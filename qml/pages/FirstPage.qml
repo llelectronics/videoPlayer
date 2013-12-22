@@ -53,11 +53,15 @@ Page {
         PullDownMenu {
             MenuItem {
                 text: "Search Youtube"
-                onClicked: pageStack.push(Qt.resolvedUrl("SecondPage.qml"))
+                onClicked: pageStack.push(Qt.resolvedUrl("SecondPage.qml"));
             }
             MenuItem {
                 text: "Open URL"
-                onClicked: pageStack.push(Qt.resolvedUrl("OpenURLPage.qml"), {dataContainer: page})
+                onClicked: pageStack.push(Qt.resolvedUrl("OpenURLPage.qml"), {dataContainer: page});
+            }
+            MenuItem {
+                text: "Open File"
+                onClicked: pageStack.push(Qt.resolvedUrl("fileman/Main.qml"), {dataContainer: page});
             }
         }
 
