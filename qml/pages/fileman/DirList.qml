@@ -1,7 +1,6 @@
 import Mer.Cutes 1.1
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-import Sailfish.Silica.theme 1.0
 import "Bridge.js" as Util
 
 SilicaListView {
@@ -27,6 +26,8 @@ SilicaListView {
 
     // used to avoid sending request for more data from callback
     signal dataAdded
+
+    signal mediaFileOpen(string url)
 
     Component {
         id: mainHeader
@@ -61,29 +62,19 @@ SilicaListView {
 
         Util.forEach(parts, function(p) {
             path = os.path(path, p);
-            pages.push({page: url, properties: {root: path}});
+            pages.push({page: url, properties: {root: path, dataContainer: dataContainer}});
         });
 
-        pageStack.clear();
         entriesList.showAbove(pages);
     }
     
     function goAndroidSd() {
-        var os = cutes.require('os');
-        if (os.path.isSame(root, home))
-            return;
-
-        var parts = "file:///data/sdcard/";
         var url = Qt.resolvedUrl('DirView.qml');
         var pages = [];
-        var path = "";
+        var path = "/data/sdcard";
 
-        Util.forEach(parts, function(p) {
-            path = os.path(path, p);
-            pages.push({page: url, properties: {root: path}});
-        });
+        pages.push({page: url, properties: {root: path, dataContainer: dataContainer}});
 
-        pageStack.clear();
         entriesList.showAbove(pages);
     }
 
@@ -168,6 +159,10 @@ SilicaListView {
 
     delegate: DirEntry {
         myList: entriesList
+        onMediaFileOpen: {
+            console.debug("DirList MediaFileOpen:"+ url);
+            entriesList.mediaFileOpen(url);
+        }
     }
 
     VerticalScrollDecorator {}

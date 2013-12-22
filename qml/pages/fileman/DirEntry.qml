@@ -1,7 +1,6 @@
 import Mer.Cutes 1.1
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-import Sailfish.Silica.theme 1.0
 import "Bridge.js" as Util
 
 ListItem {
@@ -12,10 +11,16 @@ ListItem {
     property string fileType: type
     property string fileName: name
     showMenuOnPressAndHold: false
+    signal mediaFileOpen(string url)
 
     Component {
         id: myMenu
-        DirEntryMenu {}
+        DirEntryMenu {
+            onMediaFileOpen: {
+                console.debug("DirEntry MediaFileOpen:" + url)
+                entryItem.mediaFileOpen(url)
+            }
+        }
     }
 
     function showContextMenu() {
@@ -37,7 +42,7 @@ ListItem {
                 }
             } else if (name !== '.') {
                 var url = Qt.resolvedUrl('DirView.qml');
-                myList.showAbove(url, {root: d.filePath(name)});
+                myList.showAbove(url, {root: d.filePath(name), dataContainer: dataContainer });
             }
         } else {
             showContextMenu();

@@ -1,6 +1,5 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-import Sailfish.Silica.theme 1.0
 import Mer.Cutes 1.1
 import "Bridge.js" as Util
 
@@ -8,6 +7,7 @@ Page {
     id : dirViewPage
     property int entriesCount: dirStack.count
     property string currentDirectory
+    property QtObject dataContainer
 
     onStatusChanged : {
         switch (status) {
@@ -42,6 +42,11 @@ Page {
         onIsUsableChanged : {
             if (dirList.isUsable)
                 dirViewPage.setupDirStack(dirList.root);
+        }
+
+        onMediaFileOpen: {
+            console.debug("DirView MediaFileOpen:" + url);
+            dataContainer.streamUrl = url;
         }
     }
 
@@ -88,6 +93,7 @@ Page {
 
     Component.onCompleted: {
         dirList.root = (root !== "" ? root : Util.getRoot());
+        console.debug(dataContainer)
     }
 
 }

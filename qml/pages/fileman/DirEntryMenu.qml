@@ -1,7 +1,6 @@
 import Mer.Cutes 1.1
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-import Sailfish.Silica.theme 1.0
 import "Bridge.js" as Util
 
 ContextMenu {
@@ -11,6 +10,7 @@ ContextMenu {
     property string fileType: ""
     property string fileInfo: ""
     property string filePath: ""
+    signal mediaFileOpen(string url)
 
     onVisibleChanged: {
         if (visible) {
@@ -23,9 +23,9 @@ ContextMenu {
     function openFile() {
         var url = "file://" + filePath;
         // TODO: dataContainer is not defined so define it somehow
-        if (dataContainer != null) {
-            dataContainer.streamUrl = url
-        }
+        console.log("Open clicked");
+        mediaFileOpen(url);
+        pageStack.push(dataContainer)
 
         //Qt.openUrlExternally(url);
     }
