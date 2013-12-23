@@ -21,7 +21,7 @@ Page {
     }
 
     property string home: Util.getHome()
-    property string root: ""
+    property string root: "/home/nemo/Videos" // A sane default here for Videos
 
     function reloadList() {
         dirList.state = "load";

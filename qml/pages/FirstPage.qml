@@ -46,6 +46,10 @@ Page {
         visible: page.orientation === Orientation.Portrait ? true : false
     }
 
+    function videoPauseTrigger() {
+        mediaPlayer.pause();
+    }
+
     SilicaFlickable {
         anchors.fill: parent
 
@@ -57,12 +61,43 @@ Page {
             }
             MenuItem {
                 text: "Open URL"
-                onClicked: pageStack.push(Qt.resolvedUrl("OpenURLPage.qml"), {dataContainer: page});
+                onClicked: pageStack.push(Qt.resolvedUrl("OpenURLPage.qml"), {dataContainer: page, });
             }
             MenuItem {
                 text: "Open File"
                 onClicked: pageStack.push(Qt.resolvedUrl("fileman/Main.qml"), {dataContainer: page});
             }
+        }
+
+        ProgressCircle {
+            id: progressCircle
+
+            anchors.centerIn: parent
+            visible: false
+
+            Timer {
+                interval: 32
+                repeat: true
+                onTriggered: progressCircle.value = (progressCircle.value + 0.005) % 1.0
+                running: visible
+            }
+        }
+
+        Label {
+            id: errorTxt
+            text: "An unknown error occured"
+            visible: false
+            anchors.centerIn: parent
+            font.bold: true
+        }
+        Label {
+            id: errorDetail
+            text: ""
+            visible: false
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.top: errorTxt.bottom
+            anchors.topMargin: 15
+            font.bold: false
         }
 
         Item {
@@ -86,6 +121,7 @@ Page {
                 //source: "http://netrunnerlinux.com/vids/default-panel-script.mkv"
                 //source: "http://www.ytapi.com/?vid=lfAixpkzcBQ&format=direct"
 
+
                 onClicked: {
                     if (mediaPlayer.playbackState == MediaPlayer.PlayingState) {
                         mediaPlayer.pause()
@@ -105,6 +141,18 @@ Page {
             source: MediaPlayer {
                 id: mediaPlayer
                 onDurationChanged: { videoPoster.duration = (duration/1000); }
+                onStatusChanged: {
+                    errorTxt.visible = false
+                    errorDetail.visible = false
+                    if (mediaPlayer.status === MediaPlayer.Loading || mediaPlayer.status === MediaPlayer.Buffering || mediaPlayer.status === MediaPlayer.Stalled) progressCircle.visible = true
+                    else progressCircle.visible = false
+                }
+                onError: {
+                    errorTxt.text = error
+                    errorDetail.text = errorString
+                    errorTxt.visible = true
+                    errorDetail.visible = true
+                }
             }
 
             visible: mediaPlayer.playbackState != MediaPlayer.StoppedState

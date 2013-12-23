@@ -143,10 +143,10 @@ SilicaListView {
 	    text: "Show Android sdcard"
 	    onClicked: entriesList.goAndroidSd()
 	}
-        MenuItem {
-            text: "Marked Paths"
-            onClicked: entriesList.showStoredPaths()
-        }
+//        MenuItem {
+//            text: "Marked Paths"
+//            onClicked: entriesList.showStoredPaths()
+//        }
     }
 
     RemorsePopup {

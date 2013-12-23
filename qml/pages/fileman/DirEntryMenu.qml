@@ -30,6 +30,7 @@ ContextMenu {
         //Qt.openUrlExternally(url);
     }
 
+    // Seems to work but Util.rm seems to fail somehow
     function deleteFile() {
         var fullName = filePath;
         var msg = "Deleting " + fileName;
@@ -62,12 +63,12 @@ ContextMenu {
         text: "Open"
         onClicked :  entryMenu.openFile()
     }
-    MenuItem {
-        text: "Delete"
-        onClicked: entryMenu.deleteFile()
-    }
-    MenuItem {
-        text: "Mark"
-        onClicked: entryMenu.storePath()
-    }
+//    MenuItem {
+//        text: "Delete"
+//        onClicked: entryMenu.deleteFile()
+//    }
+//    MenuItem {
+//        text: "Mark"
+//        onClicked: entryMenu.storePath()
+//    }
 }

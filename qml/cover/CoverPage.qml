@@ -35,18 +35,23 @@ CoverBackground {
     Label {
         id: label
         anchors.centerIn: parent
-        text: "My Cover"
+        text: "LLs Video Player"
     }
 
     CoverActionList {
         id: coverAction
 
-        CoverAction {
-            iconSource: "image://theme/icon-cover-next"
-        }
+//        CoverAction {
+//            iconSource: "image://theme/icon-cover-next"
+//        }
 
         CoverAction {
             iconSource: "image://theme/icon-cover-pause"
+            onTriggered: {
+                console.debug("Pause triggered");
+                //mainWindow.initialPage.firstPage.videoPauseTrigger();
+                //page.videoPauseTrigger();
+            }
         }
     }
 }
