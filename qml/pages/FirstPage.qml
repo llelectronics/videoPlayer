@@ -61,7 +61,7 @@ Page {
             }
             MenuItem {
                 text: "Open URL"
-                onClicked: pageStack.push(Qt.resolvedUrl("OpenURLPage.qml"), {dataContainer: page, });
+                onClicked: pageStack.push(Qt.resolvedUrl("OpenURLPage.qml"), {dataContainer: page, streamUrl: streamUrl});
             }
             MenuItem {
                 text: "Open File"
@@ -85,15 +85,23 @@ Page {
 
         Label {
             id: errorTxt
-            text: "An unknown error occured"
-            visible: false
-            anchors.centerIn: parent
-            font.bold: true
+            text: ""
+            visible: {
+                if (text !== "" && page.orientation === Orientation.Portrait ) return true;
+                else return false;
+            }
         }
+
+        anchors.top: parent.top
+        anchors.topMargin: 65
+        font.bold: true
         Label {
             id: errorDetail
             text: ""
-            visible: false
+            visible: {
+                if (text !== "" && page.orientation === Orientation.Portrait ) return true;
+                else return false;
+            }
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: errorTxt.bottom
             anchors.topMargin: 15
@@ -142,8 +150,8 @@ Page {
                 id: mediaPlayer
                 onDurationChanged: { videoPoster.duration = (duration/1000); }
                 onStatusChanged: {
-                    errorTxt.visible = false
-                    errorDetail.visible = false
+                    //errorTxt.visible = false     // DEBUG: Always show errors for now
+                    //errorDetail.visible = false
                     if (mediaPlayer.status === MediaPlayer.Loading || mediaPlayer.status === MediaPlayer.Buffering || mediaPlayer.status === MediaPlayer.Stalled) progressCircle.visible = true
                     else progressCircle.visible = false
                 }

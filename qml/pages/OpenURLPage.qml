@@ -17,6 +17,7 @@ Page {
         anchors.centerIn: parent
         width: Screen.width - 20
         Component.onCompleted: {
+            // console.debug("StreamUrl :" + streamUrl) // DEBUG
             if (streamUrl !== "") {
                 text = streamUrl;
             }

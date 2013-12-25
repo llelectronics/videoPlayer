@@ -19,6 +19,7 @@ PkgConfigBR:
 Requires:
 - sailfishsilica-qt5 >= 0.10.9
 Files:
+- 
 - '%{_bindir}'
 - '%{_datadir}/%{name}/qml'
 - '%{_datadir}/applications/%{name}.desktop'
