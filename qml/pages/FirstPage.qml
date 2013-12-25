@@ -90,11 +90,12 @@ Page {
                 if (text !== "" && page.orientation === Orientation.Portrait ) return true;
                 else return false;
             }
+            anchors.top: parent.top
+            anchors.topMargin: 65
+            font.bold: true
         }
 
-        anchors.top: parent.top
-        anchors.topMargin: 65
-        font.bold: true
+
         Label {
             id: errorDetail
             text: ""
@@ -158,8 +159,6 @@ Page {
                 onError: {
                     errorTxt.text = error
                     errorDetail.text = errorString
-                    errorTxt.visible = true
-                    errorDetail.visible = true
                 }
             }
 
