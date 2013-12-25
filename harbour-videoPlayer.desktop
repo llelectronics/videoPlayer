@@ -1,7 +1,7 @@
 [Desktop Entry]
 Type=Application
 X-Nemo-Application-Type=silica-qt5
-Name=harbour-videoPlayer
+Name=LLs Video Player
 Icon=harbour-videoPlayer
 Exec=harbour-videoPlayer
 
