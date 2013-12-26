@@ -11,6 +11,27 @@ Page {
         title: "Open Stream URL"
     }
 
+    function loadUrl() {
+        // Yeah I hate RegEx. Thx user2200660 for this nice youtube regex ;)
+        if (urlField.text.toString().match('/?.*(?:youtu.be\\/|v\\/|u/\\w/|embed\\/|watch\\?.*&?v=)')) {
+            console.debug("Youtube URL detected");
+            var youtube_id;
+            if (urlField.text.toString().match('embed')) { youtube_id = urlField.text.toString().split(/embed\//)[1].split('"')[0]; }
+            else { youtube_id = urlField.text.toString().split(/v\/|v=|youtu\.be\//)[1].split(/[?&]/)[0]; }
+            console.debug(youtube_id);
+
+            urlField.text = "http://ytapi.com/?vid=" + youtube_id + "&format=direct";
+        }
+
+        if (dataContainer != null) {
+            dataContainer.streamUrl = urlField.text;
+            pageStack.pop(undefined, PageStackAction.Immediate)
+        }
+    }
+
+    Keys.onEnterPressed: loadUrl();
+    Keys.onReturnPressed: loadUrl();
+
     TextField {
         id: urlField
         placeholderText: "Type in URL here"
@@ -30,21 +51,7 @@ Page {
         anchors.horizontalCenter: parent.horizontalCenter
         text: "Load Url"
         onClicked: {
-            // Yeah I hate RegEx. Thx user2200660 for this nice youtube regex ;)
-            if (urlField.text.toString().match('/?.*(?:youtu.be\\/|v\\/|u/\\w/|embed\\/|watch\\?.*&?v=)')) {
-                console.debug("Youtube URL detected");
-                var youtube_id;
-                if (urlField.text.toString().match('embed')) { youtube_id = urlField.text.toString().split(/embed\//)[1].split('"')[0]; }
-                else { youtube_id = urlField.text.toString().split(/v\/|v=|youtu\.be\//)[1].split(/[?&]/)[0]; }
-                console.debug(youtube_id);
-
-                urlField.text = "http://ytapi.com/?vid=" + youtube_id + "&format=direct";
-            }
-
-            if (dataContainer != null) {
-                dataContainer.streamUrl = urlField.text;
-                pageStack.pop(undefined, PageStackAction.Immediate)
-            }
+            loadUrl();
         }
     }
 }
