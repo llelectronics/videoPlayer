@@ -47,7 +47,8 @@ Page {
     }
 
     function videoPauseTrigger() {
-        mediaPlayer.pause();
+        // this seems not to work somehow
+        videoPoster.player.play();
     }
 
     SilicaFlickable {
@@ -57,7 +58,7 @@ Page {
         PullDownMenu {
             MenuItem {
                 text: "Search Youtube"
-                onClicked: pageStack.push(Qt.resolvedUrl("SecondPage.qml"));
+                onClicked: pageStack.push(Qt.resolvedUrl("SecondPage.qml"), {dataContainer: page});
             }
             MenuItem {
                 text: "Open URL"
@@ -120,7 +121,6 @@ Page {
                 width: page.orientation === Orientation.Portrait ? Screen.width : Screen.height
                 height: page.height
 
-
                 player: mediaPlayer
 
                 //duration: videoDuration
@@ -133,8 +133,8 @@ Page {
 
                 onClicked: {
                     if (mediaPlayer.playbackState == MediaPlayer.PlayingState) {
-                        mediaPlayer.pause()
-                        //console.debug(mediaPlayer.duration);
+                        mediaPlayer.pause();
+                        progressCircle.visible = false;
                     } else {
                         //mediaPlayer.play()
                         console.debug("clicked something else")
@@ -153,12 +153,12 @@ Page {
                 onStatusChanged: {
                     //errorTxt.visible = false     // DEBUG: Always show errors for now
                     //errorDetail.visible = false
-                    if (mediaPlayer.status === MediaPlayer.Loading || mediaPlayer.status === MediaPlayer.Buffering || mediaPlayer.status === MediaPlayer.Stalled) progressCircle.visible = true
-                    else progressCircle.visible = false
+                    if (mediaPlayer.status === MediaPlayer.Loading || mediaPlayer.status === MediaPlayer.Buffering || mediaPlayer.status === MediaPlayer.Stalled) progressCircle.visible = true;
+                    else progressCircle.visible = false;
                 }
                 onError: {
-                    errorTxt.text = error
-                    errorDetail.text = errorString
+                    errorTxt.text = error;
+                    errorDetail.text = errorString;
                 }
             }
 

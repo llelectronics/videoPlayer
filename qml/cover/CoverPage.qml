@@ -37,6 +37,12 @@ CoverBackground {
         anchors.centerIn: parent
         text: "LLs Video Player"
     }
+    Image {
+        source: "../pages/images/icon.png"
+        anchors.bottom: label.top
+        anchors.bottomMargin: 15
+        anchors.horizontalCenter: parent.horizontalCenter
+    }
 
     CoverActionList {
         id: coverAction

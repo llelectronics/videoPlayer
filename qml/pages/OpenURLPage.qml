@@ -1,5 +1,6 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
+import "yt.js" as YT
 
 Page {
     id: openUrlPage
@@ -12,20 +13,12 @@ Page {
     }
 
     function loadUrl() {
-        // Yeah I hate RegEx. Thx user2200660 for this nice youtube regex ;)
-        if (urlField.text.toString().match('/?.*(?:youtu.be\\/|v\\/|u/\\w/|embed\\/|watch\\?.*&?v=)')) {
-            console.debug("Youtube URL detected");
-            var youtube_id;
-            if (urlField.text.toString().match('embed')) { youtube_id = urlField.text.toString().split(/embed\//)[1].split('"')[0]; }
-            else { youtube_id = urlField.text.toString().split(/v\/|v=|youtu\.be\//)[1].split(/[?&]/)[0]; }
-            console.debug(youtube_id);
-
-            urlField.text = "http://ytapi.com/?vid=" + youtube_id + "&format=direct";
-        }
-
-        if (dataContainer != null) {
-            dataContainer.streamUrl = urlField.text;
-            pageStack.pop(undefined, PageStackAction.Immediate)
+        if (YT.checkYoutube(urlField.text.toString())=== true) {
+            var yturl = YT.getYoutubeVid(urlField.text.toString());
+            if (dataContainer != null) {
+                dataContainer.streamUrl = yturl;
+                pageStack.pop(undefined, PageStackAction.Immediate);
+            }
         }
     }
 

@@ -30,6 +30,9 @@
 
 import QtQuick 2.0
 import Sailfish.Silica 1.0
+import QtWebKit 3.0
+import QtWebKit.experimental 1.0
+import "yt.js" as YT
 
 
 Dialog {
@@ -37,6 +40,7 @@ Dialog {
     allowedOrientations: Orientation.All
     canAccept: searchTerm.text !== ""
     acceptDestination: searchResults
+    property QtObject dataContainer
 
     DialogHeader {
         acceptText: "Search on Youtube"
@@ -47,11 +51,14 @@ Dialog {
         placeholderText: "Type in search term here"
         anchors.centerIn: parent
         width: Screen.width - 20
+        focus: true
     }
+    Keys.onEnterPressed: accept();
+    Keys.onReturnPressed: accept();
 
     onAcceptPendingChanged: {
         if (acceptPending) {
-            // Tell the destination page what the selected category is
+            // Tell the destination page what the search term is
             acceptDestinationInstance.searchTerm = searchTerm.text
         }
     }
@@ -65,17 +72,32 @@ Dialog {
             anchors.fill: parent
             allowedOrientations: Orientation.All
 
-        SilicaWebView {
-            anchors.top: parent.top
-            anchors.topMargin: 10
-            width: searchResultsDialog.orientation === Orientation.Portrait ? Screen.width : Screen.height
-            height: Screen.height
-            //height: searchResultsDialog.height
-            //url: "http://ytapi.com/search/?vq=" + searchTerm  // now that we have youtube => ytapi openurl action we can use the official youtube site ;)
-            url: "http://m.youtube.com/results?q=" + searchTerm
+            WebView {
+                id: ytView
+                anchors.centerIn: parent
+                width: searchResultsDialog.orientation === Orientation.Portrait ? Screen.width / 2 : (Screen.height - 100) / 2
+                height: Screen.height / 2
+                scale: 2.0  // there seems no way to set the default text size and the default one is too tiny so scale instead
+                //url: "http://ytapi.com/search/?vq=" + searchTerm  // now that we have youtube => ytapi openurl action we can use the official youtube site ;)
+                url: "http://m.youtube.com/results?q=" + searchTerm
+                // iPhone user agent popups for app installation
+                //experimental.userAgent: "Mozilla/5.0 (iPhone; CPU iPhone OS 5_0 like Mac OS X) AppleWebKit/534.46 (KHTML, like Gecko) Version/5.1 Mobile/9A334 Safari/7534.48.3"
+                experimental.userAgent: "Mozilla/5.0 (Linux; U; Android 2.2; en-us; Nexus One Build/FRF91) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1"
 
-            VerticalScrollDecorator {}
-        }
+                onUrlChanged: {
+                    //console.debug("New url:" +url)
+                    if (YT.checkYoutube(url.toString()) === true) {
+                        var yturl = YT.getYoutubeVid(url.toString());
+                        if (dataContainer != null) {
+                            dataContainer.streamUrl = yturl;
+                            ytView.goBack();
+                            pageStack.push(dataContainer);
+                        }
+                    }
+                }
+
+                VerticalScrollDecorator {}
+            }
 
         }
 
