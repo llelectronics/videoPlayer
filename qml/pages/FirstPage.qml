@@ -162,7 +162,7 @@ Page {
                 }
             }
 
-            visible: mediaPlayer.playbackState != MediaPlayer.StoppedState
+            visible: mediaPlayer.status >= MediaPlayer.Loaded && mediaPlayer.status <= MediaPlayer.EndOfMedia
             width: parent.width
             height: parent.height
             anchors.centerIn: page

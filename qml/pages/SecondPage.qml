@@ -52,7 +52,7 @@ Dialog {
     onAcceptPendingChanged: {
         if (acceptPending) {
             // Tell the destination page what the selected category is
-            acceptDestinationInstance.streamUrl = searchTerm.text
+            acceptDestinationInstance.searchTerm = searchTerm.text
         }
     }
 
@@ -71,7 +71,8 @@ Dialog {
             width: searchResultsDialog.orientation === Orientation.Portrait ? Screen.width : Screen.height
             height: Screen.height
             //height: searchResultsDialog.height
-            url: "http://ytapi.com/search/?vq=" + searchTerm
+            //url: "http://ytapi.com/search/?vq=" + searchTerm  // now that we have youtube => ytapi openurl action we can use the official youtube site ;)
+            url: "http://m.youtube.com/results?q=" + searchTerm
 
             VerticalScrollDecorator {}
         }
