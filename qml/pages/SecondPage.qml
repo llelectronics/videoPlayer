@@ -71,27 +71,30 @@ Dialog {
             property string searchTerm
             //anchors.fill: parent
             allowedOrientations: Orientation.All
-            backNavigation: false
-//            showNavigationIndicator: true
+//            backNavigation: false
+//          showNavigationIndicator: true
 
-            Button {
-                text: "back to search"
-                anchors.top: parent.top
-                anchors.left: parent.left
-                anchors.topMargin: 5
-                anchors.leftMargin: 5
-                onClicked: { pageStack.pop(undefined, PageStackAction.Immediate); }
-                z: 99 // above all
-            }
+//            Button {
+//                text: "back to search"
+//                anchors.top: parent.top
+//                anchors.left: parent.left
+//                anchors.topMargin: 5
+//                anchors.leftMargin: 5
+//                onClicked: { pageStack.pop(undefined, PageStackAction.Immediate); }
+//                z: 99 // above all
+//            }
 
 
 
-            WebView {
+            SilicaWebView {
                 id: ytView
                 anchors.centerIn: parent
-                width: searchResultsDialog.orientation === Orientation.Portrait ? Screen.width / 2 : (Screen.height - 100) / 2
-                height: Screen.height / 2
-                scale: 2.0  // there seems no way to set the default text size and the default one is too tiny so scale instead
+//                width: searchResultsDialog.orientation === Orientation.Portrait ? Screen.width / 2 : (Screen.height - 100) / 2
+//                height: Screen.height / 2
+                width: searchResultsDialog.orientation === Orientation.Portrait ? Screen.width : Screen.height
+                height: Screen.height
+                //settings.defaultFontSize: 18 // Not working
+                //scale: 2.0  // there seems no way to set the default text size and the default one is too tiny so scale instead
                 //url: "http://ytapi.com/search/?vq=" + searchTerm  // now that we have youtube => ytapi openurl action we can use the official youtube site ;)
                 url: "http://m.youtube.com/results?q=" + searchTerm
                 // iPhone user agent popups for app installation
