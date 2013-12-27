@@ -69,8 +69,22 @@ Dialog {
         Page {
             id: searchResultsDialog
             property string searchTerm
-            anchors.fill: parent
+            //anchors.fill: parent
             allowedOrientations: Orientation.All
+            backNavigation: false
+//            showNavigationIndicator: true
+
+            Button {
+                text: "back to search"
+                anchors.top: parent.top
+                anchors.left: parent.left
+                anchors.topMargin: 5
+                anchors.leftMargin: 5
+                onClicked: { pageStack.pop(undefined, PageStackAction.Immediate); }
+                z: 99 // above all
+            }
+
+
 
             WebView {
                 id: ytView
