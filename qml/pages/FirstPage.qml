@@ -1,6 +1,6 @@
 /*
-  Copyright (C) 2013 Jolla Ltd.
-  Contact: Thomas Perl <thomas.perl@jollamobile.com>
+  Copyright (C) 2013 Leszek Lesner.
+  Contact: Leszek Lesner <leszek.lesner@web.de>
   All rights reserved.
 
   You may use this file under the terms of BSD license as follows:
@@ -32,7 +32,8 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 import QtMultimedia 5.0
 import Sailfish.Media 1.0
-import Sailfish.Gallery 1.0
+//import Sailfish.Gallery 1.0
+import "helper"
 
 
 Page {
@@ -121,7 +122,6 @@ Page {
 
             VideoPoster {
                 id: videoPoster
-                property bool scaled
                 width: page.orientation === Orientation.Portrait ? Screen.width : Screen.height
                 height: page.height
 
@@ -134,14 +134,39 @@ Page {
                 //source: "http://netrunnerlinux.com/vids/default-panel-script.mkv"
                 //source: "http://www.ytapi.com/?vid=lfAixpkzcBQ&format=direct"
 
+                onPlayClicked: toggleControls();
+
+                function toggleControls() {
+                    //console.debug("Controls Opacity:" + controls.opacity);
+                    if (controls.opacity === 0.0) {
+                        //console.debug("Show controls");
+                        controls.opacity = 1.0;
+                    }
+                    else {
+                        //console.debug("Hide controls");
+                        controls.opacity = 0.0;
+                    }
+                    page.showNavigationIndicator = !page.showNavigationIndicator
+                }
+
 
                 onClicked: {
                     if (mediaPlayer.playbackState == MediaPlayer.PlayingState) {
-                        mediaPlayer.pause();
-                        progressCircle.visible = false;
+                        //console.debug("Mouse values:" + mouse.x + " x " + mouse.y)
+                        var middleX = width / 2
+                        var middleY = height / 2
+                        if ((mouse.x >= middleX - 21 && mouse.x <= middleX + 21) && (mouse.y >= middleY - 21 && mouse.y <= middleY + 21)) {
+                            mediaPlayer.pause();
+                            if (controls.opacity === 0.0) toggleControls();
+                            progressCircle.visible = false;
+                        }
+                        else {
+                            toggleControls();
+                        }
                     } else {
                         //mediaPlayer.play()
                         console.debug("clicked something else")
+                        toggleControls();
                     }
                 }
             }
@@ -157,6 +182,7 @@ Page {
                 onStatusChanged: {
                     //errorTxt.visible = false     // DEBUG: Always show errors for now
                     //errorDetail.visible = false
+                    //console.debug("PlaybackStatus: " + playbackState)
                     if (mediaPlayer.status === MediaPlayer.Loading || mediaPlayer.status === MediaPlayer.Buffering || mediaPlayer.status === MediaPlayer.Stalled) progressCircle.visible = true;
                     else progressCircle.visible = false;
                 }
