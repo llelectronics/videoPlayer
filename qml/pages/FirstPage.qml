@@ -85,6 +85,7 @@ Page {
         }
 
         Label {
+            // TODO: seems only show error number. Maybe disable in the future
             id: errorTxt
             text: ""
             visible: {
@@ -97,17 +98,20 @@ Page {
         }
 
 
-        Label {
+        TextArea {
             id: errorDetail
             text: ""
             visible: {
                 if (text !== "" && page.orientation === Orientation.Portrait ) return true;
                 else return false;
             }
+            width: parent.width
+            height: parent.height / 3
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: errorTxt.bottom
             anchors.topMargin: 15
             font.bold: false
+            color: "white"
         }
 
         Item {

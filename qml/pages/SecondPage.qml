@@ -89,6 +89,7 @@ Dialog {
             SilicaWebView {
                 id: ytView
                 anchors.centerIn: parent
+                // Width and height for scale=2.0
 //                width: searchResultsDialog.orientation === Orientation.Portrait ? Screen.width / 2 : (Screen.height - 100) / 2
 //                height: Screen.height / 2
                 width: searchResultsDialog.orientation === Orientation.Portrait ? Screen.width : Screen.height

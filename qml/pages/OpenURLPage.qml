@@ -20,6 +20,12 @@ Page {
                 pageStack.pop(undefined, PageStackAction.Immediate);
             }
         }
+        else {
+            if (dataContainer != null) {
+                dataContainer.streamUrl = urlField.text;
+                pageStack.pop(undefined, PageStackAction.Immediate);
+            }
+        }
     }
 
     Keys.onEnterPressed: loadUrl();
@@ -30,10 +36,12 @@ Page {
         placeholderText: "Type in URL here"
         anchors.centerIn: parent
         width: Screen.width - 20
+        focus: true
         Component.onCompleted: {
             // console.debug("StreamUrl :" + streamUrl) // DEBUG
             if (streamUrl !== "") {
                 text = streamUrl;
+                selectAll();
             }
         }
     }
