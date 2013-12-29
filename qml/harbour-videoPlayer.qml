@@ -35,7 +35,15 @@ import "pages"
 ApplicationWindow
 {
     id: mainWindow
-    initialPage: Component { FirstPage { } }
+
+    property Item firstPage
+    initialPage: Component {
+        FirstPage {
+            id: firstPage
+
+            Component.onCompleted: { mainWindow.firstPage = firstPage }
+        }
+    }
     cover: Qt.resolvedUrl("cover/CoverPage.qml")
 }
 

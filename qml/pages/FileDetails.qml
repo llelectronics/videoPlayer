@@ -15,13 +15,17 @@ Page {
     property alias copyright: fileCopyright.text
     property alias date: fileDate.text
     property alias size: fileSize.text
+    property alias artist: fileArtist.text
 
     Flickable {
         anchors.fill: parent
+        contentHeight: items.height
+        contentWidth: parent.width
 
-        ListView {
-            anchors.fill: parent
 
+        Item {
+            id: items
+            width: parent.width
 
             Label {
                 id: fileNameLbl
@@ -60,12 +64,30 @@ Page {
                 truncationMode: TruncationMode.Fade
             }
             Label {
+                id: fileArtistLbl
+                font.bold: true
+                text: "Artist: "
+                anchors.left: parent.left
+                anchors.leftMargin: 25
+                anchors.top: fileTitleLbl.bottom
+                anchors.topMargin: 20
+            }
+            Label {
+                id: fileArtist
+                anchors.left: fileTitleLbl.right
+                anchors.leftMargin: 15
+                anchors.verticalCenter: fileArtistLbl.verticalCenter
+                width: parent.width - fileArtistLbl.width - 40
+                elide: Text.ElideRight
+                truncationMode: TruncationMode.Fade
+            }
+            Label {
                 id: fileVcodecLbl
                 font.bold: true
                 text: "Videocodec: "
                 anchors.left: parent.left
                 anchors.leftMargin: 25
-                anchors.top: fileTitleLbl.bottom
+                anchors.top: fileArtistLbl.bottom
                 anchors.topMargin: 20
                 truncationMode: TruncationMode.Elide
             }

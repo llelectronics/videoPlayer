@@ -160,7 +160,7 @@ SilicaListView {
     delegate: DirEntry {
         myList: entriesList
         onMediaFileOpen: {
-            console.debug("DirList MediaFileOpen:"+ url);
+            //console.debug("DirList MediaFileOpen:"+ url);
             entriesList.mediaFileOpen(url);
         }
     }

@@ -17,7 +17,7 @@ ListItem {
         id: myMenu
         DirEntryMenu {
             onMediaFileOpen: {
-                console.debug("DirEntry MediaFileOpen:" + url)
+                //console.debug("DirEntry MediaFileOpen:" + url)
                 entryItem.mediaFileOpen(url)
             }
         }

@@ -30,18 +30,35 @@
 
 import QtQuick 2.0
 import Sailfish.Silica 1.0
+import QtMultimedia 5.0
+import "../pages"
 
 CoverBackground {
+
     Label {
         id: label
         anchors.centerIn: parent
-        text: "LLs Video Player"
+        text: {
+            if (firstPage.title.toString().length !== 0 && firstPage.artist.toString().length !== 0) return firstPage.artist + "\n-\n" + firstPage.title
+            else if (firstPage.title.toString().length !== 0) return firstPage.title
+            else if (firstPage.streamUrl.toString().length !== 0) return firstPage.streamUrl
+            else return "LLs Video Player"
+        }
+        width: parent.width
+        horizontalAlignment: Text.AlignHCenter
+        elide: Text.ElideLeft
     }
+
     Image {
-        source: "../pages/images/icon.png"
+        source: {
+            if (firstPage.onlyMusic.opacity === 1.0) return "../pages/images/audio.png"
+            else return "../pages/images/icon.png"
+        }
         anchors.bottom: label.top
         anchors.bottomMargin: 15
         anchors.horizontalCenter: parent.horizontalCenter
+        width: 86 // fixed icon size
+        height: 86
     }
 
     CoverActionList {
@@ -52,11 +69,13 @@ CoverBackground {
 //        }
 
         CoverAction {
-            iconSource: "image://theme/icon-cover-pause"
+            iconSource: {
+                if (firstPage.videoPoster.player.playbackState === MediaPlayer.PlayingState) return "image://theme/icon-cover-pause"
+                else return "image://theme/icon-cover-play"
+            }
             onTriggered: {
-                console.debug("Pause triggered");
-                //mainWindow.initialPage.firstPage.videoPauseTrigger();
-                //page.videoPauseTrigger();
+                //console.debug("Pause triggered");
+                firstPage.videoPauseTrigger();
             }
         }
     }

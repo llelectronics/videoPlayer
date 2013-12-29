@@ -41,6 +41,11 @@ Page {
     allowedOrientations: Orientation.All
     property int videoDuration
     property string streamUrl
+    property string title: videoPoster.player.metaData.title ? videoPoster.player.metaData.title : ""
+    property string artist: videoPoster.player.metaData.albumArtist ? videoPoster.player.metaData.albumArtist : ""
+    property alias onlyMusic: onlyMusic
+    property alias videoPoster: videoPoster
+    signal updateCover
 
     PageHeader {
         title: streamUrl
@@ -49,7 +54,10 @@ Page {
 
     function videoPauseTrigger() {
         // this seems not to work somehow
-        videoPoster.player.play();
+        if (videoPoster.player.playbackState == MediaPlayer.PlayingState) videoPoster.player.pause();
+        else if (videoPoster.source.toString().length !== 0) videoPoster.player.play();
+        if (videoPoster.controls.opacity === 0.0) videoPoster.toggleControls();
+
     }
 
     SilicaFlickable {
@@ -187,10 +195,11 @@ Page {
             source: MediaPlayer {
                 id: mediaPlayer
                 function loadMetaDataPage() {
-                    console.debug("Loading metadata page")
+                    //console.debug("Loading metadata page")
                     pageStack.pushAttached(Qt.resolvedUrl("FileDetails.qml"), {
                                                filename: streamUrl,
                                                title: metaData.title,
+                                               artist: metaData.albumArtist,
                                                videocodec: metaData.videoCodec,
                                                resolution: metaData.resolution,
                                                videobitrate: metaData.videoBitRate,
@@ -214,7 +223,7 @@ Page {
                     //errorTxt.visible = false     // DEBUG: Always show errors for now
                     //errorDetail.visible = false
                     //console.debug("PlaybackStatus: " + playbackState)
-                    if (mediaPlayer.status === MediaPlayer.Loading || mediaPlayer.status === MediaPlayer.Buffering || mediaPlayer.status === MediaPlayer.Stalled) progressCircle.visible = true;
+                    if (mediaPlayer.status === MediaPlayer.Loading || mediaPlayer.status === MediaPlayer.Buffering || mediaPlayer.status === MediaPlayer.Stalled) progressCircle.visible = true; 
                     else progressCircle.visible = false;
                 }
                 onError: {

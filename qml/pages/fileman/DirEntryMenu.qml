@@ -22,8 +22,7 @@ ContextMenu {
 
     function openFile() {
         var url = "file://" + filePath;
-        // TODO: dataContainer is not defined so define it somehow
-        console.log("Open clicked");
+        //console.log("Open clicked");
         mediaFileOpen(url);
         pageStack.push(dataContainer)
 

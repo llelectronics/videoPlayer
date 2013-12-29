@@ -86,10 +86,13 @@ MouseArea {
                 anchors.fill: parent
                 enabled: !videoItem.playing
                 onClicked: {
-                    videoItem.playClicked();
-                    videoItem.player.source = videoItem.source;
-                    videoItem.player.play();
-                    //controls.opacity = 0.0;
+                    //console.debug("VideoItem.source length = " + videoItem.source.toString().length)
+                    if (videoItem.source.toString().length !== 0) {
+                        //console.debug("Yeah we have a video source")
+                        videoItem.playClicked();
+                        videoItem.player.source = videoItem.source;
+                        videoItem.player.play();
+                    }
                 }
             }
         }

@@ -39,7 +39,7 @@ SilicaListView {
             // }
         }
         onClicked: {
-            console.log("Click on ", name, index);
+            //console.log("Click on ", name, index);
             popToDirectory(index);
         }
     }
