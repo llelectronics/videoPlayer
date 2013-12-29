@@ -71,6 +71,14 @@ Page {
             }
         }
 
+        Image {
+            id: onlyMusic
+            anchors.centerIn: parent
+            source: Qt.resolvedUrl("images/audio.png")
+            opacity: 0.0
+            Behavior on opacity { FadeAnimation { } }
+        }
+
         ProgressCircle {
             id: progressCircle
 
@@ -173,8 +181,9 @@ Page {
         }
     }
     children: [
-        GStreamerVideoOutput {
+        VideoOutput {
             id: video
+            fillMode: VideoOutput.PreserveAspectCrop
 
             source: MediaPlayer {
                 id: mediaPlayer
@@ -196,7 +205,12 @@ Page {
                                            });
                 }
 
-                onDurationChanged: { videoPoster.duration = (duration/1000); loadMetaDataPage(); }
+                onDurationChanged: {
+                    videoPoster.duration = (duration/1000);
+                    loadMetaDataPage();
+                    if (hasAudio === true && hasVideo === false) onlyMusic.opacity = 1.0
+                    else onlyMusic.opacity = 0.0
+                }
                 onStatusChanged: {
                     //errorTxt.visible = false     // DEBUG: Always show errors for now
                     //errorDetail.visible = false

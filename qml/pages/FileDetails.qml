@@ -55,6 +55,9 @@ Page {
                 anchors.left: fileTitleLbl.right
                 anchors.leftMargin: 15
                 anchors.verticalCenter: fileTitleLbl.verticalCenter
+                width: parent.width - fileTitleLbl.width - 40
+                elide: Text.ElideRight
+                truncationMode: TruncationMode.Fade
             }
             Label {
                 id: fileVcodecLbl
@@ -64,15 +67,19 @@ Page {
                 anchors.leftMargin: 25
                 anchors.top: fileTitleLbl.bottom
                 anchors.topMargin: 20
+                truncationMode: TruncationMode.Elide
             }
             Label {
                 id: fileVcodec
                 anchors.left: fileVcodecLbl.right
                 anchors.leftMargin: 15
                 anchors.verticalCenter: fileVcodecLbl.verticalCenter
+                width: parent.width - fileVcodecLbl.width - 40
+                elide: Text.ElideRight
+                truncationMode: TruncationMode.Fade
             }
             Label {
-                id: fileResolutonLbl
+                id: fileResolutionLbl
                 font.bold: true
                 text: "Resolution: "
                 anchors.left: parent.left
@@ -92,7 +99,7 @@ Page {
                 text: "Videobitrate (bits/sec): "
                 anchors.left: parent.left
                 anchors.leftMargin: 25
-                anchors.top: fileResolutonLbl.bottom
+                anchors.top: fileResolutionLbl.bottom
                 anchors.topMargin: 20
             }
             Label {
@@ -130,6 +137,9 @@ Page {
                 anchors.left: fileAudiocodecLbl.right
                 anchors.leftMargin: 15
                 anchors.verticalCenter: fileAudiocodecLbl.verticalCenter
+                width: parent.width - fileAudiocodecLbl.width - 40
+                elide: Text.ElideRight
+                truncationMode: TruncationMode.Fade
             }
             Label {
                 id: fileAbitrateLbl
@@ -175,6 +185,9 @@ Page {
                 anchors.left: fileCopyrightLbl.right
                 anchors.leftMargin: 15
                 anchors.verticalCenter: fileCopyrightLbl.verticalCenter
+                width: parent.width - fileCopyrightLbl.width - 40
+                elide: Text.ElideRight
+                truncationMode: TruncationMode.Fade
             }
             Label {
                 id: fileDateLbl
