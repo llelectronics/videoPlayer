@@ -181,8 +181,9 @@ Page {
         }
     }
     children: [
-        GstreamerVideoOutput {
+        GStreamerVideoOutput {
             id: video
+            fillMode: VideoOutput.PreserveAspectCrop
 
             source: MediaPlayer {
                 id: mediaPlayer
