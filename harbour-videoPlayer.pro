@@ -32,5 +32,6 @@ OTHER_FILES += qml/harbour-videoPlayer.qml \
     qml/pages/fileman/DirEntry.qml \
     qml/pages/fileman/ActionProgress.qml \
     qml/pages/yt.js \
-    qml/pages/helper/VideoPoster.qml
+    qml/pages/helper/VideoPoster.qml \
+    qml/pages/FileDetails.qml
 

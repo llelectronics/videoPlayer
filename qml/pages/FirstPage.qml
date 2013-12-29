@@ -178,7 +178,25 @@ Page {
 
             source: MediaPlayer {
                 id: mediaPlayer
-                onDurationChanged: { videoPoster.duration = (duration/1000); }
+                function loadMetaDataPage() {
+                    console.debug("Loading metadata page")
+                    pageStack.pushAttached(Qt.resolvedUrl("FileDetails.qml"), {
+                                               filename: streamUrl,
+                                               title: metaData.title,
+                                               videocodec: metaData.videoCodec,
+                                               resolution: metaData.resolution,
+                                               videobitrate: metaData.videoBitRate,
+                                               framerate: metaData.videoFrameRate,
+                                               audiocodec: metaData.audioCodec,
+                                               audiobitrate: metaData.audioBitRate,
+                                               samplerate: metaData.sampleRate,
+                                               copyright: metaData.copyright,
+                                               date: metaData.date,
+                                               size: metaData.size
+                                           });
+                }
+
+                onDurationChanged: { videoPoster.duration = (duration/1000); loadMetaDataPage(); }
                 onStatusChanged: {
                     //errorTxt.visible = false     // DEBUG: Always show errors for now
                     //errorDetail.visible = false
