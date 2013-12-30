@@ -1,6 +1,6 @@
 /*
-  Copyright (C) 2013 Jolla Ltd.
-  Contact: Thomas Perl <thomas.perl@jollamobile.com>
+  Copyright (C) Leszek Lesner.
+  Contact: Leszek Lesner <leszek.lesner@web.de>
   All rights reserved.
 
   You may use this file under the terms of BSD license as follows:
@@ -46,6 +46,31 @@ int main(int argc, char *argv[])
     //
     // To display the view, call "show()" (will show fullscreen on device).
 
-    return SailfishApp::main(argc, argv);
+    QGuiApplication *app = SailfishApp::application(argc, argv);
+    QQuickView *view = SailfishApp::createView(); // I get a white background with this.
+    view->setSource(SailfishApp::pathTo("qml/harbour-videoPlayer.qml"));  // So I do this ;)
+
+    QObject *object = view->rootObject();
+
+    QString file;
+    for(int i=1; i<argc; i++) {
+        if (!QString(argv[i]).startsWith("/") && !QString(argv[i]).startsWith("http://") && !QString(argv[i]).startsWith("rtsp://")
+                && !QString(argv[i]).startsWith("mms://") && !QString(argv[i]).startsWith("file://") && !QString(argv[i]).startsWith("https://")) {
+            QString pwd("");
+            char * PWD;
+            PWD = getenv ("PWD");
+            pwd.append(PWD);
+            file = pwd + "/" + QString(argv[i]);
+        }
+        else file = QString(argv[i]);
+    }
+
+    QMetaObject::invokeMethod(object, "loadUrl", Q_ARG(QVariant, file));
+
+    view->show();
+
+
+    return app->exec();
+
 }
 

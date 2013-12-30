@@ -31,12 +31,22 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 import "pages"
+import "pages/yt.js" as YT
 
 ApplicationWindow
 {
     id: mainWindow
 
     property Item firstPage
+
+    function loadUrl(url) {
+        // Check if youtube url
+        if (YT.checkYoutube(url) === true) {
+        url = YT.getYoutubeVid(url);
+        }
+        firstPage.streamUrl = url
+    }
+
     initialPage: Component {
         FirstPage {
             id: firstPage
