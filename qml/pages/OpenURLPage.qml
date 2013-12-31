@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-import "yt.js" as YT
+import "helper/yt.js" as YT
+import "helper/db.js" as DB
 
 Page {
     id: openUrlPage
@@ -9,7 +10,7 @@ Page {
     property string streamUrl
 
     PageHeader {
-        title: "Open Stream URL"
+        title: drawer.open ? "History" : "Open Stream URL"
     }
 
     function loadUrl() {
@@ -28,31 +29,110 @@ Page {
         }
     }
 
+    Component.onCompleted: {
+        //console.debug("Load history...")
+        DB.getHistory();
+    }
+
     Keys.onEnterPressed: loadUrl();
     Keys.onReturnPressed: loadUrl();
 
-    TextField {
-        id: urlField
-        placeholderText: "Type in URL here"
-        anchors.centerIn: parent
-        width: Screen.width - 20
-        focus: true
-        Component.onCompleted: {
-            // console.debug("StreamUrl :" + streamUrl) // DEBUG
-            if (streamUrl !== "") {
-                text = streamUrl;
-                selectAll();
-            }
-        }
+    function addHistory(url) {
+        console.debug("Adding " + url);
+        historyModel.append({"hurl": url});
     }
 
-    Button {
-        id: loadBtn
-        anchors.top: urlField.bottom
-        anchors.horizontalCenter: parent.horizontalCenter
-        text: "Load Url"
-        onClicked: {
-            loadUrl();
+    ListModel {
+        id: historyModel
+    }
+
+    Drawer {
+        id: drawer
+
+        width: parent.width
+        height: parent.height - 65
+        anchors.bottom: parent.bottom
+        //anchors.fill: parent
+
+        dock: openUrlPage.isPortrait ? Dock.Top : Dock.Left
+
+        background: SilicaListView {
+            anchors.fill: parent
+            model: historyModel
+
+            // Not necessary now. Later maybe removing all history
+            //            PullDownMenu {
+            //                MenuItem {
+            //                    text: "Option 1"
+            //                }
+            //                MenuItem {
+            //                    text: "Option 2"
+            //                }
+            //            }
+            VerticalScrollDecorator {}
+
+            delegate: ListItem {
+                id: listItem
+
+                Label {
+                    x: Theme.paddingLarge
+                    text: hurl
+                    anchors.verticalCenter: parent.verticalCenter
+                    color: listItem.highlighted ? Theme.highlightColor : Theme.primaryColor
+                }
+                onClicked: {
+                    urlField.text = hurl
+                    drawer.open = !drawer.open
+                    //openUrlPage.loadUrl(); // No autoload for the moment. TODO: Maybe a thing for global settings
+                }
+            }
         }
+
+        MouseArea {
+            enabled: drawer.open
+            anchors.fill: column
+            onClicked: drawer.open = false
+        }
+
+        Item {
+            id: column
+            anchors.fill: parent
+
+            TextField {
+                id: urlField
+                placeholderText: "Type in URL here"
+                anchors.centerIn: parent
+                width: Screen.width - 20
+                focus: true
+                Component.onCompleted: {
+                    // console.debug("StreamUrl :" + streamUrl) // DEBUG
+                    if (streamUrl !== "") {
+                        text = streamUrl;
+                        selectAll();
+                    }
+                }
+            }
+
+            Button {
+                id: loadBtn
+                anchors.top: urlField.bottom
+                anchors.right: urlField.right
+                text: "Load Url"
+                onClicked: {
+                    openUrlPage.loadUrl();
+                }
+            }
+            Button {
+                id: historyBtn
+                anchors.top: urlField.bottom
+                anchors.left: urlField.left
+                text: "History"
+                onClicked: {
+                    //DB.getHistory();
+                    drawer.open = !drawer.open
+                }
+            }
+        }
+
     }
 }

@@ -35,7 +35,6 @@ import Sailfish.Media 1.0
 //import Sailfish.Gallery 1.0
 import "helper"
 
-
 Page {
     id: page
     allowedOrientations: Orientation.All
@@ -46,6 +45,18 @@ Page {
     property alias onlyMusic: onlyMusic
     property alias videoPoster: videoPoster
     signal updateCover
+
+    Component.onCompleted: {
+            // Initialize the database
+            DB.initialize();
+//            DB.showHistoryLast();
+//            DB.getHistory();
+        }
+
+    onStreamUrlChanged: {
+        //Write into history database
+        DB.addHistory(streamUrl);
+    }
 
     PageHeader {
         title: streamUrl
