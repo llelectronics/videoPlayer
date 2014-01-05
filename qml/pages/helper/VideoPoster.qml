@@ -26,6 +26,12 @@ MouseArea {
     implicitWidth: poster.implicitWidth
     implicitHeight: poster.implicitHeight
 
+    function play() {
+        videoItem.playClicked();
+        videoItem.player.source = videoItem.source;
+        videoItem.player.play();
+    }
+
     Connections {
         target: videoItem._loaded ? videoItem.player : null
 

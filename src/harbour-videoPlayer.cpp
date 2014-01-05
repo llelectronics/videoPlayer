@@ -30,6 +30,7 @@
 
 #ifdef QT_QML_DEBUG
 #include <QtQuick>
+#include <QDebug>
 #endif
 
 #include <sailfishapp.h>
@@ -53,7 +54,11 @@ int main(int argc, char *argv[])
     QObject *object = view->rootObject();
 
     QString file;
+    bool autoPlay = false;
     for(int i=1; i<argc; i++) {
+        if(QString(argv[i]) == "-p" ) {  // use -p option as autoplay argument
+            autoPlay = true;
+        }
         if (!QString(argv[i]).startsWith("/") && !QString(argv[i]).startsWith("http://") && !QString(argv[i]).startsWith("rtsp://")
                 && !QString(argv[i]).startsWith("mms://") && !QString(argv[i]).startsWith("file://") && !QString(argv[i]).startsWith("https://")) {
             QString pwd("");
@@ -64,6 +69,7 @@ int main(int argc, char *argv[])
         }
         else file = QString(argv[i]);
     }
+    if (autoPlay == true) object->setProperty("autoPlay", true);
 
     QMetaObject::invokeMethod(object, "loadUrl", Q_ARG(QVariant, file));
 

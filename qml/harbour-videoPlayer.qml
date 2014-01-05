@@ -38,6 +38,7 @@ ApplicationWindow
     id: mainWindow
 
     property Item firstPage
+    property bool autoPlay: false
 
     function loadUrl(url) {
         // Check if youtube url
@@ -45,6 +46,7 @@ ApplicationWindow
         url = YT.getYoutubeVid(url);
         }
         firstPage.streamUrl = url
+        if (autoPlay == true) { console.debug("autoPlay = true") ; firstPage.videoPoster.play();}
     }
 
     initialPage: Component {
