@@ -23,6 +23,11 @@ Page {
             anchors.horizontalCenter: parent.horizontalCenter
 
         }
+        Label {
+            text: "License: BSD (3-clause)"
+            anchors.horizontalCenter: parent.horizontalCenter
+        }
+
         Rectangle{
             gradient: Gradient {
                   GradientStop { position: 0.0; color: "#333333" }
@@ -64,6 +69,15 @@ Page {
             width: parent.width-64
         }
 
+        Button {
+                id: homepage
+                anchors.horizontalCenter: parent.horizontalCenter
+                text: "<a href=\"https://github.com/llelectronics/videoPlayer\">Sourcecode on Github</a>"
+                onClicked: {
+                    Qt.openUrlExternally("https://github.com/llelectronics/videoPlayer")
+                }
+        }
+
         Label {
             width: parent.width-70
             font.pixelSize: Theme.fontSizeSmall
@@ -74,10 +88,5 @@ Page {
             height: 200
             wrapMode: Text.WordWrap
         }
-
-    }
-    MouseArea{
-        anchors.fill: parent
-        onClicked: pageStack.pop()
     }
 }
