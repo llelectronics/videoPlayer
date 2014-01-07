@@ -40,6 +40,10 @@ ApplicationWindow
     property Item firstPage
     property bool autoPlay: false
 
+    property string version: "0.2"
+    property string appname: "LLs Video Player"
+    property string appicon: "images/icon.png"
+
     function loadUrl(url) {
         // Check if youtube url
         if (YT.checkYoutube(url) === true) {

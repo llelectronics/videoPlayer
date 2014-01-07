@@ -46,6 +46,8 @@ Page {
     property alias videoPoster: videoPoster
     signal updateCover
 
+
+
     Component.onCompleted: {
             // Initialize the database
             DB.initialize();
@@ -56,6 +58,7 @@ Page {
     onStreamUrlChanged: {
         //Write into history database
         DB.addHistory(streamUrl);
+        if (errorDetail.visible || errorTxt.visible) { errorDetail.visible = false; errorTxt.visible = false }
     }
 
     PageHeader {
@@ -74,8 +77,14 @@ Page {
     SilicaFlickable {
         anchors.fill: parent
 
+
         // PullDownMenu and PushUpMenu must be declared in SilicaFlickable, SilicaListView or SilicaGridView
         PullDownMenu {
+            id: pulley
+            MenuItem {
+                text: "About "+ appname
+                onClicked: pageStack.push(Qt.resolvedUrl("AboutPage.qml"));
+            }
             MenuItem {
                 text: "Search Youtube"
                 onClicked: pageStack.push(Qt.resolvedUrl("SecondPage.qml"), {dataContainer: page});
@@ -175,6 +184,7 @@ Page {
                         controls.opacity = 0.0;
                     }
                     page.showNavigationIndicator = !page.showNavigationIndicator
+                    pulley.visible = !pulley.visible
                 }
 
 
@@ -201,6 +211,14 @@ Page {
         }
     }
     children: [
+
+        // Always use a black background
+        Rectangle {
+            anchors.fill: parent
+            color: "black"
+            visible: video.visible
+        },
+
         GStreamerVideoOutput {
             id: video
 

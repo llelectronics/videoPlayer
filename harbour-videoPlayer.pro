@@ -35,5 +35,7 @@ OTHER_FILES += qml/harbour-videoPlayer.qml \
     qml/pages/helper/VideoPoster.qml \
     qml/pages/FileDetails.qml \
     qml/pages/helper/db.js \
-    qml/pages/helper/qmldir
+    qml/pages/helper/qmldir \
+    qml/pages/CreditsModel.qml \
+    qml/pages/AboutPage.qml
 
