@@ -35,41 +35,44 @@ import QtWebKit.experimental 1.0
 import "helper/yt.js" as YT
 
 
-Dialog {
-    id: searchYTDialog
-    allowedOrientations: Orientation.All
-    canAccept: searchTerm.text !== ""
-    acceptDestination: searchResults
-    property QtObject dataContainer
+//Dialog {
+//    id: searchYTDialog
+//    allowedOrientations: Orientation.All
+//    canAccept: searchTerm.text !== ""
+//    acceptDestination: searchResults
+//    property QtObject dataContainer
 
-    DialogHeader {
-        acceptText: "Search on Youtube"
-    }
+//    DialogHeader {
+//        acceptText: "Search on Youtube"
+//    }
 
-    TextField {
-        id: searchTerm
-        placeholderText: "Type in search term here"
-        anchors.centerIn: parent
-        width: Screen.width - 20
-        focus: true
-    }
-    Keys.onEnterPressed: accept();
-    Keys.onReturnPressed: accept();
+//    TextField {
+//        id: searchTerm
+//        placeholderText: "Type in search term here"
+//        anchors.centerIn: parent
+//        width: Screen.width - 20
+//        focus: true
+//    }
+//    Keys.onEnterPressed: accept();
+//    Keys.onReturnPressed: accept();
 
-    onAcceptPendingChanged: {
-        if (acceptPending) {
-            // Tell the destination page what the search term is
-            acceptDestinationInstance.searchTerm = searchTerm.text
-        }
-    }
+//    onAcceptPendingChanged: {
+//        if (acceptPending) {
+//            // Tell the destination page what the search term is
+//            acceptDestinationInstance.searchTerm = searchTerm.text
+//        }
+//    }
 
-    Component {
-        id: searchResults
+//    Component {
+//        id: searchResults
 
         Page {
             id: searchResultsDialog
             property string searchTerm
             allowedOrientations: Orientation.All
+            backNavigation: false
+            property QtObject dataContainer
+            property string streamUrl
 
 
 
@@ -79,15 +82,63 @@ Dialog {
                 // Width and height for scale=2.0
 //                width: searchResultsDialog.orientation === Orientation.Portrait ? Screen.width / 2 : (Screen.height - 100) / 2
 //                height: Screen.height / 2
-                width: parent.width
-                height: parent.height
-                //settings.defaultFontSize: 18 // Not working anymore
+                anchors.fill: parent
+                overridePageStackNavigation: true
+                focus: true
+
+                PullDownMenu {
+                    MenuItem {
+                        text: "Go Back"
+                        onClicked: pageStack.pop();
+                    }
+                }
+
+
+                header: Row {
+                    width: parent.width
+                    spacing: 1
+                    anchors.top: parent.top
+                    anchors.left: parent.left
+                    anchors.right: parent.right
+                    Switch {
+                        id: backBtn
+                        onCheckedChanged: { pageStack.pop() }
+                    }
+                    SearchField {
+                        id: searchField
+                        property string acceptedInput: ""
+                        width: parent.width - backBtn.width
+
+                        placeholderText: "Search.."
+//                        anchors.top: parent.top
+//                        anchors.left: parent.left
+//                        anchors.right: parent.right
+
+                        EnterKey.enabled: text.trim().length > 0
+                        EnterKey.text: "Go!"
+
+                        Component.onCompleted: {
+                            acceptedInput = ""
+                            _editor.accepted.connect(searchEntered)
+                        }
+
+                        // is called when user presses the Return key
+                        function searchEntered() {
+                            searchField.acceptedInput = text
+                            ytView.url = "http://m.youtube.com/results?q=" + acceptedInput
+                            searchField.focus = false
+                        }
+                    }
+                }
+
                 //scale: 2.0  // there seems no way to set the default text size and the default one is too tiny so scale instead
                 //url: "http://ytapi.com/search/?vq=" + searchTerm  // now that we have youtube => ytapi openurl action we can use the official youtube site ;)
-                url: "http://m.youtube.com/results?q=" + searchTerm
+                //url: "http://m.youtube.com/" // results?q=" + searchTerm
                 // iPhone user agent popups for app installation
                 //experimental.userAgent: "Mozilla/5.0 (iPhone; CPU iPhone OS 5_0 like Mac OS X) AppleWebKit/534.46 (KHTML, like Gecko) Version/5.1 Mobile/9A334 Safari/7534.48.3"
                 experimental.userAgent: "Mozilla/5.0 (Linux; U; Android 2.2; en-us; Nexus One Build/FRF91) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1"
+                experimental.preferences.minimumFontSize: 14
+
 
                 onUrlChanged: {
                     //console.debug("New url:" +url)
@@ -102,12 +153,13 @@ Dialog {
                 }
 
                 VerticalScrollDecorator {}
+
+                Component.onCompleted: url = "http://m.youtube.com/"
             }
+       }
 
-        }
-
-    }
-}
+   // }
+//}
 
 
 

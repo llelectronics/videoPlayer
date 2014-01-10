@@ -46,8 +46,6 @@ Page {
     property alias videoPoster: videoPoster
     signal updateCover
 
-
-
     Component.onCompleted: {
             // Initialize the database
             DB.initialize();
@@ -247,7 +245,7 @@ Page {
                     videoPoster.duration = (duration/1000);
                     loadMetaDataPage();
                     if (hasAudio === true && hasVideo === false) onlyMusic.opacity = 1.0
-                    else onlyMusic.opacity = 0.0
+                    else onlyMusic.opacity = 0.0;
                 }
                 onStatusChanged: {
                     //errorTxt.visible = false     // DEBUG: Always show errors for now

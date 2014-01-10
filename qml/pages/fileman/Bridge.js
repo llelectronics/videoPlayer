@@ -35,6 +35,10 @@ function isSpecialPath(path) {
     return (path in special_paths_);
 }
 
+function existsPath(path) {
+    return os.path.exists(path);
+}
+
 function path() {
     return os.path.apply(null, [].slice.call(arguments));
 }

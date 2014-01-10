@@ -78,6 +78,26 @@ SilicaListView {
         entriesList.showAbove(pages);
     }
 
+    function goRoot() {
+        var url = Qt.resolvedUrl('DirView.qml');
+        var pages = [];
+        var path = "/";
+
+        pages.push({page: url, properties: {root: path, dataContainer: dataContainer}});
+
+        entriesList.showAbove(pages);
+    }
+
+    function goSd() {
+        var url = Qt.resolvedUrl('DirView.qml');
+        var pages = [];
+        var path = "/run/user/100000/media/sdcard";
+
+        pages.push({page: url, properties: {root: path, dataContainer: dataContainer}});
+
+        entriesList.showAbove(pages);
+    }
+
     onDataAdded: requestData(reasonableCount)
 
     function requestData(count, is_refresh) {
@@ -136,17 +156,33 @@ SilicaListView {
 
     PullDownMenu {
         MenuItem {
-            text: "Show Home"
-            onClicked: entriesList.goHome()
+            text: "Show Filesystem Root"
+            onClicked: entriesList.goRoot();
         }
         MenuItem {
-	    text: "Show Android sdcard"
-	    onClicked: entriesList.goAndroidSd()
-	}
+            text: "Show Home"
+            onClicked: entriesList.goHome();
+        }
+        MenuItem {
+            text: "Show Android SDCard"
+            onClicked: entriesList.goAndroidSd();
+        }
+        MenuItem {
+            text: "Show SDCard"
+            onClicked: entriesList.goSd();
+            visible: Util.existsPath("/run/user/100000/media/sdcard")
+            //Component.onCompleted: console.debug("SD Card status: " + Util.existsPath("/run/user/100000/media/sdcard"))
+        }
 //        MenuItem {
 //            text: "Marked Paths"
 //            onClicked: entriesList.showStoredPaths()
 //        }
+    }
+    PushUpMenu {
+        MenuItem {
+            text: "Scroll to top"
+            onClicked: entriesList.scrollToTop();
+        }
     }
 
     RemorsePopup {
