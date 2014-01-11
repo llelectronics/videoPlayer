@@ -251,7 +251,7 @@ Page {
                     //errorTxt.visible = false     // DEBUG: Always show errors for now
                     //errorDetail.visible = false
                     //console.debug("PlaybackStatus: " + playbackState)
-                    if (mediaPlayer.status === MediaPlayer.Loading || mediaPlayer.status === MediaPlayer.Buffering || mediaPlayer.status === MediaPlayer.Stalled) progressCircle.visible = true; 
+                    if (mediaPlayer.status === MediaPlayer.Loading || mediaPlayer.status === MediaPlayer.Buffering || mediaPlayer.status === MediaPlayer.Stalled) progressCircle.visible = true;
                     else progressCircle.visible = false;
                 }
                 onError: {
