@@ -164,7 +164,12 @@ Page {
                 //duration: videoDuration
                 active: mediaItem.active
                 source: streamUrl
-                //onSourceChanged: play();  // autoPlay TODO: add config for it
+                onSourceChanged: {
+                    //play();  // autoPlay TODO: add config for it
+                    position = 0;
+                    player.seek(0);
+                    player.stop();
+                }
                 //source: "file:///home/nemo/Videos/eva.mp4"
                 //source: "http://netrunnerlinux.com/vids/default-panel-script.mkv"
                 //source: "http://www.ytapi.com/?vid=lfAixpkzcBQ&format=direct"

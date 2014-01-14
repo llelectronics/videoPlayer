@@ -40,7 +40,7 @@ ApplicationWindow
     property Item firstPage
     property bool autoPlay: false
 
-    property string version: "0.2"
+    property string version: "0.3"
     property string appname: "LLs Video Player"
     property string appicon: "images/icon.png"
 

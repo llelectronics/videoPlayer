@@ -13,6 +13,7 @@ MouseArea {
     property int duration
     onDurationChanged: positionSlider.maximumValue = duration
     property alias controls: controls
+    property alias position: positionSlider.value
     signal playClicked;
 
     property bool transpose
