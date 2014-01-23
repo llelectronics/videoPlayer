@@ -247,6 +247,7 @@ Page {
                 }
 
                 onDurationChanged: {
+                    //console.debug("Duration(msec): " + duration);
                     videoPoster.duration = (duration/1000);
                     loadMetaDataPage();
                     if (hasAudio === true && hasVideo === false) onlyMusic.opacity = 1.0
