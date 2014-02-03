@@ -196,7 +196,8 @@ Page {
                         //console.debug("Mouse values:" + mouse.x + " x " + mouse.y)
                         var middleX = width / 2
                         var middleY = height / 2
-                        if ((mouse.x >= middleX - 21 && mouse.x <= middleX + 21) && (mouse.y >= middleY - 21 && mouse.y <= middleY + 21)) {
+                        //console.debug("MiddleX:" + middleX + " MiddleY:"+middleY + " mouse.x:"+mouse.x + " mouse.y:"+mouse.y)
+                        if ((mouse.x >= middleX - 64 && mouse.x <= middleX + 64) && (mouse.y >= middleY - 64 && mouse.y <= middleY + 64)) {
                             mediaPlayer.pause();
                             if (controls.opacity === 0.0) toggleControls();
                             progressCircle.visible = false;

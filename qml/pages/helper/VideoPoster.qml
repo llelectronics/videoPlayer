@@ -90,7 +90,9 @@ MouseArea {
             }
 
             MouseArea {
-                anchors.fill: parent
+                anchors.centerIn: parent
+                width: parent.width + 64
+                height: parent.height + 64
                 enabled: !videoItem.playing
                 onClicked: {
                     //console.debug("VideoItem.source length = " + videoItem.source.toString().length)
