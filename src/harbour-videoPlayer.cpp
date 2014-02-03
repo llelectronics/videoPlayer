@@ -34,6 +34,7 @@
 #endif
 
 #include <sailfishapp.h>
+#include "DownloadManager.hpp"
 
 
 int main(int argc, char *argv[])
@@ -73,8 +74,12 @@ int main(int argc, char *argv[])
 
     QMetaObject::invokeMethod(object, "loadUrl", Q_ARG(QVariant, file));
 
-    view->show();
+    // Create download manager object
+    DownloadManager manager;
 
+    view->engine()->rootContext()->setContextProperty("_manager", &manager);
+
+    view->show();
 
     return app->exec();
 

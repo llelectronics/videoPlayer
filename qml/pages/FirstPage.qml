@@ -95,6 +95,14 @@ Page {
                 text: "Open File"
                 onClicked: pageStack.push(Qt.resolvedUrl("fileman/Main.qml"), {dataContainer: page});
             }
+            MenuItem {
+                text: "Download Youtube Video"
+                visible: {
+                    if ((/^http:\/\/ytapi.com/).test(streamUrl)) return true
+                    else return false
+                }
+                onClicked: pageStack.push(Qt.resolvedUrl("DownloadManager.qml"), {"downloadUrl": streamUrl});
+            }
         }
 
         Image {

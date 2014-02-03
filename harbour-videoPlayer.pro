@@ -10,7 +10,8 @@ TARGET = harbour-videoPlayer
 
 CONFIG += sailfishapp
 
-SOURCES += src/harbour-videoPlayer.cpp
+SOURCES += src/harbour-videoPlayer.cpp \
+    src/DownloadManager.cpp
 
 OTHER_FILES += qml/harbour-videoPlayer.qml \
     qml/cover/CoverPage.qml \
@@ -37,5 +38,9 @@ OTHER_FILES += qml/harbour-videoPlayer.qml \
     qml/pages/helper/db.js \
     qml/pages/helper/qmldir \
     qml/pages/CreditsModel.qml \
-    qml/pages/AboutPage.qml
+    qml/pages/AboutPage.qml \
+    qml/pages/DownloadManager.qml
+
+HEADERS += \
+    src/DownloadManager.hpp
 
