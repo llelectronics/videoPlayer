@@ -47,9 +47,11 @@ ApplicationWindow
     function loadUrl(url) {
         // Check if youtube url
         if (YT.checkYoutube(url) === true) {
-        url = YT.getYoutubeVid(url);
+            YT.getYoutubeTitle(url);
+            url = YT.getYoutubeVid(url);
         }
         firstPage.streamUrl = url
+        firstPage.streamTitle = ""
         if (autoPlay == true) { console.debug("autoPlay = true") ; firstPage.videoPoster.play();}
     }
 

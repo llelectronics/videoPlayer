@@ -11,14 +11,44 @@ function checkYoutube(url) {
     }
 } 
 
-function getYoutubeVid(url) {
+function getYtID(url) {
     var youtube_id;
     if (url.match('embed')) { youtube_id = url.split(/embed\//)[1].split('"')[0]; }
     else { youtube_id = url.split(/v\/|v=|youtu\.be\//)[1].split(/[?&]/)[0]; }
     console.debug("Youtube ID: " + youtube_id);
+    return youtube_id;
+}
+
+function getYoutubeVid(url) {
+    var youtube_id;
+    youtube_id = getYtID(url);
     var ytUrl = getYoutubeStream(youtube_id);
     //if (ytUrl !== "") return ytUrl;  // XMLHttpRequest does not know synchronus in QML so I need to restructe everything if I directly want to use Youtubes server
     return("http://ytapi.com/?vid=" + youtube_id + "&format=direct");
+}
+
+function getYoutubeTitle(url) {
+    var youtube_id;
+    youtube_id = getYtID(url);
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET","http://gdata.youtube.com/feeds/api/videos/" + youtube_id + "?v=2&alt=jsonc",true);
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                var jsonObject = eval('(' + xhr.responseText + ')');
+                console.log("Youtube Title: " + jsonObject.data.title);
+                firstPage.streamTitle = jsonObject.data.title;
+//                for ( var index in jsonObject.data )
+//                {
+//                    console.log("Youtube Title: " + jsonObject.data.title);
+//                    firstPage.streamTitle = jsonObject.data.title;
+//                }
+            } else {
+                console.log("responseText", xhr.responseText);
+            }
+        }
+    }
+    xhr.send();
 }
 
 

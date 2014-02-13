@@ -40,6 +40,7 @@ Page {
     allowedOrientations: Orientation.All
     property int videoDuration
     property string streamUrl
+    property string streamTitle
     property string title: videoPoster.player.metaData.title ? videoPoster.player.metaData.title : ""
     property string artist: videoPoster.player.metaData.albumArtist ? videoPoster.player.metaData.albumArtist : ""
     property alias onlyMusic: onlyMusic
@@ -47,11 +48,11 @@ Page {
     signal updateCover
 
     Component.onCompleted: {
-            // Initialize the database
-            DB.initialize();
-//            DB.showHistoryLast();
-//            DB.getHistory();
-        }
+        // Initialize the database
+        DB.initialize();
+        //            DB.showHistoryLast();
+        //            DB.getHistory();
+    }
 
     onStreamUrlChanged: {
         //Write into history database
@@ -60,8 +61,20 @@ Page {
     }
 
     PageHeader {
+        id: urlHeader
         title: streamUrl
-        visible: page.orientation === Orientation.Portrait ? true : false
+        visible: {
+            if (page.orientation === Orientation.Portrait && titleHeader.visible == false) return true
+            else return false
+        }
+    }
+    PageHeader {
+        id: titleHeader
+        title: streamTitle
+        visible: {
+            if (page.orientation === Orientation.Portrait && streamTitle != "") return true
+            else return false
+        }
     }
 
     function videoPauseTrigger() {
@@ -238,9 +251,13 @@ Page {
                 id: mediaPlayer
                 function loadMetaDataPage() {
                     //console.debug("Loading metadata page")
+                    var mDataTitle;
+                    console.debug(metaData.title)
+                    if (streamTitle != "") mDataTitle = streamTitle
+                    else mDataTitle = metaData.title
                     pageStack.pushAttached(Qt.resolvedUrl("FileDetails.qml"), {
                                                filename: streamUrl,
-                                               title: metaData.title,
+                                               title: mDataTitle,
                                                artist: metaData.albumArtist,
                                                videocodec: metaData.videoCodec,
                                                resolution: metaData.resolution,

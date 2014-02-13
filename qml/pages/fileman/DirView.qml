@@ -47,6 +47,7 @@ Page {
         onMediaFileOpen: {
             //console.debug("DirView MediaFileOpen:" + url);
             dataContainer.streamUrl = url;
+            dataContainer.streamTitle = "";
         }
     }
 

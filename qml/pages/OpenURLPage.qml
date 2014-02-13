@@ -16,6 +16,7 @@ Page {
     function loadUrl() {
         if (YT.checkYoutube(urlField.text.toString())=== true) {
             var yturl = YT.getYoutubeVid(urlField.text.toString());
+            YT.getYoutubeTitle(urlField.text.toString());
             if (dataContainer != null) {
                 dataContainer.streamUrl = yturl;
                 pageStack.pop(undefined, PageStackAction.Immediate);
@@ -24,6 +25,7 @@ Page {
         else {
             if (dataContainer != null) {
                 dataContainer.streamUrl = urlField.text;
+                dataContainer.streamTitle = "";
                 pageStack.pop(undefined, PageStackAction.Immediate);
             }
         }
