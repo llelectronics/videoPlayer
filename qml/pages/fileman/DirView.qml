@@ -49,6 +49,9 @@ Page {
             dataContainer.streamUrl = url;
             dataContainer.streamTitle = "";
         }
+        onFileRemove: {
+            dataContainer.removeFile(url);
+        }
     }
 
     ListModel {

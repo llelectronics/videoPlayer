@@ -44,6 +44,8 @@ ApplicationWindow
     property string appname: "LLs Video Player"
     property string appicon: "images/icon.png"
 
+    signal fileRemove(string url)
+
     function loadUrl(url) {
         // Check if youtube url
         if (YT.checkYoutube(url) === true) {

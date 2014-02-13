@@ -35,7 +35,7 @@
 
 #include <sailfishapp.h>
 #include "DownloadManager.hpp"
-
+#include "fmhelper.hpp"
 
 int main(int argc, char *argv[])
 {
@@ -78,6 +78,11 @@ int main(int argc, char *argv[])
     DownloadManager manager;
 
     view->engine()->rootContext()->setContextProperty("_manager", &manager);
+
+    FM *fileAction = new FM();
+    QObject::connect((QObject*)view->rootObject(),
+                     SIGNAL(removeFile(QString)),fileAction,
+                     SLOT(remove(QString)));
 
     view->show();
 

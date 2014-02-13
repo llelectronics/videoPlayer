@@ -107,6 +107,7 @@ function getYoutubeStream(youtube_id) {
 
             if (found) {
                 console.debug("video direct URL found: " + url);
+                firstPage.youtubeDirectUrl = url
                 return url;
 
             } else {

@@ -11,6 +11,7 @@ ContextMenu {
     property string fileInfo: ""
     property string filePath: ""
     signal mediaFileOpen(string url)
+    signal fileRemove(string url)
 
     onVisibleChanged: {
         if (visible) {
@@ -39,10 +40,11 @@ ContextMenu {
         var rmItem = entries.remove;
         var pos = index;
         var action = function() {
-            rmFile(fullName);
+            fileRemove(fullName);
+            //rmFile(fullName);
             rmItem(pos);
         };
-        remorseAction(msg, action, 3000);
+        remorseAction(msg, action , 3000);
     }
 
     function storePath() {

@@ -42,5 +42,6 @@ OTHER_FILES += qml/harbour-videoPlayer.qml \
     qml/pages/DownloadManager.qml
 
 HEADERS += \
-    src/DownloadManager.hpp
+    src/DownloadManager.hpp \
+    src/fmhelper.hpp
 

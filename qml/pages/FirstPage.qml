@@ -40,12 +40,14 @@ Page {
     allowedOrientations: Orientation.All
     property int videoDuration
     property string streamUrl
+    property string youtubeDirectUrl
     property string streamTitle
     property string title: videoPoster.player.metaData.title ? videoPoster.player.metaData.title : ""
     property string artist: videoPoster.player.metaData.albumArtist ? videoPoster.player.metaData.albumArtist : ""
     property alias onlyMusic: onlyMusic
     property alias videoPoster: videoPoster
     signal updateCover
+    signal removeFile(string url)
 
     Component.onCompleted: {
         // Initialize the database
@@ -114,7 +116,9 @@ Page {
                     if ((/^http:\/\/ytapi.com/).test(streamUrl)) return true
                     else return false
                 }
-                onClicked: pageStack.push(Qt.resolvedUrl("DownloadManager.qml"), {"downloadUrl": streamUrl});
+                //onClicked: pageStack.push(Qt.resolvedUrl("DownloadManager.qml"), {"downloadUrl": streamUrl});
+                // Use direct youtube url instead of ytapi for downloads (ytapi links not always download with download manager)
+                onClicked: pageStack.push(Qt.resolvedUrl("DownloadManager.qml"), {"downloadUrl": youtubeDirectUrl});
             }
         }
 

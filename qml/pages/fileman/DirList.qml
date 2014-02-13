@@ -28,6 +28,7 @@ SilicaListView {
     signal dataAdded
 
     signal mediaFileOpen(string url)
+    signal fileRemove(string url)
 
     Component {
         id: mainHeader

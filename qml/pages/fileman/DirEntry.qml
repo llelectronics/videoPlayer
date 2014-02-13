@@ -12,6 +12,7 @@ ListItem {
     property string fileName: name
     showMenuOnPressAndHold: false
     signal mediaFileOpen(string url)
+    signal fileRemove(string url)
 
     Component {
         id: myMenu
