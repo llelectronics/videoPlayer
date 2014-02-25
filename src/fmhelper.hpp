@@ -10,6 +10,7 @@ class FM : public QObject
     public slots:
         void remove(const QString &url)
         {    qDebug() << "Called the C++ slot and request removal of:" << url;
+             QFile(url).remove();
         }
 };
 

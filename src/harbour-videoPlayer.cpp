@@ -81,7 +81,7 @@ int main(int argc, char *argv[])
 
     FM *fileAction = new FM();
     QObject::connect((QObject*)view->rootObject(),
-                     SIGNAL(removeFile(QString)),fileAction,
+                     SIGNAL(fileRemove(QString)),fileAction,
                      SLOT(remove(QString)));
 
     view->show();

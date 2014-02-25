@@ -59,7 +59,12 @@ Page {
     onStreamUrlChanged: {
         //Write into history database
         DB.addHistory(streamUrl);
-        if (errorDetail.visible || errorTxt.visible) { errorDetail.visible = false; errorTxt.visible = false }
+        if (errorDetail.visible && errorTxt.visible) { errorDetail.visible = false; errorTxt.visible = false }
+        if (YT.checkYoutube(streamUrl)=== true) {
+            YT.getYoutubeTitle(streamUrl);
+            var ytID = YT.getYtID(streamUrl);
+            YT.getYoutubeStream(ytID);
+        }
     }
 
     PageHeader {
@@ -116,9 +121,14 @@ Page {
                     if ((/^http:\/\/ytapi.com/).test(streamUrl)) return true
                     else return false
                 }
-                //onClicked: pageStack.push(Qt.resolvedUrl("DownloadManager.qml"), {"downloadUrl": streamUrl});
-                // Use direct youtube url instead of ytapi for downloads (ytapi links not always download with download manager)
-                onClicked: pageStack.push(Qt.resolvedUrl("DownloadManager.qml"), {"downloadUrl": youtubeDirectUrl});
+                //onClicked: pageStack.push(Qt.resolvedUrl("DownloadManager.qml"), {"downloadUrl": streamUrl, "downloadName": streamTitle});
+                // Alternatively use direct youtube url instead of ytapi for downloads (ytapi links not always download with download manager)
+                onClicked: {
+                    // Filter out all chars that might stop the download manager from downloading the file
+                    // Illegal chars: `~!@#$%^&*()-=+\|/?.>,<;:'"[{]}
+                    streamTitle = YT.getDownloadableTitleString(streamTitle)
+                    pageStack.push(Qt.resolvedUrl("DownloadManager.qml"), {"downloadUrl": youtubeDirectUrl, "downloadName": streamTitle});
+                }
             }
         }
 

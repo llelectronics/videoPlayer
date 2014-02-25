@@ -197,8 +197,12 @@ SilicaListView {
     delegate: DirEntry {
         myList: entriesList
         onMediaFileOpen: {
-            //console.debug("DirList MediaFileOpen:"+ url);
+            //console.debug("[DirList] MediaFileOpen:"+ url);
             entriesList.mediaFileOpen(url);
+        }
+        onFileRemove: {
+            console.debug("[DirList] Request removal of: " + url);
+            entriesList.fileRemove(url);
         }
     }
 

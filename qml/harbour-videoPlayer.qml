@@ -62,6 +62,10 @@ ApplicationWindow
             id: firstPage
 
             Component.onCompleted: { mainWindow.firstPage = firstPage }
+            onRemoveFile: {
+                console.debug("Request removal of" + url);
+                fileRemove(url);
+            }
         }
     }
     cover: Qt.resolvedUrl("cover/CoverPage.qml")

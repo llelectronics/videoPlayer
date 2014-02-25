@@ -21,6 +21,11 @@ ContextMenu {
         }
     }
 
+    function removeFile(url) {
+            console.debug("[DirEntryMenu] Request removal of: " + url);
+            fileRemove(url)
+    }
+
     function openFile() {
         var url = "file://" + filePath;
         //console.log("Open clicked");
@@ -33,18 +38,16 @@ ContextMenu {
     // Seems to work but Util.rm seems to fail somehow
     function deleteFile() {
         var fullName = filePath;
-        var msg = "Deleting " + fileName;
+        var msg = qsTr("Deleting ") + fileName;
         // function executed as a remorse action does not capture context :(
         // so, save needed functions as locals
-        var rmFile = Util.rm;
-        var rmItem = entries.remove;
         var pos = index;
-        var action = function() {
-            fileRemove(fullName);
-            //rmFile(fullName);
-            rmItem(pos);
-        };
-        remorseAction(msg, action , 3000);
+        var entryIremove = entryItem.removeFile;
+
+        entryItem.remorseAction(msg, function() {
+            entryIremove(fullName,pos);
+        });
+
     }
 
     function storePath() {
@@ -64,10 +67,10 @@ ContextMenu {
         text: "Open"
         onClicked :  entryMenu.openFile()
     }
-//    MenuItem {
-//        text: "Delete"
-//        onClicked: entryMenu.deleteFile()
-//    }
+    MenuItem {
+        text: "Delete"
+        onClicked: entryMenu.deleteFile()
+    }
 //    MenuItem {
 //        text: "Mark"
 //        onClicked: entryMenu.storePath()

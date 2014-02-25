@@ -50,6 +50,7 @@ Page {
             dataContainer.streamTitle = "";
         }
         onFileRemove: {
+            console.debug("[DirView]Requesting removal of file " + url);
             dataContainer.removeFile(url);
         }
     }

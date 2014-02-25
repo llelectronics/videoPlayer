@@ -2,7 +2,7 @@ function checkYoutube(url) {
     // Yeah I hate RegEx. Thx user2200660 for this nice youtube regex ;)
     //if (url.match('/?.*(?:youtu.be\\/|v\\/|u/\\w/|embed\\/|watch\\?.*&?v=)')) {
     // Use more advanced regex to detect youtube video urls
-    if (url.match(/https?:\/\/(?:[0-9A-Z-]+\.)?(?:youtu\.be\/|youtube\.com(?:\/embed\/|\/v\/|\/watch\?v=|\/ytscreeningroom\?v=|\/feeds\/api\/videos\/|\/user\S*[^\w\-\s]|\S*[^\w\-\s]))([\w\-]{11})[?=&+%\w-]*/ig)) {
+    if (url.match(/https?:\/\/(?:[0-9A-Z-]+\.)?(?:youtu\.be\/|youtube\.com(?:\/embed\/|\/v\/|\/watch\?v=|\/ytscreeningroom\?v=|\/feeds\/api\/videos\/|\/user\S*[^\w\-\s]|\S*[^\w\-\s]))([\w\-]{11})[?=&+%\w-]*/ig) || url.match(/ytapi.com/)) {
         console.debug("Youtube URL detected");
         return true;
     }
@@ -14,6 +14,7 @@ function checkYoutube(url) {
 function getYtID(url) {
     var youtube_id;
     if (url.match('embed')) { youtube_id = url.split(/embed\//)[1].split('"')[0]; }
+    else if (url.match(/ytapi.com/)) { youtube_id = url.split(/vid=/)[1].split(/[?&]/)[0]; }
     else { youtube_id = url.split(/v\/|v=|youtu\.be\//)[1].split(/[?&]/)[0]; }
     console.debug("Youtube ID: " + youtube_id);
     return youtube_id;
@@ -124,4 +125,32 @@ function getYoutubeStream(youtube_id) {
 
     doc.open("GET", "http://www.youtube.com/get_video_info?video_id=" + youtube_id);
     doc.send();
+}
+
+// Damn it RegExp again :P
+function getDownloadableTitleString(streamTitle) {
+    if (streamTitle.match(/\//g)) streamTitle = streamTitle.replace(/\//g, "");
+    if (streamTitle.match(/\?/g)) streamTitle = streamTitle.replace(/\?/g,'');
+    if (streamTitle.match('!')) streamTitle = streamTitle.replace("!", "");
+    if (streamTitle.match(/\*/g)) streamTitle = streamTitle.replace(/\*/g, "");
+    if (streamTitle.match('`')) streamTitle = streamTitle.replace("`", "");
+    if (streamTitle.match('~')) streamTitle = streamTitle.replace("~", "");
+    if (streamTitle.match('@')) streamTitle = streamTitle.replace("@", "");
+    if (streamTitle.match('#')) streamTitle = streamTitle.replace("#", "");
+    if (streamTitle.match('$')) streamTitle = streamTitle.replace("$", "");
+    if (streamTitle.match('%')) streamTitle = streamTitle.replace("%", "");
+    if (streamTitle.match('^')) streamTitle = streamTitle.replace("^", "");
+    if (streamTitle.match(/\\/g)) streamTitle = streamTitle.replace(/\\/g, "");
+    if (streamTitle.match('|')) streamTitle = streamTitle.replace("|", "");
+    if (streamTitle.match('<')) streamTitle = streamTitle.replace("<", "");
+    if (streamTitle.match('>')) streamTitle = streamTitle.replace(">", "");
+    if (streamTitle.match(';')) streamTitle = streamTitle.replace(";", "");
+    if (streamTitle.match(':')) streamTitle = streamTitle.replace(":", "");
+    if (streamTitle.match('\'')) streamTitle = streamTitle.replace("\'", "");
+    if (streamTitle.match('\"')) streamTitle = streamTitle.replace("\"", "");
+    if (streamTitle.match(/\[/g)) streamTitle = streamTitle.replace(/\[/g, "");
+    if (streamTitle.match(/\]/g)) streamTitle = streamTitle.replace(/\]/g, "");
+    if (streamTitle.match(/\{/g)) streamTitle = streamTitle.replace(/\{/g, "");
+    if (streamTitle.match(/\}/g)) streamTitle = streamTitle.replace(/\}/g, "");
+    return streamTitle;
 }

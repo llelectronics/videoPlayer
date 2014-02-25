@@ -14,12 +14,27 @@ ListItem {
     signal mediaFileOpen(string url)
     signal fileRemove(string url)
 
+    property alias remorse: remorse
+
+    RemorseItem {
+        id: remorse
+    }
+
+    function removeFile(url,pos) {
+        console.debug("[DirEntry] Request removal of: " + url);
+        fileRemove(url)
+        entries.remove(pos)
+    }
+
     Component {
         id: myMenu
         DirEntryMenu {
             onMediaFileOpen: {
                 //console.debug("DirEntry MediaFileOpen:" + url)
                 entryItem.mediaFileOpen(url)
+            }
+            onFileRemove: {
+                entryItem.fileRemove(url)
             }
         }
     }

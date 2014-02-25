@@ -50,6 +50,7 @@
 #include <QtCore/QTime>
 #include <QtCore/QUrl>
 #include <QtNetwork/QNetworkAccessManager>
+#include <QProcess>
 
 class QNetworkReply;
 
@@ -96,7 +97,9 @@ public:
 public Q_SLOTS:
     // This method is called when the user starts a download by clicking the 'Download' button in the UI
     void downloadUrl(const QString &url);
+    void downloadWithCurl(const QString &url);
     void downloadAbort();
+    void setDownloadName(const QString &name);
 
 Q_SIGNALS:
     // The change notification signals of the properties
@@ -116,6 +119,9 @@ private Q_SLOTS:
 
     // This method is called whenever a download job has finished
     void downloadFinished();
+
+    // This method is called whenever a download with curl finished
+    void downloadCurlFinished();
 
     // This method is called whenever the current download job received new data
     void downloadReadyRead();
@@ -168,6 +174,9 @@ private:
 
     // The list of status messages
     QStringList m_statusMessage;
+
+    // Process used for curl downloading
+    QProcess *curlProc;
 };
 
 #endif

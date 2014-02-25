@@ -4,9 +4,11 @@ Page {
     id: downloadManager
     allowedOrientations: Orientation.All
     property string downloadUrl
+    property string downloadName
     //property alias downloadUrl: urlField.text
 
     Component.onCompleted: {
+        _manager.setDownloadName(downloadName)
         if (downloadUrl != "") _manager.downloadUrl(downloadUrl)
     }
 
@@ -21,6 +23,12 @@ Page {
             MenuItem {
                 text: qsTr("Add Download")
                 onClicked: pageStack.push(manualDownload);
+            }
+            MenuItem {
+                text: qsTr("Download with Curl")
+                onClicked: {
+                    _manager.downloadWithCurl(downloadUrl)
+                }
             }
 //            MenuItem {
 //                text: qsTr("Show Details")

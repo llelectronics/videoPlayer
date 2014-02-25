@@ -47,9 +47,10 @@
 #include <QtNetwork/QNetworkReply>
 #include <QtNetwork/QNetworkRequest>
 #include <QDir>
+#include <QDebug>
 
 DownloadManager::DownloadManager(QObject *parent)
-    : QObject(parent), m_currentDownload(0), m_downloadedCount(0), m_totalCount(0), m_progressTotal(0), m_progressValue(0)
+    : QObject(parent), m_currentDownload(0), m_downloadedCount(0), m_totalCount(0), m_progressTotal(0), m_progressValue(0), curlProc(new QProcess(this))
 {
 }
 
@@ -88,6 +89,11 @@ void DownloadManager::downloadUrl(const QString &url)
     append(QUrl(url));
 }
 
+void DownloadManager::setDownloadName(const QString &name)
+{
+    basename = QString(name);
+}
+
 void DownloadManager::append(const QUrl &url)
 {
     /**
@@ -111,7 +117,8 @@ QString DownloadManager::saveFileName(const QUrl &url)
     // First extract the path component from the URL ...
     const QString path = url.path();
 
-    // ... and then extract the file name.
+    // ... and then extract the file name. // only when basename is not already set
+    if (basename.isEmpty())
     QString basename = QFileInfo(path).fileName();
 
     if (basename.isEmpty())
@@ -134,6 +141,25 @@ QString DownloadManager::saveFileName(const QUrl &url)
     }
 
     return basename;
+}
+
+void DownloadManager::downloadWithCurl(const QString &url)
+{
+    QString filename;
+    if (basename.isEmpty())
+        filename = saveFileName(url);
+    else
+        filename = basename;
+
+    qDebug() << "Filename to save to with curl: " + filename + ".mp4";
+    qDebug() << "Curl Download starts";
+
+    qDebug() << "curl \"" + url + "\" -o \"" + filename + ".mp4\"";
+    // Add a status message
+    addStatusMessage(QString("Downloading %1 with curl...").arg(url));
+    curlProc->start("curl \"" + url + "\" -o \"" + filename + ".mp4\"");
+
+    connect(curlProc, SIGNAL(finished(int)), this, SLOT(downloadCurlFinished()));
 }
 
 void DownloadManager::addErrorMessage(const QString &message)
@@ -260,6 +286,7 @@ void DownloadManager::downloadReadyRead()
 {
     // Whenever new data are available on the network reply, write them out to the result file
     m_output.write(m_currentDownload->readAll());
+    //m_output.write(m_currentDownload->read(m_currentDownload->bytesAvailable()));
 }
 //! [3]
 
@@ -269,3 +296,15 @@ void DownloadManager::downloadAbort()
     m_currentDownload->abort();
 }
 //! [4]
+
+//! [5]
+void DownloadManager::downloadCurlFinished()
+{
+    // Add a status or error message
+    if (curlProc->error()) {
+        addErrorMessage(QString("Failed Downloading: ") + curlProc->errorString());
+    } else {
+        addStatusMessage("Succeeded.");
+    }
+}
+//! [5]
