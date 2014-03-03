@@ -14,24 +14,24 @@ Page {
     }
 
     function loadUrl() {
-//        if (YT.checkYoutube(urlField.text.toString())=== true) {
-//            //var yturl = YT.getYoutubeVid(urlField.text.toString());
+        if (YT.checkYoutube(urlField.text.toString())=== true) {
+            var yturl = YT.getYoutubeVid(urlField.text.toString());
 //            YT.getYoutubeTitle(urlField.text.toString());
 //            var ytID = YT.getYtID(urlField.text.toString());
 //            console.debug(ytID)
 //            YT.getYoutubeStream(ytID);
             if (dataContainer != null) {
-                dataContainer.streamUrl = urlField.text;
+                dataContainer.streamUrl = yturl
                 pageStack.pop(dataContainer);
             }
-//        }
-//        else {
-//            if (dataContainer != null) {
-//                dataContainer.streamUrl = urlField.text;
-//                dataContainer.streamTitle = "";
-//                pageStack.pop(dataContainer, PageStackAction.Immediate);
-//            }
-//        }
+        }
+        else {
+            if (dataContainer != null) {
+                dataContainer.streamUrl = urlField.text;
+                dataContainer.streamTitle = "";
+                pageStack.pop(dataContainer, PageStackAction.Immediate);
+            }
+        }
     }
 
     Component.onCompleted: {
