@@ -131,7 +131,10 @@ Page {
                 }
             }
         }
-
+        //                visible: {
+        //                    if (text !== "" && page.orientation === Orientation.Portrait ) return true;
+        //                    else return false;
+        //                }
         Image {
             id: onlyMusic
             anchors.centerIn: parent
@@ -154,34 +157,60 @@ Page {
             }
         }
 
-        Label {
-            // TODO: seems only show error number. Maybe disable in the future
-            id: errorTxt
-            text: ""
-            visible: {
-                if (text !== "" && page.orientation === Orientation.Portrait ) return true;
-                else return false;
-            }
+        Column {
+            id: errorBox
             anchors.top: parent.top
             anchors.topMargin: 65
-            font.bold: true
-        }
-
-
-        TextArea {
-            id: errorDetail
-            text: ""
+            spacing: 15
+            width: parent.width
+            height: parent.height
             visible: {
-                if (text !== "" && page.orientation === Orientation.Portrait ) return true;
+                if (errorTxt.text !== "" || errorDetail.text !== "" ) return true;
                 else return false;
             }
-            width: parent.width
-            height: parent.height / 3
-            anchors.horizontalCenter: parent.horizontalCenter
-            anchors.top: errorTxt.bottom
-            anchors.topMargin: 15
-            font.bold: false
-            color: "white"
+            Label {
+                // TODO: seems only show error number. Maybe disable in the future
+                id: errorTxt
+                text: ""
+
+                //            anchors.top: parent.top
+                //            anchors.topMargin: 65
+                font.bold: true
+            }
+
+
+            TextArea {
+                id: errorDetail
+                text: ""
+                //                visible: {
+                //                    if (text !== "" && page.orientation === Orientation.Portrait ) return true;
+                //                    else return false;
+                //                }
+                width: parent.width
+                height: parent.height / 3
+                anchors.horizontalCenter: parent.horizontalCenter
+                //            anchors.top: errorTxt.bottom
+                //            anchors.topMargin: 15
+                font.bold: false
+                color: "white"//                visible: {
+                //                    if (text !== "" && page.orientation === Orientation.Portrait ) return true;
+                //                    else return false;
+                //                }
+            }
+        }
+        MouseArea {
+            id: errorClick
+            anchors.fill: errorBox
+            enabled: {
+                if (errorTxt.text != "") return true
+                else return false
+            }
+            onClicked: {
+                errorTxt.text = ""
+                errorDetail.text = ""
+                errorBox.visible = false
+            }
+            z:99  // above all to hide error message
         }
 
         Item {
@@ -303,6 +332,7 @@ Page {
                 onError: {
                     errorTxt.text = error;
                     errorDetail.text = errorString;
+                    errorBox.visible = true;
                 }
             }
 

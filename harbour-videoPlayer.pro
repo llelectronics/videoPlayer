@@ -39,7 +39,8 @@ OTHER_FILES += qml/harbour-videoPlayer.qml \
     qml/pages/helper/qmldir \
     qml/pages/CreditsModel.qml \
     qml/pages/AboutPage.qml \
-    qml/pages/DownloadManager.qml
+    qml/pages/DownloadManager.qml \
+    qml/pages/BookmarksPage.qml
 
 HEADERS += \
     src/DownloadManager.hpp \
