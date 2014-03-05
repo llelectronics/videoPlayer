@@ -49,6 +49,14 @@ Page {
     signal updateCover
     signal removeFile(string url)
 
+    property Page dPage
+
+    function findBaseName(url) {
+        var fileName = url.substring(url.lastIndexOf('/') + 1);
+        var dot = fileName.lastIndexOf('.');
+        return dot == -1 ? fileName : fileName.substring(0, dot);
+    }
+
     Component.onCompleted: {
         // Initialize the database
         DB.initialize();
@@ -60,18 +68,38 @@ Page {
         //Write into history database
         DB.addHistory(streamUrl);
         if (errorDetail.visible && errorTxt.visible) { errorDetail.visible = false; errorTxt.visible = false }
+        streamTitle = ""  // Reset Stream Title here
         if (YT.checkYoutube(streamUrl)=== true) {
             YT.getYoutubeTitle(streamUrl);
             var ytID = YT.getYtID(streamUrl);
             YT.getYoutubeStream(ytID);
         }
+        if (streamTitle == "") dPage.title = findBaseName(streamUrl)
+    }
+
+    onStreamTitleChanged: {
+        dPage.title = streamTitle
+    }
+
+    Rectangle {
+        id: headerBg
+        width:urlHeader.width
+        height: urlHeader.height
+        visible: {
+            if (urlHeader.visible || titleHeader.visible) return true
+            else return false
+        }
+        gradient: Gradient {
+            GradientStop { position: 0.0; color: "black" }
+            GradientStop { position: 1.0; color: "transparent" } //Theme.highlightColor} // Black seems to look and work better
+        }
     }
 
     PageHeader {
         id: urlHeader
-        title: streamUrl
+        title: findBaseName(streamUrl)
         visible: {
-            if (page.orientation === Orientation.Portrait && titleHeader.visible == false) return true
+            if (titleHeader.visible == false && pulley.visible) return true
             else return false
         }
     }
@@ -79,7 +107,7 @@ Page {
         id: titleHeader
         title: streamTitle
         visible: {
-            if (page.orientation === Orientation.Portrait && streamTitle != "") return true
+            if (streamTitle != "" && pulley.visible) return true
             else return false
         }
     }
@@ -102,6 +130,10 @@ Page {
             MenuItem {
                 text: "About "+ appname
                 onClicked: pageStack.push(Qt.resolvedUrl("AboutPage.qml"));
+            }
+            MenuItem {
+                text: "Bookmarks"
+                onClicked: pageStack.push(Qt.resolvedUrl("BookmarksPage.qml"), {dataContainer: page, modelBookmarks: mainWindow.modelBookmarks});
             }
             MenuItem {
                 text: "Search Youtube"
@@ -130,11 +162,19 @@ Page {
                     pageStack.push(Qt.resolvedUrl("DownloadManager.qml"), {"downloadUrl": youtubeDirectUrl, "downloadName": streamTitle});
                 }
             }
+            MenuItem {
+                text: "Add to bookmarks"
+                visible: {
+                    if (streamTitle != "" || streamUrl != "") return true
+                    else return false
+                }
+                onClicked: {
+                    if (streamTitle != "") mainWindow.modelBookmarks.addBookmark(streamUrl,streamTitle)
+                    else mainWindow.modelBookmarks.addBookmark(streamUrl,findBaseName(streamUrl))
+                }
+            }
         }
-        //                visible: {
-        //                    if (text !== "" && page.orientation === Orientation.Portrait ) return true;
-        //                    else return false;
-        //                }
+
         Image {
             id: onlyMusic
             anchors.centerIn: parent
@@ -289,6 +329,7 @@ Page {
 
         GStreamerVideoOutput {
             id: video
+            anchors.fill: parent
 
             source: MediaPlayer {
                 id: mediaPlayer
@@ -297,8 +338,9 @@ Page {
                     var mDataTitle;
                     console.debug(metaData.title)
                     if (streamTitle != "") mDataTitle = streamTitle
-                    else mDataTitle = metaData.title
-                    pageStack.pushAttached(Qt.resolvedUrl("FileDetails.qml"), {
+                    else mDataTitle = findBaseName(streamUrl)
+                    //console.debug("[mDataTitle]: " + mDataTitle)
+                    dPage = pageStack.pushAttached(Qt.resolvedUrl("FileDetails.qml"), {
                                                filename: streamUrl,
                                                title: mDataTitle,
                                                artist: metaData.albumArtist,
@@ -328,6 +370,7 @@ Page {
                     //console.debug("PlaybackStatus: " + playbackState)
                     if (mediaPlayer.status === MediaPlayer.Loading || mediaPlayer.status === MediaPlayer.Buffering || mediaPlayer.status === MediaPlayer.Stalled) progressCircle.visible = true;
                     else progressCircle.visible = false;
+                    if (metaData.title) dPage.title = metaData.title
                 }
                 onError: {
                     errorTxt.text = error;

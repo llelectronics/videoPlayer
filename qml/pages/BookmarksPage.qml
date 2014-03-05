@@ -8,50 +8,12 @@ Page
     showNavigationIndicator: true
     forwardNavigation: false
 
-    property string siteURL
-    property string siteTitle
+    property string bookmarkUrl
+    property string bookmarkTitle
     property QtObject dataContainer
-    property ListModel bookmarks
+    property ListModel modelBookmarks
 
     //property ListModel tabModel
-
-    ListModel {
-        id:modelBookmarks
-
-        function contains(siteUrl) {
-            var suffix = "/";
-            var str = siteUrl.toString();
-            for (var i=0; i<count; i++) {
-                if (get(i).url == str)  {
-                    return true;
-                }
-                // check if url endswith '/' and return true if url-'/' = models url
-                else if (str.indexOf(suffix, str.length - suffix.length) !== -1) {
-                    if (get(i).url == str.substring(0, str.length-1)) return true;
-                }
-            }
-            return false;
-        }
-
-        function editBookmark(oldTitle, siteTitle, siteUrl, agent) {
-            for (var i=0; i<count; i++) {
-                if (get(i).title === oldTitle) set(i,{"title":siteTitle, "url":siteUrl, "agent": agent});
-            }
-            DB.addBookmark(siteTitle,siteUrl,agent);
-        }
-
-        function removeBookmark(siteUrl) {
-            for (var i=0; i<count; i++) {
-                if (get(i).url === siteUrl) remove(i);
-            }
-            DB.removeBookmark(siteUrl);
-        }
-
-        function addBookmark(siteUrl, siteTitle, agent) {
-            append({"title":siteTitle, "url":siteUrl, "agent":agent});
-            DB.addBookmark(siteTitle,siteUrl,agent);
-        }
-    }
 
 
     Column
@@ -64,7 +26,7 @@ Page
         SilicaListView {
             id: repeater1
             width: parent.width
-            height: urlPage.height - (tabListView.height + Theme.paddingLarge)  //- entryURL.height - 2*65 //- bottomBar.height
+            height: bookmarksPage.height - (Theme.paddingLarge)  //- entryURL.height - 2*65 //- bottomBar.height
             model: modelBookmarks
             header: PageHeader {
                 id: topPanel
@@ -81,10 +43,10 @@ Page
                 function remove() {
                     var removal = removalComponent.createObject(myListItem)
                     ListView.remove.connect(removal.deleteAnimation.start)
-                    removal.execute(contentItem, "Deleting " + title, function() { bookmarks.removeBookmark(url); } )
+                    removal.execute(contentItem, "Deleting " + title, function() { modelBookmarks.removeBookmark(url); } )
                 }
                 function editBookmark() {
-                    pageStack.push(Qt.resolvedUrl("AddBookmark.qml"), { bookmarks: urlPage.bookmarks, editBookmark: true, uAgent: agent, bookmarkUrl: url, bookmarkTitle: title, oldTitle: title });
+                    pageStack.push(Qt.resolvedUrl("AddBookmark.qml"), { bookmarks: modelBookmarks, editBookmark: true, bookmarkUrl: url, bookmarkTitle: title, oldTitle: title });
                 }
 
                 BackgroundItem {
@@ -140,12 +102,8 @@ Page
             }
             PullDownMenu {
                 MenuItem {
-                    text: qsTr("About ")+appname
-                    onClicked: pageStack.push(Qt.resolvedUrl("AboutPage.qml"));
-                }
-                MenuItem {
                     text: qsTr("Add Bookmark")
-                    onClicked: pageStack.push(Qt.resolvedUrl("AddBookmark.qml"), { bookmarks: urlPage.bookmarks });
+                    onClicked: pageStack.push(Qt.resolvedUrl("AddBookmark.qml"), { bookmarks: modelBookmarks });
                 }
             }
         }

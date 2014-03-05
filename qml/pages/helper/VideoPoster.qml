@@ -2,6 +2,7 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 import QtMultimedia 5.0
 import org.nemomobile.thumbnailer 1.0
+import QtGraphicalEffects 1.0
 
 MouseArea {
     id: videoItem
@@ -83,12 +84,12 @@ MouseArea {
         visible: videoItem.player || controlFade.running //(!videoItem.playing || controlFade.running)
 
         Image {
+            id: playPauseImg
             anchors.centerIn: parent
             source: {
                 if (videoItem.player && (!videoItem.playing)) return "image://theme/icon-cover-play"
                 else return "image://theme/icon-cover-pause"
             }
-
             MouseArea {
                 anchors.centerIn: parent
                 width: parent.width + 64
@@ -106,25 +107,37 @@ MouseArea {
             }
         }
 
-        Slider {
-            id: positionSlider
-
+        Rectangle {
             anchors { left: parent.left; right: parent.right; bottom: parent.bottom }
-
             enabled: { if (controls.opacity == 1.0) return true; else return false; }
-            height: Theme.itemSizeSmall
-            handleVisible: false
-            minimumValue: 0
-            valueText: {
-                if (value > 3599) return Format.formatDuration(value, Formatter.DurationLong)
-                else return Format.formatDuration(value, Formatter.DurationShort)
+            height: positionSlider.height + Theme.paddingLarge
+            //color: "black"
+            //opacity: 0.5
+            gradient: Gradient {
+                GradientStop { position: 0.0; color: "transparent" }
+                GradientStop { position: 1.0; color: "black" } //Theme.highlightColor} // Black seems to look and work better
             }
 
-            onReleased: {
-                if (videoItem.active) {
-                    videoItem.player.source = videoItem.source
-                    videoItem.player.seek(value * 1000)
-                    //videoItem.player.pause()
+            Slider {
+                id: positionSlider
+
+                anchors { left: parent.left; right: parent.right; bottom: parent.bottom }
+
+                enabled: { if (controls.opacity == 1.0) return true; else return false; }
+                height: Theme.itemSizeSmall
+                handleVisible: false
+                minimumValue: 0
+                valueText: {
+                    if (value > 3599) return Format.formatDuration(value, Formatter.DurationLong)
+                    else return Format.formatDuration(value, Formatter.DurationShort)
+                }
+
+                onReleased: {
+                    if (videoItem.active) {
+                        videoItem.player.source = videoItem.source
+                        videoItem.player.seek(value * 1000)
+                        //videoItem.player.pause()
+                    }
                 }
             }
         }

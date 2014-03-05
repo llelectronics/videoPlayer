@@ -32,6 +32,7 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 import "pages"
 import "pages/helper/yt.js" as YT
+import "pages/helper/db.js" as DB
 
 ApplicationWindow
 {
@@ -39,6 +40,7 @@ ApplicationWindow
 
     property Item firstPage
     property bool autoPlay: false
+    property alias modelBookmarks: modelBookmarks
 
     property string version: "0.3"
     property string appname: "LLs Video Player"
@@ -69,6 +71,49 @@ ApplicationWindow
         }
     }
     cover: Qt.resolvedUrl("cover/CoverPage.qml")
+
+
+    ListModel {
+        id:modelBookmarks
+
+        Component.onCompleted: {
+            DB.getBookmarks();
+        }
+
+        function contains(bookmarkUrl) {
+            var suffix = "/";
+            var str = bookmarkUrl.toString();
+            for (var i=0; i<count; i++) {
+                if (get(i).url == str)  {
+                    return true;
+                }
+                // check if url endswith '/' and return true if url-'/' = models url
+                else if (str.indexOf(suffix, str.length - suffix.length) !== -1) {
+                    if (get(i).url == str.substring(0, str.length-1)) return true;
+                }
+            }
+            return false;
+        }
+
+        function editBookmark(oldTitle, bookmarkTitle, bookmarkUrl) {
+            for (var i=0; i<count; i++) {
+                if (get(i).title === oldTitle) set(i,{"title":bookmarkTitle, "url":bookmarkUrl});
+            }
+            DB.addBookmark(bookmarkTitle,bookmarkUrl);
+        }
+
+        function removeBookmark(bookmarkUrl) {
+            for (var i=0; i<count; i++) {
+                if (get(i).url === bookmarkUrl) remove(i);
+            }
+            DB.removeBookmark(bookmarkUrl);
+        }
+
+        function addBookmark(bookmarkUrl, bookmarkTitle) {
+            append({"title":bookmarkTitle, "url":bookmarkUrl});
+            DB.addBookmark(bookmarkTitle,bookmarkUrl);
+        }
+    }
 }
 
 

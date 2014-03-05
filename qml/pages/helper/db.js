@@ -18,6 +18,8 @@ function initialize() {
 BEGIN \
     DELETE FROM history WHERE history.uid IN (SELECT history.uid FROM history ORDER BY history.uid limit (select count(*) -10 from history)); \
 END;')
+
+                    tx.executeSql('CREATE TABLE IF NOT EXISTS bookmarks(title TEXT, url TEXT)');
                 });
 }
 
@@ -69,6 +71,55 @@ function getHistory() {
         for (var i = 0; i < rs.rows.length; i++) {
             openUrlPage.addHistory(rs.rows.item(i).url)
             //console.debug("Get History urls:" + rs.rows.item(i).url)
+        }
+    })
+}
+
+// This function is used to write bookmarks into the database
+function addBookmark(title,url) {
+    var db = getDatabase();
+    var res = "";
+    db.transaction(function(tx) {
+        // Remove and readd if url already in history
+        removeBookmark(url);
+        console.debug("Adding to bookmarks db:" + title + " " + url);
+
+        var rs = tx.executeSql('INSERT OR REPLACE INTO bookmarks VALUES (?,?);', [title,url]);
+        if (rs.rowsAffected > 0) {
+            res = "OK";
+            console.log ("Saved to database");
+        } else {
+            res = "Error";
+            console.log ("Error saving to database");
+        }
+    }
+    );
+    // The function returns “OK” if it was successful, or “Error” if it wasn't
+    return res;
+}
+
+// This function is used to remove a bookmark from database
+function removeBookmark(url) {
+    var db = getDatabase();
+    var respath="";
+    db.transaction(function(tx) {
+        var rs = tx.executeSql('DELETE FROM bookmarks WHERE url=(?);', [url]);
+//        if (rs.rowsAffected > 0) {
+//            console.debug("Url found and removed");
+//        } else {
+//            console.debug("Url not found");
+//        }
+    })
+}
+
+// This function is used to retrieve bookmarks from database
+function getBookmarks() {
+    var db = getDatabase();
+    var respath="";
+    db.transaction(function(tx) {
+        var rs = tx.executeSql('SELECT * FROM bookmarks ORDER BY bookmarks.title;');
+        for (var i = 0; i < rs.rows.length; i++) {
+            mainWindow.modelBookmarks.append({"title" : rs.rows.item(i).title, "url" : rs.rows.item(i).url});
         }
     })
 }

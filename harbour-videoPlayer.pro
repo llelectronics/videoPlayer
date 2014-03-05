@@ -40,7 +40,8 @@ OTHER_FILES += qml/harbour-videoPlayer.qml \
     qml/pages/CreditsModel.qml \
     qml/pages/AboutPage.qml \
     qml/pages/DownloadManager.qml \
-    qml/pages/BookmarksPage.qml
+    qml/pages/BookmarksPage.qml \
+    qml/pages/AddBookmark.qml
 
 HEADERS += \
     src/DownloadManager.hpp \

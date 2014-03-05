@@ -3,34 +3,38 @@ import Sailfish.Silica 1.0
 import "helper/yt.js" as YT
 import "helper/db.js" as DB
 
-Page {
+Dialog {
     id: openUrlPage
     allowedOrientations: Orientation.All
     property QtObject dataContainer
     property string streamUrl
 
-    PageHeader {
-        title: drawer.open ? "History" : "Open Stream URL"
+    DialogHeader {
+        id: header
+        title: drawer.open ? "History" : "Open"
     }
+
+    onAccepted: loadUrl()
+    onCanceled: pageStack.replace(dataContainer)
 
     function loadUrl() {
         if (YT.checkYoutube(urlField.text.toString())=== true) {
             var yturl = YT.getYoutubeVid(urlField.text.toString());
-//            YT.getYoutubeTitle(urlField.text.toString());
-//            var ytID = YT.getYtID(urlField.text.toString());
-//            console.debug(ytID)
-//            YT.getYoutubeStream(ytID);
-            if (dataContainer != null) {
-                dataContainer.streamUrl = yturl
-                pageStack.pop(dataContainer);
-            }
+            //            YT.getYoutubeTitle(urlField.text.toString());
+            //            var ytID = YT.getYtID(urlField.text.toString());
+            //            console.debug(ytID)
+            //            YT.getYoutubeStream(ytID);
+            //if (dataContainer != null) {
+                mainWindow.firstPage.streamUrl = yturl
+                pageStack.replace(dataContainer);
+            //}
         }
         else {
-            if (dataContainer != null) {
-                dataContainer.streamUrl = urlField.text;
-                dataContainer.streamTitle = "";
-                pageStack.pop(dataContainer, PageStackAction.Immediate);
-            }
+            //if (dataContainer != null) {
+                mainWindow.firstPage.streamUrl = urlField.text;
+                mainWindow.firstPage.streamTitle = "";
+                pageStack.replace(dataContainer);//, PageStackAction.Immediate);
+            //}
         }
     }
 
@@ -119,22 +123,27 @@ Page {
             }
 
             Button {
-                id: loadBtn
-                anchors.top: urlField.bottom
-                anchors.right: urlField.right
-                text: "Load Url"
-                onClicked: {
-                    openUrlPage.loadUrl();
-                }
-            }
-            Button {
                 id: historyBtn
-                anchors.top: urlField.bottom
                 anchors.left: urlField.left
+                anchors.top: urlField.bottom
                 text: "History"
                 onClicked: {
                     //DB.getHistory();
                     drawer.open = !drawer.open
+                }
+            }
+
+            Button {
+                id: addToBookmarkBtn
+                anchors.top: urlField.bottom
+                anchors.right: urlField.right
+                text: "Add to bookmarks"
+                visible: {
+                    if (urlField.text !== "") return true
+                    else return false
+                }
+                onClicked: {
+                    pageStack.push(Qt.resolvedUrl("AddBookmark.qml"), { bookmarks: mainWindow.modelBookmarks, editBookmark: false, bookmarkUrl: urlField.text });
                 }
             }
         }

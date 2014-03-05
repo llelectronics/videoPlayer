@@ -17,15 +17,18 @@ Page {
     property alias size: fileSize.text
     property alias artist: fileArtist.text
 
-    Flickable {
+    allowedOrientations: Orientation.All
+
+    SilicaFlickable {
         anchors.fill: parent
-        contentHeight: items.height
+        contentHeight: items.height + (items.height / 8)
         contentWidth: parent.width
 
 
         Item {
             id: items
             width: parent.width
+            height: childrenRect.height
 
             Label {
                 id: fileNameLbl
