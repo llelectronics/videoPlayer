@@ -24,17 +24,17 @@ Dialog {
             //            var ytID = YT.getYtID(urlField.text.toString());
             //            console.debug(ytID)
             //            YT.getYoutubeStream(ytID);
-            //if (dataContainer != null) {
+            if (dataContainer != null) {
                 mainWindow.firstPage.streamUrl = yturl
-                pageStack.replace(dataContainer);
-            //}
+                pageStack.pop(dataContainer);
+            }
         }
         else {
-            //if (dataContainer != null) {
+            if (dataContainer != null) {
                 mainWindow.firstPage.streamUrl = urlField.text;
                 mainWindow.firstPage.streamTitle = "";
-                pageStack.replace(dataContainer);//, PageStackAction.Immediate);
-            //}
+                pageStack.pop(dataContainer);//, PageStackAction.Immediate);
+            }
         }
     }
 
