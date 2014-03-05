@@ -73,3 +73,9 @@ desktop-file-install --delete-original       \
 %{_bindir}
 # >> files
 # << files
+
+%post
+/usr/bin/update-desktop-database
+
+%postun
+/usr/bin/update-desktop-database
