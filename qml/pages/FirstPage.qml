@@ -325,53 +325,58 @@ Page {
                 }
             }
         }
-        Drawer {
-            id: drawer
-            width: parent.width
-            height: parent.height / 4
+    }
+    Drawer {
+        id: drawer
+        width: parent.width
+        height: parent.height
+        anchors.bottom: parent.bottom
+        dock: Dock.Bottom
+        foreground: flick
+        backgroundSize: {
+            if (page.orientation === Orientation.Portrait) return parent.height / 8
+            else return parent.height / 6
+        }
+        background: Rectangle {
+            anchors.fill: parent
             anchors.bottom: parent.bottom
-            dock: Dock.Bottom
-            background: Rectangle {
-                anchors.fill: parent
-                color: Theme.secondaryHighlightColor
-                Button {
-                    id: ytDownloadBtn
-                    anchors.verticalCenter: parent.verticalCenter
-                    anchors.left: parent.left
-                    anchors.leftMargin: Theme.paddingMedium
-                    text: "Download video"
-                    visible: {
-                        if ((/^http:\/\/ytapi.com/).test(streamUrl)) return true
-                        else return false
-                    }
-                    //onClicked: pageStack.push(Qt.resolvedUrl("DownloadManager.qml"), {"downloadUrl": streamUrl, "downloadName": streamTitle});
-                    // Alternatively use direct youtube url instead of ytapi for downloads (ytapi links not always download with download manager)
-                    onClicked: {
-                        // Filter out all chars that might stop the download manager from downloading the file
-                        // Illegal chars: `~!@#$%^&*()-=+\|/?.>,<;:'"[{]}
-                        streamTitle = YT.getDownloadableTitleString(streamTitle)
-                        pageStack.push(Qt.resolvedUrl("DownloadManager.qml"), {"downloadUrl": youtubeDirectUrl, "downloadName": streamTitle});
-                        drawer.open = !drawer.open
-                    }
+            color: Theme.secondaryHighlightColor
+            Button {
+                id: ytDownloadBtn
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.left: parent.left
+                anchors.leftMargin: Theme.paddingMedium
+                text: "Download video"
+                visible: {
+                    if ((/^http:\/\/ytapi.com/).test(streamUrl)) return true
+                    else return false
                 }
-                Button {
-                    id: add2BookmarksBtn
-                    anchors.verticalCenter: parent.verticalCenter
-                    anchors.right: parent.right
-                    anchors.rightMargin: Theme.paddingMedium
-                    text : "Add to bookmarks"
-                    visible: {
-                        if (streamTitle != "" || streamUrl != "") return true
-                        else return false
-                    }
-                    onClicked: {
-                        if (streamTitle != "") mainWindow.modelBookmarks.addBookmark(streamUrl,streamTitle)
-                        else mainWindow.modelBookmarks.addBookmark(streamUrl,findBaseName(streamUrl))
-                        drawer.open = !drawer.open
-                    }
+                //onClicked: pageStack.push(Qt.resolvedUrl("DownloadManager.qml"), {"downloadUrl": streamUrl, "downloadName": streamTitle});
+                // Alternatively use direct youtube url instead of ytapi for downloads (ytapi links not always download with download manager)
+                onClicked: {
+                    // Filter out all chars that might stop the download manager from downloading the file
+                    // Illegal chars: `~!@#$%^&*()-=+\|/?.>,<;:'"[{]}
+                    streamTitle = YT.getDownloadableTitleString(streamTitle)
+                    pageStack.push(Qt.resolvedUrl("DownloadManager.qml"), {"downloadUrl": youtubeDirectUrl, "downloadName": streamTitle});
+                    drawer.open = !drawer.open
                 }
             }
-
+            Button {
+                id: add2BookmarksBtn
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.right: parent.right
+                anchors.rightMargin: Theme.paddingMedium
+                text : "Add to bookmarks"
+                visible: {
+                    if (streamTitle != "" || streamUrl != "") return true
+                    else return false
+                }
+                onClicked: {
+                    if (streamTitle != "") mainWindow.modelBookmarks.addBookmark(streamUrl,streamTitle)
+                    else mainWindow.modelBookmarks.addBookmark(streamUrl,findBaseName(streamUrl))
+                    drawer.open = !drawer.open
+                }
+            }
         }
 
     }
