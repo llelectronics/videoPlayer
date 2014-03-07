@@ -121,8 +121,8 @@ Page {
     }
 
     SilicaFlickable {
+        id: flick
         anchors.fill: parent
-
 
         // PullDownMenu and PushUpMenu must be declared in SilicaFlickable, SilicaListView or SilicaGridView
         PullDownMenu {
@@ -257,6 +257,7 @@ Page {
             id: mediaItem
             property bool active : true
             visible: active
+            anchors.fill: parent
 
             VideoPoster {
                 id: videoPoster
@@ -296,27 +297,83 @@ Page {
 
 
                 onClicked: {
-                    if (mediaPlayer.playbackState == MediaPlayer.PlayingState) {
-                        //console.debug("Mouse values:" + mouse.x + " x " + mouse.y)
-                        var middleX = width / 2
-                        var middleY = height / 2
-                        //console.debug("MiddleX:" + middleX + " MiddleY:"+middleY + " mouse.x:"+mouse.x + " mouse.y:"+mouse.y)
-                        if ((mouse.x >= middleX - 64 && mouse.x <= middleX + 64) && (mouse.y >= middleY - 64 && mouse.y <= middleY + 64)) {
-                            mediaPlayer.pause();
-                            if (controls.opacity === 0.0) toggleControls();
-                            progressCircle.visible = false;
-                        }
-                        else {
+                    if (drawer.open) drawer.open = false
+                    else {
+                        if (mediaPlayer.playbackState == MediaPlayer.PlayingState) {
+                            //console.debug("Mouse values:" + mouse.x + " x " + mouse.y)
+                            var middleX = width / 2
+                            var middleY = height / 2
+                            //console.debug("MiddleX:" + middleX + " MiddleY:"+middleY + " mouse.x:"+mouse.x + " mouse.y:"+mouse.y)
+                            if ((mouse.x >= middleX - 64 && mouse.x <= middleX + 64) && (mouse.y >= middleY - 64 && mouse.y <= middleY + 64)) {
+                                mediaPlayer.pause();
+                                if (controls.opacity === 0.0) toggleControls();
+                                progressCircle.visible = false;
+                            }
+                            else {
+                                toggleControls();
+                            }
+                        } else {
+                            //mediaPlayer.play()
+                            console.debug("clicked something else")
                             toggleControls();
                         }
-                    } else {
-                        //mediaPlayer.play()
-                        console.debug("clicked something else")
-                        toggleControls();
                     }
+                }
+                onPressAndHold: {
+                    //console.debug("[Press and Hold detected]")
+                    if (! drawer.open) drawer.open = true
                 }
             }
         }
+        Drawer {
+            id: drawer
+            width: parent.width
+            height: parent.height / 4
+            anchors.bottom: parent.bottom
+            dock: Dock.Bottom
+            background: Rectangle {
+                anchors.fill: parent
+                color: Theme.secondaryHighlightColor
+                Button {
+                    id: ytDownloadBtn
+                    anchors.verticalCenter: parent.verticalCenter
+                    anchors.left: parent.left
+                    anchors.leftMargin: Theme.paddingMedium
+                    text: "Download video"
+                    visible: {
+                        if ((/^http:\/\/ytapi.com/).test(streamUrl)) return true
+                        else return false
+                    }
+                    //onClicked: pageStack.push(Qt.resolvedUrl("DownloadManager.qml"), {"downloadUrl": streamUrl, "downloadName": streamTitle});
+                    // Alternatively use direct youtube url instead of ytapi for downloads (ytapi links not always download with download manager)
+                    onClicked: {
+                        // Filter out all chars that might stop the download manager from downloading the file
+                        // Illegal chars: `~!@#$%^&*()-=+\|/?.>,<;:'"[{]}
+                        streamTitle = YT.getDownloadableTitleString(streamTitle)
+                        pageStack.push(Qt.resolvedUrl("DownloadManager.qml"), {"downloadUrl": youtubeDirectUrl, "downloadName": streamTitle});
+                        drawer.open = !drawer.open
+                    }
+                }
+                Button {
+                    id: add2BookmarksBtn
+                    anchors.verticalCenter: parent.verticalCenter
+                    anchors.right: parent.right
+                    anchors.rightMargin: Theme.paddingMedium
+                    text : "Add to bookmarks"
+                    visible: {
+                        if (streamTitle != "" || streamUrl != "") return true
+                        else return false
+                    }
+                    onClicked: {
+                        if (streamTitle != "") mainWindow.modelBookmarks.addBookmark(streamUrl,streamTitle)
+                        else mainWindow.modelBookmarks.addBookmark(streamUrl,findBaseName(streamUrl))
+                        drawer.open = !drawer.open
+                    }
+                }
+            }
+
+        }
+
     }
     children: [
 
