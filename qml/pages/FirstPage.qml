@@ -147,32 +147,32 @@ Page {
                 text: "Open File"
                 onClicked: pageStack.push(Qt.resolvedUrl("fileman/Main.qml"), {dataContainer: page});
             }
-            MenuItem {
-                text: "Download Youtube Video"
-                visible: {
-                    if ((/^http:\/\/ytapi.com/).test(streamUrl)) return true
-                    else return false
-                }
-                //onClicked: pageStack.push(Qt.resolvedUrl("DownloadManager.qml"), {"downloadUrl": streamUrl, "downloadName": streamTitle});
-                // Alternatively use direct youtube url instead of ytapi for downloads (ytapi links not always download with download manager)
-                onClicked: {
-                    // Filter out all chars that might stop the download manager from downloading the file
-                    // Illegal chars: `~!@#$%^&*()-=+\|/?.>,<;:'"[{]}
-                    streamTitle = YT.getDownloadableTitleString(streamTitle)
-                    pageStack.push(Qt.resolvedUrl("DownloadManager.qml"), {"downloadUrl": youtubeDirectUrl, "downloadName": streamTitle});
-                }
-            }
-            MenuItem {
-                text: "Add to bookmarks"
-                visible: {
-                    if (streamTitle != "" || streamUrl != "") return true
-                    else return false
-                }
-                onClicked: {
-                    if (streamTitle != "") mainWindow.modelBookmarks.addBookmark(streamUrl,streamTitle)
-                    else mainWindow.modelBookmarks.addBookmark(streamUrl,findBaseName(streamUrl))
-                }
-            }
+//            MenuItem {
+//                text: "Download Youtube Video"
+//                visible: {
+//                    if ((/^http:\/\/ytapi.com/).test(streamUrl)) return true
+//                    else return false
+//                }
+//                //onClicked: pageStack.push(Qt.resolvedUrl("DownloadManager.qml"), {"downloadUrl": streamUrl, "downloadName": streamTitle});
+//                // Alternatively use direct youtube url instead of ytapi for downloads (ytapi links not always download with download manager)
+//                onClicked: {
+//                    // Filter out all chars that might stop the download manager from downloading the file
+//                    // Illegal chars: `~!@#$%^&*()-=+\|/?.>,<;:'"[{]}
+//                    streamTitle = YT.getDownloadableTitleString(streamTitle)
+//                    pageStack.push(Qt.resolvedUrl("DownloadManager.qml"), {"downloadUrl": youtubeDirectUrl, "downloadName": streamTitle});
+//                }
+//            }
+//            MenuItem {
+//                text: "Add to bookmarks"
+//                visible: {
+//                    if (streamTitle != "" || streamUrl != "") return true
+//                    else return false
+//                }
+//                onClicked: {
+//                    if (streamTitle != "") mainWindow.modelBookmarks.addBookmark(streamUrl,streamTitle)
+//                    else mainWindow.modelBookmarks.addBookmark(streamUrl,findBaseName(streamUrl))
+//                }
+//            }
         }
 
         Image {

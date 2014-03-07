@@ -1,5 +1,6 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
+import "helper/yt.js" as YT
 
 Page {
     id: fileDetails
@@ -23,6 +24,36 @@ Page {
         anchors.fill: parent
         contentHeight: items.height + (items.height / 8)
         contentWidth: parent.width
+
+        PullDownMenu {
+            MenuItem {
+                text: "Download Youtube Video"
+                visible: {
+                    if ((/^http:\/\/ytapi.com/).test(mainWindow.firstPage.streamUrl)) return true
+                    else return false
+                }
+                //onClicked: pageStack.push(Qt.resolvedUrl("DownloadManager.qml"), {"downloadUrl": streamUrl, "downloadName": streamTitle});
+                // Alternatively use direct youtube url instead of ytapi for downloads (ytapi links not always download with download manager)
+                onClicked: {
+                    // Filter out all chars that might stop the download manager from downloading the file
+                    // Illegal chars: `~!@#$%^&*()-=+\|/?.>,<;:'"[{]}
+                    //console.debug("[FileDetails -> Download YT Video]: " + mainWindow.firstPage.youtubeDirectUrl)
+                    mainWindow.firstPage.streamTitle = YT.getDownloadableTitleString(mainWindow.firstPage.streamTitle)
+                    pageStack.push(Qt.resolvedUrl("DownloadManager.qml"), {"downloadUrl": mainWindow.firstPage.youtubeDirectUrl, "downloadName": mainWindow.firstPage.streamTitle});
+                }
+            }
+            MenuItem {
+                text: "Add to bookmarks"
+                visible: {
+                    if (mainWindow.firstPage.streamTitle != "" || mainWindow.firstPage.streamUrl != "") return true
+                    else return false
+                }
+                onClicked: {
+                    if (mainWindow.firstPage.streamTitle != "") mainWindow.modelBookmarks.addBookmark(mainWindow.firstPage.streamUrl,mainWindow.firstPage.streamTitle)
+                    else mainWindow.modelBookmarks.addBookmark(mainWindow.firstPage.streamUrl,mainWindow.firstPage.findBaseName(mainWindow.firstPage.streamUrl))
+                }
+            }
+        }
 
 
         Item {
