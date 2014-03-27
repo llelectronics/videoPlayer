@@ -5,6 +5,7 @@ import "Bridge.js" as Util
 
 Page {
     id : dirViewPage
+    allowedOrientations: Orientation.All
     property int entriesCount: dirStack.count
     property string currentDirectory
     property QtObject dataContainer

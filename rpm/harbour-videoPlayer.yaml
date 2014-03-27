@@ -1,7 +1,7 @@
 Name: harbour-videoPlayer
 Summary: Simple video player using gstreamer
-Version: 0.3
-Release: 4
+Version: 0.4
+Release: 2
 Group: Qt/Qt
 URL: http://example.org/
 License: LICENSE
@@ -19,7 +19,6 @@ PkgConfigBR:
 Requires:
 - sailfishsilica-qt5 >= 0.10.9
 Files:
-- 
 - /usr/share/icons/hicolor/86x86/apps
 - /usr/share/applications
 - /usr/share/harbour-videoPlayer

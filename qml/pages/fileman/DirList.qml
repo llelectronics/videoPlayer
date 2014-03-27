@@ -92,7 +92,7 @@ SilicaListView {
     function goSd() {
         var url = Qt.resolvedUrl('DirView.qml');
         var pages = [];
-        var path = "/run/user/100000/media/sdcard";
+        var path = "/media/sdcard";
 
         pages.push({page: url, properties: {root: path, dataContainer: dataContainer}});
 
@@ -171,8 +171,8 @@ SilicaListView {
         MenuItem {
             text: "Show SDCard"
             onClicked: entriesList.goSd();
-            visible: Util.existsPath("/run/user/100000/media/sdcard")
-            //Component.onCompleted: console.debug("SD Card status: " + Util.existsPath("/run/user/100000/media/sdcard"))
+            visible: Util.existsPath("/media/sdcard")
+            //Component.onCompleted: console.debug("[DirList] SD Card status: " + Util.existsPath("/media/sdcard"))
         }
 //        MenuItem {
 //            text: "Marked Paths"
@@ -201,7 +201,7 @@ SilicaListView {
             entriesList.mediaFileOpen(url);
         }
         onFileRemove: {
-            console.debug("[DirList] Request removal of: " + url);
+            //console.debug("[DirList] Request removal of: " + url);
             entriesList.fileRemove(url);
         }
     }
