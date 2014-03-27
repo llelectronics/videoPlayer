@@ -134,9 +134,22 @@ Dialog {
             }
 
             Button {
-                id: addToBookmarkBtn
+                id: openFileBtn
                 anchors.top: urlField.bottom
                 anchors.right: urlField.right
+                text: "Browse Files"
+                visible: true
+                onClicked: {
+                    pageStack.replace(Qt.resolvedUrl("fileman/Main.qml"), {dataContainer: mainWindow.firstPage});
+                }
+            }
+
+            Button {
+                id: addToBookmarkBtn
+                anchors.top: historyBtn.bottom
+                anchors.topMargin: 15
+                //anchors.right: historyBtn.right
+                anchors.horizontalCenter: parent.horizontalCenter
                 text: "Add to bookmarks"
                 visible: {
                     if (urlField.text !== "") return true

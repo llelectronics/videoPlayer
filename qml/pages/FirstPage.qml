@@ -140,13 +140,13 @@ Page {
                 onClicked: pageStack.push(Qt.resolvedUrl("SecondPage.qml"), {dataContainer: page});
             }
             MenuItem {
-                text: "Open URL"
+                text: "Open"
                 onClicked: pageStack.push(Qt.resolvedUrl("OpenURLPage.qml"), {dataContainer: page, streamUrl: streamUrl});
             }
-            MenuItem {
-                text: "Open File"
-                onClicked: pageStack.push(Qt.resolvedUrl("fileman/Main.qml"), {dataContainer: page});
-            }
+//            MenuItem {
+//                text: "Open File"
+//                onClicked: pageStack.push(Qt.resolvedUrl("fileman/Main.qml"), {dataContainer: page});
+//            }
 //            MenuItem {
 //                text: "Download Youtube Video"
 //                visible: {
