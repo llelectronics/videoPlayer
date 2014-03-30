@@ -357,7 +357,8 @@ Page {
                     // Filter out all chars that might stop the download manager from downloading the file
                     // Illegal chars: `~!@#$%^&*()-=+\|/?.>,<;:'"[{]}
                     streamTitle = YT.getDownloadableTitleString(streamTitle)
-                    pageStack.push(Qt.resolvedUrl("DownloadManager.qml"), {"downloadUrl": youtubeDirectUrl, "downloadName": streamTitle});
+                    //pageStack.push(Qt.resolvedUrl("DownloadManager.qml"), {"downloadUrl": youtubeDirectUrl, "downloadName": streamTitle});
+                    pageStack.push(Qt.resolvedUrl("ytQualityChooser.qml"), {"streamTitle": streamTitle, "url720p": YT.url720p, "url480p": YT.url480p, "url360p": YT.url360p, "url240p": YT.url240p});
                     drawer.open = !drawer.open
                 }
             }

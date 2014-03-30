@@ -1,3 +1,8 @@
+var url720p;
+var url480p;
+var url360p;
+var url240p;
+
 function checkYoutube(url) {
     // Yeah I hate RegEx. Thx user2200660 for this nice youtube regex ;)
     //if (url.match('/?.*(?:youtu.be\\/|v\\/|u/\\w/|embed\\/|watch\\?.*&?v=)')) {
@@ -65,13 +70,19 @@ function getYoutubeStream(youtube_id) {
 
             var videoInfoSplit = videoInfo.split("&");
             var streams;
+
             for (var i = 0; i < videoInfo.length; i++) {
-                var paramPair = videoInfoSplit[i].split("=");
+                try {
+                    var paramPair = videoInfoSplit[i].split("=");
+                } catch(e) {
+                    console.debug("[yt.js]: " + e)
+                }
                 if (paramPair[0] === "url_encoded_fmt_stream_map") {
                     streams = decodeURIComponent(paramPair[1]);
                     break;
                 }
             }
+
 
             if (!streams) {
                 var msg = "YouTube videoInfo parsing: url_encoded_fmt_stream_map not found";
@@ -90,6 +101,7 @@ function getYoutubeStream(youtube_id) {
 
             var url, sig, itag;
             var found = false;
+            var resolutionFormat;
             for (var i = 0; i < streamsSplit.length; i++) {
                 var paramPair = streamsSplit[i].split("=");
                 if (paramPair[0] === "url") {
@@ -99,20 +111,63 @@ function getYoutubeStream(youtube_id) {
                 } else if (paramPair[0] === "itag") {
                     itag = paramPair[1];
                 }
+                //***********************************************//
+                //     List of video formats as of 2012.12.10    //
+                // fmt=17   144p        vq=?           ?    vorbis   //
+                // fmt=36   240p        vq=small/tiny  ?    vorbis   //
+                // fmt=5    240p        vq=small/tiny  flv  mp3      //
+                // fmt=18   360p        vq=medium      mp4  aac      //
+                // fmt=34   360p        vq=medium      flv  aac      //
+                // fmt=43   360p        vq=medium      vp8  vorbis   //
+                // fmt=35   480p        vq=large       flv  aac      //
+                // fmt=44   480p        vq=large       vp8  vorbis   //
+                // fmt=22   720p        vq=hd720       mp4  aac      //
+                // fmt=45   720p        vq=hd720       vp8  vorbis   //
+                // fmt=37  1080p        vq=hd1080      mp4  aac      //
+                // fmt=46  1080p        vq=hd1080      vp8  vorbis   //
+                // fmt=38  1536p        vq=highres     mp4  aac      //
+                //***********************************************//
+
+                // Try to get 720p HD video stream first
+                if ((i + 1) % 6 === 0 && itag === "22") { // 6 parameters per video; itag 18 is "MP4 360p", see http://userscripts.org/scripts/review/25105
+                    found = true;
+                    resolutionFormat = "MP4 720p"
+                    url += "&signature=" + sig;
+                    url720p = url;
+                    break;
+                } else { url720p = "none" }
+                // If above fails try to get 480p video stream
+                if ((i + 1) % 6 === 0 && itag === "35") { // 6 parameters per video; itag 18 is "MP4 360p", see http://userscripts.org/scripts/review/25105
+                    found = true;
+                    resolutionFormat = "FLV 480p"
+                    url += "&signature=" + sig;
+                    url480p = url;
+                    break;
+                } else { url480p = "none" }
+                // If above fails try to get 360p video stream
                 if ((i + 1) % 6 === 0 && itag === "18") { // 6 parameters per video; itag 18 is "MP4 360p", see http://userscripts.org/scripts/review/25105
                     found = true;
+                    resolutionFormat = "MP4 360p"
                     url += "&signature=" + sig;
+                    url360p = url;
                     break;
-                }
+                } else { url360p = "none" }
+                // If above fails try to get 240p video stream
+                if ((i + 1) % 6 === 0 && itag === "5") { // 6 parameters per video; itag 18 is "MP4 360p", see http://userscripts.org/scripts/review/25105
+                    found = true;
+                    resolutionFormat = "FLV 240p"
+                    url += "&signature=" + sig;
+                    url240p = url;
+                    break;
+                } else { url240p = "none" }
             }
 
             if (found) {
-                console.debug("video direct URL found: " + url);
-                firstPage.youtubeDirectUrl = url
+                console.debug("[yt.js]: Video in format " + resolutionFormat + " found with direct URL: " + url);
                 return url;
 
             } else {
-                var msg = "Couldn't find video in MP4 360p";
+                var msg = "Couldn't find video either in MP4 720p, FLV 480p, MP4 360p and FLV 240p";
                 console.debug(msg);
                 return;
             }
@@ -126,6 +181,7 @@ function getYoutubeStream(youtube_id) {
     doc.open("GET", "http://www.youtube.com/get_video_info?video_id=" + youtube_id);
     doc.send();
 }
+
 
 // Damn it RegExp again :P
 function getDownloadableTitleString(streamTitle) {
