@@ -38,7 +38,14 @@ import "helper"
 Page {
     id: page
     allowedOrientations: Orientation.All
-    property int videoDuration
+    property string videoDuration: {
+        if (videoPoster.duration > 3599) return Format.formatDuration(videoPoster.duration, Formatter.DurationLong)
+        else return Format.formatDuration(videoPoster.duration, Formatter.DurationShort)
+    }
+    property string videoPosition: {
+        if (videoPoster.position > 3599) return Format.formatDuration(videoPoster.position, Formatter.DurationLong)
+        else return Format.formatDuration(videoPoster.position, Formatter.DurationShort)
+    }
     property string streamUrl
     property string youtubeDirectUrl
     property string streamTitle

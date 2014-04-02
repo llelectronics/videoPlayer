@@ -50,6 +50,7 @@ CoverBackground {
     }
 
     Image {
+        id: img
         source: {
             if (firstPage.onlyMusic.opacity === 1.0) return "../pages/images/audio.png"
             else return "../pages/images/icon.png"
@@ -59,6 +60,26 @@ CoverBackground {
         anchors.horizontalCenter: parent.horizontalCenter
         width: 86 // fixed icon size
         height: 86
+    }
+
+    Item {
+        anchors.top: label.bottom
+        anchors.topMargin: 15
+        anchors.horizontalCenter: parent.horizontalCenter
+
+
+        Label {
+            id: dur
+            text: firstPage.videoDuration
+            color: Theme.highlightColor
+        }
+        Label {
+            id: curPos
+            x: parent.width / 2
+            anchors.right: dur.left
+            text: firstPage.videoPosition + " / "
+            color: Theme.highlightColor
+        }
     }
 
     CoverActionList {
