@@ -65,17 +65,17 @@ CoverBackground {
     Item {
         anchors.top: label.bottom
         anchors.topMargin: 15
-        anchors.horizontalCenter: parent.horizontalCenter
+        x : (parent.width / 2) - ((curPos.width/2) + (dur.width/2))
 
 
         Label {
             id: dur
             text: firstPage.videoDuration
+            anchors.left: curPos.right
             color: Theme.highlightColor
         }
         Label {
             id: curPos
-            anchors.right: dur.left
             text: firstPage.videoPosition + " / "
             color: Theme.highlightColor
         }
