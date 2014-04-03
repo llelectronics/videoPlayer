@@ -75,7 +75,6 @@ CoverBackground {
         }
         Label {
             id: curPos
-            x: parent.width / 2
             anchors.right: dur.left
             text: firstPage.videoPosition + " / "
             color: Theme.highlightColor

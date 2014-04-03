@@ -51,8 +51,13 @@ Page {
     property string streamTitle
     property string title: videoPoster.player.metaData.title ? videoPoster.player.metaData.title : ""
     property string artist: videoPoster.player.metaData.albumArtist ? videoPoster.player.metaData.albumArtist : ""
+    property int subtitlesSize: 25
+    property bool boldSubtitles: false
+    property string subtitlesColor: Theme.highlightColor
+    property bool enableSubtitles: true
     property alias onlyMusic: onlyMusic
     property alias videoPoster: videoPoster
+    property variant currentVideoSub: []
     signal updateCover
     signal removeFile(string url)
 
@@ -204,6 +209,57 @@ Page {
             }
         }
 
+        Label {
+            id: subtitlesText
+
+            z: 100
+            anchors { fill: parent; margins: page.inPortrait ? 10 : 50 }
+            wrapMode: Text.WordWrap
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignBottom
+            font.pixelSize: subtitlesSize
+            font.bold: boldSubtitles
+            color: subtitlesColor
+            visible: (enableSubtitles) && (currentVideoSub) ? true : false
+            onTextChanged: {
+                console.debug("[firstPage] Subtitletext: " + text)
+            }
+        }
+
+        function getSubtitles() {
+            subsGetter.sendMessage(streamUrl);
+        }
+
+        function setSubtitles(subtitles) {
+            currentVideoSub = subtitles;
+            //console.debug("[firstPage] subtitles: " + currentVideoSub)
+        }
+
+        WorkerScript {
+            id: subsGetter
+
+            source: "helper/getsubtitles.js"
+            onMessage: {
+                flick.setSubtitles(messageObject);
+                //console.debug("[firstPage] subtitleMessageObject: " + messageObject);
+            }
+        }
+
+        function checkSubtitles() {
+            subsChecker.sendMessage({"position": videoPoster.position, "subtitles": currentVideoSub})
+            //console.debug("[firstPage] checkSubtitles activated with: " + currentVideoSub)
+        }
+
+        WorkerScript {
+            id: subsChecker
+
+            source: "helper/checksubtitles.js"
+            onMessage: {
+                subtitlesText.text = messageObject
+                //console.debug("[firstPage] subsChecker MessageObject: " + messageObject);
+            }
+        }
+
         Column {
             id: errorBox
             anchors.top: parent.top
@@ -286,7 +342,12 @@ Page {
                 //source: "http://netrunnerlinux.com/vids/default-panel-script.mkv"
                 //source: "http://www.ytapi.com/?vid=lfAixpkzcBQ&format=direct"
 
-                onPlayClicked: toggleControls();
+                onPlayClicked: {
+                    toggleControls();
+                    if (enableSubtitles) {
+                        flick.getSubtitles();
+                    }
+                }
 
                 function toggleControls() {
                     //console.debug("Controls Opacity:" + controls.opacity);
@@ -329,6 +390,9 @@ Page {
                 onPressAndHold: {
                     //console.debug("[Press and Hold detected]")
                     if (! drawer.open) drawer.open = true
+                }
+                onPositionChanged: {
+                    if ((enableSubtitles) && (currentVideoSub)) flick.checkSubtitles()
                 }
             }
         }
