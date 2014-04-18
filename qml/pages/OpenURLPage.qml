@@ -134,6 +134,16 @@ Dialog {
             }
 
             Button {
+                id: deleteHistoryBtn
+                anchors.left: historyBtn.left
+                anchors.top: historyBtn.bottom
+                text: "Delete History"
+                onClicked: {
+                    DB.delHistory();
+                }
+            }
+
+            Button {
                 id: openFileBtn
                 anchors.top: urlField.bottom
                 anchors.right: urlField.right

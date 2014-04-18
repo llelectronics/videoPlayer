@@ -75,6 +75,11 @@ function getHistory() {
     })
 }
 
+function delHistory() {
+    var db = getDatabase();
+    db.transaction(function (tx) {tx.executeSql ('DELETE FROM history')});
+}
+
 // This function is used to write bookmarks into the database
 function addBookmark(title,url) {
     var db = getDatabase();
