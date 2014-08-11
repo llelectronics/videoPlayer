@@ -73,3 +73,9 @@ desktop-file-install --delete-original       \
 /usr/share/icons/hicolor/86x86/apps
 # >> files
 # << files
+
+%post
+/usr/bin/update-desktop-database
+
+%postun
+/usr/bin/update-desktop-database
