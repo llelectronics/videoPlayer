@@ -20,6 +20,7 @@ BEGIN \
 END;')
 
                     tx.executeSql('CREATE TABLE IF NOT EXISTS bookmarks(title TEXT, url TEXT)');
+                    tx.executeSql('CREATE TABLE IF NOT EXISTS settings(setting TEXT, value TEXT)');
                 });
 }
 
@@ -120,6 +121,48 @@ function getBookmarks() {
         var rs = tx.executeSql('SELECT * FROM bookmarks ORDER BY bookmarks.title;');
         for (var i = 0; i < rs.rows.length; i++) {
             mainWindow.modelBookmarks.append({"title" : rs.rows.item(i).title, "url" : rs.rows.item(i).url});
+        }
+    })
+}
+
+// This function is used to write settings into the database
+function addSetting(setting,value) {
+    var db = getDatabase();
+    var res = "";
+    db.transaction(function(tx) {
+        var rs = tx.executeSql('INSERT OR REPLACE INTO settings VALUES (?,?);', [setting,value]);
+        if (rs.rowsAffected > 0) {
+            res = "OK";
+            console.log ("Setting written to database");
+        } else {
+            res = "Error";
+            console.log ("Error writing setting to database");
+        }
+    }
+    );
+    // The function returns “OK” if it was successful, or “Error” if it wasn't
+    return res;
+}
+
+function stringToBoolean(str) {
+    switch(str.toLowerCase()){
+    case "true": case "yes": case "1": return true;
+    case "false": case "no": case "0": case null: return false;
+    default: return Boolean(string);
+    }
+}
+
+// This function is used to retrieve settings from database
+function getSettings() {
+    var db = getDatabase();
+    var respath="";
+    db.transaction(function(tx) {
+        var rs = tx.executeSql('SELECT * FROM settings;');
+        for (var i = 0; i < rs.rows.length; i++) {
+            if (rs.rows.item(i).setting == "enableSubtitles") mainWindow.firstPage.enableSubtitles = stringToBoolean(rs.rows.item(i).value)
+            else if (rs.rows.item(i).setting == "subtitlesSize") mainWindow.firstPage.subtitlesSize = parseInt(rs.rows.item(i).value)
+            else if (rs.rows.item(i).setting == "boldSubtitles") mainWindow.firstPage.boldSubtitles = stringToBoolean(rs.rows.item(i).value)
+            else if (rs.rows.item(i).setting == "subtitlesColor") mainWindow.firstPage.subtitlesColor = rs.rows.item(i).value
         }
     })
 }

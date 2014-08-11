@@ -44,7 +44,8 @@ OTHER_FILES += qml/harbour-videoPlayer.qml \
     qml/pages/AddBookmark.qml \
     qml/pages/ytQualityChooser.qml \
     qml/pages/helper/getsubtitles.js \
-    qml/pages/helper/checksubtitles.js
+    qml/pages/helper/checksubtitles.js \
+    qml/pages/SettingsPage.qml
 
 HEADERS += \
     src/DownloadManager.hpp \

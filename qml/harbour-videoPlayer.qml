@@ -63,7 +63,7 @@ ApplicationWindow
         FirstPage {
             id: firstPage
 
-            Component.onCompleted: { mainWindow.firstPage = firstPage }
+            Component.onCompleted: { mainWindow.firstPage = firstPage; DB.getSettings(); }
             onRemoveFile: {
                 console.debug("Request removal of" + url);
                 fileRemove(url);

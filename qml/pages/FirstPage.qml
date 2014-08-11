@@ -144,6 +144,10 @@ Page {
                 onClicked: pageStack.push(Qt.resolvedUrl("AboutPage.qml"));
             }
             MenuItem {
+                text: "Settings"
+                onClicked: pageStack.push(Qt.resolvedUrl("SettingsPage.qml"));
+            }
+            MenuItem {
                 text: "Bookmarks"
                 onClicked: pageStack.push(Qt.resolvedUrl("BookmarksPage.qml"), {dataContainer: page, modelBookmarks: mainWindow.modelBookmarks});
             }
@@ -155,36 +159,6 @@ Page {
                 text: "Open"
                 onClicked: pageStack.push(Qt.resolvedUrl("OpenURLPage.qml"), {dataContainer: page, streamUrl: streamUrl});
             }
-//            MenuItem {
-//                text: "Open File"
-//                onClicked: pageStack.push(Qt.resolvedUrl("fileman/Main.qml"), {dataContainer: page});
-//            }
-//            MenuItem {
-//                text: "Download Youtube Video"
-//                visible: {
-//                    if ((/^http:\/\/ytapi.com/).test(streamUrl)) return true
-//                    else return false
-//                }
-//                //onClicked: pageStack.push(Qt.resolvedUrl("DownloadManager.qml"), {"downloadUrl": streamUrl, "downloadName": streamTitle});
-//                // Alternatively use direct youtube url instead of ytapi for downloads (ytapi links not always download with download manager)
-//                onClicked: {
-//                    // Filter out all chars that might stop the download manager from downloading the file
-//                    // Illegal chars: `~!@#$%^&*()-=+\|/?.>,<;:'"[{]}
-//                    streamTitle = YT.getDownloadableTitleString(streamTitle)
-//                    pageStack.push(Qt.resolvedUrl("DownloadManager.qml"), {"downloadUrl": youtubeDirectUrl, "downloadName": streamTitle});
-//                }
-//            }
-//            MenuItem {
-//                text: "Add to bookmarks"
-//                visible: {
-//                    if (streamTitle != "" || streamUrl != "") return true
-//                    else return false
-//                }
-//                onClicked: {
-//                    if (streamTitle != "") mainWindow.modelBookmarks.addBookmark(streamUrl,streamTitle)
-//                    else mainWindow.modelBookmarks.addBookmark(streamUrl,findBaseName(streamUrl))
-//                }
-//            }
         }
 
         Image {

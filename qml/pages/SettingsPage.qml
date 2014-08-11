@@ -1,0 +1,377 @@
+import QtQuick 2.0
+import Sailfish.Silica 1.0
+import "helper/db.js" as DB
+
+Dialog {
+    id: settingsPage
+
+    allowedOrientations: Orientation.All
+
+    acceptDestinationAction: PageStackAction.Pop
+
+//    property string uAgentTitle : mainWindow.userAgentName
+//    property string uAgent: mainWindow.userAgent
+//    property string searchEngineTitle: mainWindow.searchEngineName
+//    property string searchEngineUri: mainWindow.searchEngine
+
+
+    // Easy fix only for when http:// or https:// is missing
+//    function fixUrl(nonFixedUrl) {
+//        var valid = nonFixedUrl
+//        if (valid.indexOf(":")<0) {
+//                return "http://"+valid;
+//        } else return valid
+//    }
+
+    function loadDefaults() {
+        loadSubtitlesSwitch.checked = true ;
+        subtitleSizeCombo.currentIndex = 34 - 25;
+        boldSubtitlesSwitch.checked = false ;
+        colorIndicator.color = Theme.highlightColor
+    }
+
+    function saveSettings() {
+        DB.addSetting("enableSubtitles", loadSubtitlesSwitch.checked.toString());
+        DB.addSetting("subtitlesSize", subtitleSizeCombo.value.toString());
+        DB.addSetting("boldSubtitles", boldSubtitlesSwitch.checked.toString());
+        DB.addSetting("subtitlesColor", colorIndicator.color);
+        DB.getSettings();
+    }
+
+//    // TODO : Maybe it can be made as convenient as AddBookmark !?
+//    function enterPress() {
+//        if (hp.focus == true) { hp.text = fixUrl(hp.text);hp.focus = false; }
+//        else if (searchEngine.focus == true) { searchEngine.text = fixUrl(searchEngine.text); searchEngine.focus = false; }
+//    }
+
+//    function clearCache() {
+//        remorse.execute(qsTr("Clear cache"), function() { mainWindow.clearCache(); } )
+//    }
+
+//    function clearCookies() {
+//        remorse.execute(qsTr("Clear Cookies and restart"), function() { mainWindow.clearCookies(); } )
+//    }
+
+//    function clearHistory() {
+//        remorse.execute(qsTr("Clear History"), function() { DB.clearTable("history"); } )
+//    }
+
+
+    onAccepted: saveSettings();
+
+//    Keys.onReturnPressed: enterPress();
+//    Keys.onEnterPressed: enterPress();
+
+//    RemorsePopup { id: remorse }
+
+    SilicaFlickable {
+        id: flick
+        anchors.fill: parent
+        contentHeight: col.height + head.height
+
+        DialogHeader {
+            id: head
+            acceptText: qsTr("Save Settings")
+        }
+
+        PullDownMenu {
+//            MenuItem {
+//                text: qsTr("Add default bookmarks")
+//                onClicked: mainWindow.addDefaultBookmarks();
+//            }
+//            MenuItem {
+//                text: qsTr("Clear Cache")
+//                onClicked: clearCache();
+//            }
+//            MenuItem {
+//                text: qsTr("Clear Cookies")
+//                onClicked: clearCookies();
+//            }
+//            MenuItem {
+//                text: qsTr("Clear History")
+//                onClicked: clearHistory();
+//            }
+            MenuItem {
+                text: qsTr("Load Defaults")
+                onClicked: loadDefaults();
+            }
+        }
+
+//        PushUpMenu {
+//            MenuItem {
+//                text: qsTr("Goto top")
+//                onClicked: flick.scrollToTop();
+//            }
+//        }
+
+        Column {
+            id: col
+            width: parent.width
+            anchors.top: head.bottom
+            spacing: 15
+
+//            SectionHeader {
+//                text: qsTr("Appearance")
+//            }
+//            ComboBox {
+//                id: defaultFontCombo
+//                anchors.horizontalCenter: parent.horizontalCenter
+//                label: qsTr("Default Font Size")
+//                currentIndex: 34 - parseInt(mainWindow.defaultFontSize)
+//                menu: ContextMenu {
+//                    MenuItem { text: "34"}
+//                    MenuItem { text: "33"}
+//                    MenuItem { text: "32"}
+//                    MenuItem { text: "31"}
+//                    MenuItem { text: "30"}
+//                    MenuItem { text: "29"}
+//                    MenuItem { text: "28"}
+//                    MenuItem { text: "27"}
+//                    MenuItem { text: "26"}
+//                    MenuItem { text: "25"}
+//                    MenuItem { text: "24"}
+//                    MenuItem { text: "23"}
+//                    MenuItem { text: "22"}
+//                    MenuItem { text: "21"}
+//                    MenuItem { text: "20"}
+//                    MenuItem { text: "19"}
+//                    MenuItem { text: "18"}
+//                    MenuItem { text: "17"}
+//                    MenuItem { text: "16"}
+//                    MenuItem { text: "15"}
+//                    MenuItem { text: "14"}
+//                    MenuItem { text: "13"}
+//                    MenuItem { text: "12"}
+//                    MenuItem { text: "11"}
+//                    MenuItem { text: "10"}
+//                    MenuItem { text: "9" }
+//                }
+//            }
+//            ComboBox {
+//                id: defaultFixedFontCombo
+//                anchors.horizontalCenter: parent.horizontalCenter
+//                label: qsTr("Default Fixed Font Size")
+//                currentIndex: 34 - parseInt(mainWindow.defaultFixedFontSize)
+//                menu: ContextMenu {
+//                    MenuItem { text: "34" }
+//                    MenuItem { text: "33" }
+//                    MenuItem { text: "32" }
+//                    MenuItem { text: "31" }
+//                    MenuItem { text: "30" }
+//                    MenuItem { text: "29" }
+//                    MenuItem { text: "28" }
+//                    MenuItem { text: "27" }
+//                    MenuItem { text: "26" }
+//                    MenuItem { text: "25" }
+//                    MenuItem { text: "24" }
+//                    MenuItem { text: "23" }
+//                    MenuItem { text: "22" }
+//                    MenuItem { text: "21" }
+//                    MenuItem { text: "20" }
+//                    MenuItem { text: "19" }
+//                    MenuItem { text: "18" }
+//                    MenuItem { text: "17" }
+//                    MenuItem { text: "16" }
+//                    MenuItem { text: "15" }
+//                    MenuItem { text: "14" }
+//                    MenuItem { text: "13" }
+//                    MenuItem { text: "12" }
+//                    MenuItem { text: "11" }
+//                    MenuItem { text: "10" }
+//                    MenuItem { text: "9" }
+//                }
+//            }
+//            ComboBox {
+//                id: minimumFontCombo
+//                anchors.horizontalCenter: parent.horizontalCenter
+//                label: qsTr("Minimum Font Size")
+//                currentIndex: 34 - parseInt(mainWindow.minimumFontSize)
+//                menu: ContextMenu {
+//                    MenuItem { text: "34" }
+//                    MenuItem { text: "33" }
+//                    MenuItem { text: "32" }
+//                    MenuItem { text: "31" }
+//                    MenuItem { text: "30" }
+//                    MenuItem { text: "29" }
+//                    MenuItem { text: "28" }
+//                    MenuItem { text: "27" }
+//                    MenuItem { text: "26" }
+//                    MenuItem { text: "25" }
+//                    MenuItem { text: "24" }
+//                    MenuItem { text: "23" }
+//                    MenuItem { text: "22" }
+//                    MenuItem { text: "21" }
+//                    MenuItem { text: "20" }
+//                    MenuItem { text: "19" }
+//                    MenuItem { text: "18" }
+//                    MenuItem { text: "17" }
+//                    MenuItem { text: "16" }
+//                    MenuItem { text: "15" }
+//                    MenuItem { text: "14" }
+//                    MenuItem { text: "13" }
+//                    MenuItem { text: "12" }
+//                    MenuItem { text: "11" }
+//                    MenuItem { text: "10" }
+//                    MenuItem { text: "9" }
+//                }
+//            }
+
+            SectionHeader {
+                text: qsTr("General")
+            }
+//            Row {
+//                anchors.horizontalCenter: parent.horizontalCenter
+//                spacing: 25
+//                Label {
+//                    text: qsTr("Homepage: ")
+//                }
+//                TextField {
+//                    id: hp
+//                    text: mainWindow.homepage  // FIX: on new Window loading siteURL != homepage set in settings so add a new var homepage in mainWindow
+//                    inputMethodHints: Qt.ImhUrlCharactersOnly
+//                    onFocusChanged: if (focus == true) selectAll();
+//                }
+//            }
+//            ValueButton {
+//                anchors.horizontalCenter: parent.horizontalCenter
+//                id: searchEngineCombo
+//                label: qsTr("Search Engine:")
+//                value: searchEngineTitle
+//                onClicked: pageStack.push(Qt.resolvedUrl("SearchEngineDialog.qml"), {dataContainer: settingsPage});
+//            }
+//            Row {
+//                id: customSearchEngine
+//                visible: searchEngineCombo.value === qsTr("Custom")
+//                // TODO: Make a ValueButton out of it and add a List with predefined search engines
+//                anchors.horizontalCenter: parent.horizontalCenter
+//                spacing: 10
+//                Label {
+//                    id: searchlbl
+//                    text: qsTr("Engine Url: ")
+//                }
+//                TextField {
+//                    id: searchEngine
+//                    text: searchEngineUri
+//                    inputMethodHints: Qt.ImhUrlCharactersOnly
+//                    placeholderText: "%s for searchterm"
+//                    width: hp.width
+//                    onFocusChanged: if (focus == true) selectAll();
+//                }
+//            }
+            TextSwitch {
+                id: loadSubtitlesSwitch
+                anchors.horizontalCenter: parent.horizontalCenter
+                text: "Load Subtitles"
+                checked: mainWindow.firstPage.enableSubtitles
+            }
+
+            TextSwitch {
+                id: boldSubtitlesSwitch
+                anchors.horizontalCenter: parent.horizontalCenter
+                text: qsTr("Bold Subtitle Font")
+                checked: mainWindow.firstPage.boldSubtitles
+                visible: loadSubtitlesSwitch.checked
+            }
+
+            ComboBox {
+                id: subtitleSizeCombo
+                anchors.horizontalCenter: parent.horizontalCenter
+                label: qsTr("Subtitle Font Size")
+                visible: loadSubtitlesSwitch.checked
+                currentIndex: 34 - parseInt(mainWindow.firstPage.subtitlesSize)
+                menu: ContextMenu {
+                    MenuItem { text: "34" }
+                    MenuItem { text: "33" }
+                    MenuItem { text: "32" }
+                    MenuItem { text: "31" }
+                    MenuItem { text: "30" }
+                    MenuItem { text: "29" }
+                    MenuItem { text: "28" }
+                    MenuItem { text: "27" }
+                    MenuItem { text: "26" }
+                    MenuItem { text: "25" }
+                    MenuItem { text: "24" }
+                    MenuItem { text: "23" }
+                    MenuItem { text: "22" }
+                    MenuItem { text: "21" }
+                    MenuItem { text: "20" }
+                    MenuItem { text: "19" }
+                    MenuItem { text: "18" }
+                    MenuItem { text: "17" }
+                    MenuItem { text: "16" }
+                    MenuItem { text: "15" }
+                    MenuItem { text: "14" }
+                    MenuItem { text: "13" }
+                    MenuItem { text: "12" }
+                    MenuItem { text: "11" }
+                    MenuItem { text: "10" }
+                    MenuItem { text: "9" }
+                }
+            }
+
+            BackgroundItem {
+                id: colorPickerButton
+                visible: loadSubtitlesSwitch.checked
+                Row {
+                    x: Theme.paddingLarge
+                    height: parent.height
+                    spacing: Theme.paddingMedium
+                    Rectangle {
+                        id: colorIndicator
+
+                        width: height
+                        height: parent.height
+                        color: mainWindow.firstPage.subtitlesColor
+                    }
+                    Label {
+                        text: "Subtitle Color"
+                        color: colorPickerButton.down ? Theme.highlightColor : Theme.primaryColor
+                        anchors.verticalCenter: parent.verticalCenter
+                    }
+                }
+                onClicked: {
+                    var dialog = pageStack.push("Sailfish.Silica.ColorPickerDialog")
+                    dialog.accepted.connect(function() {
+                        colorIndicator.color = dialog.color
+                    })
+                }
+            }
+
+//            SectionHeader {
+//                text: "Advanced"
+//            }
+//            ValueButton {
+//                anchors.horizontalCenter: parent.horizontalCenter
+//                id: userAgentCombo
+//                label: qsTr("User Agent:")
+//                value: uAgentTitle
+//                onClicked: pageStack.push(Qt.resolvedUrl("UserAgentDialog.qml"), {dataContainer: settingsPage});
+//            }
+//            TextField {
+//                id: agentString
+//                anchors.horizontalCenter: parent.horizontalCenter
+//                readOnly: true
+//                width: parent.width - 20
+//                text: uAgent
+//            }
+//            TextSwitch {
+//                id: dnsPrefetchSwitch
+//                anchors.horizontalCenter: parent.horizontalCenter
+//                text: "DNS Prefetch"
+//                checked: mainWindow.dnsPrefetch
+//            }
+//            TextSwitch {
+//                id: offlineWebApplicationCacheSwitch
+//                anchors.horizontalCenter: parent.horizontalCenter
+//                text: "Offline Web Application Cache"
+//                checked: mainWindow.offlineWebApplicationCache
+//            }
+
+        }
+        VerticalScrollDecorator {
+            flickable: flick
+        }
+    }
+
+}
+
