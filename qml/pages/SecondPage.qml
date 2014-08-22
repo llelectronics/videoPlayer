@@ -146,7 +146,8 @@ import "helper/yt.js" as YT
                         var yturl = YT.getYoutubeVid(url.toString());
                         //YT.getYoutubeTitle(url.toString());
                         if (dataContainer != null) {
-                            dataContainer.streamUrl = yturl;
+                            if (!dataContainer.youtubeDirect) dataContainer.streamUrl = yturl;
+                            else dataContainer.originalUrl = url
                             ytView.goBack();
                             pageStack.push(dataContainer);
                         }

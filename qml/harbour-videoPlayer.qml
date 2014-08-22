@@ -52,9 +52,10 @@ ApplicationWindow
         // Check if youtube url
         if (YT.checkYoutube(url) === true) {
             YT.getYoutubeTitle(url);
-            url = YT.getYoutubeVid(url);
+            yurl = YT.getYoutubeVid(url);
         }
-        firstPage.streamUrl = url
+        if (!firstPage.youtubeDirect) firstPage.streamUrl = yurl
+        else firstPage.originalUrl = url
         firstPage.streamTitle = ""
         if (autoPlay == true) { console.debug("autoPlay = true") ; firstPage.videoPoster.play();}
     }

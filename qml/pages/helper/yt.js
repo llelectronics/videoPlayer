@@ -129,7 +129,7 @@ function getYoutubeStream(youtube_id) {
                 //***********************************************//
 
                 // Try to get 720p HD video stream first
-                if ((i + 1) % 6 === 0 && itag === "22") { // 6 parameters per video; itag 18 is "MP4 360p", see http://userscripts.org/scripts/review/25105
+                if ((i + 1) % 6 === 0 && itag === "22") { // 6 parameters per video; itag 22 is "MP4 720p", see http://userscripts.org/scripts/review/25105
                     found = true;
                     resolutionFormat = "MP4 720p"
                     url += "&signature=" + sig;
@@ -137,7 +137,7 @@ function getYoutubeStream(youtube_id) {
                     break;
                 } else { url720p = "none" }
                 // If above fails try to get 480p video stream
-                if ((i + 1) % 6 === 0 && itag === "35") { // 6 parameters per video; itag 18 is "MP4 360p", see http://userscripts.org/scripts/review/25105
+                if ((i + 1) % 6 === 0 && itag === "35") { // 6 parameters per video; itag 35 is "MP4 480p", see http://userscripts.org/scripts/review/25105
                     found = true;
                     resolutionFormat = "FLV 480p"
                     url += "&signature=" + sig;
@@ -153,7 +153,7 @@ function getYoutubeStream(youtube_id) {
                     break;
                 } else { url360p = "none" }
                 // If above fails try to get 240p video stream
-                if ((i + 1) % 6 === 0 && itag === "5") { // 6 parameters per video; itag 18 is "MP4 360p", see http://userscripts.org/scripts/review/25105
+                if ((i + 1) % 6 === 0 && itag === "5") { // 6 parameters per video; itag 5 is "MP4 360p", see http://userscripts.org/scripts/review/25105
                     found = true;
                     resolutionFormat = "FLV 240p"
                     url += "&signature=" + sig;
@@ -164,6 +164,11 @@ function getYoutubeStream(youtube_id) {
 
             if (found) {
                 console.debug("[yt.js]: Video in format " + resolutionFormat + " found with direct URL: " + url);
+//                if (url720p != "none") console.debug("[yt.js]: Video in format MP4 720p found with direct URL: " + url720p)
+//                if (url480p != "none") console.debug("[yt.js]: Video in format MP4 480p found with direct URL: " + url480p)
+//                if (url360p != "none") console.debug("[yt.js]: Video in format MP4 360p found with direct URL: " + url360p)
+//                if (url240p != "none") console.debug("[yt.js]: Video in format MP4 240p found with direct URL: " + url240p)
+                if (firstPage.youtubeDirect) firstPage.streamUrl = url
                 return url;
 
             } else {

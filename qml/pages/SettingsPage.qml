@@ -28,6 +28,7 @@ Dialog {
         subtitleSizeCombo.currentIndex = 34 - 25;
         boldSubtitlesSwitch.checked = false ;
         colorIndicator.color = Theme.highlightColor
+        directYoutubeSwitch.checked = false;
     }
 
     function saveSettings() {
@@ -35,6 +36,7 @@ Dialog {
         DB.addSetting("subtitlesSize", subtitleSizeCombo.value.toString());
         DB.addSetting("boldSubtitles", boldSubtitlesSwitch.checked.toString());
         DB.addSetting("subtitlesColor", colorIndicator.color);
+        DB.addSetting("youtubeDirect", directYoutubeSwitch.checked.toString())
         DB.getSettings();
     }
 
@@ -335,6 +337,13 @@ Dialog {
                         colorIndicator.color = dialog.color
                     })
                 }
+            }
+
+            TextSwitch {
+                id: directYoutubeSwitch
+                anchors.horizontalCenter: parent.horizontalCenter
+                text: "Use direct youtube url"
+                checked: mainWindow.firstPage.youtubeDirect
             }
 
 //            SectionHeader {

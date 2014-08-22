@@ -46,8 +46,10 @@ Page {
         if (videoPoster.position > 3599) return Format.formatDuration(videoPoster.position, Formatter.DurationLong)
         else return Format.formatDuration(videoPoster.position, Formatter.DurationShort)
     }
+    property string originalUrl
     property string streamUrl
-    property string youtubeDirectUrl
+    property bool youtubeDirect: false
+    property bool isYtUrl: false
     property string streamTitle
     property string title: videoPoster.player.metaData.title ? videoPoster.player.metaData.title : ""
     property string artist: videoPoster.player.metaData.albumArtist ? videoPoster.player.metaData.albumArtist : ""
@@ -82,6 +84,7 @@ Page {
         if (errorDetail.visible && errorTxt.visible) { errorDetail.visible = false; errorTxt.visible = false }
         streamTitle = ""  // Reset Stream Title here
         if (YT.checkYoutube(streamUrl)=== true) {
+            isYtUrl = true;
             YT.getYoutubeTitle(streamUrl);
             var ytID = YT.getYtID(streamUrl);
             YT.getYoutubeStream(ytID);
@@ -394,6 +397,7 @@ Page {
                 text: "Download video"
                 visible: {
                     if ((/^http:\/\/ytapi.com/).test(streamUrl)) return true
+                    else if (isYtUrl) return true
                     else return false
                 }
                 //onClicked: pageStack.push(Qt.resolvedUrl("DownloadManager.qml"), {"downloadUrl": streamUrl, "downloadName": streamTitle});
@@ -402,7 +406,6 @@ Page {
                     // Filter out all chars that might stop the download manager from downloading the file
                     // Illegal chars: `~!@#$%^&*()-=+\|/?.>,<;:'"[{]}
                     streamTitle = YT.getDownloadableTitleString(streamTitle)
-                    //pageStack.push(Qt.resolvedUrl("DownloadManager.qml"), {"downloadUrl": youtubeDirectUrl, "downloadName": streamTitle});
                     pageStack.push(Qt.resolvedUrl("ytQualityChooser.qml"), {"streamTitle": streamTitle, "url720p": YT.url720p, "url480p": YT.url480p, "url360p": YT.url360p, "url240p": YT.url240p});
                     drawer.open = !drawer.open
                 }
@@ -418,8 +421,10 @@ Page {
                     else return false
                 }
                 onClicked: {
-                    if (streamTitle != "") mainWindow.modelBookmarks.addBookmark(streamUrl,streamTitle)
-                    else mainWindow.modelBookmarks.addBookmark(streamUrl,findBaseName(streamUrl))
+                    if (streamTitle != "" && !youtubeDirect) mainWindow.modelBookmarks.addBookmark(streamUrl,streamTitle)
+                    else if (streamTitle != "" && youtubeDirect) mainWindow.modelBookmarks.addBookmark(originalUrl,streamTitle)
+                    else if (!youtubeDirect) mainWindow.modelBookmarks.addBookmark(streamUrl,findBaseName(streamUrl))
+                    else mainWindow.modelBookmarks.addBookmark(originalUrl,findBaseName(originalUrl))
                     drawer.open = !drawer.open
                 }
             }
