@@ -8,6 +8,8 @@ Page {
     property string url360p
     property string url240p
 
+    allowedOrientations: Orientation.All
+
     Component.onCompleted: {
 
         if (url720p != "none" && url720p != undefined) {
