@@ -32,6 +32,7 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 import QtMultimedia 5.0
 import Sailfish.Media 1.0
+import Sailfish.Pickers 1.0
 //import Sailfish.Gallery 1.0
 import "helper"
 
@@ -62,6 +63,7 @@ Page {
     property variant currentVideoSub: []
     signal updateCover
     signal removeFile(string url)
+    property alias videoPickerComponent: videoPickerComponent
 
     property Page dPage
 
@@ -431,6 +433,21 @@ Page {
         }
 
     }
+
+    Component  {
+        id: videoPickerComponent
+        VideoPickerPage {
+            //: For choosing video to open from the device
+            //% "Open video"
+            title: qsTr("Open Video")
+            Component.onDestruction: {
+                //console.debug("[OpenURLPage.qml]: Selected Video: " + selectedContent);
+                mainWindow.firstPage.streamUrl = selectedContent;
+                //pageStack.pop();
+            }
+        }
+    }
+
     children: [
 
         // Always use a black background

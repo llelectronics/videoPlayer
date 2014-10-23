@@ -141,7 +141,8 @@ Dialog {
                 text: "Browse Files"
                 visible: true
                 onClicked: {
-                    pageStack.replace(Qt.resolvedUrl("fileman/Main.qml"), {dataContainer: mainWindow.firstPage});
+                    //pageStack.replace(Qt.resolvedUrl("fileman/Main.qml"), {dataContainer: mainWindow.firstPage});
+                    pageStack.replace(mainWindow.firstPage.videoPickerComponent);
                 }
             }
 
