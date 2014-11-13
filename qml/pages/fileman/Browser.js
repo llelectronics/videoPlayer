@@ -1,12 +1,12 @@
 var os = require('os');
 var util = require('util');
-var Q = require('qtcore');
+var Q = require('qt-core');
 var dirObj =  os.qt.dir;
 var error = require('error');
 var curDir;
 var curList = [];
 var sendFn;
-var filters = Q.Dir.AllEntries | Q.Dir.NoDotAndDotDot;
+var filters = Q.Dir.AllEntries | Q.Dir.NoDot | Q.Dir.NoDotDot;
 var debug = require('debug');
 
 var send_info = function(ctx, info) {
@@ -38,9 +38,11 @@ exports.listDir = function(msg, ctx) {
     if (!curDir || dirName !== curDir.path() || msg.refresh) {
         curDir = dirObj(dirName);
         sendFn = send_info;//curDir.isRoot() ? send_top_info : send_info;
-        curList = curDir.entryInfoList(["*"], filters);
+        curList = curDir.entryInfoList(["*"], filters, os.qt.dir.DirsFirst);
+        debug.error("[Browser.js] curList: ", curList);
     }
     len = curList.length;
+    //debug.error("[Browser.js] curList.length: ", len);
     begin = msg.begin || 0;
     end = msg.len ? Math.min(begin + msg.len, len) : len;
     if (begin > end)

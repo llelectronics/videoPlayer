@@ -21,6 +21,7 @@ END;')
 
                     tx.executeSql('CREATE TABLE IF NOT EXISTS bookmarks(title TEXT, url TEXT)');
                     tx.executeSql('CREATE TABLE IF NOT EXISTS settings(setting TEXT, value TEXT)');
+                    tx.executeSql('CREATE UNIQUE INDEX idx_settings ON settings(setting)');
                 });
 }
 
@@ -164,6 +165,7 @@ function getSettings() {
             else if (rs.rows.item(i).setting == "boldSubtitles") mainWindow.firstPage.boldSubtitles = stringToBoolean(rs.rows.item(i).value)
             else if (rs.rows.item(i).setting == "subtitlesColor") mainWindow.firstPage.subtitlesColor = rs.rows.item(i).value
             else if (rs.rows.item(i).setting == "youtubeDirect") mainWindow.firstPage.youtubeDirect = stringToBoolean(rs.rows.item(i).value)
+            else if (rs.rows.item(i).setting == "openDialogType") mainWindow.firstPage.openDialogType = rs.rows.item(i).value
         }
     })
 }

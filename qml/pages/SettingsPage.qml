@@ -36,7 +36,9 @@ Dialog {
         DB.addSetting("subtitlesSize", subtitleSizeCombo.value.toString());
         DB.addSetting("boldSubtitles", boldSubtitlesSwitch.checked.toString());
         DB.addSetting("subtitlesColor", colorIndicator.color);
-        DB.addSetting("youtubeDirect", directYoutubeSwitch.checked.toString())
+        DB.addSetting("youtubeDirect", directYoutubeSwitch.checked.toString());
+        //console.log("[SettingsPage.qml] openDialogCombo.dType:" + openDialogCombo.dType.toString());
+        DB.addSetting("openDialogType", openDialogCombo.dType.toString());
         DB.getSettings();
     }
 
@@ -344,6 +346,31 @@ Dialog {
                 anchors.horizontalCenter: parent.horizontalCenter
                 text: "Use direct youtube url"
                 checked: mainWindow.firstPage.youtubeDirect
+            }
+
+            ComboBox {
+                id: openDialogCombo
+                anchors.horizontalCenter: parent.horizontalCenter
+                label: qsTr("Browse File Dialog")
+                visible: loadSubtitlesSwitch.checked
+                property string dType
+                currentIndex: {
+                    // Current Option
+                    if (mainWindow.firstPage.openDialogType === "adv") return 0;
+                    else if (mainWindow.firstPage.openDialogType === "simple") return 1;
+                    else if (mainWindow.firstPage.openDialogType === "gallery") return 2;
+                }
+
+                menu: ContextMenu {
+                    MenuItem { text: qsTr("Advanced Filemanager") }
+                    MenuItem { text: qsTr("Simple Filemanager") }
+                    MenuItem { text: qsTr("Videogallery") }
+                }
+                onCurrentIndexChanged: {
+                    if (currentIndex == 0) dType = "adv"
+                    else if (currentIndex == 1) dType = "simple"
+                    else if (currentIndex == 2) dType = "gallery"
+                }
             }
 
 //            SectionHeader {

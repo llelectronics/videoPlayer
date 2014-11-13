@@ -8,8 +8,8 @@ ListItem {
 
     menu: myMenu
     property Item myList
-    property string fileType: type
-    property string fileName: name
+    property string fileType: fileIsDir ? "d" : "f"
+    //property string fileName: fileName
     showMenuOnPressAndHold: false
     signal mediaFileOpen(string url)
     signal fileRemove(string url)
@@ -40,25 +40,25 @@ ListItem {
     }
 
     function showContextMenu() {
-        var filePath = getFullName(fileName);
+        //var filePath = getFullName(fileName);
         if (!Util.isSpecialPath(filePath))
             showMenu({fileName: fileName
                       , fileType: fileType
-                      , filePath: getFullName(fileName)});
+                      , filePath: filePath});
     }
 
     onClicked : {
-        if (fileType === 'd') {
+        if (fileIsDir) {
             var os = cutes.require('os');
             var d = os.qt.dir(myList.root);
-            if (name === '..') {
+            if (fileName === '..') {
                 pageStack.pop();
                 if (d.cdUp()) {
                     myList.root = d.path();
                 }
-            } else if (name !== '.') {
+            } else if (fileName !== '.') {
                 var url = Qt.resolvedUrl('DirView.qml');
-                myList.showAbove(url, {root: d.filePath(name), dataContainer: dataContainer });
+                myList.showAbove(url, {root: d.filePath(fileName), dataContainer: dataContainer });
             }
         } else {
             showContextMenu();
@@ -107,7 +107,7 @@ ListItem {
 
             Label {
                 width: parent.width
-                text: name
+                text: fileName
                 font.pixelSize: Theme.fontSizeMedium
                 elide: TruncationMode.Elide
                 //truncationMode: TruncationMode.Elide
@@ -135,7 +135,7 @@ ListItem {
 
                 function fileSizeString() {
                     var suffices = ['b', 'K', 'M', 'G', 'T'];
-                    var s = size;
+                    var s = fileSize;
                     var i = 0;
                     while (s > 1024) {
                         s /= 1024;
@@ -151,7 +151,7 @@ ListItem {
         }
         Image {
             id: auxLabel
-            source: (fileType === 'd') ? "image://theme/icon-m-right" : ""
+            source: (fileIsDir) ? "image://theme/icon-m-right" : ""
             anchors {
                 verticalCenter: parent.verticalCenter
                 right: parent.right

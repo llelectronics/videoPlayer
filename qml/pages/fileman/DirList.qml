@@ -2,6 +2,7 @@ import Mer.Cutes 1.1
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 import "Bridge.js" as Util
+import Qt.labs.folderlistmodel 2.0
 
 SilicaListView {
 
@@ -39,8 +40,9 @@ SilicaListView {
 
     header: mainHeader
 
-    ListModel {
+    FolderListModel {
         id: entries
+        folder: entriesList.root
     }
 
     model: entries
@@ -122,9 +124,9 @@ SilicaListView {
             name: "load"
             StateChangeScript {
                 script: {
-                    Util.waitOperationCompleted();
-                    entries.clear();
-                    requestData(usableCount, true);
+                    //Util.waitOperationCompleted();  // Not necessary if requestData not working
+                    //entries.clear();
+                    //requestData(usableCount, true); // Not working currently so disabled
                 }
             }
         }

@@ -35,6 +35,7 @@ import Sailfish.Media 1.0
 import Sailfish.Pickers 1.0
 //import Sailfish.Gallery 1.0
 import "helper"
+import "fileman"
 
 Page {
     id: page
@@ -64,6 +65,8 @@ Page {
     signal updateCover
     signal removeFile(string url)
     property alias videoPickerComponent: videoPickerComponent
+    property alias openDialog: openFileDialog
+    property string openDialogType: "adv"
 
     property Page dPage
 
@@ -444,6 +447,15 @@ Page {
                 //console.debug("[OpenURLPage.qml]: Selected Video: " + selectedContent);
                 mainWindow.firstPage.streamUrl = selectedContent;
                 //pageStack.pop();
+            }
+        }
+    }
+
+    Component {
+        id: openFileDialog
+        OpenDialog {
+            onOpenFile: {
+                mainWindow.firstPage.streamUrl = path
             }
         }
     }

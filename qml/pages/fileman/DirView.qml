@@ -6,7 +6,7 @@ import "Bridge.js" as Util
 Page {
     id : dirViewPage
     allowedOrientations: Orientation.All
-    property int entriesCount: dirStack.count
+    //property int entriesCount: dirStack.count
     property string currentDirectory
     property QtObject dataContainer
 
@@ -36,8 +36,9 @@ Page {
             top: parent.top
             left: parent.left
             right: parent.right
-            bottom: dirStackList.top
-            bottomMargin: Theme.paddingLarge
+            bottom: parent.bottom
+            //bottom: dirStackList.top
+            //bottomMargin: Theme.paddingLarge
         }
 
         onIsUsableChanged : {
@@ -56,46 +57,46 @@ Page {
         }
     }
 
-    ListModel {
-        id: dirStack
-    }
+//    ListModel {
+//        id: dirStack
+//    }
 
-    function popToDirectory(pos) {
-        console.log("Pop ", pos);
-        var end = dirStack.count;
-        var pos = end - pos - 1;
-        if (!pos)
-            return;
-        var p = pageStack.find(function(p) {
-            console.log("P:", p.root);
-            return (pos-- == 0);
-        });
-        pageStack.pop(p);
-    }
+//    function popToDirectory(pos) {
+//        console.log("Pop ", pos);
+//        var end = dirStack.count;
+//        var pos = end - pos - 1;
+//        if (!pos)
+//            return;
+//        var p = pageStack.find(function(p) {
+//            console.log("P:", p.root);
+//            return (pos-- == 0);
+//        });
+//        pageStack.pop(p);
+//    }
 
-    DirStack {
-        id: dirStackList
-        model: dirStack
-        height: Theme.itemSizeLarge
-        anchors {
-            left: parent.left
-            right: parent.right
-            bottom: parent.bottom
-        }
-    }
+//    DirStack {
+//        id: dirStackList
+//        model: dirStack
+//        height: Theme.itemSizeLarge
+//        anchors {
+//            left: parent.left
+//            right: parent.right
+//            bottom: parent.bottom
+//        }
+//    }
 
-    function setupDirStack(d) {
-        dirStack.clear();
-        if (d === "")
-            return;
+//    function setupDirStack(d) {
+//        dirStack.clear();
+//        if (d === "")
+//            return;
 
-        Util.dirStack(d, {done: function(res) {
-            Util.forEach(res, function(v) { dirStack.append({name: v}); });
-            var count = dirStackList.count;
-            if (count)
-                dirStackList.currentIndex = count - 1;
-        }});
-    }
+//        Util.dirStack(d, {done: function(res) {
+//            Util.forEach(res, function(v) { dirStack.append({name: v}); });
+//            var count = dirStackList.count;
+//            if (count)
+//                dirStackList.currentIndex = count - 1;
+//        }});
+//    }
 
     Component.onCompleted: {
         dirList.root = (root !== "" ? root : Util.getRoot());
