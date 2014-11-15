@@ -30,10 +30,10 @@ Page {
                     _manager.downloadWithCurl(downloadUrl)
                 }
             }
-//            MenuItem {
-//                text: qsTr("Show Details")
-//                onClicked: pageStack.push(details);
-//            }
+            //            MenuItem {
+            //                text: qsTr("Show Details")
+            //                onClicked: pageStack.push(details);
+            //            }
         }
 
         Column{
@@ -95,7 +95,7 @@ Page {
                 anchors.topMargin: 65
                 text: downloadUrl
                 width: parent.width
-                height: 100
+                height: parent.height / 2.5
                 anchors.horizontalCenter: parent.horizontalCenter
                 color: Theme.primaryColor
                 font.pixelSize: Theme.fontSizeMedium
@@ -103,6 +103,7 @@ Page {
             }
 
             ProgressBar {
+                id: pg
                 width: parent.width
                 maximumValue: _manager.progressTotal
                 value: _manager.progressValue
@@ -121,82 +122,114 @@ Page {
             }
 
             Label {
+                id: activeDownloadLabel
                 text: qsTr("Active Downloads: ") + (_manager.activeDownloads == 0 ? "none" : _manager.activeDownloads)
                 color: Theme.primaryColor
             }
 
-            Label {
-                anchors.topMargin: 65
-                text: qsTr("Status:")
-                color: Theme.primaryColor
+            ValueButton {
+                id: valStatus
+                label: qsTr("Status")
+                onClicked: {
+                    pageStack.push(statusPage);
+                }
             }
-            // A standard TextArea for the download status output
-            TextArea {
-                width: parent.width
-                height: 145
-                readOnly: true
 
-                text: _manager.statusMessage
-
-                color: Theme.primaryColor
-            }
-            Label {
-                text: qsTr ("Errors:")
-                color: Theme.primaryColor
-            }
-            // A standard TextArea for displaying error output
-            TextArea {
-                width: parent.width
-                height: 125
-                readOnly: true
-
-                text: _manager.errorMessage
-                color: Theme.primaryColor
+            ValueButton {
+                id: valErrors
+                label: qsTr("Errors")
+                onClicked: {
+                    pageStack.push(errorPage);
+                }
             }
 
 
-// TODO: Maybe handy when there is a download list
-//            Component {
-//                id: details
-//                Page {
-//                    Column {
-//                        width: parent.width
-//                        spacing: 15
-//                        PageHeader {
-//                            title: qsTr("Download Details")
-//                        }
 
-//                        Label {
-//                            anchors.topMargin: 65
-//                            text: qsTr("Status:")
-//                            color: Theme.primaryColor
-//                        }
-//                        // A standard TextArea for the download status output
-//                        TextArea {
-//                            width: parent.width
-//                            height: 145
-//                            readOnly: true
+            Component {
+                id: statusPage
+                Page {
+                    PageHeader {
+                        id: pheader
+                        title: qsTr("Download Status")
+                    }
+                    // A standard TextArea for the download status output
+                    TextArea {
+                        width: parent.width
+                        height: parent.height - pheader.height
+                        anchors.top: pheader.bottom
+                        readOnly: true
 
-//                            text: _manager.statusMessage
+                        text: _manager.statusMessage
 
-//                            color: Theme.primaryColor
-//                        }
-//                        Label {
-//                            text: qsTr ("Errors:")
-//                            color: Theme.primaryColor
-//                        }
-//                        // A standard TextArea for displaying error output
-//                        TextArea {
-//                            width: parent.width
-//                            height: 125
-//                            readOnly: true
+                        color: Theme.primaryColor
+                    }
+                }
+            }
 
-//                            text: _manager.errorMessage
-//                            color: Theme.primaryColor
-//                        }
-//                    }
-//                }
-//            }
+        Component {
+            id: errorPage
+            Page {
+                PageHeader {
+                    id: pheader
+                    title: qsTr("Download Errors")
+                }
+                // A standard TextArea for the download status output
+                TextArea {
+                    width: parent.width
+                    height: parent.height - pheader.height
+                    anchors.top: pheader.bottom
+                    readOnly: true
+
+                    text: _manager.errorMessage
+
+                    color: Theme.primaryColor
+                }
+            }
+        }
+
+
+            // TODO: Maybe handy when there is a download list
+            //            Component {
+            //                id: details
+            //                Page {
+            //                    Column {
+            //                        width: parent.width
+            //                        spacing: 15
+            //                        PageHeader {
+            //                            title: qsTr("Download Details")
+            //                        }
+
+            //                        Label {
+            //                            anchors.topMargin: 65
+            //                            text: qsTr("Status:")
+            //                            color: Theme.primaryColor
+            //                        }
+            //                        // A standard TextArea for the download status output
+            //                        TextArea {
+            //                            width: parent.width
+            //                            height: 145
+            //                            readOnly: true
+
+            //                            text: _manager.statusMessage
+
+            //                            color: Theme.primaryColor
+            //                        }
+            //                        Label {
+            //                            text: qsTr ("Errors:")
+            //                            color: Theme.primaryColor
+            //                        }
+            //                        // A standard TextArea for displaying error output
+            //                        TextArea {
+            //                            width: parent.width
+            //                            height: 125
+            //                            readOnly: true
+
+            //                            text: _manager.errorMessage
+            //                            color: Theme.primaryColor
+            //                        }
+            //                    }
+            //                }
+            //            }
         }
     }
 }

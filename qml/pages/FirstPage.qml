@@ -67,6 +67,10 @@ Page {
     property alias videoPickerComponent: videoPickerComponent
     property alias openDialog: openFileDialog
     property string openDialogType: "adv"
+    property string url720p
+    property string url480p
+    property string url360p
+    property string url240p
 
     property Page dPage
 
@@ -89,16 +93,18 @@ Page {
         if (errorDetail.visible && errorTxt.visible) { errorDetail.visible = false; errorTxt.visible = false }
         streamTitle = ""  // Reset Stream Title here
         if (YT.checkYoutube(streamUrl)=== true) {
-            isYtUrl = true;
             YT.getYoutubeTitle(streamUrl);
             var ytID = YT.getYtID(streamUrl);
             YT.getYoutubeStream(ytID);
+        }
+        else if (YT.checkYoutube(originalUrl) === true) {
+            YT.getYoutubeTitle(originalUrl);
         }
         if (streamTitle == "") dPage.title = findBaseName(streamUrl)
     }
 
     onStreamTitleChanged: {
-        dPage.title = streamTitle
+        if (streamTitle != "") dPage.title = streamTitle
     }
 
     Rectangle {
@@ -204,7 +210,7 @@ Page {
             color: subtitlesColor
             visible: (enableSubtitles) && (currentVideoSub) ? true : false
             onTextChanged: {
-                console.debug("[firstPage] Subtitletext: " + text)
+                //console.debug("[firstPage] Subtitletext: " + text)
             }
         }
 
@@ -364,7 +370,7 @@ Page {
                             }
                         } else {
                             //mediaPlayer.play()
-                            console.debug("clicked something else")
+                            //console.debug("clicked something else")
                             toggleControls();
                         }
                     }
@@ -411,7 +417,7 @@ Page {
                     // Filter out all chars that might stop the download manager from downloading the file
                     // Illegal chars: `~!@#$%^&*()-=+\|/?.>,<;:'"[{]}
                     streamTitle = YT.getDownloadableTitleString(streamTitle)
-                    pageStack.push(Qt.resolvedUrl("ytQualityChooser.qml"), {"streamTitle": streamTitle, "url720p": YT.url720p, "url480p": YT.url480p, "url360p": YT.url360p, "url240p": YT.url240p});
+                    pageStack.push(Qt.resolvedUrl("ytQualityChooser.qml"), {"streamTitle": streamTitle, "url720p": url720p, "url480p": url480p, "url360p": url360p, "url240p": url240p});
                     drawer.open = !drawer.open
                 }
             }
@@ -445,6 +451,7 @@ Page {
             title: qsTr("Open Video")
             Component.onDestruction: {
                 //console.debug("[OpenURLPage.qml]: Selected Video: " + selectedContent);
+                mainWindow.firstPage.originalUrl = selectedContent;
                 mainWindow.firstPage.streamUrl = selectedContent;
                 //pageStack.pop();
             }
@@ -455,6 +462,7 @@ Page {
         id: openFileDialog
         OpenDialog {
             onOpenFile: {
+                mainWindow.firstPage.originalUrl = path
                 mainWindow.firstPage.streamUrl = path
             }
         }
@@ -478,7 +486,7 @@ Page {
                 function loadMetaDataPage() {
                     //console.debug("Loading metadata page")
                     var mDataTitle;
-                    console.debug(metaData.title)
+                    //console.debug(metaData.title)
                     if (streamTitle != "") mDataTitle = streamTitle
                     else mDataTitle = findBaseName(streamUrl)
                     //console.debug("[mDataTitle]: " + mDataTitle)

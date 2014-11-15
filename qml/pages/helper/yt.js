@@ -1,8 +1,3 @@
-var url720p;
-var url480p;
-var url360p;
-var url240p;
-
 function checkYoutube(url) {
     // Yeah I hate RegEx. Thx user2200660 for this nice youtube regex ;)
     //if (url.match('/?.*(?:youtu.be\\/|v\\/|u/\\w/|embed\\/|watch\\?.*&?v=)')) {
@@ -133,33 +128,33 @@ function getYoutubeStream(youtube_id) {
                     found = true;
                     resolutionFormat = "MP4 720p"
                     url += "&signature=" + sig;
-                    url720p = url;
+                    firstPage.url720p = url;
                     break;
-                } else { url720p = "none" }
+                } else { firstPage.url720p = "none" }
                 // If above fails try to get 480p video stream
                 if ((i + 1) % 6 === 0 && itag === "35") { // 6 parameters per video; itag 35 is "MP4 480p", see http://userscripts.org/scripts/review/25105
                     found = true;
                     resolutionFormat = "FLV 480p"
                     url += "&signature=" + sig;
-                    url480p = url;
+                    firstPage.url480p = url;
                     break;
-                } else { url480p = "none" }
+                } else { firstPage.url480p = "none" }
                 // If above fails try to get 360p video stream
                 if ((i + 1) % 6 === 0 && itag === "18") { // 6 parameters per video; itag 18 is "MP4 360p", see http://userscripts.org/scripts/review/25105
                     found = true;
                     resolutionFormat = "MP4 360p"
                     url += "&signature=" + sig;
-                    url360p = url;
+                    firstPage.url360p = url;
                     break;
-                } else { url360p = "none" }
+                } else { firstPage.url360p = "none" }
                 // If above fails try to get 240p video stream
                 if ((i + 1) % 6 === 0 && itag === "5") { // 6 parameters per video; itag 5 is "MP4 360p", see http://userscripts.org/scripts/review/25105
                     found = true;
                     resolutionFormat = "FLV 240p"
                     url += "&signature=" + sig;
-                    url240p = url;
+                    firstPage.url240p = url;
                     break;
-                } else { url240p = "none" }
+                } else { firstPage.url240p = "none" }
             }
 
             if (found) {

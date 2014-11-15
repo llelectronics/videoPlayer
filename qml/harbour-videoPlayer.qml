@@ -54,8 +54,8 @@ ApplicationWindow
             YT.getYoutubeTitle(url);
             url = YT.getYoutubeVid(url);
         }
-        firstPage.streamUrl = url
         firstPage.originalUrl = url
+        firstPage.streamUrl = url
         firstPage.streamTitle = ""
         if (autoPlay == true) { console.debug("autoPlay = true") ; firstPage.videoPoster.play();}
     }

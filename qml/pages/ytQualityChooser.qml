@@ -12,19 +12,19 @@ Page {
 
     Component.onCompleted: {
 
-        if (url720p != "none" && url720p != undefined) {
+        if (url720p != "none" && url720p != undefined && url720p != "") {
             console.debug("Added 720p with" + url720p)
             qualList.append({"name": "MP4 720p", "url":url720p})
         }
-        if (url480p != "none" && url480p != undefined) {
+        if (url480p != "none" && url480p != undefined && url480p != "") {
             console.debug("Added 480p with " + url480p)
             qualList.append({"name": "FLV 480p", "url":url480p})
         }
-        if (url360p != "none" && url360p != undefined) {
+        if (url360p != "none" && url360p != undefined && url360p != "") {
             console.debug("Added 360p with" + url360p)
             qualList.append({"name": "MP4 360p", "url":url360p})
         }
-        if (url240p != "none" && url240p != undefined) {
+        if (url240p != "none" && url240p != undefined && url240p != "") {
             console.debug("Added 240p with" + url240p)
             qualList.append({"name": "FLV 240p", "url":url240p})
         }

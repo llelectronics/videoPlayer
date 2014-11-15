@@ -353,7 +353,7 @@ Dialog {
                 anchors.horizontalCenter: parent.horizontalCenter
                 label: qsTr("Browse File Dialog")
                 visible: loadSubtitlesSwitch.checked
-                property string dType
+                property string dType: mainWindow.firstPage.openDialogType
                 currentIndex: {
                     // Current Option
                     if (mainWindow.firstPage.openDialogType === "adv") return 0;

@@ -143,6 +143,7 @@ import "helper/yt.js" as YT
                 onUrlChanged: {
                     //console.debug("New url:" +url)
                     if (YT.checkYoutube(url.toString()) === true) {
+                        dataContainer.isYtUrl = true;
                         var yturl = YT.getYoutubeVid(url.toString());
                         //YT.getYoutubeTitle(url.toString());
                         if (dataContainer != null) {
