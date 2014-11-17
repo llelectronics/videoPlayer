@@ -71,6 +71,7 @@ Page {
     property string url480p
     property string url360p
     property string url240p
+    property bool liveView: true
 
     property Page dPage
 
@@ -543,7 +544,7 @@ Page {
     ]
 
     Item {
-        visible: !mainWindow.applicationActive
+        visible: !mainWindow.applicationActive && liveView
         anchors.top: titleHeader.bottom
         anchors.topMargin: 15
         x : (parent.width / 2) - ((curPos.width/2) + (dur.width/2))
@@ -566,6 +567,7 @@ Page {
 
     CoverActionList {
         id: coverAction
+        enabled: liveView
 
 //        CoverAction {
 //            iconSource: "image://theme/icon-cover-next"

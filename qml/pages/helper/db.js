@@ -166,6 +166,7 @@ function getSettings() {
             else if (rs.rows.item(i).setting == "subtitlesColor") mainWindow.firstPage.subtitlesColor = rs.rows.item(i).value
             else if (rs.rows.item(i).setting == "youtubeDirect") mainWindow.firstPage.youtubeDirect = stringToBoolean(rs.rows.item(i).value)
             else if (rs.rows.item(i).setting == "openDialogType") mainWindow.firstPage.openDialogType = rs.rows.item(i).value
+            else if (rs.rows.item(i).setting == "liveView") mainWindow.firstPage.liveView = stringToBoolean(rs.rows.item(i).value)
         }
     })
 }

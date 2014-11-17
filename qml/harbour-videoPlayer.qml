@@ -72,8 +72,11 @@ ApplicationWindow
         }
     }
     //cover: Qt.resolvedUrl("cover/CoverPage.qml")
-    cover: undefined
+    cover: {
+        if (firstPage.liveView) return undefined
+        else return Qt.resolvedUrl("cover/CoverPage.qml")
 
+    }
 
     ListModel {
         id:modelBookmarks

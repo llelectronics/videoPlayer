@@ -29,6 +29,8 @@ Dialog {
         boldSubtitlesSwitch.checked = false ;
         colorIndicator.color = Theme.highlightColor
         directYoutubeSwitch.checked = false;
+        openDialogCombo.currentIndex = 0;
+        liveViewSwitch.checked = true;
     }
 
     function saveSettings() {
@@ -39,6 +41,7 @@ Dialog {
         DB.addSetting("youtubeDirect", directYoutubeSwitch.checked.toString());
         //console.log("[SettingsPage.qml] openDialogCombo.dType:" + openDialogCombo.dType.toString());
         DB.addSetting("openDialogType", openDialogCombo.dType.toString());
+        DB.addSetting("liveView", liveViewSwitch.checked.toString());
         DB.getSettings();
     }
 
@@ -371,6 +374,13 @@ Dialog {
                     else if (currentIndex == 1) dType = "simple"
                     else if (currentIndex == 2) dType = "gallery"
                 }
+            }
+
+            TextSwitch {
+                id: liveViewSwitch
+                anchors.horizontalCenter: parent.horizontalCenter
+                text: "Use live preview when minimized"
+                checked: mainWindow.firstPage.liveView
             }
 
 //            SectionHeader {
