@@ -21,7 +21,7 @@ END;')
 
                     tx.executeSql('CREATE TABLE IF NOT EXISTS bookmarks(title TEXT, url TEXT)');
                     tx.executeSql('CREATE TABLE IF NOT EXISTS settings(setting TEXT, value TEXT)');
-                    tx.executeSql('CREATE UNIQUE INDEX idx_settings ON settings(setting)');
+                    tx.executeSql('CREATE UNIQUE INDEX IF NOT EXISTS idx_settings ON settings(setting)');
                 });
 }
 

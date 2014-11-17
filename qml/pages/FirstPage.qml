@@ -543,7 +543,27 @@ Page {
         }
     ]
 
+    // Need some more time to figure that out completely
+//    Timer {
+//        id: showTimeAndTitle
+//        property int count: 0
+//        interval: 1000
+//        repeat: true
+//        triggeredOnStart: true
+//        onTriggered: {
+//            ++count
+//            if (count >= 5) {
+//                stop()
+//                coverTime.visible = false
+//                count = 0
+//            } else {
+//                coverTime.visible = true
+//            }
+//        }
+//    }
+
     Item {
+        id: coverTime
         visible: !mainWindow.applicationActive && liveView
         anchors.top: titleHeader.bottom
         anchors.topMargin: 15

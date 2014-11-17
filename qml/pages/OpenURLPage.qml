@@ -60,7 +60,7 @@ Dialog {
         id: drawer
 
         width: parent.width
-        height: parent.height - 65
+        height: parent.height - header.height
         anchors.bottom: parent.bottom
         //anchors.fill: parent
 
