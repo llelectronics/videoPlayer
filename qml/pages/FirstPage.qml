@@ -125,17 +125,19 @@ Page {
         id: urlHeader
         title: findBaseName(streamUrl)
         visible: {
-            if (titleHeader.visible == false && pulley.visible) return true
+            if ((titleHeader.visible == false && pulley.visible) || !mainWindow.applicationActive) return true
             else return false
         }
+        _titleItem.font.pixelSize: mainWindow.applicationActive ? Theme.fontSizeLarge : Theme.fontSizeHuge
     }
     PageHeader {
         id: titleHeader
         title: streamTitle
         visible: {
-            if (streamTitle != "" && pulley.visible) return true
+            if ((streamTitle != "" && pulley.visible) || !mainWindow.applicationActive) return true
             else return false
         }
+        _titleItem.font.pixelSize: mainWindow.applicationActive ? Theme.fontSizeLarge : Theme.fontSizeHuge
     }
 
     function videoPauseTrigger() {
@@ -307,7 +309,7 @@ Page {
         Item {
             id: mediaItem
             property bool active : true
-            visible: active
+            visible: active && mainWindow.applicationActive
             anchors.fill: parent
 
             VideoPoster {
@@ -539,6 +541,47 @@ Page {
             }
         }
     ]
+
+    Item {
+        visible: !mainWindow.applicationActive
+        anchors.top: titleHeader.bottom
+        anchors.topMargin: 15
+        x : (parent.width / 2) - ((curPos.width/2) + (dur.width/2))
+
+
+        Label {
+            id: dur
+            text: firstPage.videoDuration
+            anchors.left: curPos.right
+            color: Theme.highlightColor
+            font.pixelSize: Theme.fontSizeHuge
+        }
+        Label {
+            id: curPos
+            text: firstPage.videoPosition + " / "
+            color: Theme.highlightColor
+            font.pixelSize: Theme.fontSizeHuge
+        }
+    }
+
+    CoverActionList {
+        id: coverAction
+
+//        CoverAction {
+//            iconSource: "image://theme/icon-cover-next"
+//        }
+
+        CoverAction {
+            iconSource: {
+                if (firstPage.videoPoster.player.playbackState === MediaPlayer.PlayingState) return "image://theme/icon-cover-pause"
+                else return "image://theme/icon-cover-play"
+            }
+            onTriggered: {
+                //console.debug("Pause triggered");
+                firstPage.videoPauseTrigger();
+            }
+        }
+    }
 }
 
 

@@ -71,7 +71,8 @@ ApplicationWindow
             }
         }
     }
-    cover: Qt.resolvedUrl("cover/CoverPage.qml")
+    //cover: Qt.resolvedUrl("cover/CoverPage.qml")
+    cover: undefined
 
 
     ListModel {
