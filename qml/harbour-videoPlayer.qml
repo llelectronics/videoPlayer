@@ -78,6 +78,18 @@ ApplicationWindow
 
     }
 
+    onApplicationActiveChanged: {
+        if (!mainWindow.applicationActive) {
+            firstPage.videoPoster.hideControls();
+            firstPage.showTimeAndTitle.count = 0
+            firstPage.showTimeAndTitle.start();
+        }
+        else if (mainWindow.applicationActive === true) {
+            firstPage.showTimeAndTitle.count = 5
+            if (firstPage.videoPoster.opacity == 0) firstPage.videoPoster.toggleControls(); // Something is interfering with this
+        }
+    }
+
     ListModel {
         id:modelBookmarks
 

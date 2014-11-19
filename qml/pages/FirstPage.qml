@@ -66,6 +66,8 @@ Page {
     signal removeFile(string url)
     property alias videoPickerComponent: videoPickerComponent
     property alias openDialog: openFileDialog
+    property alias showTimeAndTitle: showTimeAndTitle
+    property alias pulley: pulley
     property string openDialogType: "adv"
     property string url720p
     property string url480p
@@ -126,19 +128,37 @@ Page {
         id: urlHeader
         title: findBaseName(streamUrl)
         visible: {
-            if ((titleHeader.visible == false && pulley.visible) || !mainWindow.applicationActive) return true
+            if (titleHeader.visible == false && pulley.visible && mainWindow.applicationActive) return true
             else return false
         }
         _titleItem.font.pixelSize: mainWindow.applicationActive ? Theme.fontSizeLarge : Theme.fontSizeHuge
+        states: [
+            State {
+                name: "cover"
+                PropertyChanges {
+                    target: urlHeader
+                    visible: true
+                }
+            }
+        ]
     }
     PageHeader {
         id: titleHeader
         title: streamTitle
         visible: {
-            if ((streamTitle != "" && pulley.visible) || !mainWindow.applicationActive) return true
+            if (streamTitle != "" && pulley.visible && mainWindow.applicationActive) return true
             else return false
         }
         _titleItem.font.pixelSize: mainWindow.applicationActive ? Theme.fontSizeLarge : Theme.fontSizeHuge
+        states: [
+            State {
+                name: "cover"
+                PropertyChanges {
+                    target: titleHeader
+                    visible: true
+                }
+            }
+        ]
     }
 
     function videoPauseTrigger() {
@@ -354,6 +374,12 @@ Page {
                     pulley.visible = !pulley.visible
                 }
 
+                function hideControls() {
+                    controls.opacity = 0.0
+                    pulley.visible = false
+                    page.showNavigationIndicator = false
+                }
+
 
                 onClicked: {
                     if (drawer.open) drawer.open = false
@@ -544,44 +570,81 @@ Page {
     ]
 
     // Need some more time to figure that out completely
-//    Timer {
-//        id: showTimeAndTitle
-//        property int count: 0
-//        interval: 1000
-//        repeat: true
-//        triggeredOnStart: true
-//        onTriggered: {
-//            ++count
-//            if (count >= 5) {
-//                stop()
-//                coverTime.visible = false
-//                count = 0
-//            } else {
-//                coverTime.visible = true
-//            }
-//        }
-//    }
+    Timer {
+        id: showTimeAndTitle
+        property int count: 0
+        interval: 1000
+        repeat: true
+        triggeredOnStart: true
+        onTriggered: {
+            ++count
+            if (count >= 5) {
+                stop()
+                coverTime.fadeOut.start()
+                urlHeader.state = ""
+                titleHeader.state = ""
+                count = 0
+            } else {
+                coverTime.visible = true
+                if (firstPage.title.toString().length !== 0 && !mainWindow.applicationActive) titleHeader.state = "cover";
+                else if (firstPage.streamUrl.toString().length !== 0 && !mainWindow.applicationActive) urlHeader.state = "cover";
+            }
+        }
+    }
+
+    Rectangle {
+        width: parent.width
+        height: Theme.fontSizeHuge
+        y: coverTime.y + 10
+        color: "black"
+        opacity: 0.4
+        visible: coverTime.visible
+    }
 
     Item {
         id: coverTime
-        visible: !mainWindow.applicationActive && liveView
+        property alias fadeOut: fadeout
+        //visible: !mainWindow.applicationActive && liveView
+        visible: false
+        onVisibleChanged: {
+            if (visible) fadein.start()
+        }
         anchors.top: titleHeader.bottom
         anchors.topMargin: 15
         x : (parent.width / 2) - ((curPos.width/2) + (dur.width/2))
-
-
+        NumberAnimation {
+            id: fadein
+            target: coverTime
+            property: "opacity"
+            easing.type: Easing.InOutQuad
+            duration: 500
+            from: 0
+            to: 1
+        }
+        NumberAnimation {
+            id: fadeout
+            target: coverTime
+            property: "opacity"
+            duration: 500
+            easing.type: Easing.InOutQuad
+            from: 1
+            to: 0
+            onStopped: coverTime.visible = false;
+        }
         Label {
             id: dur
             text: firstPage.videoDuration
             anchors.left: curPos.right
             color: Theme.highlightColor
             font.pixelSize: Theme.fontSizeHuge
+            font.bold: true
         }
         Label {
             id: curPos
             text: firstPage.videoPosition + " / "
             color: Theme.highlightColor
             font.pixelSize: Theme.fontSizeHuge
+            font.bold: true
         }
     }
 
@@ -601,6 +664,9 @@ Page {
             onTriggered: {
                 //console.debug("Pause triggered");
                 firstPage.videoPauseTrigger();
+                if (!showTimeAndTitle.running) showTimeAndTitle.start();
+                else showTimeAndTitle.count = 0;
+                videoPoster.hideControls();
             }
         }
     }
