@@ -48,10 +48,12 @@
 #include <QtNetwork/QNetworkRequest>
 #include <QDir>
 #include <QDebug>
+#include <QTextCodec>
 
 DownloadManager::DownloadManager(QObject *parent)
     : QObject(parent), m_currentDownload(0), m_downloadedCount(0), m_totalCount(0), m_progressTotal(0), m_progressValue(0), curlProc(new QProcess(this))
 {
+    QTextCodec::setCodecForLocale(QTextCodec::codecForName("UTF-8"));
 }
 
 QString DownloadManager::errorMessage() const
@@ -86,12 +88,12 @@ QString DownloadManager::progressMessage() const
 
 void DownloadManager::downloadUrl(const QString &url)
 {
-    append(QUrl(url));
+    append(QUrl::fromEncoded(url.toLocal8Bit()));
 }
 
 void DownloadManager::setDownloadName(const QString &name)
 {
-    basename = QString(name);
+    basename = QString(name.toUtf8());
 }
 
 void DownloadManager::append(const QUrl &url)
@@ -125,7 +127,7 @@ QString DownloadManager::saveFileName(const QUrl &url)
         basename = "download";
 
     // Replace the file name with 'download' if the URL provides no file name.
-    basename = QDir::homePath() + "/Videos/" + basename; // locate in tmp directory
+    basename = QDir::homePath() + "/Videos/" + basename; // locate in Video directory
 
     /**
      * Check if the file name exists already, if so, append an increasing number and test again.
@@ -157,7 +159,7 @@ void DownloadManager::downloadWithCurl(const QString &url)
     qDebug() << "curl \"" + url + "\" -o \"" + filename + ".mp4\"";
     // Add a status message
     addStatusMessage(QString("Downloading %1 with curl...").arg(url));
-    curlProc->start("curl \"" + url + "\" -o \"" + filename + ".mp4\"");
+    curlProc->start("curl \"" + url.toLocal8Bit() + "\" -o \"" + filename + ".mp4\"");
 
     connect(curlProc, SIGNAL(finished(int)), this, SLOT(downloadCurlFinished()));
 }

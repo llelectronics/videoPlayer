@@ -101,6 +101,10 @@ SilicaListView {
         entriesList.showAbove(pages);
     }
 
+//    function showHidden() {   // Only works with Qt 5.2 and Qt.labs.folderlistmodel 2.1
+//        entries.showHidden()
+//    }
+
     onDataAdded: requestData(reasonableCount)
 
     function requestData(count, is_refresh) {
