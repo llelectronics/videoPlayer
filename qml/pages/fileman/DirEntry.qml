@@ -1,7 +1,5 @@
-import Mer.Cutes 1.1
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-import "Bridge.js" as Util
 
 ListItem {
     id: entryItem
@@ -26,13 +24,18 @@ ListItem {
         entries.remove(pos)
     }
 
+    function openFile() {
+        var url = "file://" + filePath;
+        //console.log("Open clicked");
+        mediaFileOpen(url);
+        pageStack.push(dataContainer)
+
+        //Qt.openUrlExternally(url);
+    }
+
     Component {
         id: myMenu
         DirEntryMenu {
-            onMediaFileOpen: {
-                //console.debug("DirEntry MediaFileOpen:" + url)
-                entryItem.mediaFileOpen(url)
-            }
             onFileRemove: {
                 entryItem.fileRemove(url)
             }
@@ -41,7 +44,7 @@ ListItem {
 
     function showContextMenu() {
         //var filePath = getFullName(fileName);
-        if (!Util.isSpecialPath(filePath))
+//        if (!Util.isSpecialPath(filePath))
             showMenu({fileName: fileName
                       , fileType: fileType
                       , filePath: filePath});
@@ -49,19 +52,12 @@ ListItem {
 
     onClicked : {
         if (fileIsDir) {
-            var os = cutes.require('os');
-            var d = os.qt.dir(myList.root);
-            if (fileName === '..') {
-                pageStack.pop();
-                if (d.cdUp()) {
-                    myList.root = d.path();
-                }
-            } else if (fileName !== '.') {
+            if (fileName !== '.' && fileName !== '..') {  // Very unlikely as we don't show dot or dotdot
                 var url = Qt.resolvedUrl('DirView.qml');
-                myList.showAbove(url, {root: d.filePath(fileName), dataContainer: dataContainer });
+                myList.showAbove(url, {root: filePath, dataContainer: dataContainer });
             }
         } else {
-            showContextMenu();
+            openFile();
         }
     }
     onPressAndHold: showContextMenu()

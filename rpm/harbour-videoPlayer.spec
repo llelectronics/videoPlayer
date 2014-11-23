@@ -14,13 +14,13 @@ Name:       harbour-videoPlayer
 %{?qtc_builddir:%define _builddir %qtc_builddir}
 Summary:    Simple video player using gstreamer
 Version:    0.7
-Release:    4
+Release:    6
 Group:      Qt/Qt
 License:    LICENSE
 URL:        http://example.org/
 Source0:    %{name}-%{version}.tar.bz2
 Source100:  harbour-videoPlayer.yaml
-Requires:   sailfishsilica-qt5 >= 0.10.9, qt5-qtdeclarative-import-folderlistmodel, cutes-qt5, cutes-js
+Requires:   sailfishsilica-qt5 >= 0.10.9
 BuildRequires:  pkgconfig(Qt5Quick)
 BuildRequires:  pkgconfig(Qt5Qml)
 BuildRequires:  pkgconfig(Qt5Core)

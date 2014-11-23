@@ -1,14 +1,12 @@
-import Mer.Cutes 1.1
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-import "Bridge.js" as Util
-import Qt.labs.folderlistmodel 2.0
+import harbour.videoplayer.Videoplayer 1.0
 
 SilicaListView {
 
     id: entriesList
 
-    property string home: Util.getHome()
+    property string home: _fm.getHome()
     property string root: ""
 
     // when all content is loaded
@@ -47,6 +45,12 @@ SilicaListView {
 
     model: entries
 
+    function forEach(arr, fn) {
+        var i;
+        for (i = 0; i < arr.length; ++i)
+            fn(arr[i]);
+    }
+
     function showAbove(pages, params, immediate) {
         if (!isLoaded)
             state = "interrupted";
@@ -54,19 +58,14 @@ SilicaListView {
     }
 
     function goHome() {
-        var os = cutes.require('os');
-        if (os.path.isSame(root, home))
+        if (root == home)
             return;
 
-        var parts = os.path.split(home);
         var url = Qt.resolvedUrl('DirView.qml');
         var pages = [];
-        var path = "";
+        var path = home;
 
-        Util.forEach(parts, function(p) {
-            path = os.path(path, p);
-            pages.push({page: url, properties: {root: path, dataContainer: dataContainer}});
-        });
+        pages.push({page: url, properties: {root: path, dataContainer: dataContainer}});
 
         entriesList.showAbove(pages);
     }
@@ -105,23 +104,23 @@ SilicaListView {
 //        entries.showHidden()
 //    }
 
-    onDataAdded: requestData(reasonableCount)
+//    onDataAdded: requestData(reasonableCount)
 
-    function requestData(count, is_refresh) {
-        var requestMoreIfAny = function(info) {
-            if (!info) {
-                isLoaded = true;
-            } else if (state === 'loading') {
-                dataAdded();
-            }
-            isUsable = true;
-        };
+//    function requestData(count, is_refresh) {
+//        var requestMoreIfAny = function(info) {
+//            if (!info) {
+//                isLoaded = true;
+//            } else if (state === 'loading') {
+//                dataAdded();
+//            }
+//            isUsable = true;
+//        };
 
-        Util.listDir({dir: entriesList.root, refresh: is_refresh
-                      , begin: entries.count, len: count}
-                    , {on_done: requestMoreIfAny
-                       , on_progress: entries.append});
-    }
+//        Util.listDir({dir: entriesList.root, refresh: is_refresh
+//                      , begin: entries.count, len: count}
+//                    , {on_done: requestMoreIfAny
+//                       , on_progress: entries.append});
+//    }
 
     states: [
         State {
@@ -177,13 +176,9 @@ SilicaListView {
         MenuItem {
             text: "Show SDCard"
             onClicked: entriesList.goSd();
-            visible: Util.existsPath("/media/sdcard")
+            visible: _fm.existsPath("/media/sdcard")
             //Component.onCompleted: console.debug("[DirList] SD Card status: " + Util.existsPath("/media/sdcard"))
         }
-//        MenuItem {
-//            text: "Marked Paths"
-//            onClicked: entriesList.showStoredPaths()
-//        }
     }
     PushUpMenu {
         MenuItem {
@@ -197,7 +192,7 @@ SilicaListView {
     }
 
     function getFullName(fileName) {
-        return Util.path(entriesList.root, fileName);
+        return entriesList.root + '/' + fileName;
     }
 
     delegate: DirEntry {

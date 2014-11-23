@@ -36,6 +36,7 @@
 #include <sailfishapp.h>
 #include "DownloadManager.hpp"
 #include "fmhelper.hpp"
+#include "folderlistmodel/qquickfolderlistmodel.h"
 
 int main(int argc, char *argv[])
 {
@@ -49,6 +50,9 @@ int main(int argc, char *argv[])
     // To display the view, call "show()" (will show fullscreen on device).
 
     QGuiApplication *app = SailfishApp::application(argc, argv);
+
+    qmlRegisterType<QQuickFolderListModel>("harbour.videoplayer.Videoplayer", 1, 0, "FolderListModel");
+
     QQuickView *view = SailfishApp::createView(); // I get a white background with this.
     view->setSource(SailfishApp::pathTo("qml/harbour-videoPlayer.qml"));  // So I do this ;)
 
@@ -80,6 +84,8 @@ int main(int argc, char *argv[])
     view->engine()->rootContext()->setContextProperty("_manager", &manager);
 
     FM *fileAction = new FM();
+    view->engine()->rootContext()->setContextProperty("_fm", fileAction);
+
     QObject::connect((QObject*)view->rootObject(),
                      SIGNAL(fileRemove(QString)),fileAction,
                      SLOT(remove(QString)));

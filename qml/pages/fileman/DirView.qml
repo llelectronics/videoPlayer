@@ -1,7 +1,5 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-import Mer.Cutes 1.1
-import "Bridge.js" as Util
 
 Page {
     id : dirViewPage
@@ -21,7 +19,7 @@ Page {
         }
     }
 
-    property string home: Util.getHome()
+    property string home: _fm.getHome()
     property string root: "/home/nemo/Videos" // A sane default here for Videos
 
     function reloadList() {
@@ -100,7 +98,7 @@ Page {
 //    }
 
     Component.onCompleted: {
-        dirList.root = (root !== "" ? root : Util.getRoot());
+        dirList.root = (root !== "" ? root : _fm.getRoot());
         console.debug(dataContainer)
     }
 
