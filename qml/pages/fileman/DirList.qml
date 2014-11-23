@@ -29,6 +29,8 @@ SilicaListView {
     signal mediaFileOpen(string url)
     signal fileRemove(string url)
 
+    property bool isHidden: true
+
     Component {
         id: mainHeader
         PageHeader {
@@ -100,9 +102,10 @@ SilicaListView {
         entriesList.showAbove(pages);
     }
 
-//    function showHidden() {   // Only works with Qt 5.2 and Qt.labs.folderlistmodel 2.1
-//        entries.showHidden()
-//    }
+    function showHidden() {   // Only works with Qt 5.2 and Qt.labs.folderlistmodel 2.1
+        entries.showHidden = !entries.showHidden
+        isHidden = !isHidden
+    }
 
 //    onDataAdded: requestData(reasonableCount)
 
@@ -161,6 +164,10 @@ SilicaListView {
     }
 
     PullDownMenu {
+        MenuItem {
+            text: isHidden ? "Show Hidden Files" : "Hide Hidden Files"
+            onClicked: entriesList.showHidden();
+        }
         MenuItem {
             text: "Show Filesystem Root"
             onClicked: entriesList.goRoot();
