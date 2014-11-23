@@ -28,7 +28,8 @@ BuildRequires:  pkgconfig(sailfishapp) >= 0.0.10
 BuildRequires:  desktop-file-utils
 
 %description
-Short description of my SailfishOS Application
+A simple media player based on gstreamer able to playback audio and video.
+Build in Youtube support for viewing and downloading videos.
 
 
 %prep
