@@ -99,7 +99,7 @@ Page {
 
     Component.onCompleted: {
         dirList.root = (root !== "" ? root : _fm.getRoot());
-        console.debug(dataContainer)
+        //console.debug(dataContainer)
     }
 
 }

@@ -12,7 +12,7 @@ ContextMenu {
     signal fileRemove(string url)
 
     function removeFile(url) {
-            console.debug("[DirEntryMenu] Request removal of: " + url);
+            //console.debug("[DirEntryMenu] Request removal of: " + url);
             fileRemove(url)
     }
 

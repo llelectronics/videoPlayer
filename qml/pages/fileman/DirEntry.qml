@@ -19,7 +19,7 @@ ListItem {
     }
 
     function removeFile(url,pos) {
-        console.debug("[DirEntry] Request removal of: " + url);
+        //console.debug("[DirEntry] Request removal of: " + url);
         fileRemove(url)
         entries.remove(pos)
     }

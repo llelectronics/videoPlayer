@@ -34,18 +34,18 @@ function addHistory(url) {
         // Remove and readd if url already in history
         var rs0 = tx.executeSql('delete from history where url=(?);',[url]);
         if (rs0.rowsAffected > 0) {
-            console.debug("Url already found and removed to readd it");
+            //console.debug("Url already found and removed to readd it");
         } else {
-            console.debug("Url not found so add it newly");
+            //console.debug("Url not found so add it newly");
         }
 
         var rs = tx.executeSql('INSERT OR REPLACE INTO history VALUES (?,?);', [date.getTime(),url]);
         if (rs.rowsAffected > 0) {
             res = "OK";
-            console.log ("Saved to database");
+            //console.log ("Saved to database");
         } else {
             res = "Error";
-            console.log ("Error saving to database");
+            //console.log ("Error saving to database");
         }
     }
     );
@@ -59,7 +59,7 @@ function showHistoryLast() {
     db.transaction(function(tx) {
         res = tx.executeSql('SELECT history.uid FROM history ORDER BY history.uid limit (select count(*) -10 from history);');
         for (var i = 0; i < res.rows.length; i++) {
-            console.debug("showHistoryLast: " + res.rows.item(i).uid);
+            //console.debug("showHistoryLast: " + res.rows.item(i).uid);
         }
     })
 }
@@ -84,7 +84,7 @@ function addBookmark(title,url) {
     db.transaction(function(tx) {
         // Remove and readd if url already in history
         removeBookmark(url);
-        console.debug("Adding to bookmarks db:" + title + " " + url);
+        //console.debug("Adding to bookmarks db:" + title + " " + url);
 
         var rs = tx.executeSql('INSERT OR REPLACE INTO bookmarks VALUES (?,?);', [title,url]);
         if (rs.rowsAffected > 0) {
