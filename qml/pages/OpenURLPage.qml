@@ -48,7 +48,7 @@ Dialog {
     Keys.onReturnPressed: loadUrl();
 
     function addHistory(url) {
-        console.debug("Adding " + url);
+        //console.debug("Adding " + url);
         historyModel.append({"hurl": url});
     }
 

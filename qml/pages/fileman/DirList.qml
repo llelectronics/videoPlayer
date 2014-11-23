@@ -15,17 +15,6 @@ SilicaListView {
     // when visible part of the list is filled
     property bool isUsable: false
 
-    // how many values needed to prefill the list covering visible
-    // area. In a correct way it should be calculated
-    property int usableCount: 15
-
-    // it should be amount of items can be received w/o affecting
-    // interactivity (operation execution time < ~0.1s)
-    property int reasonableCount: 50
-
-    // used to avoid sending request for more data from callback
-    signal dataAdded
-
     signal mediaFileOpen(string url)
     signal fileRemove(string url)
 
@@ -107,24 +96,6 @@ SilicaListView {
         isHidden = !isHidden
     }
 
-//    onDataAdded: requestData(reasonableCount)
-
-//    function requestData(count, is_refresh) {
-//        var requestMoreIfAny = function(info) {
-//            if (!info) {
-//                isLoaded = true;
-//            } else if (state === 'loading') {
-//                dataAdded();
-//            }
-//            isUsable = true;
-//        };
-
-//        Util.listDir({dir: entriesList.root, refresh: is_refresh
-//                      , begin: entries.count, len: count}
-//                    , {on_done: requestMoreIfAny
-//                       , on_progress: entries.append});
-//    }
-
     states: [
         State {
             name: "load"
@@ -143,25 +114,20 @@ SilicaListView {
             name: "loaded"
             when: isLoaded
         }
-        , State {
-            name: "loading"
-            when: isUsable && dirViewPage.status === PageStatus.Active
-            StateChangeScript {
-                script: {
-                    dataAdded();
-                }
-            }
-        }
-        , State {
-            name: "usable"
-            when: isUsable
-        }
+//        , State {
+//            name: "loading"
+//            when: isUsable && dirViewPage.status === PageStatus.Active
+//            StateChangeScript {
+//                script: {
+//                    dataAdded();
+//                }
+//            }
+//        }
+//        , State {
+//            name: "usable"
+//            when: isUsable
+//        }
     ]
-
-    function showStoredPaths() {
-        entriesList.showAbove(Qt.resolvedUrl("StoredPathsPage.qml")
-                              , {destination: entriesList.root});
-    }
 
     PullDownMenu {
         MenuItem {
