@@ -445,7 +445,7 @@ Page {
                 onClicked: {
                     // Filter out all chars that might stop the download manager from downloading the file
                     // Illegal chars: `~!@#$%^&*()-=+\|/?.>,<;:'"[{]}
-                    //streamTitle = YT.getDownloadableTitleString(streamTitle)
+                    streamTitle = YT.getDownloadableTitleString(streamTitle)
                     pageStack.push(Qt.resolvedUrl("ytQualityChooser.qml"), {"streamTitle": streamTitle, "url720p": url720p, "url480p": url480p, "url360p": url360p, "url240p": url240p});
                     drawer.open = !drawer.open
                 }
