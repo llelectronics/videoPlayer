@@ -86,10 +86,6 @@ int main(int argc, char *argv[])
     FM *fileAction = new FM();
     view->engine()->rootContext()->setContextProperty("_fm", fileAction);
 
-    QObject::connect((QObject*)view->rootObject(),
-                     SIGNAL(fileRemove(QString)),fileAction,
-                     SLOT(remove(QString)));
-
     view->show();
 
     return app->exec();

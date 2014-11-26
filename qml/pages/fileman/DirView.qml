@@ -52,7 +52,7 @@ Page {
         }
         onFileRemove: {
             console.debug("[DirView]Requesting removal of file " + url);
-            dataContainer.removeFile(url);
+            _fm.removeFile(url);
         }
     }
 
