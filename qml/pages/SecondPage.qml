@@ -74,6 +74,9 @@ import "helper/yt.js" as YT
             property QtObject dataContainer
             property string streamUrl
 
+            property string websiteUrl: "http://m.youtube.com/"
+            property string searchUrl: "http://m.youtube.com/results?q="
+
 
 
             SilicaWebView {
@@ -125,7 +128,7 @@ import "helper/yt.js" as YT
                         // is called when user presses the Return key
                         function searchEntered() {
                             searchField.acceptedInput = text
-                            ytView.url = "http://m.youtube.com/results?q=" + acceptedInput
+                            ytView.url = searchUrl + acceptedInput
                             searchField.focus = false
                         }
                     }
@@ -157,7 +160,7 @@ import "helper/yt.js" as YT
 
                 VerticalScrollDecorator {}
 
-                Component.onCompleted: url = "http://m.youtube.com/"
+                Component.onCompleted: url = websiteUrl
             }
        }
 

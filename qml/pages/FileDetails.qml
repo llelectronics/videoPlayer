@@ -20,6 +20,11 @@ Page {
 
     allowedOrientations: Orientation.All
 
+    function returnArtist4WebSearch() {
+        if (fileArtist.text != "") return fileArtist.text
+        else return fileTitle.text
+    }
+
     SilicaFlickable {
         anchors.fill: parent
         contentHeight: items.height + (items.height / 8)
@@ -27,9 +32,18 @@ Page {
 
         PullDownMenu {
             MenuItem {
-                text: "Download Youtube Video"
+                text: qsTr("Search Artist on Wikipedia")
+                onClicked: pageStack.push(Qt.resolvedUrl("SecondPage.qml"), {dataContainer: mainWindow.firstPage, websiteUrl: "http://en.m.wikipedia.org/w/index.php?search=" + fileDetails.returnArtist4WebSearch(), searchUrl: "http://en.m.wikipedia.org/w/index.php?search="});
+            }
+            MenuItem {
+                text: qsTr("Search Artist on Google Image")
+                onClicked: pageStack.push(Qt.resolvedUrl("SecondPage.qml"), {dataContainer: mainWindow.firstPage, websiteUrl: "https://www.google.com/search?tbm=isch&q=" + fileDetails.returnArtist4WebSearch(), searchUrl: "https://www.google.com/search?tbm=isch&q="});
+            }
+            MenuItem {
+                text: qsTr("Download Youtube Video")
                 visible: {
                     if ((/^http:\/\/ytapi.com/).test(mainWindow.firstPage.streamUrl)) return true
+                    else if (mainWindow.firstPage.isYtUrl) return true
                     else return false
                 }
                 //onClicked: pageStack.push(Qt.resolvedUrl("DownloadManager.qml"), {"downloadUrl": streamUrl, "downloadName": streamTitle});
@@ -43,7 +57,7 @@ Page {
                 }
             }
             MenuItem {
-                text: "Add to bookmarks"
+                text: qsTr("Add to bookmarks")
                 visible: {
                     if (mainWindow.firstPage.streamTitle != "" || mainWindow.firstPage.streamUrl != "") return true
                     else return false
