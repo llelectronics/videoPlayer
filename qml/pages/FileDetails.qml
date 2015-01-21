@@ -32,12 +32,25 @@ Page {
 
         PullDownMenu {
             MenuItem {
+                text: qsTr("Search Artist on Youtube")
+                onClicked: pageStack.push(Qt.resolvedUrl("SecondPage.qml"), {dataContainer: mainWindow.firstPage, websiteUrl: "http://m.youtube.com/results?q=" + fileDetails.returnArtist4WebSearch(), searchUrl: "http://m.youtube.com/results?q="});
+            }
+            MenuItem {
                 text: qsTr("Search Artist on Wikipedia")
                 onClicked: pageStack.push(Qt.resolvedUrl("SecondPage.qml"), {dataContainer: mainWindow.firstPage, websiteUrl: "http://en.m.wikipedia.org/w/index.php?search=" + fileDetails.returnArtist4WebSearch(), searchUrl: "http://en.m.wikipedia.org/w/index.php?search="});
             }
             MenuItem {
                 text: qsTr("Search Artist on Google Image")
                 onClicked: pageStack.push(Qt.resolvedUrl("SecondPage.qml"), {dataContainer: mainWindow.firstPage, websiteUrl: "https://www.google.com/search?tbm=isch&q=" + fileDetails.returnArtist4WebSearch(), searchUrl: "https://www.google.com/search?tbm=isch&q="});
+            }
+            MenuItem {
+                text: qsTr("Show Youtube Comments")
+                visible: {
+                    if ((/^http:\/\/ytapi.com/).test(mainWindow.firstPage.streamUrl)) return true
+                    else if (mainWindow.firstPage.isYtUrl) return true
+                    else return false
+                }
+                onClicked: pageStack.push(Qt.resolvedUrl("SecondPage.qml"), {dataContainer: mainWindow.firstPage, websiteUrl: mainWindow.firstPage.originalUrl, searchUrl: "http://m.youtube.com/results?q=", ytDetect: false, uA: "Mozilla/5.0 (Maemo; Linux; Jolla; Sailfish; Mobile) AppleWebKit/534.13 (KHTML, like Gecko) NokiaBrowser/8.5.0 Mobile Safari/534.13"});
             }
             MenuItem {
                 text: qsTr("Download Youtube Video")

@@ -73,10 +73,10 @@ import "helper/yt.js" as YT
             backNavigation: false
             property QtObject dataContainer
             property string streamUrl
-
+            property bool ytDetect: true
             property string websiteUrl: "http://m.youtube.com/"
             property string searchUrl: "http://m.youtube.com/results?q="
-
+            property string uA: "Mozilla/5.0 (Linux; U; Android 2.2; en-us; Nexus One Build/FRF91) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1"
 
 
             SilicaWebView {
@@ -139,24 +139,43 @@ import "helper/yt.js" as YT
                 //url: "http://m.youtube.com/" // results?q=" + searchTerm
                 // iPhone user agent popups for app installation
                 //experimental.userAgent: "Mozilla/5.0 (iPhone; CPU iPhone OS 5_0 like Mac OS X) AppleWebKit/534.46 (KHTML, like Gecko) Version/5.1 Mobile/9A334 Safari/7534.48.3"
-                experimental.userAgent: "Mozilla/5.0 (Linux; U; Android 2.2; en-us; Nexus One Build/FRF91) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1"
+                experimental.userAgent: uA
                 experimental.preferences.minimumFontSize: 14
 
-
-                onUrlChanged: {
-                    //console.debug("New url:" +url)
-                    if (YT.checkYoutube(url.toString()) === true) {
+                onNavigationRequested: {
+                    //console.debug("[SecondPage.qml] Request navigation to " + request.url)
+                    if (YT.checkYoutube(request.url.toString()) === true && ytDetect === true) {
+                        //console.debug("[SecondPage.qml] Youtube Link detected")
+                        request.action = WebView.IgnoreRequest;
                         dataContainer.isYtUrl = true;
-                        var yturl = YT.getYoutubeVid(url.toString());
+                        var yturl = YT.getYoutubeVid(request.url.toString());
                         //YT.getYoutubeTitle(url.toString());
                         if (dataContainer != null) {
                             if (!dataContainer.youtubeDirect) dataContainer.streamUrl = yturl;
-                            else dataContainer.originalUrl = url
-                            ytView.goBack();
+                            else dataContainer.originalUrl = request.url
                             pageStack.push(dataContainer);
                         }
                     }
+                    else {
+                        request.action = WebView.AcceptRequest;
+                    }
                 }
+
+
+//                onUrlChanged: {
+//                    //console.debug("New url:" +url)
+//                    if (YT.checkYoutube(url.toString()) === true) {
+//                        dataContainer.isYtUrl = true;
+//                        var yturl = YT.getYoutubeVid(url.toString());
+//                        //YT.getYoutubeTitle(url.toString());
+//                        if (dataContainer != null) {
+//                            if (!dataContainer.youtubeDirect) dataContainer.streamUrl = yturl;
+//                            else dataContainer.originalUrl = url
+//                            ytView.goBack();
+//                            pageStack.push(dataContainer);
+//                        }
+//                    }
+//                }
 
                 VerticalScrollDecorator {}
 

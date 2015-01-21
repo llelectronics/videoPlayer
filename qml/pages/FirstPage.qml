@@ -380,6 +380,12 @@ Page {
                     page.showNavigationIndicator = false
                 }
 
+                function showControls() {
+                    controls.opacity = 1.0;
+                    pulley.visible = false
+                    page.showNavigationIndicator = true
+                }
+
 
                 onClicked: {
                     if (drawer.open) drawer.open = false
@@ -393,6 +399,7 @@ Page {
                                 mediaPlayer.pause();
                                 if (controls.opacity === 0.0) toggleControls();
                                 progressCircle.visible = false;
+                                if (! mediaPlayer.seekable) mediaPlayer.stop();
                             }
                             else {
                                 toggleControls();
@@ -548,6 +555,7 @@ Page {
                     //errorDetail.visible = false
                     //console.debug("PlaybackStatus: " + playbackState)
                     if (mediaPlayer.status === MediaPlayer.Loading || mediaPlayer.status === MediaPlayer.Buffering || mediaPlayer.status === MediaPlayer.Stalled) progressCircle.visible = true;
+                    else if (mediaPlayer.status === MediaPlayer.EndOfMedia) videoPoster.showControls();
                     else progressCircle.visible = false;
                     if (metaData.title) dPage.title = metaData.title
                 }
