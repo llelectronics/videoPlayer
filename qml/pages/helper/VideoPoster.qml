@@ -110,12 +110,29 @@ MouseArea {
         Rectangle {
             anchors { left: parent.left; right: parent.right; bottom: parent.bottom }
             enabled: { if (controls.opacity == 1.0) return true; else return false; }
-            height: positionSlider.height + Theme.paddingLarge
+            height: positionSlider.height + (2 * Theme.paddingLarge)
             //color: "black"
             //opacity: 0.5
             gradient: Gradient {
                 GradientStop { position: 0.0; color: "transparent" }
                 GradientStop { position: 1.0; color: "black" } //Theme.highlightColor} // Black seems to look and work better
+            }
+
+            BackgroundItem {
+                id: qualBtn
+                anchors.right: parent.right
+                anchors.top: parent.top
+                width: height
+                height: Theme.itemSizeSmall
+                visible: {
+                    if (firstPage.ytQual != "") return true
+                    else return false
+                }
+                onClicked: pageStack.push(Qt.resolvedUrl("../ytQualityChooser.qml"), {"streamTitle": firstPage.streamTitle, "url720p": firstPage.url720p, "url480p": firstPage.url480p, "url360p": firstPage.url360p, "url240p": firstPage.url240p});
+                Label {
+                    text: firstPage.ytQual
+                    color: parent.highlighted ? Theme.highlightColor : "#FFFFFF"
+                }
             }
 
             Slider {

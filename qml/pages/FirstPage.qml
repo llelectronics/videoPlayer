@@ -50,7 +50,7 @@ Page {
     }
     property string originalUrl
     property string streamUrl
-    property bool youtubeDirect: false
+    property bool youtubeDirect: true
     property bool isYtUrl: false
     property string streamTitle
     property string title: videoPoster.player.metaData.title ? videoPoster.player.metaData.title : ""
@@ -73,6 +73,7 @@ Page {
     property string url480p
     property string url360p
     property string url240p
+    property string ytQual
     property bool liveView: true
 
     property Page dPage
@@ -95,9 +96,15 @@ Page {
         DB.addHistory(streamUrl);
         if (errorDetail.visible && errorTxt.visible) { errorDetail.visible = false; errorTxt.visible = false }
         streamTitle = ""  // Reset Stream Title here
+        ytQual = ""
         if (YT.checkYoutube(streamUrl)=== true) {
             YT.getYoutubeTitle(streamUrl);
             var ytID = YT.getYtID(streamUrl);
+            // Reset Stream urls
+            url240p = ""
+            url360p = ""
+            url480p = ""
+            url720p = ""
             YT.getYoutubeStream(ytID);
         }
         else if (YT.checkYoutube(originalUrl) === true) {
@@ -453,7 +460,7 @@ Page {
                     // Filter out all chars that might stop the download manager from downloading the file
                     // Illegal chars: `~!@#$%^&*()-=+\|/?.>,<;:'"[{]}
                     streamTitle = YT.getDownloadableTitleString(streamTitle)
-                    pageStack.push(Qt.resolvedUrl("ytQualityChooser.qml"), {"streamTitle": streamTitle, "url720p": url720p, "url480p": url480p, "url360p": url360p, "url240p": url240p});
+                    pageStack.push(Qt.resolvedUrl("ytQualityChooser.qml"), {"streamTitle": streamTitle, "url720p": url720p, "url480p": url480p, "url360p": url360p, "url240p": url240p, "ytDownload": true});
                     drawer.open = !drawer.open
                 }
             }
@@ -513,7 +520,7 @@ Page {
             visible: video.visible
         },
 
-        GStreamerVideoOutput {
+        VideoOutput {
             id: video
             anchors.fill: parent
 

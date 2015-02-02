@@ -7,6 +7,7 @@ Page {
     property string url480p
     property string url360p
     property string url240p
+    property bool ytDownload: false
 
     allowedOrientations: Orientation.All
 
@@ -18,7 +19,7 @@ Page {
         }
         if (url480p != "none" && url480p != undefined && url480p != "") {
             console.debug("Added 480p with " + url480p)
-            qualList.append({"name": "FLV 480p", "url":url480p})
+            qualList.append({"name": "WEBM 480p", "url":url480p})
         }
         if (url360p != "none" && url360p != undefined && url360p != "") {
             console.debug("Added 360p with" + url360p)
@@ -57,7 +58,17 @@ Page {
                 text: name
                 color: highlighted ? Theme.highlightColor : Theme.primaryColor
             }
-            onClicked: pageStack.replace(Qt.resolvedUrl("DownloadManager.qml"), {"downloadUrl": url, "downloadName": streamTitle});
+            onClicked: {
+                if (ytDownload) pageStack.replace(Qt.resolvedUrl("DownloadManager.qml"), {"downloadUrl": url, "downloadName": streamTitle});
+                else {
+                    firstPage.streamUrl = url
+                    if (name == "MP4 720p") firstPage.ytQual = "720p"
+                    else if (name == "FLV 480p") firstPage.ytQual = "480p"
+                    else if (name == "MP4 360p") firstPage.ytQual = "360p"
+                    else if (name == "FLV 240p") firstPage.ytQual = "240p"
+                    pageStack.pop();
+                }
+            }
         }
     }
 }

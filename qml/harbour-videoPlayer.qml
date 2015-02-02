@@ -42,7 +42,7 @@ ApplicationWindow
     property bool autoPlay: false
     property alias modelBookmarks: modelBookmarks
 
-    property string version: "0.7"
+    property string version: "0.8"
     property string appname: "LLs Video Player"
     property string appicon: "images/icon.png"
 
