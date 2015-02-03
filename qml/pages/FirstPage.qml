@@ -98,16 +98,18 @@ Page {
         streamTitle = ""  // Reset Stream Title here
         ytQual = ""
         if (YT.checkYoutube(streamUrl)=== true) {
-            YT.getYoutubeTitle(streamUrl);
-            var ytID = YT.getYtID(streamUrl);
+            //console.debug("[firstPage.qml] Youtube Link detected loading Streaming URLs")
             // Reset Stream urls
             url240p = ""
             url360p = ""
             url480p = ""
             url720p = ""
+            YT.getYoutubeTitle(streamUrl);
+            var ytID = YT.getYtID(streamUrl);
             YT.getYoutubeStream(ytID);
         }
         else if (YT.checkYoutube(originalUrl) === true) {
+            console.debug("[firstPage.qml] Loading Youtube Title from original URL")
             YT.getYoutubeTitle(originalUrl);
         }
         if (streamTitle == "") dPage.title = findBaseName(streamUrl)

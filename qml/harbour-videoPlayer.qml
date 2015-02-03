@@ -52,7 +52,7 @@ ApplicationWindow
         // Check if youtube url
         if (YT.checkYoutube(url) === true) {
             YT.getYoutubeTitle(url);
-            url = YT.getYoutubeVid(url);
+            //url = YT.getYoutubeVid(url);
         }
         firstPage.originalUrl = url
         firstPage.streamUrl = url

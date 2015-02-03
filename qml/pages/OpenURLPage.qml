@@ -19,13 +19,13 @@ Dialog {
 
     function loadUrl() {
         if (YT.checkYoutube(urlField.text.toString())=== true) {
-            var yturl = YT.getYoutubeVid(urlField.text.toString());
+            //var yturl = YT.getYoutubeVid(urlField.text.toString());
             //            YT.getYoutubeTitle(urlField.text.toString());
             //            var ytID = YT.getYtID(urlField.text.toString());
             //            console.debug(ytID)
             //            YT.getYoutubeStream(ytID);
             if (dataContainer != null) {
-                if (!mainWindow.firstPage.youtubeDirect) mainWindow.firstPage.streamUrl = yturl
+                if (!mainWindow.firstPage.youtubeDirect) mainWindow.firstPage.streamUrl = urlField.text.toString()
                 else mainWindow.firstPage.originalUrl = urlField.text.toString()
                 pageStack.pop(dataContainer);
             }

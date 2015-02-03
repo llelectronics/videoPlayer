@@ -70,7 +70,7 @@ import "helper/yt.js" as YT
             id: searchResultsDialog
             property string searchTerm
             allowedOrientations: Orientation.All
-            backNavigation: false
+            backNavigation: true
             property QtObject dataContainer
             property string streamUrl
             property bool ytDetect: true
@@ -103,14 +103,11 @@ import "helper/yt.js" as YT
                     anchors.top: parent.top
                     anchors.left: parent.left
                     anchors.right: parent.right
-                    Switch {
-                        id: backBtn
-                        onCheckedChanged: { pageStack.pop() }
-                    }
+
                     SearchField {
                         id: searchField
                         property string acceptedInput: ""
-                        width: parent.width - backBtn.width
+                        width: parent.width
 
                         placeholderText: "Search.."
 //                        anchors.top: parent.top
@@ -128,7 +125,7 @@ import "helper/yt.js" as YT
                         // is called when user presses the Return key
                         function searchEntered() {
                             searchField.acceptedInput = text
-                            ytView.url = searchUrl + acceptedInput
+                            ytView.url = searchUrl + encodeURI(acceptedInput)
                             searchField.focus = false
                         }
                     }
@@ -140,7 +137,8 @@ import "helper/yt.js" as YT
                 // iPhone user agent popups for app installation
                 //experimental.userAgent: "Mozilla/5.0 (iPhone; CPU iPhone OS 5_0 like Mac OS X) AppleWebKit/534.46 (KHTML, like Gecko) Version/5.1 Mobile/9A334 Safari/7534.48.3"
                 experimental.userAgent: uA
-                experimental.preferences.minimumFontSize: 14
+                experimental.preferences.minimumFontSize: 11
+                experimental.userScripts: [Qt.resolvedUrl("helper/userscript.js")]
 
                 onNavigationRequested: {
                     //console.debug("[SecondPage.qml] Request navigation to " + request.url)
@@ -148,11 +146,11 @@ import "helper/yt.js" as YT
                         //console.debug("[SecondPage.qml] Youtube Link detected")
                         request.action = WebView.IgnoreRequest;
                         dataContainer.isYtUrl = true;
-                        var yturl = YT.getYoutubeVid(request.url.toString());
+                        //var yturl = YT.getYoutubeVid(request.url.toString());
                         //YT.getYoutubeTitle(url.toString());
                         if (dataContainer != null) {
-                            if (!dataContainer.youtubeDirect) dataContainer.streamUrl = yturl;
-                            else dataContainer.originalUrl = request.url
+                            dataContainer.streamUrl = request.url;
+                            dataContainer.originalUrl = request.url
                             pageStack.push(dataContainer);
                         }
                     }
@@ -180,6 +178,27 @@ import "helper/yt.js" as YT
                 VerticalScrollDecorator {}
 
                 Component.onCompleted: url = websiteUrl
+            }
+            Rectangle {
+                anchors.left: parent.left
+                anchors.bottom: parent.bottom
+                visible: ytView.canGoBack
+                width: parent.width / 8
+                height: parent.height / 16
+                gradient: Gradient {
+                    GradientStop { position: 1.0; color: "black" }
+                    GradientStop { position: 0.0; color: "transparent" } //Theme.highlightColor} // Black seems to look and work better
+                }
+                IconButton {
+                    id: backBtn
+                    icon.source: "image://theme/icon-m-back"
+                    enabled: ytView.canGoBack
+                    visible: ytView.canGoBack
+                    anchors.centerIn: parent
+                    onClicked: {
+                        ytView.goBack();
+                    }
+                }
             }
        }
 

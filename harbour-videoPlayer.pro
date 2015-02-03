@@ -43,7 +43,8 @@ OTHER_FILES += qml/harbour-videoPlayer.qml \
     qml/pages/helper/getsubtitles.js \
     qml/pages/helper/checksubtitles.js \
     qml/pages/SettingsPage.qml \
-    qml/pages/fileman/OpenDialog.qml
+    qml/pages/fileman/OpenDialog.qml \
+    qml/pages/helper/userscript.js
 
 HEADERS += \
     src/DownloadManager.hpp \

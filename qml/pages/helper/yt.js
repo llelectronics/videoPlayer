@@ -93,7 +93,7 @@ function getYoutubeStream(youtube_id) {
                   msg = "[yt.js]: " + e
 //                console.debug(msg)
             }
-            //try {
+            try {
                 // some lines contain two value pairs separated by comma
                 var newSplit = [];
                 for (var i = 0; i < streamsSplit.length; i++) {
@@ -193,12 +193,12 @@ function getYoutubeStream(youtube_id) {
                     console.debug(msg);
                     return;
                 }
-            /*} catch(e) {
+            } catch(e) {
                 //console.debug("[yt.js]: " + e)
                 //console.debug("[yt.js] ytfailCount: " +ytfailCount);
                 ytfailCount++;
                 getYoutubeStream(youtube_id);
-            }*/
+            }
 
         }
     }
