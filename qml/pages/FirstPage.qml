@@ -390,8 +390,8 @@ Page {
                 }
 
                 function showControls() {
-                    controls.opacity = 1.0;
-                    pulley.visible = false
+                    controls.opacity = 1.0
+                    pulley.visible = true
                     page.showNavigationIndicator = true
                 }
 
