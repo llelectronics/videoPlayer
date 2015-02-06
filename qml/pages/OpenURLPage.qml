@@ -25,8 +25,8 @@ Dialog {
             //            console.debug(ytID)
             //            YT.getYoutubeStream(ytID);
             if (dataContainer != null) {
-                if (!mainWindow.firstPage.youtubeDirect) mainWindow.firstPage.streamUrl = urlField.text.toString()
-                else mainWindow.firstPage.originalUrl = urlField.text.toString()
+                mainWindow.firstPage.streamUrl = urlField.text.toString()
+                mainWindow.firstPage.originalUrl = urlField.text.toString()
                 pageStack.pop(dataContainer);
             }
         }
