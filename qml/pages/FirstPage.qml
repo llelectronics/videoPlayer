@@ -95,6 +95,7 @@ Page {
         //Write into history database
         DB.addHistory(streamUrl);
         if (errorDetail.visible && errorTxt.visible) { errorDetail.visible = false; errorTxt.visible = false }
+        videoPoster.showControls();
         streamTitle = ""  // Reset Stream Title here
         ytQual = ""
         if (YT.checkYoutube(streamUrl)=== true) {
@@ -353,10 +354,11 @@ Page {
                 active: mediaItem.active
                 source: streamUrl
                 onSourceChanged: {
+                    player.stop();
                     //play();  // autoPlay TODO: add config for it
                     position = 0;
                     player.seek(0);
-                    player.stop();
+
                 }
                 //source: "file:///home/nemo/Videos/eva.mp4"
                 //source: "http://netrunnerlinux.com/vids/default-panel-script.mkv"
@@ -536,36 +538,35 @@ Page {
                     else mDataTitle = findBaseName(streamUrl)
                     //console.debug("[mDataTitle]: " + mDataTitle)
                     dPage = pageStack.pushAttached(Qt.resolvedUrl("FileDetails.qml"), {
-                                               filename: streamUrl,
-                                               title: mDataTitle,
-                                               artist: metaData.albumArtist,
-                                               videocodec: metaData.videoCodec,
-                                               resolution: metaData.resolution,
-                                               videobitrate: metaData.videoBitRate,
-                                               framerate: metaData.videoFrameRate,
-                                               audiocodec: metaData.audioCodec,
-                                               audiobitrate: metaData.audioBitRate,
-                                               samplerate: metaData.sampleRate,
-                                               copyright: metaData.copyright,
-                                               date: metaData.date,
-                                               size: metaData.size
-                                           });
+                                                       filename: streamUrl,
+                                                       title: mDataTitle,
+                                                       artist: metaData.albumArtist,
+                                                       videocodec: metaData.videoCodec,
+                                                       resolution: metaData.resolution,
+                                                       videobitrate: metaData.videoBitRate,
+                                                       framerate: metaData.videoFrameRate,
+                                                       audiocodec: metaData.audioCodec,
+                                                       audiobitrate: metaData.audioBitRate,
+                                                       samplerate: metaData.sampleRate,
+                                                       copyright: metaData.copyright,
+                                                       date: metaData.date,
+                                                       size: metaData.size
+                                                   });
                 }
 
                 onDurationChanged: {
                     //console.debug("Duration(msec): " + duration);
                     videoPoster.duration = (duration/1000);
-                    loadMetaDataPage();
                     if (hasAudio === true && hasVideo === false) onlyMusic.opacity = 1.0
                     else onlyMusic.opacity = 0.0;
                 }
                 onStatusChanged: {
                     //errorTxt.visible = false     // DEBUG: Always show errors for now
                     //errorDetail.visible = false
-                    //console.debug("PlaybackStatus: " + playbackState)
+                    console.debug("[firstPage.qml]: mediaPlayer.status" + mediaPlayer.status)
                     if (mediaPlayer.status === MediaPlayer.Loading || mediaPlayer.status === MediaPlayer.Buffering || mediaPlayer.status === MediaPlayer.Stalled) progressCircle.visible = true;
                     else if (mediaPlayer.status === MediaPlayer.EndOfMedia) videoPoster.showControls();
-                    else progressCircle.visible = false;
+                    else  { progressCircle.visible = false; loadMetaDataPage(); }
                     if (metaData.title) dPage.title = metaData.title
                 }
                 onError: {

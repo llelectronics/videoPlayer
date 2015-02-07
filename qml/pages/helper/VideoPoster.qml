@@ -121,7 +121,7 @@ MouseArea {
             BackgroundItem {
                 id: qualBtn
                 anchors.right: parent.right
-                anchors.top: parent.top
+                y: positionSlider.y - (qualBtn.height / 4)
                 width: height
                 height: Theme.itemSizeSmall
                 visible: {
@@ -132,23 +132,43 @@ MouseArea {
                 Label {
                     text: firstPage.ytQual
                     color: parent.highlighted ? Theme.highlightColor : "#FFFFFF"
+                    anchors.centerIn: parent
                 }
+            }
+            Label {
+                id: maxTime
+                anchors.right: qualBtn.visible ? qualBtn.left : parent.right
+                anchors.rightMargin: qualBtn.visible ? Theme.paddingMedium : (2 * Theme.paddingLarge)
+                y: positionSlider.y
+                text: {
+                    if (positionSlider.maximumValue > 3599) return Format.formatDuration(maximumValue, Formatter.DurationLong)
+                    else return Format.formatDuration(positionSlider.maximumValue, Formatter.DurationShort)
+                }
+                visible: videoItem._loaded
             }
 
             Slider {
                 id: positionSlider
 
-                anchors { left: parent.left; right: parent.right; bottom: parent.bottom }
-
+                anchors {
+                    left: parent.left;
+                    right: maxTime.visible ? maxTime.left : parent.right;
+                    bottom: parent.bottom
+                }
                 enabled: { if (controls.opacity == 1.0) return true; else return false; }
                 height: Theme.itemSizeSmall
-                handleVisible: false
+                width: {
+                    if (qualBtn.visible && maxTime.visible) parent.width - (maxTime.width + qualBtn.width)
+                    else if (maxTime.visible) parent.width - (maxTime.width)
+                    else parent.width
+                }
+                handleVisible: down ? true : false
                 minimumValue: 0
+
                 valueText: {
                     if (value > 3599) return Format.formatDuration(value, Formatter.DurationLong)
                     else return Format.formatDuration(value, Formatter.DurationShort)
                 }
-
                 onReleased: {
                     if (videoItem.active) {
                         videoItem.player.source = videoItem.source
