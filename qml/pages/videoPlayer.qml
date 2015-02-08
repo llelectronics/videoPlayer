@@ -1,10 +1,13 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 import QtMultimedia 5.0
+import Sailfish.Media 1.0
 import "helper"
 
 Page {
     id: videoPlayerPage
+    objectName: "videoPlayerPage"
+    allowedOrientations: Orientation.All
 
     property QtObject dataContainer
 
@@ -23,7 +26,7 @@ Page {
     property string streamTitle: dataContainer.streamTitle
     property string title: videoPoster.player.metaData.title ? videoPoster.player.metaData.title : ""
     property string artist: videoPoster.player.metaData.albumArtist ? videoPoster.player.metaData.albumArtist : ""
-    property int subtitlesSize: dataContainer.subtitleSize
+    property int subtitlesSize: dataContainer.subtitlesSize
     property bool boldSubtitles: dataContainer.boldSubtitles
     property string subtitlesColor: dataContainer.subtitlesColor
     property bool enableSubtitles: dataContainer.enableSubtitles
@@ -36,8 +39,6 @@ Page {
     property bool liveView: true
     property Page dPage
 
-    property alias videoPickerComponent: videoPickerComponent
-    property alias openDialog: openFileDialog
     property alias showTimeAndTitle: showTimeAndTitle
     property alias pulley: pulley
     property alias onlyMusic: onlyMusic
@@ -193,7 +194,7 @@ Page {
             id: subtitlesText
 
             z: 100
-            anchors { fill: parent; margins: page.inPortrait ? 10 : 50 }
+            anchors { fill: parent; margins: videoPlayerPage.inPortrait ? 10 : 50 }
             wrapMode: Text.WordWrap
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignBottom
@@ -265,20 +266,10 @@ Page {
             TextArea {
                 id: errorDetail
                 text: ""
-                //                visible: {
-                //                    if (text !== "" && page.orientation === Orientation.Portrait ) return true;
-                //                    else return false;
-                //                }
                 width: parent.width
                 height: parent.height / 3
                 anchors.horizontalCenter: parent.horizontalCenter
-                //            anchors.top: errorTxt.bottom
-                //            anchors.topMargin: 15
                 font.bold: false
-                color: "white"//                visible: {
-                //                    if (text !== "" && page.orientation === Orientation.Portrait ) return true;
-                //                    else return false;
-                //                }
             }
         }
         MouseArea {
@@ -304,8 +295,8 @@ Page {
 
             VideoPoster {
                 id: videoPoster
-                width: page.orientation === Orientation.Portrait ? Screen.width : Screen.height
-                height: page.height
+                width: videoPlayerPage.orientation === Orientation.Portrait ? Screen.width : Screen.height
+                height: videoPlayerPage.height
 
                 player: mediaPlayer
 
@@ -340,20 +331,20 @@ Page {
                         //console.debug("Hide controls");
                         controls.opacity = 0.0;
                     }
-                    page.showNavigationIndicator = !page.showNavigationIndicator
+                    videoPlayerPage.showNavigationIndicator = !videoPlayerPage.showNavigationIndicator
                     pulley.visible = !pulley.visible
                 }
 
                 function hideControls() {
                     controls.opacity = 0.0
                     pulley.visible = false
-                    page.showNavigationIndicator = false
+                    videoPlayerPage.showNavigationIndicator = false
                 }
 
                 function showControls() {
                     controls.opacity = 1.0
                     pulley.visible = true
-                    page.showNavigationIndicator = true
+                    videoPlayerPage.showNavigationIndicator = true
                 }
 
 
@@ -399,7 +390,7 @@ Page {
         dock: Dock.Bottom
         foreground: flick
         backgroundSize: {
-            if (page.orientation === Orientation.Portrait) return parent.height / 8
+            if (videoPlayerPage.orientation === Orientation.Portrait) return parent.height / 8
             else return parent.height / 6
         }
         background: Rectangle {
@@ -417,7 +408,6 @@ Page {
                     else if (isYtUrl) return true
                     else return false
                 }
-                //onClicked: pageStack.push(Qt.resolvedUrl("DownloadManager.qml"), {"downloadUrl": streamUrl, "downloadName": streamTitle});
                 // Alternatively use direct youtube url instead of ytapi for downloads (ytapi links not always download with download manager)
                 onClicked: {
                     // Filter out all chars that might stop the download manager from downloading the file
@@ -513,7 +503,7 @@ Page {
             visible: mediaPlayer.status >= MediaPlayer.Loaded && mediaPlayer.status <= MediaPlayer.EndOfMedia
             width: parent.width
             height: parent.height
-            anchors.centerIn: page
+            anchors.centerIn: videoPlayerPage
 
             ScreenBlank {
                 suspend: mediaPlayer.playbackState == MediaPlayer.PlayingState

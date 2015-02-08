@@ -113,11 +113,11 @@ Page {
         id: drawer
 
         width: parent.width
-        height: parent.height - header.height
+        height: parent.height
         anchors.bottom: parent.bottom
         //anchors.fill: parent
 
-        dock: openUrlPage.isPortrait ? Dock.Top : Dock.Left
+        dock: page.isPortrait ? Dock.Top : Dock.Left
 
         background: SilicaListView {
             anchors.fill: parent
@@ -194,9 +194,9 @@ Page {
                 text: "Browse Files"
                 visible: true
                 onClicked: {
-                    if (mainWindow.firstPage.openDialogType === "adv") pageStack.replace(Qt.resolvedUrl("fileman/Main.qml"), {dataContainer: mainWindow.firstPage});
-                    else if (mainWindow.firstPage.openDialogType === "gallery") pageStack.replace(mainWindow.firstPage.videoPickerComponent);
-                    else if (mainWindow.firstPage.openDialogType === "simple") pageStack.replace(mainWindow.firstPage.openDialog);
+                    if (mainWindow.firstPage.openDialogType === "adv") pageStack.push(Qt.resolvedUrl("fileman/Main.qml"), {dataContainer: mainWindow.firstPage});
+                    else if (mainWindow.firstPage.openDialogType === "gallery") pageStack.push(mainWindow.firstPage.videoPickerComponent);
+                    else if (mainWindow.firstPage.openDialogType === "simple") pageStack.push(mainWindow.firstPage.openDialog);
                 }
             }
 

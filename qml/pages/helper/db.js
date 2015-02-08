@@ -71,7 +71,7 @@ function getHistory() {
     db.transaction(function(tx) {
         var rs = tx.executeSql('SELECT history.url FROM history ORDER BY history.uid;');
         for (var i = 0; i < rs.rows.length; i++) {
-            openUrlPage.addHistory(rs.rows.item(i).url)
+            firstPage.addHistory(rs.rows.item(i).url)
             //console.debug("Get History urls:" + rs.rows.item(i).url)
         }
     })

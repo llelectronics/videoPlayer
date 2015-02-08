@@ -80,14 +80,16 @@ ApplicationWindow
     }
 
     onApplicationActiveChanged: {
-        if (!mainWindow.applicationActive) {
-            firstPage.videoPoster.hideControls();
-            firstPage.showTimeAndTitle.count = 0
-            firstPage.showTimeAndTitle.start();
-        }
-        else if (mainWindow.applicationActive === true) {
-            firstPage.showTimeAndTitle.count = 5
-            if (firstPage.videoPoster.opacity == 0) firstPage.videoPoster.toggleControls(); // Something is interfering with this
+        if (pageStack.currentPage.objectName === "videoPlayerPage") {
+            if (!mainWindow.applicationActive) {
+                pageStack.currentPage.videoPoster.hideControls();
+                pageStack.currentPage.showTimeAndTitle.count = 0
+                pageStack.currentPage.showTimeAndTitle.start();
+            }
+            else if (mainWindow.applicationActive === true) {
+                pageStack.currentPage.showTimeAndTitle.count = 5
+                if (pageStack.currentPage.videoPoster.opacity == 0) pageStack.currentPage.videoPoster.toggleControls();
+            }
         }
     }
 
