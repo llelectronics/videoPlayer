@@ -58,7 +58,7 @@ Page
                     }
                     onClicked: {
                         dataContainer.streamUrl = url;
-                        pageStack.pop();
+                        dataContainer.loadPlayer();
                     }
                     onPressAndHold: {
                         if (!contextMenu)

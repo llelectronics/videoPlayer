@@ -76,7 +76,7 @@ int main(int argc, char *argv[])
     }
     if (autoPlay == true) object->setProperty("autoPlay", true);
 
-    QMetaObject::invokeMethod(object, "loadUrl", Q_ARG(QVariant, file));
+    if (argc>1) QMetaObject::invokeMethod(object, "loadUrl", Q_ARG(QVariant, file));
 
     // Create download manager object
     DownloadManager manager;

@@ -152,7 +152,11 @@ MouseArea {
 
                 anchors {
                     left: parent.left;
-                    right: maxTime.visible ? maxTime.left : parent.right;
+                    right: {
+                        if (maxTime.visible) maxTime.left
+                        else if (qualBtn.visible) qualBtn.left
+                        else parent.right;
+                    }
                     bottom: parent.bottom
                 }
                 enabled: { if (controls.opacity == 1.0) return true; else return false; }
@@ -160,6 +164,7 @@ MouseArea {
                 width: {
                     if (qualBtn.visible && maxTime.visible) parent.width - (maxTime.width + qualBtn.width)
                     else if (maxTime.visible) parent.width - (maxTime.width)
+                    else if (qualBtn.visible) parent.width - (qualBtn.width)
                     else parent.width
                 }
                 handleVisible: down ? true : false

@@ -56,17 +56,28 @@ Page {
     property string originalUrl
     property string streamUrl
     property bool isYtUrl: false
+    property bool youtubeDirect: true
+    property bool autoplay: false
     property string streamTitle
     property string url720p
     property string url480p
     property string url360p
     property string url240p
     property string ytQual
+    ////////////////////////////////////////////////////
+
+    // Aliase
+    property alias videoPickerComponent: videoPickerComponent
+    property alias openFileComponent: openFileComponent
 
     Component.onCompleted: {
         // Initialize the database
         DB.initialize();
         DB.getHistory();
+    }
+
+    onStreamTitleChanged: {
+        console.debug("[firstPage.qml] streamTitle: " + streamTitle)
     }
 
     function loadPlayer() {
@@ -90,133 +101,159 @@ Page {
             title: qsTr("Open Video")
             Component.onDestruction: {
                 //console.debug("[OpenURLPage.qml]: Selected Video: " + selectedContent);
-                // TODO: Load videoPlayer function
+                mainWindow.firstPage.loadPlayer();
                 mainWindow.firstPage.originalUrl = selectedContent;
                 mainWindow.firstPage.streamUrl = selectedContent;
-                //pageStack.pop();
             }
         }
     }
 
     Component {
-        id: openFileDialog
+        id: openFileComponent
         OpenDialog {
             onOpenFile: {
-                // TODO: Load videoPlayer function
-                mainWindow.firstPage.originalUrl = path
-                mainWindow.firstPage.streamUrl = path
+                mainWindow.firstPage.originalUrl = path;
+                mainWindow.firstPage.streamUrl = path;
+                mainWindow.firstPage.loadPlayer();
             }
         }
     }
 
-    Drawer {
-        id: drawer
-
-        width: parent.width
-        height: parent.height
-        anchors.bottom: parent.bottom
-        //anchors.fill: parent
-
-        dock: page.isPortrait ? Dock.Top : Dock.Left
-
-        background: SilicaListView {
-            anchors.fill: parent
-            model: historyModel
-
-            // Not necessary now. Later maybe removing all history
-            //            PullDownMenu {
-            //                MenuItem {
-            //                    text: "Option 1"
-            //                }
-            //                MenuItem {
-            //                    text: "Option 2"
-            //                }
-            //            }
-            VerticalScrollDecorator {}
-
-            delegate: ListItem {
-                id: listItem
-
-                Label {
-                    x: Theme.paddingLarge
-                    text: hurl
-                    anchors.verticalCenter: parent.verticalCenter
-                    color: listItem.highlighted ? Theme.highlightColor : Theme.primaryColor
-                }
-                onClicked: {
-                    urlField.text = hurl
-                    drawer.open = !drawer.open
-                    //openUrlPage.loadUrl(); // No autoload for the moment. TODO: Maybe a thing for global settings
-                }
+    SilicaFlickable {
+        id: flick
+        anchors.fill: parent
+        PullDownMenu {
+            id: pulley
+            MenuItem {
+                text: "About "+ appname
+                onClicked: pageStack.push(Qt.resolvedUrl("AboutPage.qml"));
+            }
+            MenuItem {
+                text: "Settings"
+                onClicked: pageStack.push(Qt.resolvedUrl("SettingsPage.qml"));
+            }
+            MenuItem {
+                text: "Bookmarks"
+                onClicked: pageStack.push(Qt.resolvedUrl("BookmarksPage.qml"), {dataContainer: page, modelBookmarks: mainWindow.modelBookmarks});
+            }
+            MenuItem {
+                text: "Search Youtube"
+                onClicked: pageStack.push(Qt.resolvedUrl("SecondPage.qml"), {dataContainer: page});
             }
         }
 
-        MouseArea {
-            enabled: drawer.open
-            anchors.fill: column
-            onClicked: drawer.open = false
-        }
 
-        Item {
-            id: column
-            anchors.fill: parent
+        Drawer {
+            id: drawer
 
-            TextField {
-                id: urlField
-                placeholderText: "Type in URL here"
-                anchors.centerIn: parent
-                width: Screen.width - 20
-                focus: true
-                Component.onCompleted: {
-                    // console.debug("StreamUrl :" + streamUrl) // DEBUG
-                    if (streamUrl !== "") {
-                        text = streamUrl;
-                        selectAll();
+            width: parent.width
+            height: parent.height
+            anchors.bottom: parent.bottom
+            //anchors.fill: parent
+
+            dock: page.isPortrait ? Dock.Top : Dock.Left
+
+            background: SilicaListView {
+                anchors.fill: parent
+                model: historyModel
+
+                // Not necessary now. Later maybe removing all history
+                //            PullDownMenu {
+                //                MenuItem {
+                //                    text: "Option 1"
+                //                }
+                //                MenuItem {
+                //                    text: "Option 2"
+                //                }
+                //            }
+                VerticalScrollDecorator {}
+
+                delegate: ListItem {
+                    id: listItem
+
+                    Label {
+                        x: Theme.paddingLarge
+                        text: hurl
+                        anchors.verticalCenter: parent.verticalCenter
+                        color: listItem.highlighted ? Theme.highlightColor : Theme.primaryColor
+                    }
+                    onClicked: {
+//                        urlField.text = hurl
+//                        drawer.open = !drawer.open
+                        streamUrl = hurl
+                        loadPlayer();
+                        //openUrlPage.loadUrl(); // No autoload for the moment. TODO: Maybe a thing for global settings
                     }
                 }
             }
 
-            Button {
-                id: historyBtn
-                anchors.left: urlField.left
-                anchors.top: urlField.bottom
-                text: "History"
-                onClicked: {
-                    //DB.getHistory();
-                    drawer.open = !drawer.open
+            MouseArea {
+                enabled: drawer.open
+                anchors.fill: column
+                onClicked: drawer.open = false
+            }
+
+            Item {
+                id: column
+                anchors.fill: parent
+
+                TextField {
+                    id: urlField
+                    placeholderText: "Type in URL here"
+                    anchors.centerIn: parent
+                    width: Screen.width - 20
+                    focus: true
+                    Component.onCompleted: {
+                        // console.debug("StreamUrl :" + streamUrl) // DEBUG
+                        if (streamUrl !== "") {
+                            text = streamUrl;
+                            selectAll();
+                        }
+                    }
+                }
+
+                Button {
+                    id: historyBtn
+                    anchors.left: urlField.left
+                    anchors.top: urlField.bottom
+                    text: "History"
+                    onClicked: {
+                        //DB.getHistory();
+                        drawer.open = !drawer.open
+                    }
+                }
+
+                Button {
+                    id: openFileBtn
+                    anchors.top: urlField.bottom
+                    anchors.right: urlField.right
+                    text: "Browse Files"
+                    visible: true
+                    onClicked: {
+                        if (mainWindow.firstPage.openDialogType === "adv") pageStack.push(Qt.resolvedUrl("fileman/Main.qml"), {dataContainer: mainWindow.firstPage});
+                        else if (mainWindow.firstPage.openDialogType === "gallery") pageStack.push(mainWindow.firstPage.videoPickerComponent);
+                        else if (mainWindow.firstPage.openDialogType === "simple") pageStack.push(mainWindow.firstPage.openFileComponent);
+                    }
+                }
+
+                Button {
+                    id: addToBookmarkBtn
+                    anchors.top: historyBtn.bottom
+                    anchors.topMargin: 15
+                    //anchors.right: historyBtn.right
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    text: "Add to bookmarks"
+                    visible: {
+                        if (urlField.text !== "") return true
+                        else return false
+                    }
+                    onClicked: {
+                        pageStack.push(Qt.resolvedUrl("AddBookmark.qml"), { bookmarks: mainWindow.modelBookmarks, editBookmark: false, bookmarkUrl: urlField.text });
+                    }
                 }
             }
 
-            Button {
-                id: openFileBtn
-                anchors.top: urlField.bottom
-                anchors.right: urlField.right
-                text: "Browse Files"
-                visible: true
-                onClicked: {
-                    if (mainWindow.firstPage.openDialogType === "adv") pageStack.push(Qt.resolvedUrl("fileman/Main.qml"), {dataContainer: mainWindow.firstPage});
-                    else if (mainWindow.firstPage.openDialogType === "gallery") pageStack.push(mainWindow.firstPage.videoPickerComponent);
-                    else if (mainWindow.firstPage.openDialogType === "simple") pageStack.push(mainWindow.firstPage.openDialog);
-                }
-            }
-
-            Button {
-                id: addToBookmarkBtn
-                anchors.top: historyBtn.bottom
-                anchors.topMargin: 15
-                //anchors.right: historyBtn.right
-                anchors.horizontalCenter: parent.horizontalCenter
-                text: "Add to bookmarks"
-                visible: {
-                    if (urlField.text !== "") return true
-                    else return false
-                }
-                onClicked: {
-                    pageStack.push(Qt.resolvedUrl("AddBookmark.qml"), { bookmarks: mainWindow.modelBookmarks, editBookmark: false, bookmarkUrl: urlField.text });
-                }
-            }
         }
-
     }
 
 

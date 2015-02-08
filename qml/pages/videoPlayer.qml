@@ -21,7 +21,7 @@ Page {
     }
     property string originalUrl: dataContainer.originalUrl
     property string streamUrl: dataContainer.streamUrl
-    property bool youtubeDirect: true
+    property bool youtubeDirect: dataContainer.youtubeDirect
     property bool isYtUrl: dataContainer.isYtUrl
     property string streamTitle: dataContainer.streamTitle
     property string title: videoPoster.player.metaData.title ? videoPoster.player.metaData.title : ""
@@ -38,11 +38,22 @@ Page {
     property string ytQual: dataContainer.ytQual
     property bool liveView: true
     property Page dPage
+    property bool autoplay: dataContainer.autoplay
 
     property alias showTimeAndTitle: showTimeAndTitle
     property alias pulley: pulley
     property alias onlyMusic: onlyMusic
     property alias videoPoster: videoPoster
+
+    Component.onCompleted: {
+        if (autoplay) {
+            //console.debug("[videoPlayer.qml] Autoplay activated for url: " + videoPoster.source);
+            videoPoster.play();
+            // TODO: Workaround somehow toggleControls() has a racing condition with something else
+            pulley.visible = false;
+            showNavigationIndicator = false;
+        }
+    }
 
 
     function findBaseName(url) {
@@ -56,8 +67,8 @@ Page {
         DB.addHistory(streamUrl);
         if (errorDetail.visible && errorTxt.visible) { errorDetail.visible = false; errorTxt.visible = false }
         videoPoster.showControls();
-        streamTitle = ""  // Reset Stream Title here
-        ytQual = ""
+        dataContainer.streamTitle = ""  // Reset Stream Title here
+        dataContainer.ytQual = ""
         if (YT.checkYoutube(streamUrl)=== true) {
             //console.debug("[videoPlayer.qml] Youtube Link detected loading Streaming URLs")
             // Reset Stream urls
@@ -73,7 +84,7 @@ Page {
             //console.debug("[videoPlayer.qml] Loading Youtube Title from original URL")
             YT.getYoutubeTitle(originalUrl);
         }
-        if (streamTitle == "") dPage.title = findBaseName(streamUrl)
+        if (dataContainer.streamTitle == "") dPage.title = findBaseName(streamUrl)
     }
 
     onStreamTitleChanged: {
@@ -308,7 +319,6 @@ Page {
                     //play();  // autoPlay TODO: add config for it
                     position = 0;
                     player.seek(0);
-
                 }
                 //source: "file:///home/nemo/Videos/eva.mp4"
                 //source: "http://netrunnerlinux.com/vids/default-panel-script.mkv"
@@ -324,11 +334,11 @@ Page {
                 function toggleControls() {
                     //console.debug("Controls Opacity:" + controls.opacity);
                     if (controls.opacity === 0.0) {
-                        //console.debug("Show controls");
+                        console.debug("Show controls");
                         controls.opacity = 1.0;
                     }
                     else {
-                        //console.debug("Hide controls");
+                        console.debug("Hide controls");
                         controls.opacity = 0.0;
                     }
                     videoPlayerPage.showNavigationIndicator = !videoPlayerPage.showNavigationIndicator
@@ -612,5 +622,4 @@ Page {
             }
         }
     }
-
 }

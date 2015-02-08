@@ -58,7 +58,11 @@ ApplicationWindow
         firstPage.originalUrl = url
         firstPage.streamUrl = url
         firstPage.streamTitle = ""
-        if (autoPlay == true) { console.debug("autoPlay = true") ; firstPage.videoPoster.play();}
+        if (autoPlay == true) {
+            console.debug("autoPlay = true") ;
+            firstPage.autoplay = true;
+        }
+        firstPage.loadPlayer();
     }
 
     initialPage: Component {

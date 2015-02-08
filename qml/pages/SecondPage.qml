@@ -153,7 +153,7 @@ import "helper/yt.js" as YT
                             if (dataContainer != null) {
                                 dataContainer.streamUrl = request.url;
                                 dataContainer.originalUrl = request.url
-                                pageStack.push(dataContainer);
+                                dataContainer.loadPlayer();
                             }
                         } else { request.action = WebView.AcceptRequest; }
                     }

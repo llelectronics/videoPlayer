@@ -28,7 +28,7 @@ Dialog {
         subtitleSizeCombo.currentIndex = 34 - 25;
         boldSubtitlesSwitch.checked = false ;
         colorIndicator.color = Theme.highlightColor
-        directYoutubeSwitch.checked = false;
+        directYoutubeSwitch.checked = true;
         openDialogCombo.currentIndex = 0;
         liveViewSwitch.checked = true;
     }
@@ -349,6 +349,7 @@ Dialog {
                 anchors.horizontalCenter: parent.horizontalCenter
                 text: "Use direct youtube url"
                 checked: mainWindow.firstPage.youtubeDirect
+                visible: false // Disabled YTAPI
             }
 
             ComboBox {

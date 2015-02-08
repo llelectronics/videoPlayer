@@ -82,7 +82,6 @@ Page {
                     else fileModel.folder = filePath
                 } else {
                     openFile(filePath)
-                    pageStack.pop()
                 }
             }
         }
