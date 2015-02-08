@@ -49,6 +49,7 @@ Page {
             dataContainer.originalUrl = url;
             dataContainer.streamUrl = url;
             dataContainer.streamTitle = "";
+            dataContainer.loadPlayer();
         }
         onFileRemove: {
             console.debug("[DirView]Requesting removal of file " + url);

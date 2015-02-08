@@ -54,6 +54,7 @@ ApplicationWindow
             YT.getYoutubeTitle(url);
             //url = YT.getYoutubeVid(url);
         }
+        // TODO: Load videoPlayer function from firstPage
         firstPage.originalUrl = url
         firstPage.streamUrl = url
         firstPage.streamTitle = ""
