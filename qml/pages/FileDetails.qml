@@ -52,34 +52,6 @@ Page {
                 }
                 onClicked: pageStack.push(Qt.resolvedUrl("SecondPage.qml"), {dataContainer: mainWindow.firstPage, websiteUrl: mainWindow.firstPage.originalUrl, searchUrl: "http://m.youtube.com/results?q=", ytDetect: false, uA: "Mozilla/5.0 (Maemo; Linux; Jolla; Sailfish; Mobile) AppleWebKit/534.13 (KHTML, like Gecko) NokiaBrowser/8.5.0 Mobile Safari/534.13"});
             }
-            MenuItem {
-                text: qsTr("Download Youtube Video")
-                visible: {
-                    if ((/^http:\/\/ytapi.com/).test(mainWindow.firstPage.streamUrl)) return true
-                    else if (mainWindow.firstPage.isYtUrl) return true
-                    else return false
-                }
-                //onClicked: pageStack.push(Qt.resolvedUrl("DownloadManager.qml"), {"downloadUrl": streamUrl, "downloadName": streamTitle});
-                // Alternatively use direct youtube url instead of ytapi for downloads (ytapi links not always download with download manager)
-                onClicked: {
-                    // Filter out all chars that might stop the download manager from downloading the file
-                    // Illegal chars: `~!@#$%^&*()-=+\|/?.>,<;:'"[{]}
-                    //console.debug("[FileDetails -> Download YT Video]: " + mainWindow.firstPage.youtubeDirectUrl)
-                    mainWindow.firstPage.streamTitle = YT.getDownloadableTitleString(mainWindow.firstPage.streamTitle)
-                    pageStack.push(Qt.resolvedUrl("DownloadManager.qml"), {"downloadUrl": mainWindow.firstPage.youtubeDirectUrl, "downloadName": mainWindow.firstPage.streamTitle});
-                }
-            }
-            MenuItem {
-                text: qsTr("Add to bookmarks")
-                visible: {
-                    if (mainWindow.firstPage.streamTitle != "" || mainWindow.firstPage.streamUrl != "") return true
-                    else return false
-                }
-                onClicked: {
-                    if (mainWindow.firstPage.streamTitle != "") mainWindow.modelBookmarks.addBookmark(mainWindow.firstPage.streamUrl,mainWindow.firstPage.streamTitle)
-                    else mainWindow.modelBookmarks.addBookmark(mainWindow.firstPage.streamUrl,mainWindow.firstPage.findBaseName(mainWindow.firstPage.streamUrl))
-                }
-            }
         }
 
 

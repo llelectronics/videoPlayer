@@ -158,24 +158,32 @@ Page {
         PullDownMenu {
             id: pulley
             MenuItem {
-                text: "About "+ appname
-                onClicked: pageStack.push(Qt.resolvedUrl("AboutPage.qml"));
+                text: qsTr("Download Youtube Video")
+                visible: {
+                    if ((/^http:\/\/ytapi.com/).test(mainWindow.firstPage.streamUrl)) return true
+                    else if (mainWindow.firstPage.isYtUrl) return true
+                    else return false
+                }
+                //onClicked: pageStack.push(Qt.resolvedUrl("DownloadManager.qml"), {"downloadUrl": streamUrl, "downloadName": streamTitle});
+                // Alternatively use direct youtube url instead of ytapi for downloads (ytapi links not always download with download manager)
+                onClicked: {
+                    // Filter out all chars that might stop the download manager from downloading the file
+                    // Illegal chars: `~!@#$%^&*()-=+\|/?.>,<;:'"[{]}
+                    //console.debug("[FileDetails -> Download YT Video]: " + mainWindow.firstPage.youtubeDirectUrl)
+                    mainWindow.firstPage.streamTitle = YT.getDownloadableTitleString(mainWindow.firstPage.streamTitle)
+                    pageStack.push(Qt.resolvedUrl("DownloadManager.qml"), {"downloadUrl": mainWindow.firstPage.youtubeDirectUrl, "downloadName": mainWindow.firstPage.streamTitle});
+                }
             }
             MenuItem {
-                text: "Settings"
-                onClicked: pageStack.push(Qt.resolvedUrl("SettingsPage.qml"));
-            }
-            MenuItem {
-                text: "Bookmarks"
-                onClicked: pageStack.push(Qt.resolvedUrl("BookmarksPage.qml"), {dataContainer: page, modelBookmarks: mainWindow.modelBookmarks});
-            }
-            MenuItem {
-                text: "Search Youtube"
-                onClicked: pageStack.push(Qt.resolvedUrl("SecondPage.qml"), {dataContainer: page});
-            }
-            MenuItem {
-                text: "Open"
-                onClicked: pageStack.push(Qt.resolvedUrl("OpenURLPage.qml"), {dataContainer: page, streamUrl: streamUrl});
+                text: qsTr("Add to bookmarks")
+                visible: {
+                    if (mainWindow.firstPage.streamTitle != "" || mainWindow.firstPage.streamUrl != "") return true
+                    else return false
+                }
+                onClicked: {
+                    if (mainWindow.firstPage.streamTitle != "") mainWindow.modelBookmarks.addBookmark(mainWindow.firstPage.streamUrl,mainWindow.firstPage.streamTitle)
+                    else mainWindow.modelBookmarks.addBookmark(mainWindow.firstPage.streamUrl,mainWindow.firstPage.findBaseName(mainWindow.firstPage.streamUrl))
+                }
             }
         }
 

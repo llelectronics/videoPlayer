@@ -93,6 +93,13 @@ Page {
         id: historyModel
     }
 
+    Keys.onEnterPressed: {
+        if (urlField.text != "" && urlField.visible) loadPlayer();
+    }
+    Keys.onReturnPressed: {
+        if (urlField.text != "" && urlField.visible) loadPlayer();
+    }
+
     Component  {
         id: videoPickerComponent
         VideoPickerPage {
@@ -122,6 +129,7 @@ Page {
     SilicaFlickable {
         id: flick
         anchors.fill: parent
+
         PullDownMenu {
             id: pulley
             MenuItem {
@@ -132,13 +140,34 @@ Page {
                 text: "Settings"
                 onClicked: pageStack.push(Qt.resolvedUrl("SettingsPage.qml"));
             }
-            MenuItem {
-                text: "Bookmarks"
-                onClicked: pageStack.push(Qt.resolvedUrl("BookmarksPage.qml"), {dataContainer: page, modelBookmarks: mainWindow.modelBookmarks});
+        }
+
+        PageHeader {
+            id: pageHeader
+            title: {
+                if (urlField.visible) ""
+                else if (drawer.opened) qsTr("History")
+                else qsTr("Open")
             }
-            MenuItem {
-                text: "Search Youtube"
-                onClicked: pageStack.push(Qt.resolvedUrl("SecondPage.qml"), {dataContainer: page});
+            TextField {
+                id: urlField
+                visible: false
+                placeholderText: qsTr("Type in URL here")
+                label: qsTr("URL to media")
+                anchors.top: parent.top
+                anchors.horizontalCenter: parent.horizontalCenter
+                anchors.margins: Theme.paddingLarge
+                width: Screen.width - Theme.paddingLarge
+                inputMethodHints: Qt.ImhUrlCharactersOnly | Qt.ImhNoPredictiveText
+                EnterKey.enabled: text.length > 0
+                EnterKey.text: qsTr("Open")
+                Component.onCompleted: {
+                    // console.debug("StreamUrl :" + streamUrl) // DEBUG
+                    if (streamUrl !== "") {
+                        text = streamUrl;
+                        selectAll();
+                    }
+                }
             }
         }
 
@@ -147,8 +176,9 @@ Page {
             id: drawer
 
             width: parent.width
-            height: parent.height
+            height: parent.height - pageHeader.height
             anchors.bottom: parent.bottom
+            anchors.top: pageHeader.bottom
             //anchors.fill: parent
 
             dock: page.isPortrait ? Dock.Top : Dock.Left
@@ -197,60 +227,112 @@ Page {
                 id: column
                 anchors.fill: parent
 
-                TextField {
-                    id: urlField
-                    placeholderText: "Type in URL here"
-                    anchors.centerIn: parent
-                    width: Screen.width - 20
-                    focus: true
-                    Component.onCompleted: {
-                        // console.debug("StreamUrl :" + streamUrl) // DEBUG
-                        if (streamUrl !== "") {
-                            text = streamUrl;
-                            selectAll();
-                        }
-                    }
-                }
-
-                Button {
+                ItemButton {
                     id: historyBtn
-                    anchors.left: urlField.left
-                    anchors.top: urlField.bottom
-                    text: "History"
+                    anchors.left: parent.left
+                    anchors.top: parent.top
+                    width: parent.width / 2
+                    height: width
+                    text: qsTr("History")
                     onClicked: {
                         //DB.getHistory();
                         drawer.open = !drawer.open
                     }
+                    color: "gray"
+                    icon: Qt.resolvedUrl("images/icon-l-backup.png")
                 }
 
-                Button {
+                ItemButton {
+                    id: bookmarksBtn
+                    anchors.top: parent.top
+                    anchors.right: parent.right
+                    width: parent.width / 2
+                    height: width
+                    text: qsTr("Bookmarks")
+                    onClicked: {
+                        pageStack.push(Qt.resolvedUrl("BookmarksPage.qml"), {dataContainer: page, modelBookmarks: mainWindow.modelBookmarks});
+                    }
+                    color: "brown"
+                    icon: Qt.resolvedUrl("images/icon-l-star.png")
+                }
+
+                ItemButton {
+                    id: youtubeBtn
+                    anchors.left: parent.left
+                    anchors.top: historyBtn.bottom
+                    width: parent.width / 2
+                    height: width
+                    text: qsTr("Search on Youtube")
+                    onClicked: {
+                        pageStack.push(Qt.resolvedUrl("SecondPage.qml"), {dataContainer: page});
+                    }
+                    color: "red"
+                    icon: Qt.resolvedUrl("images/icon-l-service-youtube.png")
+                }
+
+                ItemButton {
                     id: openFileBtn
-                    anchors.top: urlField.bottom
-                    anchors.right: urlField.right
-                    text: "Browse Files"
+                    anchors.top: bookmarksBtn.bottom
+                    anchors.right: parent.right
+                    text: qsTr("Browse Files")
                     visible: true
+                    width: parent.width / 2
+                    height: width
                     onClicked: {
                         if (mainWindow.firstPage.openDialogType === "adv") pageStack.push(Qt.resolvedUrl("fileman/Main.qml"), {dataContainer: mainWindow.firstPage});
                         else if (mainWindow.firstPage.openDialogType === "gallery") pageStack.push(mainWindow.firstPage.videoPickerComponent);
                         else if (mainWindow.firstPage.openDialogType === "simple") pageStack.push(mainWindow.firstPage.openFileComponent);
                     }
+                    color: "blue"
+                    icon: Qt.resolvedUrl("images/icon-l-media-files.png")
                 }
 
-                Button {
-                    id: addToBookmarkBtn
-                    anchors.top: historyBtn.bottom
-                    anchors.topMargin: 15
-                    //anchors.right: historyBtn.right
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    text: "Add to bookmarks"
-                    visible: {
-                        if (urlField.text !== "") return true
-                        else return false
-                    }
+                ItemButton {
+                    id: openUrlBtn
+                    anchors.left: parent.left
+                    anchors.top: youtubeBtn.bottom
+                    width: parent.width / 2
+                    height: width
+                    text: qsTr("Enter URL")
                     onClicked: {
-                        pageStack.push(Qt.resolvedUrl("AddBookmark.qml"), { bookmarks: mainWindow.modelBookmarks, editBookmark: false, bookmarkUrl: urlField.text });
+                        urlField.visible = !urlField.visible
+                        if (urlField.visible) urlField.forceActiveFocus()
                     }
+                    color: "green"
+                    icon: Qt.resolvedUrl("images/icon-l-redirect.png")
                 }
+
+//                TextField {
+//                    id: urlField
+//                    placeholderText: "Type in URL here"
+//                    anchors.top: openFileBtn.bottom
+//                    anchors.horizontalCenter: parent.horizontalCenter
+//                    width: Screen.width - 20
+//                    focus: true
+//                    Component.onCompleted: {
+//                        // console.debug("StreamUrl :" + streamUrl) // DEBUG
+//                        if (streamUrl !== "") {
+//                            text = streamUrl;
+//                            selectAll();
+//                        }
+//                    }
+//                }
+
+//                Button {
+//                    id: addToBookmarkBtn
+//                    anchors.top: historyBtn.bottom
+//                    anchors.topMargin: 15
+//                    //anchors.right: historyBtn.right
+//                    anchors.horizontalCenter: parent.horizontalCenter
+//                    text: "Add to bookmarks"
+//                    visible: {
+//                        if (urlField.text !== "") return true
+//                        else return false
+//                    }
+//                    onClicked: {
+//                        pageStack.push(Qt.resolvedUrl("AddBookmark.qml"), { bookmarks: mainWindow.modelBookmarks, editBookmark: false, bookmarkUrl: urlField.text });
+//                    }
+//                }
             }
 
         }
