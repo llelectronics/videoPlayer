@@ -10,8 +10,7 @@ Dialog {
     property string streamUrl
 
     DialogHeader {
-        id: header
-        title: qsTr("Open URL")
+        acceptText: qsTr("Load URL")
     }
 
     onAccepted: loadUrl()
@@ -51,13 +50,17 @@ Dialog {
 
     Item {
         id: column
-        anchors.fill: parent
+        width:parent.width
+        height: isLandscape ? parent.height - Theme.paddingLarge * 4 : parent.height - Theme.paddingLarge * 6
+        anchors.top: parent.top
+        anchors.topMargin: isLandscape ? Theme.paddingLarge * 4 : Theme.paddingLarge * 6
 
         TextField {
             id: urlField
-            placeholderText: "Type in URL here"
-            anchors.centerIn: parent
+            placeholderText: qsTr("Type in URL here")
+            label: qsTr("URL to media file/stream")
             width: Screen.width - 20
+            anchors.horizontalCenter: parent.horizontalCenter
             focus: true
             Component.onCompleted: {
                 // console.debug("StreamUrl :" + streamUrl) // DEBUG
