@@ -182,8 +182,7 @@ Page {
                     else if (mainWindow.firstPage.openDialogType === "simple") pageStack.push(mainWindow.firstPage.openFileComponent);
                 }
                 else if (btnId == "openUrlBtn") {
-                    grid.urlField.visible = !grid.urlField.visible
-                    if (grid.urlField.visible) grid.urlField.forceActiveFocus()
+                   pageStack.push(Qt.resolvedUrl("OpenURLPage.qml"), {dataContainer: page});
                 }
             }
             color: colour
