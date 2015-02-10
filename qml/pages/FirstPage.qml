@@ -126,219 +126,174 @@ Page {
         }
     }
 
-    SilicaFlickable {
-        id: flick
+
+
+    ListModel {
+        id: menuButtons
+
+        ListElement {
+            btnId: "historyBtn"
+            name: "History"
+            colour: "gray"
+            bicon: "images/icon-l-backup.png"
+        }
+        ListElement {
+            btnId: "bookmarksBtn"
+            name: "Bookmarks"
+            colour: "brown"
+            bicon: "images/icon-l-star.png"
+        }
+        ListElement {
+            btnId: "youtubeBtn"
+            name: "Search on Youtube"
+            colour: "red"
+            bicon: "images/icon-l-service-youtube.png"
+        }
+        ListElement {
+            btnId: "openFileBtn"
+            name: "Browse Files"
+            colour: "blue"
+            bicon: "images/icon-l-media-files.png"
+        }
+        ListElement {
+            btnId: "openUrlBtn"
+            name: "Enter URL"
+            colour: "green"
+            bicon: "images/icon-l-redirect.png"
+        }
+    }
+
+    Component {
+        id: menuButtonsDelegate
+        ItemButton {
+            id: historyBtn
+            width: grid.cellWidth
+            height: grid.cellHeight
+            text: qsTr(name)
+            onClicked: {
+                if (btnId == "historyBtn") drawer.open = !drawer.open
+                else if (btnId == "bookmarksBtn")
+                    pageStack.push(Qt.resolvedUrl("BookmarksPage.qml"), {dataContainer: page, modelBookmarks: mainWindow.modelBookmarks});
+                else if (btnId == "youtubeBtn")
+                    pageStack.push(Qt.resolvedUrl("SecondPage.qml"), {dataContainer: page});
+                else if (btnId == "openFileBtn") {
+                    if (mainWindow.firstPage.openDialogType === "adv") pageStack.push(Qt.resolvedUrl("fileman/Main.qml"), {dataContainer: mainWindow.firstPage});
+                    else if (mainWindow.firstPage.openDialogType === "gallery") pageStack.push(mainWindow.firstPage.videoPickerComponent);
+                    else if (mainWindow.firstPage.openDialogType === "simple") pageStack.push(mainWindow.firstPage.openFileComponent);
+                }
+                else if (btnId == "openUrlBtn") {
+                    grid.urlField.visible = !grid.urlField.visible
+                    if (grid.urlField.visible) grid.urlField.forceActiveFocus()
+                }
+            }
+            color: colour
+            icon: Qt.resolvedUrl(bicon)
+        }
+    }
+
+    Drawer {
+        id: drawer
+
         anchors.fill: parent
 
-        PullDownMenu {
-            id: pulley
-            MenuItem {
-                text: "About "+ appname
-                onClicked: pageStack.push(Qt.resolvedUrl("AboutPage.qml"));
-            }
-            MenuItem {
-                text: "Settings"
-                onClicked: pageStack.push(Qt.resolvedUrl("SettingsPage.qml"));
-            }
-        }
+        dock: page.isPortrait ? Dock.Top : Dock.Left
 
-        PageHeader {
-            id: pageHeader
-            title: {
-                if (urlField.visible) ""
-                else if (drawer.opened) qsTr("History")
-                else qsTr("Open")
-            }
-            TextField {
-                id: urlField
-                visible: false
-                placeholderText: qsTr("Type in URL here")
-                label: qsTr("URL to media")
-                anchors.top: parent.top
-                anchors.horizontalCenter: parent.horizontalCenter
-                anchors.margins: Theme.paddingLarge
-                width: Screen.width - Theme.paddingLarge
-                inputMethodHints: Qt.ImhUrlCharactersOnly | Qt.ImhNoPredictiveText
-                EnterKey.enabled: text.length > 0
-                EnterKey.text: qsTr("Open")
-                Component.onCompleted: {
-                    // console.debug("StreamUrl :" + streamUrl) // DEBUG
-                    if (streamUrl !== "") {
-                        text = streamUrl;
-                        selectAll();
-                    }
+        background: SilicaListView {
+            anchors.fill: parent
+            model: historyModel
+
+            VerticalScrollDecorator {}
+
+            delegate: ListItem {
+                id: listItem
+
+                Label {
+                    x: Theme.paddingLarge
+                    text: hurl
+                    anchors.verticalCenter: parent.verticalCenter
+                    color: listItem.highlighted ? Theme.highlightColor : Theme.primaryColor
+                }
+                onClicked: {
+                    streamUrl = hurl
+                    loadPlayer();
                 }
             }
         }
 
-
-        Drawer {
-            id: drawer
-
+        SilicaGridView {
+            id: grid
             width: parent.width
-            height: parent.height - pageHeader.height
-            anchors.bottom: parent.bottom
-            anchors.top: pageHeader.bottom
-            //anchors.fill: parent
+            height: page.height
 
-            dock: page.isPortrait ? Dock.Top : Dock.Left
-
-            background: SilicaListView {
-                anchors.fill: parent
-                model: historyModel
-
-                // Not necessary now. Later maybe removing all history
-                //            PullDownMenu {
-                //                MenuItem {
-                //                    text: "Option 1"
-                //                }
-                //                MenuItem {
-                //                    text: "Option 2"
-                //                }
-                //            }
-                VerticalScrollDecorator {}
-
-                delegate: ListItem {
-                    id: listItem
-
-                    Label {
-                        x: Theme.paddingLarge
-                        text: hurl
-                        anchors.verticalCenter: parent.verticalCenter
-                        color: listItem.highlighted ? Theme.highlightColor : Theme.primaryColor
-                    }
-                    onClicked: {
-//                        urlField.text = hurl
-//                        drawer.open = !drawer.open
-                        streamUrl = hurl
-                        loadPlayer();
-                        //openUrlPage.loadUrl(); // No autoload for the moment. TODO: Maybe a thing for global settings
-                    }
+            PullDownMenu {
+                id: pulley
+                MenuItem {
+                    text: "About "+ appname
+                    onClicked: pageStack.push(Qt.resolvedUrl("AboutPage.qml"));
+                }
+                MenuItem {
+                    text: "Settings"
+                    onClicked: pageStack.push(Qt.resolvedUrl("SettingsPage.qml"));
                 }
             }
 
             MouseArea {
                 enabled: drawer.open
-                anchors.fill: column
+                anchors.fill: grid
                 onClicked: drawer.open = false
             }
 
-            Item {
-                id: column
-                anchors.fill: parent
+            property TextField urlField
+            property PageHeader pageHeader
 
-                ItemButton {
-                    id: historyBtn
-                    anchors.left: parent.left
+            header: PageHeader {
+                id: pageHeader
+                title: {
+                    if (urlField.visible) ""
+                    else if (drawer.opened) qsTr("History")
+                    else qsTr("Open")
+                }
+                TextField {
+                    id: urlField
+                    visible: false
+                    placeholderText: qsTr("Type in URL here")
+                    label: qsTr("URL to media")
                     anchors.top: parent.top
-                    width: parent.width / 2
-                    height: width
-                    text: qsTr("History")
-                    onClicked: {
-                        //DB.getHistory();
-                        drawer.open = !drawer.open
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    anchors.margins: Theme.paddingLarge
+                    width: Screen.width - Theme.paddingLarge
+                    inputMethodHints: Qt.ImhUrlCharactersOnly | Qt.ImhNoPredictiveText
+                    EnterKey.enabled: text.length > 0
+                    EnterKey.text: qsTr("Open")
+                    Component.onCompleted: {
+                        grid.urlField = urlField
+                        // console.debug("StreamUrl :" + streamUrl) // DEBUG
+                        if (streamUrl !== "") {
+                            text = streamUrl;
+                            selectAll();
+                        }
                     }
-                    color: "gray"
-                    icon: Qt.resolvedUrl("images/icon-l-backup.png")
                 }
-
-                ItemButton {
-                    id: bookmarksBtn
-                    anchors.top: parent.top
-                    anchors.right: parent.right
-                    width: parent.width / 2
-                    height: width
-                    text: qsTr("Bookmarks")
-                    onClicked: {
-                        pageStack.push(Qt.resolvedUrl("BookmarksPage.qml"), {dataContainer: page, modelBookmarks: mainWindow.modelBookmarks});
-                    }
-                    color: "brown"
-                    icon: Qt.resolvedUrl("images/icon-l-star.png")
-                }
-
-                ItemButton {
-                    id: youtubeBtn
-                    anchors.left: parent.left
-                    anchors.top: historyBtn.bottom
-                    width: parent.width / 2
-                    height: width
-                    text: qsTr("Search on Youtube")
-                    onClicked: {
-                        pageStack.push(Qt.resolvedUrl("SecondPage.qml"), {dataContainer: page});
-                    }
-                    color: "red"
-                    icon: Qt.resolvedUrl("images/icon-l-service-youtube.png")
-                }
-
-                ItemButton {
-                    id: openFileBtn
-                    anchors.top: bookmarksBtn.bottom
-                    anchors.right: parent.right
-                    text: qsTr("Browse Files")
-                    visible: true
-                    width: parent.width / 2
-                    height: width
-                    onClicked: {
-                        if (mainWindow.firstPage.openDialogType === "adv") pageStack.push(Qt.resolvedUrl("fileman/Main.qml"), {dataContainer: mainWindow.firstPage});
-                        else if (mainWindow.firstPage.openDialogType === "gallery") pageStack.push(mainWindow.firstPage.videoPickerComponent);
-                        else if (mainWindow.firstPage.openDialogType === "simple") pageStack.push(mainWindow.firstPage.openFileComponent);
-                    }
-                    color: "blue"
-                    icon: Qt.resolvedUrl("images/icon-l-media-files.png")
-                }
-
-                ItemButton {
-                    id: openUrlBtn
-                    anchors.left: parent.left
-                    anchors.top: youtubeBtn.bottom
-                    width: parent.width / 2
-                    height: width
-                    text: qsTr("Enter URL")
-                    onClicked: {
-                        urlField.visible = !urlField.visible
-                        if (urlField.visible) urlField.forceActiveFocus()
-                    }
-                    color: "green"
-                    icon: Qt.resolvedUrl("images/icon-l-redirect.png")
-                }
-
-//                TextField {
-//                    id: urlField
-//                    placeholderText: "Type in URL here"
-//                    anchors.top: openFileBtn.bottom
-//                    anchors.horizontalCenter: parent.horizontalCenter
-//                    width: Screen.width - 20
-//                    focus: true
-//                    Component.onCompleted: {
-//                        // console.debug("StreamUrl :" + streamUrl) // DEBUG
-//                        if (streamUrl !== "") {
-//                            text = streamUrl;
-//                            selectAll();
-//                        }
-//                    }
-//                }
-
-//                Button {
-//                    id: addToBookmarkBtn
-//                    anchors.top: historyBtn.bottom
-//                    anchors.topMargin: 15
-//                    //anchors.right: historyBtn.right
-//                    anchors.horizontalCenter: parent.horizontalCenter
-//                    text: "Add to bookmarks"
-//                    visible: {
-//                        if (urlField.text !== "") return true
-//                        else return false
-//                    }
-//                    onClicked: {
-//                        pageStack.push(Qt.resolvedUrl("AddBookmark.qml"), { bookmarks: mainWindow.modelBookmarks, editBookmark: false, bookmarkUrl: urlField.text });
-//                    }
-//                }
+                Component.onCompleted: grid.pageHeader = pageHeader
             }
+            cellWidth: {
+                if (page.orientation == Orientation.PortraitInverted || page.orientation == Orientation.Portrait)
+                    page.width / 2
+                else
+                    page.width / 4
+            }
+            cellHeight: {
+                if (page.orientation == Orientation.PortraitInverted || page.orientation == Orientation.Portrait)
+                    (page.height / 3) - pageHeader.height / 2
+                else
+                    (page.height / 2) - pageHeader.height / 2
+            }
+            model: menuButtons
+            delegate: menuButtonsDelegate
+            snapMode: GridView.SnapToRow
+        } // SilicaGridView
+    } // Drawer
 
-        }
-    }
-
-
-}
+} // Page
 
 
