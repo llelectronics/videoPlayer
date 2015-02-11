@@ -1,0 +1,20 @@
+harbour-videoPlayer (new-ui) - firstPage
+120m  37m  26m S  0.0  4.6   0:02.84 harbour-videoPl 
+
+harbour-videoPlayer - firstPage
+137m  42m  28m S  4.2  5.2   0:04.63 harbour-videoPl
+
+harbour-videoPlayer - movie playes locally
+286m  72m  41m S 19.3  9.0   0:11.63 harbour-videoPl
+
+harbour-videoPlayer (new-ui) - movie plays locally
+287m  74m  41m S 22.1  9.1   0:09.17 harbour-videoPl
+
+harbour-videoPlayer (new-ui w/GridView) - firstPage
+132m  34m  22m S  0.0  4.2   0:03.91 harbour-videoPl
+
+harbour-videoPlayer (new-ui w/GridView) - movie plays locally
+296m  70m  38m S 22.0  8.7   0:08.54 harbour-videoPl
+
+harbour-videoPlayer (new-ui w/GridView) - movie plays youtube video
+353m 104m  54m S 87.3 12.9   0:29.32 harbour-videoPl
