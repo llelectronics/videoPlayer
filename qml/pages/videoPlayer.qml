@@ -171,7 +171,7 @@ Page {
                     // Illegal chars: `~!@#$%^&*()-=+\|/?.>,<;:'"[{]}
                     //console.debug("[FileDetails -> Download YT Video]: " + mainWindow.firstPage.youtubeDirectUrl)
                     mainWindow.firstPage.streamTitle = YT.getDownloadableTitleString(mainWindow.firstPage.streamTitle)
-                    pageStack.push(Qt.resolvedUrl("DownloadManager.qml"), {"downloadUrl": mainWindow.firstPage.youtubeDirectUrl, "downloadName": mainWindow.firstPage.streamTitle});
+                    pageStack.push(Qt.resolvedUrl("ytQualityChooser.qml"), {"streamTitle": streamTitle, "url720p": url720p, "url480p": url480p, "url360p": url360p, "url240p": url240p, "ytDownload": true});
                 }
             }
             MenuItem {
