@@ -2,31 +2,38 @@
 .import QtQuick.LocalStorage 2.0 as LS
 // First, let's create a short helper function to get the database connection
 function getDatabase() {
-    return LS.LocalStorage.openDatabaseSync("LLsVideoPlayer", "0.1", "StorageDatabase", 100000);
+    return LS.LocalStorage.openDatabaseSync("LLsVideoPlayer", "", "StorageDatabase", 100000);
 }
 
 // At the start of the application, we can initialize the tables we need if they haven't been created yet
 function initialize() {
     var db = getDatabase();
-    db.transaction(
-                function(tx) {
-                    // Create the history table if it doesn't already exist
-                    // If the table exists, this is skipped
-                    tx.executeSql('CREATE TABLE IF NOT EXISTS history(uid INTEGER UNIQUE, url TEXT)');
-                    // Limit history entries to 10
-                    tx.executeSql('CREATE TRIGGER IF NOT EXISTS delete_till_10 INSERT ON history WHEN (select count(*) from history)>9 \
+    if(db.version == '') {
+        db.changeVersion('', '0.2', function(tx) {
+            // Create the history table if it doesn't already exist
+            // If the table exists, this is skipped
+            tx.executeSql('CREATE TABLE IF NOT EXISTS history(uid INTEGER UNIQUE, url TEXT, title TEXT)');
+            // Limit history entries to 10
+            tx.executeSql('CREATE TRIGGER IF NOT EXISTS delete_till_10 INSERT ON history WHEN (select count(*) from history)>9 \
 BEGIN \
     DELETE FROM history WHERE history.uid IN (SELECT history.uid FROM history ORDER BY history.uid limit (select count(*) -10 from history)); \
 END;')
 
-                    tx.executeSql('CREATE TABLE IF NOT EXISTS bookmarks(title TEXT, url TEXT)');
-                    tx.executeSql('CREATE TABLE IF NOT EXISTS settings(setting TEXT, value TEXT)');
-                    tx.executeSql('CREATE UNIQUE INDEX IF NOT EXISTS idx_settings ON settings(setting)');
-                });
+            tx.executeSql('CREATE TABLE IF NOT EXISTS bookmarks(title TEXT, url TEXT)');
+            tx.executeSql('CREATE TABLE IF NOT EXISTS settings(setting TEXT, value TEXT)');
+            tx.executeSql('CREATE UNIQUE INDEX IF NOT EXISTS idx_settings ON settings(setting)');
+        });
+    }
+    else if (db.version == '0.1') {
+        // Need to upgrade History here
+        db.changeVersion('0.1', '0.2', function(tx) {
+            tx.executeSql('alter table history add title TEXT');
+        });
+    }
 }
 
 // This function is used to write history into the database
-function addHistory(url) {
+function addHistory(url,title) {
     var date = new Date();
     var db = getDatabase();
     var res = "";
@@ -39,7 +46,7 @@ function addHistory(url) {
             //console.debug("Url not found so add it newly");
         }
 
-        var rs = tx.executeSql('INSERT OR REPLACE INTO history VALUES (?,?);', [date.getTime(),url]);
+        var rs = tx.executeSql('INSERT OR REPLACE INTO history VALUES (?,?,?);', [date.getTime(),url,title]);
         if (rs.rowsAffected > 0) {
             res = "OK";
             //console.log ("Saved to database");
@@ -69,10 +76,12 @@ function getHistory() {
     var db = getDatabase();
     var respath="";
     db.transaction(function(tx) {
-        var rs = tx.executeSql('SELECT history.url FROM history ORDER BY history.uid;');
+        var rs = tx.executeSql('SELECT * FROM history ORDER BY history.uid;');
         for (var i = 0; i < rs.rows.length; i++) {
-            firstPage.addHistory(rs.rows.item(i).url)
-            //console.debug("Get History urls:" + rs.rows.item(i).url)
+            if (rs.rows.item(i).title != null) {
+                //console.debug("[db.js] History text != '' :" + rs.rows.item(i).title);
+                firstPage.addHistory(rs.rows.item(i).url,rs.rows.item(i).title)
+            } else firstPage.addHistory(rs.rows.item(i).url,rs.rows.item(i).url)
         }
     })
 }

@@ -63,8 +63,6 @@ Page {
     }
 
     onStreamUrlChanged: {
-        //Write into history database
-        DB.addHistory(streamUrl);
         if (errorDetail.visible && errorTxt.visible) { errorDetail.visible = false; errorTxt.visible = false }
         videoPoster.showControls();
         dataContainer.streamTitle = ""  // Reset Stream Title here
@@ -84,11 +82,12 @@ Page {
             //console.debug("[videoPlayer.qml] Loading Youtube Title from original URL")
             YT.getYoutubeTitle(originalUrl);
         }
-        if (dataContainer.streamTitle == "") dPage.title = findBaseName(streamUrl)
-    }
+        if (streamTitle === "") streamTitle = findBaseName(streamUrl)
 
-    onStreamTitleChanged: {
-        if (streamTitle != "") dPage.title = streamTitle
+        //Write into history database
+        DB.addHistory(streamUrl,streamTitle);
+        // Don't forgt to write it to the List aswell
+        mainWindow.firstPage.addHistory(streamUrl,streamTitle);
     }
 
     Rectangle {

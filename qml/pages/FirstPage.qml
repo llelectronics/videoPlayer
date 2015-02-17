@@ -84,13 +84,22 @@ Page {
         pageStack.push(Qt.resolvedUrl("videoPlayer.qml"), {dataContainer: page});
     }
 
-    function addHistory(url) {
+    function addHistory(url,title) {
         //console.debug("Adding " + url);
-        historyModel.append({"hurl": url});
+        if (! historyModel.contains(title)) historyModel.append({"hurl": url, "htitle": title});
     }
 
     ListModel {
         id: historyModel
+
+        function contains(htitle) {
+            for (var i=0; i<count; i++) {
+                if (get(i).htitle == htitle)  {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 
     Keys.onEnterPressed: {
@@ -208,7 +217,7 @@ Page {
 
                 Label {
                     x: Theme.paddingLarge
-                    text: hurl
+                    text: htitle
                     anchors.verticalCenter: parent.verticalCenter
                     color: listItem.highlighted ? Theme.highlightColor : Theme.primaryColor
                 }
