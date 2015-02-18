@@ -389,10 +389,10 @@ Page {
                         }
                     }
                 }
-                onPressAndHold: {
-                    //console.debug("[Press and Hold detected]")
-                    if (! drawer.open) drawer.open = true
-                }
+//                onPressAndHold: {
+//                    //console.debug("[Press and Hold detected]")
+//                    if (! drawer.open) drawer.open = true
+//                }
                 onPositionChanged: {
                     if ((enableSubtitles) && (currentVideoSub)) flick.checkSubtitles()
                 }
