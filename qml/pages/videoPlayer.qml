@@ -82,7 +82,6 @@ Page {
             //console.debug("[videoPlayer.qml] Loading Youtube Title from original URL")
             YT.getYoutubeTitle(originalUrl);
         }
-        if (streamTitle === "") streamTitle = findBaseName(streamUrl)
 
         //Write into history database
         DB.addHistory(streamUrl,streamTitle);
