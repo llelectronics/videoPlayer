@@ -86,19 +86,42 @@ Page {
 
     function addHistory(url,title) {
         //console.debug("Adding " + url);
-        if (! historyModel.contains(title)) historyModel.append({"hurl": url, "htitle": title});
+        historyModel.append({"hurl": url, "htitle": title});
+    }
+
+    function add2History(url,title) {
+        if (historyModel.containsTitle(title) || historyModel.containsUrl(url)) {
+            historyModel.removeUrl(url);
+        }
+        historyModel.append({"hurl": url, "htitle": title});
     }
 
     ListModel {
         id: historyModel
 
-        function contains(htitle) {
+        function containsTitle(htitle) {
             for (var i=0; i<count; i++) {
                 if (get(i).htitle == htitle)  {
                     return true;
                 }
             }
             return false;
+        }
+        function containsUrl(hurl) {
+            for (var i=0; i<count; i++) {
+                if (get(i).hurl == hurl)  {
+                    return true;
+                }
+            }
+            return false;
+        }
+        function removeUrl(hurl) {
+            for (var i=0; i<count; i++) {
+                if (get(i).hurl == hurl)  {
+                    remove(i)
+                }
+            }
+            return;
         }
     }
 

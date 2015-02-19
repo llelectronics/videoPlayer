@@ -82,11 +82,14 @@ Page {
             //console.debug("[videoPlayer.qml] Loading Youtube Title from original URL")
             YT.getYoutubeTitle(originalUrl);
         }
+        if (dataContainer.streamTitle == "") dataContainer.streamTitle = findBaseName(streamUrl)
+    }
 
+    onStreamTitleChanged: {
         //Write into history database
         DB.addHistory(streamUrl,streamTitle);
         // Don't forgt to write it to the List aswell
-        mainWindow.firstPage.addHistory(streamUrl,streamTitle);
+        mainWindow.firstPage.add2History(streamUrl,streamTitle);
     }
 
     Rectangle {
