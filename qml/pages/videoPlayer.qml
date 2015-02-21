@@ -159,6 +159,7 @@ Page {
         PullDownMenu {
             id: pulley
             MenuItem {
+                id: ytMenuItem
                 text: qsTr("Download Youtube Video")
                 visible: {
                     if ((/^http:\/\/ytapi.com/).test(mainWindow.firstPage.streamUrl)) return true
@@ -173,6 +174,22 @@ Page {
                     //console.debug("[FileDetails -> Download YT Video]: " + mainWindow.firstPage.youtubeDirectUrl)
                     mainWindow.firstPage.streamTitle = YT.getDownloadableTitleString(mainWindow.firstPage.streamTitle)
                     pageStack.push(Qt.resolvedUrl("ytQualityChooser.qml"), {"streamTitle": streamTitle, "url720p": url720p, "url480p": url480p, "url360p": url360p, "url240p": url240p, "ytDownload": true});
+                }
+            }
+            MenuItem {
+                text: qsTr("Download")
+                visible: {
+                    if ((/^https?:\/\/.*$/).test(mainWindow.firstPage.streamUrl) && ytMenuItem.visible == false) return true
+                    else return false
+                }
+                //onClicked: pageStack.push(Qt.resolvedUrl("DownloadManager.qml"), {"downloadUrl": streamUrl, "downloadName": streamTitle});
+                // Alternatively use direct youtube url instead of ytapi for downloads (ytapi links not always download with download manager)
+                onClicked: {
+                    // Filter out all chars that might stop the download manager from downloading the file
+                    // Illegal chars: `~!@#$%^&*()-=+\|/?.>,<;:'"[{]}
+                    //console.debug("[FileDetails -> Download YT Video]: " + mainWindow.firstPage.youtubeDirectUrl)
+                    mainWindow.firstPage.streamTitle = YT.getDownloadableTitleString(mainWindow.firstPage.streamTitle)
+                    pageStack.push(Qt.resolvedUrl("DownloadManager.qml"), {"downloadName": streamTitle, "downloadUrl": streamUrl});
                 }
             }
             MenuItem {
