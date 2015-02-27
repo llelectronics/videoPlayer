@@ -533,6 +533,7 @@ Page {
                     errorTxt.text = error;
                     errorDetail.text = errorString;
                     errorBox.visible = true;
+                    stop();
                 }
             }
 
