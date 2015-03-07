@@ -23,6 +23,8 @@ Dialog {
 //        } else return valid
 //    }
 
+    RemorsePopup { id: remorse }
+
     function loadDefaults() {
         loadSubtitlesSwitch.checked = true ;
         subtitleSizeCombo.currentIndex = 34 - 25;
@@ -31,6 +33,10 @@ Dialog {
         directYoutubeSwitch.checked = true;
         openDialogCombo.currentIndex = 0;
         liveViewSwitch.checked = true;
+    }
+
+    function clearHistory() {
+        remorse.execute(qsTr("Clear History"), function() { DB.clearTable("history"); mainWindow.firstPage.historyModel.clear() } )
     }
 
     function saveSettings() {
@@ -382,6 +388,19 @@ Dialog {
                 anchors.horizontalCenter: parent.horizontalCenter
                 text: "Use live preview when minimized"
                 checked: mainWindow.firstPage.liveView
+            }
+
+            BackgroundItem {
+                id: clearHistoryButton
+                Label {
+                    text: qsTr("Clear History")
+                    anchors.verticalCenter: parent.verticalCenter
+                    anchors.left: parent.left
+                    anchors.leftMargin: Theme.paddingLarge
+                    color: clearHistoryButton.highlighted ? Theme.highlightColor : Theme.primaryColor
+                }
+                anchors.horizontalCenter: parent.horizontalCenter
+                onClicked: clearHistory();
             }
 
 //            SectionHeader {

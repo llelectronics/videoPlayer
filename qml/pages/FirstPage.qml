@@ -69,6 +69,7 @@ Page {
     // Aliase
     property alias videoPickerComponent: videoPickerComponent
     property alias openFileComponent: openFileComponent
+    property alias historyModel: historyModel
 
     Component.onCompleted: {
         // Initialize the database

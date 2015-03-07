@@ -162,6 +162,24 @@ function stringToBoolean(str) {
     }
 }
 
+function clearTable(table) {
+    var db = getDatabase();
+    var res = "";
+    db.transaction(function(tx) {
+        var rs = tx.executeSql("DELETE FROM " + table);
+        if (rs.rowsAffected > 0) {
+            res = "OK";
+            console.log ("Cleared database table " + table);
+        } else {
+            res = "Error";
+            console.log ("Error clearing database table " + table);
+        }
+    }
+    );
+    // The function returns “OK” if it was successful, or “Error” if it wasn't
+    return res;
+}
+
 // This function is used to retrieve settings from database
 function getSettings() {
     var db = getDatabase();
