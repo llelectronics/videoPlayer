@@ -1,4 +1,5 @@
 var ytfailCount = 0;
+var ytApiKey = 'AIzaSyBHWWmICLJr2-MoxRjTS7qs2vOJ5HY86so'
 
 function checkYoutube(url) {
     // Yeah I hate RegEx. Thx user2200660 for this nice youtube regex ;)
@@ -34,13 +35,14 @@ function getYoutubeTitle(url) {
     var youtube_id;
     youtube_id = getYtID(url);
     var xhr = new XMLHttpRequest();
-    xhr.open("GET","http://gdata.youtube.com/feeds/api/videos/" + youtube_id + "?v=2&alt=jsonc",true);
+    xhr.open("GET","https://www.googleapis.com/youtube/v3/videos?id=" + youtube_id + "&key="+ ytApiKey + "&fields=items(snippet(title))&part=snippet",true);
     xhr.onreadystatechange = function() {
         if (xhr.readyState === 4) {
             if (xhr.status === 200) {
                 var jsonObject = eval('(' + xhr.responseText + ')');
-                console.log("Youtube Title: " + jsonObject.data.title);
-                firstPage.streamTitle = jsonObject.data.title;
+                //console.log("JSON Response: " + jsonObject.data.items[0].snippet);
+                console.log("Youtube Title: " + jsonObject.items[0].snippet.title);
+                firstPage.streamTitle = jsonObject.items[0].snippet.title;
                 //                for ( var index in jsonObject.data )
                 //                {
                 //                    console.log("Youtube Title: " + jsonObject.data.title);
