@@ -36,6 +36,7 @@
 #include <sailfishapp.h>
 #include "DownloadManager.hpp"
 #include "fmhelper.hpp"
+#include "youtubedl-helper.hpp"
 #include "folderlistmodel/qquickfolderlistmodel.h"
 
 int main(int argc, char *argv[])
@@ -85,6 +86,9 @@ int main(int argc, char *argv[])
 
     FM *fileAction = new FM();
     view->engine()->rootContext()->setContextProperty("_fm", fileAction);
+
+    ythelper *youtubedl = new ythelper();
+    view->engine()->rootContext()->setContextProperty("_ytdl", youtubedl);
 
     view->show();
 

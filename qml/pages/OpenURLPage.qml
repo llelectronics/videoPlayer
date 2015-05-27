@@ -16,6 +16,16 @@ Dialog {
     onAccepted: loadUrl()
     onCanceled: pageStack.replace(dataContainer)
 
+    function isUrl(url) {
+        var pattern = new RegExp(/^(([\w]+:)?\/\/)?(([\d\w]|%[a-fA-f\d]{2,2})+(:([\d\w]|%[a-fA-f\d]{2,2})+)?@)?([\d\w][-\d\w]{0,253}[\d\w]\.)+[\w]{2,4}(:[\d]+)?(\/([-+_~.\d\w]|%[a-fA-f\d]{2,2})*)*(\?(&?([-+_~.\d\w]|%[a-fA-f\d]{2,2})=?)*)?(#([-+_~.\d\w]|%[a-fA-f\d]{2,2})*)?$/);
+        if(!pattern.test(url)) {
+            console.debug("Not a valid URL.");
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     function loadUrl() {
         if (YT.checkYoutube(urlField.text.toString())=== true) {
             //var yturl = YT.getYoutubeVid(urlField.text.toString());
@@ -30,8 +40,20 @@ Dialog {
             }
         }
         else {
-            if (dataContainer != null) {
+            if (isUrl(urlField.text.toString()) === true) {
+                // Call C++ side here to grab url
+                _ytdl.setUrl(urlField.text.toString());
+                streamUrl = _ytdl.getStreamUrl();
+                if (dataContainer != null) {
+                    mainWindow.firstPage.streamUrl = streamUrl;
+                    mainWindow.firstPage.originalUrl = urlField.text.toString();
+                    mainWindow.firstPage.streamTitle = "";
+                    mainWindow.firstPage.loadPlayer();
+                }
+            }
+          else if (dataContainer != null) {
                 mainWindow.firstPage.streamUrl = urlField.text;
+                mainWindow.firstPage.originalUrl = "";
                 mainWindow.firstPage.streamTitle = "";
                 mainWindow.firstPage.loadPlayer();
             }

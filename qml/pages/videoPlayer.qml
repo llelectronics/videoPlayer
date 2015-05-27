@@ -55,7 +55,6 @@ Page {
         }
     }
 
-
     function findBaseName(url) {
         var fileName = url.substring(url.lastIndexOf('/') + 1);
         var dot = fileName.lastIndexOf('.');

@@ -46,12 +46,14 @@ OTHER_FILES += qml/harbour-videoPlayer.qml \
     qml/pages/fileman/OpenDialog.qml \
     qml/pages/helper/userscript.js \
     qml/pages/videoPlayer.qml \
-    qml/pages/helper/ItemButton.qml
+    qml/pages/helper/ItemButton.qml \
+    qml/pages/helper/youtube-dl
 
 HEADERS += \
     src/DownloadManager.hpp \
     src/fmhelper.hpp \
     src/folderlistmodel/qquickfolderlistmodel.h \
     src/folderlistmodel/fileproperty_p.h \
-    src/folderlistmodel/fileinfothread_p.h
+    src/folderlistmodel/fileinfothread_p.h \
+    src/youtubedl-helper.hpp
 
