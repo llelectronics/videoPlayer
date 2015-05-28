@@ -70,6 +70,7 @@ Page {
     property alias videoPickerComponent: videoPickerComponent
     property alias openFileComponent: openFileComponent
     property alias historyModel: historyModel
+    property alias busy: busy
 
     Component.onCompleted: {
         // Initialize the database
@@ -204,6 +205,7 @@ Page {
             height: grid.cellHeight
             text: qsTr(name)
             onClicked: {
+                errTxt.visible = false;
                 if (btnId == "historyBtn") drawer.open = !drawer.open
                 else if (btnId == "bookmarksBtn")
                     pageStack.push(Qt.resolvedUrl("BookmarksPage.qml"), {dataContainer: page, modelBookmarks: mainWindow.modelBookmarks});
@@ -325,6 +327,57 @@ Page {
             snapMode: GridView.SnapToRow
         } // SilicaGridView
     } // Drawer
+
+    Connections {
+        target: _ytdl
+        onStreamUrlChanged: {
+            page.streamUrl = changedUrl;
+            page.originalUrl = _ytdl.getReqUrl();
+            page.streamTitle = "";
+            page.loadPlayer();
+            busy.running = false
+            busy.visible = false
+        }
+        onError: {
+            busy.running = false
+            errTxt.visible = true
+            errTxt.text = message
+        }
+    }
+
+    Rectangle {
+        color: "black"
+        opacity: 0.60
+        anchors.fill: parent
+        visible: {
+            if (busy.running) return true;
+            else if (errTxt.visible) return true;
+            else return false;
+        }
+        MouseArea {
+            anchors.fill: parent
+            onClicked: {
+                if (errTxt.visible) errTxt.visible = false;
+            }
+        }
+    }
+
+    BusyIndicator {
+        id: busy
+        anchors.centerIn: parent
+        width: Theme.iconSizeLarge
+        height: Theme.iconSizeLarge
+        running: false
+        visible: false
+    }
+
+    Label {
+        id: errTxt
+        anchors.top: busy.bottom
+        anchors.horizontalCenter: busy.verticalCenter
+        font.pointSize: Theme.fontSizeMedium
+        visible: false
+    }
 
 } // Page
 

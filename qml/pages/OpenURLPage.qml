@@ -27,6 +27,7 @@ Dialog {
     }
 
     function loadUrl() {
+        mainWindow.firstPage.busy.visible = false
         if (YT.checkYoutube(urlField.text.toString())=== true) {
             //var yturl = YT.getYoutubeVid(urlField.text.toString());
             //            YT.getYoutubeTitle(urlField.text.toString());
@@ -43,13 +44,15 @@ Dialog {
             if (isUrl(urlField.text.toString()) === true) {
                 // Call C++ side here to grab url
                 _ytdl.setUrl(urlField.text.toString());
-                streamUrl = _ytdl.getStreamUrl();
-                if (dataContainer != null) {
-                    mainWindow.firstPage.streamUrl = streamUrl;
-                    mainWindow.firstPage.originalUrl = urlField.text.toString();
-                    mainWindow.firstPage.streamTitle = "";
-                    mainWindow.firstPage.loadPlayer();
-                }
+                _ytdl.getStreamUrl();
+                mainWindow.firstPage.busy.visible = true;
+                mainWindow.firstPage.busy.running = true;
+//                if (dataContainer != null) {
+//                    mainWindow.firstPage.streamUrl = streamUrl;
+//                    mainWindow.firstPage.originalUrl = urlField.text.toString();
+//                    mainWindow.firstPage.streamTitle = "";
+//                    mainWindow.firstPage.loadPlayer();
+//                }
             }
           else if (dataContainer != null) {
                 mainWindow.firstPage.streamUrl = urlField.text;
@@ -59,6 +62,8 @@ Dialog {
             }
         }
     }
+
+
 
     Keys.onEnterPressed: loadUrl();
     Keys.onReturnPressed: loadUrl();
