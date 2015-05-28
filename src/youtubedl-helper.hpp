@@ -33,19 +33,24 @@ public slots:
         //qDebug() << "Starting process with url:" << reqUrl;
         process.start("/usr/share/harbour-videoPlayer/qml/pages/helper/youtube-dl -g " + reqUrl);
 
-        connect(&process, SIGNAL(readyReadStandardOutput()), this, SLOT(printOutput()));
-        connect(&process, SIGNAL(readyReadStandardError()), this, SLOT(printError()));
+        connect(&process, SIGNAL(finished(int)), this, SLOT(printOutput(int)));
 
         //process.waitForFinished(-1);
         //qDebug() << "Called the C++ slot and got following url:" << out.simplified();
         //return out.simplified();
     }
-    void printOutput()
+    void printOutput(int exitCode)
     {
-        QByteArray out = process.readAllStandardOutput();
-        qDebug() << "Called the C++ slot and got following url:" << out.simplified();
-        streamUrl = out.simplified();
-        streamUrlChanged(streamUrl);
+        if (exitCode == 0) {
+            QByteArray out = process.readAllStandardOutput();
+            QList<QByteArray> outputList = out.split('\n');
+            qDebug() << "Called the C++ slot and got following url:" << outputList[0];
+            streamUrl = outputList[0];
+            streamUrlChanged(streamUrl);
+        }
+        else {
+            printError();
+        }
     }
     void printError()
     {

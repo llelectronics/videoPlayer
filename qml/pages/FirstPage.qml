@@ -331,17 +331,26 @@ Page {
     Connections {
         target: _ytdl
         onStreamUrlChanged: {
-            page.streamUrl = changedUrl;
-            page.originalUrl = _ytdl.getReqUrl();
-            page.streamTitle = "";
-            page.loadPlayer();
-            busy.running = false
-            busy.visible = false
+            if (changedUrl != "") {  // Don't load empty stuff
+                page.streamUrl = changedUrl;
+                page.originalUrl = _ytdl.getReqUrl();
+                busy.running = false
+                busy.visible = false
+                page.streamTitle = "";
+                page.loadPlayer();
+            }
+            else {
+                // Fail silently
+                busy.running = false
+                busy.visible = false
+            }
         }
         onError: {
             busy.running = false
-            errTxt.visible = true
-            errTxt.text = message
+            if (message != "") {
+                errTxt.visible = true
+                errTxt.text = message
+            }
         }
     }
 
@@ -354,29 +363,36 @@ Page {
             else if (errTxt.visible) return true;
             else return false;
         }
-        MouseArea {
-            anchors.fill: parent
-            onClicked: {
-                if (errTxt.visible) errTxt.visible = false;
-            }
-        }
     }
 
     BusyIndicator {
         id: busy
         anchors.centerIn: parent
-        width: Theme.iconSizeLarge
-        height: Theme.iconSizeLarge
+        size: BusyIndicatorSize.Large
         running: false
         visible: false
     }
 
-    Label {
+    TextArea {
         id: errTxt
-        anchors.top: busy.bottom
-        anchors.horizontalCenter: busy.verticalCenter
-        font.pointSize: Theme.fontSizeMedium
+        anchors.top: parent.top
+        height: parent.height - (dismissBtn.height + Theme.paddingLarge)
+        width: parent.width
+        font.pointSize: Theme.fontSizeSmall
+        color: Theme.primaryColor
         visible: false
+        background: null
+        wrapMode: TextEdit.WordWrap
+    }
+    Button {
+        id: dismissBtn
+        anchors.top: errTxt.bottom
+        anchors.horizontalCenter: parent.horizontalCenter
+        visible: errTxt.visible
+        text: qsTr("Dismiss")
+        onClicked: {
+            if (errTxt.visible) errTxt.visible = false;
+        }
     }
 
 } // Page
