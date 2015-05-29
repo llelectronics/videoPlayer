@@ -72,6 +72,8 @@ Page {
     property alias historyModel: historyModel
     property alias busy: busy
 
+    property bool ytdlStream: false
+
     Component.onCompleted: {
         // Initialize the database
         DB.initialize();
@@ -80,6 +82,11 @@ Page {
 
     onStreamTitleChanged: {
         console.debug("[firstPage.qml] streamTitle: " + streamTitle)
+    }
+
+    onStreamUrlChanged: {
+        if (! ytdlStream) streamTitle = ""  // Reset Stream Title here
+        ytQual = ""
     }
 
     function loadPlayer() {
@@ -336,13 +343,18 @@ Page {
                 page.originalUrl = _ytdl.getReqUrl();
                 busy.running = false
                 busy.visible = false
-                page.streamTitle = "";
+                page.ytdlStream = true
                 page.loadPlayer();
             }
             else {
                 // Fail silently
                 busy.running = false
                 busy.visible = false
+            }
+        }
+        onSTitleChanged: {
+            if (sTitle != "") {
+                page.streamTitle = sTitle
             }
         }
         onError: {

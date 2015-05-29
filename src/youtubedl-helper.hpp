@@ -13,10 +13,13 @@ class ythelper : public QObject
 public:
     QString reqUrl;
     QString streamUrl;
+    QString streamTitle;
     QString errorMsg;
-    QProcess process;
+    QProcess streamProcess;
+    QProcess titleProcess;
 signals:
     void streamUrlChanged(QString changedUrl);
+    void sTitleChanged(QString sTitle);
     void error(QString message);
 public slots:
     void setUrl(QString url)
@@ -29,20 +32,20 @@ public slots:
     }
     void getStreamUrl()
     {
-
         //qDebug() << "Starting process with url:" << reqUrl;
-        process.start("/usr/share/harbour-videoPlayer/qml/pages/helper/youtube-dl -g " + reqUrl);
-
-        connect(&process, SIGNAL(finished(int)), this, SLOT(printOutput(int)));
-
-        //process.waitForFinished(-1);
-        //qDebug() << "Called the C++ slot and got following url:" << out.simplified();
-        //return out.simplified();
+        streamProcess.start("/usr/share/harbour-videoPlayer/qml/pages/helper/youtube-dl -g " + reqUrl);
+        connect(&streamProcess, SIGNAL(finished(int)), this, SLOT(getStreamUrlOutput(int)));
     }
-    void printOutput(int exitCode)
+    void getStreamTitle()
+    {
+        //qDebug() << "Starting process with url:" << reqUrl;
+        titleProcess.start("/usr/share/harbour-videoPlayer/qml/pages/helper/youtube-dl -e " + reqUrl);
+        connect(&titleProcess, SIGNAL(finished(int)), this, SLOT(getTitleOutput(int)));
+    }
+    void getStreamUrlOutput(int exitCode)
     {
         if (exitCode == 0) {
-            QByteArray out = process.readAllStandardOutput();
+            QByteArray out = streamProcess.readAllStandardOutput();
             QList<QByteArray> outputList = out.split('\n');
             qDebug() << "Called the C++ slot and got following url:" << outputList[0];
             streamUrl = outputList[0];
@@ -54,10 +57,20 @@ public slots:
     }
     void printError()
     {
-        QByteArray errorOut = process.readAllStandardError();
+        QByteArray errorOut = streamProcess.readAllStandardError();
         qDebug() << "Called the C++ slot and got following error:" << errorOut.simplified();
         errorMsg = errorOut.simplified();
         error(errorMsg);
+    }
+    void getTitleOutput(int exitCode)
+    {
+        if (exitCode == 0) {
+            QByteArray out = titleProcess.readAllStandardOutput();
+            QList<QByteArray> outputList = out.split('\n');
+            qDebug() << "Called the C++ slot and got following url:" << outputList[0];
+            streamTitle = outputList[0];
+            sTitleChanged(streamTitle);
+        }
     }
 };
 

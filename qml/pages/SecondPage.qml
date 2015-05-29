@@ -156,6 +156,7 @@ import "helper/yt.js" as YT
                                 dataContainer.loadPlayer();
                             }
                             ytView.reload(); // WTF why is this working with IgnoreRequest
+
                         } else { request.action = WebView.AcceptRequest; }
                     }
                     else {

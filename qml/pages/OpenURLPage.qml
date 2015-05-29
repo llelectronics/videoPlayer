@@ -45,6 +45,7 @@ Dialog {
                 // Call C++ side here to grab url
                 _ytdl.setUrl(urlField.text.toString());
                 _ytdl.getStreamUrl();
+                _ytdl.getStreamTitle();
                 mainWindow.firstPage.busy.visible = true;
                 mainWindow.firstPage.busy.running = true;
 //                if (dataContainer != null) {

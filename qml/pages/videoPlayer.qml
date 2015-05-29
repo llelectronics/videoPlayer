@@ -64,8 +64,8 @@ Page {
     onStreamUrlChanged: {
         if (errorDetail.visible && errorTxt.visible) { errorDetail.visible = false; errorTxt.visible = false }
         videoPoster.showControls();
-        dataContainer.streamTitle = ""  // Reset Stream Title here
-        dataContainer.ytQual = ""
+//        dataContainer.streamTitle = ""  // Reset Stream Title here
+//        dataContainer.ytQual = ""
         if (YT.checkYoutube(streamUrl)=== true) {
             //console.debug("[videoPlayer.qml] Youtube Link detected loading Streaming URLs")
             // Reset Stream urls
@@ -82,6 +82,7 @@ Page {
             YT.getYoutubeTitle(originalUrl);
         }
         if (dataContainer.streamTitle == "") dataContainer.streamTitle = findBaseName(streamUrl)
+        dataContainer.ytdlStream = false
     }
 
     onStreamTitleChanged: {
