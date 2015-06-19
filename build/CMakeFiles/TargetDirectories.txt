@@ -1,0 +1,3 @@
+/home/llelectronics/Downloads/work/plasma-phone/vplayer-build/build/CMakeFiles/uninstall.dir
+/home/llelectronics/Downloads/work/plasma-phone/vplayer-build/build/src/CMakeFiles/vplayer.dir
+/home/llelectronics/Downloads/work/plasma-phone/vplayer-build/build/src/CMakeFiles/vplayer_automoc.dir

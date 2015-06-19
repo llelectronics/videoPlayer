@@ -1,0 +1,1 @@
+install(DIRECTORY ./ DESTINATION ${DATA_INSTALL_DIR}/vplayer PATTERN "*.qml")

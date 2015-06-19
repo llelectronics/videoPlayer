@@ -1,0 +1,7 @@
+/usr/bin/vplayer
+/usr/share/applications/org.kde.vplayer.desktop
+/usr/share/vplayer/CMakeLists.txt
+/usr/share/vplayer/mainPage.qml
+/usr/share/vplayer/main.qml
+/usr/share/vplayer/aboutPage.qml
+/usr/share/icons/hicolor/86x86/apps/vplayer.png

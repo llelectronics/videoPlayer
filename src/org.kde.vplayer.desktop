@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=vPlayer
+GenericName=Video Player
+Comment=An simple video player application
+Comment[de]=Eine einfache Videoplayer-Anwendung
+Exec=vplayer %U
+Terminal=false
+Type=Application
+Categories=Qt;KDE;Multimedia;Video;
+Icon=vplayer
