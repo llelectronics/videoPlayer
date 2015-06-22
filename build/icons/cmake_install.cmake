@@ -1,4 +1,4 @@
-# Install script for directory: /home/llelectronics/Downloads/work/plasma-phone/vplayer-build/icons
+# Install script for directory: /home/llelectronics/Downloads/work/plasma-phone/videoPlayer/icons
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -33,7 +33,7 @@ if(NOT DEFINED CMAKE_INSTALL_SO_NO_EXE)
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "VPlayer")
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/icons/hicolor/86x86/apps" TYPE FILE RENAME "vplayer.png" FILES "/home/llelectronics/Downloads/work/plasma-phone/vplayer-build/icons/hi86-apps-vplayer.png")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/icons/hicolor/86x86/apps" TYPE FILE RENAME "vplayer.png" FILES "/home/llelectronics/Downloads/work/plasma-phone/videoPlayer/icons/hi86-apps-vplayer.png")
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "VPlayer")

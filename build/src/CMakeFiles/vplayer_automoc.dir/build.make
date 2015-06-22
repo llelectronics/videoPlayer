@@ -35,10 +35,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/llelectronics/Downloads/work/plasma-phone/vplayer-build
+CMAKE_SOURCE_DIR = /home/llelectronics/Downloads/work/plasma-phone/videoPlayer
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/llelectronics/Downloads/work/plasma-phone/vplayer-build/build
+CMAKE_BINARY_DIR = /home/llelectronics/Downloads/work/plasma-phone/videoPlayer/build
 
 # Utility rule file for vplayer_automoc.
 
@@ -46,9 +46,9 @@ CMAKE_BINARY_DIR = /home/llelectronics/Downloads/work/plasma-phone/vplayer-build
 include src/CMakeFiles/vplayer_automoc.dir/progress.make
 
 src/CMakeFiles/vplayer_automoc:
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/llelectronics/Downloads/work/plasma-phone/vplayer-build/build/CMakeFiles $(CMAKE_PROGRESS_1)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/llelectronics/Downloads/work/plasma-phone/videoPlayer/build/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Automatic moc for target vplayer"
-	cd /home/llelectronics/Downloads/work/plasma-phone/vplayer-build/build/src && /usr/bin/cmake -E cmake_autogen /home/llelectronics/Downloads/work/plasma-phone/vplayer-build/build/src/CMakeFiles/vplayer_automoc.dir/ ""
+	cd /home/llelectronics/Downloads/work/plasma-phone/videoPlayer/build/src && /usr/bin/cmake -E cmake_autogen /home/llelectronics/Downloads/work/plasma-phone/videoPlayer/build/src/CMakeFiles/vplayer_automoc.dir/ ""
 
 vplayer_automoc: src/CMakeFiles/vplayer_automoc
 vplayer_automoc: src/CMakeFiles/vplayer_automoc.dir/build.make
@@ -59,10 +59,10 @@ src/CMakeFiles/vplayer_automoc.dir/build: vplayer_automoc
 .PHONY : src/CMakeFiles/vplayer_automoc.dir/build
 
 src/CMakeFiles/vplayer_automoc.dir/clean:
-	cd /home/llelectronics/Downloads/work/plasma-phone/vplayer-build/build/src && $(CMAKE_COMMAND) -P CMakeFiles/vplayer_automoc.dir/cmake_clean.cmake
+	cd /home/llelectronics/Downloads/work/plasma-phone/videoPlayer/build/src && $(CMAKE_COMMAND) -P CMakeFiles/vplayer_automoc.dir/cmake_clean.cmake
 .PHONY : src/CMakeFiles/vplayer_automoc.dir/clean
 
 src/CMakeFiles/vplayer_automoc.dir/depend:
-	cd /home/llelectronics/Downloads/work/plasma-phone/vplayer-build/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/llelectronics/Downloads/work/plasma-phone/vplayer-build /home/llelectronics/Downloads/work/plasma-phone/vplayer-build/src /home/llelectronics/Downloads/work/plasma-phone/vplayer-build/build /home/llelectronics/Downloads/work/plasma-phone/vplayer-build/build/src /home/llelectronics/Downloads/work/plasma-phone/vplayer-build/build/src/CMakeFiles/vplayer_automoc.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/llelectronics/Downloads/work/plasma-phone/videoPlayer/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/llelectronics/Downloads/work/plasma-phone/videoPlayer /home/llelectronics/Downloads/work/plasma-phone/videoPlayer/src /home/llelectronics/Downloads/work/plasma-phone/videoPlayer/build /home/llelectronics/Downloads/work/plasma-phone/videoPlayer/build/src /home/llelectronics/Downloads/work/plasma-phone/videoPlayer/build/src/CMakeFiles/vplayer_automoc.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : src/CMakeFiles/vplayer_automoc.dir/depend
 

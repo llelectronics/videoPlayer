@@ -4,8 +4,8 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/llelectronics/Downloads/work/plasma-phone/vplayer-build/src/main.cpp" "/home/llelectronics/Downloads/work/plasma-phone/vplayer-build/build/src/CMakeFiles/vplayer.dir/main.cpp.o"
-  "/home/llelectronics/Downloads/work/plasma-phone/vplayer-build/build/src/vplayer_automoc.cpp" "/home/llelectronics/Downloads/work/plasma-phone/vplayer-build/build/src/CMakeFiles/vplayer.dir/vplayer_automoc.cpp.o"
+  "/home/llelectronics/Downloads/work/plasma-phone/videoPlayer/src/main.cpp" "/home/llelectronics/Downloads/work/plasma-phone/videoPlayer/build/src/CMakeFiles/vplayer.dir/main.cpp.o"
+  "/home/llelectronics/Downloads/work/plasma-phone/videoPlayer/build/src/vplayer_automoc.cpp" "/home/llelectronics/Downloads/work/plasma-phone/videoPlayer/build/src/CMakeFiles/vplayer.dir/vplayer_automoc.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

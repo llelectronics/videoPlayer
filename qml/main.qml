@@ -32,24 +32,27 @@ ApplicationWindow {
     width: 640
     height: 800
     visible: true
-    property string appIcon: "/usr/share/icons/hicolor/86x86/apps/vplayer.png"
+    property string appIcon: "/usr/share/icons/hicolor/86x86/apps/vplayer.png" //TODO: use xdg somehow
     property string appName: "LLs vPlayer"
     property string version: "0.1"
+    property alias mainToolbar: mainToolbar
 
     PlasmaComponents.PageStack {
         id: mainStack
         anchors.fill: parent
     }
     
-    toolBar: ToolBar {
+    statusBar: ToolBar { // for mobile we use toolbar in status bar as it is closer to fingers of user
         visible: mainStack.depth > 1
         RowLayout {
+            id: mainToolbar
+            height: parent.height
             //
             // Navigation
             //
             PlasmaComponents.ToolButton {
                 iconName: "draw-arrow-back"
-                text: "Back"
+                //text: "Back" // We don't that do we ?
                 onClicked: mainStack.pop();
             }
         }

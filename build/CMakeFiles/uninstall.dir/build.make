@@ -35,10 +35,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/llelectronics/Downloads/work/plasma-phone/vplayer-build
+CMAKE_SOURCE_DIR = /home/llelectronics/Downloads/work/plasma-phone/videoPlayer
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/llelectronics/Downloads/work/plasma-phone/vplayer-build/build
+CMAKE_BINARY_DIR = /home/llelectronics/Downloads/work/plasma-phone/videoPlayer/build
 
 # Utility rule file for uninstall.
 
@@ -46,7 +46,7 @@ CMAKE_BINARY_DIR = /home/llelectronics/Downloads/work/plasma-phone/vplayer-build
 include CMakeFiles/uninstall.dir/progress.make
 
 CMakeFiles/uninstall:
-	/usr/bin/cmake -P /home/llelectronics/Downloads/work/plasma-phone/vplayer-build/build/ecm_uninstall.cmake
+	/usr/bin/cmake -P /home/llelectronics/Downloads/work/plasma-phone/videoPlayer/build/ecm_uninstall.cmake
 
 uninstall: CMakeFiles/uninstall
 uninstall: CMakeFiles/uninstall.dir/build.make
@@ -61,6 +61,6 @@ CMakeFiles/uninstall.dir/clean:
 .PHONY : CMakeFiles/uninstall.dir/clean
 
 CMakeFiles/uninstall.dir/depend:
-	cd /home/llelectronics/Downloads/work/plasma-phone/vplayer-build/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/llelectronics/Downloads/work/plasma-phone/vplayer-build /home/llelectronics/Downloads/work/plasma-phone/vplayer-build /home/llelectronics/Downloads/work/plasma-phone/vplayer-build/build /home/llelectronics/Downloads/work/plasma-phone/vplayer-build/build /home/llelectronics/Downloads/work/plasma-phone/vplayer-build/build/CMakeFiles/uninstall.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/llelectronics/Downloads/work/plasma-phone/videoPlayer/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/llelectronics/Downloads/work/plasma-phone/videoPlayer /home/llelectronics/Downloads/work/plasma-phone/videoPlayer /home/llelectronics/Downloads/work/plasma-phone/videoPlayer/build /home/llelectronics/Downloads/work/plasma-phone/videoPlayer/build /home/llelectronics/Downloads/work/plasma-phone/videoPlayer/build/CMakeFiles/uninstall.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/uninstall.dir/depend
 

@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/llelectronics/Downloads/work/plasma-phone/vplayer-build
+CMAKE_SOURCE_DIR = /home/llelectronics/Downloads/work/plasma-phone/videoPlayer
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/llelectronics/Downloads/work/plasma-phone/vplayer-build/build
+CMAKE_BINARY_DIR = /home/llelectronics/Downloads/work/plasma-phone/videoPlayer/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -124,14 +124,14 @@ test/fast: test
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/llelectronics/Downloads/work/plasma-phone/vplayer-build/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/llelectronics/Downloads/work/plasma-phone/vplayer-build/build/CMakeFiles /home/llelectronics/Downloads/work/plasma-phone/vplayer-build/build/qml/CMakeFiles/progress.marks
-	cd /home/llelectronics/Downloads/work/plasma-phone/vplayer-build/build && $(MAKE) -f CMakeFiles/Makefile2 qml/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/llelectronics/Downloads/work/plasma-phone/vplayer-build/build/CMakeFiles 0
+	cd /home/llelectronics/Downloads/work/plasma-phone/videoPlayer/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/llelectronics/Downloads/work/plasma-phone/videoPlayer/build/CMakeFiles /home/llelectronics/Downloads/work/plasma-phone/videoPlayer/build/qml/CMakeFiles/progress.marks
+	cd /home/llelectronics/Downloads/work/plasma-phone/videoPlayer/build && $(MAKE) -f CMakeFiles/Makefile2 qml/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/llelectronics/Downloads/work/plasma-phone/videoPlayer/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/llelectronics/Downloads/work/plasma-phone/vplayer-build/build && $(MAKE) -f CMakeFiles/Makefile2 qml/clean
+	cd /home/llelectronics/Downloads/work/plasma-phone/videoPlayer/build && $(MAKE) -f CMakeFiles/Makefile2 qml/clean
 .PHONY : clean
 
 # The main clean target
@@ -140,17 +140,17 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/llelectronics/Downloads/work/plasma-phone/vplayer-build/build && $(MAKE) -f CMakeFiles/Makefile2 qml/preinstall
+	cd /home/llelectronics/Downloads/work/plasma-phone/videoPlayer/build && $(MAKE) -f CMakeFiles/Makefile2 qml/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/llelectronics/Downloads/work/plasma-phone/vplayer-build/build && $(MAKE) -f CMakeFiles/Makefile2 qml/preinstall
+	cd /home/llelectronics/Downloads/work/plasma-phone/videoPlayer/build && $(MAKE) -f CMakeFiles/Makefile2 qml/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/llelectronics/Downloads/work/plasma-phone/vplayer-build/build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/llelectronics/Downloads/work/plasma-phone/videoPlayer/build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Help Target
@@ -177,6 +177,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/llelectronics/Downloads/work/plasma-phone/vplayer-build/build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/llelectronics/Downloads/work/plasma-phone/videoPlayer/build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

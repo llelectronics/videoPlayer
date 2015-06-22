@@ -1,4 +1,4 @@
-# Install script for directory: /home/llelectronics/Downloads/work/plasma-phone/vplayer-build/qml
+# Install script for directory: /home/llelectronics/Downloads/work/plasma-phone/videoPlayer/qml
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -33,6 +33,6 @@ if(NOT DEFINED CMAKE_INSTALL_SO_NO_EXE)
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "VPlayer")
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/vplayer" TYPE DIRECTORY FILES "/home/llelectronics/Downloads/work/plasma-phone/vplayer-build/qml/./" REGEX "/[^/]*\\.qml$")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/vplayer" TYPE DIRECTORY FILES "/home/llelectronics/Downloads/work/plasma-phone/videoPlayer/qml/./" REGEX "/[^/]*\\.qml$")
 endif()
 

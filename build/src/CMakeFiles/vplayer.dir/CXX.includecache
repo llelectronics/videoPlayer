@@ -6,7 +6,9 @@
 
 #IncludeRegexTransform: 
 
-/home/llelectronics/Downloads/work/plasma-phone/vplayer-build/src/main.cpp
+/home/llelectronics/Downloads/work/plasma-phone/videoPlayer/build/src/vplayer_automoc.cpp
+
+/home/llelectronics/Downloads/work/plasma-phone/videoPlayer/src/main.cpp
 QQmlEngine
 -
 QQmlContext

@@ -1,4 +1,4 @@
-# Install script for directory: /home/llelectronics/Downloads/work/plasma-phone/vplayer-build/src
+# Install script for directory: /home/llelectronics/Downloads/work/plasma-phone/videoPlayer/src
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -39,7 +39,7 @@ if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "VPlayer
          FILE "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/vplayer"
          RPATH "")
   endif()
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/bin" TYPE EXECUTABLE FILES "/home/llelectronics/Downloads/work/plasma-phone/vplayer-build/build/src/vplayer")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/bin" TYPE EXECUTABLE FILES "/home/llelectronics/Downloads/work/plasma-phone/videoPlayer/build/src/vplayer")
   if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/vplayer" AND
      NOT IS_SYMLINK "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/vplayer")
     if(CMAKE_INSTALL_DO_STRIP)
@@ -49,6 +49,6 @@ if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "VPlayer
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "VPlayer")
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/applications" TYPE FILE FILES "/home/llelectronics/Downloads/work/plasma-phone/vplayer-build/src/org.kde.vplayer.desktop")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/applications" TYPE FILE FILES "/home/llelectronics/Downloads/work/plasma-phone/videoPlayer/src/org.kde.vplayer.desktop")
 endif()
 

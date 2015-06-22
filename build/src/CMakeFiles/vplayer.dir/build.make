@@ -35,10 +35,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/llelectronics/Downloads/work/plasma-phone/vplayer-build
+CMAKE_SOURCE_DIR = /home/llelectronics/Downloads/work/plasma-phone/videoPlayer
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/llelectronics/Downloads/work/plasma-phone/vplayer-build/build
+CMAKE_BINARY_DIR = /home/llelectronics/Downloads/work/plasma-phone/videoPlayer/build
 
 # Include any dependencies generated for this target.
 include src/CMakeFiles/vplayer.dir/depend.make
@@ -51,17 +51,17 @@ include src/CMakeFiles/vplayer.dir/flags.make
 
 src/CMakeFiles/vplayer.dir/main.cpp.o: src/CMakeFiles/vplayer.dir/flags.make
 src/CMakeFiles/vplayer.dir/main.cpp.o: ../src/main.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/llelectronics/Downloads/work/plasma-phone/vplayer-build/build/CMakeFiles $(CMAKE_PROGRESS_1)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/llelectronics/Downloads/work/plasma-phone/videoPlayer/build/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/vplayer.dir/main.cpp.o"
-	cd /home/llelectronics/Downloads/work/plasma-phone/vplayer-build/build/src && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/vplayer.dir/main.cpp.o -c /home/llelectronics/Downloads/work/plasma-phone/vplayer-build/src/main.cpp
+	cd /home/llelectronics/Downloads/work/plasma-phone/videoPlayer/build/src && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/vplayer.dir/main.cpp.o -c /home/llelectronics/Downloads/work/plasma-phone/videoPlayer/src/main.cpp
 
 src/CMakeFiles/vplayer.dir/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/vplayer.dir/main.cpp.i"
-	cd /home/llelectronics/Downloads/work/plasma-phone/vplayer-build/build/src && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/llelectronics/Downloads/work/plasma-phone/vplayer-build/src/main.cpp > CMakeFiles/vplayer.dir/main.cpp.i
+	cd /home/llelectronics/Downloads/work/plasma-phone/videoPlayer/build/src && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/llelectronics/Downloads/work/plasma-phone/videoPlayer/src/main.cpp > CMakeFiles/vplayer.dir/main.cpp.i
 
 src/CMakeFiles/vplayer.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/vplayer.dir/main.cpp.s"
-	cd /home/llelectronics/Downloads/work/plasma-phone/vplayer-build/build/src && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/llelectronics/Downloads/work/plasma-phone/vplayer-build/src/main.cpp -o CMakeFiles/vplayer.dir/main.cpp.s
+	cd /home/llelectronics/Downloads/work/plasma-phone/videoPlayer/build/src && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/llelectronics/Downloads/work/plasma-phone/videoPlayer/src/main.cpp -o CMakeFiles/vplayer.dir/main.cpp.s
 
 src/CMakeFiles/vplayer.dir/main.cpp.o.requires:
 .PHONY : src/CMakeFiles/vplayer.dir/main.cpp.o.requires
@@ -74,17 +74,17 @@ src/CMakeFiles/vplayer.dir/main.cpp.o.provides.build: src/CMakeFiles/vplayer.dir
 
 src/CMakeFiles/vplayer.dir/vplayer_automoc.cpp.o: src/CMakeFiles/vplayer.dir/flags.make
 src/CMakeFiles/vplayer.dir/vplayer_automoc.cpp.o: src/vplayer_automoc.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/llelectronics/Downloads/work/plasma-phone/vplayer-build/build/CMakeFiles $(CMAKE_PROGRESS_2)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/llelectronics/Downloads/work/plasma-phone/videoPlayer/build/CMakeFiles $(CMAKE_PROGRESS_2)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/vplayer.dir/vplayer_automoc.cpp.o"
-	cd /home/llelectronics/Downloads/work/plasma-phone/vplayer-build/build/src && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/vplayer.dir/vplayer_automoc.cpp.o -c /home/llelectronics/Downloads/work/plasma-phone/vplayer-build/build/src/vplayer_automoc.cpp
+	cd /home/llelectronics/Downloads/work/plasma-phone/videoPlayer/build/src && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/vplayer.dir/vplayer_automoc.cpp.o -c /home/llelectronics/Downloads/work/plasma-phone/videoPlayer/build/src/vplayer_automoc.cpp
 
 src/CMakeFiles/vplayer.dir/vplayer_automoc.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/vplayer.dir/vplayer_automoc.cpp.i"
-	cd /home/llelectronics/Downloads/work/plasma-phone/vplayer-build/build/src && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/llelectronics/Downloads/work/plasma-phone/vplayer-build/build/src/vplayer_automoc.cpp > CMakeFiles/vplayer.dir/vplayer_automoc.cpp.i
+	cd /home/llelectronics/Downloads/work/plasma-phone/videoPlayer/build/src && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/llelectronics/Downloads/work/plasma-phone/videoPlayer/build/src/vplayer_automoc.cpp > CMakeFiles/vplayer.dir/vplayer_automoc.cpp.i
 
 src/CMakeFiles/vplayer.dir/vplayer_automoc.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/vplayer.dir/vplayer_automoc.cpp.s"
-	cd /home/llelectronics/Downloads/work/plasma-phone/vplayer-build/build/src && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/llelectronics/Downloads/work/plasma-phone/vplayer-build/build/src/vplayer_automoc.cpp -o CMakeFiles/vplayer.dir/vplayer_automoc.cpp.s
+	cd /home/llelectronics/Downloads/work/plasma-phone/videoPlayer/build/src && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/llelectronics/Downloads/work/plasma-phone/videoPlayer/build/src/vplayer_automoc.cpp -o CMakeFiles/vplayer.dir/vplayer_automoc.cpp.s
 
 src/CMakeFiles/vplayer.dir/vplayer_automoc.cpp.o.requires:
 .PHONY : src/CMakeFiles/vplayer.dir/vplayer_automoc.cpp.o.requires
@@ -108,7 +108,7 @@ src/vplayer: src/CMakeFiles/vplayer.dir/vplayer_automoc.cpp.o
 src/vplayer: src/CMakeFiles/vplayer.dir/build.make
 src/vplayer: src/CMakeFiles/vplayer.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX executable vplayer"
-	cd /home/llelectronics/Downloads/work/plasma-phone/vplayer-build/build/src && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/vplayer.dir/link.txt --verbose=$(VERBOSE)
+	cd /home/llelectronics/Downloads/work/plasma-phone/videoPlayer/build/src && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/vplayer.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
 src/CMakeFiles/vplayer.dir/build: src/vplayer
@@ -119,10 +119,10 @@ src/CMakeFiles/vplayer.dir/requires: src/CMakeFiles/vplayer.dir/vplayer_automoc.
 .PHONY : src/CMakeFiles/vplayer.dir/requires
 
 src/CMakeFiles/vplayer.dir/clean:
-	cd /home/llelectronics/Downloads/work/plasma-phone/vplayer-build/build/src && $(CMAKE_COMMAND) -P CMakeFiles/vplayer.dir/cmake_clean.cmake
+	cd /home/llelectronics/Downloads/work/plasma-phone/videoPlayer/build/src && $(CMAKE_COMMAND) -P CMakeFiles/vplayer.dir/cmake_clean.cmake
 .PHONY : src/CMakeFiles/vplayer.dir/clean
 
 src/CMakeFiles/vplayer.dir/depend:
-	cd /home/llelectronics/Downloads/work/plasma-phone/vplayer-build/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/llelectronics/Downloads/work/plasma-phone/vplayer-build /home/llelectronics/Downloads/work/plasma-phone/vplayer-build/src /home/llelectronics/Downloads/work/plasma-phone/vplayer-build/build /home/llelectronics/Downloads/work/plasma-phone/vplayer-build/build/src /home/llelectronics/Downloads/work/plasma-phone/vplayer-build/build/src/CMakeFiles/vplayer.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/llelectronics/Downloads/work/plasma-phone/videoPlayer/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/llelectronics/Downloads/work/plasma-phone/videoPlayer /home/llelectronics/Downloads/work/plasma-phone/videoPlayer/src /home/llelectronics/Downloads/work/plasma-phone/videoPlayer/build /home/llelectronics/Downloads/work/plasma-phone/videoPlayer/build/src /home/llelectronics/Downloads/work/plasma-phone/videoPlayer/build/src/CMakeFiles/vplayer.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : src/CMakeFiles/vplayer.dir/depend
 

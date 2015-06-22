@@ -23,23 +23,40 @@ import QtQuick 2.1
 import QtQuick.Layouts 1.1
 import QtQuick.Controls 1.0
 import QtQuick.Window 2.1
+import QtMultimedia 5.0
 
 import org.kde.plasma.components 2.0 as PlasmaComponents
 
 PlasmaComponents.Page {
-    id: mainPage
+    id: videoPlayerPage
+
+    Video {
+    	id: videoWindow
+    	anchors.fill: parent
+        source: "/home/llelectronics/Videos/test.mp4"
+    }
     
-    PlasmaComponents.ButtonColumn {
-        anchors.centerIn: parent
-        PlasmaComponents.Button { 
-	    text: "Player" 
-            onClicked: mainStack.push(Qt.resolvedUrl("playerPage.qml"))
+    // TODO: Timeline (in seperate QML Component)
+
+    PlasmaComponents.ToolButton {
+        id: stopBtn
+        parent: mainWindow.mainToolbar
+    	iconName: "media-playback-stop"
+    	//text: "Back" // We don't that do we ?
+    	onClicked: videoWindow.stop()
+    }
+
+    PlasmaComponents.ToolButton {
+        id: playBtn
+        parent: mainWindow.mainToolbar
+    	iconName: { 
+		if (videoWindow.playbackState != MediaPlayer.PlayingState) return "media-playback-start"
+                else return "media-playback-pause"
         }
-        PlasmaComponents.Button { 
-            text: "About" 
-            onClicked: mainStack.push(Qt.resolvedUrl("aboutPage.qml"))
+    	//text: "Back" // We don't that do we ?
+    	onClicked: { 
+		if (videoWindow.playbackState != MediaPlayer.PlayingState) videoWindow.play()
+                else videoWindow.pause()
         }
     }
-   
-
 }

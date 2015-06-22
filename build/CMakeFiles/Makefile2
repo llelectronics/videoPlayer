@@ -47,10 +47,41 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/llelectronics/Downloads/work/plasma-phone/vplayer-build
+CMAKE_SOURCE_DIR = /home/llelectronics/Downloads/work/plasma-phone/videoPlayer
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/llelectronics/Downloads/work/plasma-phone/vplayer-build/build
+CMAKE_BINARY_DIR = /home/llelectronics/Downloads/work/plasma-phone/videoPlayer/build
+
+#=============================================================================
+# Target rules for target CMakeFiles/buildtests.dir
+
+# All Build rule for target.
+CMakeFiles/buildtests.dir/all:
+	$(MAKE) -f CMakeFiles/buildtests.dir/build.make CMakeFiles/buildtests.dir/depend
+	$(MAKE) -f CMakeFiles/buildtests.dir/build.make CMakeFiles/buildtests.dir/build
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/llelectronics/Downloads/work/plasma-phone/videoPlayer/build/CMakeFiles 
+	@echo "Built target buildtests"
+.PHONY : CMakeFiles/buildtests.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/buildtests.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/llelectronics/Downloads/work/plasma-phone/videoPlayer/build/CMakeFiles 0
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/buildtests.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/llelectronics/Downloads/work/plasma-phone/videoPlayer/build/CMakeFiles 0
+.PHONY : CMakeFiles/buildtests.dir/rule
+
+# Convenience name for target.
+buildtests: CMakeFiles/buildtests.dir/rule
+.PHONY : buildtests
+
+# clean rule for target.
+CMakeFiles/buildtests.dir/clean:
+	$(MAKE) -f CMakeFiles/buildtests.dir/build.make CMakeFiles/buildtests.dir/clean
+.PHONY : CMakeFiles/buildtests.dir/clean
+
+# clean rule for target.
+clean: CMakeFiles/buildtests.dir/clean
+.PHONY : clean
 
 #=============================================================================
 # Target rules for target CMakeFiles/uninstall.dir
@@ -59,15 +90,15 @@ CMAKE_BINARY_DIR = /home/llelectronics/Downloads/work/plasma-phone/vplayer-build
 CMakeFiles/uninstall.dir/all:
 	$(MAKE) -f CMakeFiles/uninstall.dir/build.make CMakeFiles/uninstall.dir/depend
 	$(MAKE) -f CMakeFiles/uninstall.dir/build.make CMakeFiles/uninstall.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/llelectronics/Downloads/work/plasma-phone/vplayer-build/build/CMakeFiles 
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/llelectronics/Downloads/work/plasma-phone/videoPlayer/build/CMakeFiles 
 	@echo "Built target uninstall"
 .PHONY : CMakeFiles/uninstall.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/uninstall.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/llelectronics/Downloads/work/plasma-phone/vplayer-build/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/llelectronics/Downloads/work/plasma-phone/videoPlayer/build/CMakeFiles 0
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/uninstall.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/llelectronics/Downloads/work/plasma-phone/vplayer-build/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/llelectronics/Downloads/work/plasma-phone/videoPlayer/build/CMakeFiles 0
 .PHONY : CMakeFiles/uninstall.dir/rule
 
 # Convenience name for target.
@@ -106,7 +137,7 @@ src/preinstall:
 src/CMakeFiles/vplayer.dir/all: src/CMakeFiles/vplayer_automoc.dir/all
 	$(MAKE) -f src/CMakeFiles/vplayer.dir/build.make src/CMakeFiles/vplayer.dir/depend
 	$(MAKE) -f src/CMakeFiles/vplayer.dir/build.make src/CMakeFiles/vplayer.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/llelectronics/Downloads/work/plasma-phone/vplayer-build/build/CMakeFiles  1 2
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/llelectronics/Downloads/work/plasma-phone/videoPlayer/build/CMakeFiles  1 2
 	@echo "Built target vplayer"
 .PHONY : src/CMakeFiles/vplayer.dir/all
 
@@ -116,9 +147,9 @@ all: src/CMakeFiles/vplayer.dir/all
 
 # Build rule for subdir invocation for target.
 src/CMakeFiles/vplayer.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/llelectronics/Downloads/work/plasma-phone/vplayer-build/build/CMakeFiles 3
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/llelectronics/Downloads/work/plasma-phone/videoPlayer/build/CMakeFiles 3
 	$(MAKE) -f CMakeFiles/Makefile2 src/CMakeFiles/vplayer.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/llelectronics/Downloads/work/plasma-phone/vplayer-build/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/llelectronics/Downloads/work/plasma-phone/videoPlayer/build/CMakeFiles 0
 .PHONY : src/CMakeFiles/vplayer.dir/rule
 
 # Convenience name for target.
@@ -141,15 +172,15 @@ clean: src/CMakeFiles/vplayer.dir/clean
 src/CMakeFiles/vplayer_automoc.dir/all:
 	$(MAKE) -f src/CMakeFiles/vplayer_automoc.dir/build.make src/CMakeFiles/vplayer_automoc.dir/depend
 	$(MAKE) -f src/CMakeFiles/vplayer_automoc.dir/build.make src/CMakeFiles/vplayer_automoc.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/llelectronics/Downloads/work/plasma-phone/vplayer-build/build/CMakeFiles  3
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/llelectronics/Downloads/work/plasma-phone/videoPlayer/build/CMakeFiles  3
 	@echo "Built target vplayer_automoc"
 .PHONY : src/CMakeFiles/vplayer_automoc.dir/all
 
 # Build rule for subdir invocation for target.
 src/CMakeFiles/vplayer_automoc.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/llelectronics/Downloads/work/plasma-phone/vplayer-build/build/CMakeFiles 1
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/llelectronics/Downloads/work/plasma-phone/videoPlayer/build/CMakeFiles 1
 	$(MAKE) -f CMakeFiles/Makefile2 src/CMakeFiles/vplayer_automoc.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/llelectronics/Downloads/work/plasma-phone/vplayer-build/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/llelectronics/Downloads/work/plasma-phone/videoPlayer/build/CMakeFiles 0
 .PHONY : src/CMakeFiles/vplayer_automoc.dir/rule
 
 # Convenience name for target.

@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/llelectronics/Downloads/work/plasma-phone/vplayer-build
+CMAKE_SOURCE_DIR = /home/llelectronics/Downloads/work/plasma-phone/videoPlayer
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/llelectronics/Downloads/work/plasma-phone/vplayer-build/build
+CMAKE_BINARY_DIR = /home/llelectronics/Downloads/work/plasma-phone/videoPlayer/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -124,9 +124,9 @@ test/fast: test
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/llelectronics/Downloads/work/plasma-phone/vplayer-build/build/CMakeFiles /home/llelectronics/Downloads/work/plasma-phone/vplayer-build/build/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/llelectronics/Downloads/work/plasma-phone/videoPlayer/build/CMakeFiles /home/llelectronics/Downloads/work/plasma-phone/videoPlayer/build/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/llelectronics/Downloads/work/plasma-phone/vplayer-build/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/llelectronics/Downloads/work/plasma-phone/videoPlayer/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -152,6 +152,19 @@ preinstall/fast:
 depend:
 	$(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
+
+#=============================================================================
+# Target rules for targets named buildtests
+
+# Build rule for target.
+buildtests: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 buildtests
+.PHONY : buildtests
+
+# fast build rule for target.
+buildtests/fast:
+	$(MAKE) -f CMakeFiles/buildtests.dir/build.make CMakeFiles/buildtests.dir/build
+.PHONY : buildtests/fast
 
 #=============================================================================
 # Target rules for targets named uninstall
@@ -198,6 +211,7 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
+	@echo "... buildtests"
 	@echo "... edit_cache"
 	@echo "... install"
 	@echo "... install/local"
