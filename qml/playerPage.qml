@@ -24,19 +24,45 @@ import QtQuick.Layouts 1.1
 import QtQuick.Controls 1.0
 import QtQuick.Window 2.1
 import QtMultimedia 5.0
+import "helper/timeFormat.js" as TimeHelper
 
 import org.kde.plasma.components 2.0 as PlasmaComponents
 
 PlasmaComponents.Page {
     id: videoPlayerPage
 
+    Rectangle {
+	anchors.fill: parent
+	color: "black"
+    }
+
     Video {
     	id: videoWindow
     	anchors.fill: parent
-        source: "/home/llelectronics/Videos/test.mp4"
+        source: "/home/llelectronics/Videos/test.m4v"
+        onDurationChanged: timeLine.maximumValue = duration / 1000
+        onPositionChanged: timeLine.value = position / 1000
+    }
+
+    PlasmaComponents.Label {
+        id: timeLineLbl
+	text: TimeHelper.formatTime(timeLine.value) + "/" + TimeHelper.formatTime(timeLine.maximumValue)
+        parent: mainWindow.mainToolbar
     }
     
-    // TODO: Timeline (in seperate QML Component)
+    PlasmaComponents.Slider {
+	id: timeLine
+        parent: mainWindow.mainToolbar
+	minimumValue: 0
+        value: 0
+        stepSize: 1.0
+        width: parent.width - stopBtn.width * 5 // We have 3 buttons + timelinelbl in toolbar
+        onPressedChanged: {
+                if (!pressed) {
+			if (videoWindow.seekable) videoWindow.seek(value * 1000)
+                }
+	}
+    }
 
     PlasmaComponents.ToolButton {
         id: stopBtn

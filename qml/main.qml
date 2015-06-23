@@ -44,9 +44,10 @@ ApplicationWindow {
     
     statusBar: ToolBar { // for mobile we use toolbar in status bar as it is closer to fingers of user
         visible: mainStack.depth > 1
-        RowLayout {
+        Row {
             id: mainToolbar
             height: parent.height
+            width: parent.width
             //
             // Navigation
             //
