@@ -40,6 +40,5 @@ PlasmaComponents.Page {
             onClicked: mainStack.push(Qt.resolvedUrl("aboutPage.qml"))
         }
     }
-   
 
 }

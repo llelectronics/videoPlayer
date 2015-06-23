@@ -26,6 +26,7 @@ import QtQuick.Window 2.1
 
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.plasma.extras 2.0
+import "helper/db.js" as DB
 
 ApplicationWindow {
     id: mainWindow
@@ -59,11 +60,52 @@ ApplicationWindow {
         }
     }
     
-//     Heading {
-//         text: "vPlayer"
-//         font.bold: true
-//         level: 2
-//     }
-    Component.onCompleted: mainStack.push(Qt.resolvedUrl("mainPage.qml"))
+    function addHistory(url,title) {
+        //console.debug("Adding " + url);
+        historyModel.append({"hurl": url, "htitle": title});
+    }
+
+    function add2History(url,title) {
+        if (historyModel.containsTitle(title) || historyModel.containsUrl(url)) {
+            historyModel.removeUrl(url);
+        }
+        historyModel.append({"hurl": url, "htitle": title});
+    }
+    
+    ListModel {
+        id: historyModel
+        
+        function containsTitle(htitle) {
+            for (var i=0; i<count; i++) {
+                if (get(i).htitle == htitle)  {
+                    return true;
+                }
+            }
+            return false;
+        }
+        function containsUrl(hurl) {
+            for (var i=0; i<count; i++) {
+                if (get(i).hurl == hurl)  {
+                    return true;
+                }
+            }
+            return false;
+        }
+        function removeUrl(hurl) {
+            for (var i=0; i<count; i++) {
+                if (get(i).hurl == hurl)  {
+                    remove(i)
+                }
+            }
+            return;
+        }
+    }    
+    
+    Component.onCompleted: { 
+        // Intitialize DB
+        DB.initialize();
+        DB.getHistory();
+	mainStack.push(Qt.resolvedUrl("mainPage.qml"))
+    }
 
 }
