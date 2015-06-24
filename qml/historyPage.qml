@@ -25,24 +25,42 @@ import QtQuick.Controls 1.0
 import QtQuick.Window 2.1
 
 import org.kde.plasma.components 2.0 as PlasmaComponents
+import org.kde.plasma.extras 2.0
 
 PlasmaComponents.Page {
-    id: mainPage
+    id: historyPage
     
-    PlasmaComponents.ButtonColumn {
-        anchors.centerIn: parent
-        PlasmaComponents.Button { 
-	    text: "Player" 
-            onClicked: mainStack.push(Qt.resolvedUrl("playerPage.qml"))
-        }
-        PlasmaComponents.Button { 
-	    text: "History" 
-            onClicked: mainStack.push(Qt.resolvedUrl("historyPage.qml"))
-        }
-        PlasmaComponents.Button { 
-            text: "About" 
-            onClicked: mainStack.push(Qt.resolvedUrl("aboutPage.qml"))
-        }
-    }
+    Heading {
+        id: header
+	text: qsTr("History")
+	font.bold: true
+	level: 2
+        anchors.top: parent.top
+        anchors.left: parent.left
+        anchors.margins: parent.width / 32
+    } 
 
+    ListView {
+        anchors.top: header.bottom
+        width: parent.width
+        height: parent.height - header.height
+	model: mainWindow.historyModel
+        delegate: PlasmaComponents.ListItem {
+                width: parent.width - (parent.width / 32)
+                anchors.centerIn: parent
+		onClicked: { 
+			console.debug("Clicked " + htitle + " with url: " + hurl)
+			mainWindow.loadPlayer(htitle,hurl)
+		}
+                enabled: true
+		PlasmaComponents.Label {
+                	anchors.left: parent.left
+                	anchors.right: parent.right
+                	height: implicitHeight
+
+                	elide: Text.ElideRight
+                	text: model.htitle
+                }
+	}
+    }
 }

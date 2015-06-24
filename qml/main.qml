@@ -30,13 +30,35 @@ import "helper/db.js" as DB
 
 ApplicationWindow {
     id: mainWindow
-    width: 640
-    height: 800
+    width: 540
+    height: 960
     visible: true
     property string appIcon: "/usr/share/icons/hicolor/86x86/apps/vplayer.png" //TODO: use xdg somehow
     property string appName: "LLs vPlayer"
     property string version: "0.1"
     property alias mainToolbar: mainToolbar
+    property alias historyModel: historyModel
+
+    // Settings /////////////////////////////////////////
+    property string openDialogType: "adv"
+    property bool enableSubtitles: true
+    property int subtitlesSize: 25
+    property bool boldSubtitles: false
+    property string subtitlesColor: "white"
+    /////////////////////////////////////////////////////
+
+    // Videoplayer properties //////////////////////////
+    property string originalUrl
+    property string streamUrl
+    property bool isYtUrl: false
+    property bool autoplay: false
+    property string streamTitle
+    property string url720p
+    property string url480p
+    property string url360p
+    property string url240p
+    property string ytQual
+    ////////////////////////////////////////////////////
 
     PlasmaComponents.PageStack {
         id: mainStack
@@ -59,9 +81,15 @@ ApplicationWindow {
             }
         }
     }
+
+    function loadPlayer(title,url) {
+        streamTitle = title
+	streamUrl = url
+        mainStack.push(Qt.resolvedUrl("playerPage.qml"));
+    }
     
     function addHistory(url,title) {
-        //console.debug("Adding " + url);
+        //console.debug("Adding " + url + " with title " + title);
         historyModel.append({"hurl": url, "htitle": title});
     }
 

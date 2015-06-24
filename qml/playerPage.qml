@@ -27,13 +27,83 @@ import QtMultimedia 5.0
 import "helper/timeFormat.js" as TimeHelper
 
 import org.kde.plasma.components 2.0 as PlasmaComponents
+import org.kde.plasma.core 2.0
 
 PlasmaComponents.Page {
     id: videoPlayerPage
+ 
+    property string originalUrl: mainWindow.originalUrl
+    property string streamUrl: mainWindow.streamUrl
+    property bool isYtUrl: mainWindow.isYtUrl
+    property string streamTitle: mainWindow.streamTitle
+    property string title: videoWindow.metaData.title ? videoWindow.metaData.title : ""
+    property string artist: videoWindow.metaData.albumArtist ? videoWindow.metaData.albumArtist : ""
+    property int subtitlesSize: mainWindow.subtitlesSize
+    property bool boldSubtitles: mainWindow.boldSubtitles
+    property string subtitlesColor: mainWindow.subtitlesColor
+    property bool enableSubtitles: mainWindow.enableSubtitles
+    property variant currentVideoSub: []
+    property string url720p: mainWindow.url720p
+    property string url480p: mainWindow.url480p
+    property string url360p: mainWindow.url360p
+    property string url240p: mainWindow.url240p
+    property string ytQual: mainWindow.ytQual
+    property bool autoplay: mainWindow.autoplay
 
     Rectangle {
 	anchors.fill: parent
 	color: "black"
+    }
+
+    IconItem {
+	id: onlyAudioIcon
+	source: "audio-x-generic"
+	anchors.centerIn: parent
+        width: parent.width / 2
+        height: width
+        visible: !videoWindow.hasVideo
+    }
+
+    function showControls() {
+	headerTitle.visible = true;
+	mainWindow.mainToolbar.parent.parent.visible = true;
+    }
+
+    function hideControls() {
+	headerTitle.visible = false;
+	mainWindow.mainToolbar.parent.parent.visible = false;
+    }
+
+    function toggleControls() {
+	if (headerTitle.visible && mainWindow.mainToolbar.parent.parent.visible) 
+		hideControls();
+	else if (!headerTitle.visible && !mainWindow.mainToolbar.parent.parent.visible) 
+		showControls();	
+    }
+
+    onStreamUrlChanged: {
+	// TODO: maybe youtube or other url checks
+        // TODO: add2history
+        videoWindow.source = streamUrl
+    }
+
+    Rectangle {
+	id: headerTitle
+	anchors.top: parent.top
+	anchors.left: parent.left
+	width: parent.width
+	height: parent.height / 32
+        color: theme.backgroundColor
+        PlasmaComponents.Label {
+                anchors.verticalCenter: parent.verticalCenter
+		anchors.left: parent.left
+		anchors.leftMargin: units.smallSpacing
+		text: {
+			if (title != "") return title
+			else if (streamTitle != "") return streamTitle
+			else return streamUrl
+		}
+	}
     }
 
     Video {
@@ -42,6 +112,11 @@ PlasmaComponents.Page {
         source: "/home/llelectronics/Videos/test.m4v"
         onDurationChanged: timeLine.maximumValue = duration / 1000
         onPositionChanged: timeLine.value = position / 1000
+        MouseArea {
+		anchors.fill: parent
+		onClicked: toggleControls()
+	}
+        onStopped: showControls()
     }
 
     PlasmaComponents.Label {
