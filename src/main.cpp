@@ -42,7 +42,6 @@ int main(int argc, char** argv)
     KDBusService service(KDBusService::Unique);
 
     QCommandLineParser parser;
-    //parser.addOption(QCommandLineOption("reset", i18n("Reset the database")));
     parser.addOption(QCommandLineOption("phone", i18n("Run the phone version of vPlayer")));
     parser.addHelpOption();
     parser.process(app);
@@ -51,18 +50,17 @@ int main(int argc, char** argv)
         parser.showHelp(1);
     }
 
-//     if (parser.isSet("reset")) {
-//         KokoConfig config;
-//         config.reset();
-// 
-//         ImageStorage::reset();
-//     }
-
     QStringList locations = QStandardPaths::standardLocations(QStandardPaths::MoviesLocation);
     Q_ASSERT(locations.size() >= 1);
     qDebug() << locations;
 
+    QString videoFolder = QStandardPaths::writableLocation(QStandardPaths::MoviesLocation);
+    QString homeFolder = QStandardPaths::writableLocation(QStandardPaths::HomeLocation);
+
     QQmlEngine engine;
+    QQmlContext* objectContext = engine.rootContext();
+    objectContext->setContextProperty("homePath", homeFolder);
+    objectContext->setContextProperty("videoPath", videoFolder);
 
     QString path;
     if (parser.isSet("phone") || qgetenv("PLASMA_PLATFORM") == QByteArray("phone")) {
@@ -76,7 +74,7 @@ int main(int argc, char** argv)
         Q_ASSERT(0);
     }
     Q_ASSERT(component.status() == QQmlComponent::Ready);
-    component.create();
+    component.create(objectContext);
 
     int rt = app.exec();
     return rt;

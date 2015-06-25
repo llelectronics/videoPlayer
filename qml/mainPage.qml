@@ -28,12 +28,12 @@ import org.kde.plasma.components 2.0 as PlasmaComponents
 
 PlasmaComponents.Page {
     id: mainPage
-    
+
     PlasmaComponents.ButtonColumn {
         anchors.centerIn: parent
         PlasmaComponents.Button { 
-	    text: "Player" 
-            onClicked: mainStack.push(Qt.resolvedUrl("playerPage.qml"))
+	    text: "Browse Files" 
+            onClicked: mainStack.push(Qt.resolvedUrl("openDialog.qml"))
         }
         PlasmaComponents.Button { 
 	    text: "History" 

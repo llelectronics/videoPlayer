@@ -6,3 +6,4 @@ Build depends (ubuntu package names):
 * plasma-framework-dev
 * libkf5declarative-dev
 * qml-module-qtquick-localstorage
+* qml-module-qt-labs-folderlistmodel

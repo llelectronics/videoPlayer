@@ -25,6 +25,7 @@ import QtQuick.Controls 1.0
 import QtQuick.Window 2.1
 import QtMultimedia 5.0
 import "helper/timeFormat.js" as TimeHelper
+import "helper/db.js" as DB
 
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.plasma.core 2.0
@@ -83,8 +84,11 @@ PlasmaComponents.Page {
 
     onStreamUrlChanged: {
 	// TODO: maybe youtube or other url checks
-        // TODO: add2history
         videoWindow.source = streamUrl
+        //Write into history database
+        DB.addHistory(streamUrl,headerTitle.text);
+        // Don't forgt to write it to the List aswell
+        mainWindow.add2History(streamUrl,headerTitle.text);
     }
 
     Rectangle {

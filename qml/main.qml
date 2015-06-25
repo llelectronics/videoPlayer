@@ -35,7 +35,7 @@ ApplicationWindow {
     visible: true
     property string appIcon: "/usr/share/icons/hicolor/86x86/apps/vplayer.png" //TODO: use xdg somehow
     property string appName: "LLs vPlayer"
-    property string version: "0.1"
+    property string version: "0.2"
     property alias mainToolbar: mainToolbar
     property alias historyModel: historyModel
 
@@ -59,6 +59,9 @@ ApplicationWindow {
     property string url240p
     property string ytQual
     ////////////////////////////////////////////////////
+  
+    //property string homePath // Use from C++ QStandardsPath
+    //property string videoPath
 
     PlasmaComponents.PageStack {
         id: mainStack
@@ -97,6 +100,7 @@ ApplicationWindow {
         if (historyModel.containsTitle(title) || historyModel.containsUrl(url)) {
             historyModel.removeUrl(url);
         }
+        if (title == "" || title == undefined) title = url
         historyModel.append({"hurl": url, "htitle": title});
     }
     

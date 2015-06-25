@@ -47,7 +47,8 @@ PlasmaComponents.Page {
 	model: mainWindow.historyModel
         delegate: PlasmaComponents.ListItem {
                 width: parent.width - (parent.width / 32)
-                anchors.centerIn: parent
+                height: implicitHeight
+                anchors.horizontalCenter: parent.horizontalCenter
 		onClicked: { 
 			console.debug("Clicked " + htitle + " with url: " + hurl)
 			mainWindow.loadPlayer(htitle,hurl)
@@ -59,7 +60,7 @@ PlasmaComponents.Page {
                 	height: implicitHeight
 
                 	elide: Text.ElideRight
-                	text: model.htitle
+                	text: htitle
                 }
 	}
     }
