@@ -36,6 +36,10 @@ PlasmaComponents.Page {
             onClicked: mainStack.push(Qt.resolvedUrl("openDialog.qml"))
         }
         PlasmaComponents.Button { 
+	    text: "Open Url" 
+            onClicked: mainStack.push(Qt.resolvedUrl("openUrl.qml"))
+        }
+        PlasmaComponents.Button { 
 	    text: "History" 
             onClicked: mainStack.push(Qt.resolvedUrl("historyPage.qml"))
         }

@@ -59,6 +59,8 @@ ApplicationWindow {
     property string url240p
     property string ytQual
     ////////////////////////////////////////////////////
+
+    property QtObject mainPage
   
     //property string homePath // Use from C++ QStandardsPath
     //property string videoPath
@@ -66,10 +68,17 @@ ApplicationWindow {
     PlasmaComponents.PageStack {
         id: mainStack
         anchors.fill: parent
+        initialPage: Component {
+        MainPage {
+            id: mainPage
+            Component.onCompleted: mainWindow.mainPage = mainPage
+            }
+        }
     }
     
     statusBar: ToolBar { // for mobile we use toolbar in status bar as it is closer to fingers of user
-        visible: mainStack.depth > 1
+        //visible: mainStack.depth > 0
+        visible: mainStack.currentPage != mainPage
         Row {
             id: mainToolbar
             height: parent.height
@@ -137,7 +146,6 @@ ApplicationWindow {
         // Intitialize DB
         DB.initialize();
         DB.getHistory();
-	mainStack.push(Qt.resolvedUrl("mainPage.qml"))
     }
 
 }
