@@ -97,7 +97,7 @@ PlasmaComponents.Page {
                 anchors.horizontalCenter: parent.horizontalCenter
                 text: "<a href=\"https://github.com/llelectronics/\">Sourcecode on Github</a>"
                 onClicked: {
-                    Qt.openUrlExternally("https://github.com/llelectronics/");
+                    Qt.openUrlExternally("https://github.com/llelectronics/videoPlayer/tree/plasma");
                 }
             }
             

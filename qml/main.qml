@@ -33,7 +33,7 @@ ApplicationWindow {
     width: 540
     height: 960
     visible: true
-    property string appIcon: "/usr/share/icons/hicolor/86x86/apps/vplayer.png" //TODO: use xdg somehow
+    property string appIcon: "/usr/share/icons/hicolor/64x64/apps/vplayer.png" //TODO: use xdg somehow
     property string appName: "LLs vPlayer"
     property string version: "0.2"
     property alias mainToolbar: mainToolbar
