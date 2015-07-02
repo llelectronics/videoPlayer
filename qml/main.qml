@@ -45,6 +45,7 @@ ApplicationWindow {
     property int subtitlesSize: 25
     property bool boldSubtitles: false
     property string subtitlesColor: "white"
+    property bool youtubeDirect: true           
     /////////////////////////////////////////////////////
 
     // Videoplayer properties //////////////////////////
@@ -97,6 +98,10 @@ ApplicationWindow {
     function loadPlayer(title,url) {
         streamTitle = title
 	streamUrl = url
+        mainStack.push(Qt.resolvedUrl("playerPage.qml"));
+    }
+  
+    function showPlayer() {
         mainStack.push(Qt.resolvedUrl("playerPage.qml"));
     }
     

@@ -32,19 +32,23 @@ PlasmaComponents.Page {
     PlasmaComponents.ButtonColumn {
         anchors.centerIn: parent
         PlasmaComponents.Button { 
-	    text: "Browse Files" 
-            onClicked: mainStack.push(Qt.resolvedUrl("openDialog.qml"))
-        }
-        PlasmaComponents.Button { 
-	    text: "Open Url" 
-            onClicked: mainStack.push(Qt.resolvedUrl("openUrl.qml"))
-        }
-        PlasmaComponents.Button { 
-	    text: "History" 
+	    text: qsTr("History")
             onClicked: mainStack.push(Qt.resolvedUrl("historyPage.qml"))
         }
         PlasmaComponents.Button { 
-            text: "About" 
+	    text: qsTr("Search on Youtube")
+            onClicked: mainStack.push(Qt.resolvedUrl("youtubeSearch.qml"))
+        }
+        PlasmaComponents.Button { 
+	    text: qsTr("Browse Files")
+            onClicked: mainStack.push(Qt.resolvedUrl("openDialog.qml"))
+        }
+        PlasmaComponents.Button { 
+	    text: qsTr("Open Url") 
+            onClicked: mainStack.push(Qt.resolvedUrl("openUrl.qml"))
+        }
+        PlasmaComponents.Button { 
+            text: qsTr("About") 
             onClicked: mainStack.push(Qt.resolvedUrl("aboutPage.qml"))
         }
     }
