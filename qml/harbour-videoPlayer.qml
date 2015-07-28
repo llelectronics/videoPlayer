@@ -46,6 +46,8 @@ ApplicationWindow
     property string appname: "LLs Video Player"
     property string appicon: "images/icon.png"
 
+    allowedOrientations: defaultAllowedOrientations
+
     signal fileRemove(string url)
 
     function loadUrl(url) {

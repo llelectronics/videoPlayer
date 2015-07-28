@@ -37,7 +37,7 @@ import "fileman"
 
 Page {
     id: page
-    allowedOrientations: Orientation.All
+    allowedOrientations: defaultAllowedOrientations
 
 
     signal updateCover
