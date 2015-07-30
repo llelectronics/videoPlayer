@@ -55,6 +55,14 @@ Page {
         }
     }
 
+    onStatusChanged: {
+        if (status == PageStatus.Deactivating) {
+            console.debug("VidePlayer page deactiated");
+            mediaPlayer.stop();
+            video.destroy();
+        }
+    }
+
     function findBaseName(url) {
         var fileName = url.substring(url.lastIndexOf('/') + 1);
         var dot = fileName.lastIndexOf('.');
