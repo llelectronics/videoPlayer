@@ -57,7 +57,7 @@ Page {
 
     onStatusChanged: {
         if (status == PageStatus.Deactivating) {
-            console.debug("VidePlayer page deactiated");
+            //console.debug("VidePlayer page deactivated");
             mediaPlayer.stop();
             video.destroy();
         }
