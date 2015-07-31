@@ -14,7 +14,7 @@ Name:       harbour-videoPlayer
 %{?qtc_builddir:%define _builddir %qtc_builddir}
 Summary:    Simple video player using gstreamer
 Version:    0.9
-Release:    4
+Release:    5
 Group:      Qt/Qt
 License:    LICENSE
 URL:        http://example.org/
@@ -28,8 +28,7 @@ BuildRequires:  pkgconfig(sailfishapp) >= 0.0.10
 BuildRequires:  desktop-file-utils
 
 %description
-A simple media player based on gstreamer able to playback audio and video.
-Build in Youtube support for viewing and downloading videos.
+Short description of my SailfishOS Application
 
 
 %prep
@@ -55,8 +54,15 @@ rm -rf %{buildroot}
 # << install pre
 %qmake5_install
 
+%post
+/usr/bin/update-desktop-database
 # >> install post
 # << install post
+
+%postun
+/usr/bin/update-desktop-database
+# >> install postun
+# << install postun
 
 desktop-file-install --delete-original       \
   --dir %{buildroot}%{_datadir}/applications             \
@@ -74,9 +80,3 @@ desktop-file-install --delete-original       \
 /usr/share/icons/hicolor/86x86/apps
 # >> files
 # << files
-
-%post
-/usr/bin/update-desktop-database
-
-%postun
-/usr/bin/update-desktop-database

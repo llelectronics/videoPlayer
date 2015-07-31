@@ -1,7 +1,7 @@
 Name: harbour-videoPlayer
 Summary: Simple video player using gstreamer
-Version: 0.8
-Release: 1
+Version: 0.9
+Release: 5
 Group: Qt/Qt
 URL: http://example.org/
 License: LICENSE

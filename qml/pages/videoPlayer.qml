@@ -9,6 +9,8 @@ Page {
     objectName: "videoPlayerPage"
     allowedOrientations: Orientation.All
 
+    focus: true
+
     property QtObject dataContainer
 
     property string videoDuration: {
@@ -632,6 +634,16 @@ Page {
             color: Theme.highlightColor
             font.pixelSize: Theme.fontSizeHuge
             font.bold: true
+        }
+    }
+
+    Keys.onPressed: {
+        if (event.key == Qt.Key_Space) videoPauseTrigger();
+        if (event.key == Qt.Key_Left && mediaPlayer.seekable) {
+            mediaPlayer.seek(mediaPlayer.position - 5000)
+        }
+        if (event.key == Qt.Key_Right && mediaPlayer.seekable) {
+            mediaPlayer.seek(mediaPlayer.position + 5000)
         }
     }
 
