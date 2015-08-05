@@ -16,4 +16,4 @@ target_link_libraries(vplayer
 
 install(TARGETS vplayer ${INSTALL_TARGETS_DEFAULT_ARGS})
 
-install (FILES org.kde.vplayer.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})
+install (FILES org.kde.mobile.vplayer.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})
