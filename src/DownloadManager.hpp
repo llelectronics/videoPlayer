@@ -177,6 +177,9 @@ private:
 
     // Process used for curl downloading
     QProcess *curlProc;
+
+    // Get FileName from ContentDisposition header
+    QString filenameFromHTTPContentDisposition(const QString& value);
 };
 
 #endif

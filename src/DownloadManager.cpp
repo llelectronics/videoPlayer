@@ -49,6 +49,9 @@
 #include <QDir>
 #include <QDebug>
 #include <QTextCodec>
+#include <QMimeDatabase>
+#include <QMimeType>
+#include <QFile>
 
 DownloadManager::DownloadManager(QObject *parent)
     : QObject(parent), m_currentDownload(0), m_downloadedCount(0), m_totalCount(0), m_progressTotal(0), m_progressValue(0), curlProc(new QProcess(this))
@@ -118,6 +121,15 @@ QString DownloadManager::saveFileName(const QUrl &url)
 {
     // First extract the path component from the URL ...
     const QString path = url.path();
+    QString suffix;
+    suffix = QFileInfo(path).completeSuffix();
+    qDebug() << "[DownloadManager] Detected suffix from QFileInfo: " + suffix;
+
+    if (suffix.isEmpty()) {
+        QMimeDatabase getMime;
+        QMimeType urlMimeType = getMime.mimeTypeForUrl(url);
+        suffix = urlMimeType.preferredSuffix();
+    }
 
     // ... and then extract the file name. // only when basename is not already set
     if (basename.isEmpty())
@@ -140,6 +152,11 @@ QString DownloadManager::saveFileName(const QUrl &url)
             ++i;
 
         basename += QString::number(i);
+    }
+
+    if (!suffix.isEmpty() && suffix != "bin") {
+        qDebug() << "[DownloadManager.cpp] Suffix isn't empty so appending: " + suffix;
+        basename = basename + "." + suffix;
     }
 
     return basename;
@@ -176,6 +193,28 @@ void DownloadManager::addStatusMessage(const QString &message)
     emit statusMessageChanged();
 }
 
+QString DownloadManager::filenameFromHTTPContentDisposition(const QString& value) {
+    QStringList keyValuePairs = value.split(';');
+
+    foreach(const QString& valuePair, keyValuePairs) {
+        int valueStartPos = valuePair.indexOf('=');
+
+        if (valueStartPos < 0)
+            continue;
+
+        QStringList pair = valuePair.split('=');
+        if (pair.size() != 2 || pair[0].isEmpty() || pair[0].simplified() != "filename")
+            continue;
+
+        QString value = pair[1].replace("\"", "") // remove ""
+            .replace("'", "") // remove '
+            .simplified();  // remove white spaces
+        return value;
+    }
+
+    return QString();
+}
+
 //! [0]
 void DownloadManager::startNextDownload()
 {
@@ -202,6 +241,27 @@ void DownloadManager::startNextDownload()
 
     // Now create the network request for the URL ...
     QNetworkRequest request(url);
+
+    QNetworkReply *serverRequest = m_manager.head(request);
+
+    if (serverRequest->hasRawHeader("Content-Disposition"))
+    {
+        QString contentDisposition = m_currentDownload->rawHeader("Content-Disposition");
+        qDebug() << "[DownloadManager.cpp] contentDisposition Header: " + contentDisposition;
+
+        if (contentDisposition.contains("filename")) {
+            QString serverFileName = filenameFromHTTPContentDisposition(contentDisposition);
+            qDebug() << "[DownloadManager.cpp] Server filename: " + serverFileName;
+
+            if (!serverFileName.isEmpty()) {
+                QFileInfo fiContentDisposition(serverFileName);
+                QString filename = fiContentDisposition.fileName();
+                // replace the filename of the current _filePath with the new one
+                m_output.setFileName(filename);
+
+            } // If serverFileName empty
+        } // If filename
+    } // If contentDisposition
 
     // ... and start the download.
     m_currentDownload = m_manager.get(request);
