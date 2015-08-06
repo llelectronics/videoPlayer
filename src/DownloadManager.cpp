@@ -123,7 +123,7 @@ QString DownloadManager::saveFileName(const QUrl &url)
     const QString path = url.path();
     QString suffix;
     suffix = QFileInfo(path).completeSuffix();
-    qDebug() << "[DownloadManager] Detected suffix from QFileInfo: " + suffix;
+    //qDebug() << "[DownloadManager] Detected suffix from QFileInfo: " + suffix;
 
     if (suffix.isEmpty()) {
         QMimeDatabase getMime;
@@ -155,7 +155,7 @@ QString DownloadManager::saveFileName(const QUrl &url)
     }
 
     if (!suffix.isEmpty()) {
-        qDebug() << "[DownloadManager.cpp] Suffix isn't empty so appending: " + suffix;
+        //qDebug() << "[DownloadManager.cpp] Suffix isn't empty so appending: " + suffix;
         basename = basename + "." + suffix;
     }
 
@@ -247,11 +247,11 @@ void DownloadManager::startNextDownload()
     if (serverRequest->hasRawHeader("Content-Disposition"))
     {
         QString contentDisposition = m_currentDownload->rawHeader("Content-Disposition");
-        qDebug() << "[DownloadManager.cpp] contentDisposition Header: " + contentDisposition;
+        //qDebug() << "[DownloadManager.cpp] contentDisposition Header: " + contentDisposition;
 
         if (contentDisposition.contains("filename")) {
             QString serverFileName = filenameFromHTTPContentDisposition(contentDisposition);
-            qDebug() << "[DownloadManager.cpp] Server filename: " + serverFileName;
+            //qDebug() << "[DownloadManager.cpp] Server filename: " + serverFileName;
 
             if (!serverFileName.isEmpty()) {
                 QFileInfo fiContentDisposition(serverFileName);
@@ -342,7 +342,7 @@ void DownloadManager::downloadFinished()
     QMimeDatabase getMime;
     QMimeType urlMimeType = getMime.mimeTypeForFile(outputFileName,QMimeDatabase::MatchContent);
     QString suffix = urlMimeType.preferredSuffix();
-    qDebug() << "[DownloadManager.cpp] Detected suffix after download: " + suffix;
+    //qDebug() << "[DownloadManager.cpp] Detected suffix after download: " + suffix;
     if (!suffix.isEmpty()) {
         QFile outputFile(outputFileName);
         QString outputFileBaseName = QFileInfo(outputFileName).baseName();
