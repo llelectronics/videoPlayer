@@ -154,7 +154,7 @@ QString DownloadManager::saveFileName(const QUrl &url)
         basename += QString::number(i);
     }
 
-    if (!suffix.isEmpty() && suffix != "bin") {
+    if (!suffix.isEmpty()) {
         qDebug() << "[DownloadManager.cpp] Suffix isn't empty so appending: " + suffix;
         basename = basename + "." + suffix;
     }
@@ -337,6 +337,17 @@ void DownloadManager::downloadFinished()
     m_currentDownload->deleteLater();
     m_currentDownload = 0;
     emit activeDownloadsChanged();
+
+    QString outputFileName = m_output.fileName();
+    QMimeDatabase getMime;
+    QMimeType urlMimeType = getMime.mimeTypeForFile(outputFileName,QMimeDatabase::MatchContent);
+    QString suffix = urlMimeType.preferredSuffix();
+    qDebug() << "[DownloadManager.cpp] Detected suffix after download: " + suffix;
+    if (!suffix.isEmpty()) {
+        QFile outputFile(outputFileName);
+        QString outputFileBaseName = QFileInfo(outputFileName).baseName();
+        outputFile.rename(QDir::homePath() + "/Videos/" + outputFileBaseName + "." + suffix);
+    }
 
     // Trigger the execution of the next job
     startNextDownload();
