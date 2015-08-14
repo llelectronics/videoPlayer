@@ -58,7 +58,12 @@ Page {
     }
 
     Component.onDestruction: {
+        console.debug("Destruction of videoplayer")
         mediaPlayer.stop();
+        mediaPlayer.source = "";
+        mediaPlayer.play();
+        mediaPlayer.stop();
+        gc();
         video.destroy();
     }
 
@@ -375,11 +380,11 @@ Page {
                 function toggleControls() {
                     //console.debug("Controls Opacity:" + controls.opacity);
                     if (controls.opacity === 0.0) {
-                        console.debug("Show controls");
+                        //console.debug("Show controls");
                         controls.opacity = 1.0;
                     }
                     else {
-                        console.debug("Hide controls");
+                        //console.debug("Hide controls");
                         controls.opacity = 0.0;
                     }
                     videoPlayerPage.showNavigationIndicator = !videoPlayerPage.showNavigationIndicator

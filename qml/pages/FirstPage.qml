@@ -81,7 +81,7 @@ Page {
     }
 
     onStreamTitleChanged: {
-        console.debug("[firstPage.qml] streamTitle: " + streamTitle)
+        //console.debug("[firstPage.qml] streamTitle: " + streamTitle)
     }
 
     onStreamUrlChanged: {

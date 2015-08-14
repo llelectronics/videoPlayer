@@ -52,7 +52,7 @@ Page {
             dataContainer.loadPlayer();
         }
         onFileRemove: {
-            console.debug("[DirView]Requesting removal of file " + url);
+            //console.debug("[DirView]Requesting removal of file " + url);
             _fm.remove(url);
         }
     }

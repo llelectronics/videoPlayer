@@ -19,7 +19,7 @@ Dialog {
     function isUrl(url) {
         var pattern = new RegExp(/^(([\w]+:)?\/\/)?(([\d\w]|%[a-fA-f\d]{2,2})+(:([\d\w]|%[a-fA-f\d]{2,2})+)?@)?([\d\w][-\d\w]{0,253}[\d\w]\.)+[\w]{2,4}(:[\d]+)?(\/([-+_~.\d\w]|%[a-fA-f\d]{2,2})*)*(\?(&?([-+_~.\d\w]|%[a-fA-f\d]{2,2})=?)*)?(#([-+_~.\d\w]|%[a-fA-f\d]{2,2})*)?$/);
         if(!pattern.test(url)) {
-            console.debug("Not a valid URL.");
+            //console.debug("Not a valid URL.");
             return false;
         } else {
             return true;
