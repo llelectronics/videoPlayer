@@ -83,6 +83,17 @@ MouseArea {
 
         visible: videoItem.player || controlFade.running //(!videoItem.playing || controlFade.running)
 
+        Rectangle {
+            anchors.centerIn: parent
+            width: playPauseImg.width + 64
+            height: playPauseImg.height + 64
+            color: "black"
+            opacity: 0.4
+            radius: width / 2
+            border.color: "white"
+            border.width: 2
+        }
+
         Image {
             id: playPauseImg
             anchors.centerIn: parent

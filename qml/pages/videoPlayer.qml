@@ -129,11 +129,12 @@ Page {
     PageHeader {
         id: urlHeader
         title: findBaseName(streamUrl)
+        _titleItem.color: "white"
         visible: {
             if (titleHeader.visible == false && pulley.visible && mainWindow.applicationActive) return true
             else return false
         }
-        _titleItem.font.pixelSize: mainWindow.applicationActive ? Theme.fontSizeLarge : Theme.fontSizeHuge
+        _titleItem.font.pixelSize: mainWindow.applicationActive ? Theme.fontSizeMedium : Theme.fontSizeHuge
         states: [
             State {
                 name: "cover"
@@ -146,12 +147,13 @@ Page {
     }
     PageHeader {
         id: titleHeader
+        _titleItem.color: "white"
         title: streamTitle
         visible: {
             if (streamTitle != "" && pulley.visible && mainWindow.applicationActive) return true
             else return false
         }
-        _titleItem.font.pixelSize: mainWindow.applicationActive ? Theme.fontSizeLarge : Theme.fontSizeHuge
+        _titleItem.font.pixelSize: mainWindow.applicationActive ? Theme.fontSizeMedium : Theme.fontSizeHuge
         states: [
             State {
                 name: "cover"
