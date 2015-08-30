@@ -329,9 +329,15 @@ Page {
                 else
                     (page.height / 2) - pageHeader.height / 2
             }
-            model: menuButtons
+            //model: menuButtons
             delegate: menuButtonsDelegate
             snapMode: GridView.SnapToRow
+            populate: Transition {
+                NumberAnimation { properties: "x,y"; duration: 400 }
+            }
+            Component.onCompleted: {
+                grid.model = menuButtons
+            }
         } // SilicaGridView
     } // Drawer
 
