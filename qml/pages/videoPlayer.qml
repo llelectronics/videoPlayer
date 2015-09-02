@@ -41,6 +41,8 @@ Page {
     property bool liveView: true
     property Page dPage
     property bool autoplay: dataContainer.autoplay
+    property bool savedPosition: false
+    property string savePositionMsec
 
     property alias showTimeAndTitle: showTimeAndTitle
     property alias pulley: pulley
@@ -59,6 +61,11 @@ Page {
 
     Component.onDestruction: {
         console.debug("Destruction of videoplayer")
+        var sourcePath = mediaPlayer.source.toString();
+        if (sourcePath.match("^file://")) {
+            //console.debug("[videoPlayer.qml] Destruction going on so write : " + mediaPlayer.source + " with timecode: " + mediaPlayer.position + " to db")
+            DB.addPosition(sourcePath,mediaPlayer.position);
+        }
         mediaPlayer.stop();
         mediaPlayer.source = "";
         mediaPlayer.play();
@@ -103,6 +110,13 @@ Page {
         }
         if (dataContainer.streamTitle == "") dataContainer.streamTitle = findBaseName(streamUrl)
         dataContainer.ytdlStream = false
+
+        if (streamUrl.toString().match("^file://")) {
+            savePositionMsec = DB.getPosition(streamUrl.toString());
+            //console.debug("[videoPlayer.qml] streamUrl= " + streamUrl + " savePositionMsec= " + savePositionMsec + " streamUrl.length = " + streamUrl.length);
+            if (savePositionMsec !== "Not Found") savedPosition = true;
+            else savedPosition = false;
+        }
     }
 
     onStreamTitleChanged: {
@@ -223,6 +237,16 @@ Page {
                 onClicked: {
                     if (mainWindow.firstPage.streamTitle != "") mainWindow.modelBookmarks.addBookmark(mainWindow.firstPage.streamUrl,mainWindow.firstPage.streamTitle)
                     else mainWindow.modelBookmarks.addBookmark(mainWindow.firstPage.streamUrl,mainWindow.firstPage.findBaseName(mainWindow.firstPage.streamUrl))
+                }
+            }
+            MenuItem {
+                text: qsTr("Play from last known position")
+                visible: {
+                    savedPosition
+                }
+                onClicked: {
+                    if (mediaPlayer.playbackState != MediaPlayer.PlayingState) videoPoster.play();
+                    mediaPlayer.seek(savePositionMsec)
                 }
             }
         }

@@ -9,7 +9,7 @@ function getDatabase() {
 function initialize() {
     var db = getDatabase();
     if(db.version == '') {
-        db.changeVersion('', '0.2', function(tx) {
+        db.changeVersion('', '0.3', function(tx) {
             // Create the history table if it doesn't already exist
             // If the table exists, this is skipped
             tx.executeSql('CREATE TABLE IF NOT EXISTS history(uid INTEGER UNIQUE, url TEXT, title TEXT)');
@@ -22,12 +22,29 @@ END;')
             tx.executeSql('CREATE TABLE IF NOT EXISTS bookmarks(title TEXT, url TEXT)');
             tx.executeSql('CREATE TABLE IF NOT EXISTS settings(setting TEXT, value TEXT)');
             tx.executeSql('CREATE UNIQUE INDEX IF NOT EXISTS idx_settings ON settings(setting)');
+            tx.executeSql('CREATE TABLE IF NOT EXISTS positionStore(uid INTEGER UNIQUE, url TEXT, position INTEGER)');
+            // Limit positionStore entries to 10
+            tx.executeSql('CREATE TRIGGER IF NOT EXISTS delete_pos_till_10 INSERT ON positionStore WHEN (select count(*) from positionStore)>9 \
+BEGIN \
+    DELETE FROM positionStore WHERE positionStore.uid IN (SELECT positionStore.uid FROM positionStore ORDER BY positionStore.uid limit (select count(*) -10 from positionStore)); \
+END;')
         });
     }
     else if (db.version == '0.1') {
         // Need to upgrade History here
         db.changeVersion('0.1', '0.2', function(tx) {
             tx.executeSql('alter table history add title TEXT');
+        });
+    }
+    else if (db.version == '0.2') {
+        // Need to upgrade History here
+        db.changeVersion('0.2', '0.3', function(tx) {
+            tx.executeSql('CREATE TABLE IF NOT EXISTS positionStore(uid INTEGER UNIQUE, url TEXT, position INTEGER)');
+            // Limit positionStore entries to 10
+            tx.executeSql('CREATE TRIGGER IF NOT EXISTS delete_pos_till_10 INSERT ON positionStore WHEN (select count(*) from positionStore)>9 \
+BEGIN \
+    DELETE FROM positionStore WHERE positionStore.uid IN (SELECT positionStore.uid FROM positionStore ORDER BY positionStore.uid limit (select count(*) -10 from positionStore)); \
+END;')
         });
     }
 }
@@ -133,6 +150,57 @@ function getBookmarks() {
             mainWindow.modelBookmarks.append({"title" : rs.rows.item(i).title, "url" : rs.rows.item(i).url});
         }
     })
+}
+
+// This function is used to write position into the database
+function addPosition(url,position) {
+    var date = new Date();
+    var db = getDatabase();
+    var res = "";
+    db.transaction(function(tx) {
+        // Remove and readd if url already in history
+        var rs0 = tx.executeSql('delete from positionStore where url=(?);',[url]);
+        if (rs0.rowsAffected > 0) {
+            //console.debug("Url already found and removed to readd it");
+        } else {
+            //console.debug("Url not found so add it newly");
+        }
+
+        var rs = tx.executeSql('INSERT OR REPLACE INTO positionStore VALUES (?,?,?);', [date.getTime(),url,position]);
+        if (rs.rowsAffected > 0) {
+            res = "OK";
+            //console.log ("Saved to database");
+        } else {
+            res = "Error";
+            //console.log ("Error saving to database");
+        }
+    }
+    );
+    // The function returns “OK” if it was successful, or “Error” if it wasn't
+    return res;
+}
+
+// This function is used to write position into the database
+function getPosition(url) {
+    var db = getDatabase();
+    var res = "";
+    db.transaction(function(tx) {
+        var rs = tx.executeSql('SELECT position FROM positionStore WHERE url=(?);', [url]);
+    if (rs.rows.length > 0) {  // Headaches !!! Why isn't rowsAffected working here ?
+        for (var i = 0; i < rs.rows.length; i++) {
+            if (rs.rows.item(i).position != null) {
+                //console.debug("[db.js] History text != '' :" + rs.rows.item(i).title);
+                res = rs.rows.item(i).position
+                return res;
+            } else res = "Not Found";
+        }
+        } else {
+            res = "Not Found";
+            //console.log ("Error saving to database");
+        }
+    }
+    );
+    return res;
 }
 
 // This function is used to write settings into the database
