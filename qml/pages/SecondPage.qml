@@ -186,10 +186,12 @@ import "helper/yt.js" as YT
             }
             Rectangle {
                 anchors.left: parent.left
+                anchors.leftMargin: -(width / 6)
                 anchors.bottom: parent.bottom
                 visible: ytView.canGoBack
                 width: parent.width / 8
                 height: parent.height / 16
+                radius: parent.width / 32
                 gradient: Gradient {
                     GradientStop { position: 1.0; color: "black" }
                     GradientStop { position: 0.0; color: "transparent" } //Theme.highlightColor} // Black seems to look and work better
