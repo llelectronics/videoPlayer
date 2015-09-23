@@ -7,6 +7,8 @@
 #include <QDebug>
 #include <QProcess>
 #include <QByteArray>
+#include <QFile>
+#include <QStandardPaths>
 
 class ythelper : public QObject
 {   Q_OBJECT
@@ -17,9 +19,11 @@ public:
     QString errorMsg;
     QProcess streamProcess;
     QProcess titleProcess;
+    QString data_dir = QStandardPaths::writableLocation(QStandardPaths::DataLocation);
 signals:
     void streamUrlChanged(QString changedUrl);
     void sTitleChanged(QString sTitle);
+    void updateComplete();
     void error(QString message);
 public slots:
     void setUrl(QString url)
@@ -30,16 +34,35 @@ public slots:
     {
         return reqUrl;
     }
+    void checkAndInstall()
+    {
+        QFile ytdlBin;
+        ytdlBin.setFileName(data_dir + "/youtube-dl");
+        if (!ytdlBin.exists()) {
+            ytdlBin.setFileName("/usr/share/harbour-videoPlayer/qml/pages/helper/youtube-dl");
+            ytdlBin.copy(data_dir + "/youtube-dl");
+        }
+    }
+    void updateYtdl()
+    {
+        checkAndInstall();
+        QProcess updateBinary;
+        updateBinary.start(data_dir + "/youtube-dl -U");
+        connect(&updateBinary, SIGNAL(finished(int)), this, SLOT(getUpdateStatus(int)));
+    }
+
     void getStreamUrl()
     {
         //qDebug() << "Starting process with url:" << reqUrl;
-        streamProcess.start("/usr/share/harbour-videoPlayer/qml/pages/helper/youtube-dl -g " + reqUrl);
+        checkAndInstall();
+        streamProcess.start(data_dir + "/youtube-dl -g " + reqUrl);
         connect(&streamProcess, SIGNAL(finished(int)), this, SLOT(getStreamUrlOutput(int)));
     }
     void getStreamTitle()
     {
         //qDebug() << "Starting process with url:" << reqUrl;
-        titleProcess.start("/usr/share/harbour-videoPlayer/qml/pages/helper/youtube-dl -e " + reqUrl);
+        checkAndInstall();
+        titleProcess.start(data_dir + "/youtube-dl -e " + reqUrl);
         connect(&titleProcess, SIGNAL(finished(int)), this, SLOT(getTitleOutput(int)));
     }
     void getStreamUrlOutput(int exitCode)
@@ -70,6 +93,12 @@ public slots:
             qDebug() << "Called the C++ slot and got following url:" << outputList[0];
             streamTitle = outputList[0];
             sTitleChanged(streamTitle);
+        }
+    }
+    void getUpdateStatus(int exitCode)
+    {
+        if (exitCode == 0) {
+            updateComplete();
         }
     }
 };
