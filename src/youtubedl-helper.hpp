@@ -19,6 +19,7 @@ public:
     QString errorMsg;
     QProcess streamProcess;
     QProcess titleProcess;
+    QProcess updateBinary;
     QString data_dir = QStandardPaths::writableLocation(QStandardPaths::DataLocation);
 signals:
     void streamUrlChanged(QString changedUrl);
@@ -46,7 +47,6 @@ public slots:
     void updateYtdl()
     {
         checkAndInstall();
-        QProcess updateBinary;
         updateBinary.start(data_dir + "/youtube-dl -U");
         connect(&updateBinary, SIGNAL(finished(int)), this, SLOT(getUpdateStatus(int)));
     }

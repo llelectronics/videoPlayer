@@ -105,6 +105,12 @@ Page {
         historyModel.append({"hurl": url, "htitle": title});
     }
 
+    function updateYtdl() {
+        busy.visible = true
+        busy.running = true
+        _ytdl.updateYtdl();
+    }
+
     ListModel {
         id: historyModel
 
@@ -369,6 +375,12 @@ Page {
                 errTxt.visible = true
                 errTxt.text = message
             }
+        }
+        onUpdateComplete: {
+            busy.running = false
+            busy.visible = false
+            errTxt.visible = true
+            errTxt.text = qsTr("Youtube-Dl updated.")
         }
     }
 

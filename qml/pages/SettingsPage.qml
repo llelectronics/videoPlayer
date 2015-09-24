@@ -403,6 +403,19 @@ Dialog {
                 onClicked: clearHistory();
             }
 
+            BackgroundItem {
+                id: updateYtdlButton
+                Label {
+                    text: qsTr("Update Youtube-Dl")
+                    anchors.verticalCenter: parent.verticalCenter
+                    anchors.left: parent.left
+                    anchors.leftMargin: Theme.paddingLarge
+                    color: updateYtdlButton.highlighted ? Theme.highlightColor : Theme.primaryColor
+                }
+                anchors.horizontalCenter: parent.horizontalCenter
+                onClicked: { mainWindow.firstPage.updateYtdl(); pageStack.pop(); }
+            }
+
 //            SectionHeader {
 //                text: "Advanced"
 //            }
