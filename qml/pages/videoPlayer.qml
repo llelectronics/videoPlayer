@@ -528,7 +528,7 @@ Page {
         Rectangle {
             anchors.fill: parent
             color: "black"
-            visible: video.visible
+            //visible: video.visible
         },
 
         VideoOutput {
