@@ -72,6 +72,7 @@ Page {
         mediaPlayer.stop();
         gc();
         video.destroy();
+        pageStack.popAttached();
     }
 
 //    onStatusChanged: {
