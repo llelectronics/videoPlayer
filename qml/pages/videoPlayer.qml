@@ -3,6 +3,7 @@ import Sailfish.Silica 1.0
 import QtMultimedia 5.0
 import Sailfish.Media 1.0
 import "helper"
+import "fileman"
 
 Page {
     id: videoPlayerPage
@@ -43,6 +44,7 @@ Page {
     property bool autoplay: dataContainer.autoplay
     property bool savedPosition: false
     property string savePositionMsec
+    property string subtitleUrl
 
     property alias showTimeAndTitle: showTimeAndTitle
     property alias pulley: pulley
@@ -241,6 +243,10 @@ Page {
                 }
             }
             MenuItem {
+                text: qsTr("Load Subtitle")
+                onClicked: pageStack.push(openSubsComponent)
+            }
+            MenuItem {
                 text: qsTr("Play from last known position")
                 visible: {
                     savedPosition
@@ -291,8 +297,9 @@ Page {
             }
         }
 
-        function getSubtitles() {
-            subsGetter.sendMessage(streamUrl);
+        function getSubtitles(url) {
+            if (url !== "") subsGetter.sendMessage(url);
+            else subsGetter.sendMessage(streamUrl);
         }
 
         function setSubtitles(subtitles) {
@@ -322,6 +329,16 @@ Page {
             onMessage: {
                 subtitlesText.text = messageObject
                 //console.debug("[videoPlayer.qml] subsChecker MessageObject: " + messageObject);
+            }
+        }
+
+        Component {
+            id: openSubsComponent
+            OpenDialog {
+                onOpenFile: {
+                    subtitleUrl = path
+                    pageStack.pop()
+                }
             }
         }
 
@@ -400,7 +417,7 @@ Page {
                 onPlayClicked: {
                     toggleControls();
                     if (enableSubtitles) {
-                        flick.getSubtitles();
+                        flick.getSubtitles(subtitleUrl);
                     }
                 }
 

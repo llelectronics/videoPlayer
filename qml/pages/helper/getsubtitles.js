@@ -53,12 +53,24 @@ WorkerScript.onMessage = function(url) {
             }
         }
     }
-    doc.open("GET", url.slice(0, url.lastIndexOf(".")) + ".srt");
+    if (endsWith(url,"srt")) {
+        //console.debug("[getsubtitles.js] subtitle specified with url here: " + url);
+        doc.open("GET", url);
+    }
+    else {
+        //console.debug("[getsubtitles.js] No subtitle specified trying to load default")
+        if (url.indexOf(".") !=-1) doc.open("GET", url.slice(0, url.lastIndexOf(".")) + ".srt");
+        else doc.open("GET", url + ".srt")
+    }
     doc.send();
 }
 
 function strip(string) {
     return string.replace(/^\s+|\s+$/g, '');
+}
+
+function endsWith(txt,suffix) {
+    return !!txt.match(suffix+"$");
 }
 
 function getSubTime(time) {
