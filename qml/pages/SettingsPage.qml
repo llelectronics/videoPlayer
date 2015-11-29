@@ -27,7 +27,7 @@ Dialog {
 
     function loadDefaults() {
         loadSubtitlesSwitch.checked = true ;
-        subtitleSizeCombo.currentIndex = 34 - 25;
+        subtitleSizeCombo.currentIndex = 40 - 25;
         boldSubtitlesSwitch.checked = false ;
         colorIndicator.color = Theme.highlightColor
         directYoutubeSwitch.checked = true;
@@ -291,8 +291,14 @@ Dialog {
                 anchors.horizontalCenter: parent.horizontalCenter
                 label: qsTr("Subtitle Font Size")
                 visible: loadSubtitlesSwitch.checked
-                currentIndex: 34 - parseInt(mainWindow.firstPage.subtitlesSize)
+                currentIndex: 40 - parseInt(mainWindow.firstPage.subtitlesSize)
                 menu: ContextMenu {
+                    MenuItem { text: "95" }
+                    MenuItem { text: "85" }
+                    MenuItem { text: "75" }
+                    MenuItem { text: "65" }
+                    MenuItem { text: "55" }
+                    MenuItem { text: "45" }
                     MenuItem { text: "34" }
                     MenuItem { text: "33" }
                     MenuItem { text: "32" }
