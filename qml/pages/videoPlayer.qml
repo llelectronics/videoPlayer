@@ -349,6 +349,7 @@ Page {
             spacing: 15
             width: parent.width
             height: parent.height
+            z:99
             visible: {
                 if (errorTxt.text !== "" || errorDetail.text !== "" ) return true;
                 else return false;
@@ -361,6 +362,9 @@ Page {
                 //            anchors.top: parent.top
                 //            anchors.topMargin: 65
                 font.bold: true
+                onTextChanged: {
+                    if (text !== "") visible = true;
+                }
             }
 
 
@@ -368,24 +372,23 @@ Page {
                 id: errorDetail
                 text: ""
                 width: parent.width
-                height: parent.height / 3
+                height: parent.height / 2.5
                 anchors.horizontalCenter: parent.horizontalCenter
                 font.bold: false
+                onTextChanged: {
+                    if (text !== "") visible = true;
+                }
+                background: null
             }
-        }
-        MouseArea {
-            id: errorClick
-            anchors.fill: errorBox
-            enabled: {
-                if (errorTxt.text != "") return true
-                else return false
+            Button {
+                text: qsTr("Dismiss")
+                onClicked: {
+                    errorTxt.text = ""
+                    errorDetail.text = ""
+                    errorBox.visible = false
+                }
+                anchors.horizontalCenter: parent.horizontalCenter
             }
-            onClicked: {
-                errorTxt.text = ""
-                errorDetail.text = ""
-                errorBox.visible = false
-            }
-            z:99  // above all to hide error message
         }
 
         Item {
@@ -594,9 +597,29 @@ Page {
                     if (metaData.title) dPage.title = metaData.title
                 }
                 onError: {
-                    errorTxt.text = error;
+                    // Just a little help
+        //            MediaPlayer.NoError - there is no current error.
+        //            MediaPlayer.ResourceError - the video cannot be played due to a problem allocating resources.
+        //            MediaPlayer.FormatError - the video format is not supported.
+        //            MediaPlayer.NetworkError - the video cannot be played due to network issues.
+        //            MediaPlayer.AccessDenied - the video cannot be played due to insufficient permissions.
+        //            MediaPlayer.ServiceMissing - the video cannot be played because the media service could not be instantiated.
+                    if (error == MediaPlayer.ResourceError) errorTxt.text = "Ressource Error";
+                    else if (error == MediaPlayer.FormatError) errorTxt.text = "Format Error";
+                    else if (error == MediaPlayer.NetworkError) errorTxt.text = "Network Error";
+                    else if (error == MediaPlayer.AccessDenied) errorTxt.text = "Access Denied Error";
+                    else if (error == MediaPlayer.ServiceMissing) errorTxt.text = "Media Service Missing Error";
+                    //errorTxt.text = error;
+                    // Prepare user friendly advise on error
                     errorDetail.text = errorString;
+                    if (error == MediaPlayer.ResourceError) errorDetail.text += qsTr("\nThe video cannot be played due to a problem allocating resources.\n\
+On Youtube Videos please make sure to be logged in. Some videos might be geoblocked or require you to be logged into youtube.")
+                    else if (error == MediaPlayer.FormatError) errorDetail.text += qsTr("\nThe audio and or video format is not supported.")
+                    else if (error == MediaPlayer.NetworkError) errorDetail.text += qsTr("\nThe video cannot be played due to network issues.")
+                    else if (error == MediaPlayer.AccessDenied) errorDetail.text += qsTr("\nThe video cannot be played due to insufficient permissions.")
+                    else if (error == MediaPlayer.ServiceMissing) errorDetail.text += qsTr("\nThe video cannot be played because the media service could not be instantiated.")
                     errorBox.visible = true;
+                    /* Avoid MediaPlayer undefined behavior */
                     stop();
                 }
             }
