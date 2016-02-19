@@ -101,6 +101,8 @@ MouseArea {
                 if (videoItem.player && (!videoItem.playing)) return "image://theme/icon-cover-play"
                 else return "image://theme/icon-cover-pause"
             }
+            width: Theme.iconSizeMedium
+            height: width
             MouseArea {
                 anchors.centerIn: parent
                 width: parent.width + 64

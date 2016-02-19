@@ -264,6 +264,8 @@ Page {
             source: Qt.resolvedUrl("images/audio.png")
             opacity: 0.0
             Behavior on opacity { FadeAnimation { } }
+            width: parent.width / 1.25
+            height: width
         }
 
         ProgressCircle {
