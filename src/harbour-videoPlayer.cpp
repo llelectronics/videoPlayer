@@ -57,6 +57,10 @@ int main(int argc, char *argv[])
     QQuickView *view = SailfishApp::createView(); // I get a white background with this.
     view->setSource(SailfishApp::pathTo("qml/harbour-videoPlayer.qml"));  // So I do this ;)
 
+    // Needs to be added here before trying to load the file as _ytdl might be needed for that
+    ythelper *youtubedl = new ythelper();
+    view->engine()->rootContext()->setContextProperty("_ytdl", youtubedl);
+
     QObject *object = view->rootObject();
 
     QString file;
@@ -86,9 +90,6 @@ int main(int argc, char *argv[])
 
     FM *fileAction = new FM();
     view->engine()->rootContext()->setContextProperty("_fm", fileAction);
-
-    ythelper *youtubedl = new ythelper();
-    view->engine()->rootContext()->setContextProperty("_ytdl", youtubedl);
 
     view->show();
 

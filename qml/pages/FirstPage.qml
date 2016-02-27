@@ -50,6 +50,7 @@ Page {
     property bool boldSubtitles: false
     property string subtitlesColor: Theme.highlightColor
     property bool liveView: true
+    property bool ytdlStream: false
     /////////////////////////////////////////////////////
 
     // Videoplayer properties //////////////////////////
@@ -70,9 +71,8 @@ Page {
     property alias videoPickerComponent: videoPickerComponent
     property alias openFileComponent: openFileComponent
     property alias historyModel: historyModel
-    property alias busy: busy
 
-    property bool ytdlStream: false
+    property variant busy: mainWindow.busy
 
     Component.onCompleted: {
         // Initialize the database
@@ -393,14 +393,6 @@ Page {
             else if (errTxt.visible) return true;
             else return false;
         }
-    }
-
-    BusyIndicator {
-        id: busy
-        anchors.centerIn: parent
-        size: BusyIndicatorSize.Large
-        running: false
-        visible: false
     }
 
     TextArea {

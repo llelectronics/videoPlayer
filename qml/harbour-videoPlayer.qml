@@ -41,6 +41,7 @@ ApplicationWindow
     property Item firstPage
     property bool autoPlay: false
     property alias modelBookmarks: modelBookmarks
+    property alias busy: busy
 
     property string version: "1.1"
     property string appname: "LLs Video Player"
@@ -50,21 +51,43 @@ ApplicationWindow
 
     signal fileRemove(string url)
 
-    function loadUrl(url) {
-        // Check if youtube url
-        if (YT.checkYoutube(url) === true) {
-            YT.getYoutubeTitle(url);
-            //url = YT.getYoutubeVid(url);
+    function isUrl(url) {
+        var pattern = new RegExp(/^(([\w]+:)?\/\/)?(([\d\w]|%[a-fA-f\d]{2,2})+(:([\d\w]|%[a-fA-f\d]{2,2})+)?@)?([\d\w][-\d\w]{0,253}[\d\w]\.)+[\w]{2,4}(:[\d]+)?(\/([-+_~.\d\w]|%[a-fA-f\d]{2,2})*)*(\?(&?([-+_~.\d\w]|%[a-fA-f\d]{2,2})=?)*)?(#([-+_~.\d\w]|%[a-fA-f\d]{2,2})*)?$/);
+        if(!pattern.test(url)) {
+            //console.debug("Not a valid URL.");
+            return false;
+        } else {
+            return true;
         }
-        // TODO: Load videoPlayer function from firstPage
-        firstPage.originalUrl = url
-        firstPage.streamUrl = url
-        firstPage.streamTitle = ""
+    }
+
+    function loadUrl(url) {
         if (autoPlay == true) {
             console.debug("autoPlay = true") ;
             firstPage.autoplay = true;
         }
-        firstPage.loadPlayer();
+        // Check if youtube url
+        if (YT.checkYoutube(url) === true) {
+            YT.getYoutubeTitle(url);
+            firstPage.originalUrl = url
+            firstPage.streamUrl = url
+            firstPage.loadPlayer();
+            //url = YT.getYoutubeVid(url);
+        }
+        else if (isUrl(url)) {
+            // Call C++ side here to grab url
+            _ytdl.setUrl(url);
+            _ytdl.getStreamUrl();
+            _ytdl.getStreamTitle();
+            busy.visible = true;
+            busy.running = true;
+        }
+        else {
+            firstPage.originalUrl = url
+            firstPage.streamUrl = url
+            firstPage.streamTitle = ""
+            firstPage.loadPlayer();
+        }
     }
 
     initialPage: Component {
@@ -139,6 +162,14 @@ ApplicationWindow
             append({"title":bookmarkTitle, "url":bookmarkUrl});
             DB.addBookmark(bookmarkTitle,bookmarkUrl);
         }
+    }
+
+    BusyIndicator {
+        id: busy
+        anchors.centerIn: parent
+        size: BusyIndicatorSize.Large
+        running: false
+        visible: false
     }
 }
 
