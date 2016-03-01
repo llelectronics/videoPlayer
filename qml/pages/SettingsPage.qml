@@ -334,7 +334,8 @@ Dialog {
                     }
                 }
                 onClicked: {
-                    var dialog = pageStack.push("Sailfish.Silica.ColorPickerDialog")
+                    var allowedColors = ["#FFFFFF","#0000C0","#00FFFF","#00FF00", "#FF0000", "#FF8000", "#FFFF00", "#FFFFC0", "#000000", "#C0FFC0", "#C0C0FF", "#FFC0C0"]
+                    var dialog = pageStack.push("Sailfish.Silica.ColorPickerDialog", {colors: allowedColors})
                     dialog.accepted.connect(function() {
                         colorIndicator.color = dialog.color
                     })
