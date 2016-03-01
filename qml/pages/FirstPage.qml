@@ -46,7 +46,7 @@ Page {
     // Settings /////////////////////////////////////////
     property string openDialogType: "adv"
     property bool enableSubtitles: true
-    property int subtitlesSize: 25
+    property variant subtitlesSize: Theme.fontSizeMedium
     property bool boldSubtitles: false
     property string subtitlesColor: Theme.highlightColor
     property bool liveView: true
@@ -87,6 +87,16 @@ Page {
     onStreamUrlChanged: {
         if (! ytdlStream) streamTitle = ""  // Reset Stream Title here
         ytQual = ""
+    }
+
+    onSubtitlesSizeChanged: {
+        if (subtitlesSize != Theme.fontSizeSmall && subtitlesSize != Theme.fontSizeMedium && subtitlesSize != Theme.fontSizeLarge && subtitlesSize != Theme.fontSizeExtraLarge) {
+            if (subtitlesSize == "small") mainWindow.firstPage.subtitlesSize = Theme.fontSizeSmall
+            else if (subtitlesSize == "medium") mainWindow.firstPage.subtitlesSize = Theme.fontSizeMedium
+            else if (subtitlesSize == "large") mainWindow.firstPage.subtitlesSize = Theme.fontSizeLarge
+            else if (subtitlesSize == "extralarge") mainWindow.firstPage.subtitlesSize = Theme.fontSizeExtraLarge
+            else mainWindow.firstPage.subtitlesSize = Theme.fontSizeMedium
+        }
     }
 
     function loadPlayer() {

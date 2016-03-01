@@ -27,7 +27,7 @@ Dialog {
 
     function loadDefaults() {
         loadSubtitlesSwitch.checked = true ;
-        subtitleSizeCombo.currentIndex = 40 - 25;
+        subtitleSizeCombo.currentIndex = 1;
         boldSubtitlesSwitch.checked = false ;
         colorIndicator.color = Theme.highlightColor
         directYoutubeSwitch.checked = true;
@@ -41,7 +41,7 @@ Dialog {
 
     function saveSettings() {
         DB.addSetting("enableSubtitles", loadSubtitlesSwitch.checked.toString());
-        DB.addSetting("subtitlesSize", subtitleSizeCombo.value.toString());
+        DB.addSetting("subtitlesSize", subtitleSizeCombo.subtitleSize.toString());
         DB.addSetting("boldSubtitles", boldSubtitlesSwitch.checked.toString());
         DB.addSetting("subtitlesColor", colorIndicator.color);
         DB.addSetting("youtubeDirect", directYoutubeSwitch.checked.toString());
@@ -291,40 +291,25 @@ Dialog {
                 anchors.horizontalCenter: parent.horizontalCenter
                 label: qsTr("Subtitle Font Size")
                 visible: loadSubtitlesSwitch.checked
-                currentIndex: 40 - parseInt(mainWindow.firstPage.subtitlesSize)
+                property string subtitleSize: mainWindow.firstPage.subtitlesSize
+                currentIndex: {
+                    // Current Option
+                    if (mainWindow.firstPage.subtitleSize === Theme.fontSizeSmall) return 0;
+                    else if (mainWindow.firstPage.subtitlesSize === Theme.fontSizeMedium) return 1;
+                    else if (mainWindow.firstPage.subtitlesSize === Theme.fontSizeLarge) return 2;
+                    else if (mainWindow.firstPage.subtitlesSize === Theme.fontSizeExtraLarge) return 3;
+                }
                 menu: ContextMenu {
-                    MenuItem { text: "95" }
-                    MenuItem { text: "85" }
-                    MenuItem { text: "75" }
-                    MenuItem { text: "65" }
-                    MenuItem { text: "55" }
-                    MenuItem { text: "45" }
-                    MenuItem { text: "34" }
-                    MenuItem { text: "33" }
-                    MenuItem { text: "32" }
-                    MenuItem { text: "31" }
-                    MenuItem { text: "30" }
-                    MenuItem { text: "29" }
-                    MenuItem { text: "28" }
-                    MenuItem { text: "27" }
-                    MenuItem { text: "26" }
-                    MenuItem { text: "25" }
-                    MenuItem { text: "24" }
-                    MenuItem { text: "23" }
-                    MenuItem { text: "22" }
-                    MenuItem { text: "21" }
-                    MenuItem { text: "20" }
-                    MenuItem { text: "19" }
-                    MenuItem { text: "18" }
-                    MenuItem { text: "17" }
-                    MenuItem { text: "16" }
-                    MenuItem { text: "15" }
-                    MenuItem { text: "14" }
-                    MenuItem { text: "13" }
-                    MenuItem { text: "12" }
-                    MenuItem { text: "11" }
-                    MenuItem { text: "10" }
-                    MenuItem { text: "9" }
+                    MenuItem { text: "Small" }
+                    MenuItem { text: "Medium" }
+                    MenuItem { text: "Large" }
+                    MenuItem { text: "Extra Large" }
+                }
+                onCurrentIndexChanged: {
+                    if (currentIndex == 0) subtitleSize = "small"
+                    else if (currentIndex == 1) subtitleSize = "medium"
+                    else if (currentIndex == 2) subtitleSize = "large"
+                    else if (currentIndex == 3) subtitleSize = "extralarge"
                 }
             }
 

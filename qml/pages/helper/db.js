@@ -256,7 +256,7 @@ function getSettings() {
         var rs = tx.executeSql('SELECT * FROM settings;');
         for (var i = 0; i < rs.rows.length; i++) {
             if (rs.rows.item(i).setting == "enableSubtitles") mainWindow.firstPage.enableSubtitles = stringToBoolean(rs.rows.item(i).value)
-            else if (rs.rows.item(i).setting == "subtitlesSize") mainWindow.firstPage.subtitlesSize = parseInt(rs.rows.item(i).value)
+            else if (rs.rows.item(i).setting == "subtitlesSize") mainWindow.firstPage.subtitlesSize = rs.rows.item(i).value
             else if (rs.rows.item(i).setting == "boldSubtitles") mainWindow.firstPage.boldSubtitles = stringToBoolean(rs.rows.item(i).value)
             else if (rs.rows.item(i).setting == "subtitlesColor") mainWindow.firstPage.subtitlesColor = rs.rows.item(i).value
             //else if (rs.rows.item(i).setting == "youtubeDirect") mainWindow.firstPage.youtubeDirect = stringToBoolean(rs.rows.item(i).value) // awlays on as ytapi changed api and wants money
