@@ -33,6 +33,7 @@ Dialog {
         directYoutubeSwitch.checked = true;
         openDialogCombo.currentIndex = 0;
         liveViewSwitch.checked = true;
+        solidSubtitlesSwitch.checked = false;
     }
 
     function clearHistory() {
@@ -48,6 +49,7 @@ Dialog {
         //console.log("[SettingsPage.qml] openDialogCombo.dType:" + openDialogCombo.dType.toString());
         DB.addSetting("openDialogType", openDialogCombo.dType.toString());
         DB.addSetting("liveView", liveViewSwitch.checked.toString());
+        DB.addSetting("subtitleSolid", solidSubtitlesSwitch.checked.toString());
         DB.getSettings();
     }
 
@@ -340,6 +342,14 @@ Dialog {
                         colorIndicator.color = dialog.color
                     })
                 }
+            }
+
+            TextSwitch {
+                id: solidSubtitlesSwitch
+                anchors.horizontalCenter: parent.horizontalCenter
+                text: qsTr("Use solid subtitletext background")
+                checked: mainWindow.firstPage.subtitleSolid
+                visible: loadSubtitlesSwitch.checked
             }
 
             TextSwitch {

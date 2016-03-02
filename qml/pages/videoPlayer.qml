@@ -45,6 +45,7 @@ Page {
     property bool savedPosition: false
     property string savePositionMsec
     property string subtitleUrl
+    property bool subtitleSolid: dataContainer.subtitleSolid
 
     property alias showTimeAndTitle: showTimeAndTitle
     property alias pulley: pulley
@@ -301,6 +302,7 @@ Page {
                 bold: boldSubtitles
                 color: subtitlesColor
                 visible: (enableSubtitles) && (currentVideoSub) ? true : false
+                isSolid: subtitleSolid
             }
         }
 

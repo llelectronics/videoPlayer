@@ -51,6 +51,7 @@ Page {
     property string subtitlesColor: Theme.highlightColor
     property bool liveView: true
     property bool ytdlStream: false
+    property bool subtitleSolid: false
     /////////////////////////////////////////////////////
 
     // Videoplayer properties //////////////////////////
