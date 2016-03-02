@@ -282,74 +282,25 @@ Page {
             }
         }
 
-        Label {
-            id: subtitlesText
-
-            z: 100
-            anchors { fill: parent; margins: videoPlayerPage.inPortrait ? 10 : 50 }
-            wrapMode: Text.WordWrap
-            horizontalAlignment: Text.AlignHCenter
-            verticalAlignment: Text.AlignBottom
-            font.pixelSize: subtitlesSize
-            font.bold: boldSubtitles
-            color: subtitlesColor
-            visible: (enableSubtitles) && (currentVideoSub) ? true : false
-            onTextChanged: {
-                //console.debug("[videoPlayer.qml] Subtitletext: " + text)
-            }
-            style: Text.Outline
-            styleColor: contrastingColor(color)
-
-            function contrastingColor(color)
-            {
-                var rgb = getRGB(color);
-                console.debug("[videoPlayer.qml] getrgb:" + rgb)
-                if (!rgb) return null;
-                return (0.2126 * rgb[0] + 0.7152 * rgb[1] + 0.0722 * rgb[2]) > 180 ? "black" : "white";
-            }
-            function getRGB(b) {
-              var a;
-              if (b && b.constructor == Array && b.length == 3) return b;
-              if (a = /rgb\(\s*([0-9]{1,3})\s*,\s*([0-9]{1,3})\s*,\s*([0-9]{1,3})\s*\)/.exec(b)) return [parseInt(a[1]), parseInt(a[2]), parseInt(a[3])];
-              if (a = /rgb\(\s*([0-9]+(?:\.[0-9]+)?)\%\s*,\s*([0-9]+(?:\.[0-9]+)?)\%\s*,\s*([0-9]+(?:\.[0-9]+)?)\%\s*\)/.exec(b)) return [parseFloat(a[1]) * 2.55, parseFloat(a[2]) * 2.55, parseFloat(a[3]) * 2.55];
-              if (a = /#([a-fA-F0-9]{2})([a-fA-F0-9]{2})([a-fA-F0-9]{2})/.exec(b)) return [parseInt(a[1], 16), parseInt(a[2], 16), parseInt(a[3],
-            16)];
-              if (a = /#([a-fA-F0-9])([a-fA-F0-9])([a-fA-F0-9])/.exec(b)) return [parseInt(a[1] + a[1], 16), parseInt(a[2] + a[2], 16), parseInt(a[3] + a[3], 16)];
-            }
+        Loader {
+            id: subTitleLoader
+            active: enableSubtitles
+            sourceComponent: subItem
+            anchors.fill: parent
         }
 
-        function getSubtitles(url) {
-            if (url !== "") subsGetter.sendMessage(url);
-            else subsGetter.sendMessage(streamUrl);
-        }
-
-        function setSubtitles(subtitles) {
-            currentVideoSub = subtitles;
-            //console.debug("[videoPlayer.qml] subtitles: " + currentVideoSub)
-        }
-
-        WorkerScript {
-            id: subsGetter
-
-            source: "helper/getsubtitles.js"
-            onMessage: {
-                flick.setSubtitles(messageObject);
-                //console.debug("[videoPlayer.qml] subtitleMessageObject: " + messageObject);
-            }
-        }
-
-        function checkSubtitles() {
-            subsChecker.sendMessage({"position": videoPoster.position, "subtitles": currentVideoSub})
-            //console.debug("[videoPlayer.qml] checkSubtitles activated with: " + currentVideoSub)
-        }
-
-        WorkerScript {
-            id: subsChecker
-
-            source: "helper/checksubtitles.js"
-            onMessage: {
-                subtitlesText.text = messageObject
-                //console.debug("[videoPlayer.qml] subsChecker MessageObject: " + messageObject);
+        Component {
+            id: subItem
+            SubtitlesItem {
+                id: subtitlesText
+                anchors { fill: parent; margins: videoPlayerPage.inPortrait ? 10 : 50 }
+                wrapMode: Text.WordWrap
+                horizontalAlignment: Text.AlignHCenter
+                verticalAlignment: Text.AlignBottom
+                pixelSize: subtitlesSize
+                bold: boldSubtitles
+                color: subtitlesColor
+                visible: (enableSubtitles) && (currentVideoSub) ? true : false
             }
         }
 
@@ -441,7 +392,7 @@ Page {
                 onPlayClicked: {
                     toggleControls();
                     if (enableSubtitles) {
-                        flick.getSubtitles(subtitleUrl);
+                        subTitleLoader.item.getSubtitles(subtitleUrl);
                     }
                 }
 
@@ -501,7 +452,7 @@ Page {
 //                    if (! drawer.open) drawer.open = true
 //                }
                 onPositionChanged: {
-                    if ((enableSubtitles) && (currentVideoSub)) flick.checkSubtitles()
+                    if ((enableSubtitles) && (currentVideoSub)) subTitleLoader.item.checkSubtitles()
                 }
             }
         }

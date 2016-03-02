@@ -57,3 +57,6 @@ HEADERS += \
     src/folderlistmodel/fileinfothread_p.h \
     src/youtubedl-helper.hpp
 
+DISTFILES += \
+    qml/pages/helper/SubtitlesItem.qml
+
