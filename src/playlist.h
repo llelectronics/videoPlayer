@@ -14,7 +14,7 @@ class Playlist : public QObject
     Q_OBJECT
 
 public:
-    Q_PROPERTY(QString pllist READ pllist WRITE setPllist)
+    Q_PROPERTY(QString pllist READ pllist WRITE setPllist NOTIFY pllistChanged)
     explicit Playlist(QObject *parent = 0);
 
     QString pllist() { return mCurrent; }
@@ -26,10 +26,14 @@ public slots:
     QString get(int pos);
     void insert(int pos, QString track);
     int count();
+    void save(QString file);
 
 private:
     QMediaPlaylist *playlist;
     QString mCurrent;
+
+Q_SIGNALS:
+    void pllistChanged();
 
 };
 

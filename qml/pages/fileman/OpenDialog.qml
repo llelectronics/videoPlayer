@@ -8,14 +8,16 @@ Page {
 
     signal openFile(string path);
 
-    property var editor
+    property var path
+    property var filter
 
     FolderListModel {
         id: fileModel
-        folder: "/home/nemo/Videos"
+        folder: path
         showDirsFirst: true
         showDotAndDotDot: true
         showOnlyReadable: true
+        nameFilters: filter
     }
 
     SilicaListView {

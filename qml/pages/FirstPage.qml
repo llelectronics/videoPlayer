@@ -176,6 +176,8 @@ Page {
     Component {
         id: openFileComponent
         OpenDialog {
+            path: "/home/nemo/Videos"
+            filter: ["*.*"]
             onOpenFile: {
                 mainWindow.firstPage.originalUrl = path;
                 mainWindow.firstPage.streamUrl = path;
@@ -219,6 +221,12 @@ Page {
             colour: "green"
             bicon: "images/icon-l-redirect.png"
         }
+        ListElement {
+            btnId: "playlistBtn"
+            name: "Playlists"
+            colour: "yellow"
+            bicon: "images/icon-l-clipboard.png"
+        }
     }
 
     Component {
@@ -242,6 +250,9 @@ Page {
                 }
                 else if (btnId == "openUrlBtn") {
                    pageStack.push(Qt.resolvedUrl("OpenURLPage.qml"), {dataContainer: page});
+                }
+                else if (btnId == "playlistBtn") {
+                   pageStack.push(Qt.resolvedUrl("PlaylistPage.qml"), {dataContainer: page, modelPlaylist: mainWindow.modelPlaylist});
                 }
             }
             color: colour

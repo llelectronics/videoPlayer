@@ -62,5 +62,7 @@ HEADERS += \
     src/playlist.h
 
 DISTFILES += \
-    qml/pages/helper/SubtitlesItem.qml
+    qml/pages/helper/SubtitlesItem.qml \
+    qml/pages/PlaylistPage.qml \
+    qml/pages/InfoBanner.qml
 

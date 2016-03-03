@@ -6,10 +6,12 @@ Playlist::Playlist(QObject *parent) :
 }
 
 bool Playlist::setPllist(const QString &pllist){
+    //qDebug() << "Trying to load:" +pllist;
     QFile inputList(pllist);
     if (inputList.open(QIODevice::ReadOnly)){
         playlist->clear();
         QTextStream in(&inputList);
+        in.setCodec("UTF-8");
         while ( !in.atEnd() ){
           QString line = in.readLine();
           if(line.at(0) == 'F'){
@@ -25,12 +27,12 @@ bool Playlist::setPllist(const QString &pllist){
             qDebug() << playlist->errorString();
             return false;
         }else{
-            playlist->setPlaybackMode(QMediaPlaylist::Loop);
-            playlist->setCurrentIndex(1);
+            emit pllistChanged();
+            mCurrent = pllist;
             return true;
         }
     }else{
-        qDebug() << "Cannot open source: "+pllist;
+        qDebug() << "Cannot open playlist: "+pllist;
         return false;
     }
 }
@@ -53,4 +55,9 @@ void Playlist::insert(int pos, QString track){
 
 int Playlist::count() {
     return playlist->mediaCount();
+}
+
+void Playlist::save(QString file) {
+    //qDebug() << "Save called with filename:" + file;
+    playlist->save(QUrl::fromLocalFile(file));
 }

@@ -42,7 +42,10 @@ ApplicationWindow
     property Item firstPage
     property bool autoPlay: false
     property alias modelBookmarks: modelBookmarks
+    property alias modelPlaylist: modelPlaylist
+    property alias playlist: playlist
     property alias busy: busy
+    property alias infoBanner: infoBanner
 
     property string version: "1.1"
     property string appname: "LLs Video Player"
@@ -89,6 +92,12 @@ ApplicationWindow
             firstPage.streamTitle = ""
             firstPage.loadPlayer();
         }
+    }
+
+    function findBaseName(url) {
+        var fileName = url.substring(url.lastIndexOf('/') + 1);
+        var dot = fileName.lastIndexOf('.');
+        return dot == -1 ? fileName : fileName.substring(0, dot);
     }
 
     initialPage: Component {
@@ -165,14 +174,34 @@ ApplicationWindow
         }
     }
 
-//    Playlist {
-//        id: playlist
-//        pllist: "/home/nemo/Music/playlists/MGS.pls"
+    ListModel {
+        id: modelPlaylist
 
-//        Component.onCompleted: {
-//            console.debug("[harbour-videoPlayer.qml] Playlist Example entry 0 url: " + playlist.get(0));
-//        }
-//    }
+        function removeTrack(url) {
+            for (var i=0; i<count; i++) {
+                if (get(i).url === url) remove(i);
+                playlist.remove(i);
+            }
+        }
+    }
+
+    Playlist {
+        id: playlist
+        //        pllist: "/home/nemo/Music/playlists/MGS.pls"
+
+        onPllistChanged: {
+            //console.debug("[harbour-videoPlayer.qml] Playlist Example entry 0 url: " + playlist.get(playlist.count()-1));
+            modelPlaylist.clear();
+            for (var i = 0; i < count(); i++) {
+                modelPlaylist.append({"title" : findBaseName(playlist.get(i)), "url" : playlist.get(i)});
+            }
+        }
+    }
+
+    InfoBanner {
+        id: infoBanner
+        z:1
+    }
 
     BusyIndicator {
         id: busy

@@ -86,12 +86,6 @@ Page {
 //        }
 //    }
 
-    function findBaseName(url) {
-        var fileName = url.substring(url.lastIndexOf('/') + 1);
-        var dot = fileName.lastIndexOf('.');
-        return dot == -1 ? fileName : fileName.substring(0, dot);
-    }
-
     onStreamUrlChanged: {
         if (errorDetail.visible && errorTxt.visible) { errorDetail.visible = false; errorTxt.visible = false }
         videoPoster.showControls();
@@ -112,7 +106,7 @@ Page {
             //console.debug("[videoPlayer.qml] Loading Youtube Title from original URL")
             YT.getYoutubeTitle(originalUrl);
         }
-        if (dataContainer.streamTitle == "") dataContainer.streamTitle = findBaseName(streamUrl)
+        if (dataContainer.streamTitle == "") dataContainer.streamTitle = mainWindow.findBaseName(streamUrl)
         dataContainer.ytdlStream = false
 
         if (streamUrl.toString().match("^file://")) {
@@ -146,7 +140,7 @@ Page {
 
     PageHeader {
         id: urlHeader
-        title: findBaseName(streamUrl)
+        title: mainWindow.findBaseName(streamUrl)
         _titleItem.color: "white"
         visible: {
             if (titleHeader.visible == false && pulley.visible && mainWindow.applicationActive) return true
@@ -240,7 +234,7 @@ Page {
                 }
                 onClicked: {
                     if (mainWindow.firstPage.streamTitle != "") mainWindow.modelBookmarks.addBookmark(mainWindow.firstPage.streamUrl,mainWindow.firstPage.streamTitle)
-                    else mainWindow.modelBookmarks.addBookmark(mainWindow.firstPage.streamUrl,mainWindow.firstPage.findBaseName(mainWindow.firstPage.streamUrl))
+                    else mainWindow.modelBookmarks.addBookmark(mainWindow.firstPage.streamUrl,mainWindow.findBaseName(mainWindow.firstPage.streamUrl))
                 }
             }
             MenuItem {
@@ -507,8 +501,8 @@ Page {
                 onClicked: {
                     if (streamTitle != "" && !youtubeDirect) mainWindow.modelBookmarks.addBookmark(streamUrl,streamTitle)
                     else if (streamTitle != "" && youtubeDirect) mainWindow.modelBookmarks.addBookmark(originalUrl,streamTitle)
-                    else if (!youtubeDirect) mainWindow.modelBookmarks.addBookmark(streamUrl,findBaseName(streamUrl))
-                    else mainWindow.modelBookmarks.addBookmark(originalUrl,findBaseName(originalUrl))
+                    else if (!youtubeDirect) mainWindow.modelBookmarks.addBookmark(streamUrl,mainWindow.findBaseName(streamUrl))
+                    else mainWindow.modelBookmarks.addBookmark(originalUrl,mainWindow.findBaseName(originalUrl))
                     drawer.open = !drawer.open
                 }
             }
@@ -536,7 +530,7 @@ Page {
                     var mDataTitle;
                     //console.debug(metaData.title)
                     if (streamTitle != "") mDataTitle = streamTitle
-                    else mDataTitle = findBaseName(streamUrl)
+                    else mDataTitle = mainWindow.findBaseName(streamUrl)
                     //console.debug("[mDataTitle]: " + mDataTitle)
                     dPage = pageStack.pushAttached(Qt.resolvedUrl("FileDetails.qml"), {
                                                        filename: streamUrl,
