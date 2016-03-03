@@ -33,6 +33,7 @@ import Sailfish.Silica 1.0
 import "pages"
 import "pages/helper/yt.js" as YT
 import "pages/helper/db.js" as DB
+import harbour.videoplayer.Videoplayer 1.0
 
 ApplicationWindow
 {
@@ -163,6 +164,15 @@ ApplicationWindow
             DB.addBookmark(bookmarkTitle,bookmarkUrl);
         }
     }
+
+//    Playlist {
+//        id: playlist
+//        pllist: "/home/nemo/Music/playlists/MGS.pls"
+
+//        Component.onCompleted: {
+//            console.debug("[harbour-videoPlayer.qml] Playlist Example entry 0 url: " + playlist.get(0));
+//        }
+//    }
 
     BusyIndicator {
         id: busy

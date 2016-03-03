@@ -8,12 +8,15 @@
 #         - icon definition filename in desktop file must be changed
 TARGET = harbour-videoPlayer
 
+QT += multimedia
+
 CONFIG += sailfishapp
 
 SOURCES += src/harbour-videoPlayer.cpp \
     src/DownloadManager.cpp \
     src/folderlistmodel/qquickfolderlistmodel.cpp \
-    src/folderlistmodel/fileinfothread.cpp
+    src/folderlistmodel/fileinfothread.cpp \
+    src/playlist.cpp
 
 OTHER_FILES += qml/harbour-videoPlayer.qml \
     qml/cover/CoverPage.qml \
@@ -55,7 +58,8 @@ HEADERS += \
     src/folderlistmodel/qquickfolderlistmodel.h \
     src/folderlistmodel/fileproperty_p.h \
     src/folderlistmodel/fileinfothread_p.h \
-    src/youtubedl-helper.hpp
+    src/youtubedl-helper.hpp \
+    src/playlist.h
 
 DISTFILES += \
     qml/pages/helper/SubtitlesItem.qml

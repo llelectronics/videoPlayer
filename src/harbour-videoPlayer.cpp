@@ -38,6 +38,7 @@
 #include "fmhelper.hpp"
 #include "youtubedl-helper.hpp"
 #include "folderlistmodel/qquickfolderlistmodel.h"
+#include "playlist.h"
 
 int main(int argc, char *argv[])
 {
@@ -53,6 +54,7 @@ int main(int argc, char *argv[])
     QGuiApplication *app = SailfishApp::application(argc, argv);
 
     qmlRegisterType<QQuickFolderListModel>("harbour.videoplayer.Videoplayer", 1, 0, "FolderListModel");
+    qmlRegisterType<Playlist, 1>("harbour.videoplayer.Videoplayer", 1, 0,"Playlist");
 
     QQuickView *view = SailfishApp::createView(); // I get a white background with this.
     view->setSource(SailfishApp::pathTo("qml/harbour-videoPlayer.qml"));  // So I do this ;)
