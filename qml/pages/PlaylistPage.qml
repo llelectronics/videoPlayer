@@ -44,7 +44,7 @@ Page
                 function remove() {
                     var removal = removalComponent.createObject(myListItem)
                     ListView.remove.connect(removal.deleteAnimation.start)
-                    removal.execute(contentItem, "Deleting " + url, function() { modelPlaylist.removeTrack(url); } )
+                    removal.execute(contentItem, "Deleting " + title, function() { modelPlaylist.removeTrack(url); } )
                 }
 //                function editBookmark() {
 //                    pageStack.push(Qt.resolvedUrl("AddBookmark.qml"), { bookmarks: modelBookmarks, editBookmark: true, bookmarkUrl: url, bookmarkTitle: title, oldTitle: title });
@@ -114,8 +114,15 @@ Page
                 MenuItem {
                     text: qsTr("Save Playlist")
                     onClicked: {
-                        mainWindow.playlist.save(mainWindow.playlist.pllist);
-                        mainWindow.infoBanner.showText(qsTr("Playlist saved."))
+                        var saveReturn = mainWindow.playlist.save(mainWindow.playlist.pllist);
+                        if (saveReturn) {
+                            console.debug("Saved successfully!")
+                            mainWindow.infoBanner.showText(qsTr("Playlist saved."))
+                        }
+                        else {
+                            console.debug("Playlist saving failed with error message: " + mainWindow.playlist.getError())
+                            mainWindow.playlist.clearError() // So that we can load new playlists
+                        }
                     }
                     visible: mainWindow.modelPlaylist.count != 0
                 }

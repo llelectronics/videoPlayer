@@ -179,8 +179,10 @@ ApplicationWindow
 
         function removeTrack(url) {
             for (var i=0; i<count; i++) {
-                if (get(i).url === url) remove(i);
-                playlist.remove(i);
+                if (get(i).url === url) {
+                    remove(i);
+                    playlist.remove(i);
+                }
             }
         }
     }

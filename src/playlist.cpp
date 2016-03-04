@@ -7,6 +7,7 @@ Playlist::Playlist(QObject *parent) :
 
 bool Playlist::setPllist(const QString &pllist){
     //qDebug() << "Trying to load:" +pllist;
+    //playlist->load(QUrl::fromUserInput(pllist));
     QFile inputList(pllist);
     if (inputList.open(QIODevice::ReadOnly)){
         playlist->clear();
@@ -30,7 +31,7 @@ bool Playlist::setPllist(const QString &pllist){
             emit pllistChanged();
             mCurrent = pllist;
             return true;
-        }
+       }
     }else{
         qDebug() << "Cannot open playlist: "+pllist;
         return false;
@@ -57,7 +58,44 @@ int Playlist::count() {
     return playlist->mediaCount();
 }
 
-void Playlist::save(QString file) {
+bool Playlist::save(QString filename) {
     //qDebug() << "Save called with filename:" + file;
-    playlist->save(QUrl::fromLocalFile(file));
+    //playlist->save(QUrl::fromLocalFile("/home/nemo/Music/playlists/test.m3u"), "m3u");
+    QFile file(filename);
+    if (file.open(QIODevice::WriteOnly))
+    {
+        QTextStream ts(&file);
+        ts << plsEncode();
+        file.close();
+        return true;
+    }
+    else {
+        qDebug() << ("PlayListParser: unable to save playlist, error: %s", qPrintable(file.errorString()));
+        return false;
+    }
+}
+
+QString Playlist::getError() {
+    return playlist->errorString();
+}
+
+void Playlist::clearError() {
+    playlist->clear();
+}
+
+QString Playlist::plsEncode() {
+    QStringList out;
+    out << QString("[playlist]");
+    for (int counter = 1; counter <= playlist->mediaCount(); counter++)
+    {
+        qDebug() << "Writing: " + playlist->media(counter-1).canonicalUrl().toString() + " Counter is: " + QString::number(counter) + " mediaCount is: " + QString::number(playlist->mediaCount());
+        QString begin = "File" + QString::number(counter) + "=";
+        out.append(begin + playlist->media(counter-1).canonicalUrl().toString());
+        //        begin = "Title" + QString::number(counter) + "="; //TODO: activate when we have title loading implemented
+        //        out.append(begin + f->value(Qmmp::TITLE));
+        //        begin = "Length" + QString::number(counter) + "=";
+        //        out.append(begin + QString::number(f->length()));
+    }
+    out << "NumberOfEntries=" + QString::number(playlist->mediaCount());
+    return out.join("\n");
 }

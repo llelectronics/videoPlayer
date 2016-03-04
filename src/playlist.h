@@ -26,11 +26,14 @@ public slots:
     QString get(int pos);
     void insert(int pos, QString track);
     int count();
-    void save(QString file);
+    bool save(QString filename);
+    QString getError();
+    void clearError();
 
 private:
     QMediaPlaylist *playlist;
     QString mCurrent;
+    QString plsEncode();
 
 Q_SIGNALS:
     void pllistChanged();
