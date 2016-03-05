@@ -176,7 +176,10 @@ ApplicationWindow
 
     ListModel {
         id: modelPlaylist
-        property variant current: 0
+        property int current: 0
+        property bool active: false
+        property bool isNew: false
+        property string name
 
         function isNext() {
             if (current != count-1) return true
@@ -212,6 +215,11 @@ ApplicationWindow
                 }
             }
         }
+
+        function addTrack(url) {
+            append({"title" : findBaseName(url), "url" : url});
+            playlist.add(url);
+        }
     }
 
     Playlist {
@@ -221,9 +229,12 @@ ApplicationWindow
         onPllistChanged: {
             //console.debug("[harbour-videoPlayer.qml] Playlist Example entry 0 url: " + playlist.get(playlist.count()-1));
             modelPlaylist.clear();
-            for (var i = 0; i < count(); i++) {
-                modelPlaylist.append({"title" : findBaseName(playlist.get(i)), "url" : playlist.get(i)});
+            if (!modelPlaylist.isNew) {
+                for (var i = 0; i < count(); i++) {
+                    modelPlaylist.append({"title" : findBaseName(playlist.get(i)), "url" : playlist.get(i)});
+                }
             }
+            modelPlaylist.active = true
         }
     }
 

@@ -30,8 +30,11 @@ Page
                 title: qsTr("Playlists")
             }
             ViewPlaceholder {
-                enabled: modelPlaylist.count == 0
-                text: qsTr("Please load or create playlist")
+                enabled: modelPlaylist.count == 0 && !playlistPanel.open
+                text: {
+                    if (modelPlaylist.isNew && modelPlaylist.count == 0) qsTr("Please add tracks to playlist")
+                    else qsTr("Please load or create playlist")
+                }
             }
             VerticalScrollDecorator {}
             delegate: ListItem {
@@ -110,13 +113,26 @@ Page
             }
             PullDownMenu {
                 MenuItem {
+                    text: qsTr("Create Playlist")
+                    onClicked: playlistPanel.open = true
+                }
+                MenuItem {
+                    text: qsTr("Add to Playlist")
+                    visible: mainWindow.modelPlaylist.isNew
+                    onClicked: pageStack.push(add2PlaylistComponent);
+                }
+                MenuItem {
                     text: qsTr("Load Playlist")
                     onClicked: pageStack.push(openPlaylistComponent);
                 }
                 MenuItem {
                     text: qsTr("Save Playlist")
                     onClicked: {
-                        var saveReturn = mainWindow.playlist.save(mainWindow.playlist.pllist);
+                        var saveReturn
+                        if (mainWindow.playlist.pllist != "")
+                            saveReturn = mainWindow.playlist.save(mainWindow.playlist.pllist);
+                        else
+                            saveReturn = mainWindow.playlist.save("/home/nemo/Music/playlists/" + mainWindow.modelPlaylist.name + ".pls")
                         if (saveReturn) {
                             console.debug("Saved successfully!")
                             mainWindow.infoBanner.showText(qsTr("Playlist saved."))
@@ -139,10 +155,68 @@ Page
             filter: ["*.pls", "*.m3u"]
             onOpenFile: {
                 //console.debug("Try loading playlist " + path);
+                mainWindow.modelPlaylist.isNew = false;
                 mainWindow.playlist.pllist = path;
                 pageStack.pop();
             }
         }
+    }
+
+    Component {
+        id: add2PlaylistComponent
+        OpenDialog {
+            path: "/home/nemo/Videos"
+            filter: ["*.mp4", "*.mp3", "*.mkv", "*.ogg", "*.ogv", "*.flac", "*.wav", "*.m4a", "*.flv", "*.webm", "*.oga", "*.avi", "*.mov", "*.3gp", "*.mpg", "*.mpeg", "*.wmv", "*.wma", "*.dv", "*.m2v", "*.asf", "*.nsv"]
+            onOpenFile: {
+                mainWindow.modelPlaylist.addTrack(path);
+                pageStack.pop();
+            }
+        }
+    }
+
+    DockedPanel {
+        id: playlistPanel
+
+        width: playlistPage.isPortrait ? parent.width : Theme.itemSizeExtraLarge + Theme.paddingLarge
+        height: playlistPage.isPortrait ? Theme.itemSizeExtraLarge + Theme.paddingLarge : parent.height
+
+        dock: playlistPage.isPortrait ? Dock.Bottom : Dock.Right
+        onOpenChanged: {
+            if (open) inputName.forceActiveFocus();
+        }
+
+        TextField {
+            id: inputName
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.top: lbl.bottom
+            anchors.topMargin: Theme.paddingMedium
+            width: parent.width - (Theme.paddingLarge * 2)
+            placeholderText: "Enter Playlistname"
+            label: "Playlist"
+            inputMethodHints: Qt.ImhNoPredictiveText | Qt.ImhNoAutoUppercase
+            // Only allow Enter key to be pressed when text has been entered
+            EnterKey.enabled: text.length > 0
+            EnterKey.onClicked: {
+                mainWindow.modelPlaylist.isNew = true
+                mainWindow.modelPlaylist.name = text // Might be useful in the future
+                mainWindow.playlist.pllist = "/home/nemo/Music/playlists/" + text + ".pls"
+                playlistPanel.open = false
+                Qt.inputMethod.hide();
+            }
+        }
+        Label {
+            id: lbl
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.top: parent.top
+            anchors.topMargin: Theme.paddingMedium
+            width: parent.width - (Theme.paddingLarge * 2)
+            anchors.margins: { left: Theme.paddingMedium; right: Theme.paddingMedium }
+            color: Theme.secondaryColor
+            wrapMode: TextEdit.WordWrap
+            text: qsTr("Playlists are saved to /home/nemo/Music/playlists")
+        }
+
+
     }
 }
 

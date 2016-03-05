@@ -34,6 +34,7 @@ bool Playlist::setPllist(const QString &pllist){
        }
     }else{
         qDebug() << "Cannot open playlist: "+pllist;
+        qDebug() << "It might be a new created by the user";
         return false;
     }
 }
