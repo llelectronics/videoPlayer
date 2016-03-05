@@ -46,6 +46,7 @@ Page {
     property string savePositionMsec
     property string subtitleUrl
     property bool subtitleSolid: dataContainer.subtitleSolid
+    property bool isPlaylist: dataContainer.isPlaylist
 
     property alias showTimeAndTitle: showTimeAndTitle
     property alias pulley: pulley
@@ -118,10 +119,12 @@ Page {
     }
 
     onStreamTitleChanged: {
-        //Write into history database
-        DB.addHistory(streamUrl,streamTitle);
-        // Don't forgt to write it to the List aswell
-        mainWindow.firstPage.add2History(streamUrl,streamTitle);
+        if (streamTitle != "") {
+            //Write into history database
+            DB.addHistory(streamUrl,streamTitle);
+            // Don't forgt to write it to the List aswell
+            mainWindow.firstPage.add2History(streamUrl,streamTitle);
+        }
     }
 
     Rectangle {
@@ -380,6 +383,7 @@ Page {
                     //play();  // autoPlay TODO: add config for it
                     position = 0;
                     player.seek(0);
+                    console.debug("Source changed to " + source)
                 }
                 //source: "file:///home/nemo/Videos/eva.mp4"
                 //source: "http://netrunnerlinux.com/vids/default-panel-script.mkv"
@@ -525,6 +529,7 @@ Page {
 
             source: MediaPlayer {
                 id: mediaPlayer
+                source: videoPoster.source
                 function loadMetaDataPage() {
                     //console.debug("Loading metadata page")
                     var mDataTitle;
@@ -560,7 +565,19 @@ Page {
                     //errorDetail.visible = false
                     //console.debug("[videoPlayer.qml]: mediaPlayer.status: " + mediaPlayer.status)
                     if (mediaPlayer.status === MediaPlayer.Loading || mediaPlayer.status === MediaPlayer.Buffering || mediaPlayer.status === MediaPlayer.Stalled) progressCircle.visible = true;
-                    else if (mediaPlayer.status === MediaPlayer.EndOfMedia) videoPoster.showControls();
+                    else if (mediaPlayer.status === MediaPlayer.EndOfMedia) {
+                        videoPoster.showControls();
+                        if (isPlaylist && mainWindow.modelPlaylist.isNext()) {
+                            // reset
+                            streamUrl = ""
+                            streamTitle = ""
+                            stop()
+                            // before load new
+                            streamUrl = mainWindow.modelPlaylist.next() ;
+                            source = streamUrl
+                            videoPoster.player.play();
+                        }
+                    }
                     else  { progressCircle.visible = false; loadMetaDataPage(); }
                     if (metaData.title) dPage.title = metaData.title
                 }
@@ -693,8 +710,8 @@ On Youtube Videos please make sure to be logged in. Some videos might be geobloc
     }
 
     CoverActionList {
-        id: coverAction
-        enabled: liveView
+        id: coverActionPlay
+        enabled: liveView && !isPlaylist
 
         //        CoverAction {
         //            iconSource: "image://theme/icon-cover-next"
@@ -711,6 +728,41 @@ On Youtube Videos please make sure to be logged in. Some videos might be geobloc
                 if (!showTimeAndTitle.running) showTimeAndTitle.start();
                 else showTimeAndTitle.count = 0;
                 videoPoster.hideControls();
+            }
+        }
+    }
+    CoverActionList {
+        id: coverActionPlayNext
+        enabled: liveView && mainWindow.modelPlaylist.isNext() && isPlaylist
+
+        //        CoverAction {
+        //            iconSource: "image://theme/icon-cover-next"
+        //        }
+
+        CoverAction {
+            iconSource: {
+                if (videoPoster.player.playbackState === MediaPlayer.PlayingState) return "image://theme/icon-cover-pause"
+                else return "image://theme/icon-cover-play"
+            }
+            onTriggered: {
+                //console.debug("Pause triggered");
+                videoPauseTrigger();
+                if (!showTimeAndTitle.running) showTimeAndTitle.start();
+                else showTimeAndTitle.count = 0;
+                videoPoster.hideControls();
+            }
+        }
+        CoverAction {
+            iconSource: "image://theme/icon-cover-next-song"
+            onTriggered: {
+                // reset
+                streamUrl = ""
+                streamTitle = ""
+                mediaPlayer.stop()
+                // before load new
+                streamUrl = mainWindow.modelPlaylist.next() ;
+                mediaPlayer.source = streamUrl
+                videoPoster.player.play();
             }
         }
     }

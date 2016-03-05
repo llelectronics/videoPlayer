@@ -176,6 +176,33 @@ ApplicationWindow
 
     ListModel {
         id: modelPlaylist
+        property variant current: 0
+
+        function isNext() {
+            if (current != count-1) return true
+            else return false
+        }
+
+        function isPrev() {
+            if (current != 0) return true
+            else return false
+        }
+
+        function next() {
+            if (isNext()) {
+                var nextUrl = get(current+1).url
+                current = current + 1
+                return nextUrl
+            }
+        }
+
+        function prev() {
+            if (isPrev()) {
+                var prevUrl = get(current-1).url
+                current = current - 1
+                return prevUrl
+            }
+        }
 
         function removeTrack(url) {
             for (var i=0; i<count; i++) {

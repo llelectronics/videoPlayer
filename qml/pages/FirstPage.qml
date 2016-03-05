@@ -52,6 +52,7 @@ Page {
     property bool liveView: true
     property bool ytdlStream: false
     property bool subtitleSolid: false
+    property bool isPlaylist: false
     /////////////////////////////////////////////////////
 
     // Videoplayer properties //////////////////////////

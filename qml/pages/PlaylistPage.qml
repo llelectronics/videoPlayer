@@ -64,6 +64,8 @@ Page
                     }
                     onClicked: {
                         dataContainer.streamUrl = url;
+                        mainWindow.modelPlaylist.current = index;
+                        dataContainer.isPlaylist = true;
                         dataContainer.loadPlayer();
                     }
                     onPressAndHold: {
