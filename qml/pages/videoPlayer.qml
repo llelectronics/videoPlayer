@@ -529,7 +529,7 @@ Page {
 
             source: MediaPlayer {
                 id: mediaPlayer
-                source: videoPoster.source
+
                 function loadMetaDataPage() {
                     //console.debug("Loading metadata page")
                     var mDataTitle;
