@@ -20,6 +20,17 @@ Page {
         nameFilters: filter
     }
 
+    function getReadableFileSizeString(fileSizeInBytes) {
+        var i = -1;
+        var byteUnits = [' kB', ' MB', ' GB', ' TB', 'PB', 'EB', 'ZB', 'YB'];
+        do {
+            fileSizeInBytes = fileSizeInBytes / 1024;
+            i++;
+        } while (fileSizeInBytes > 1024);
+
+        return Math.max(fileSizeInBytes, 0.1).toFixed(1) + byteUnits[i];
+    }
+
     SilicaListView {
         id: view
         model: fileModel
@@ -57,23 +68,41 @@ Page {
         delegate: BackgroundItem {
             id: delegate
             width: parent.width
+            height: fileDetailsLbl.visible ? fileNameLbl.height + fileDetailsLbl.height : Theme.itemSizeSmall
 
-            Column {
-                width: parent.width
+            Item {
+                id: dItem
+                anchors.fill: parent
 
                 Label {
-                    anchors.left: parent.left
-                    anchors.leftMargin: Theme.paddingLarge
+                    id: fileNameLbl
                     text: fileName + (fileIsDir ? "/" : "")
                     color: delegate.highlighted ? Theme.highlightColor : Theme.primaryColor
+                    wrapMode: Text.WordWrap
+                    width: parent.width - (Theme.paddingMedium * 2)
+                    anchors.left: parent.left
+                    anchors.leftMargin: Theme.paddingMedium
+                    anchors.right: parent.right
+                    anchors.rightMargin: Theme.paddingMedium
+                    truncationMode: TruncationMode.Fade
                 }
 
                 Label {
+                    id: fileDetailsLbl
+                    anchors.top: fileNameLbl.bottom
                     visible: !fileIsDir
-                    anchors.left: parent.left
-                    anchors.leftMargin: Theme.paddingLarge
-                    text: fileSize + ", " + fileModified
+                    text: getReadableFileSizeString(fileSize) + ", " + fileModified
                     color: Theme.secondaryColor
+                    truncationMode: TruncationMode.Fade
+                    width: parent.width - (Theme.paddingMedium * 2)
+                    anchors.left: parent.left
+                    anchors.leftMargin: Theme.paddingMedium
+                    anchors.right: parent.right
+                    anchors.rightMargin: Theme.paddingMedium
+                }
+                Component.onCompleted: {
+                    if (!fileDetailsLbl.visible) fileNameLbl.anchors.verticalCenter = dItem.verticalCenter
+                    else fileNameLbl.anchors.top = dItem.top
                 }
             }
 
