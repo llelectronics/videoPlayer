@@ -114,7 +114,7 @@ MouseArea {
                         //console.debug("Yeah we have a video source")
                         videoItem.playClicked();
                         videoItem.player.source = videoItem.source;
-                        videoItem.player.play();
+                        if (videoItem.player.bufferProgress == 1.0 && videoItem.player.playbackState != MediaPlayer.PlayingState) videoItem.player.play();
                     }
                 }
             }
@@ -142,13 +142,15 @@ MouseArea {
                     else return false
                 }
                 onClicked: {
-                    videoItem.player.stop()
+                    videoItem.player.pause()
                     pageStack.push(Qt.resolvedUrl("../ytQualityChooser.qml"), {"streamTitle": firstPage.streamTitle, "url720p": firstPage.url720p, "url480p": firstPage.url480p, "url360p": firstPage.url360p, "url240p": firstPage.url240p});
                 }
                 Label {
                     text: firstPage.ytQual
                     color: parent.highlighted ? Theme.highlightColor : "#FFFFFF"
                     anchors.centerIn: parent
+                    style: Text.Outline
+                    styleColor: "#000000"
                 }
             }
             Label {

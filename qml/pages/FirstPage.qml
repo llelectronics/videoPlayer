@@ -428,10 +428,12 @@ Page {
         visible: false
         background: null
         wrapMode: TextEdit.WordWrap
+        readOnly: true
     }
     Button {
         id: dismissBtn
-        anchors.top: errTxt.bottom
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: Theme.paddingLarge
         anchors.horizontalCenter: parent.horizontalCenter
         visible: errTxt.visible
         text: qsTr("Dismiss")

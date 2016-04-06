@@ -51,6 +51,15 @@ int main(int argc, char *argv[])
     //
     // To display the view, call "show()" (will show fullscreen on device).
 
+    //Some more speed & memory improvements
+    setenv("QT_NO_FT_CACHE","1",1);
+    setenv("QT_NO_FAST_SCROLL","1",1);
+    setenv("QT_NO_ANTIALIASING","1",1);
+    setenv("QT_NO_FREE","1",1);
+    // Taken from sailfish-browser
+    setenv("USE_ASYNC", "1", 1);
+    QQuickWindow::setDefaultAlphaBuffer(true);
+
     QGuiApplication *app = SailfishApp::application(argc, argv);
 
     qmlRegisterType<QQuickFolderListModel>("harbour.videoplayer.Videoplayer", 1, 0, "FolderListModel");

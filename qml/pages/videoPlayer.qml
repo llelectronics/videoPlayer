@@ -47,6 +47,7 @@ Page {
     property string subtitleUrl
     property bool subtitleSolid: dataContainer.subtitleSolid
     property bool isPlaylist: dataContainer.isPlaylist
+    property bool isPlayClicked: false
 
     property alias showTimeAndTitle: showTimeAndTitle
     property alias pulley: pulley
@@ -313,6 +314,16 @@ Page {
             }
         }
 
+        Rectangle {
+            color: "black"
+            opacity: 0.60
+            anchors.fill: parent
+            visible: {
+                if (errorBox.visible) return true;
+                else return false;
+            }
+        }
+
         Column {
             id: errorBox
             anchors.top: parent.top
@@ -350,16 +361,21 @@ Page {
                     if (text !== "") visible = true;
                 }
                 background: null
+                readOnly: true
             }
-            Button {
-                text: qsTr("Dismiss")
-                onClicked: {
-                    errorTxt.text = ""
-                    errorDetail.text = ""
-                    errorBox.visible = false
-                }
-                anchors.horizontalCenter: parent.horizontalCenter
+        }
+        Button {
+            text: qsTr("Dismiss")
+            onClicked: {
+                errorTxt.text = ""
+                errorDetail.text = ""
+                errorBox.visible = false
             }
+            visible: errorBox.visible
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: Theme.paddingLarge
+            z: videoPoster.z + 1
         }
 
         Item {
@@ -383,7 +399,7 @@ Page {
                     //play();  // autoPlay TODO: add config for it
                     position = 0;
                     player.seek(0);
-                    console.debug("Source changed to " + source)
+                    //console.debug("Source changed to " + source)
                 }
                 //source: "file:///home/nemo/Videos/eva.mp4"
                 //source: "http://netrunnerlinux.com/vids/default-panel-script.mkv"
@@ -394,6 +410,7 @@ Page {
                     if (enableSubtitles) {
                         subTitleLoader.item.getSubtitles(subtitleUrl);
                     }
+                    isPlayClicked = true
                 }
 
                 function toggleControls() {
@@ -436,6 +453,7 @@ Page {
                                 if (controls.opacity === 0.0) toggleControls();
                                 progressCircle.visible = false;
                                 if (! mediaPlayer.seekable) mediaPlayer.stop();
+                                isPlayClicked = false
                             }
                             else {
                                 toggleControls();
@@ -606,6 +624,9 @@ On Youtube Videos please make sure to be logged in. Some videos might be geobloc
                     errorBox.visible = true;
                     /* Avoid MediaPlayer undefined behavior */
                     stop();
+                }
+                onBufferProgressChanged: {
+                    if (bufferProgress == 1.0 && isPlayClicked) play()
                 }
             }
 
