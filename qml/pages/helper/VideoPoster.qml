@@ -114,7 +114,7 @@ MouseArea {
                         //console.debug("Yeah we have a video source")
                         videoItem.playClicked();
                         videoItem.player.source = videoItem.source;
-                        if (videoItem.player.bufferProgress == 1.0 && videoItem.player.playbackState != MediaPlayer.PlayingState) videoItem.player.play();
+                        videoItem.player.play();
                     }
                 }
             }

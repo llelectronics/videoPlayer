@@ -20,12 +20,13 @@ License:    LICENSE
 URL:        http://example.org/
 Source0:    %{name}-%{version}.tar.bz2
 Source100:  harbour-videoPlayer.yaml
-Requires:   sailfishsilica-qt5 >= 0.10.9, python
+Requires:   sailfishsilica-qt5 >= 0.10.9, python, mpris-qt5
 BuildRequires:  pkgconfig(Qt5Quick)
 BuildRequires:  pkgconfig(Qt5Qml)
 BuildRequires:  pkgconfig(Qt5Core)
 BuildRequires:  pkgconfig(sailfishapp) >= 0.0.10
 BuildRequires:  desktop-file-utils
+BuildRequires:  pkgconfig(mpris-qt5)
 
 %description
 Short description of my SailfishOS Application

@@ -4,6 +4,7 @@ import QtMultimedia 5.0
 import Sailfish.Media 1.0
 import "helper"
 import "fileman"
+import org.nemomobile.mpris 1.0
 
 Page {
     id: videoPlayerPage
@@ -47,7 +48,6 @@ Page {
     property string subtitleUrl
     property bool subtitleSolid: dataContainer.subtitleSolid
     property bool isPlaylist: dataContainer.isPlaylist
-    property bool isPlayClicked: false
 
     property alias showTimeAndTitle: showTimeAndTitle
     property alias pulley: pulley
@@ -125,6 +125,7 @@ Page {
             DB.addHistory(streamUrl,streamTitle);
             // Don't forgt to write it to the List aswell
             mainWindow.firstPage.add2History(streamUrl,streamTitle);
+            mprisPlayer.title = streamTitle
         }
     }
 
@@ -183,8 +184,8 @@ Page {
 
     function videoPauseTrigger() {
         // this seems not to work somehow
-        if (videoPoster.player.playbackState == MediaPlayer.PlayingState) videoPoster.player.pause();
-        else if (videoPoster.source.toString().length !== 0) videoPoster.player.play();
+        if (videoPoster.player.playbackState == MediaPlayer.PlayingState) videoPoster.pause();
+        else if (videoPoster.source.toString().length !== 0) videoPoster.play();
         if (videoPoster.controls.opacity === 0.0) videoPoster.toggleControls();
 
     }
@@ -410,7 +411,6 @@ Page {
                     if (enableSubtitles) {
                         subTitleLoader.item.getSubtitles(subtitleUrl);
                     }
-                    isPlayClicked = true
                 }
 
                 function toggleControls() {
@@ -439,6 +439,13 @@ Page {
                     videoPlayerPage.showNavigationIndicator = true
                 }
 
+                function pause() {
+                    mediaPlayer.pause();
+                    if (controls.opacity === 0.0) toggleControls();
+                    progressCircle.visible = false;
+                    if (! mediaPlayer.seekable) mediaPlayer.stop();
+                    isPlayClicked = false
+                }
 
                 onClicked: {
                     if (drawer.open) drawer.open = false
@@ -449,11 +456,7 @@ Page {
                             var middleY = height / 2
                             //console.debug("MiddleX:" + middleX + " MiddleY:"+middleY + " mouse.x:"+mouse.x + " mouse.y:"+mouse.y)
                             if ((mouse.x >= middleX - 64 && mouse.x <= middleX + 64) && (mouse.y >= middleY - 64 && mouse.y <= middleY + 64)) {
-                                mediaPlayer.pause();
-                                if (controls.opacity === 0.0) toggleControls();
-                                progressCircle.visible = false;
-                                if (! mediaPlayer.seekable) mediaPlayer.stop();
-                                isPlayClicked = false
+                                pause();
                             }
                             else {
                                 toggleControls();
@@ -596,7 +599,10 @@ Page {
                             videoPoster.player.play();
                         }
                     }
-                    else  { progressCircle.visible = false; loadMetaDataPage(); }
+                    else  {
+                        progressCircle.visible = false;
+                        loadMetaDataPage();
+                    }
                     if (metaData.title) dPage.title = metaData.title
                 }
                 onError: {
@@ -624,9 +630,6 @@ On Youtube Videos please make sure to be logged in. Some videos might be geobloc
                     errorBox.visible = true;
                     /* Avoid MediaPlayer undefined behavior */
                     stop();
-                }
-                onBufferProgressChanged: {
-                    if (bufferProgress == 1.0 && isPlayClicked) play()
                 }
             }
 
@@ -786,5 +789,73 @@ On Youtube Videos please make sure to be logged in. Some videos might be geobloc
                 videoPoster.player.play();
             }
         }
+    }
+
+    MprisPlayer {
+        id: mprisPlayer
+
+        serviceName: "qtmpris"
+
+        property string title
+
+        onTitleChanged: {
+            console.debug("Title changed to: " + title)
+            var metadata = mprisPlayer.metadata
+            metadata[Mpris.metadataToString(Mpris.Title)] = title
+            mprisPlayer.metadata = metadata
+        }
+
+        // Mpris2 Root Interface
+        identity: "LLs video player"
+
+        // Mpris2 Player Interface
+        canControl: true
+
+        canGoNext: mainWindow.modelPlaylist.isNext() && isPlaylist
+        canGoPrevious: mainWindow.modelPlaylist.isPrev() && isPlaylist
+        canPause: mediaPlayer.playbackState == MediaPlayer.PlayingState
+        canPlay: mediaPlayer.playbackState != MediaPlayer.PlayingState
+        canSeek: true
+        hasTrackList: false
+
+        playbackStatus: (mediaPlayer.playbackState == MediaPlayer.PlayingState) ? Mpris.Playing : Mpris.Paused
+        loopStatus: Mpris.None
+        shuffle: false
+
+        onPauseRequested: {
+            console.debug("Pause requested")
+            videoPoster.pause();
+        }
+
+        onPlayRequested: {
+            console.debug("Play requested")
+            videoPoster.play();
+        }
+//        onPlayPauseRequested: {
+//            console.debug("Play pause requested")
+//            videoPlayerPage.videoPauseTrigger();
+//        }
+        onStopRequested: {
+            mediaPlayer.stop();
+        }
+        onNextRequested: {
+            mediaPlayer.stop();
+            streamUrl = mainWindow.modelPlaylist.next() ;
+            mediaPlayer.source = streamUrl
+            videoPoster.player.play();
+        }
+        onPreviousRequested: {
+            mediaPlayer.stop();
+            streamUrl = mainWindow.modelPlaylist.prev() ;
+            mediaPlayer.source = streamUrl
+            videoPoster.player.play();
+        }
+        onSeekRequested: {
+            mediaPlayer.seek(offset)
+        }
+        onSetPositionRequested: {
+            mediaPlayer.seek(offset)
+        }
+
     }
 }
