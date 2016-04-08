@@ -125,7 +125,6 @@ Page {
             DB.addHistory(streamUrl,streamTitle);
             // Don't forgt to write it to the List aswell
             mainWindow.firstPage.add2History(streamUrl,streamTitle);
-            mprisPlayer.title = streamTitle
         }
     }
 
@@ -444,7 +443,6 @@ Page {
                     if (controls.opacity === 0.0) toggleControls();
                     progressCircle.visible = false;
                     if (! mediaPlayer.seekable) mediaPlayer.stop();
-                    isPlayClicked = false
                 }
 
                 onClicked: {
@@ -794,7 +792,7 @@ On Youtube Videos please make sure to be logged in. Some videos might be geobloc
     MprisPlayer {
         id: mprisPlayer
 
-        serviceName: "qtmpris"
+        serviceName: "llsVplayer"
 
         property string title
 
@@ -806,37 +804,40 @@ On Youtube Videos please make sure to be logged in. Some videos might be geobloc
         }
 
         // Mpris2 Root Interface
-        identity: "LLs video player"
+        identity: "LLs Video Player"
 
         // Mpris2 Player Interface
         canControl: true
 
         canGoNext: mainWindow.modelPlaylist.isNext() && isPlaylist
+        onCanGoNextChanged: {
+            console.debug("CanGoNext changed to: " + canGoNext)
+        }
         canGoPrevious: mainWindow.modelPlaylist.isPrev() && isPlaylist
-        canPause: mediaPlayer.playbackState == MediaPlayer.PlayingState
-        canPlay: mediaPlayer.playbackState != MediaPlayer.PlayingState
+        canPause: true
+        canPlay: true
         canSeek: true
-        hasTrackList: false
 
-        playbackStatus: (mediaPlayer.playbackState == MediaPlayer.PlayingState) ? Mpris.Playing : Mpris.Paused
+        playbackStatus: {
+            if (mediaPlayer.playbackState == MediaPlayer.PlayingState) return Mpris.Playing
+            else if (mediaPlayer.playbackState == MediaPlayer.PausedState) return Mpris.Paused
+            else return Mpris.Stopped
+        }
         loopStatus: Mpris.None
         shuffle: false
+        volume: 1
 
         onPauseRequested: {
-            console.debug("Pause requested")
             videoPoster.pause();
         }
-
         onPlayRequested: {
-            console.debug("Play requested")
             videoPoster.play();
         }
-//        onPlayPauseRequested: {
-//            console.debug("Play pause requested")
-//            videoPlayerPage.videoPauseTrigger();
-//        }
+        onPlayPauseRequested: {
+            videoPlayerPage.videoPauseTrigger();
+        }
         onStopRequested: {
-            mediaPlayer.stop();
+            videoPoster.player.stop();
         }
         onNextRequested: {
             mediaPlayer.stop();
@@ -853,9 +854,5 @@ On Youtube Videos please make sure to be logged in. Some videos might be geobloc
         onSeekRequested: {
             mediaPlayer.seek(offset)
         }
-        onSetPositionRequested: {
-            mediaPlayer.seek(offset)
-        }
-
     }
 }
