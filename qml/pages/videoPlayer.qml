@@ -62,6 +62,9 @@ Page {
             pulley.visible = false;
             showNavigationIndicator = false;
         }
+        mprisPlayer.canGoNext = mainWindow.modelPlaylist.isNext() && isPlaylist
+        mprisPlayer.canGoPrevious = mainWindow.modelPlaylist.isPrev() && isPlaylist
+        mprisPlayer.title = dataContainer.streamUrl
     }
 
     Component.onDestruction: {
@@ -778,8 +781,8 @@ On Youtube Videos please make sure to be logged in. Some videos might be geobloc
             iconSource: "image://theme/icon-cover-next-song"
             onTriggered: {
                 // reset
-                streamUrl = ""
-                streamTitle = ""
+                dataContainer.streamUrl = ""
+                dataContainer.streamTitle = ""
                 mediaPlayer.stop()
                 // before load new
                 streamUrl = mainWindow.modelPlaylist.next() ;
@@ -794,13 +797,15 @@ On Youtube Videos please make sure to be logged in. Some videos might be geobloc
 
         serviceName: "llsVplayer"
 
-        property string title
+        property string title: streamTitle
 
         onTitleChanged: {
-            console.debug("Title changed to: " + title)
-            var metadata = mprisPlayer.metadata
-            metadata[Mpris.metadataToString(Mpris.Title)] = title
-            mprisPlayer.metadata = metadata
+            if (title != "") {
+                console.debug("Title changed to: " + title)
+                var metadata = mprisPlayer.metadata
+                metadata[Mpris.metadataToString(Mpris.Title)] = title
+                mprisPlayer.metadata = metadata
+            }
         }
 
         // Mpris2 Root Interface
@@ -809,11 +814,8 @@ On Youtube Videos please make sure to be logged in. Some videos might be geobloc
         // Mpris2 Player Interface
         canControl: true
 
-        canGoNext: mainWindow.modelPlaylist.isNext() && isPlaylist
-        onCanGoNextChanged: {
-            console.debug("CanGoNext changed to: " + canGoNext)
-        }
-        canGoPrevious: mainWindow.modelPlaylist.isPrev() && isPlaylist
+        canGoNext: true
+        canGoPrevious: true
         canPause: true
         canPlay: true
         canSeek: true
@@ -823,6 +825,12 @@ On Youtube Videos please make sure to be logged in. Some videos might be geobloc
             else if (mediaPlayer.playbackState == MediaPlayer.PausedState) return Mpris.Paused
             else return Mpris.Stopped
         }
+        onPlaybackStatusChanged: {
+            mprisPlayer.canGoNext = mainWindow.modelPlaylist.isNext() && isPlaylist
+            mprisPlayer.canGoPrevious = mainWindow.modelPlaylist.isPrev() && isPlaylist
+            title = streamTitle
+        }
+
         loopStatus: Mpris.None
         shuffle: false
         volume: 1
@@ -840,13 +848,21 @@ On Youtube Videos please make sure to be logged in. Some videos might be geobloc
             videoPoster.player.stop();
         }
         onNextRequested: {
-            mediaPlayer.stop();
+            // reset
+            dataContainer.streamUrl = ""
+            dataContainer.streamTitle = ""
+            mediaPlayer.stop()
+            // before load new
             streamUrl = mainWindow.modelPlaylist.next() ;
             mediaPlayer.source = streamUrl
             videoPoster.player.play();
         }
         onPreviousRequested: {
-            mediaPlayer.stop();
+            // reset
+            dataContainer.streamUrl = ""
+            dataContainer.streamTitle = ""
+            mediaPlayer.stop()
+            // before load new
             streamUrl = mainWindow.modelPlaylist.prev() ;
             mediaPlayer.source = streamUrl
             videoPoster.player.play();
