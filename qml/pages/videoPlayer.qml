@@ -260,7 +260,7 @@ Page {
             }
         }
 
-        Image {
+        AnimatedImage {
             id: onlyMusic
             anchors.centerIn: parent
             source: Qt.resolvedUrl("images/audio.png")
@@ -268,6 +268,7 @@ Page {
             Behavior on opacity { FadeAnimation { } }
             width: parent.width / 1.25
             height: width
+            playing: false
         }
 
         ProgressCircle {
@@ -413,6 +414,7 @@ Page {
                     if (enableSubtitles) {
                         subTitleLoader.item.getSubtitles(subtitleUrl);
                     }
+                    onlyMusic.playing = true
                 }
 
                 function toggleControls() {
@@ -446,6 +448,7 @@ Page {
                     if (controls.opacity === 0.0) toggleControls();
                     progressCircle.visible = false;
                     if (! mediaPlayer.seekable) mediaPlayer.stop();
+                    onlyMusic.playing = false
                 }
 
                 onClicked: {
@@ -469,10 +472,31 @@ Page {
                         }
                     }
                 }
-//                onPressAndHold: {
-//                    //console.debug("[Press and Hold detected]")
-//                    if (! drawer.open) drawer.open = true
-//                }
+                onPressAndHold: {
+                    if (onlyMusic.opacity == 1.0) {
+                        if (onlyMusic.source == Qt.resolvedUrl("images/audio.png")) {
+                            onlyMusic.source = Qt.resolvedUrl("images/audio-mc-anim.gif")
+                            onlyMusic.width = videoPlayerPage.height / 1.25
+                            onlyMusic.height = videoPlayerPage.width - Theme.paddingMedium
+                            onlyMusic.rotation = (videoPlayerPage.orientation == Orientation.Portrait || page.orientation == Orientation.PortraitInverted) ? 90 : 0
+                            onlyMusic.playing = videoPoster.playing
+                        }
+                        else if (onlyMusic.source == Qt.resolvedUrl("images/audio-mc-anim.gif")) {
+                            onlyMusic.source = Qt.resolvedUrl("images/audio-eq-anim.gif")
+                            onlyMusic.width = videoPlayerPage.height / 1.25
+                            onlyMusic.height = videoPlayerPage.width / 0.8
+                            onlyMusic.rotation = (videoPlayerPage.orientation == Orientation.Portrait || page.orientation == Orientation.PortraitInverted) ? -90 : 0
+                            onlyMusic.playing = videoPoster.playing
+                        }
+                        else {
+                            onlyMusic.source = Qt.resolvedUrl("images/audio.png")
+                            onlyMusic.width = videoPlayerPage.width / 1.25
+                            onlyMusic.height = onlyMusic.width
+                            onlyMusic.rotation = 0
+                            onlyMusic.playing = false
+                        }
+                    }
+                }
                 onPositionChanged: {
                     if ((enableSubtitles) && (currentVideoSub)) subTitleLoader.item.checkSubtitles()
                 }
