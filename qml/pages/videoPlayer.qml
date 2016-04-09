@@ -451,6 +451,28 @@ Page {
                     onlyMusic.playing = false
                 }
 
+                function next() {
+                    // reset
+                    dataContainer.streamUrl = ""
+                    dataContainer.streamTitle = ""
+                    mediaPlayer.stop()
+                    // before load new
+                    streamUrl = mainWindow.modelPlaylist.next() ;
+                    mediaPlayer.source = streamUrl
+                    videoPoster.player.play();
+                }
+
+                function prev() {
+                    // reset
+                    dataContainer.streamUrl = ""
+                    dataContainer.streamTitle = ""
+                    mediaPlayer.stop()
+                    // before load new
+                    streamUrl = mainWindow.modelPlaylist.prev() ;
+                    mediaPlayer.source = streamUrl
+                    videoPoster.player.play();
+                }
+
                 onClicked: {
                     if (drawer.open) drawer.open = false
                     else {
@@ -614,22 +636,28 @@ Page {
                     else if (mediaPlayer.status === MediaPlayer.EndOfMedia) {
                         videoPoster.showControls();
                         if (isPlaylist && mainWindow.modelPlaylist.isNext()) {
-                            // reset
-                            streamUrl = ""
-                            streamTitle = ""
-                            stop()
-                            // before load new
-                            streamUrl = mainWindow.modelPlaylist.next() ;
-                            source = streamUrl
-                            videoPoster.player.play();
+                            videoPoster.next();
                         }
                     }
                     else  {
                         progressCircle.visible = false;
                         loadMetaDataPage();
                     }
-                    if (metaData.title) dPage.title = metaData.title
+                    if (metaData.title) {
+                        dPage.title = metaData.title
+                        mprisPlayer.title = metaData.title
+                    }
                 }
+                onPlaybackStateChanged: {
+                    if (playbackState == MediaPlayer.PlayingState) {
+                        mprisPlayer.title = streamTitle
+                        if (onlyMusic.opacity == 1.0) onlyMusic.playing = true
+                    }
+                    else  {
+                        if (onlyMusic.opacity == 1.0) onlyMusic.playing = false
+                    }
+                }
+
                 onError: {
                     // Just a little help
         //            MediaPlayer.NoError - there is no current error.
@@ -804,14 +832,7 @@ On Youtube Videos please make sure to be logged in. Some videos might be geobloc
         CoverAction {
             iconSource: "image://theme/icon-cover-next-song"
             onTriggered: {
-                // reset
-                dataContainer.streamUrl = ""
-                dataContainer.streamTitle = ""
-                mediaPlayer.stop()
-                // before load new
-                streamUrl = mainWindow.modelPlaylist.next() ;
-                mediaPlayer.source = streamUrl
-                videoPoster.player.play();
+                videoPoster.next()
             }
         }
     }
@@ -872,24 +893,10 @@ On Youtube Videos please make sure to be logged in. Some videos might be geobloc
             videoPoster.player.stop();
         }
         onNextRequested: {
-            // reset
-            dataContainer.streamUrl = ""
-            dataContainer.streamTitle = ""
-            mediaPlayer.stop()
-            // before load new
-            streamUrl = mainWindow.modelPlaylist.next() ;
-            mediaPlayer.source = streamUrl
-            videoPoster.player.play();
+            videoPoster.next()
         }
         onPreviousRequested: {
-            // reset
-            dataContainer.streamUrl = ""
-            dataContainer.streamTitle = ""
-            mediaPlayer.stop()
-            // before load new
-            streamUrl = mainWindow.modelPlaylist.prev() ;
-            mediaPlayer.source = streamUrl
-            videoPoster.player.play();
+            videoPoster.prev()
         }
         onSeekRequested: {
             mediaPlayer.seek(offset)
