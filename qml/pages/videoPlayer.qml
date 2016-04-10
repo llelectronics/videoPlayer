@@ -893,13 +893,13 @@ On Youtube Videos please make sure to be logged in. Some videos might be geobloc
             videoPoster.player.stop();
         }
         onNextRequested: {
-            videoPoster.next()
+            videoPoster.next();
         }
         onPreviousRequested: {
-            videoPoster.prev()
+            videoPoster.prev();
         }
         onSeekRequested: {
-            mediaPlayer.seek(offset)
+            mediaPlayer.seek(offset);
         }
     }
 }
