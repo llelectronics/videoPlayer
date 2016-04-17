@@ -684,6 +684,11 @@ On Youtube Videos please make sure to be logged in. Some videos might be geobloc
                     /* Avoid MediaPlayer undefined behavior */
                     stop();
                 }
+                onBufferProgressChanged: {
+                    if (bufferProgress == 1.0) {
+                        play()
+                    } else pause()
+                }
             }
 
             visible: mediaPlayer.status >= MediaPlayer.Loaded && mediaPlayer.status <= MediaPlayer.EndOfMedia
