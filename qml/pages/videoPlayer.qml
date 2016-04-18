@@ -48,6 +48,7 @@ Page {
     property string subtitleUrl
     property bool subtitleSolid: dataContainer.subtitleSolid
     property bool isPlaylist: dataContainer.isPlaylist
+    property bool isNewSource: false
 
     property alias showTimeAndTitle: showTimeAndTitle
     property alias pulley: pulley
@@ -120,6 +121,7 @@ Page {
             if (savePositionMsec !== "Not Found") savedPosition = true;
             else savedPosition = false;
         }
+        isNewSource = true
     }
 
     onStreamTitleChanged: {
@@ -685,9 +687,10 @@ On Youtube Videos please make sure to be logged in. Some videos might be geobloc
                     stop();
                 }
                 onBufferProgressChanged: {
-                    if (bufferProgress == 1.0) {
+                    if (bufferProgress == 1.0 && isNewSource) {
+                        isNewSource = false
                         play()
-                    } else pause()
+                    } else if(isNewSource) pause()
                 }
             }
 
