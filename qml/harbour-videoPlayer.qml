@@ -47,7 +47,7 @@ ApplicationWindow
     property alias busy: busy
     property alias infoBanner: infoBanner
 
-    property string version: "1.1"
+    property string version: "1.3"
     property string appname: "LLs Video Player"
     property string appicon: "images/icon.png"
 
