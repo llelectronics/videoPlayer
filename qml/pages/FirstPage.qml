@@ -123,6 +123,10 @@ Page {
         _ytdl.updateYtdl();
     }
 
+    function openPlaylist() {
+        pageStack.push(Qt.resolvedUrl("PlaylistPage.qml"), {dataContainer: page, modelPlaylist: mainWindow.modelPlaylist});
+    }
+
     ListModel {
         id: historyModel
 
@@ -253,7 +257,7 @@ Page {
                    pageStack.push(Qt.resolvedUrl("OpenURLPage.qml"), {dataContainer: page});
                 }
                 else if (btnId == "playlistBtn") {
-                   pageStack.push(Qt.resolvedUrl("PlaylistPage.qml"), {dataContainer: page, modelPlaylist: mainWindow.modelPlaylist});
+                   openPlaylist();
                 }
             }
             color: colour

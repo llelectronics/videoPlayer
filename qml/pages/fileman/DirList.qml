@@ -17,6 +17,7 @@ SilicaListView {
 
     signal mediaFileOpen(string url)
     signal fileRemove(string url)
+    signal addToPlaylist(string url)
 
     property bool isHidden: true
 
@@ -36,10 +37,11 @@ SilicaListView {
 
     model: entries
 
-    function forEach(arr, fn) {
+    function forEachAddToPlaylist() {
         var i;
-        for (i = 0; i < arr.length; ++i)
-            fn(arr[i]);
+        for (i = 0; i < entries.count; ++i)
+            if (!entries.isFolder(i))
+                addToPlaylist(entries.get(i, "filePath"))
     }
 
     function showAbove(pages, params, immediate) {
@@ -130,6 +132,13 @@ SilicaListView {
     ]
 
     PullDownMenu {
+        MenuItem {
+            text: "Add files to playlist"
+            onClicked: {
+                forEachAddToPlaylist();
+                dataContainer.openPlaylist();
+            }
+        }
         MenuItem {
             text: isHidden ? "Show Hidden Files" : "Hide Hidden Files"
             onClicked: entriesList.showHidden();

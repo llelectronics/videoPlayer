@@ -20,6 +20,13 @@ Page {
         nameFilters: filter
     }
 
+    function forEachAddToPlaylist() {
+        var i;
+        for (i = 0; i < fileModel.count; ++i)
+            if (!fileModel.isFolder(i))
+            mainWindow.modelPlaylist.addTrack(fileModel.get(i, "filePath"))
+    }
+
     function getReadableFileSizeString(fileSizeInBytes) {
         var i = -1;
         var byteUnits = [' kB', ' MB', ' GB', ' TB', 'PB', 'EB', 'ZB', 'YB'];
@@ -41,6 +48,13 @@ Page {
         }
 
         PullDownMenu {
+            MenuItem {
+                text: "Add files to playlist"
+                onClicked: {
+                    forEachAddToPlaylist();
+                    dataContainer.openPlaylist();
+                }
+            }
             MenuItem {
                 text: "Show Filesystem Root"
                 onClicked: fileModel.folder = "/";

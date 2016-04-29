@@ -13,6 +13,10 @@ Page
     property QtObject dataContainer
     property ListModel modelPlaylist
 
+    RemorsePopup {
+        id: globalRemorse
+    }
+
     Column
     {
         //anchors.fill: parent
@@ -37,6 +41,11 @@ Page
                 }
             }
             VerticalScrollDecorator {}
+
+            function removeAll() {
+                globalRemorse.execute("Clearing Playlist", function() { modelPlaylist.clear(); } )
+            }
+
             delegate: ListItem {
                 id: myListItem
                 property bool menuOpen: contextMenu != null && contextMenu.parent === myListItem
@@ -49,6 +58,7 @@ Page
                     ListView.remove.connect(removal.deleteAnimation.start)
                     removal.execute(contentItem, "Deleting " + title, function() { modelPlaylist.removeTrack(url); } )
                 }
+
 //                function editBookmark() {
 //                    pageStack.push(Qt.resolvedUrl("AddBookmark.qml"), { bookmarks: modelBookmarks, editBookmark: true, bookmarkUrl: url, bookmarkTitle: title, oldTitle: title });
 //                }
@@ -112,6 +122,12 @@ Page
                 }
             }
             PullDownMenu {
+                MenuItem {
+                    text: qsTr("Clear Playlist")
+                    visible: mainWindow.modelPlaylist.count > 0
+                    onClicked: repeater1.removeAll();
+                }
+
                 MenuItem {
                     text: qsTr("Create Playlist")
                     onClicked: playlistPanel.open = true
