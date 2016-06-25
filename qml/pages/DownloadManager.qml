@@ -1,15 +1,106 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
+import "helper/otherComponents"
+
 Page {
     id: downloadManager
-    allowedOrientations: Orientation.All
+    allowedOrientations: mainWindow.allowedOrientations
     property string downloadUrl
     property string downloadName
-    //property alias downloadUrl: urlField.text
+    property string downLoc
+    property QtObject dataContainer
 
     Component.onCompleted: {
-        _manager.setDownloadName(downloadName)
-        if (downloadUrl != "") _manager.downloadUrl(downloadUrl)
+        if (downloadUrl != "") {
+            download();
+        }
+    }
+
+    function download() {
+        if (downloadName != "") {
+            _manager.setDownloadName(downloadName);
+        }
+        downLoc = _manager.saveFileName(downloadUrl);
+        if (downloadName === "") downloadName = downLoc.substring(downLoc.lastIndexOf('/')+1)
+        _manager.downloadUrl(downloadUrl);
+        console.debug("[DownloadManager.qml] downloadName = " + downloadName);
+        downloadVisualModel.model.append({"name": downloadName, "url": downloadUrl, "downLocation": downLoc.toString()})
+        downloadList.forceLayout();
+    }
+
+    VisualDataModel {
+        id: downloadVisualModel
+        model: mainWindow.downloadModel
+        delegate: BackgroundItem {
+            id: bgdelegate
+            width: parent.width
+            anchors.margins: Theme.paddingMedium
+            height: menuOpen ? contextMenu.height + dname.height + durl.height + Theme.paddingLarge : dname.height + durl.height + Theme.paddingLarge
+            property Item contextMenu
+            property bool menuOpen: contextMenu != null && contextMenu.parent === bgdelegate
+
+            function remove() {
+                var removal = removalComponent.createObject(bgdelegate)
+                removal.execute(bgdelegate,qsTr("Deleting ") + dname.text, function() { _fm.remove(downLocation); mainWindow.downloadModel.remove(index) })
+            }
+
+            function showContextMenu() {
+                if (!contextMenu)
+                    contextMenu = myMenu.createObject(downloadVisualModel)
+                contextMenu.show(bgdelegate)
+            }
+
+            Label {
+                id: dname
+                text: name
+                anchors.top: parent.top
+                anchors.topMargin: Theme.paddingSmall
+                anchors.left: parent.left
+                anchors.leftMargin: Theme.paddingLarge
+                color: highlighted ? Theme.highlightColor : Theme.primaryColor
+                truncationMode: TruncationMode.Fade
+                width: parent.width - (Theme.paddingMedium)
+            }
+            Label {
+                id: durl
+                text: url
+                anchors.top: dname.bottom
+                anchors.topMargin: Theme.paddingSmall
+                anchors.left: parent.left
+                anchors.leftMargin: Theme.paddingLarge
+                color: Theme.secondaryColor
+                truncationMode: TruncationMode.Fade
+                width: parent.width - (Theme.paddingMedium)
+            }
+            anchors.horizontalCenter: parent.horizontalCenter
+            onClicked: {
+                mainWindow.firstPage.loadPlayer();
+                mainWindow.firstPage.originalUrl = downLocation;
+                mainWindow.firstPage.streamUrl = downLocation;
+            }
+            onPressAndHold: showContextMenu()
+
+            Component {
+                id: removalComponent
+                RemorseItem {
+                    id: remorse
+                    onCanceled: destroy()
+                }
+            }
+
+            Component {
+                id: myMenu
+                ContextMenu {
+                    MenuItem {
+                        text: qsTr("Delete")
+                        onClicked: {
+                            bgdelegate.remove();
+                        }
+                    }
+                }
+            }
+        } // delegate
+
     }
 
     Flickable {
@@ -24,19 +115,21 @@ Page {
                 text: qsTr("Add Download")
                 onClicked: pageStack.push(manualDownload);
             }
+//            MenuItem {
+//                text: qsTr("Show Downloadfolder")
+//                onClicked: {
+//                    if (dataContainer) pageStack.push(Qt.resolvedUrl("fileman/OpenDialog.qml"), {"dataContainer": dataContainer, "path": _fm.getHome()+ "/Downloads"});
+//                    else pageStack.push(Qt.resolvedUrl("fileman/OpenDialog.qml"), {"dataContainer": dataContainer, "path": _fm.getHome()+ "/Downloads"});
+//                }
+//            }
             MenuItem {
-                text: qsTr("Download with Curl")
-                onClicked: {
-                    _manager.downloadWithCurl(downloadUrl)
-                }
+                text: qsTr("Clear Downloads")
+                onClicked: downloadVisualModel.model.clear()
+                visible: downloadVisualModel.count > 0
             }
-            //            MenuItem {
-            //                text: qsTr("Show Details")
-            //                onClicked: pageStack.push(details);
-            //            }
         }
 
-        Column{
+        Column {
             id: column1
             width: parent.width
             spacing: 15
@@ -50,6 +143,7 @@ Page {
                 id: manualDownload
                 Page {
 
+                    allowedOrientations: mainWindow.orient
                     Column {
                         width: parent.width
                         spacing: 15
@@ -85,29 +179,48 @@ Page {
                             text: qsTr("Download")
 
                             // Start download from url on click
-                            onClicked: { _manager.downloadUrl(urlField.text); downloadManager.downloadUrl = urlField.text ; pageStack.pop() }
+                            onClicked: { downloadManager.downloadUrl = urlField.text ; downloadManager.download(); pageStack.pop() }
                         }
                     }
                 }
             }
-            TextArea {
-                id: toDownload
-                anchors.topMargin: 65
-                text: downloadUrl
+            //            TextArea {
+            //                id: toDownload
+            //                anchors.topMargin: 65
+            //                text: downloadUrl
+            //                width: parent.width
+            //                height: parent.height / 2.5
+            //                anchors.horizontalCenter: parent.horizontalCenter
+            //                color: Theme.primaryColor
+            //                font.pixelSize: Theme.fontSizeMedium
+            //                readOnly: true
+            //            }
+
+            SectionHeader {
+                text: qsTr("Download list")
+            }
+
+            SilicaListView {
+                id: downloadList
                 width: parent.width
                 height: parent.height / 2.5
-                anchors.horizontalCenter: parent.horizontalCenter
-                color: Theme.primaryColor
-                font.pixelSize: Theme.fontSizeMedium
-                readOnly: true
+                model: downloadVisualModel
+                clip: true
+            }
+
+            SectionHeader {
+                text: qsTr("Current operation")
             }
 
             ProgressBar {
-                id: pg
                 width: parent.width
                 maximumValue: _manager.progressTotal
                 value: _manager.progressValue
                 label: _manager.progressMessage
+                visible: {
+                    if (_manager.activeDownloads != 0) return true
+                    else false
+                }
             }
 
             Button {
@@ -117,7 +230,7 @@ Page {
                     else false
                 }
                 text: qsTr("Abort")
-                onClicked: { _manager.downloadAbort(); toDownload.text = "" }
+                onClicked: { _manager.downloadAbort(); }
                 anchors.horizontalCenter: parent.horizontalCenter
             }
 
@@ -125,6 +238,10 @@ Page {
                 id: activeDownloadLabel
                 text: qsTr("Active Downloads: ") + (_manager.activeDownloads == 0 ? "none" : _manager.activeDownloads)
                 color: Theme.primaryColor
+            }
+
+            SectionHeader {
+                text: qsTr("Details")
             }
 
             ValueButton {
@@ -142,8 +259,6 @@ Page {
                     pageStack.push(errorPage);
                 }
             }
-
-
 
             Component {
                 id: statusPage
@@ -166,26 +281,26 @@ Page {
                 }
             }
 
-        Component {
-            id: errorPage
-            Page {
-                PageHeader {
-                    id: pheader
-                    title: qsTr("Download Errors")
-                }
-                // A standard TextArea for the download status output
-                TextArea {
-                    width: parent.width
-                    height: parent.height - pheader.height
-                    anchors.top: pheader.bottom
-                    readOnly: true
+            Component {
+                id: errorPage
+                Page {
+                    PageHeader {
+                        id: pheader
+                        title: qsTr("Download Errors")
+                    }
+                    // A standard TextArea for the download status output
+                    TextArea {
+                        width: parent.width
+                        height: parent.height - pheader.height
+                        anchors.top: pheader.bottom
+                        readOnly: true
 
-                    text: _manager.errorMessage
+                        text: _manager.errorMessage
 
-                    color: Theme.primaryColor
+                        color: Theme.primaryColor
+                    }
                 }
             }
-        }
 
 
             // TODO: Maybe handy when there is a download list

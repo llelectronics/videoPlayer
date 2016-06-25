@@ -46,8 +46,9 @@ ApplicationWindow
     property alias playlist: playlist
     property alias busy: busy
     property alias infoBanner: infoBanner
+    property alias downloadModel: downloadModel
 
-    property string version: "1.3"
+    property string version: "1.4"
     property string appname: "LLs Video Player"
     property string appicon: "images/icon.png"
 
@@ -130,6 +131,17 @@ ApplicationWindow
                 if (pageStack.currentPage.videoPoster.opacity == 0) pageStack.currentPage.videoPoster.toggleControls();
             }
         }
+    }
+
+    ListModel {
+        id: downloadModel
+
+        // Example data
+        //        ListElement {
+        //            name: "foobar"
+        //            url: "http://download/foo.bar"
+        //            downLocation: "home/nemo/Downloads/foo.bar"
+        //        }
     }
 
     ListModel {

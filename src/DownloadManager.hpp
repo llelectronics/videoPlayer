@@ -49,8 +49,11 @@
 #include <QtCore/QStringList>
 #include <QtCore/QTime>
 #include <QtCore/QUrl>
+#include <QtCore/QPair>
 #include <QtNetwork/QNetworkAccessManager>
-#include <QProcess>
+//  Not allowed yet I guess. Leave it here until it is allowed
+//#include <transferengineinterface.h>
+//#include <transfertypes.h>
 
 class QNetworkReply;
 
@@ -94,12 +97,16 @@ public:
     int progressValue() const;
     QString progressMessage() const;
 
+    // The network access manager that does all the network communication
+    QNetworkAccessManager m_manager;
+
 public Q_SLOTS:
     // This method is called when the user starts a download by clicking the 'Download' button in the UI
     void downloadUrl(const QString &url);
-    void downloadWithCurl(const QString &url);
-    void downloadAbort();
     void setDownloadName(const QString &name);
+    void downloadAbort();
+    // This method determines a file name that can be used to save the given URL
+    QString saveFileName(const QUrl &url);
 
 Q_SIGNALS:
     // The change notification signals of the properties
@@ -120,18 +127,12 @@ private Q_SLOTS:
     // This method is called whenever a download job has finished
     void downloadFinished();
 
-    // This method is called whenever a download with curl finished
-    void downloadCurlFinished();
-
     // This method is called whenever the current download job received new data
     void downloadReadyRead();
 
 private:
     // Enqueues a new download to the internal job queue
-    void append(const QUrl &url);
-
-    // This method determines a file name that can be used to save the given URL
-    QString saveFileName(const QUrl &url);
+    void append(const QUrl &url, const QString &name);
 
     // A helper method to collect error messages
     void addErrorMessage(const QString &message);
@@ -139,11 +140,8 @@ private:
     // A helper method to collect status messages
     void addStatusMessage(const QString &message);
 
-    // The network access manager that does all the network communication
-    QNetworkAccessManager m_manager;
-
     // The internal job queue
-    QQueue<QUrl> m_downloadQueue;
+    QQueue< QPair<QUrl, QString> > m_downloadQueue;
 
     // The currently running download job
     QNetworkReply *m_currentDownload;
@@ -169,17 +167,21 @@ private:
     // A textual representation of the current progress status
     QString m_progressMessage;
 
+    // A textual representation of the current save path
+    QString m_savePath;
+
     // The list of error messages
     QStringList m_errorMessage;
 
     // The list of status messages
     QStringList m_statusMessage;
 
-    // Process used for curl downloading
-    QProcess *curlProc;
+    // The actual path to where the file is stored
+    QString m_fileLocation;
 
-    // Get FileName from ContentDisposition header
-    QString filenameFromHTTPContentDisposition(const QString& value);
+    //  Not allowed yet I guess. Leave it here until it is allowed
+    // Access to global dbus transferengine interface
+    //TransferEngineInterface *m_transferClient;
 };
 
 #endif

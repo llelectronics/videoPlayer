@@ -54,8 +54,13 @@
 #include <QFile>
 
 DownloadManager::DownloadManager(QObject *parent)
-    : QObject(parent), m_currentDownload(0), m_downloadedCount(0), m_totalCount(0), m_progressTotal(0), m_progressValue(0), curlProc(new QProcess(this))
+    : QObject(parent), m_currentDownload(0), m_downloadedCount(0), m_totalCount(0), m_progressTotal(0), m_progressValue(0)
 {
+//  Not allowed yet I guess. Leave it here until it is allowed
+//    m_transferClient = new TransferEngineInterface("org.nemo.transferengine",
+//                                                   "/org/nemo/transferengine",
+//                                                   QDBusConnection::sessionBus(),
+//                                                   this);
     QTextCodec::setCodecForLocale(QTextCodec::codecForName("UTF-8"));
 }
 
@@ -91,7 +96,10 @@ QString DownloadManager::progressMessage() const
 
 void DownloadManager::downloadUrl(const QString &url)
 {
-    append(QUrl::fromEncoded(url.toLocal8Bit()));
+    if (basename != "")
+        append(QUrl::fromEncoded(url.toLocal8Bit()), basename);
+    else
+        append(QUrl::fromEncoded(url.toLocal8Bit()), "");
 }
 
 void DownloadManager::setDownloadName(const QString &name)
@@ -99,7 +107,7 @@ void DownloadManager::setDownloadName(const QString &name)
     basename = QString(name.toUtf8());
 }
 
-void DownloadManager::append(const QUrl &url)
+void DownloadManager::append(const QUrl &url, const QString &name)
 {
     /**
      * If there is no job in the queue at the moment or we do
@@ -110,7 +118,10 @@ void DownloadManager::append(const QUrl &url)
         QTimer::singleShot(0, this, SLOT(startNextDownload()));
 
     // Enqueue the new URL to the job queue
-    m_downloadQueue.enqueue(url);
+    QPair <QUrl, QString> downPair;
+    downPair.first = url;
+    downPair.second = name;
+    m_downloadQueue.enqueue(downPair);
     emit activeDownloadsChanged();
 
     // Increment the total number of jobs
@@ -121,64 +132,46 @@ QString DownloadManager::saveFileName(const QUrl &url)
 {
     // First extract the path component from the URL ...
     const QString path = url.path();
-    QString suffix;
-    suffix = QFileInfo(path).completeSuffix();
-    //qDebug() << "[DownloadManager] Detected suffix from QFileInfo: " + suffix;
+//    QString suffix;
+//    suffix = QFileInfo(path).completeSuffix();
+//    qDebug() << "[DownloadManager.cpp] Downloadpath = " + path;
 
-    if (suffix.isEmpty()) {
-        QMimeDatabase getMime;
-        QMimeType urlMimeType = getMime.mimeTypeForUrl(url);
-        suffix = urlMimeType.preferredSuffix();
-    }
+//    if (suffix.isEmpty()) {
+//        QMimeDatabase getMime;
+//        QMimeType urlMimeType = getMime.mimeTypeForUrl(url);
+//        suffix = urlMimeType.preferredSuffix();
+//    }
 
-    // ... and then extract the file name. // only when basename is not already set
+    // ... and then extract the file name if not already set
     if (basename.isEmpty())
-    QString basename = QFileInfo(path).fileName();
+        basename = QFileInfo(path).fileName();
 
+    // Replace the file name with 'download' if the URL provides no file name.
     if (basename.isEmpty())
         basename = "download";
 
-    // Replace the file name with 'download' if the URL provides no file name.
-    basename = QDir::homePath() + "/Videos/" + basename; // locate in Video directory
+    QString savename =  QDir::homePath() + "/Videos/" + basename; // locate in downloads directory of users home
+    qDebug() << "[DOwnloadManager.cpp] Savename: " + savename;
 
     /**
      * Check if the file name exists already, if so, append an increasing number and test again.
      */
-    if (QFile::exists(basename)) {
+    if (QFile::exists(savename)) {
         // already exists, don't overwrite
         int i = 0;
-        basename += '.';
-        while (QFile::exists(basename + QString::number(i)))
+        savename += '.';
+        while (QFile::exists(savename + QString::number(i)))
             ++i;
 
-        basename += QString::number(i);
+        savename += QString::number(i);
     }
 
-    if (!suffix.isEmpty()) {
-        //qDebug() << "[DownloadManager.cpp] Suffix isn't empty so appending: " + suffix;
-        basename = basename + "." + suffix;
-    }
+//    if (!suffix.isEmpty()) {
+//        //qDebug() << "[DownloadManager.cpp] Suffix isn't empty so appending: " + suffix;
+//        savename = savename + "." + suffix;
+//    }
 
-    return basename;
-}
-
-void DownloadManager::downloadWithCurl(const QString &url)
-{
-    QString filename;
-    if (basename.isEmpty())
-        filename = saveFileName(url);
-    else
-        filename = basename;
-
-    qDebug() << "Filename to save to with curl: " + filename + ".mp4";
-    qDebug() << "Curl Download starts";
-
-    qDebug() << "curl \"" + url + "\" -o \"" + filename + ".mp4\"";
-    // Add a status message
-    addStatusMessage(QString("Downloading %1 with curl...").arg(url));
-    curlProc->start("curl \"" + url.toLocal8Bit() + "\" -o \"" + filename + ".mp4\"");
-
-    connect(curlProc, SIGNAL(finished(int)), this, SLOT(downloadCurlFinished()));
+    return savename;
 }
 
 void DownloadManager::addErrorMessage(const QString &message)
@@ -193,28 +186,6 @@ void DownloadManager::addStatusMessage(const QString &message)
     emit statusMessageChanged();
 }
 
-QString DownloadManager::filenameFromHTTPContentDisposition(const QString& value) {
-    QStringList keyValuePairs = value.split(';');
-
-    foreach(const QString& valuePair, keyValuePairs) {
-        int valueStartPos = valuePair.indexOf('=');
-
-        if (valueStartPos < 0)
-            continue;
-
-        QStringList pair = valuePair.split('=');
-        if (pair.size() != 2 || pair[0].isEmpty() || pair[0].simplified() != "filename")
-            continue;
-
-        QString value = pair[1].replace("\"", "") // remove ""
-            .replace("'", "") // remove '
-            .simplified();  // remove white spaces
-        return value;
-    }
-
-    return QString();
-}
-
 //! [0]
 void DownloadManager::startNextDownload()
 {
@@ -225,10 +196,13 @@ void DownloadManager::startNextDownload()
     }
 
     // Otherwise dequeue the first job from the queue ...
-    const QUrl url = m_downloadQueue.dequeue();
+    const QPair<QUrl, QString> pair = m_downloadQueue.dequeue();
+    const QUrl url = pair.first;
+    basename = pair.second;
 
     // ... and determine a local file name where the result can be stored.
     const QString filename = saveFileName(url);
+    m_savePath = filename;
 
     // Open the file with this file name for writing
     m_output.setFileName(filename);
@@ -241,27 +215,6 @@ void DownloadManager::startNextDownload()
 
     // Now create the network request for the URL ...
     QNetworkRequest request(url);
-
-    QNetworkReply *serverRequest = m_manager.head(request);
-
-    if (serverRequest->hasRawHeader("Content-Disposition"))
-    {
-        QString contentDisposition = m_currentDownload->rawHeader("Content-Disposition");
-        //qDebug() << "[DownloadManager.cpp] contentDisposition Header: " + contentDisposition;
-
-        if (contentDisposition.contains("filename")) {
-            QString serverFileName = filenameFromHTTPContentDisposition(contentDisposition);
-            //qDebug() << "[DownloadManager.cpp] Server filename: " + serverFileName;
-
-            if (!serverFileName.isEmpty()) {
-                QFileInfo fiContentDisposition(serverFileName);
-                QString filename = fiContentDisposition.fileName();
-                // replace the filename of the current _filePath with the new one
-                m_output.setFileName(filename);
-
-            } // If serverFileName empty
-        } // If filename
-    } // If contentDisposition
 
     // ... and start the download.
     m_currentDownload = m_manager.get(request);
@@ -277,6 +230,31 @@ void DownloadManager::startNextDownload()
 
     // Start the timer so that we can calculate the download speed later on
     m_downloadTime.start();
+
+//  Not allowed yet I guess. Leave it here until it is allowed
+//    QStringList callback;
+//    QMimeDatabase db;
+//    callback << "org.webcat.browser" << "/" << "org.webcat.browser";
+//    QDBusPendingReply<int> reply = m_transferClient->createDownload(QFileInfo(filename).fileName(),
+//                                                                    QString("image://theme/icon-launcher-browser"),
+//                                                                    QString("image://theme/icon-launcher-browser"),
+//                                                                    filename.toString(),
+//                                                                    db.mimeTypeForUrl(url).toString(),
+//                                                                    progressTotal().toULongLong(),
+//                                                                    callback,
+//                                                                    QString("cancelTransfer"),
+//                                                                    QString("restartTransfer"));
+//    reply.waitForFinished();
+
+//    if (reply.isError()) {
+//        qWarning() << "DownloadManager::recvObserve: failed to get transfer ID!" << reply.error();
+//        return;
+//    }
+
+//    int transferId(reply.value());
+
+//    m_transferClient->startTransfer(transferId);
+
 }
 //! [0]
 
@@ -310,7 +288,7 @@ void DownloadManager::downloadProgress(qint64 bytesReceived, qint64 bytesTotal)
 
 //! [2]
 void DownloadManager::downloadFinished()
-{
+{   
     // Reset the progress information when the download has finished
     m_progressTotal = 0;
     m_progressValue = 0;
@@ -322,9 +300,18 @@ void DownloadManager::downloadFinished()
     // Close the file where the data have been written
     m_output.close();
 
+
+
     // Add a status or error message
     if (m_currentDownload->error()) {
         addErrorMessage(QString("Failed: %1").arg(m_currentDownload->errorString()));
+    } else if (m_currentDownload->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt() == 302) {
+        m_output.remove();
+        QUrl redirecturl = m_currentDownload->attribute(QNetworkRequest::RedirectionTargetAttribute).toUrl();
+        if(redirecturl.isValid() && (redirecturl != m_currentDownload->url())) /* Avoid Fake/Redirect Loop */
+        {
+            downloadUrl(redirecturl.toString());
+        }
     } else {
         addStatusMessage("Succeeded.");
         ++m_downloadedCount;
@@ -338,16 +325,18 @@ void DownloadManager::downloadFinished()
     m_currentDownload = 0;
     emit activeDownloadsChanged();
 
-    QString outputFileName = m_output.fileName();
-    QMimeDatabase getMime;
-    QMimeType urlMimeType = getMime.mimeTypeForFile(outputFileName,QMimeDatabase::MatchContent);
-    QString suffix = urlMimeType.preferredSuffix();
-    //qDebug() << "[DownloadManager.cpp] Detected suffix after download: " + suffix;
-    if (!suffix.isEmpty()) {
-        QFile outputFile(outputFileName);
-        QString outputFileBaseName = QFileInfo(outputFileName).baseName();
-        outputFile.rename(QDir::homePath() + "/Videos/" + outputFileBaseName + "." + suffix);
-    }
+//    QString outputFileName = m_output.fileName();
+//    QMimeDatabase getMime;
+//    QMimeType urlMimeType = getMime.mimeTypeForFile(outputFileName,QMimeDatabase::MatchContent);
+//    QString suffix = urlMimeType.preferredSuffix();
+//    //qDebug() << "[DownloadManager.cpp] Detected suffix after download: " + suffix;
+//    if (!suffix.isEmpty()) {
+//        QFile outputFile(outputFileName);
+//        QString outputFileBaseName = QFileInfo(outputFileName).baseName();
+//        outputFile.rename(QDir::homePath() + "/Videos/" + outputFileBaseName + "." + suffix);
+//    }
+
+    basename = "";
 
     // Trigger the execution of the next job
     startNextDownload();
@@ -359,7 +348,6 @@ void DownloadManager::downloadReadyRead()
 {
     // Whenever new data are available on the network reply, write them out to the result file
     m_output.write(m_currentDownload->readAll());
-    //m_output.write(m_currentDownload->read(m_currentDownload->bytesAvailable()));
 }
 //! [3]
 
@@ -367,17 +355,6 @@ void DownloadManager::downloadReadyRead()
 void DownloadManager::downloadAbort()
 {
     m_currentDownload->abort();
+    basename = "";
 }
 //! [4]
-
-//! [5]
-void DownloadManager::downloadCurlFinished()
-{
-    // Add a status or error message
-    if (curlProc->error()) {
-        addErrorMessage(QString("Failed Downloading: ") + curlProc->errorString());
-    } else {
-        addStatusMessage("Succeeded.");
-    }
-}
-//! [5]

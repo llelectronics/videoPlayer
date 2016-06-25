@@ -59,7 +59,14 @@ Page {
                 color: highlighted ? Theme.highlightColor : Theme.primaryColor
             }
             onClicked: {
-                if (ytDownload) pageStack.replace(Qt.resolvedUrl("DownloadManager.qml"), {"downloadUrl": url, "downloadName": streamTitle});
+                if (ytDownload) {
+                    var suf
+                    if (name == "MP4 720p") suf = ".mp4"
+                    else if (name == "FLV 480p") suf = ".flv"
+                    else if (name == "MP4 360p") suf = ".mp4"
+                    else if (name == "FLV 240p") suf = ".flv"
+                    pageStack.replace(Qt.resolvedUrl("DownloadManager.qml"), {"downloadUrl": url, "downloadName": streamTitle + suf});
+                }
                 else {
                     firstPage.streamUrl = url
                     if (name == "MP4 720p") firstPage.ytQual = "720p"
