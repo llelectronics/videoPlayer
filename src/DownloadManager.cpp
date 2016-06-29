@@ -192,6 +192,8 @@ void DownloadManager::startNextDownload()
     // If the queue is empty just add a new status message
     if (m_downloadQueue.isEmpty()) {
         addStatusMessage(QString("%1/%2 files downloaded successfully").arg(m_downloadedCount).arg(m_totalCount));
+        emit curNameChanged();
+        emit activeDownloadsChanged();
         return;
     }
 
@@ -199,6 +201,7 @@ void DownloadManager::startNextDownload()
     const QPair<QUrl, QString> pair = m_downloadQueue.dequeue();
     const QUrl url = pair.first;
     basename = pair.second;
+    emit curNameChanged();
 
     // ... and determine a local file name where the result can be stored.
     const QString filename = saveFileName(url);
@@ -323,7 +326,7 @@ void DownloadManager::downloadFinished()
      */
     m_currentDownload->deleteLater();
     m_currentDownload = 0;
-    emit activeDownloadsChanged();
+    if (m_downloadQueue.count() != 0) emit activeDownloadsChanged();
 
 //    QString outputFileName = m_output.fileName();
 //    QMimeDatabase getMime;
@@ -355,6 +358,5 @@ void DownloadManager::downloadReadyRead()
 void DownloadManager::downloadAbort()
 {
     m_currentDownload->abort();
-    basename = "";
 }
 //! [4]

@@ -76,6 +76,12 @@ class DownloadManager : public QObject
     // Makes the number of currently running downloads available to the UI
     Q_PROPERTY(int activeDownloads READ activeDownloads NOTIFY activeDownloadsChanged)
 
+    // Makes the number of total downloads available to the UI
+    Q_PROPERTY(int totalDownloads READ totalDownloads NOTIFY totalDownloadsChanged)
+
+    // Makes the current basename available to the UI
+    Q_PROPERTY(QString curName READ curName NOTIFY curNameChanged)
+
     // Makes the total number of bytes of the current download available to the UI
     Q_PROPERTY(int progressTotal READ progressTotal NOTIFY progressTotalChanged)
 
@@ -93,9 +99,11 @@ public:
     QString statusMessage() const;
     QString basename;
     int activeDownloads() const;
+    int totalDownloads(){ return m_totalCount;}
     int progressTotal() const;
     int progressValue() const;
     QString progressMessage() const;
+    QString curName() { return basename;}
 
     // The network access manager that does all the network communication
     QNetworkAccessManager m_manager;
@@ -113,6 +121,8 @@ Q_SIGNALS:
     void errorMessageChanged();
     void statusMessageChanged();
     void activeDownloadsChanged();
+    void totalDownloadsChanged();
+    void curNameChanged();
     void progressTotalChanged();
     void progressValueChanged();
     void progressMessageChanged();
