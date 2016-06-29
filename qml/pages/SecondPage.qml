@@ -101,6 +101,17 @@ import "helper/yt.js" as YT
                     }
                 }
 
+                Rectangle {
+                    id: loadingRec
+                    height: Theme.iconSizeExtraSmall / 2
+                    color: Theme.highlightColor
+                    anchors.top: parent.top
+                    property int minimumValue: 0
+                    property int maximumValue: 100
+                    property int value: ytView.loadProgress
+                    width: (value / (maximumValue - minimumValue)) * parent.width
+                    visible: value == 100 ? false : true
+                }
 
                 header: Row {
                     width: parent.width
