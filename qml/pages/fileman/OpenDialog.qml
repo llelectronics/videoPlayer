@@ -91,7 +91,7 @@ Page {
                 text: "Add files to playlist"
                 onClicked: {
                     forEachAddToPlaylist();
-                    dataContainer.openPlaylist();
+                    mainWindow.firstPage.openPlaylist();
                 }
             }
             MenuItem {
