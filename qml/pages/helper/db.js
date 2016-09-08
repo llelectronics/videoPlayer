@@ -126,6 +126,26 @@ function addBookmark(title,url) {
     return res;
 }
 
+// This function is used to edit bookmarks in the database
+function editBookmark(oldtitle,title,url) {
+    var db = getDatabase();
+    var res = "";
+    db.transaction(function(tx) {
+        console.debug("UPDATE bookmarks SET title=" + title + ", url=" + url + " WHERE title=" + oldtitle + ";")
+        var rs = tx.executeSql('UPDATE bookmarks SET title=(?), url=(?) WHERE title=(?);', [title,url,oldtitle]);
+        if (rs.rowsAffected > 0) {
+            res = "OK";
+            console.log ("Saved to database");
+        } else {
+            res = "Error";
+            console.log ("Error saving to database");
+        }
+    }
+    );
+    // The function returns “OK” if it was successful, or “Error” if it wasn't
+    return res;
+}
+
 // This function is used to remove a bookmark from database
 function removeBookmark(url) {
     var db = getDatabase();

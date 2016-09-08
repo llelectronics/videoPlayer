@@ -313,7 +313,7 @@ Page {
         Component {
             id: openSubsComponent
             OpenDialog {
-                onOpenFile: {
+                onFileOpen: {
                     subtitleUrl = path
                     pageStack.pop()
                 }

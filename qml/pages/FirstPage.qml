@@ -183,7 +183,7 @@ Page {
         OpenDialog {
             path: "/home/nemo/Videos"
             filter: ["*.*"]
-            onOpenFile: {
+            onFileOpen: {
                 mainWindow.firstPage.originalUrl = path;
                 mainWindow.firstPage.streamUrl = path;
                 mainWindow.firstPage.loadPlayer();

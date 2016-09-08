@@ -170,7 +170,7 @@ ApplicationWindow
             for (var i=0; i<count; i++) {
                 if (get(i).title === oldTitle) set(i,{"title":bookmarkTitle, "url":bookmarkUrl});
             }
-            DB.addBookmark(bookmarkTitle,bookmarkUrl);
+            DB.editBookmark(oldTitle,bookmarkTitle,bookmarkUrl);
         }
 
         function removeBookmark(bookmarkUrl) {

@@ -6,36 +6,67 @@ Page {
     id: page
     allowedOrientations: Orientation.All
 
-    signal openFile(string path);
+    property bool multiSelect: onlyFolders ? true : false
+    property bool selectMode: false
+    property bool onlyFolders: false
+    property string path
+    property variant filter: [ "*" ]
+    property string title
 
-    property var path
-    property var filter
+    property QtObject dataContainer
+
+    signal fileOpen(string path);
+
+    onPathChanged: {
+        openFile(path);
+    }
+
+    function openFile(path) {
+        if (_fm.isFile(path)) {
+
+            fileOpen(path)
+        }
+    }
 
     FolderListModel {
         id: fileModel
-        folder: path
+        folder: path ? path: _fm.getHome()
         showDirsFirst: true
         showDotAndDotDot: true
         showOnlyReadable: true
         nameFilters: filter
     }
 
-    function forEachAddToPlaylist() {
-        var i;
-        for (i = 0; i < fileModel.count; ++i)
-            if (!fileModel.isFolder(i))
-            mainWindow.modelPlaylist.addTrack(fileModel.get(i, "filePath"))
+    function humanSize(bytes) {
+        var precision = 2;
+        var kilobyte = 1024;
+        var megabyte = kilobyte * 1024;
+        var gigabyte = megabyte * 1024;
+        var terabyte = gigabyte * 1024;
+
+        if ((bytes >= 0) && (bytes < kilobyte)) {
+            return bytes + ' B';
+
+        } else if ((bytes >= kilobyte) && (bytes < megabyte)) {
+            return (bytes / kilobyte).toFixed(precision) + ' KB';
+
+        } else if ((bytes >= megabyte) && (bytes < gigabyte)) {
+            return (bytes / megabyte).toFixed(precision) + ' MB';
+
+        } else if ((bytes >= gigabyte) && (bytes < terabyte)) {
+            return (bytes / gigabyte).toFixed(precision) + ' GB';
+
+        } else if (bytes >= terabyte) {
+            return (bytes / terabyte).toFixed(precision) + ' TB';
+
+        } else {
+            return bytes + ' B';
+        }
     }
 
-    function getReadableFileSizeString(fileSizeInBytes) {
-        var i = -1;
-        var byteUnits = [' kB', ' MB', ' GB', ' TB', 'PB', 'EB', 'ZB', 'YB'];
-        do {
-            fileSizeInBytes = fileSizeInBytes / 1024;
-            i++;
-        } while (fileSizeInBytes > 1024);
-
-        return Math.max(fileSizeInBytes, 0.1).toFixed(1) + byteUnits[i];
+    function findBaseName(url) {
+        var fileName = url.substring(url.lastIndexOf('/') + 1);
+        return fileName;
     }
 
     SilicaListView {
@@ -44,92 +75,145 @@ Page {
         anchors.fill: parent
 
         header: PageHeader {
-            title: qsTr("Open file")
+            title: if (page.title != "") return page.title 
+            else return findBaseName((fileModel.folder).toString())
         }
 
         PullDownMenu {
             MenuItem {
-                text: "Add files to playlist"
-                onClicked: {
-                    forEachAddToPlaylist();
-                    dataContainer.openPlaylist();
-                }
-            }
-            MenuItem {
                 text: "Show Filesystem Root"
-                onClicked: fileModel.folder = "/";
+                onClicked: fileModel.folder = _fm.getRoot();
             }
             MenuItem {
                 text: "Show Home"
-                onClicked: fileModel.folder = "/home/nemo";
+                onClicked: fileModel.folder = _fm.getHome();
             }
             MenuItem {
                 text: "Show Android SDCard"
-                onClicked: fileModel.folder = "/data/sdcard";
+                onClicked: fileModel.folder = _fm.getRoot() + "/data/sdcard";
             }
             MenuItem {
                 text: "Show SDCard"
-                onClicked: fileModel.folder = "/media/sdcard";
-                //visible: Util.existsPath("/media/sdcard")
-                //Component.onCompleted: console.debug("[DirList] SD Card status: " + Util.existsPath("/media/sdcard"))
+                onClicked: fileModel.folder = _fm.getRoot() + "/media/sdcard";
             }
-    //        MenuItem {
-    //            text: "Marked Paths"
-    //            onClicked: entriesList.showStoredPaths()
-    //        }
         }
 
         delegate: BackgroundItem {
-            id: delegate
+            id: bgdelegate
             width: parent.width
-            height: fileDetailsLbl.visible ? fileNameLbl.height + fileDetailsLbl.height : Theme.itemSizeSmall
+            height: menuOpen ? contextMenu.height + delegate.height : delegate.height
+            property Item contextMenu
+            property bool menuOpen: contextMenu != null && contextMenu.parent === bgdelegate
 
-            Item {
-                id: dItem
-                anchors.fill: parent
+            function remove() {
+                var removal = removalComponent.createObject(bgdelegate)
+                removal.execute(delegate,qsTr("Deleting ") + fileName, function() { _fm.remove(filePath); })
+            }
+
+            ListItem {
+                id: delegate
+
+                showMenuOnPressAndHold: false
+                menu: myMenu
+                visible : {
+                    if (onlyFolders && fileIsDir) return true
+                    else if (onlyFolders) return false
+                    else return true
+                }
+
+                function showContextMenu() {
+                    if (!contextMenu)
+                        contextMenu = myMenu.createObject(view)
+                    contextMenu.show(bgdelegate)
+                }
+
+                Image
+                {
+                    id: fileIcon
+                    anchors.left: parent.left
+                    anchors.leftMargin: Theme.paddingSmall
+                    anchors.verticalCenter: parent.verticalCenter
+                    source: fileIsDir ? "image://theme/icon-m-folder" : "image://theme/icon-m-document"
+                }
 
                 Label {
-                    id: fileNameLbl
+                    id: fileLabel
+                    anchors.left: fileIcon.right
+                    anchors.leftMargin: Theme.paddingLarge
+                    anchors.top: fileInfo.text != "" ? parent.top : undefined
+                    anchors.verticalCenter: fileInfo.text == "" ? parent.verticalCenter : undefined
                     text: fileName + (fileIsDir ? "/" : "")
                     color: delegate.highlighted ? Theme.highlightColor : Theme.primaryColor
-                    wrapMode: Text.WordWrap
-                    width: parent.width - (Theme.paddingMedium * 2)
-                    anchors.left: parent.left
-                    anchors.leftMargin: Theme.paddingMedium
-                    anchors.right: parent.right
-                    anchors.rightMargin: Theme.paddingMedium
+                    width: mSelect.visible ? parent.width - (fileIcon.width + Theme.paddingLarge + Theme.paddingSmall + mSelect.width) : parent.width - (fileIcon.width + Theme.paddingLarge + Theme.paddingSmall)
                     truncationMode: TruncationMode.Fade
                 }
-
                 Label {
-                    id: fileDetailsLbl
-                    anchors.top: fileNameLbl.bottom
+                    id: fileInfo
                     visible: !fileIsDir
-                    text: getReadableFileSizeString(fileSize) + ", " + fileModified
+                    anchors.left: fileIcon.right
+                    anchors.leftMargin: Theme.paddingLarge
+                    anchors.top: fileLabel.bottom
+                    text: humanSize(fileSize) + ", " + fileModified
                     color: Theme.secondaryColor
+                    width: parent.width - fileIcon.width - (Theme.paddingLarge + Theme.paddingSmall + Theme.paddingLarge)
                     truncationMode: TruncationMode.Fade
-                    width: parent.width - (Theme.paddingMedium * 2)
-                    anchors.left: parent.left
-                    anchors.leftMargin: Theme.paddingMedium
-                    anchors.right: parent.right
-                    anchors.rightMargin: Theme.paddingMedium
                 }
-                Component.onCompleted: {
-                    if (!fileDetailsLbl.visible) fileNameLbl.anchors.verticalCenter = dItem.verticalCenter
-                    else fileNameLbl.anchors.top = dItem.top
+                Switch {
+                    id: mSelect
+                    visible: fileIsDir && multiSelect && onlyFolders
+                    anchors.right: parent.right
+                    checked: false
+                    onClicked: {
+                        checked = !checked
+                        fileOpen(filePath);
+                        pageStack.pop();
+                    }
+                }
+
+                onClicked: {
+                    if(multiSelect)
+                    {
+                        mSelect.checked = !mSelect.checked
+                        return;
+                    }
+
+                    if (fileIsDir) {
+                        if (fileName === "..") fileModel.folder = fileModel.parentFolder
+                        else if (fileName === ".") return
+                        else fileModel.folder = filePath
+                    } else {
+                        if (!selectMode) openFile(filePath)
+                        else {
+                            fileOpen(filePath);
+                            pageStack.pop();
+                        }
+                    }
+                }
+                onPressAndHold: showContextMenu()
+            }
+
+            Component {
+                id: removalComponent
+                RemorseItem {
+                    id: remorse
+                    onCanceled: destroy()
                 }
             }
 
-            onClicked: {
-                if (fileIsDir) {
-                    if (fileName === "..") fileModel.folder = fileModel.parentFolder
-                    else if (fileName === ".") return
-                    else fileModel.folder = filePath
-                } else {
-                    openFile(filePath)
+            Component {
+                id: myMenu
+                ContextMenu {
+                    MenuItem {
+                        text: qsTr("Delete")
+                        onClicked: {
+                            bgdelegate.remove();
+                        }
+                    }
                 }
             }
+
         }
         VerticalScrollDecorator { flickable: view }
     }
+
 }

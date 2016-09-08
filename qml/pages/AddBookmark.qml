@@ -65,7 +65,7 @@ Dialog {
                 anchors.horizontalCenter: parent.horizontalCenter
                 placeholderText: "URL of bookmark"
                 inputMethodHints: Qt.ImhUrlCharactersOnly
-                visible: editBookmark ? false : true
+                visible: /*editBookmark ? false :*/ true
             }
             Keys.onEnterPressed: enterPress();
             Keys.onReturnPressed: enterPress();
