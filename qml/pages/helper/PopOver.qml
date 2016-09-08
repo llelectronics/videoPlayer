@@ -11,8 +11,8 @@ MouseArea {
     Item {
         id: container
 
-        width:  rect.width  + (2 * rectShadow.radius);
-        height: rect.height + (2 * rectShadow.radius);
+        width:  rect.width
+        height: rect.height
 
         x: {
             if (popoverModel.elementRect.x + width/2 > rootArea.width) {
@@ -28,7 +28,7 @@ MouseArea {
             if (popoverModel.elementRect.y + popoverModel.elementRect.height + height < rootArea.height ) {
                 popoverDownCaret.visible = true
                 popoverUpCaret.visible = false
-                popoverModel.elementRect.y + popoverModel.elementRect.height
+                popoverModel.elementRect.y + popoverModel.elementRect.height + Theme.paddingLarge
             } else {
                 popoverDownCaret.visible = false
                 popoverUpCaret.visible = true
