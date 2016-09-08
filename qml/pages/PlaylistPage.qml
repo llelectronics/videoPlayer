@@ -32,6 +32,15 @@ Page
             header: PageHeader {
                 id: topPanel
                 title: qsTr("Playlists")
+                Image {
+                    id: playlistsLogo
+                    anchors.right: _titleItem.left
+                    anchors.rightMargin: Theme.paddingLarge
+                    anchors.verticalCenter: parent.verticalCenter
+                    width: Theme.iconSizeMedium
+                    height: width
+                    source: "images/icon-l-clipboard.png"
+                }
             }
             ViewPlaceholder {
                 enabled: modelPlaylist.count == 0 && !playlistPanel.open

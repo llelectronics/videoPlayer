@@ -15,7 +15,6 @@ Page
 
     //property ListModel tabModel
 
-
     SilicaListView {
         id: repeater1
         anchors.fill: parent
@@ -23,6 +22,15 @@ Page
         header: PageHeader {
             id: topPanel
             title: qsTr("Bookmarks")
+            Image {
+                id: bookmarksLogo
+                anchors.right: _titleItem.left
+                anchors.rightMargin: Theme.paddingLarge
+                anchors.verticalCenter: parent.verticalCenter
+                width: Theme.iconSizeMedium
+                height: width
+                source: "images/icon-l-star.png"
+            }
         }
         VerticalScrollDecorator {}
         delegate: ListItem {
