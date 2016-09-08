@@ -48,7 +48,7 @@ ApplicationWindow
     property alias infoBanner: infoBanner
     property alias downloadModel: downloadModel
 
-    property string version: "1.4"
+    property string version: "1.5"
     property string appname: "LLs Video Player"
     property string appicon: "images/icon.png"
 

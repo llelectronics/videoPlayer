@@ -13,7 +13,7 @@ Name:       harbour-videoPlayer
 %{!?qtc_make:%define qtc_make make}
 %{?qtc_builddir:%define _builddir %qtc_builddir}
 Summary:    Simple video player using gstreamer
-Version:    1.4
+Version:    1.5
 Release:    1
 Group:      Qt/Qt
 License:    LICENSE

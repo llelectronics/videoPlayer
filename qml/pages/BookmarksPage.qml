@@ -16,95 +16,88 @@ Page
     //property ListModel tabModel
 
 
-    Column
-    {
-        //anchors.fill: parent
-        width: parent.width
-        height: parent.height
-        spacing: Theme.paddingLarge
+    SilicaListView {
+        id: repeater1
+        anchors.fill: parent
+        model: modelBookmarks
+        header: PageHeader {
+            id: topPanel
+            title: qsTr("Bookmarks")
+        }
+        VerticalScrollDecorator {}
+        delegate: ListItem {
+            id: myListItem
+            property bool menuOpen: contextMenu != null && contextMenu.parent === myListItem
+            property Item contextMenu
 
-        SilicaListView {
-            id: repeater1
-            width: parent.width
-            height: bookmarksPage.height - (Theme.paddingLarge)  //- entryURL.height - 2*65 //- bottomBar.height
-            model: modelBookmarks
-            header: PageHeader {
-                id: topPanel
-                title: qsTr("Bookmarks")
+            height: menuOpen ? contextMenu.height + contentItem.height : contentItem.height
+
+            function remove() {
+                var removal = removalComponent.createObject(myListItem)
+                ListView.remove.connect(removal.deleteAnimation.start)
+                removal.execute(contentItem, "Deleting " + title, function() { modelBookmarks.removeBookmark(url); } )
             }
-            VerticalScrollDecorator {}
-            delegate: ListItem {
-                id: myListItem
-                property bool menuOpen: contextMenu != null && contextMenu.parent === myListItem
-                property Item contextMenu
+            function editBookmark() {
+                pageStack.push(Qt.resolvedUrl("AddBookmark.qml"), { bookmarks: modelBookmarks, editBookmark: true, bookmarkUrl: url, bookmarkTitle: title, oldTitle: title });
+            }
 
-                height: menuOpen ? contextMenu.height + contentItem.height : contentItem.height
-
-                function remove() {
-                    var removal = removalComponent.createObject(myListItem)
-                    ListView.remove.connect(removal.deleteAnimation.start)
-                    removal.execute(contentItem, "Deleting " + title, function() { modelBookmarks.removeBookmark(url); } )
+            BackgroundItem {
+                id: contentItem
+                Label {
+                    text: title
+                    anchors.verticalCenter: parent.verticalCenter
+                    anchors.left: parent.left
+                    anchors.leftMargin: Theme.paddingMedium
+                    color: contentItem.down || menuOpen ? Theme.highlightColor : Theme.primaryColor
                 }
-                function editBookmark() {
-                    pageStack.push(Qt.resolvedUrl("AddBookmark.qml"), { bookmarks: modelBookmarks, editBookmark: true, bookmarkUrl: url, bookmarkTitle: title, oldTitle: title });
+                onClicked: {
+                    dataContainer.streamUrl = url;
+                    dataContainer.loadPlayer();
                 }
-
-                BackgroundItem {
-                    id: contentItem
-                    Label {
-                        text: title
-                        anchors.verticalCenter: parent.verticalCenter
-                        color: contentItem.down || menuOpen ? Theme.highlightColor : Theme.primaryColor
-                    }
-                    onClicked: {
-                        dataContainer.streamUrl = url;
-                        dataContainer.loadPlayer();
-                    }
-                    onPressAndHold: {
-                        if (!contextMenu)
-                            contextMenu = contextMenuComponent.createObject(repeater1)
-                        contextMenu.show(myListItem)
-                    }
+                onPressAndHold: {
+                    if (!contextMenu)
+                        contextMenu = contextMenuComponent.createObject(repeater1)
+                    contextMenu.show(myListItem)
                 }
-                Component {
-                    id: removalComponent
-                    RemorseItem {
-                        property QtObject deleteAnimation: SequentialAnimation {
-                            PropertyAction { target: myListItem; property: "ListView.delayRemove"; value: true }
-                            NumberAnimation {
-                                target: myListItem
-                                properties: "height,opacity"; to: 0; duration: 300
-                                easing.type: Easing.InOutQuad
-                            }
-                            PropertyAction { target: myListItem; property: "ListView.delayRemove"; value: false }
+            }
+            Component {
+                id: removalComponent
+                RemorseItem {
+                    property QtObject deleteAnimation: SequentialAnimation {
+                        PropertyAction { target: myListItem; property: "ListView.delayRemove"; value: true }
+                        NumberAnimation {
+                            target: myListItem
+                            properties: "height,opacity"; to: 0; duration: 300
+                            easing.type: Easing.InOutQuad
                         }
-                        onCanceled: destroy();
+                        PropertyAction { target: myListItem; property: "ListView.delayRemove"; value: false }
                     }
+                    onCanceled: destroy();
                 }
-                Component {
-                    id: contextMenuComponent
-                    ContextMenu {
-                        id: menu
-                        MenuItem {
-                            text: qsTr("Edit")
-                            onClicked: {
-                                menu.parent.editBookmark();
-                            }
+            }
+            Component {
+                id: contextMenuComponent
+                ContextMenu {
+                    id: menu
+                    MenuItem {
+                        text: qsTr("Edit")
+                        onClicked: {
+                            menu.parent.editBookmark();
                         }
-                        MenuItem {
-                            text: qsTr("Delete")
-                            onClicked: {
-                                menu.parent.remove();
-                            }
+                    }
+                    MenuItem {
+                        text: qsTr("Delete")
+                        onClicked: {
+                            menu.parent.remove();
                         }
                     }
                 }
             }
-            PullDownMenu {
-                MenuItem {
-                    text: qsTr("Add Bookmark")
-                    onClicked: pageStack.push(Qt.resolvedUrl("AddBookmark.qml"), { bookmarks: modelBookmarks });
-                }
+        }
+        PullDownMenu {
+            MenuItem {
+                text: qsTr("Add Bookmark")
+                onClicked: pageStack.push(Qt.resolvedUrl("AddBookmark.qml"), { bookmarks: modelBookmarks });
             }
         }
     }
