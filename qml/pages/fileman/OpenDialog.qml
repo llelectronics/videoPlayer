@@ -69,6 +69,13 @@ Page {
         return fileName;
     }
 
+    function forEachAddToPlaylist() {
+        var i;
+        for (i = 0; i < fileModel.count; ++i)
+            if (!fileModel.isFolder(i))
+                mainWindow.modelPlaylist.addTrack(fileModel.get(i, "filePath"))
+    }
+
     SilicaListView {
         id: view
         model: fileModel
@@ -80,6 +87,13 @@ Page {
         }
 
         PullDownMenu {
+            MenuItem {
+                text: "Add files to playlist"
+                onClicked: {
+                    forEachAddToPlaylist();
+                    dataContainer.openPlaylist();
+                }
+            }
             MenuItem {
                 text: "Show Filesystem Root"
                 onClicked: fileModel.folder = _fm.getRoot();
