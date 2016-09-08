@@ -64,5 +64,6 @@ HEADERS += \
 DISTFILES += \
     qml/pages/helper/SubtitlesItem.qml \
     qml/pages/PlaylistPage.qml \
-    qml/pages/InfoBanner.qml
+    qml/pages/InfoBanner.qml \
+    qml/pages/helper/PopOver.qml
 

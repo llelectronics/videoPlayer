@@ -34,6 +34,7 @@ import QtWebKit 3.0
 import QtWebKit.experimental 1.0
 import QtMultimedia 5.0
 import "helper/yt.js" as YT
+import "helper"
 
 
 //Dialog {
@@ -93,6 +94,10 @@ import "helper/yt.js" as YT
                 anchors.fill: parent
                 overridePageStackNavigation: true
                 focus: true
+
+                property variant itemSelectorIndex: -1
+
+                experimental.itemSelector: PopOver {}
 
                 PullDownMenu {
                     MenuItem {
