@@ -85,8 +85,30 @@ MouseArea {
 
         Rectangle {
             anchors.centerIn: parent
-            width: playPauseImg.width + 64
-            height: playPauseImg.height + 64
+            width: playPauseImg.width + Theme.iconSizeMedium
+            height: playPauseImg.height + Theme.iconSizeMedium
+            color: "black"
+            opacity: 0.4
+            radius: width / 2
+            border.color: "white"
+            border.width: 2
+        }
+
+        Rectangle {
+            anchors.centerIn: ffwdImg
+            width: playPauseImg.width + Theme.iconSizeSmall
+            height: playPauseImg.height + Theme.iconSizeSmall
+            color: "black"
+            opacity: 0.4
+            radius: width / 2
+            border.color: "white"
+            border.width: 2
+        }
+
+        Rectangle {
+            anchors.centerIn: rewImg
+            width: playPauseImg.width + Theme.iconSizeSmall
+            height: playPauseImg.height + Theme.iconSizeSmall
             color: "black"
             opacity: 0.4
             radius: width / 2
@@ -105,8 +127,8 @@ MouseArea {
             height: width
             MouseArea {
                 anchors.centerIn: parent
-                width: parent.width + 64
-                height: parent.height + 64
+                width: parent.width + Theme.iconSizeMedium
+                height: parent.height + Theme.iconSizeMedium
                 enabled: !videoItem.playing
                 onClicked: {
                     //console.debug("VideoItem.source length = " + videoItem.source.toString().length)
@@ -115,6 +137,53 @@ MouseArea {
                         videoItem.playClicked();
                         videoItem.player.source = videoItem.source;
                         videoItem.player.play();
+                    }
+                }
+            }
+        }
+
+        Image {
+            id: ffwdImg
+            anchors.verticalCenter: playPauseImg.verticalCenter
+            anchors.left: playPauseImg.right
+            anchors.leftMargin: Theme.paddingLarge * 2 + Theme.paddingMedium
+            source: "image://theme/icon-m-enter-accept"
+            width: Theme.iconSizeMedium
+            height: width
+            MouseArea {
+                anchors.centerIn: parent
+                width: parent.width + Theme.iconSizeMedium
+                height: parent.height + Theme.iconSizeMedium
+                enabled: !videoItem.playing
+                onClicked: {
+                    //console.debug("VideoItem.source length = " + videoItem.source.toString().length)
+                    if (videoItem.source.toString().length !== 0) {
+                        //console.debug("Yeah we have a video source")
+                        videoItem.player.seek((positionSlider.value*1000) + 10000)
+                    }
+                }
+            }
+        }
+
+        Image {
+            id: rewImg
+            anchors.verticalCenter: playPauseImg.verticalCenter
+            anchors.right: playPauseImg.left
+            anchors.rightMargin: Theme.paddingLarge * 2 + Theme.paddingMedium
+            source: "image://theme/icon-m-enter-accept"
+            width: Theme.iconSizeMedium
+            height: width
+            mirror: true
+            MouseArea {
+                anchors.centerIn: parent
+                width: parent.width + Theme.iconSizeMedium
+                height: parent.height + Theme.iconSizeMedium
+                enabled: !videoItem.playing
+                onClicked: {
+                    //console.debug("VideoItem.source length = " + videoItem.source.toString().length)
+                    if (videoItem.source.toString().length !== 0) {
+                        //console.debug("Yeah we have a video source")
+                        videoItem.player.seek((positionSlider.value*1000) - 10000)
                     }
                 }
             }

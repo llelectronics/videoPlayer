@@ -488,9 +488,10 @@ Page {
                             var middleX = width / 2
                             var middleY = height / 2
                             //console.debug("MiddleX:" + middleX + " MiddleY:"+middleY + " mouse.x:"+mouse.x + " mouse.y:"+mouse.y)
-                            if ((mouse.x >= middleX - 64 && mouse.x <= middleX + 64) && (mouse.y >= middleY - 64 && mouse.y <= middleY + 64)) {
+                            if ((mouse.x >= middleX - Theme.iconSizeMedium && mouse.x <= middleX + Theme.iconSizeMedium) && (mouse.y >= middleY - Theme.iconSizeMedium && mouse.y <= middleY + Theme.iconSizeMedium)) {
                                 pause();
                             }
+                            //TODO: Add rew and ffwd stuff
                             else {
                                 toggleControls();
                             }
