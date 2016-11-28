@@ -489,12 +489,6 @@ Page {
                             if ((mouse.x >= middleX - Theme.iconSizeMedium && mouse.x <= middleX + Theme.iconSizeMedium) && (mouse.y >= middleY - Theme.iconSizeMedium && mouse.y <= middleY + Theme.iconSizeMedium)) {
                                 pause();
                             }
-                            else if ((controls.opacity == 1.0) && (mouse.x >= controls.rew.x && mouse.x <= controls.rew.x + controls.rew.width) && (mouse.y >= controls.rew.y && mouse.y <= controls.rew.y + controls.rew.height)) {
-                                rew(10)
-                            }
-                            else if ((controls.opacity == 1.0) && (mouse.x >= controls.ffwd.x && mouse.x <= controls.ffwd.x + controls.ffwd.width) && (mouse.y >= controls.ffwd.y && mouse.y <= controls.ffwd.y + controls.ffwd.height)) {
-                                ffwd(10)
-                            }
                             //TODO: Add rew and ffwd stuff
                             else {
                                 toggleControls();

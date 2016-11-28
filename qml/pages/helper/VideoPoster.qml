@@ -166,7 +166,7 @@ MouseArea {
                 anchors.centerIn: parent
                 width: parent.width + Theme.iconSizeMedium
                 height: parent.height + Theme.iconSizeMedium
-                enabled: !videoItem.playing
+                enabled: { if (controls.opacity == 1.0) return true; else return false; }
                 onClicked: {
                     //console.debug("VideoItem.source length = " + videoItem.source.toString().length)
                     if (videoItem.source.toString().length !== 0) {
@@ -190,7 +190,7 @@ MouseArea {
                 anchors.centerIn: parent
                 width: parent.width + Theme.iconSizeMedium
                 height: parent.height + Theme.iconSizeMedium
-                enabled: !videoItem.playing
+                enabled: { if (controls.opacity == 1.0) return true; else return false; }
                 onClicked: {
                     //console.debug("VideoItem.source length = " + videoItem.source.toString().length)
                     if (videoItem.source.toString().length !== 0) {
