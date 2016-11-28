@@ -34,6 +34,14 @@ MouseArea {
         videoItem.player.play();
     }
 
+    function ffwd(seconds) {
+        videoItem.player.seek((positionSlider.value*1000) + (seconds * 1000))
+    }
+
+    function rew(seconds) {
+        videoItem.player.seek((positionSlider.value*1000) - (seconds * 1000))
+    }
+
     Connections {
         target: videoItem._loaded ? videoItem.player : null
 
@@ -77,6 +85,8 @@ MouseArea {
         id: controls
         width: videoItem.width
         height: videoItem.height
+        property alias rew: rewRec
+        property alias ffwd: ffwdRec
 
         opacity: 1.0
         Behavior on opacity { FadeAnimation { id: controlFade } }
@@ -95,6 +105,7 @@ MouseArea {
         }
 
         Rectangle {
+            id: ffwdRec
             anchors.centerIn: ffwdImg
             width: playPauseImg.width + Theme.iconSizeSmall
             height: playPauseImg.height + Theme.iconSizeSmall
@@ -106,6 +117,7 @@ MouseArea {
         }
 
         Rectangle {
+            id: rewRec
             anchors.centerIn: rewImg
             width: playPauseImg.width + Theme.iconSizeSmall
             height: playPauseImg.height + Theme.iconSizeSmall
@@ -159,7 +171,7 @@ MouseArea {
                     //console.debug("VideoItem.source length = " + videoItem.source.toString().length)
                     if (videoItem.source.toString().length !== 0) {
                         //console.debug("Yeah we have a video source")
-                        videoItem.player.seek((positionSlider.value*1000) + 10000)
+                        ffwd(10)
                     }
                 }
             }
@@ -183,7 +195,7 @@ MouseArea {
                     //console.debug("VideoItem.source length = " + videoItem.source.toString().length)
                     if (videoItem.source.toString().length !== 0) {
                         //console.debug("Yeah we have a video source")
-                        videoItem.player.seek((positionSlider.value*1000) - 10000)
+                        rew(10)
                     }
                 }
             }
