@@ -424,6 +424,18 @@ Page {
                     onlyMusic.playing = true
                 }
 
+                onNextClicked: {
+                    if (isPlaylist && mainWindow.modelPlaylist.isNext()) {
+                        next();
+                    }
+                }
+
+                onPrevClicked: {
+                    if (isPlaylist && mainWindow.modelPlaylist.isPrev()) {
+                        prev();
+                    }
+                }
+
                 function toggleControls() {
                     //console.debug("Controls Opacity:" + controls.opacity);
                     if (controls.opacity === 0.0) {

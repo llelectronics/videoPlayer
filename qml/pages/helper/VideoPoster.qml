@@ -16,6 +16,8 @@ MouseArea {
     property alias controls: controls
     property alias position: positionSlider.value
     signal playClicked;
+    signal nextClicked;
+    signal prevClicked;
 
     property bool transpose
 
@@ -174,6 +176,9 @@ MouseArea {
                         ffwd(10)
                     }
                 }
+                onPressAndHold: {
+                    nextClicked();
+                }
             }
         }
 
@@ -197,6 +202,9 @@ MouseArea {
                         //console.debug("Yeah we have a video source")
                         rew(10)
                     }
+                }
+                onPressAndHold: {
+                    prevClicked();
                 }
             }
         }
