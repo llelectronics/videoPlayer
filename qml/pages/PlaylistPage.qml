@@ -204,10 +204,12 @@ Page
 
         width: playlistPage.isPortrait ? parent.width : Theme.itemSizeExtraLarge + Theme.paddingLarge
         height: playlistPage.isPortrait ? Theme.itemSizeExtraLarge + Theme.paddingLarge : parent.height
+        modal: true
 
         dock: playlistPage.isPortrait ? Dock.Bottom : Dock.Right
         onOpenChanged: {
             if (open) inputName.forceActiveFocus();
+            else playlistPage.forceActiveFocus();
         }
 
         TextField {
