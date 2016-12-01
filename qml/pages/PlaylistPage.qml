@@ -227,6 +227,7 @@ Page
                 mainWindow.playlist.pllist = "/home/nemo/Music/playlists/" + text + ".pls"
                 playlistPanel.open = false
                 Qt.inputMethod.hide();
+                playlistPage.forceActiveFocus();
             }
         }
         Label {
