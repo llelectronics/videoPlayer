@@ -178,11 +178,12 @@ Page
         OpenDialog {
             path: "/home/nemo/Music/playlists"
             filter: ["*.pls", "*.m3u"]
+            dataContainer: playlistPage
+            selectMode: true
             onFileOpen: {
                 //console.debug("Try loading playlist " + path);
                 mainWindow.modelPlaylist.isNew = false;
                 mainWindow.playlist.pllist = path;
-                pageStack.pop();
             }
         }
     }
@@ -192,9 +193,10 @@ Page
         OpenDialog {
             path: "/home/nemo/Videos"
             filter: ["*.mp4", "*.mp3", "*.mkv", "*.ogg", "*.ogv", "*.flac", "*.wav", "*.m4a", "*.flv", "*.webm", "*.oga", "*.avi", "*.mov", "*.3gp", "*.mpg", "*.mpeg", "*.wmv", "*.wma", "*.dv", "*.m2v", "*.asf", "*.nsv"]
+            dataContainer: playlistPage
+            selectMode: true
             onFileOpen: {
                 mainWindow.modelPlaylist.addTrack(path);
-                pageStack.pop();
             }
         }
     }

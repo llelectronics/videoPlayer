@@ -204,13 +204,13 @@ Page {
                     }
 
                     if (fileIsDir) {
-                        var anotherFM = pageStack.push(Qt.resolvedUrl("OpenDialog.qml"), {"path": filePath, "dataContainer": dataContainer});
+                        var anotherFM = pageStack.push(Qt.resolvedUrl("OpenDialog.qml"), {"path": filePath, "dataContainer": dataContainer, "selectMode": selectMode, "multiSelect": multiSelect});
                         anotherFM.fileOpen.connect(fileOpen)
                     } else {
                         if (!selectMode) openFile(filePath)
                         else {
                             fileOpen(filePath);
-                            pageStack.pop();
+                            pageStack.pop(dataContainer);
                         }
                     }
                 }
