@@ -151,6 +151,11 @@ Page {
                         if (fileIsDir) "image://theme/icon-m-folder"
                         else if (_fm.getMime(filePath).indexOf("video") !== -1) "image://theme/icon-m-file-video"
                         else if (_fm.getMime(filePath).indexOf("audio") !== -1) "image://theme/icon-m-file-audio"
+                        else if (_fm.getMime(filePath).indexOf("image") !== -1) "image://theme/icon-m-file-image"
+                        else if (_fm.getMime(filePath).indexOf("text") !== -1) "image://theme/icon-m-file-document"
+                        else if (_fm.getMime(filePath).indexOf("pdf") !== -1) "image://theme/icon-m-file-pdf"
+                        else if (_fm.getMime(filePath).indexOf("android") !== -1) "image://theme/icon-m-file-apk"
+                        else if (_fm.getMime(filePath).indexOf("rpm") !== -1) "image://theme/icon-m-file-rpm"
                         else "image://theme/icon-m-document"
                     }
 //                    Component.onCompleted: {
