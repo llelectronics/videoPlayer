@@ -20,13 +20,12 @@ License:    LICENSE
 URL:        http://example.org/
 Source0:    %{name}-%{version}.tar.bz2
 Source100:  harbour-videoPlayer.yaml
-Requires:   sailfishsilica-qt5 >= 0.10.9, python, mpris-qt5
+Requires:   sailfishsilica-qt5 >= 0.10.9
 BuildRequires:  pkgconfig(Qt5Quick)
 BuildRequires:  pkgconfig(Qt5Qml)
 BuildRequires:  pkgconfig(Qt5Core)
 BuildRequires:  pkgconfig(sailfishapp) >= 0.0.10
 BuildRequires:  desktop-file-utils
-BuildRequires:  pkgconfig(mpris-qt5)
 
 %description
 Short description of my SailfishOS Application
@@ -55,15 +54,8 @@ rm -rf %{buildroot}
 # << install pre
 %qmake5_install
 
-%post
-/usr/bin/update-desktop-database
 # >> install post
 # << install post
-
-%postun
-/usr/bin/update-desktop-database
-# >> install postun
-# << install postun
 
 desktop-file-install --delete-original       \
   --dir %{buildroot}%{_datadir}/applications             \

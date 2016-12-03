@@ -6,7 +6,12 @@ ListItem {
 
     menu: myMenu
     property Item myList
-    property string fileType: fileIsDir ? "d" : "f"
+    property string fileType: {
+        if (fileIsDir) "d"
+        else if (_fm.getMime(filePath).indexOf("video") !== -1) "v"
+        else if (_fm.getMime(filePath).indexOf("audio") !== -1) "a"
+        else "f"
+    }
     //property string fileName: fileName
     showMenuOnPressAndHold: false
     signal mediaFileOpen(string url)
@@ -77,6 +82,8 @@ ListItem {
             function getSource() {
                 var sources = {
                     f : "image://theme/icon-m-document"
+                    , v : "image://theme/icon-m-file-video"
+                    , a : "image://theme/icon-m-file-audio"
                     , d : "image://theme/icon-m-folder"
                     , s : "image://theme/icon-m-link"
                 };

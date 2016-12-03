@@ -104,11 +104,11 @@ Page {
             }
             MenuItem {
                 text: "Show Android SDCard"
-                onClicked: fileModel.folder = _fm.getRoot() + "/data/sdcard";
+                onClicked: fileModel.folder = _fm.getRoot() + "sdcard";
             }
             MenuItem {
                 text: "Show SDCard"
-                onClicked: fileModel.folder = _fm.getRoot() + "/media/sdcard";
+                onClicked: fileModel.folder = _fm.getRoot() + "media/sdcard";
             }
         }
 
@@ -147,7 +147,15 @@ Page {
                     anchors.left: parent.left
                     anchors.leftMargin: Theme.paddingSmall
                     anchors.verticalCenter: parent.verticalCenter
-                    source: fileIsDir ? "image://theme/icon-m-folder" : "image://theme/icon-m-document"
+                    source: {
+                        if (fileIsDir) "image://theme/icon-m-folder"
+                        else if (_fm.getMime(filePath).indexOf("video") !== -1) "image://theme/icon-m-file-video"
+                        else if (_fm.getMime(filePath).indexOf("audio") !== -1) "image://theme/icon-m-file-audio"
+                        else "image://theme/icon-m-document"
+                    }
+//                    Component.onCompleted: {
+//                        console.debug("File " + fileName + " has mimetype: " + _fm.getMime(filePath))
+//                    }
                 }
 
                 Label {
@@ -156,7 +164,7 @@ Page {
                     anchors.leftMargin: Theme.paddingLarge
                     anchors.top: fileInfo.text != "" ? parent.top : undefined
                     anchors.verticalCenter: fileInfo.text == "" ? parent.verticalCenter : undefined
-                    text: fileName + (fileIsDir ? "/" : "")
+                    text: fileName //+ (fileIsDir ? "/" : "")
                     color: delegate.highlighted ? Theme.highlightColor : Theme.primaryColor
                     width: mSelect.visible ? parent.width - (fileIcon.width + Theme.paddingLarge + Theme.paddingSmall + mSelect.width) : parent.width - (fileIcon.width + Theme.paddingLarge + Theme.paddingSmall)
                     truncationMode: TruncationMode.Fade
