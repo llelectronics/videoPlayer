@@ -636,7 +636,7 @@ Page {
                                                        samplerate: metaData.sampleRate,
                                                        copyright: metaData.copyright,
                                                        date: metaData.date,
-                                                       size: metaData.size
+                                                       size: mainWindow.humanSize(_fm.getSize(streamUrl)) //metaData.size
                                                    });
                 }
 

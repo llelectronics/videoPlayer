@@ -34,6 +34,10 @@ class FM : public QObject
         {
             return QFileInfo(url).isFile();
         }
+        int getSize(const QString &url)
+        {
+            return QFileInfo(url).size();
+        }
         QString getMime(const QString &url)
         {
             QMimeDatabase db;
