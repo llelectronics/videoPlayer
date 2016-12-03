@@ -32,7 +32,7 @@ Page {
         id: fileModel
         folder: path ? path: _fm.getHome()
         showDirsFirst: true
-        showDotAndDotDot: true
+        showDotAndDotDot: false
         showOnlyReadable: true
         nameFilters: filter
     }
@@ -200,9 +200,8 @@ Page {
                     }
 
                     if (fileIsDir) {
-                        if (fileName === "..") fileModel.folder = fileModel.parentFolder
-                        else if (fileName === ".") return
-                        else fileModel.folder = filePath
+                        var anotherFM = pageStack.push(Qt.resolvedUrl("OpenDialog.qml"), {"path": filePath, "dataContainer": dataContainer});
+                        anotherFM.fileOpen.connect(fileOpen)
                     } else {
                         if (!selectMode) openFile(filePath)
                         else {
