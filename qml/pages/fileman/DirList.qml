@@ -33,6 +33,7 @@ SilicaListView {
     FolderListModel {
         id: entries
         folder: entriesList.root
+        showDirsFirst: true
     }
 
     model: entries
