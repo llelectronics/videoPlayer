@@ -171,11 +171,10 @@ Page {
                 }
                 Label {
                     id: fileInfo
-                    visible: !fileIsDir
                     anchors.left: fileIcon.right
                     anchors.leftMargin: Theme.paddingLarge
                     anchors.top: fileLabel.bottom
-                    text: humanSize(fileSize) + ", " + fileModified
+                    text: fileIsDir ? "directory" : humanSize(fileSize) + ", " + fileModified
                     color: Theme.secondaryColor
                     width: parent.width - fileIcon.width - (Theme.paddingLarge + Theme.paddingSmall + Theme.paddingLarge)
                     truncationMode: TruncationMode.Fade
