@@ -10,6 +10,11 @@ ListItem {
         if (fileIsDir) "d"
         else if (_fm.getMime(filePath).indexOf("video") !== -1) "v"
         else if (_fm.getMime(filePath).indexOf("audio") !== -1) "a"
+        else if (_fm.getMime(filePath).indexOf("image") !== -1) "i"
+        else if (_fm.getMime(filePath).indexOf("text") !== -1) "t"
+        else if (_fm.getMime(filePath).indexOf("pdf") !== -1) "p"
+        else if (_fm.getMime(filePath).indexOf("android") !== -1) "apk"
+        else if (_fm.getMime(filePath).indexOf("rpm") !== -1) "r"
         else "f"
     }
     //property string fileName: fileName
@@ -84,6 +89,11 @@ ListItem {
                     f : "image://theme/icon-m-document"
                     , v : "image://theme/icon-m-file-video"
                     , a : "image://theme/icon-m-file-audio"
+                    , i : "image://theme/icon-m-file-image"
+                    , t : "image://theme/icon-m-file-document"
+                    , p : "image://theme/icon-m-file-pdf"
+                    , apk : "image://theme/icon-m-file-apk"
+                    , r : "image://theme/icon-m-file-rpm"
                     , d : "image://theme/icon-m-folder"
                     , s : "image://theme/icon-m-link"
                 };
