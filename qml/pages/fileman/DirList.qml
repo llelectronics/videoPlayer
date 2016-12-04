@@ -67,7 +67,7 @@ SilicaListView {
     function goAndroidSd() {
         var url = Qt.resolvedUrl('DirView.qml');
         var pages = [];
-        var path = "/data/sdcard";
+        var path = "/sdcard";
 
         pages.push({page: url, properties: {root: path, dataContainer: dataContainer}});
 
