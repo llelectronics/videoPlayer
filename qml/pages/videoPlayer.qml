@@ -333,6 +333,10 @@ Page {
                 if (errorBox.visible) return true;
                 else return false;
             }
+            z:98
+            MouseArea {
+                anchors.fill: parent
+            }
         }
 
         Column {
@@ -386,7 +390,10 @@ Page {
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.bottom: parent.bottom
             anchors.bottomMargin: Theme.paddingLarge
-            z: videoPoster.z + 1
+            z: {
+                if ((errorBox.z + 1) > (videoPoster.z + 1)) errorBox.z + 1
+                else videoPoster.z + 1
+            }
         }
 
         Item {
