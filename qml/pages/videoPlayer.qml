@@ -201,6 +201,24 @@ Page {
         // PullDownMenu and PushUpMenu must be declared in SilicaFlickable, SilicaListView or SilicaGridView
         PullDownMenu {
             id: pulley
+//            MenuItem {
+//                id: ytdlMenuItem
+//                text: qsTr("Load with ytdl")
+//                visible: {
+//                    if ((/^http:\/\/ytapi.com/).test(mainWindow.firstPage.streamUrl)) return true
+//                    else if (mainWindow.firstPage.isYtUrl) return true
+//                    else return false
+//                }
+//                //onClicked: pageStack.push(Qt.resolvedUrl("DownloadManager.qml"), {"downloadUrl": streamUrl, "downloadName": streamTitle});
+//                // Alternatively use direct youtube url instead of ytapi for downloads (ytapi links not always download with download manager)
+//                onClicked: {
+//                    _ytdl.setUrl(originalUrl)
+//                    _ytdl.getStreamUrl()
+//                    _ytdl.getStreamTitle()
+//                    mainWindow.firstPage.isYtUrl = false
+//                    pageStack.pop()
+//                }
+//            }
             MenuItem {
                 id: ytMenuItem
                 text: qsTr("Download Youtube Video")
