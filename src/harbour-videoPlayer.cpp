@@ -52,8 +52,9 @@ int main(int argc, char *argv[])
     // To display the view, call "show()" (will show fullscreen on device).
 
     //Some more speed & memory improvements
-    setenv("QT_NO_FT_CACHE","1",1);
-    setenv("QT_NO_FAST_SCROLL","1",1);
+    setenv("QT_NO_FAST_MOVE", "0", 0);
+    setenv("QT_NO_FT_CACHE","0",0);
+    setenv("QT_NO_FAST_SCROLL","0",0);
     setenv("QT_NO_ANTIALIASING","1",1);
     setenv("QT_NO_FREE","1",1);
     // Taken from sailfish-browser
