@@ -37,200 +37,164 @@ import "helper/yt.js" as YT
 import "helper"
 
 
-//Dialog {
-//    id: searchYTDialog
-//    allowedOrientations: Orientation.All
-//    canAccept: searchTerm.text !== ""
-//    acceptDestination: searchResults
-//    property QtObject dataContainer
+Page {
+    id: searchResultsDialog
+    property string searchTerm
+    allowedOrientations: Orientation.All
+    backNavigation: true
+    property QtObject dataContainer
+    property string streamUrl
+    property bool ytDetect: true
+    property string websiteUrl: "http://m.youtube.com/"
+    property string searchUrl: "http://m.youtube.com/results?q="
+    property string uA: "Mozilla/5.0 (Linux; U; Android 2.2; en-us; Nexus One Build/FRF91) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1"
 
-//    DialogHeader {
-//        acceptText: "Search on Youtube"
-//    }
+    onStateChanged: {
+        if (status == PageStatus.Active) ytView.experimental.page.visible = true
+        else ytView.experimental.page.visible = false
+    }
 
-//    TextField {
-//        id: searchTerm
-//        placeholderText: "Type in search term here"
-//        anchors.centerIn: parent
-//        width: Screen.width - 20
-//        focus: true
-//    }
-//    Keys.onEnterPressed: accept();
-//    Keys.onReturnPressed: accept();
+    SilicaWebView {
+        id: ytView
+        anchors.centerIn: parent
+        // Width and height for scale=2.0
+        //                width: searchResultsDialog.orientation === Orientation.Portrait ? Screen.width / 2 : (Screen.height - 100) / 2
+        //                height: Screen.height / 2
+        anchors.fill: parent
+        overridePageStackNavigation: true
+        focus: true
 
-//    onAcceptPendingChanged: {
-//        if (acceptPending) {
-//            // Tell the destination page what the search term is
-//            acceptDestinationInstance.searchTerm = searchTerm.text
-//        }
-//    }
+        property variant itemSelectorIndex: -1
 
-//    Component {
-//        id: searchResults
+        experimental.itemSelector: PopOver {}
 
-        Page {
-            id: searchResultsDialog
-            property string searchTerm
-            allowedOrientations: Orientation.All
-            backNavigation: true
-            property QtObject dataContainer
-            property string streamUrl
-            property bool ytDetect: true
-            property string websiteUrl: "http://m.youtube.com/"
-            property string searchUrl: "http://m.youtube.com/results?q="
-            property string uA: "Mozilla/5.0 (Linux; U; Android 2.2; en-us; Nexus One Build/FRF91) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1"
-
-            onStateChanged: {
-                if (status == PageStatus.Active) ytView.experimental.page.visible = true
-                else ytView.experimental.page.visible = false
+        PullDownMenu {
+            MenuItem {
+                text: "Go Back"
+                onClicked: pageStack.pop();
             }
+        }
 
-            SilicaWebView {
-                id: ytView
-                anchors.centerIn: parent
-                // Width and height for scale=2.0
-//                width: searchResultsDialog.orientation === Orientation.Portrait ? Screen.width / 2 : (Screen.height - 100) / 2
-//                height: Screen.height / 2
-                anchors.fill: parent
-                overridePageStackNavigation: true
-                focus: true
+        Rectangle {
+            id: loadingRec
+            height: Theme.iconSizeExtraSmall / 2
+            color: Theme.highlightColor
+            anchors.top: parent.top
+            property int minimumValue: 0
+            property int maximumValue: 100
+            property int value: ytView.loadProgress
+            width: (value / (maximumValue - minimumValue)) * parent.width
+            visible: value == 100 ? false : true
+        }
 
-                property variant itemSelectorIndex: -1
+        header: Row {
+            width: parent.width
+            spacing: 1
+            anchors.top: parent.top
+            anchors.left: parent.left
+            anchors.right: parent.right
 
-                experimental.itemSelector: PopOver {}
+            SearchField {
+                id: searchField
+                property string acceptedInput: ""
+                width: parent.width
 
-                PullDownMenu {
-                    MenuItem {
-                        text: "Go Back"
-                        onClicked: pageStack.pop();
-                    }
+                placeholderText: "Search.."
+                //                        anchors.top: parent.top
+                //                        anchors.left: parent.left
+                //                        anchors.right: parent.right
+
+                EnterKey.enabled: text.trim().length > 0
+                EnterKey.text: "Go!"
+
+                Component.onCompleted: {
+                    acceptedInput = ""
+                    _editor.accepted.connect(searchEntered)
                 }
 
-                Rectangle {
-                    id: loadingRec
-                    height: Theme.iconSizeExtraSmall / 2
-                    color: Theme.highlightColor
-                    anchors.top: parent.top
-                    property int minimumValue: 0
-                    property int maximumValue: 100
-                    property int value: ytView.loadProgress
-                    width: (value / (maximumValue - minimumValue)) * parent.width
-                    visible: value == 100 ? false : true
-                }
-
-                header: Row {
-                    width: parent.width
-                    spacing: 1
-                    anchors.top: parent.top
-                    anchors.left: parent.left
-                    anchors.right: parent.right
-
-                    SearchField {
-                        id: searchField
-                        property string acceptedInput: ""
-                        width: parent.width
-
-                        placeholderText: "Search.."
-//                        anchors.top: parent.top
-//                        anchors.left: parent.left
-//                        anchors.right: parent.right
-
-                        EnterKey.enabled: text.trim().length > 0
-                        EnterKey.text: "Go!"
-
-                        Component.onCompleted: {
-                            acceptedInput = ""
-                            _editor.accepted.connect(searchEntered)
-                        }
-
-                        // is called when user presses the Return key
-                        function searchEntered() {
-                            searchField.acceptedInput = text
-                            ytView.url = searchUrl + encodeURI(acceptedInput)
-                            searchField.focus = false
-                        }
-                    }
-                }
-
-                //scale: 2.0  // there seems no way to set the default text size and the default one is too tiny so scale instead
-                //url: "http://ytapi.com/search/?vq=" + searchTerm  // now that we have youtube => ytapi openurl action we can use the official youtube site ;)
-                //url: "http://m.youtube.com/" // results?q=" + searchTerm
-                // iPhone user agent popups for app installation
-                //experimental.userAgent: "Mozilla/5.0 (iPhone; CPU iPhone OS 5_0 like Mac OS X) AppleWebKit/534.46 (KHTML, like Gecko) Version/5.1 Mobile/9A334 Safari/7534.48.3"
-                experimental.userAgent: uA
-                experimental.preferences.minimumFontSize: 11
-                experimental.userScripts: [Qt.resolvedUrl("helper/userscript.js")]
-
-                onNavigationRequested: {
-                    //console.debug("[SecondPage.qml] Request navigation to " + request.url)
-                    if (YT.checkYoutube(request.url.toString()) === true && ytDetect === true) {
-                        if (YT.getYtID(request.url.toString()) != "") {
-                            //console.debug("[SecondPage.qml] Youtube Link detected")
-                            request.action = WebView.IgnoreRequest;
-                            dataContainer.isYtUrl = true;
-                            //var yturl = YT.getYoutubeVid(request.url.toString());
-                            //YT.getYoutubeTitle(url.toString());
-                            if (dataContainer != null) {
-                                dataContainer.streamUrl = request.url;
-                                dataContainer.originalUrl = request.url
-                                dataContainer.loadPlayer();
-                            }
-                            ytView.reload(); // WTF why is this working with IgnoreRequest
-
-                        } else { request.action = WebView.AcceptRequest; }
-                    }
-                    else {
-                        request.action = WebView.AcceptRequest;
-                    }
-                }
-
-
-//                onUrlChanged: {
-//                    //console.debug("New url:" +url)
-//                    if (YT.checkYoutube(url.toString()) === true) {
-//                        dataContainer.isYtUrl = true;
-//                        var yturl = YT.getYoutubeVid(url.toString());
-//                        //YT.getYoutubeTitle(url.toString());
-//                        if (dataContainer != null) {
-//                            if (!dataContainer.youtubeDirect) dataContainer.streamUrl = yturl;
-//                            else dataContainer.originalUrl = url
-//                            ytView.goBack();
-//                            pageStack.push(dataContainer);
-//                        }
-//                    }
-//                }
-
-                VerticalScrollDecorator {}
-
-                Component.onCompleted: url = websiteUrl
-            }
-            Rectangle {
-                anchors.left: parent.left
-                anchors.leftMargin: -(width / 6)
-                anchors.bottom: parent.bottom
-                visible: ytView.canGoBack
-                width: parent.width / 8
-                height: parent.height / 16
-                radius: parent.width / 32
-                gradient: Gradient {
-                    GradientStop { position: 1.0; color: "black" }
-                    GradientStop { position: 0.0; color: "transparent" } //Theme.highlightColor} // Black seems to look and work better
-                }
-                IconButton {
-                    id: backBtn
-                    icon.source: "image://theme/icon-m-back"
-                    enabled: ytView.canGoBack
-                    visible: ytView.canGoBack
-                    anchors.centerIn: parent
-                    onClicked: {
-                        ytView.goBack();
-                    }
+                // is called when user presses the Return key
+                function searchEntered() {
+                    searchField.acceptedInput = text
+                    ytView.url = searchUrl + encodeURI(acceptedInput)
+                    searchField.focus = false
                 }
             }
+        }
+        experimental.userAgent: uA
+        experimental.preferences.minimumFontSize: 11
+        experimental.userScripts: [Qt.resolvedUrl("helper/userscript.js")]
+
+        experimental.onMessageReceived: {
+            //console.log('onMessageReceived: ' + message.data );
+            var data = null
+            try {
+                data = JSON.parse(message.data)
+            } catch (error) {
+                console.log('onMessageReceived: ' + message.data );
+                return
+            }
+        }
+
+
+
+        onNavigationRequested: {
+            //console.debug("[SecondPage.qml] Request navigation to " + request.url)
+            if (YT.checkYoutube(request.url.toString()) === true && ytDetect === true) {
+                if (YT.getYtID(request.url.toString()) != "") {
+                    //console.debug("[SecondPage.qml] Youtube Link detected")
+                    request.action = WebView.IgnoreRequest;
+                    dataContainer.isYtUrl = true;
+                    //var yturl = YT.getYoutubeVid(request.url.toString());
+                    //YT.getYoutubeTitle(url.toString());
+                    if (dataContainer != null) {
+                        dataContainer.streamUrl = request.url;
+                        dataContainer.originalUrl = request.url
+                        dataContainer.loadPlayer();
+                    }
+                    ytView.reload(); // WTF why is this working with IgnoreRequest
+
+                } else { request.action = WebView.AcceptRequest; }
+            }
+            else {
+                request.action = WebView.AcceptRequest;
+            }
+        }
+
+        VerticalScrollDecorator {}
+
+        Component.onCompleted: url = websiteUrl
+    }
+
+    DockedPanel {
+           id: navbar
+
+           width: parent.width
+           height: Theme.itemSizeSmall + Theme.paddingSmall
+
+           dock: Dock.Bottom
+           open: ytView.canGoBack
+
+           Rectangle {
+               anchors.fill: parent
+               color: Theme.rgba(Theme.highlightBackgroundColor, Theme.highlightBackgroundOpacity)
+               opacity: 0.75
+           }
+
+           Row {
+               anchors.centerIn: parent
+               IconButton {
+                   id: backBtn
+                   icon.source: "image://theme/icon-m-back"
+                   enabled: ytView.canGoBack
+                   visible: ytView.canGoBack
+                   anchors.centerIn: parent
+                   onClicked: {
+                       ytView.goBack();
+                   }
+               }
+           }
        }
-
-   // }
-//}
+}
 
 
 
