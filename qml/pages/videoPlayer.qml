@@ -40,6 +40,8 @@ Page {
     property string url360p: dataContainer.url360p
     property string url240p: dataContainer.url240p
     property string ytQual: dataContainer.ytQual
+    property string ytQualWanted: dataContainer.ytQualWanted
+    property string ytdlQual: dataContainer.ytdlQual
     property bool liveView: true
     property Page dPage
     property bool autoplay: dataContainer.autoplay
@@ -213,7 +215,7 @@ Page {
                 // Alternatively use direct youtube url instead of ytapi for downloads (ytapi links not always download with download manager)
                 onClicked: {
                     _ytdl.setUrl(originalUrl)
-                    _ytdl.setParameter("-f best") // Try to get best format usually non dash format
+                    _ytdl.setParameter("-f " + ytdlQual)
                     _ytdl.getStreamUrl()
                     _ytdl.getStreamTitle()
                     mainWindow.firstPage.isYtUrl = false

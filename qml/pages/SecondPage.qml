@@ -237,7 +237,7 @@ Page {
                 onClicked: {
                     contextMenu.hide()
                     _ytdl.setUrl(contextMenu.clickedUrl)
-                    _ytdl.setParameter("-f best") // Try to get best format usually non dash format
+                    _ytdl.setParameter("-f " + mainWindow.firstPage.ytdlQual)
                     _ytdl.getStreamUrl()
                     _ytdl.getStreamTitle()
                     mainWindow.firstPage.isYtUrl = false

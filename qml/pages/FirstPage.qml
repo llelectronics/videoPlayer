@@ -67,6 +67,14 @@ Page {
     property string url360p
     property string url240p
     property string ytQual
+    property string ytQualWanted: "720p"
+    property string ytdlQual: {
+        if (ytQualWanted == "720p") return "best"
+        else if (ytQualWanted == "480p") return "135"
+        else if (ytQualWanted == "360p") return "18"
+        else if (ytQualWanted == "240p") return "36"
+    }
+
     ////////////////////////////////////////////////////
 
     // Aliase

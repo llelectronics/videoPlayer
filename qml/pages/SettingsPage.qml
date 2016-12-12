@@ -34,6 +34,7 @@ Dialog {
         openDialogCombo.currentIndex = 0;
         liveViewSwitch.checked = true;
         solidSubtitlesSwitch.checked = false;
+        ytDefaultQualCombo.currentIndex = 0;
     }
 
     function clearHistory() {
@@ -50,6 +51,7 @@ Dialog {
         DB.addSetting("openDialogType", openDialogCombo.dType.toString());
         DB.addSetting("liveView", liveViewSwitch.checked.toString());
         DB.addSetting("subtitleSolid", solidSubtitlesSwitch.checked.toString());
+        DB.addSetting("ytDefaultQual", ytDefaultQualCombo.qual.toString());
         DB.getSettings();
     }
 
@@ -382,6 +384,34 @@ Dialog {
                     if (currentIndex == 0) dType = "adv"
                     else if (currentIndex == 1) dType = "simple"
                     else if (currentIndex == 2) dType = "gallery"
+                }
+            }
+
+            ComboBox {
+                id: ytDefaultQualCombo
+                anchors.horizontalCenter: parent.horizontalCenter
+                label: qsTr("Default Youtube Quality")
+                visible: loadSubtitlesSwitch.checked
+                property string qual: mainWindow.firstPage.ytQualWanted
+                currentIndex: {
+                    // Current Option
+                    if (mainWindow.firstPage.ytQualWanted === "720p") return 0;
+                    else if (mainWindow.firstPage.ytQualWanted  === "480p") return 1;
+                    else if (mainWindow.firstPage.ytQualWanted === "360p") return 2;
+                    else if (mainWindow.firstPage.ytQualWanted === "240p") return 3;
+                }
+
+                menu: ContextMenu {
+                    MenuItem { text: "720p" }
+                    MenuItem { text: "480p" }
+                    MenuItem { text: "360p" }
+                    MenuItem { text: "240p" }
+                }
+                onCurrentIndexChanged: {
+                    if (currentIndex == 0) qual = "720p"
+                    else if (currentIndex == 1) qual = "480p"
+                    else if (currentIndex == 2) qual = "360p"
+                    else if (currentIndex == 3) qual = "240p"
                 }
             }
 

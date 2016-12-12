@@ -167,28 +167,29 @@ function getYoutubeStream(youtube_id) {
                 if (found) {
                     //console.debug("[yt.js]: Video in format " + resolutionFormat + " found with direct URL: " + url);
                     if (firstPage.youtubeDirect) {
-                        if (firstPage.url720p != "none" && firstPage.url720p != "") {
+                        if (firstPage.url720p != "none" && firstPage.url720p != "" && firstPage.ytQualWanted == "720p") {
                             console.debug("[yt.js]: Video in format MP4 720p found with direct URL: " + firstPage.url720p)
                             firstPage.streamUrl = firstPage.url720p
                             firstPage.ytQual = "720p"
                         }
-                        else if (firstPage.url480p != "none" && firstPage.url480p != "") {
+                        if (firstPage.url480p != "none" && firstPage.url480p != "" && (firstPage.ytQual == "" || firstPage.ytQualWanted == "480p")) {
                             console.debug("[yt.js]: Video in format MP4 480p found with direct URL: " + firstPage.url480p)
-                            if (firstPage.url720p == "") firstPage.streamUrl = firstPage.url480p
+                            /*if (firstPage.url720p == "")*/ firstPage.streamUrl = firstPage.url480p
                             firstPage.ytQual = "480p"
                         }
-                        else if (firstPage.url360p != "none" && firstPage.url360p != "") {
+                        if (firstPage.url360p != "none" && firstPage.url360p != "" && (firstPage.ytQual == "" || firstPage.ytQualWanted == "360p")) {
                             console.debug("[yt.js]: Video in format MP4 360p found with direct URL: " + firstPage.url360p)
-                            if (firstPage.url720p == "" && firstPage.url480p == "") firstPage.streamUrl = firstPage.url360p
+                            /*if (firstPage.url720p == "" && firstPage.url480p == "")*/ firstPage.streamUrl = firstPage.url360p
                             firstPage.ytQual = "360p"
                         }
-                        else if (firstPage.url240p != "none" && firstPage.url240p != "") {
+                        if (firstPage.url240p != "none" && firstPage.url240p != "" && (firstPage.ytQual == "" || firstPage.ytQualWanted == "240p")) {
                             console.debug("[yt.js]: Video in format MP4 240p found with direct URL: " + firstPage.url240p)
-                            if (firstPage.url720p == "" && firstPage.url480p == "" && firstPage.url360p == "") firstPage.streamUrl = firstPage.url240p
+                            /*if (firstPage.url720p == "" && firstPage.url480p == "" && firstPage.url360p == "")*/ firstPage.streamUrl = firstPage.url240p
                             firstPage.ytQual = "240p"
                         }
                         found = false;
                     }
+
                     //if (firstPage.youtubeDirect) firstPage.streamUrl = url
                     return url;
 
