@@ -213,7 +213,7 @@ Page {
                 // Alternatively use direct youtube url instead of ytapi for downloads (ytapi links not always download with download manager)
                 onClicked: {
                     _ytdl.setUrl(originalUrl)
-                    _ytdl.setParameter("-f 22") // Try to get Format 22 (720p mp4) as otherwise it will return DASH (split audio+video)
+                    _ytdl.setParameter("-f best") // Try to get best format usually non dash format
                     _ytdl.getStreamUrl()
                     _ytdl.getStreamTitle()
                     mainWindow.firstPage.isYtUrl = false
