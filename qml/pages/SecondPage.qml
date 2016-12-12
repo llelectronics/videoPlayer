@@ -123,6 +123,7 @@ Page {
         experimental.userAgent: uA
         experimental.preferences.minimumFontSize: 11
         experimental.userScripts: [Qt.resolvedUrl("helper/userscript.js")]
+        experimental.preferences.navigatorQtObjectEnabled: true
 
         experimental.onMessageReceived: {
             //console.log('onMessageReceived: ' + message.data );
@@ -132,6 +133,10 @@ Page {
             } catch (error) {
                 console.log('onMessageReceived: ' + message.data );
                 return
+            }
+            if (data.href != "" && data.href != "CANT FIND LINK") {
+                contextMenu.clickedUrl = data.href
+                contextMenu.show()
             }
         }
 
@@ -166,34 +171,100 @@ Page {
     }
 
     DockedPanel {
-           id: navbar
+        id: navbar
 
-           width: parent.width
-           height: Theme.itemSizeSmall + Theme.paddingSmall
+        width: parent.width
+        height: Theme.itemSizeSmall + Theme.paddingSmall
 
-           dock: Dock.Bottom
-           open: ytView.canGoBack
+        dock: Dock.Bottom
+        open: ytView.canGoBack && (!ytView.atYEnd)
 
-           Rectangle {
-               anchors.fill: parent
-               color: Theme.rgba(Theme.highlightBackgroundColor, Theme.highlightBackgroundOpacity)
-               opacity: 0.75
-           }
+        Rectangle {
+            anchors.fill: parent
+            color: Theme.rgba(Theme.highlightBackgroundColor, Theme.highlightBackgroundOpacity)
+            //opacity: 0.75
+        }
 
-           Row {
-               anchors.centerIn: parent
-               IconButton {
-                   id: backBtn
-                   icon.source: "image://theme/icon-m-back"
-                   enabled: ytView.canGoBack
-                   visible: ytView.canGoBack
-                   anchors.centerIn: parent
-                   onClicked: {
-                       ytView.goBack();
-                   }
-               }
-           }
-       }
+        Row {
+            anchors.centerIn: parent
+            IconButton {
+                id: backBtn
+                icon.source: "image://theme/icon-m-back"
+                enabled: ytView.canGoBack
+                visible: ytView.canGoBack
+                anchors.centerIn: parent
+                onClicked: {
+                    ytView.goBack();
+                }
+            }
+        }
+    }
+
+    // Modal works not so great so use or own here
+    Rectangle {
+        color: "black"
+        opacity: 0.60
+        anchors.fill: parent
+        visible: contextMenu.open
+        MouseArea {
+            anchors.fill: parent
+            onClicked: contextMenu.hide();
+        }
+    }
+
+    DockedPanel {
+        id: contextMenu
+
+        width: parent.width
+        height: contextButtons.height + Theme.paddingLarge * 2
+
+        dock: Dock.Bottom
+        //modal: true
+
+        Rectangle {
+            anchors.fill: parent
+            color: Theme.rgba(Theme.highlightBackgroundColor, Theme.highlightBackgroundOpacity)
+        }
+
+        property string clickedUrl
+
+        Column {
+            id: contextButtons
+            anchors.centerIn: parent
+            spacing: Theme.paddingMedium
+            Button {
+                id: widestBtn
+                text: qsTr("Load with ytdl")
+                onClicked: {
+                    contextMenu.hide()
+                    _ytdl.setUrl(contextMenu.clickedUrl)
+                    _ytdl.setParameter("-f best") // Try to get best format usually non dash format
+                    _ytdl.getStreamUrl()
+                    _ytdl.getStreamTitle()
+                    mainWindow.firstPage.isYtUrl = false
+                    mainWindow.firstPage.busy.visible = true;
+                    mainWindow.firstPage.busy.running = true;
+                }
+                visible: contextMenu.clickedUrl != ""
+            }
+            Button {
+                text: qsTr("Load")
+                width: widestBtn.width
+                onClicked: {
+                    contextMenu.hide()
+                    dataContainer.isYtUrl = true;
+                    //var yturl = YT.getYoutubeVid(request.url.toString());
+                    //YT.getYoutubeTitle(url.toString());
+                    if (dataContainer != null) {
+                        dataContainer.streamUrl = contextMenu.clickedUrl
+                        dataContainer.originalUrl = contextMenu.clickedUrl
+                        dataContainer.loadPlayer();
+                    }
+                }
+                visible: contextMenu.clickedUrl != ""
+            }
+        }
+    }
 }
 
 
