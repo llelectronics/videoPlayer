@@ -529,7 +529,6 @@ Page {
                             if ((mouse.x >= middleX - Theme.iconSizeMedium && mouse.x <= middleX + Theme.iconSizeMedium) && (mouse.y >= middleY - Theme.iconSizeMedium && mouse.y <= middleY + Theme.iconSizeMedium)) {
                                 pause();
                             }
-                            //TODO: Add rew and ffwd stuff
                             else {
                                 toggleControls();
                             }

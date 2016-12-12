@@ -200,7 +200,7 @@ MouseArea {
                     //console.debug("VideoItem.source length = " + videoItem.source.toString().length)
                     if (videoItem.source.toString().length !== 0) {
                         //console.debug("Yeah we have a video source")
-                        rew(10)
+                        rew(5)
                     }
                 }
                 onPressAndHold: {
