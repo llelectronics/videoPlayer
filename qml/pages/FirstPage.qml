@@ -75,6 +75,7 @@ Page {
     property alias historyModel: historyModel
 
     property variant busy: mainWindow.busy
+    property variant errTxt: mainWindow.errTxt
 
     Component.onCompleted: {
         // Initialize the database
@@ -408,41 +409,6 @@ Page {
             busy.visible = false
             errTxt.visible = true
             errTxt.text = qsTr("Youtube-Dl updated.")
-        }
-    }
-
-    Rectangle {
-        color: "black"
-        opacity: 0.60
-        anchors.fill: parent
-        visible: {
-            if (busy.running) return true;
-            else if (errTxt.visible) return true;
-            else return false;
-        }
-    }
-
-    TextArea {
-        id: errTxt
-        anchors.top: parent.top
-        height: parent.height - (dismissBtn.height + Theme.paddingLarge)
-        width: parent.width
-        font.pointSize: Theme.fontSizeSmall
-        color: Theme.primaryColor
-        visible: false
-        background: null
-        wrapMode: TextEdit.WordWrap
-        readOnly: true
-    }
-    Button {
-        id: dismissBtn
-        anchors.bottom: parent.bottom
-        anchors.bottomMargin: Theme.paddingLarge
-        anchors.horizontalCenter: parent.horizontalCenter
-        visible: errTxt.visible
-        text: qsTr("Dismiss")
-        onClicked: {
-            if (errTxt.visible) errTxt.visible = false;
         }
     }
 

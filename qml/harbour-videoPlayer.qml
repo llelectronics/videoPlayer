@@ -47,6 +47,7 @@ ApplicationWindow
     property alias busy: busy
     property alias infoBanner: infoBanner
     property alias downloadModel: downloadModel
+    property alias errTxt: errTxt
 
     property string version: "1.7"
     property string appname: "LLs Video Player"
@@ -282,12 +283,47 @@ ApplicationWindow
         z:1
     }
 
+    Rectangle {
+        color: "black"
+        opacity: 0.60
+        anchors.fill: parent
+        visible: {
+            if (busy.running) return true;
+            else if (errTxt.visible) return true;
+            else return false;
+        }
+    }
+
     BusyIndicator {
         id: busy
         anchors.centerIn: parent
         size: BusyIndicatorSize.Large
         running: false
         visible: false
+    }
+
+    TextArea {
+        id: errTxt
+        anchors.top: parent.top
+        height: parent.height - (dismissBtn.height + Theme.paddingLarge)
+        width: parent.width
+        font.pointSize: Theme.fontSizeSmall
+        color: Theme.primaryColor
+        visible: false
+        background: null
+        wrapMode: TextEdit.WordWrap
+        readOnly: true
+    }
+    Button {
+        id: dismissBtn
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: Theme.paddingLarge
+        anchors.horizontalCenter: parent.horizontalCenter
+        visible: errTxt.visible
+        text: qsTr("Dismiss")
+        onClicked: {
+            if (errTxt.visible) errTxt.visible = false;
+        }
     }
 }
 

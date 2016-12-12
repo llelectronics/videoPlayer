@@ -17,6 +17,7 @@ public:
     QString streamUrl;
     QString streamTitle;
     QString errorMsg;
+    QString parameter;
     QProcess streamProcess;
     QProcess titleProcess;
     QProcess updateBinary;
@@ -30,6 +31,10 @@ public slots:
     void setUrl(QString url)
     {
         reqUrl = url;
+    }
+    void setParameter(QString param)
+    {
+        parameter = param;
     }
     QString getReqUrl()
     {
@@ -55,7 +60,7 @@ public slots:
     {
         //qDebug() << "Starting process with url:" << reqUrl;
         checkAndInstall();
-        streamProcess.start(data_dir + "/youtube-dl -g " + reqUrl);
+        streamProcess.start(data_dir + "/youtube-dl " + parameter + " -g " + reqUrl);
         connect(&streamProcess, SIGNAL(finished(int)), this, SLOT(getStreamUrlOutput(int)));
     }
     void getStreamTitle()
