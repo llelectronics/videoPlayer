@@ -833,7 +833,7 @@ On Youtube Videos please make sure to be logged in. Some videos might be geobloc
             mediaPlayer.seek(mediaPlayer.position - 5000)
         }
         if (event.key == Qt.Key_Right && mediaPlayer.seekable) {
-            mediaPlayer.seek(mediaPlayer.position + 5000)
+            mediaPlayer.seek(mediaPlayer.position + 10000)
         }
     }
 
