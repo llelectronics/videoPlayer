@@ -34,20 +34,20 @@ Kirigami.ScrollablePage {
         anchors.fill: historyPage
         model: mainWindow.historyModel
         delegate: Kirigami.BasicListItem {
-                width: parent.width - (parent.width / 32)
-                height: implicitHeight
-                anchors.horizontalCenter: parent.horizontalCenter
+            width: parent.width - (parent.width / 32)
+            height: implicitHeight
+            anchors.horizontalCenter: parent.horizontalCenter
             onClicked: {
                 console.debug("Clicked " + htitle + " with url: " + hurl)
                 mainWindow.loadPlayer(htitle,hurl)
             }
             Kirigami.Label {
-                        anchors.left: parent.left
-                        anchors.right: parent.right
-                        height: implicitHeight
+                anchors.left: parent.left
+                anchors.right: parent.right
+                height: implicitHeight
 
-                        elide: Text.ElideRight
-                        text: htitle
+                elide: Text.ElideRight
+                text: htitle
             }
         }
     }
