@@ -1,7 +1,8 @@
+#!/usr/bin/env xdg-open
 [Desktop Entry]
 Name=vPlayer
 GenericName=Video Player
-Comment=An simple video player application
+Comment=A simple video player application
 Comment[de]=Eine einfache Videoplayer-Anwendung
 Exec=vplayer %U
 Terminal=false

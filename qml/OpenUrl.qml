@@ -27,32 +27,29 @@ import QtQuick.Window 2.1
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.plasma.core 2.0
 import org.kde.plasma.extras 2.0
+import org.kde.kirigami 1.0 as Kirigami
 import Qt.labs.folderlistmodel 2.1
 
 
-PlasmaComponents.Page {
+Kirigami.Page {
     id: page
+    title: "Open URL"
 
     function openUrl(path) {
-	mainWindow.loadPlayer("",path);
+        mainWindow.loadPlayer("",path);
     }
-
-    Heading {
-      	id: header
-       	text: qsTr("Open URL")
-       	font.bold: true
-       	level: 2
-    } 
 
     PlasmaComponents.TextField {
-	id: urlField
-	clearButtonShown: true
+        id: urlField
+        clearButtonShown: true
+        placeholderText: "Enter a streaming url starting with 'http://' or similar"
         width: parent.width / 1.15
         height: units.gridUnit * 2
-	anchors.horizontalCenter: parent.horizontalCenter
-	anchors.top: header.bottom
-	anchors.topMargin: units.largeSpacing
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.top: header.bottom
+        anchors.topMargin: units.largeSpacing
     }
+    
     PlasmaComponents.ListItem {
             height: units.gridUnit * 2
             width: urlField.width
@@ -60,28 +57,29 @@ PlasmaComponents.Page {
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: urlField.bottom
             enabled: true
-	    IconItem {
-		id: openIcon
-		width: units.gridUnit * 2
-		height: width
-		source: "dialog-ok"
-		anchors {
-		    verticalCenter: parent.verticalCenter
-		    left: parent.left
-		    margins: units.gridUnit
-		    rightMargin: 0
-		}
-	    }
-	    Heading {
+            
+            IconItem {
+                id: openIcon
+                width: units.gridUnit * 2
+                height: width
+                source: "dialog-ok"
+                anchors {
+                    verticalCenter: parent.verticalCenter
+                    left: parent.left
+                    margins: units.gridUnit
+                    rightMargin: 0
+                }
+            }
+            Heading {
                 id: openLbl
                 text: qsTr("Load Url")
                 elide: Text.ElideRight
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.right: parent.right
                 level: 4
-	    }
+            }
             onClicked: {
-		openUrl(urlField.text)
-	    }
+                openUrl(urlField.text)
+        }
     }
 }

@@ -26,17 +26,19 @@ import QtMultimedia 5.0
 
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.plasma.core 2.0
+import org.kde.kirigami 1.0 as Kirigami
 
 import "helper/yt.js" as YT
 
 
-PlasmaComponents.Page {
+Kirigami.Page {
+    title: "Youtube"
     id: searchResultsDialog
     property string searchTerm
     property bool ytDetect: true
     property string websiteUrl: "http://m.youtube.com/"
     property string searchUrl: "http://m.youtube.com/results?q="
-    property string uA: "Mozilla/5.0 (Linux; U; Android 2.2; en-us; Nexus One Build/FRF91) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1"
+    property string uA: "Mozilla/5.0 (Linux; U; Android 2.3; en-us; Nexus One Build/FRF91) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1"
 
 
     WebView {
@@ -46,10 +48,9 @@ PlasmaComponents.Page {
         //                width: searchResultsDialog.orientation === Orientation.Portrait ? Screen.width / 2 : (Screen.height - 100) / 2
         //                height: Screen.height / 2
         focus: true
-	anchors.fill: parent
+        anchors.fill: parent
 
         experimental.userAgent: uA
-        experimental.preferences.minimumFontSize: 11
         experimental.userScripts: [Qt.resolvedUrl("helper/userscript.js")]
 
         onNavigationRequested: {
@@ -74,29 +75,29 @@ PlasmaComponents.Page {
 
         Component.onCompleted: url = websiteUrl
 
-        Rectangle {
-            anchors.left: parent.left
-            anchors.bottom: parent.bottom
-            visible: ytView.canGoBack
-            width: parent.width / 8
-            height: parent.height / 16
-            gradient: Gradient {
-                GradientStop { position: 1.0; color: "black" }
-                GradientStop { position: 0.0; color: "transparent" } //Theme.highlightColor} // Black seems to look and work better
-            }
-            IconItem {
-                id: backBtn
-                source: "arrow-left"
-                enabled: ytView.canGoBack
-                visible: ytView.canGoBack
-                anchors.centerIn: parent
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: {
-                        ytView.goBack();
-                    }
-                }
-            }
-        }
+//         Rectangle {
+//             anchors.left: parent.left
+//             anchors.bottom: parent.bottom
+//             visible: ytView.canGoBack
+//             width: parent.width / 8
+//             height: parent.height / 16
+//             gradient: Gradient {
+//                 GradientStop { position: 1.0; color: "black" }
+//                 GradientStop { position: 0.0; color: "transparent" } //Theme.highlightColor} // Black seems to look and work better
+//             }
+//             IconItem {
+//                 id: backBtn
+//                 source: "arrow-left"
+//                 enabled: ytView.canGoBack
+//                 visible: ytView.canGoBack
+//                 anchors.centerIn: parent
+//                 MouseArea {
+//                     anchors.fill: parent
+//                     onClicked: {
+//                         ytView.goBack();
+//                     }
+//                 }
+//             }
+//         }
     }
 }

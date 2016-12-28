@@ -24,19 +24,19 @@ import QtQuick.Layouts 1.1
 import QtQuick.Controls 1.0
 import QtQuick.Window 2.1
 
-import org.kde.plasma.components 2.0 as PlasmaComponents
-import org.kde.plasma.extras 2.0
+import org.kde.kirigami 1.0 as Kirigami
+
 import "helper/db.js" as DB
 
-ApplicationWindow {
+Kirigami.ApplicationWindow {
     id: mainWindow
     width: 540
     height: 960
     visible: true
+    
     property string appIcon: "/usr/share/icons/hicolor/64x64/apps/vplayer.png" //TODO: use xdg somehow
     property string appName: "LLs vPlayer"
     property string version: "0.2"
-    property alias mainToolbar: mainToolbar
     property alias historyModel: historyModel
 
     // Settings /////////////////////////////////////////
@@ -65,44 +65,83 @@ ApplicationWindow {
   
     //property string homePath // Use from C++ QStandardsPath
     //property string videoPath
-
-    PlasmaComponents.PageStack {
-        id: mainStack
-        anchors.fill: parent
-        initialPage: Component {
-        MainPage {
-            id: mainPage
-            Component.onCompleted: mainWindow.mainPage = mainPage
+    
+    globalDrawer: Kirigami.GlobalDrawer {
+        title: "Video Player"
+        titleIcon: "vplayer"
+        actions: [
+            Kirigami.Action {
+                text: "History"
+                iconName: "view-list-icons"
+                onTriggered: applicationWindow().pageStack.replace(historyPageComponent)
+            },
+            Kirigami.Action {
+                text: "Youtube Search"
+                iconName: "smtube"
+                onTriggered: applicationWindow().pageStack.replace(youtubeSearchComponent)
+            },
+            Kirigami.Action {
+                text: "Open File"
+                iconName: "document-open"
+                onTriggered: applicationWindow().pageStack.replace(openDialogComponent)
+            },
+            Kirigami.Action {
+                text: "Open Url"
+                iconName: "internet-web-browser"
+                onTriggered: applicationWindow().pageStack.replace(openUrlComponent)
+            },
+            Kirigami.Action {
+                text: "About Video Player"
+                iconName: "help-about"
+                onTriggered: applicationWindow().pageStack.replace(aboutPageComponent)
             }
-        }
+            ]
     }
     
-    statusBar: ToolBar { // for mobile we use toolbar in status bar as it is closer to fingers of user
-        //visible: mainStack.depth > 0
-        visible: mainStack.currentPage != mainPage
-        Row {
-            id: mainToolbar
-            height: parent.height
-            width: parent.width
-            //
-            // Navigation
-            //
-            PlasmaComponents.ToolButton {
-                iconName: "draw-arrow-back"
-                //text: "Back" // We don't that do we ?
-                onClicked: mainStack.pop();
-            }
-        }
+    pageStack.initialPage: openDialogComponent
+
+    // drawer components
+    Component {
+        id: historyPageComponent
+        HistoryPage {}
     }
+    
+    Component {
+        id: youtubeSearchComponent
+        YoutubeSearch {}
+    }
+    
+    Component {
+        id: openDialogComponent
+        OpenDialog {}
+    }
+    
+    Component {
+        id: openUrlComponent
+        OpenUrl {}
+    }
+    
+    Component {
+        id: aboutPageComponent
+        AboutPage {}
+    }
+    
+    // components not needed for the drawer
+    
+    Component {
+        id: playerPageComponent
+        PlayerPage {}
+    }
+    
 
     function loadPlayer(title,url) {
         streamTitle = title
 	streamUrl = url
-        mainStack.push(Qt.resolvedUrl("playerPage.qml"));
+        applicationWindow().pageStack.push(playerPageComponent);
     }
   
     function showPlayer() {
-        mainStack.push(Qt.resolvedUrl("playerPage.qml"));
+        applicationWindow().pageStack.push(playerPageComponent);
     }
     
     function addHistory(url,title) {

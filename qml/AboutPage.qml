@@ -21,13 +21,14 @@
 
 import QtQuick 2.1
 import QtQuick.Layouts 1.1
-import QtQuick.Controls 1.0
+import QtQuick.Controls 1.4
 import QtQuick.Window 2.1
 
-import org.kde.plasma.components 2.0 as PlasmaComponents
+import org.kde.kirigami 1.0 as Kirigami
 
-PlasmaComponents.Page {
+Kirigami.ScrollablePage {
     id: aboutPage
+    title: "About"
     
     Flickable {
         id: flick
@@ -50,13 +51,13 @@ PlasmaComponents.Page {
                     horizontalCenter: parent.horizontalCenter
                 }
             }
-            PlasmaComponents.Label {
+            Kirigami.Label {
                 font.bold: true
                 text: mainWindow.appName+" v"+mainWindow.version
                 anchors.horizontalCenter: parent.horizontalCenter
                 
             }
-            PlasmaComponents.Label {
+            Kirigami.Label {
                 text: "License: LGPLv2"
                 anchors.horizontalCenter: parent.horizontalCenter
             }
@@ -72,10 +73,10 @@ PlasmaComponents.Page {
                 width: parent.width-64
             }
             
-            PlasmaComponents.Label {
-                width: 360
+            Kirigami.Label {
+                width: aboutPage.width
                 font.bold: true
-                text: "Created by llelectronics"
+                text: "Copyright (c) 2014-2015 Leszek Lesner &lt;leszek@zevenos.com&gt;<p>Copyright (c) 2016 JBBGameich &lt;jbb.mail@gmx.de&gt;"
                 anchors.horizontalCenter: parent.horizontalCenter
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment: Text.AlignHCenter
@@ -92,16 +93,16 @@ PlasmaComponents.Page {
                 width: parent.width-64
             }
             
-            PlasmaComponents.Button {
+            Button {
                 id: homepage
                 anchors.horizontalCenter: parent.horizontalCenter
-                text: "<a href=\"https://github.com/llelectronics/\">Sourcecode on Github</a>"
+                text: "Sourcecode on Github"
                 onClicked: {
                     Qt.openUrlExternally("https://github.com/llelectronics/videoPlayer/tree/plasma");
                 }
             }
             
-            PlasmaComponents.Label {
+            Kirigami.Label {
                 width: parent.width-70
                 text: qsTr("A simple videoplayer based on gstreamer.")
                 anchors.horizontalCenter: parent.horizontalCenter

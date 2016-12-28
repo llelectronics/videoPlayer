@@ -21,20 +21,44 @@
 
 import QtQuick 2.1
 import QtQuick.Layouts 1.1
-import QtQuick.Controls 1.0
+import QtQuick.Controls 1.2
 import QtQuick.Window 2.1
 
 import org.kde.plasma.components 2.0 as PlasmaComponents
-import org.kde.plasma.core 2.0
-import org.kde.plasma.extras 2.0
+import org.kde.kirigami 1.0 as Kirigami
 import Qt.labs.folderlistmodel 2.1
 
 
-PlasmaComponents.Page {
+Kirigami.Page {
     id: page
-
+    title: "Open File"
+    
     function openFile(path) {
-	mainWindow.loadPlayer("",path);
+        mainWindow.loadPlayer("",path);
+    }
+    
+    actions {
+        main: Action {
+            iconName: "user-home"
+            text: "Show Home"
+            onTriggered: {
+                fileModel.folder = homePath
+            }
+        }
+        left: Action {
+            iconName: "folder-videos"
+            text: "Show Video Folder"
+            onTriggered: { 
+                fileModel.folder = videoPath                
+            }
+        }
+        right: Action {
+            iconName: "folder-red"
+            text: "Show Filesystem Root"
+            onTriggered: {
+                fileModel.folder = "/";
+            }
+        }
     }
 
     FolderListModel {
@@ -50,47 +74,7 @@ PlasmaComponents.Page {
         model: fileModel
         anchors.fill: parent
 
-        header: Heading {
-        	id: header
-        	text: qsTr("Open File")
-        	font.bold: true
-        	level: 2
-        	//anchors.top: parent.top
-        	//anchors.left: parent.left
-        	//anchors.margins: parent.width / 32
-        } 
-
-        PlasmaComponents.ToolButton {
-		id: videoBtn
-        	parent: mainWindow.mainToolbar
-        	iconName: "folder-videos"
-        	//text: "Show Video Folder" // We don't that do we ?
-        	tooltip: "Show Video Folder" 
-                onClicked: fileModel.folder = videoPath
-                visible: page.status == PlasmaComponents.PageStatus.Active
-	}
-
-        PlasmaComponents.ToolButton {
-		id: homeBtn
-        	parent: mainWindow.mainToolbar
-        	iconName: "user-home"
-        	//text: "Show Home" // We don't that do we ?
-        	tooltip: "Show Home" 
-                onClicked: fileModel.folder = homePath
-                visible: page.status == PlasmaComponents.PageStatus.Active
-	}
-
-        PlasmaComponents.ToolButton {
-		id: rootBtn
-        	parent: mainWindow.mainToolbar
-        	iconName: "folder-red"
-        	//text: "Show Filesystem Root" // We don't that do we ?
-        	tooltip: "Show Filesystem Root" 
-                onClicked: fileModel.folder = "/";
-                visible: page.status == PlasmaComponents.PageStatus.Active
-	}
-
-        delegate: PlasmaComponents.ListItem {
+        delegate: Kirigami.BasicListItem {
             id: delegate
             width: parent.width
             enabled: true
@@ -98,16 +82,15 @@ PlasmaComponents.Page {
             Column {
                 width: parent.width
 
-                Label {
+                Kirigami.Label {
                     anchors.left: parent.left
                     anchors.leftMargin: units.largeSpacing
                     text: fileName + (fileIsDir ? "/" : "")
                 }
 
-                Label {
+                Kirigami.Label {
                     visible: !fileIsDir
                     anchors.left: parent.left
-                    anchors.leftMargin: Theme.paddingLarge
                     text: fileSize + ", " + fileModified
                     color: theme.linkColor
                 }
@@ -123,6 +106,7 @@ PlasmaComponents.Page {
                 }
             }
         }
+        
         PlasmaComponents.ScrollBar {
 		id: scrollBar
 		flickableItem: view

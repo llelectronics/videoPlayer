@@ -21,7 +21,7 @@
 
 import QtQuick 2.1
 import QtQuick.Layouts 1.1
-import QtQuick.Controls 1.0
+import QtQuick.Controls 1.2
 import QtQuick.Window 2.1
 import QtMultimedia 5.0
 import "helper/timeFormat.js" as TimeHelper
@@ -29,15 +29,20 @@ import "helper/db.js" as DB
 
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.plasma.core 2.0
+import org.kde.kirigami 1.0 as Kirigami
 
-PlasmaComponents.Page {
+Kirigami.Page {
     id: videoPlayerPage
+    title: {
+        if (title != "") return title
+        else if (streamTitle != "") return streamTitle
+        else return streamUrl
+    }
  
     property string originalUrl: mainWindow.originalUrl
     property string streamUrl: mainWindow.streamUrl
     property bool isYtUrl: mainWindow.isYtUrl
     property string streamTitle: mainWindow.streamTitle
-    property string title: videoWindow.metaData.title ? videoWindow.metaData.title : ""
     property string artist: videoWindow.metaData.albumArtist ? videoWindow.metaData.albumArtist : ""
     property int subtitlesSize: mainWindow.subtitlesSize
     property bool boldSubtitles: mainWindow.boldSubtitles
@@ -50,118 +55,102 @@ PlasmaComponents.Page {
     property string url240p: mainWindow.url240p
     property string ytQual: mainWindow.ytQual
     property bool autoplay: mainWindow.autoplay
+    
+    actions {
+        main: Action {
+            iconName: { 
+                if (videoWindow.playbackState != MediaPlayer.PlayingState) return "media-playback-start"
+                else return "media-playback-pause"
+            }
+            onTriggered: {
+                if (videoWindow.playbackState != MediaPlayer.PlayingState) videoWindow.play()
+                else videoWindow.pause()
+            }
+        }
+        left: Action {
+            iconName: "view-fullscreen"
+            onTriggered: toggleControls()
+        }
+        right: Action {
+            iconName: "media-playback-stop"
+            onTriggered: {
+                // applicationWindow().pageStack.pop;
+                videoWindow.stop();
+            }
+        }
+    }
 
     Rectangle {
-	anchors.fill: parent
-	color: "black"
+        anchors.fill: parent
+        color: "black"
     }
 
     IconItem {
-	id: onlyAudioIcon
-	source: "audio-x-generic"
-	anchors.centerIn: parent
+        id: onlyAudioIcon
+        source: "audio-x-generic"
+        anchors.centerIn: parent
         width: parent.width / 2
         height: width
         visible: !videoWindow.hasVideo
     }
 
     function showControls() {
-	headerTitle.visible = true;
-	mainWindow.mainToolbar.parent.parent.visible = true;
+        timeLine.visible = true;
+        timeLineLbl.visible = true;
+        applicationWindow().controlsVisible = true;
     }
 
     function hideControls() {
-	headerTitle.visible = false;
-	mainWindow.mainToolbar.parent.parent.visible = false;
+        timeLine.visible = false;
+        timeLineLbl.visible = false;
+        applicationWindow().controlsVisible = false;
     }
 
     function toggleControls() {
-	if (headerTitle.visible && mainWindow.mainToolbar.parent.parent.visible) 
-		hideControls();
-	else if (!headerTitle.visible && !mainWindow.mainToolbar.parent.parent.visible) 
-		showControls();	
+        if (timeLine.visible && applicationWindow().controlsVisible) 
+            hideControls();
+        else if (!timeLine.visible && !applicationWindow().controlsVisible) 
+            showControls();	
     }
-
+    
     onStreamUrlChanged: {
 	// TODO: maybe youtube or other url checks
         videoWindow.source = streamUrl
         //Write into history database
-        DB.addHistory(streamUrl,headerTitle.text);
+        DB.addHistory(streamUrl,videoPlayerPage.title);
         // Don't forgt to write it to the List aswell
-        mainWindow.add2History(streamUrl,headerTitle.text);
-    }
-
-    Rectangle {
-	id: headerTitle
-	anchors.top: parent.top
-	anchors.left: parent.left
-	width: parent.width
-	height: parent.height / 32
-        color: theme.backgroundColor
-        PlasmaComponents.Label {
-                anchors.verticalCenter: parent.verticalCenter
-		anchors.left: parent.left
-		anchors.leftMargin: units.smallSpacing
-		text: {
-			if (title != "") return title
-			else if (streamTitle != "") return streamTitle
-			else return streamUrl
-		}
-	}
+        mainWindow.add2History(streamUrl,videoPlayerPage.text);
     }
 
     Video {
     	id: videoWindow
     	anchors.fill: parent
-        source: "/home/llelectronics/Videos/test.m4v"
         onDurationChanged: timeLine.maximumValue = duration / 1000
         onPositionChanged: timeLine.value = position / 1000
         MouseArea {
-		anchors.fill: parent
-		onClicked: toggleControls()
-	}
-        onStopped: showControls()
-    }
+            anchors.fill: parent
+            onClicked: toggleControls()
+            }
+        onStopped: applicationWindow().controlsVisible = true
+        }
 
-    PlasmaComponents.Label {
+    Kirigami.Label {
         id: timeLineLbl
-	text: TimeHelper.formatTime(timeLine.value) + "/" + TimeHelper.formatTime(timeLine.maximumValue)
-        parent: mainWindow.mainToolbar
+        text: TimeHelper.formatTime(timeLine.value) + "/" + TimeHelper.formatTime(timeLine.maximumValue)
+        anchors.bottom: videoWindow.bottom
+        anchors.right: videoWindow.right
     }
     
-    PlasmaComponents.Slider {
-	id: timeLine
-        parent: mainWindow.mainToolbar
-	minimumValue: 0
+    Slider {
+        id: timeLine
+        minimumValue: 0
         value: 0
         stepSize: 1.0
-        width: parent.width - stopBtn.width * 5 // We have 3 buttons + timelinelbl in toolbar
+        width: parent.width
         onPressedChanged: {
                 if (!pressed) {
-			if (videoWindow.seekable) videoWindow.seek(value * 1000)
+                if (videoWindow.seekable) videoWindow.seek(value * 1000)
                 }
-	}
-    }
-
-    PlasmaComponents.ToolButton {
-        id: stopBtn
-        parent: mainWindow.mainToolbar
-    	iconName: "media-playback-stop"
-    	//text: "Back" // We don't that do we ?
-    	onClicked: videoWindow.stop()
-    }
-
-    PlasmaComponents.ToolButton {
-        id: playBtn
-        parent: mainWindow.mainToolbar
-    	iconName: { 
-		if (videoWindow.playbackState != MediaPlayer.PlayingState) return "media-playback-start"
-                else return "media-playback-pause"
-        }
-    	//text: "Back" // We don't that do we ?
-    	onClicked: { 
-		if (videoWindow.playbackState != MediaPlayer.PlayingState) videoWindow.play()
-                else videoWindow.pause()
         }
     }
 }
