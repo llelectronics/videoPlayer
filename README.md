@@ -7,3 +7,4 @@ Build depends (ubuntu package names):
 * libkf5declarative-dev
 * qml-module-qtquick-localstorage
 * qml-module-qt-labs-folderlistmodel
+* qml-module-org-kde-kirigami
