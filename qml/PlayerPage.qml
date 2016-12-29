@@ -37,6 +37,17 @@ Kirigami.Page {
     bottomPadding: 0
     topPadding: 0
     
+    onStreamUrlChanged: {
+        // TODO: maybe youtube or other url checks
+        videoWindow.source = streamUrl;
+        // Correct Page title, this is just needed to work around a bug, maybe I've done this bad
+        videoPlayerPage.title = mainWindow.streamTitle
+        // Write into history database
+        DB.addHistory(streamUrl,videoPlayerPage.title);
+        // Don't forgt to write it to the List aswell
+        mainWindow.add2History(streamUrl,videoPlayerPage.text);
+    }
+    
     id: videoPlayerPage
     title: {
         if (title != "") return title
@@ -120,15 +131,6 @@ Kirigami.Page {
         else if (!timeLine.visible && !applicationWindow().controlsVisible) 
             showControls();	
     }
-    
-    onStreamUrlChanged: {
-	// TODO: maybe youtube or other url checks
-        videoWindow.source = streamUrl
-        //Write into history database
-        DB.addHistory(streamUrl,videoPlayerPage.title);
-        // Don't forgt to write it to the List aswell
-        mainWindow.add2History(streamUrl,videoPlayerPage.text);
-    }
 
     Video {
     	id: videoWindow
@@ -139,7 +141,7 @@ Kirigami.Page {
             anchors.fill: parent
             onClicked: toggleControls()
             }
-        onStopped: applicationWindow().controlsVisible = true
+        onStopped: showControls()
         }
 
     Kirigami.Label {
