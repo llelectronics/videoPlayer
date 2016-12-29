@@ -28,7 +28,6 @@ import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.kirigami 1.0 as Kirigami
 import Qt.labs.folderlistmodel 2.1
 
-
 Kirigami.Page {
     id: page
     title: "Open File"
@@ -38,35 +37,47 @@ Kirigami.Page {
     }
     
     actions {
-        main: Action {
-            iconName: "user-home"
-            text: "Show Home"
-            onTriggered: {
-                fileModel.folder = homePath
-            }
+        main: Kirigami.Action {
+            tooltip: "go to parent folder"
+            iconName: "go-parent-folder"
+            onTriggered: fileModel.folder = fileModel.parentFolder
         }
-        left: Action {
-            iconName: "folder-videos"
-            text: "Show Video Folder"
-            onTriggered: { 
-                fileModel.folder = videoPath                
+        contextualActions: [
+            Kirigami.Action {
+                text:"Go to file system root"
+                iconName: "folder-red"
+                onTriggered: fileModel.folder = "/"
+            },
+            Kirigami.Action {
+                iconName: "folder-videos"
+                text: "Show Video Folder"
+                onTriggered: fileModel.folder = videoPath                
+            },
+            Kirigami.Action {
+                iconName: "user-home"
+                text: "Show Home"
+                onTriggered: fileModel.folder = homePath
+            },
+            Kirigami.Action {
+                text: "View sounds"
+                iconName: "folder-sound"
+                onTriggered: fileModel.nameFilters = ["*.mp3", "*.wav", "*.ogg", "*.webm"]
+            },
+            Kirigami.Action {
+                text: "View Videos"
+                iconName: "folder-video"
+                onTriggered: fileModel.nameFilters = ["*.mkv", "*.mp4", "*.ogv", "*.webm"]
             }
-        }
-        right: Action {
-            iconName: "folder-red"
-            text: "Show Filesystem Root"
-            onTriggered: {
-                fileModel.folder = "/";
-            }
-        }
+        ]
     }
 
     FolderListModel {
         id: fileModel
-        folder: videoPath 
+        folder: videoPath
         showDirsFirst: true
-        showDotAndDotDot: true // TODO: good default or should be configurable ?
+        showDotAndDotDot: false // replaced by the main action Button
         showOnlyReadable: true
+        nameFilters: [ "*"]
     }
 
     ListView {

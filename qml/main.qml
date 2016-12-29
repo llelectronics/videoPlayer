@@ -36,7 +36,7 @@ Kirigami.ApplicationWindow {
     
     property string appIcon: "/usr/share/icons/hicolor/64x64/apps/vplayer.png" //TODO: use xdg somehow
     property string appName: "LLs vPlayer"
-    property string version: "0.2"
+    property string version: "0.2-plasma-mobile"
     property alias historyModel: historyModel
 
     // Settings /////////////////////////////////////////
@@ -98,6 +98,10 @@ Kirigami.ApplicationWindow {
             ]
     }
     
+    contextDrawer: Kirigami.ContextDrawer {
+        id: contextDrawer
+    }
+    
     pageStack.initialPage: openDialogComponent
 
     // drawer components
@@ -136,7 +140,7 @@ Kirigami.ApplicationWindow {
 
     function loadPlayer(title,url) {
         streamTitle = title
-	streamUrl = url
+        streamUrl = url
         applicationWindow().pageStack.push(playerPageComponent);
     }
   

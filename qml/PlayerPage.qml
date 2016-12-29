@@ -37,11 +37,16 @@ Kirigami.Page {
     bottomPadding: 0
     topPadding: 0
     
+    Component.onCompleted: {
+        // Automaticly start playing
+        videoWindow.play();
+    }
+    
     onStreamUrlChanged: {
         // TODO: maybe youtube or other url checks
         videoWindow.source = streamUrl;
         // Correct Page title, this is just needed to work around a bug, maybe I've done this bad
-        videoPlayerPage.title = mainWindow.streamTitle
+        videoPlayerPage.title = mainWindow.streamTitle;
         // Write into history database
         DB.addHistory(streamUrl,videoPlayerPage.title);
         // Don't forgt to write it to the List aswell

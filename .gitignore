@@ -3,7 +3,6 @@
 src/vplayer_automoc.cpp
 src/vplayer
 
-
 ################## CMake ######################
 
 CMakeCache.txt
