@@ -87,7 +87,7 @@ Kirigami.ApplicationWindow {
             },
             Kirigami.Action {
                 text: "Open Url"
-                iconName: "internet-web-browser"
+                iconName: "applications-internet"
                 onTriggered: applicationWindow().pageStack.replace(openUrlComponent)
             },
             Kirigami.Action {

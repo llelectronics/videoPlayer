@@ -32,6 +32,11 @@ import org.kde.plasma.core 2.0
 import org.kde.kirigami 1.0 as Kirigami
 
 Kirigami.Page {
+    leftPadding: 0
+    rightPadding: 0
+    bottomPadding: 0
+    topPadding: 0
+    
     id: videoPlayerPage
     title: {
         if (title != "") return title
@@ -66,6 +71,7 @@ Kirigami.Page {
                 if (videoWindow.playbackState != MediaPlayer.PlayingState) videoWindow.play()
                 else videoWindow.pause()
             }
+            shortcut: "Space"
         }
         left: Action {
             iconName: "view-fullscreen"
@@ -74,7 +80,7 @@ Kirigami.Page {
         right: Action {
             iconName: "media-playback-stop"
             onTriggered: {
-                // applicationWindow().pageStack.pop;
+                applicationWindow().pageStack.pop;
                 videoWindow.stop();
             }
         }
@@ -97,12 +103,14 @@ Kirigami.Page {
     function showControls() {
         timeLine.visible = true;
         timeLineLbl.visible = true;
+        // globalDrawer.opened = true;
         applicationWindow().controlsVisible = true;
     }
 
     function hideControls() {
         timeLine.visible = false;
         timeLineLbl.visible = false;
+        globalDrawer.opened = false;
         applicationWindow().controlsVisible = false;
     }
 

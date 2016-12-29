@@ -32,6 +32,11 @@ import "helper/yt.js" as YT
 
 
 Kirigami.Page {
+    leftPadding: 0
+    rightPadding: 0
+    bottomPadding: 0
+    topPadding: 0
+    
     title: "Youtube"
     id: searchResultsDialog
     property string searchTerm
