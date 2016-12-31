@@ -43,7 +43,7 @@ Kirigami.Page {
     property bool ytDetect: true
     property string websiteUrl: "http://m.youtube.com/"
     property string searchUrl: "http://m.youtube.com/results?q="
-    property string uA: "Mozilla/5.0 (Linux; Android 6.0.1; Aquaris U Build/MMB29M; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/52.0.2743.98 Mobile Safari/537.36"
+    property string uA: "Mozilla/5.0 (Linux; U; Android 2.3; en-us; Nexus One Build/FRF91) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1"
 
 
     WebView {

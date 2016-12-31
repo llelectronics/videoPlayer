@@ -76,7 +76,7 @@ Kirigami.ScrollablePage {
             Kirigami.Label {
                 width: aboutPage.width
                 font.bold: true
-                text: "Copyright (c) 2014-2015 Leszek Lesner &lt;leszek@zevenos.com&gt;<p>Copyright (c) 2016 JBBGameich &lt;jbb.mail@gmx.de&gt;"
+                text: "Copyright (c) 2014-2015 Leszek Lesner &lt;leszek@zevenos.com&gt;<br>Copyright (c) 2016 JBBGameich &lt;jbb.mail@gmx.de&gt;"
                 anchors.horizontalCenter: parent.horizontalCenter
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment: Text.AlignHCenter

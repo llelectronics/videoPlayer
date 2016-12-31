@@ -38,9 +38,11 @@ Kirigami.Page {
     
     actions {
         main: Kirigami.Action {
+            id: parentFolderButton
             tooltip: "go to parent folder"
             iconName: "go-parent-folder"
             onTriggered: fileModel.folder = fileModel.parentFolder
+            enabled: true
         }
         contextualActions: [
             Kirigami.Action {
@@ -61,16 +63,16 @@ Kirigami.Page {
             Kirigami.Action {
                 text: "View sounds"
                 iconName: "folder-sound"
-                onTriggered: fileModel.nameFilters = ["*.mp3", "*.wav", "*.ogg", "*.webm"]
+                onTriggered: fileModel.nameFilters = ["*.mp3", "*.wav", "*.ogg", "*.webm", "*.flac", "*.3ga", "*.aac", ".*.mpa", ".*.wma"]
             },
             Kirigami.Action {
                 text: "View Videos"
                 iconName: "folder-video"
-                onTriggered: fileModel.nameFilters = ["*.mkv", "*.mp4", "*.ogv", "*.webm"]
+                onTriggered: fileModel.nameFilters = ["*.mkv", "*.mp4", "*.ogv", "*.webm", "*.264", "*.avi", "*.h264", "*.wmv", "*.mpg4", "*.3gp*"]
             }
         ]
     }
-
+    
     FolderListModel {
         id: fileModel
         folder: videoPath
@@ -119,11 +121,11 @@ Kirigami.Page {
         }
         
         PlasmaComponents.ScrollBar {
-		id: scrollBar
-		flickableItem: view
-		anchors.right: parent.right
-                width: parent.width / 64
-		interactive: true
-	}
+            id: scrollBar
+            flickableItem: view
+            anchors.right: parent.right
+            width: parent.width / 64
+            interactive: true
+        }
     }
 }
