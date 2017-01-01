@@ -32,6 +32,7 @@ import org.kde.plasma.core 2.0
 import org.kde.kirigami 1.0 as Kirigami
 
 Kirigami.Page {
+    implicitWidth: 2000 // This number is just the with of this page until it will be tiled.
     leftPadding: 0
     rightPadding: 0
     bottomPadding: 0
