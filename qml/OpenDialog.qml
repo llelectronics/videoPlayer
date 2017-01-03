@@ -30,7 +30,7 @@ import Qt.labs.folderlistmodel 2.1
 
 Kirigami.Page {
     id: page
-    title: "Open File"
+    title: qsTr("Open File")
     
     function openFile(path) {
         mainWindow.loadPlayer("",path);
@@ -39,34 +39,34 @@ Kirigami.Page {
     actions {
         main: Kirigami.Action {
             id: parentFolderButton
-            tooltip: "go to parent folder"
+            tooltip: qsTr("go to parent folder")
             iconName: "go-parent-folder"
             onTriggered: fileModel.folder = fileModel.parentFolder
             enabled: true
         }
         contextualActions: [
             Kirigami.Action {
-                text:"Go to file system root"
+                text: qsTr("Go to file system root")
                 iconName: "folder-red"
                 onTriggered: fileModel.folder = "/"
             },
             Kirigami.Action {
                 iconName: "folder-videos"
-                text: "Show Video Folder"
+                text: qsTr("Show Video Folder")
                 onTriggered: fileModel.folder = videoPath                
             },
             Kirigami.Action {
                 iconName: "user-home"
-                text: "Show Home"
+                text: qsTr("Show Home")
                 onTriggered: fileModel.folder = homePath
             },
             Kirigami.Action {
-                text: "View sounds"
+                text: qsTr("View sounds")
                 iconName: "folder-sound"
                 onTriggered: fileModel.nameFilters = ["*.mp3", "*.wav", "*.ogg", "*.webm", "*.flac", "*.3ga", "*.aac", ".*.mpa", ".*.wma"]
             },
             Kirigami.Action {
-                text: "View Videos"
+                text: qsTr("View Videos")
                 iconName: "folder-video"
                 onTriggered: fileModel.nameFilters = ["*.mkv", "*.mp4", "*.ogv", "*.webm", "*.264", "*.avi", "*.h264", "*.wmv", "*.mpg4", "*.3gp*"]
             }

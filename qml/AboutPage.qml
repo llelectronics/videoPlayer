@@ -28,7 +28,7 @@ import org.kde.kirigami 1.0 as Kirigami
 
 Kirigami.ScrollablePage {
     id: aboutPage
-    title: "About"
+    title: qsTr("About")
     
     Flickable {
         id: flick
@@ -58,7 +58,7 @@ Kirigami.ScrollablePage {
                 
             }
             Kirigami.Label {
-                text: "License: LGPLv2"
+                text: qsTr("License: LGPLv2")
                 anchors.horizontalCenter: parent.horizontalCenter
             }
             Rectangle{
@@ -76,7 +76,7 @@ Kirigami.ScrollablePage {
             Kirigami.Label {
                 width: aboutPage.width
                 font.bold: true
-                text: "Copyright (c) 2014-2015 Leszek Lesner &lt;leszek@zevenos.com&gt;<br>Copyright (c) 2016 JBBGameich &lt;jbb.mail@gmx.de&gt;"
+                text: qsTr("Copyright (c) 2014-2015 Leszek Lesner &lt;leszek@zevenos.com&gt;<br>Copyright (c) 2016 JBBGameich &lt;jbb.mail@gmx.de&gt;") // JBBgameich: I'm still not sure how I should write this text, maybe just "developed by Leszek Lesner, contributors: JBBgameich..."
                 anchors.horizontalCenter: parent.horizontalCenter
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment: Text.AlignHCenter
@@ -96,7 +96,7 @@ Kirigami.ScrollablePage {
             Button {
                 id: homepage
                 anchors.horizontalCenter: parent.horizontalCenter
-                text: "Sourcecode on Github"
+                text: qsTr("Sourcecode on Github")
                 onClicked: {
                     Qt.openUrlExternally("https://github.com/llelectronics/videoPlayer/tree/plasma");
                 }

@@ -71,27 +71,27 @@ Kirigami.ApplicationWindow {
         titleIcon: "vplayer"
         actions: [
             Kirigami.Action {
-                text: "History"
+                text: qsTr("History")
                 iconName: "view-list-icons"
                 onTriggered: applicationWindow().pageStack.replace(historyPageComponent)
             },
             Kirigami.Action {
-                text: "Youtube Search"
+                text: qsTr("Youtube Search")
                 iconName: "smtube"
                 onTriggered: applicationWindow().pageStack.replace(youtubeSearchComponent)
             },
             Kirigami.Action {
-                text: "Open File"
+                text: qsTr("Open File")
                 iconName: "document-open"
                 onTriggered: applicationWindow().pageStack.replace(openDialogComponent)
             },
             Kirigami.Action {
-                text: "Open Url"
+                text: qsTr("Open Url")
                 iconName: "applications-internet"
                 onTriggered: applicationWindow().pageStack.replace(openUrlComponent)
             },
             Kirigami.Action {
-                text: "About Video Player"
+                text: qsTr("About Video Player")
                 iconName: "help-about"
                 onTriggered: applicationWindow().pageStack.replace(aboutPageComponent)
             }

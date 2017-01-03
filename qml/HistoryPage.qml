@@ -28,7 +28,7 @@ import org.kde.kirigami 1.0 as Kirigami
 
 Kirigami.ScrollablePage {
     id: historyPage
-    title: "History"
+    title: qsTr("History")
 
     ListView {
         anchors.fill: historyPage

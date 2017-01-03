@@ -33,7 +33,7 @@ import Qt.labs.folderlistmodel 2.1
 
 Kirigami.Page {
     id: page
-    title: "Open URL"
+    title: qsTr("Open URL")
 
     function openUrl(path) {
         mainWindow.loadPlayer("",path);
@@ -42,7 +42,7 @@ Kirigami.Page {
     PlasmaComponents.TextField {
         id: urlField
         clearButtonShown: true
-        placeholderText: "Enter a streaming url starting with 'http://' or similar"
+        placeholderText: qsTr("Enter a streaming url starting with 'http://' or similar")
         width: parent.width / 1.15
         height: units.gridUnit * 2
         anchors.horizontalCenter: parent.horizontalCenter
