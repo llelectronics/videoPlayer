@@ -29,171 +29,170 @@ import org.kde.kirigami 1.0 as Kirigami
 import "helper/db.js" as DB
 
 Kirigami.ApplicationWindow {
-    id: mainWindow
-    width: 540
-    height: 960
-    visible: true
-    
-    property string appIcon: "/usr/share/icons/hicolor/64x64/apps/vplayer.png" //TODO: use xdg somehow
-    property string appName: "LLs vPlayer"
-    property string version: "0.2-plasma-mobile"
-    property alias historyModel: historyModel
+	id: mainWindow
+	width: 540
+	height: 960
+	visible: true
+	
+	property string appIcon: "/usr/share/icons/hicolor/64x64/apps/vplayer.png" //TODO: use xdg somehow
+	property string appName: "LLs vPlayer"
+	property string version: "0.2-plasma-mobile"
+	property alias historyModel: historyModel
 
-    // Settings /////////////////////////////////////////
-    property string openDialogType: "adv"
-    property bool enableSubtitles: true
-    property int subtitlesSize: 25
-    property bool boldSubtitles: false
-    property string subtitlesColor: "white"
-    property bool youtubeDirect: true           
-    /////////////////////////////////////////////////////
+	// Settings /////////////////////////////////////////
+	property string openDialogType: "adv"
+	property bool enableSubtitles: true
+	property int subtitlesSize: 25
+	property bool boldSubtitles: false
+	property string subtitlesColor: "white"
+	property bool youtubeDirect: true           
+	/////////////////////////////////////////////////////
 
-    // Videoplayer properties //////////////////////////
-    property string originalUrl
-    property string streamUrl
-    property bool isYtUrl: false
-    property bool autoplay: false
-    property string streamTitle
-    property string url720p
-    property string url480p
-    property string url360p
-    property string url240p
-    property string ytQual
-    ////////////////////////////////////////////////////
+	// Videoplayer properties //////////////////////////
+	property string originalUrl
+	property string streamUrl
+	property bool isYtUrl: false
+	property bool autoplay: false
+	property string streamTitle
+	property string url720p
+	property string url480p
+	property string url360p
+	property string url240p
+	property string ytQual
+	////////////////////////////////////////////////////
 
-    property QtObject mainPage
-  
-    //property string homePath // Use from C++ QStandardsPath
-    //property string videoPath
-    
-    globalDrawer: Kirigami.GlobalDrawer {
-        title: "Video Player"
-        titleIcon: "vplayer"
-        actions: [
-            Kirigami.Action {
-                text: qsTr("History")
-                iconName: "view-list-icons"
-                onTriggered: applicationWindow().pageStack.replace(historyPageComponent)
-            },
-            Kirigami.Action {
-                text: qsTr("Youtube Search")
-                iconName: "smtube"
-                onTriggered: applicationWindow().pageStack.replace(youtubeSearchComponent)
-            },
-            Kirigami.Action {
-                text: qsTr("Open File")
-                iconName: "document-open"
-                onTriggered: applicationWindow().pageStack.replace(openDialogComponent)
-            },
-            Kirigami.Action {
-                text: qsTr("Open Url")
-                iconName: "applications-internet"
-                onTriggered: applicationWindow().pageStack.replace(openUrlComponent)
-            },
-            Kirigami.Action {
-                text: qsTr("About Video Player")
-                iconName: "help-about"
-                onTriggered: applicationWindow().pageStack.replace(aboutPageComponent)
-            }
-            ]
-    }
-    
-    contextDrawer: Kirigami.ContextDrawer {
-        id: contextDrawer
-    }
-    
-    pageStack.initialPage: openDialogComponent
+	property QtObject mainPage
 
-    // drawer components
-    Component {
-        id: historyPageComponent
-        HistoryPage {}
-    }
-    
-    Component {
-        id: youtubeSearchComponent
-        YoutubeSearch {}
-    }
-    
-    Component {
-        id: openDialogComponent
-        OpenDialog {}
-    }
-    
-    Component {
-        id: openUrlComponent
-        OpenUrl {}
-    }
-    
-    Component {
-        id: aboutPageComponent
-        AboutPage {}
-    }
-    
-    // components not needed for the drawer
-    
-    Component {
-        id: playerPageComponent
-        PlayerPage {}
-    }
-    
+	//property string homePath // Use from C++ QStandardsPath
+	//property string videoPath
+	
+	globalDrawer: Kirigami.GlobalDrawer {
+		title: "Video Player"
+		titleIcon: "vplayer"
+		actions: [
+			Kirigami.Action {
+				text: qsTr("History")
+				iconName: "view-list-icons"
+				onTriggered: applicationWindow().pageStack.replace(historyPageComponent)
+			},
+			Kirigami.Action {
+				text: qsTr("Youtube Search")
+				iconName: "smtube"
+				onTriggered: applicationWindow().pageStack.replace(youtubeSearchComponent)
+			},
+			Kirigami.Action {
+				text: qsTr("Open File")
+				iconName: "document-open"
+				onTriggered: applicationWindow().pageStack.replace(openDialogComponent)
+			},
+			Kirigami.Action {
+				text: qsTr("Open Url")
+				iconName: "applications-internet"
+				onTriggered: applicationWindow().pageStack.replace(openUrlComponent)
+			},
+			Kirigami.Action {
+				text: qsTr("About Video Player")
+				iconName: "help-about"
+				onTriggered: applicationWindow().pageStack.replace(aboutPageComponent)
+			}
+			]
+	}
+	
+	contextDrawer: Kirigami.ContextDrawer {
+		id: contextDrawer
+	}
+	
+	pageStack.initialPage: openDialogComponent
 
-    function loadPlayer(title,url) {
-        streamTitle = title
-        streamUrl = url
-        applicationWindow().pageStack.push(playerPageComponent);
-    }
-  
-    function showPlayer() {
-        applicationWindow().pageStack.push(playerPageComponent);
-    }
-    
-    function addHistory(url,title) {
-        //console.debug("Adding " + url + " with title " + title);
-        historyModel.append({"hurl": url, "htitle": title});
-    }
+	// drawer components
+	Component {
+		id: historyPageComponent
+		HistoryPage {}
+	}
+	
+	Component {
+		id: youtubeSearchComponent
+		YoutubeSearch {}
+	}
+	
+	Component {
+		id: openDialogComponent
+		OpenDialog {}
+	}
+	
+	Component {
+		id: openUrlComponent
+		OpenUrl {}
+	}
+	
+	Component {
+		id: aboutPageComponent
+		AboutPage {}
+	}
+	
+	// components not needed for the drawer
+	
+	Component {
+		id: playerPageComponent
+		PlayerPage {}
+	}
+	
 
-    function add2History(url,title) {
-        if (historyModel.containsTitle(title) || historyModel.containsUrl(url)) {
-            historyModel.removeUrl(url);
-        }
-        if (title == "" || title == undefined) title = url
-        historyModel.append({"hurl": url, "htitle": title});
-    }
-    
-    ListModel {
-        id: historyModel
-        
-        function containsTitle(htitle) {
-            for (var i=0; i<count; i++) {
-                if (get(i).htitle == htitle)  {
-                    return true;
-                }
-            }
-            return false;
-        }
-        function containsUrl(hurl) {
-            for (var i=0; i<count; i++) {
-                if (get(i).hurl == hurl)  {
-                    return true;
-                }
-            }
-            return false;
-        }
-        function removeUrl(hurl) {
-            for (var i=0; i<count; i++) {
-                if (get(i).hurl == hurl)  {
-                    remove(i)
-                }
-            }
-            return;
-        }
-    }    
-    
-    Component.onCompleted: { 
-        // Intitialize DB
-        DB.initialize();
-        DB.getHistory();
-    }
+	function loadPlayer(title,url) {
+		streamTitle = title
+		streamUrl = url
+		applicationWindow().pageStack.push(playerPageComponent);
+	}
 
+	function showPlayer() {
+		applicationWindow().pageStack.push(playerPageComponent);
+	}
+	
+	function addHistory(url,title) {
+		//console.debug("Adding " + url + " with title " + title);
+		historyModel.append({"hurl": url, "htitle": title});
+	}
+
+	function add2History(url,title) {
+		if (historyModel.containsTitle(title) || historyModel.containsUrl(url)) {
+			historyModel.removeUrl(url);
+		}
+		if (title == "" || title == undefined) title = url
+		historyModel.append({"hurl": url, "htitle": title});
+	}
+	
+	ListModel {
+		id: historyModel
+		
+		function containsTitle(htitle) {
+			for (var i=0; i<count; i++) {
+				if (get(i).htitle == htitle)  {
+					return true;
+				}
+			}
+			return false;
+		}
+		function containsUrl(hurl) {
+			for (var i=0; i<count; i++) {
+				if (get(i).hurl == hurl)  {
+					return true;
+				}
+			}
+			return false;
+		}
+		function removeUrl(hurl) {
+			for (var i=0; i<count; i++) {
+				if (get(i).hurl == hurl)  {
+					remove(i)
+				}
+			}
+			return;
+		}
+	}    
+	
+	Component.onCompleted: { 
+		// Intitialize DB
+		DB.initialize();
+		DB.getHistory();
+	}
 }

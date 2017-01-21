@@ -27,28 +27,28 @@ import QtQuick.Window 2.1
 import org.kde.kirigami 1.0 as Kirigami
 
 Kirigami.ScrollablePage {
-    id: historyPage
-    title: qsTr("History")
+	id: historyPage
+	title: qsTr("History")
 
-    ListView {
-        anchors.fill: historyPage
-        model: mainWindow.historyModel
-        delegate: Kirigami.BasicListItem {
-            width: parent.width - (parent.width / 32)
-            height: implicitHeight
-            anchors.horizontalCenter: parent.horizontalCenter
-            onClicked: {
-                console.debug("Clicked " + htitle + " with url: " + hurl)
-                mainWindow.loadPlayer(htitle,hurl)
-            }
-            Kirigami.Label {
-                anchors.left: parent.left
-                anchors.right: parent.right
-                height: implicitHeight
+	ListView {
+		anchors.fill: historyPage
+		model: mainWindow.historyModel
+		delegate: Kirigami.BasicListItem {
+			width: parent.width - (parent.width / 32)
+			height: implicitHeight
+			anchors.horizontalCenter: parent.horizontalCenter
+			onClicked: {
+				console.debug("Clicked " + htitle + " with url: " + hurl)
+				mainWindow.loadPlayer(htitle,hurl)
+			}
+			Kirigami.Label {
+				anchors.left: parent.left
+				anchors.right: parent.right
+				height: implicitHeight
 
-                elide: Text.ElideRight
-                text: htitle
-            }
-        }
-    }
+				elide: Text.ElideRight
+				text: htitle
+			}
+		}
+	}
 }

@@ -32,54 +32,56 @@ import Qt.labs.folderlistmodel 2.1
 
 
 Kirigami.Page {
-    id: page
-    title: qsTr("Open URL")
+	id: page
+	title: qsTr("Open URL")
 
-    function openUrl(path) {
-        mainWindow.loadPlayer("",path);
-    }
+	function openUrl(path) {
+		mainWindow.loadPlayer("",path);
+	}
 
-    PlasmaComponents.TextField {
-        id: urlField
-        clearButtonShown: true
-        placeholderText: qsTr("Enter a streaming url starting with 'http://' or similar")
-        width: parent.width / 1.15
-        height: units.gridUnit * 2
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.top: header.bottom
-        anchors.topMargin: units.largeSpacing
-    }
-    
-    PlasmaComponents.ListItem {
-            height: units.gridUnit * 2
-            width: urlField.width
-            anchors.margins: units.gridUnit
-            anchors.horizontalCenter: parent.horizontalCenter
-            anchors.top: urlField.bottom
-            enabled: true
-            
-            IconItem {
-                id: openIcon
-                width: units.gridUnit * 2
-                height: width
-                source: "dialog-ok"
-                anchors {
-                    verticalCenter: parent.verticalCenter
-                    left: parent.left
-                    margins: units.gridUnit
-                    rightMargin: 0
-                }
-            }
-            Heading {
-                id: openLbl
-                text: qsTr("Load Url")
-                elide: Text.ElideRight
-                anchors.verticalCenter: parent.verticalCenter
-                anchors.right: parent.right
-                level: 4
-            }
-            onClicked: {
-                openUrl(urlField.text)
-        }
-    }
+	PlasmaComponents.TextField {
+		id: urlField
+		clearButtonShown: true
+		placeholderText: qsTr("Enter a streaming url starting with 'http://' or similar")
+		width: parent.width / 1.15
+		height: units.gridUnit * 2
+		anchors.horizontalCenter: parent.horizontalCenter
+		anchors.top: header.bottom
+		anchors.topMargin: units.largeSpacing
+	}
+	
+	PlasmaComponents.ListItem {
+		height: units.gridUnit * 2
+		width: urlField.width
+		anchors.margins: units.gridUnit
+		anchors.horizontalCenter: parent.horizontalCenter
+		anchors.top: urlField.bottom
+		enabled: true
+		
+		IconItem {
+			id: openIcon
+			width: units.gridUnit * 2
+			height: width
+			source: "dialog-ok"
+			anchors {
+				verticalCenter: parent.verticalCenter
+				left: parent.left
+				margins: units.gridUnit
+				rightMargin: 0
+			}
+		}
+		
+		Heading {
+			id: openLbl
+			text: qsTr("Load Url")
+			elide: Text.ElideRight
+			anchors.verticalCenter: parent.verticalCenter
+			anchors.right: parent.right
+			level: 4
+		}
+		
+		onClicked: {
+			openUrl(urlField.text)
+		}
+	}
 }
