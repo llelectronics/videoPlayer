@@ -24,33 +24,31 @@ import QtQuick.Layouts 1.1
 import QtQuick.Controls 1.0
 import QtQuick.Window 2.1
 
-import org.kde.plasma.components 2.0 as PlasmaComponents
+import org.kde.kirigami 1.0 as Kirigami
 
-PlasmaComponents.Page {
-    id: mainPage
+Kirigami.ScrollablePage {
+	id: historyPage
+	title: qsTr("History")
 
-    PlasmaComponents.ButtonColumn {
-        anchors.centerIn: parent
-        PlasmaComponents.Button { 
-	    text: qsTr("History")
-            onClicked: mainStack.push(Qt.resolvedUrl("historyPage.qml"))
-        }
-        PlasmaComponents.Button { 
-	    text: qsTr("Search on Youtube")
-            onClicked: mainStack.push(Qt.resolvedUrl("youtubeSearch.qml"))
-        }
-        PlasmaComponents.Button { 
-	    text: qsTr("Browse Files")
-            onClicked: mainStack.push(Qt.resolvedUrl("openDialog.qml"))
-        }
-        PlasmaComponents.Button { 
-	    text: qsTr("Open Url") 
-            onClicked: mainStack.push(Qt.resolvedUrl("openUrl.qml"))
-        }
-        PlasmaComponents.Button { 
-            text: qsTr("About") 
-            onClicked: mainStack.push(Qt.resolvedUrl("aboutPage.qml"))
-        }
-    }
+	ListView {
+		anchors.fill: historyPage
+		model: mainWindow.historyModel
+		delegate: Kirigami.BasicListItem {
+			width: parent.width - (parent.width / 32)
+			height: implicitHeight
+			anchors.horizontalCenter: parent.horizontalCenter
+			onClicked: {
+				console.debug("Clicked " + htitle + " with url: " + hurl)
+				mainWindow.loadPlayer(htitle,hurl)
+			}
+			Kirigami.Label {
+				anchors.left: parent.left
+				anchors.right: parent.right
+				height: implicitHeight
 
+				elide: Text.ElideRight
+				text: htitle
+			}
+		}
+	}
 }
