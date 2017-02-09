@@ -223,7 +223,8 @@ MouseArea {
             BackgroundItem {
                 id: qualBtn
                 anchors.right: parent.right
-                y: positionSlider.y - (qualBtn.height / 4)
+                anchors.bottom: parent.bottom
+                anchors.bottomMargin: Theme.paddingMedium
                 width: height
                 height: Theme.itemSizeSmall
                 visible: {
@@ -246,7 +247,8 @@ MouseArea {
                 id: maxTime
                 anchors.right: qualBtn.visible ? qualBtn.left : parent.right
                 anchors.rightMargin: qualBtn.visible ? Theme.paddingMedium : (2 * Theme.paddingLarge)
-                y: positionSlider.y
+                anchors.bottom: parent.bottom
+                anchors.bottomMargin: Theme.paddingLarge
                 text: {
                     if (positionSlider.maximumValue > 3599) return Format.formatDuration(maximumValue, Formatter.DurationLong)
                     else return Format.formatDuration(positionSlider.maximumValue, Formatter.DurationShort)
@@ -266,6 +268,7 @@ MouseArea {
                     }
                     bottom: parent.bottom
                 }
+                anchors.bottomMargin: Theme.paddingLarge + Theme.paddingMedium
                 enabled: { if (controls.opacity == 1.0) return true; else return false; }
                 height: Theme.itemSizeSmall
                 width: {

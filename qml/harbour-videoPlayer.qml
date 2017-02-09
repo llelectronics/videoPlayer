@@ -49,7 +49,7 @@ ApplicationWindow
     property alias downloadModel: downloadModel
     property alias errTxt: errTxt
 
-    property string version: "1.7"
+    property string version: "1.8"
     property string appname: "LLs Video Player"
     property string appicon: "images/icon.png"
 
