@@ -21,28 +21,27 @@
 
 import QtQuick 2.1
 import QtQuick.Layouts 1.1
-import QtQuick.Controls 1.2
+import QtQuick.Controls 2.0 as Controls
 import QtQuick.Window 2.1
-import QtMultimedia 5.0
+import QtMultimedia 5.7
+import org.kde.plasma.core 2.0
+import org.kde.kirigami 2.0 as Kirigami
+
 import "helper/timeFormat.js" as TimeHelper
 import "helper/db.js" as DB
 
-import org.kde.plasma.components 2.0 as PlasmaComponents
-import org.kde.plasma.core 2.0
-import org.kde.kirigami 1.0 as Kirigami
-
 Kirigami.Page {
-	implicitWidth: 2000 // This number is just the with of this page until it will be tiled.
+	implicitWidth: 5000
 	leftPadding: 0
 	rightPadding: 0
 	bottomPadding: 0
 	topPadding: 0
-	
+
 	Component.onCompleted: {
 		// Automaticly start playing
 		videoWindow.play();
 	}
-	
+
 	onStreamUrlChanged: {
 		// TODO: maybe youtube or other url checks
 		videoWindow.source = streamUrl;
@@ -53,13 +52,8 @@ Kirigami.Page {
 		// Don't forgt to write it to the List aswell
 		mainWindow.add2History(streamUrl,videoPlayerPage.text);
 	}
-	
+
 	id: videoPlayerPage
-	title: {
-		if (title != "") return title
-		else if (streamTitle != "") return streamTitle
-		else return streamUrl
-	}
 
 	property string originalUrl: mainWindow.originalUrl
 	property string streamUrl: mainWindow.streamUrl
@@ -79,7 +73,7 @@ Kirigami.Page {
 	property bool autoplay: mainWindow.autoplay
 	
 	actions {
-		main: Action {
+		main: Kirigami.Action {
 			iconName: { 
 				if (videoWindow.playbackState != MediaPlayer.PlayingState) return "media-playback-start"
 				else return "media-playback-pause"
@@ -90,15 +84,15 @@ Kirigami.Page {
 			}
 			shortcut: "Space"
 		}
-		left: Action {
+		left: Kirigami.Action {
 			iconName: "view-fullscreen"
 			onTriggered: toggleControls()
 		}
-		right: Action {
+		right: Kirigami.Action {
 			iconName: "media-playback-stop"
 			onTriggered: {
-				applicationWindow().pageStack.pop;
 				videoWindow.stop();
+				pageStack.pop(undefined);
 			}
 		}
 	}
@@ -120,14 +114,13 @@ Kirigami.Page {
 	function showControls() {
 		timeLine.visible = true;
 		timeLineLbl.visible = true;
-		// globalDrawer.opened = true;
-		applicationWindow().controlsVisible = true;
+		controlsVisible = true;
 	}
 
 	function hideControls() {
 		timeLine.visible = false;
 		timeLineLbl.visible = false;
-		globalDrawer.opened = false;
+		globalDrawer.drawerOpen = false;
 		applicationWindow().controlsVisible = false;
 	}
 
@@ -141,14 +134,16 @@ Kirigami.Page {
 	Video {
 		id: videoWindow
 		anchors.fill: parent
-		onDurationChanged: timeLine.maximumValue = duration / 1000
+		onDurationChanged: timeLine.to = duration / 1000
 		onPositionChanged: timeLine.value = position / 1000
+
 		MouseArea {
 			anchors.fill: parent
 			onClicked: toggleControls()
 		}
+
 		onStopped: showControls()
-		}
+	}
 
 	Kirigami.Label {
 		id: timeLineLbl
@@ -157,11 +152,9 @@ Kirigami.Page {
 		anchors.right: videoWindow.right
 	}
 	
-	Slider {
+	Controls.Slider {
 		id: timeLine
-		minimumValue: 0
-		value: 0
-		stepSize: 1.0
+		from: 1
 		width: parent.width
 		onPressedChanged: {
 				if (!pressed) {

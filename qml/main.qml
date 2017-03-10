@@ -21,10 +21,9 @@
 
 import QtQuick 2.1
 import QtQuick.Layouts 1.1
-import QtQuick.Controls 1.0
+import QtQuick.Controls 2.0
 import QtQuick.Window 2.1
-
-import org.kde.kirigami 1.0 as Kirigami
+import org.kde.kirigami 2.0 as Kirigami
 
 import "helper/db.js" as DB
 
@@ -36,7 +35,7 @@ Kirigami.ApplicationWindow {
 	
 	property string appIcon: "/usr/share/icons/hicolor/64x64/apps/vplayer.png" //TODO: use xdg somehow
 	property string appName: "LLs vPlayer"
-	property string version: "0.2-plasma-mobile"
+	property string version: "0.2"
 	property alias historyModel: historyModel
 
 	// Settings /////////////////////////////////////////
@@ -65,43 +64,17 @@ Kirigami.ApplicationWindow {
 
 	//property string homePath // Use from C++ QStandardsPath
 	//property string videoPath
-	
-	globalDrawer: Kirigami.GlobalDrawer {
-		title: "Video Player"
-		titleIcon: "vplayer"
-		actions: [
-			Kirigami.Action {
-				text: qsTr("History")
-				iconName: "view-list-icons"
-				onTriggered: applicationWindow().pageStack.replace(historyPageComponent)
-			},
-			Kirigami.Action {
-				text: qsTr("Youtube Search")
-				iconName: "smtube"
-				onTriggered: applicationWindow().pageStack.replace(youtubeSearchComponent)
-			},
-			Kirigami.Action {
-				text: qsTr("Open File")
-				iconName: "document-open"
-				onTriggered: applicationWindow().pageStack.replace(openDialogComponent)
-			},
-			Kirigami.Action {
-				text: qsTr("Open Url")
-				iconName: "applications-internet"
-				onTriggered: applicationWindow().pageStack.replace(openUrlComponent)
-			},
-			Kirigami.Action {
-				text: qsTr("About Video Player")
-				iconName: "help-about"
-				onTriggered: applicationWindow().pageStack.replace(aboutPageComponent)
-			}
-			]
+
+	header: Kirigami.ApplicationHeader {
+		preferredHeight: Kirigami.Units.gridUnit * 2.25
 	}
-	
+
+	globalDrawer: GlobalDrawer {}
+
 	contextDrawer: Kirigami.ContextDrawer {
 		id: contextDrawer
 	}
-	
+
 	pageStack.initialPage: openDialogComponent
 
 	// drawer components
@@ -109,7 +82,7 @@ Kirigami.ApplicationWindow {
 		id: historyPageComponent
 		HistoryPage {}
 	}
-	
+
 	Component {
 		id: youtubeSearchComponent
 		YoutubeSearch {}
