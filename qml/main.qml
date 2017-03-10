@@ -75,8 +75,6 @@ Kirigami.ApplicationWindow {
 		id: contextDrawer
 	}
 
-	pageStack.initialPage: openDialogComponent
-
 	// drawer components
 	Component {
 		id: historyPageComponent
@@ -87,12 +85,12 @@ Kirigami.ApplicationWindow {
 		id: youtubeSearchComponent
 		YoutubeSearch {}
 	}
-	
+
 	Component {
 		id: openDialogComponent
 		OpenDialog {}
 	}
-	
+
 	Component {
 		id: openUrlComponent
 		OpenUrl {}
@@ -102,9 +100,9 @@ Kirigami.ApplicationWindow {
 		id: aboutPageComponent
 		AboutPage {}
 	}
-	
+
 	// components not needed for the drawer
-	
+
 	Component {
 		id: playerPageComponent
 		PlayerPage {}
@@ -114,13 +112,13 @@ Kirigami.ApplicationWindow {
 	function loadPlayer(title,url) {
 		streamTitle = title
 		streamUrl = url
-		applicationWindow().pageStack.push(playerPageComponent);
+		applicationWindow().pageStack.replace(playerPageComponent);
 	}
 
 	function showPlayer() {
 		applicationWindow().pageStack.push(playerPageComponent);
 	}
-	
+
 	function addHistory(url,title) {
 		//console.debug("Adding " + url + " with title " + title);
 		historyModel.append({"hurl": url, "htitle": title});
@@ -133,7 +131,7 @@ Kirigami.ApplicationWindow {
 		if (title == "" || title == undefined) title = url
 		historyModel.append({"hurl": url, "htitle": title});
 	}
-	
+
 	ListModel {
 		id: historyModel
 		
@@ -162,10 +160,11 @@ Kirigami.ApplicationWindow {
 			return;
 		}
 	}    
-	
+
 	Component.onCompleted: { 
 		// Intitialize DB
 		DB.initialize();
 		DB.getHistory();
+		pageStack.push(openDialogComponent);
 	}
 }

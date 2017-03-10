@@ -36,6 +36,12 @@ Kirigami.Page {
 	rightPadding: 0
 	bottomPadding: 0
 	topPadding: 0
+	
+	title: {
+		if (title != "") return title
+		else if (streamTitle != "") return streamTitle
+		else return streamUrl
+	}
 
 	Component.onCompleted: {
 		// Automaticly start playing
@@ -92,7 +98,7 @@ Kirigami.Page {
 			iconName: "media-playback-stop"
 			onTriggered: {
 				videoWindow.stop();
-				pageStack.pop(undefined);
+				pageStack.replace(openDialogComponent);
 			}
 		}
 	}

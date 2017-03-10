@@ -34,20 +34,16 @@ Kirigami.ScrollablePage {
 		model: mainWindow.historyModel
 
 		delegate: Kirigami.BasicListItem {
-			height: implicitHeight
+			width: parent.width
+			reserveSpaceForIcon: true
+
+			icon: "video-mp4"
+			label: htitle
 
 			onClicked: {
 				console.debug("Clicked " + htitle + " with url: " + hurl);
-				mainWindow.loadPlayer(htitle,hurl)
-			}
-
-			Kirigami.Label {
-				anchors.left: parent.left
-				anchors.right: parent.right
-				height: implicitHeight
-
-				elide: Text.ElideRight
-				text: htitle
+				mainWindow.loadPlayer(htitle,hurl);
+				pageStack.pop(historyPage);
 			}
 		}
 	}
