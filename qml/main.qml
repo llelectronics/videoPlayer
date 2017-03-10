@@ -116,7 +116,7 @@ Kirigami.ApplicationWindow {
 	}
 
 	function showPlayer() {
-		applicationWindow().pageStack.push(playerPageComponent);
+		applicationWindow().pageStack.replace(playerPageComponent);
 	}
 
 	function addHistory(url,title) {

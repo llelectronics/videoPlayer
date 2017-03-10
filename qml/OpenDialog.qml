@@ -21,10 +21,8 @@
 
 import QtQuick 2.1
 import QtQuick.Layouts 1.1
-import QtQuick.Controls 2.0
-import org.kde.plasma.core 2.0
 import org.kde.kirigami 2.0 as Kirigami
-import Qt.labs.folderlistmodel 2.1
+import Qt.labs.folderlistmodel 2.2
 
 Kirigami.ScrollablePage {
 	id: page

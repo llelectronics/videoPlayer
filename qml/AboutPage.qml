@@ -21,7 +21,7 @@
 
 import QtQuick 2.1
 import QtQuick.Layouts 1.1
-import QtQuick.Controls 2.0
+import QtQuick.Controls 2.0 as Controls
 import org.kde.kirigami 2.0 as Kirigami
 
 Kirigami.ScrollablePage {
@@ -44,12 +44,12 @@ Kirigami.ScrollablePage {
 		}
 
 		Kirigami.Heading {
-			text: mainWindow.appName+" v"+mainWindow.version
+			text: mainWindow.appName+" v" + mainWindow.version
 			anchors.horizontalCenter: parent.horizontalCenter
 		}
 
 		Kirigami.Label {
-			text: qsTr("License:") + "LGPLv2"
+			text: qsTr("License: ") + "LGPLv2"
 			anchors.horizontalCenter: parent.horizontalCenter
 		}
 
@@ -70,7 +70,7 @@ Kirigami.ScrollablePage {
 		Kirigami.Label {
 			width: aboutPage.width
 			font.bold: true
-			text: qsTr("Copyright (c) 2014-2015 Leszek Lesner &lt;leszek@zevenos.com&gt;<br>Copyright (c) 2016 JBBGameich &lt;jbb.mail@gmx.de&gt;") // JBBgameich: I'm still not sure how I should write this text, maybe just "developed by Leszek Lesner, contributors: JBBgameich..."
+			text: qsTr("Copyright (c) 2014-2015 Leszek Lesner &lt;leszek@zevenos.com&gt;<br>Copyright (c) 2016 JBBGameich &lt;jbb.mail@gmx.de&gt;")
 			anchors.horizontalCenter: parent.horizontalCenter
 			horizontalAlignment: Text.AlignHCenter
 			verticalAlignment: Text.AlignHCenter
@@ -90,7 +90,7 @@ Kirigami.ScrollablePage {
 			}
 		}
 
-		Button {
+		Controls.ToolButton {
 			id: homepage
 			anchors.horizontalCenter: parent.horizontalCenter
 			text: qsTr("Sourcecode on Github")
@@ -105,8 +105,12 @@ Kirigami.ScrollablePage {
 			anchors.horizontalCenter: parent.horizontalCenter
 			horizontalAlignment: Text.AlignHCenter
 			verticalAlignment: Text.AlignHCenter
-			height: 200
-			wrapMode: Text.WordWrap
+		}
+
+		Controls.Button {
+			text: qsTr("Close")
+			anchors.horizontalCenter: parent.horizontalCenter
+			onClicked: pageStack.replace(openDialogComponent)
 		}
 	}
 }
