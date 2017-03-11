@@ -98,7 +98,7 @@ Kirigami.Page {
 			iconName: "media-playback-stop"
 			onTriggered: {
 				videoWindow.stop();
-				pageStack.replace(openDialogComponent);
+				pageStack.pop()
 			}
 		}
 	}
@@ -148,7 +148,10 @@ Kirigami.Page {
 			onClicked: toggleControls()
 		}
 
-		onStopped: showControls()
+		onStopped: {
+			showControls()
+			pageStack.pop()
+        }
 	}
 
 	Kirigami.Label {

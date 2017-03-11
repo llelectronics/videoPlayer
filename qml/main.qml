@@ -112,11 +112,11 @@ Kirigami.ApplicationWindow {
 	function loadPlayer(title,url) {
 		streamTitle = title
 		streamUrl = url
-		applicationWindow().pageStack.replace(playerPageComponent);
+		applicationWindow().pageStack.push(playerPageComponent);
 	}
 
 	function showPlayer() {
-		applicationWindow().pageStack.replace(playerPageComponent);
+		applicationWindow().pageStack.push(playerPageComponent);
 	}
 
 	function addHistory(url,title) {
