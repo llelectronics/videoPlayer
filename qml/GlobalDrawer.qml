@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014-2015 Leszek Lesner <leszek@zevenos.com>
+ * Copyright (C) 2017 JBBgameich <jbb.mail@gmx.de>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,32 +19,43 @@
  *
  */
 
-import QtQuick 2.1
-import QtQuick.Layouts 1.1
-import QtQuick.Controls 2.0
-import QtQuick.Window 2.1
 import org.kde.kirigami 2.0 as Kirigami
 
-Kirigami.ScrollablePage {
-	id: historyPage
-	title: qsTr("History")
+Kirigami.GlobalDrawer {
+	title: "Video Player"
+	titleIcon: "vplayer"
+	
+	drawerOpen: false
+	// show open button on the left side
+	handleVisible: true
+	modal: true
 
-	ListView {
-		anchors.fill: parent
-		model: mainWindow.historyModel
-
-		delegate: Kirigami.BasicListItem {
-			width: parent.width
-			reserveSpaceForIcon: true
-
-			icon: "video-mp4"
-			label: htitle
-
-			onClicked: {
-				console.debug("Clicked " + htitle + " with url: " + hurl);
-				mainWindow.loadPlayer(htitle,hurl);
-				pageStack.pop(historyPage);
-			}
+	actions: [
+		Kirigami.Action {
+			text: qsTr("History")
+			iconName: "view-list-icons"
+			onTriggered: pageStack.replace(historyPageComponent)
+		},
+		Kirigami.Action {
+			text: qsTr("Youtube Search")
+			iconName: "smtube"
+			onTriggered: pageStack.replace(youtubeSearchComponent)
+		},
+		Kirigami.Action {
+			text: qsTr("Open File")
+			iconName: "document-open"
+			onTriggered: pageStack.replace(openDialogComponent)
+		},
+		Kirigami.Action {
+			text: qsTr("Open Url")
+			iconName: "applications-internet"
+			onTriggered: pageStack.replace(openUrlComponent)
+		},
+		Kirigami.Action {
+			text: qsTr("About Video Player")
+			iconName: "help-about"
+			onTriggered: pageStack.replace(aboutPageComponent)
 		}
-	}
+	]
 }
+

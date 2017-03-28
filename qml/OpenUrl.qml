@@ -21,15 +21,11 @@
 
 import QtQuick 2.1
 import QtQuick.Layouts 1.1
-import QtQuick.Controls 1.0
+import QtQuick.Controls 2.0 as Controls
 import QtQuick.Window 2.1
-
-import org.kde.plasma.components 2.0 as PlasmaComponents
-import org.kde.plasma.core 2.0
-import org.kde.plasma.extras 2.0
-import org.kde.kirigami 1.0 as Kirigami
+import org.kde.kirigami 2.0 as Kirigami
 import Qt.labs.folderlistmodel 2.1
-
+import org.kde.plasma.core 2.0
 
 Kirigami.Page {
 	id: page
@@ -39,49 +35,44 @@ Kirigami.Page {
 		mainWindow.loadPlayer("",path);
 	}
 
-	PlasmaComponents.TextField {
-		id: urlField
-		clearButtonShown: true
-		placeholderText: qsTr("Enter a streaming url starting with 'http://' or similar")
-		width: parent.width / 1.15
-		height: units.gridUnit * 2
-		anchors.horizontalCenter: parent.horizontalCenter
-		anchors.top: header.bottom
-		anchors.topMargin: units.largeSpacing
-	}
-	
-	PlasmaComponents.ListItem {
-		height: units.gridUnit * 2
-		width: urlField.width
-		anchors.margins: units.gridUnit
-		anchors.horizontalCenter: parent.horizontalCenter
-		anchors.top: urlField.bottom
-		enabled: true
+	Column {
+		anchors.fill: parent
+		spacing: 50
 		
-		IconItem {
-			id: openIcon
-			width: units.gridUnit * 2
-			height: width
-			source: "dialog-ok"
-			anchors {
-				verticalCenter: parent.verticalCenter
-				left: parent.left
-				margins: units.gridUnit
-				rightMargin: 0
+		Controls.TextField {
+			id: urlField
+			placeholderText: qsTr("Enter a streaming url")
+			width: parent.width / 1.15
+			anchors.horizontalCenter: parent.horizontalCenter
+			selectByMouse: true
+
+			Controls.ToolButton {
+				height: parent.height
+				width: clearIcon. width
+				anchors.right: parent.right
+
+				visible: urlField.length > 0
+
+				IconItem {
+					id: clearIcon
+					source: "edit-clear"
+					height: parent.height
+				}
+
+				onClicked: urlField.text = "";
 			}
 		}
-		
-		Heading {
-			id: openLbl
-			text: qsTr("Load Url")
-			elide: Text.ElideRight
-			anchors.verticalCenter: parent.verticalCenter
-			anchors.right: parent.right
-			level: 4
-		}
-		
-		onClicked: {
-			openUrl(urlField.text)
+
+		Controls.Button {
+			text: "Load URL"
+			enabled: urlField.length > 0
+			height: units.gridUnit * 3
+			anchors.horizontalCenter: parent.horizontalCenter
+			anchors.topMargin: units.gridUnit * 2
+
+			onClicked: {
+				openUrl(urlField.text)
+			}
 		}
 	}
 }

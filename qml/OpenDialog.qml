@@ -21,14 +21,10 @@
 
 import QtQuick 2.1
 import QtQuick.Layouts 1.1
-import QtQuick.Controls 1.2
-import QtQuick.Window 2.1
+import org.kde.kirigami 2.0 as Kirigami
+import Qt.labs.folderlistmodel 2.2
 
-import org.kde.plasma.components 2.0 as PlasmaComponents
-import org.kde.kirigami 1.0 as Kirigami
-import Qt.labs.folderlistmodel 2.1
-
-Kirigami.Page {
+Kirigami.ScrollablePage {
 	id: page
 	title: qsTr("Open File")
 	
@@ -88,26 +84,11 @@ Kirigami.Page {
 		anchors.fill: parent
 
 		delegate: Kirigami.BasicListItem {
-			id: delegate
 			width: parent.width
-			enabled: true
+			reserveSpaceForIcon: true
 
-			Column {
-				width: parent.width
-
-				Kirigami.Label {
-					anchors.left: parent.left
-					anchors.leftMargin: units.largeSpacing
-					text: fileName + (fileIsDir ? "/" : "")
-				}
-
-				Kirigami.Label {
-					visible: !fileIsDir
-					anchors.left: parent.left
-					text: fileSize + ", " + fileModified
-					color: theme.linkColor
-				}
-			}
+			icon: (fileIsDir ? "folder" : "text-x-plain")
+			label: fileName + (fileIsDir ? "/" : "")
 
 			onClicked: {
 				if (fileIsDir) {
@@ -118,14 +99,6 @@ Kirigami.Page {
 					openFile(filePath)
 				}
 			}
-		}
-		
-		PlasmaComponents.ScrollBar {
-			id: scrollBar
-			flickableItem: view
-			anchors.right: parent.right
-			width: parent.width / 64
-			interactive: true
 		}
 	}
 }
