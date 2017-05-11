@@ -69,6 +69,11 @@ Page {
         return fileName;
     }
 
+    function findFullPath(url) {
+        var fullPath = url.substring(url.lastIndexOf('://') + 3);
+        return fullPath;
+    }
+
     function forEachAddToPlaylist() {
         var i;
         for (i = 0; i < fileModel.count; ++i)
@@ -84,6 +89,7 @@ Page {
         header: PageHeader {
             title: if (page.title != "") return page.title 
             else return findBaseName((fileModel.folder).toString())
+            description: findFullPath(fileModel.folder.toString())
         }
 
         PullDownMenu {
