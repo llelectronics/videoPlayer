@@ -16,6 +16,16 @@ ContextMenu {
             fileRemove(url)
     }
 
+    function copy() {
+        _fm.sourceUrl = filePath
+        //console.debug(_fm.sourceUrl)
+    }
+
+    function move() {
+        _fm.moveMode = true;
+        copy();
+    }
+
     // Seems to work but Util.rm seems to fail somehow
     function deleteFile() {
         var fullName = filePath;
@@ -29,6 +39,16 @@ ContextMenu {
             entryIremove(fullName,pos);
         });
 
+    }
+
+    MenuItem {
+        text: "Cut"
+        onClicked: entryMenu.move()
+    }
+
+    MenuItem {
+        text: "Copy"
+        onClicked: entryMenu.copy()
     }
 
     MenuItem {

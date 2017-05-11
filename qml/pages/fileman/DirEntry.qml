@@ -21,6 +21,7 @@ ListItem {
     showMenuOnPressAndHold: false
     signal mediaFileOpen(string url)
     signal fileRemove(string url)
+    signal dirRemove(string url)
 
     property alias remorse: remorse
 
@@ -30,8 +31,9 @@ ListItem {
 
     function removeFile(url,pos) {
         //console.debug("[DirEntry] Request removal of: " + url);
-        fileRemove(url)
-        entries.remove(pos)
+        if (fileIsDir) dirRemove(url)
+        else fileRemove(url)
+        //entries.remove(pos)
     }
 
     function openFile() {
@@ -47,7 +49,8 @@ ListItem {
         id: myMenu
         DirEntryMenu {
             onFileRemove: {
-                entryItem.fileRemove(url)
+                if (fileIsDir) entryItem.dirRemove(url)
+                else entryItem.fileRemove(url)
             }
         }
     }

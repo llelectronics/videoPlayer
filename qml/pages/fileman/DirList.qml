@@ -17,6 +17,7 @@ SilicaListView {
 
     signal mediaFileOpen(string url)
     signal fileRemove(string url)
+    signal dirRemove(string url)
     signal addToPlaylist(string url)
 
     property bool isHidden: true
@@ -99,6 +100,18 @@ SilicaListView {
         isHidden = !isHidden
     }
 
+    function findBaseName(url) {
+        url = url.toString();
+        var fileName = url.substring(url.lastIndexOf('/') + 1);
+        return fileName;
+    }
+
+    function findFullPath(url) {
+        url = url.toString();
+        var fullPath = url.substring(url.lastIndexOf('://') + 3);
+        return fullPath;
+    }
+
     states: [
         State {
             name: "load"
@@ -162,6 +175,30 @@ SilicaListView {
             visible: _fm.existsPath("/media/sdcard")
             //Component.onCompleted: console.debug("[DirList] SD Card status: " + Util.existsPath("/media/sdcard"))
         }
+        MenuItem {
+            id: pasteMenuEntry
+            visible: { if (_fm.sourceUrl != "" && _fm.sourceUrl != undefined) return true;
+                else return false
+            }
+            text: qsTr("Paste") + "(" + findBaseName(_fm.sourceUrl) + ")"
+            onClicked: {
+                var err = false;
+                if (_fm.moveMode) {
+                    console.debug("Moving " + _fm.sourceUrl + " to " + root+ "/" + findBaseName(_fm.sourceUrl));
+                    if (!_fm.moveFile(_fm.sourceUrl,root + "/" + findBaseName(_fm.sourceUrl))) err = true;
+                }
+                else {
+                    console.debug("Copy " + _fm.sourceUrl + " to " + root+ "/" + findBaseName(_fm.sourceUrl));
+                    if (!_fm.copyFile(_fm.sourceUrl,root + "/" + findBaseName(_fm.sourceUrl))) err = true;
+                }
+                if (err) {
+                    var message = qsTr("Error pasting file ") + _fm.sourceUrl
+                    console.debug(message);
+                    infoBanner.showText(message)
+                }
+                else _fm.sourceUrl = "";
+            }
+        }
     }
     PushUpMenu {
         MenuItem {
@@ -188,8 +225,21 @@ SilicaListView {
             //console.debug("[DirList] Request removal of: " + url);
             entriesList.fileRemove(url);
         }
+        onDirRemove: {
+            entriesList.dirRemove(url);
+        }
     }
 
     VerticalScrollDecorator {}
+
+    Connections {
+        target: _fm
+        onSourceUrlChanged: {
+            if (_fm.sourceUrl != "" && _fm.sourceUrl != undefined) {
+                pasteMenuEntry.visible = true;
+            }
+            else pasteMenuEntry.visible = false;
+        }
+    }
 
 }

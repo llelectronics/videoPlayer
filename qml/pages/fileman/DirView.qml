@@ -55,6 +55,9 @@ Page {
             //console.debug("[DirView]Requesting removal of file " + url);
             _fm.remove(url);
         }
+        onDirRemove: {
+            _fm.removeDir(url);
+        }
         onAddToPlaylist: {
             mainWindow.modelPlaylist.addTrack(url)
         }
