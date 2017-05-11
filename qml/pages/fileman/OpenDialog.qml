@@ -135,10 +135,9 @@ Page {
                         if (!_fm.copyFile(_fm.sourceUrl,findFullPath(fileModel.folder) + "/" + findBaseName(_fm.sourceUrl))) err = true;
                     }
                     if (err) {
-                        var message = "Error pasting file " + _fm.sourceUrl
+                        var message = qsTr("Error pasting file ") + _fm.sourceUrl
                         console.debug(message);
-                        errTxt.visible = true
-                        errTxt.text = message
+                        infoBanner.showText(message)
                     }
                     else _fm.sourceUrl = "";
                 }

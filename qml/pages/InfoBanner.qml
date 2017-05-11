@@ -52,7 +52,7 @@ Rectangle {
 
     Timer {
         id: closeTimer
-        interval: 3000
+        interval: 5000
         onTriggered: {
             infoBanner.opacity = 0.0
             infoBanner.height = 0
