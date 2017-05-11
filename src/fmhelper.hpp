@@ -18,6 +18,10 @@ class FM : public QObject
         {    //qDebug() << "Called the C++ slot and request removal of:" << url;
              QFile(url).remove();
         }
+        void removeDir(const QString &url)
+        {
+            QDir(url).removeRecursively();
+        }
         QString getHome()
         {    //qDebug() << "Called the C++ slot and request removal of:" << url;
              return QDir::homePath();

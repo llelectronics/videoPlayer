@@ -121,7 +121,8 @@ Page {
 
             function remove() {
                 var removal = removalComponent.createObject(bgdelegate)
-                removal.execute(delegate,qsTr("Deleting ") + fileName, function() { _fm.remove(filePath); })
+                if (fileIsDir) removal.execute(delegate,qsTr("Deleting ") + fileName, function() { _fm.removeDir(filePath); })
+                else removal.execute(delegate,qsTr("Deleting ") + fileName, function() { _fm.remove(filePath); })
             }
 
             ListItem {
