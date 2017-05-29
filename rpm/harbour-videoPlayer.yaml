@@ -18,6 +18,8 @@ PkgConfigBR:
 - sailfishapp >= 0.0.10
 Requires:
 - sailfishsilica-qt5 >= 0.10.9
+- python
+- mpris-qt5
 Files:
 - '%{_bindir}'
 - '%{_datadir}/%{name}/qml'
@@ -27,4 +29,3 @@ Files:
 - /usr/share/harbour-videoPlayer
 - /usr/share/applications
 - /usr/share/icons/hicolor/86x86/apps
-PkgBR: []

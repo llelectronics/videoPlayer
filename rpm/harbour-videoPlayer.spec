@@ -13,7 +13,7 @@ Name:       harbour-videoPlayer
 %{!?qtc_make:%define qtc_make make}
 %{?qtc_builddir:%define _builddir %qtc_builddir}
 Summary:    Simple video player using gstreamer
-Version:    1.9
+Version:    1.9.1
 Release:    1
 Group:      Qt/Qt
 License:    LICENSE
@@ -25,8 +25,8 @@ BuildRequires:  pkgconfig(Qt5Quick)
 BuildRequires:  pkgconfig(Qt5Qml)
 BuildRequires:  pkgconfig(Qt5Core)
 BuildRequires:  pkgconfig(sailfishapp) >= 0.0.10
-BuildRequires:  desktop-file-utils
 BuildRequires:  pkgconfig(mpris-qt5)
+BuildRequires:  desktop-file-utils
 
 %description
 Short description of my SailfishOS Application
