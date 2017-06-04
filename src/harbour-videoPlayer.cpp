@@ -58,6 +58,8 @@ int main(int argc, char *argv[])
     setenv("QT_NO_ANTIALIASING","1",1);
     setenv("QT_NO_FREE","0",0);
     setenv("QT_PREDICT_FUTURE", "1", 1);
+    setenv("QT_NO_BUG", "1", 1);
+    setenv("QT_NO_QT", "1", 1);
     // Taken from sailfish-browser
     setenv("USE_ASYNC", "1", 1);
     QQuickWindow::setDefaultAlphaBuffer(true);
