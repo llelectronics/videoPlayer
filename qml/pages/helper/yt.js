@@ -134,7 +134,7 @@ function getYoutubeStream(youtube_id) {
                     //***********************************************//
 
                     // Try to get 720p HD video stream first
-                    if ((i + 1) % 5 === 0 && itag === "22") { // 5 parameters per video; itag 22 is "MP4 720p", see http://userscripts.org/scripts/review/25105
+                    if ((i + 1) % 4 === 0 && itag === "22") { // 5 parameters per video; itag 22 is "MP4 720p", see http://userscripts.org/scripts/review/25105
                         resolutionFormat = "MP4 720p"
                         firstPage.url720p = url += "&signature=" + sig;
                         url += "&signature=" + sig;
@@ -142,21 +142,21 @@ function getYoutubeStream(youtube_id) {
                     }
                     // If above fails try to get 480p video stream
                     // TODO: This is not working. Need to check it in the future
-                    else if ((i + 1) % 12 === 0 && itag === "135") { // 12 parameters per video; itag 135 is "MP4 480p", see http://userscripts.org/scripts/review/25105
+                    else if ((i + 1) % 4 === 0 && itag === "35") { // 12 parameters per video; itag 135 is "MP4 480p", see http://userscripts.org/scripts/review/25105
                         resolutionFormat = "MP4 480p"
                         firstPage.url480p = url += "&signature=" + sig;
                         if (found == false) url += "&signature=" + sig;
                         found = true;
                     }
                     // If above fails try to get 360p video stream
-                    else if ((i + 1) % 5 === 0 && itag === "18") { // 5 parameters per video; itag 18 is "MP4 360p", see http://userscripts.org/scripts/review/25105
+                    else if ((i + 1) % 4 === 0 && itag === "18") { // 5 parameters per video; itag 18 is "MP4 360p", see http://userscripts.org/scripts/review/25105
                         resolutionFormat = "MP4 360p"
                         firstPage.url360p = url += "&signature=" + sig;
                         if (found == false) url += "&signature=" + sig;
                         found = true;
                     }
                     // If above fails try to get 240p video stream
-                    else if ((i + 1) % 5 === 0 && itag === "36") { // 5 parameters per video; itag 36 is "3GPP 240p", see http://userscripts.org/scripts/review/25105
+                    else if ((i + 1) % 4 === 0 && itag === "36") { // 5 parameters per video; itag 36 is "3GPP 240p", see http://userscripts.org/scripts/review/25105
                         resolutionFormat = "FLV 240p"
                         firstPage.url240p = url += "&signature=" + sig;
                         if (found == false) url += "&signature=" + sig;
