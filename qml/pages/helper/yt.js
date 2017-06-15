@@ -69,10 +69,11 @@ function getYoutubeStream(youtube_id) {
 
             var videoInfoSplit = videoInfo.split("&");
             var streams;
+            var paramPair;
 
             for (var i = 0; i < videoInfo.length; i++) {
                 try {
-                    var paramPair = videoInfoSplit[i].split("=");
+                    paramPair = videoInfoSplit[i].split("=");
                 } catch(e) {
                     msg = "[yt.js]: " + e
                     //console.debug(msg)
@@ -90,77 +91,85 @@ function getYoutubeStream(youtube_id) {
                 //return;
             }
             try {
-                var streamsSplit = streams.split("&");
+                var streamsSplit = streams.split(",");
+                //console.debug(" --- STREAMSPLIT : " + streamsSplit[1] + " , " + streamsSplit[2] + " , " + streamsSplit[3] + " , " + streamsSplit[4]);
             } catch(e) {
-                  msg = "[yt.js]: " + e
-//                console.debug(msg)
+                msg = "[yt.js]: " + e
+                //                console.debug(msg)
             }
             try {
-                // some lines contain two value pairs separated by comma
-                var newSplit = [];
-                for (var i = 0; i < streamsSplit.length; i++) {
-                    var secondSplit = streamsSplit[i].split(",");
-                    newSplit.push.apply(newSplit, secondSplit);
-                }
-                streamsSplit = newSplit;
-
-                var url, sig, itag;
+                var secondSplit;
                 var found = false;
-                var resolutionFormat;
                 for (var i = 0; i < streamsSplit.length; i++) {
-                    var paramPair = streamsSplit[i].split("=");
-                    if (paramPair[0] === "url") {
-                        url = decodeURIComponent(paramPair[1]);
-                    } else if (paramPair[0] === "sig") {
-                        sig = paramPair[1]; // do not decode, as we would have to encode it later (although decoding/encoding has currently no effect for the signature)
-                    } else if (paramPair[0] === "itag") {
-                        itag = paramPair[1];
-                    }
-                    //***********************************************//
-                    //     List of video formats as of 2012.12.10    //
-                    // fmt=17   144p        vq=?           ?    vorbis   //
-                    // fmt=36   240p        vq=small/tiny  ?    vorbis   //
-                    // fmt=5    240p        vq=small/tiny  flv  mp3      //
-                    // fmt=18   360p        vq=medium      mp4  aac      //
-                    // fmt=34   360p        vq=medium      flv  aac      //
-                    // fmt=43   360p        vq=medium      vp8  vorbis   //
-                    // fmt=35   480p        vq=large       flv  aac      //
-                    // fmt=44   480p        vq=large       vp8  vorbis   //
-                    // fmt=22   720p        vq=hd720       mp4  aac      //
-                    // fmt=45   720p        vq=hd720       vp8  vorbis   //
-                    // fmt=37  1080p        vq=hd1080      mp4  aac      //
-                    // fmt=46  1080p        vq=hd1080      vp8  vorbis   //
-                    // fmt=38  1536p        vq=highres     mp4  aac      //
-                    //***********************************************//
+                    secondSplit = streamsSplit[i].split("&");
+//                    console.debug(" --- STREAMSPLIT 2 streamsSplit.length : " + streamsSplit.length)
+//                    console.debug(" --- STREAMSPLIT 2 : " + i);
+//                    console.debug(" --- STREAMSPLIT 2 --- : " + secondSplit[0] + " , " + secondSplit[1]+ " , " + secondSplit[2]+ " , " + secondSplit[3]);
+//                    }
 
-                    // Try to get 720p HD video stream first
-                    if ((i + 1) % 4 === 0 && itag === "22") { // 5 parameters per video; itag 22 is "MP4 720p", see http://userscripts.org/scripts/review/25105
-                        resolutionFormat = "MP4 720p"
-                        firstPage.url720p = url += "&signature=" + sig;
-                        url += "&signature=" + sig;
-                        found = true;
-                    }
-                    // If above fails try to get 480p video stream
-                    // TODO: This is not working. Need to check it in the future
-                    else if ((i + 1) % 4 === 0 && itag === "35") { // 12 parameters per video; itag 135 is "MP4 480p", see http://userscripts.org/scripts/review/25105
-                        resolutionFormat = "MP4 480p"
-                        firstPage.url480p = url += "&signature=" + sig;
-                        if (found == false) url += "&signature=" + sig;
-                        found = true;
-                    }
-                    // If above fails try to get 360p video stream
-                    else if ((i + 1) % 4 === 0 && itag === "18") { // 5 parameters per video; itag 18 is "MP4 360p", see http://userscripts.org/scripts/review/25105
-                        resolutionFormat = "MP4 360p"
-                        firstPage.url360p = url += "&signature=" + sig;
-                        if (found == false) url += "&signature=" + sig;
-                        found = true;
-                    }
-                    // If above fails try to get 240p video stream
-                    else if ((i + 1) % 4 === 0 && itag === "36") { // 5 parameters per video; itag 36 is "3GPP 240p", see http://userscripts.org/scripts/review/25105
-                        resolutionFormat = "FLV 240p"
-                        firstPage.url240p = url += "&signature=" + sig;
-                        if (found == false) url += "&signature=" + sig;
-                        found = true;
+                    var url="", sig="", itag="";
+                    var resolutionFormat;
+                    for (var j = 0; j < secondSplit.length; j++) {
+                        paramPair = secondSplit[j].split("=");
+                        //                    console.debug(" --- STREAMS PARAM PAIR : " + i);
+                        //                    console.debug(" --- STREAMS PARAM PAIR --- : " + paramPair[0] + " = " + paramPair[1]);
+                        if (paramPair[0] === "url") {
+                            url = decodeURIComponent(paramPair[1]);
+                        } else if (paramPair[0] === "sig") {
+                            sig = paramPair[1]; // do not decode, as we would have to encode it later (although decoding/encoding has currently no effect for the signature)
+                        } else if (paramPair[0] === "itag") {
+                            itag = paramPair[1];
+                        }
+                        //***********************************************//
+                        //     List of video formats as of 2012.12.10    //
+                        // fmt=17   144p        vq=?           ?    vorbis   //
+                        // fmt=36   240p        vq=small/tiny  ?    vorbis   //
+                        // fmt=5    240p        vq=small/tiny  flv  mp3      //
+                        // fmt=18   360p        vq=medium      mp4  aac      //
+                        // fmt=34   360p        vq=medium      flv  aac      //
+                        // fmt=43   360p        vq=medium      vp8  vorbis   //
+                        // fmt=35   480p        vq=large       flv  aac      //
+                        // fmt=44   480p        vq=large       vp8  vorbis   //
+                        // fmt=22   720p        vq=hd720       mp4  aac      //
+                        // fmt=45   720p        vq=hd720       vp8  vorbis   //
+                        // fmt=37  1080p        vq=hd1080      mp4  aac      //
+                        // fmt=46  1080p        vq=hd1080      vp8  vorbis   //
+                        // fmt=38  1536p        vq=highres     mp4  aac      //
+                        //***********************************************//
+
+                        // Try to get 720p HD video stream first
+                        if (itag === "22" && typeof url !== 'undefined' && url != "") { // 5 parameters per video; itag 22 is "MP4 720p", see http://userscripts.org/scripts/review/25105
+                            resolutionFormat = "MP4 720p"
+                            firstPage.url720p = url += "&signature=" + sig;
+                            url += "&signature=" + sig;
+                            found = true;
+                            break;
+                        }
+                        // If above fails try to get 480p video stream
+                        // TODO: This is not working. Need to check it in the future
+                        else if (itag === "35" && typeof url !== 'undefined' && url != "") { // 12 parameters per video; itag 135 is "MP4 480p", see http://userscripts.org/scripts/review/25105
+                            resolutionFormat = "MP4 480p"
+                            firstPage.url480p = url += "&signature=" + sig;
+                            if (found == false) url += "&signature=" + sig;
+                            found = true;
+                            break;
+                        }
+                        // If above fails try to get 360p video stream
+                        else if (itag === "18" && typeof url !== 'undefined' && url != "") { // 5 parameters per video; itag 18 is "MP4 360p", see http://userscripts.org/scripts/review/25105
+                            resolutionFormat = "MP4 360p"
+                            firstPage.url360p = url += "&signature=" + sig;
+                            if (found == false) url += "&signature=" + sig;
+                            found = true;
+                            break;
+                        }
+                        // If above fails try to get 240p video stream
+                        else if (itag === "36" && typeof url !== 'undefined' && url != "") { // 5 parameters per video; itag 36 is "3GPP 240p", see http://userscripts.org/scripts/review/25105
+                            resolutionFormat = "FLV 240p"
+                            firstPage.url240p = url += "&signature=" + sig;
+                            if (found == false) url += "&signature=" + sig;
+                            found = true;
+                            break;
+                        }
                     }
                 }
 
