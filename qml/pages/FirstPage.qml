@@ -180,9 +180,10 @@ Page {
             title: qsTr("Open Video")
             Component.onDestruction: {
                 //console.debug("[OpenURLPage.qml]: Selected Video: " + selectedContent);
-                mainWindow.firstPage.loadPlayer();
                 mainWindow.firstPage.originalUrl = selectedContent;
                 mainWindow.firstPage.streamUrl = selectedContent;
+                mainWindow.firstPage.autoplay = true;
+                mainWindow.firstPage.loadPlayer();
             }
         }
     }
@@ -195,6 +196,7 @@ Page {
             onFileOpen: {
                 mainWindow.firstPage.originalUrl = path;
                 mainWindow.firstPage.streamUrl = path;
+                mainWindow.firstPage.autoplay = true;
                 mainWindow.firstPage.loadPlayer();
             }
         }

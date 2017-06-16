@@ -49,6 +49,7 @@ Page {
             dataContainer.originalUrl = url;
             dataContainer.streamUrl = url;
             dataContainer.streamTitle = "";
+            dataContainer.autoplay = true;
             dataContainer.loadPlayer();
         }
         onFileRemove: {

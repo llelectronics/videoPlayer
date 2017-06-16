@@ -117,9 +117,9 @@ Page {
         if (dataContainer.streamTitle == "") dataContainer.streamTitle = mainWindow.findBaseName(streamUrl)
         dataContainer.ytdlStream = false
 
-        if (streamUrl.toString().match("^file://")) {
+        if (streamUrl.toString().match("^file://") || streamUrl.toString().match("^/")) {
             savePositionMsec = DB.getPosition(streamUrl.toString());
-            //console.debug("[videoPlayer.qml] streamUrl= " + streamUrl + " savePositionMsec= " + savePositionMsec + " streamUrl.length = " + streamUrl.length);
+            console.debug("[videoPlayer.qml] streamUrl= " + streamUrl + " savePositionMsec= " + savePositionMsec + " streamUrl.length = " + streamUrl.length);
             if (savePositionMsec !== "Not Found") savedPosition = true;
             else savedPosition = false;
         }
@@ -436,8 +436,6 @@ Page {
                 active: mediaItem.active
                 source: streamUrl
                 onSourceChanged: {
-                    player.stop();
-                    //play();  // autoPlay TODO: add config for it
                     position = 0;
                     player.seek(0);
                     //console.debug("Source changed to " + source)
@@ -502,22 +500,24 @@ Page {
                     // reset
                     dataContainer.streamUrl = ""
                     dataContainer.streamTitle = ""
-                    mediaPlayer.stop()
+                    videoPoster.player.stop();
                     // before load new
                     streamUrl = mainWindow.modelPlaylist.next() ;
                     mediaPlayer.source = streamUrl
-                    videoPoster.player.play();
+                    videoPauseTrigger();
+                    mediaPlayer.play();
                 }
 
                 function prev() {
                     // reset
                     dataContainer.streamUrl = ""
                     dataContainer.streamTitle = ""
-                    mediaPlayer.stop()
+                    videoPoster.player.stop();
                     // before load new
                     streamUrl = mainWindow.modelPlaylist.prev() ;
                     mediaPlayer.source = streamUrl
-                    videoPoster.player.play();
+                    videoPauseTrigger();
+                    mediaPlayer.play();
                 }
 
                 onClicked: {

@@ -88,6 +88,7 @@ Page
                         dataContainer.streamUrl = url;
                         mainWindow.modelPlaylist.current = index;
                         dataContainer.isPlaylist = true;
+                        dataContainer.autoplay = true;
                         dataContainer.loadPlayer();
                     }
                     onPressAndHold: {
