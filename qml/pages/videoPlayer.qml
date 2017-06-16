@@ -506,6 +506,7 @@ Page {
                     mediaPlayer.source = streamUrl
                     videoPauseTrigger();
                     mediaPlayer.play();
+                    hideControls();
                 }
 
                 function prev() {
@@ -518,6 +519,7 @@ Page {
                     mediaPlayer.source = streamUrl
                     videoPauseTrigger();
                     mediaPlayer.play();
+                    hideControls();
                 }
 
                 onClicked: {

@@ -144,9 +144,20 @@ Page {
             }
         }
 
+        PushUpMenu {
+            MenuItem {
+                text: "Scroll to top"
+                onClicked: entriesList.scrollToTop();
+            }
+            MenuItem {
+                text : "Show Playlist"
+                onClicked: pageStack.push(Qt.resolvedUrl("../PlaylistPage.qml"), {dataContainer: mainWindow.firstPage, modelPlaylist: mainWindow.modelPlaylist});
+            }
+        }
+
         delegate: BackgroundItem {
             id: bgdelegate
-            width: parent.width
+            width: view.width
             height: menuOpen ? contextMenu.height + delegate.height : delegate.height
             property Item contextMenu
             property bool menuOpen: contextMenu != null && contextMenu.parent === bgdelegate
@@ -165,6 +176,11 @@ Page {
             function move() {
                 _fm.moveMode = true;
                 copy();
+            }
+
+            function add2playlist() {
+                mainWindow.infoBanner.showText(mainWindow.findBaseName(filePath) + " " + qsTr("added to playlist"));
+                mainWindow.modelPlaylist.addTrack(filePath);
             }
 
             ListItem {
@@ -271,6 +287,13 @@ Page {
             Component {
                 id: myMenu
                 ContextMenu {
+                    MenuItem {
+                        text: qsTr("Add to playlist")
+                        onClicked: {
+                            bgdelegate.add2playlist();
+                        }
+                    }
+
                     MenuItem {
                         text: qsTr("Cut")
                         onClicked: {

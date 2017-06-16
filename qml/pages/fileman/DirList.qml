@@ -205,6 +205,10 @@ SilicaListView {
             text: "Scroll to top"
             onClicked: entriesList.scrollToTop();
         }
+        MenuItem {
+            text : "Show Playlist"
+            onClicked: pageStack.push(Qt.resolvedUrl("../PlaylistPage.qml"), {dataContainer: mainWindow.firstPage, modelPlaylist: mainWindow.modelPlaylist});
+        }
     }
 
     RemorsePopup {

@@ -40,6 +40,13 @@ ContextMenu {
         });
 
     }
+    MenuItem {
+        text: "Add to playlist"
+        onClicked: {
+            mainWindow.infoBanner.showText(mainWindow.findBaseName(filePath) + " " + qsTr("added to playlist"));
+            mainWindow.modelPlaylist.addTrack(filePath);
+        }
+    }
 
     MenuItem {
         text: "Cut"
