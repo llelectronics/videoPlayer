@@ -30,12 +30,6 @@ MouseArea {
     implicitWidth: poster.implicitWidth
     implicitHeight: poster.implicitHeight
 
-    function play() {
-        videoItem.playClicked();
-        videoItem.player.source = videoItem.source;
-        videoItem.player.play();
-    }
-
     function ffwd(seconds) {
         videoItem.player.seek((positionSlider.value*1000) + (seconds * 1000))
     }
@@ -149,8 +143,6 @@ MouseArea {
                     if (videoItem.source.toString().length !== 0) {
                         //console.debug("Yeah we have a video source")
                         videoItem.playClicked();
-                        videoItem.player.source = videoItem.source;
-                        videoItem.player.play();
                     }
                 }
             }

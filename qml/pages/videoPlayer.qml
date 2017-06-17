@@ -444,8 +444,16 @@ Page {
                 //source: "http://netrunnerlinux.com/vids/default-panel-script.mkv"
                 //source: "http://www.ytapi.com/?vid=lfAixpkzcBQ&format=direct"
 
+                function play() {
+                    playClicked();
+                }
+
                 onPlayClicked: {
-                    toggleControls();
+                    console.debug("Loading source into player")
+                    player.source = source;
+                    console.debug("Starting playback")
+                    player.play();
+                    hideControls();
                     if (enableSubtitles) {
                         subTitleLoader.item.getSubtitles(subtitleUrl);
                     }
@@ -502,7 +510,7 @@ Page {
                     dataContainer.streamTitle = ""
                     videoPoster.player.stop();
                     // before load new
-                    streamUrl = mainWindow.modelPlaylist.next() ;
+                    dataContainer.streamUrl = mainWindow.modelPlaylist.next() ;
                     mediaPlayer.source = streamUrl
                     videoPauseTrigger();
                     mediaPlayer.play();
@@ -515,7 +523,7 @@ Page {
                     dataContainer.streamTitle = ""
                     videoPoster.player.stop();
                     // before load new
-                    streamUrl = mainWindow.modelPlaylist.prev() ;
+                    dataContainer.streamUrl = mainWindow.modelPlaylist.prev() ;
                     mediaPlayer.source = streamUrl
                     videoPauseTrigger();
                     mediaPlayer.play();
@@ -647,6 +655,11 @@ Page {
             source: MediaPlayer {
                 id: mediaPlayer
 
+                function loadPlaylistPage() {
+                    var playlistPage = pageStack.pushAttached(Qt.resolvedUrl("PlaylistPage.qml"), { "dataContainer" : videoPlayerPage, "modelPlaylist" : mainWindow.modelPlaylist, "isPlayer" : true});
+
+                }
+
                 function loadMetaDataPage() {
                     //console.debug("Loading metadata page")
                     var mDataTitle;
@@ -690,7 +703,8 @@ Page {
                     }
                     else  {
                         progressCircle.visible = false;
-                        loadMetaDataPage();
+                        if (!isPlaylist) loadMetaDataPage();
+                        else loadPlaylistPage();
                     }
                     if (metaData.title) {
                         dPage.title = metaData.title
@@ -709,12 +723,12 @@ Page {
 
                 onError: {
                     // Just a little help
-        //            MediaPlayer.NoError - there is no current error.
-        //            MediaPlayer.ResourceError - the video cannot be played due to a problem allocating resources.
-        //            MediaPlayer.FormatError - the video format is not supported.
-        //            MediaPlayer.NetworkError - the video cannot be played due to network issues.
-        //            MediaPlayer.AccessDenied - the video cannot be played due to insufficient permissions.
-        //            MediaPlayer.ServiceMissing - the video cannot be played because the media service could not be instantiated.
+                    //            MediaPlayer.NoError - there is no current error.
+                    //            MediaPlayer.ResourceError - the video cannot be played due to a problem allocating resources.
+                    //            MediaPlayer.FormatError - the video format is not supported.
+                    //            MediaPlayer.NetworkError - the video cannot be played due to network issues.
+                    //            MediaPlayer.AccessDenied - the video cannot be played due to insufficient permissions.
+                    //            MediaPlayer.ServiceMissing - the video cannot be played because the media service could not be instantiated.
                     if (error == MediaPlayer.ResourceError) errorTxt.text = "Ressource Error";
                     else if (error == MediaPlayer.FormatError) errorTxt.text = "Format Error";
                     else if (error == MediaPlayer.NetworkError) errorTxt.text = "Network Error";
@@ -724,7 +738,7 @@ Page {
                     // Prepare user friendly advise on error
                     errorDetail.text = errorString;
                     if (error == MediaPlayer.ResourceError) errorDetail.text += qsTr("\nThe video cannot be played due to a problem allocating resources.\n\
-On Youtube Videos please make sure to be logged in. Some videos might be geoblocked or require you to be logged into youtube.")
+            On Youtube Videos please make sure to be logged in. Some videos might be geoblocked or require you to be logged into youtube.")
                     else if (error == MediaPlayer.FormatError) errorDetail.text += qsTr("\nThe audio and or video format is not supported.")
                     else if (error == MediaPlayer.NetworkError) errorDetail.text += qsTr("\nThe video cannot be played due to network issues.")
                     else if (error == MediaPlayer.AccessDenied) errorDetail.text += qsTr("\nThe video cannot be played due to insufficient permissions.")

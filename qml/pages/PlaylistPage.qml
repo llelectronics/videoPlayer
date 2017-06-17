@@ -12,9 +12,19 @@ Page
     property string playlistTitle
     property QtObject dataContainer
     property ListModel modelPlaylist
+    property bool isPlayer: false
+
+    property int _curPlayingIndex : -1;
 
     RemorsePopup {
         id: globalRemorse
+    }
+
+    Component.onCompleted: {
+        if (isPlayer && dataContainer && modelPlaylist) {
+            _curPlayingIndex = modelPlaylist.getPosition(dataContainer.streamUrl)
+        }
+        repeater1.currentIndex = _curPlayingIndex
     }
 
     Column
@@ -74,22 +84,46 @@ Page
 
                 BackgroundItem {
                     id: contentItem
+                    Image {
+                         id: playIcon
+                         anchors.verticalCenter: parent.verticalCenter
+                         anchors.left: parent.left
+                         anchors.leftMargin: Theme.paddingMedium
+                         visible: isPlayer && repeater1.currentIndex == index
+                         width: Theme.itemSizeExtraSmall
+                         height: width
+                         source: "image://theme/icon-m-play"
+                    }
                     Label {
                         text: title
                         anchors.verticalCenter: parent.verticalCenter
-                        color: contentItem.down || menuOpen ? Theme.highlightColor : Theme.primaryColor
+                        color: contentItem.down || menuOpen || repeater1.currentIndex == index ? Theme.highlightColor : Theme.primaryColor
                         truncationMode: TruncationMode.Fade
                         width: parent.width - (Theme.paddingMedium * 2)
                         anchors.right: parent.right
-                        anchors.left: parent.left
+                        anchors.left: playIcon.visible ? playIcon.right : parent.left
                         anchors.margins: { left: Theme.paddingMedium; right: Theme.paddingMedium }
                     }
                     onClicked: {
-                        dataContainer.streamUrl = url;
-                        mainWindow.modelPlaylist.current = index;
-                        dataContainer.isPlaylist = true;
-                        dataContainer.autoplay = true;
-                        dataContainer.loadPlayer();
+                        if (isPlayer) {
+                            // Workaround for hanging player
+                            dataContainer.streamUrl = "";
+                            dataContainer.videoPoster.player.stop();
+                            dataContainer.videoPoster.player.play();
+                            dataContainer.videoPoster.player.stop();
+                            //
+                            dataContainer.streamUrl = url;
+                            dataContainer.videoPoster.player.source = url;
+                            dataContainer.videoPoster.play();
+                            pageStack.navigateBack();
+                        }
+                        else {
+                            dataContainer.streamUrl = url;
+                            mainWindow.modelPlaylist.current = index;
+                            dataContainer.isPlaylist = true;
+                            dataContainer.autoplay = true;
+                            dataContainer.loadPlayer();
+                        }
                     }
                     onPressAndHold: {
                         if (!contextMenu)

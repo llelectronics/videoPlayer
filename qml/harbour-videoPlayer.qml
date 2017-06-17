@@ -260,6 +260,14 @@ ApplicationWindow
             append({"title" : findBaseName(url), "url" : url});
             playlist.add(url);
         }
+
+        function getPosition(str) {
+            for (var i=0; i<count; i++) {
+                if (get(i).url == str)  {
+                    return i;
+                }
+            }
+        }
     }
 
     Playlist {
