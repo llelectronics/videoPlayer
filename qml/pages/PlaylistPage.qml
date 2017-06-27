@@ -107,13 +107,13 @@ Page
                     onClicked: {
                         if (isPlayer) {
                             // Workaround for hanging player
-                            dataContainer.streamUrl = "";
+                            firstPage.streamUrl = "";
                             dataContainer.videoPoster.player.stop();
                             dataContainer.videoPoster.player.play();
                             dataContainer.videoPoster.player.stop();
                             //
-                            dataContainer.streamUrl = url;
-                            dataContainer.videoPoster.player.source = url;
+                            mainWindow.modelPlaylist.current = index;
+                            firstPage.streamUrl = url;
                             dataContainer.videoPoster.play();
                             pageStack.navigateBack();
                         }
