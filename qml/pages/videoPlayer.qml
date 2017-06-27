@@ -51,11 +51,13 @@ Page {
     property bool subtitleSolid: dataContainer.subtitleSolid
     property bool isPlaylist: dataContainer.isPlaylist
     property bool isNewSource: false
+    property string onlyMusicState: dataContainer.onlyMusicState
 
     property alias showTimeAndTitle: showTimeAndTitle
     property alias pulley: pulley
     property alias onlyMusic: onlyMusic
     property alias videoPoster: videoPoster
+
 
     Component.onCompleted: {
         if (autoplay) {
@@ -299,6 +301,7 @@ Page {
             width: Screen.width / 1.25
             height: width
             playing: false
+            state: onlyMusicState
 
             states: [
                     State {

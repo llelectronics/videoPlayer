@@ -53,6 +53,7 @@ Page {
     property bool ytdlStream: false
     property bool subtitleSolid: false
     property bool isPlaylist: false
+    property string onlyMusicState: "default"
     /////////////////////////////////////////////////////
 
     // Videoplayer properties //////////////////////////

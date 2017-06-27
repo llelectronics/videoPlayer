@@ -52,6 +52,7 @@ Dialog {
         DB.addSetting("liveView", liveViewSwitch.checked.toString());
         DB.addSetting("subtitleSolid", solidSubtitlesSwitch.checked.toString());
         DB.addSetting("ytDefaultQual", ytDefaultQualCombo.qual.toString());
+        DB.addSetting("onlyMusicState", onlyMusicCombo.onlyMusicState.toString());
         DB.getSettings();
     }
 
@@ -420,6 +421,31 @@ Dialog {
                 anchors.horizontalCenter: parent.horizontalCenter
                 text: "Use live preview when minimized"
                 checked: mainWindow.firstPage.liveView
+            }
+
+            ComboBox {
+                id: onlyMusicCombo
+                anchors.horizontalCenter: parent.horizontalCenter
+                label: qsTr("Music Only Indicator")
+                visible: loadSubtitlesSwitch.checked
+                property string onlyMusicState: mainWindow.firstPage.onlyMusicState
+                currentIndex: {
+                    // Current Option
+                    if (mainWindow.firstPage.onlyMusicState === "default") return 0;
+                    else if (mainWindow.firstPage.onlyMusicState  === "mc") return 1;
+                    else if (mainWindow.firstPage.ytQualWanted === "eq") return 2;
+                }
+
+                menu: ContextMenu {
+                    MenuItem { text: "Default (Sound Icon)" }
+                    MenuItem { text: "MC (animated Music Cassette)" }
+                    MenuItem { text: "EQ (animated Equalizer)" }
+                }
+                onCurrentIndexChanged: {
+                    if (currentIndex == 0) onlyMusicState = "default"
+                    else if (currentIndex == 1) onlyMusicState = "mc"
+                    else if (currentIndex == 2) onlyMusicState = "eq"
+                }
             }
 
             BackgroundItem {
