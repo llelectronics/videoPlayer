@@ -296,9 +296,47 @@ Page {
             source: Qt.resolvedUrl("images/audio.png")
             opacity: 0.0
             Behavior on opacity { FadeAnimation { } }
-            width: parent.width / 1.25
+            width: Screen.width / 1.25
             height: width
             playing: false
+
+            states: [
+                    State {
+                        name: "default"
+                        PropertyChanges {
+                            target: onlyMusic;
+                            source: Qt.resolvedUrl("images/audio.png")
+                            width: Screen.width / 1.25
+                            height: onlyMusic.width
+                            rotation: 0
+                            playing: false
+                        }
+                    },
+                State {
+                    name: "mc"
+                    PropertyChanges {
+                        target: onlyMusic;
+                        source: Qt.resolvedUrl("images/audio-mc-anim.gif")
+                        width: Screen.height / 1.25
+                        height: Screen.width - Theme.paddingMedium
+                        rotation: 90 -videoPlayerPage.rotation
+                        playing: videoPoster.playing
+                    }
+                },
+                State {
+                    name: "eq"
+                    PropertyChanges {
+                        target: onlyMusic;
+                        source: Qt.resolvedUrl("images/audio-eq-anim.gif")
+                        width: Screen.height / 1.25
+                        height: Screen.width / 0.8
+                        rotation: 90 -videoPlayerPage.rotation
+                        playing: videoPoster.playing
+                    }
+                }
+
+                ]
+
         }
 
         ProgressCircle {
@@ -554,25 +592,13 @@ Page {
                 onPressAndHold: {
                     if (onlyMusic.opacity == 1.0) {
                         if (onlyMusic.source == Qt.resolvedUrl("images/audio.png")) {
-                            onlyMusic.source = Qt.resolvedUrl("images/audio-mc-anim.gif")
-                            onlyMusic.width = videoPlayerPage.height / 1.25
-                            onlyMusic.height = videoPlayerPage.width - Theme.paddingMedium
-                            onlyMusic.rotation = (videoPlayerPage.orientation == Orientation.Portrait || page.orientation == Orientation.PortraitInverted) ? 90 : 0
-                            onlyMusic.playing = videoPoster.playing
+                            onlyMusic.state = "mc"
                         }
                         else if (onlyMusic.source == Qt.resolvedUrl("images/audio-mc-anim.gif")) {
-                            onlyMusic.source = Qt.resolvedUrl("images/audio-eq-anim.gif")
-                            onlyMusic.width = videoPlayerPage.height / 1.25
-                            onlyMusic.height = videoPlayerPage.width / 0.8
-                            onlyMusic.rotation = (videoPlayerPage.orientation == Orientation.Portrait || page.orientation == Orientation.PortraitInverted) ? -90 : 0
-                            onlyMusic.playing = videoPoster.playing
+                            onlyMusic.state = "eq"
                         }
                         else {
-                            onlyMusic.source = Qt.resolvedUrl("images/audio.png")
-                            onlyMusic.width = videoPlayerPage.width / 1.25
-                            onlyMusic.height = onlyMusic.width
-                            onlyMusic.rotation = 0
-                            onlyMusic.playing = false
+                            onlyMusic.state = "default"
                         }
                     }
                 }
