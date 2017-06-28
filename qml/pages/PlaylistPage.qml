@@ -195,6 +195,8 @@ Page
                             saveReturn = mainWindow.playlist.save("/home/nemo/Music/playlists/" + mainWindow.modelPlaylist.name + ".pls")
                         if (saveReturn) {
                             console.debug("Saved successfully!")
+                            mainWindow.infoBanner.parent = playlistPage
+                            mainWindow.infoBanner.anchors.top = playlistPage
                             mainWindow.infoBanner.showText(qsTr("Playlist saved."))
                         }
                         else {

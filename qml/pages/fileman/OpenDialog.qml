@@ -137,6 +137,8 @@ Page {
                     if (err) {
                         var message = qsTr("Error pasting file ") + _fm.sourceUrl
                         console.debug(message);
+                        mainWindow.infoBanner.parent = page
+                        mainWindow.infoBanner.anchors.top = page.top
                         infoBanner.showText(message)
                     }
                     else _fm.sourceUrl = "";
@@ -179,6 +181,8 @@ Page {
             }
 
             function add2playlist() {
+                mainWindow.infoBanner.parent = page
+                mainWindow.infoBanner.anchors.top = page.top
                 mainWindow.infoBanner.showText(mainWindow.findBaseName(filePath) + " " + qsTr("added to playlist"));
                 mainWindow.modelPlaylist.addTrack(filePath);
             }

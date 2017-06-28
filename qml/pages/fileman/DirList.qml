@@ -194,6 +194,8 @@ SilicaListView {
                 if (err) {
                     var message = qsTr("Error pasting file ") + _fm.sourceUrl
                     console.debug(message);
+                    mainWindow.infoBanner.parent = firstPage
+                    mainWindow.infoBanner.anchors.top = firstPage.top
                     infoBanner.showText(message)
                 }
                 else _fm.sourceUrl = "";

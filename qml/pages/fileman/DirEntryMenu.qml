@@ -43,6 +43,8 @@ ContextMenu {
     MenuItem {
         text: "Add to playlist"
         onClicked: {
+            mainWindow.infoBanner.parent = firstPage
+            mainWindow.infoBanner.anchors.top = firstPage.top
             mainWindow.infoBanner.showText(mainWindow.findBaseName(filePath) + " " + qsTr("added to playlist"));
             mainWindow.modelPlaylist.addTrack(filePath);
         }
