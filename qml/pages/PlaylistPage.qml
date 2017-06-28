@@ -196,7 +196,7 @@ Page
                         if (saveReturn) {
                             console.debug("Saved successfully!")
                             mainWindow.infoBanner.parent = playlistPage
-                            mainWindow.infoBanner.anchors.top = playlistPage
+                            mainWindow.infoBanner.anchors.top = playlistPage.top
                             mainWindow.infoBanner.showText(qsTr("Playlist saved."))
                         }
                         else {
