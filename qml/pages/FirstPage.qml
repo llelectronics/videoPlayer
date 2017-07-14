@@ -184,6 +184,7 @@ Page {
                 mainWindow.firstPage.originalUrl = selectedContent;
                 mainWindow.firstPage.streamUrl = selectedContent;
                 mainWindow.firstPage.autoplay = true;
+                mainWindow.firstPage.isPlaylist = false;
                 mainWindow.firstPage.loadPlayer();
             }
         }
@@ -198,6 +199,7 @@ Page {
                 mainWindow.firstPage.originalUrl = path;
                 mainWindow.firstPage.streamUrl = path;
                 mainWindow.firstPage.autoplay = true;
+                mainWindow.firstPage.isPlaylist = false;
                 mainWindow.firstPage.loadPlayer();
             }
         }

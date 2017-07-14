@@ -50,6 +50,7 @@ Page {
             dataContainer.streamUrl = url;
             dataContainer.streamTitle = "";
             dataContainer.autoplay = true;
+            dataContainer.isPlaylist = false;
             dataContainer.loadPlayer();
         }
         onFileRemove: {
