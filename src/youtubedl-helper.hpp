@@ -9,6 +9,7 @@
 #include <QByteArray>
 #include <QFile>
 #include <QStandardPaths>
+#include <QFileDevice>
 
 class ythelper : public QObject
 {   Q_OBJECT
@@ -48,6 +49,7 @@ public slots:
             ytdlBin.setFileName("/usr/share/harbour-videoPlayer/qml/pages/helper/youtube-dl");
             ytdlBin.copy(data_dir + "/youtube-dl");
         }
+        ytdlBin.setPermissions(QFileDevice::ExeUser|QFileDevice::ExeGroup|QFileDevice::ExeOther|QFileDevice::ReadUser|QFileDevice::ReadGroup|QFileDevice::ReadOther);
     }
     void updateYtdl()
     {
