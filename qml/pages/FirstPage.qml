@@ -257,6 +257,7 @@ Page {
             text: qsTr(name)
             onClicked: {
                 errTxt.visible = false;
+                autoplay = false;
                 if (btnId == "historyBtn") drawer.open = !drawer.open
                 else if (btnId == "bookmarksBtn")
                     pageStack.push(Qt.resolvedUrl("BookmarksPage.qml"), {dataContainer: page, modelBookmarks: mainWindow.modelBookmarks});
