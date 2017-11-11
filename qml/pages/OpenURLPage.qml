@@ -31,7 +31,7 @@ Dialog {
             }
         }
         else {
-            if (mainWindow.isUrl(urlField.text.toString()) === true) {
+            if ((!urlField.text.toString().indexOf("rtsp")) && mainWindow.isUrl(urlField.text.toString()) === true) {
                 // Call C++ side here to grab url
                 _ytdl.setUrl(urlField.text.toString());
                 _ytdl.getStreamUrl();
