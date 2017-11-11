@@ -78,12 +78,14 @@ Page {
                     }
                 }
                 else {
-                    firstPage.streamUrl = url
-                    if (name == "MP4 720p") firstPage.ytQual = "720p"
-                    else if (name == "FLV 480p") firstPage.ytQual = "480p"
-                    else if (name == "MP4 360p") firstPage.ytQual = "360p"
-                    else if (name == "FLV 240p") firstPage.ytQual = "240p"
-                    pageStack.pop();
+                    if (url != "") {
+                        firstPage.streamUrl = url
+                        if (name == "MP4 720p") firstPage.ytQual = "720p"
+                        else if (name == "FLV 480p") firstPage.ytQual = "480p"
+                        else if (name == "MP4 360p") firstPage.ytQual = "360p"
+                        else if (name == "FLV 240p") firstPage.ytQual = "240p"
+                        pageStack.pop();
+                    }
                 }
             }
         }
