@@ -23,11 +23,22 @@ public:
     QProcess titleProcess;
     QProcess updateBinary;
     QString data_dir = QStandardPaths::writableLocation(QStandardPaths::DataLocation);
+    QString music_dir = QStandardPaths::writableLocation(QStandardPaths::MusicLocation);
+//    bool ffmpegAvailable = false;
+private:
+    QString _oggAudio;
+    QString _opusAudio;
+    QString _format;
+    QProcess oggProcess;
+    QProcess opusProcess;
 signals:
     void streamUrlChanged(QString changedUrl);
     void sTitleChanged(QString sTitle);
     void updateComplete();
+    void downloadComplete();
     void error(QString message);
+    void oggAudioChanged();
+    void opusAudioChanged();
 public slots:
     void setUrl(QString url)
     {
@@ -41,6 +52,18 @@ public slots:
     {
         return reqUrl;
     }
+//    bool getFfmpegAvailable()
+//    {
+//        return ffmpegAvailable;
+//    }
+    QString getOggAudioUrl()
+    {
+        return _oggAudio;
+    }
+    QString getOpusAudioUrl()
+    {
+        return _opusAudio;
+    }
     void checkAndInstall()
     {
         QFile ytdlBin;
@@ -50,6 +73,23 @@ public slots:
             ytdlBin.copy(data_dir + "/youtube-dl");
         }
         ytdlBin.setPermissions(QFileDevice::ExeUser|QFileDevice::ExeGroup|QFileDevice::ExeOther|QFileDevice::ReadUser|QFileDevice::ReadGroup|QFileDevice::ReadOther|QFileDevice::WriteUser|QFileDevice::WriteGroup|QFileDevice::WriteOther);
+
+//        // Detect ffmpeg binary from Encode App
+//        QFile ffmpegBin;
+//        ffmpegBin.setFileName("/usr/share/harbour-encode/ffmpeg_static");
+//        if (ffmpegBin.exists()) {
+//            //qDebug() << "ffmpegbin exists";
+//            ffmpegAvailable = true;
+//            QFile ffmpegHelperBin;
+//            ffmpegHelperBin.setFileName(data_dir + "/ffmpeg");
+//            if (!ffmpegHelperBin.exists()) {
+//                ffmpegBin.link(data_dir + "/ffmpeg");
+//            }
+//        }
+//        else {
+//            //qDebug() << "ffmpegbin does not exist";
+//            ffmpegAvailable = false;
+//        }
     }
     void updateYtdl()
     {
@@ -71,6 +111,54 @@ public slots:
         checkAndInstall();
         titleProcess.start(data_dir + "/youtube-dl -e " + reqUrl);
         connect(&titleProcess, SIGNAL(finished(int)), this, SLOT(getTitleOutput(int)));
+    }
+    void getMusicUrls()
+    {
+        getVorbisUrl();
+        getOpusUrl();
+    }
+
+    void getVorbisUrl()
+    {
+        checkAndInstall();
+        parameter = " ";
+        parameter += "-f 171";
+        oggProcess.start(data_dir + "/youtube-dl " + parameter + " -g " + reqUrl);
+        connect(&oggProcess, SIGNAL(finished(int)), this, SLOT(getOggUrlOutput(int)));
+    }
+    void getOpusUrl()
+    {
+        checkAndInstall();
+        parameter = " ";
+        parameter += "-f 251";
+        opusProcess.start(data_dir + "/youtube-dl " + parameter + " -g " + reqUrl);
+        connect(&opusProcess, SIGNAL(finished(int)), this, SLOT(getOpusUrlOutput(int)));
+    }
+    void getOggUrlOutput(int exitCode)
+    {
+        if (exitCode == 0) {
+            QByteArray out = oggProcess.readAllStandardOutput();
+            QList<QByteArray> outputList = out.split('\n');
+            qDebug() << "Called the C++ slot and got following url:" << outputList[0];
+            _oggAudio = outputList[0];
+            oggAudioChanged();
+        }
+        else {
+            printError();
+        }
+    }
+    void getOpusUrlOutput(int exitCode)
+    {
+        if (exitCode == 0) {
+            QByteArray out = opusProcess.readAllStandardOutput();
+            QList<QByteArray> outputList = out.split('\n');
+            qDebug() << "Called the C++ slot and got following url:" << outputList[0];
+            _opusAudio = outputList[0];
+            opusAudioChanged();
+        }
+        else {
+            printError();
+        }
     }
     void getStreamUrlOutput(int exitCode)
     {

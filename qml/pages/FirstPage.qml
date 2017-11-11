@@ -127,9 +127,13 @@ Page {
         historyModel.append({"hurl": url, "htitle": title});
     }
 
-    function updateYtdl() {
+    function bbusy() {
         busy.visible = true
         busy.running = true
+    }
+
+    function updateYtdl() {
+        bbusy();
         _ytdl.updateYtdl();
     }
 

@@ -241,6 +241,7 @@ Page {
                     // Illegal chars: `~!@#$%^&*()-=+\|/?.>,<;:'"[{]}
                     //console.debug("[FileDetails -> Download YT Video]: " + mainWindow.firstPage.youtubeDirectUrl)
                     mainWindow.firstPage.streamTitle = YT.getDownloadableTitleString(mainWindow.firstPage.streamTitle)
+                    _ytdl.setUrl(originalUrl);
                     pageStack.push(Qt.resolvedUrl("ytQualityChooser.qml"), {"streamTitle": mainWindow.firstPage.streamTitle, "url720p": url720p, "url480p": url480p, "url360p": url360p, "url240p": url240p, "ytDownload": true});
                 }
             }
@@ -642,6 +643,7 @@ Page {
                     // Filter out all chars that might stop the download manager from downloading the file
                     // Illegal chars: `~!@#$%^&*()-=+\|/?.>,<;:'"[{]}
                     streamTitle = YT.getDownloadableTitleString(streamTitle)
+                    _ytdl.setUrl(originalUrl);
                     pageStack.push(Qt.resolvedUrl("ytQualityChooser.qml"), {"streamTitle": streamTitle, "url720p": url720p, "url480p": url480p, "url360p": url360p, "url240p": url240p, "ytDownload": true});
                     drawer.open = !drawer.open
                 }

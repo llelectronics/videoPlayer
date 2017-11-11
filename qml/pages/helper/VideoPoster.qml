@@ -225,6 +225,7 @@ MouseArea {
                 }
                 onClicked: {
                     videoItem.player.pause()
+                    _ytdl.setUrl(firstPage.originalUrl);
                     pageStack.push(Qt.resolvedUrl("../ytQualityChooser.qml"), {"streamTitle": firstPage.streamTitle, "url720p": firstPage.url720p, "url480p": firstPage.url480p, "url360p": firstPage.url360p, "url240p": firstPage.url240p});
                 }
                 Label {

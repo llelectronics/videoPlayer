@@ -9,9 +9,16 @@ Page {
     property string url240p
     property bool ytDownload: false
 
+    // Private
+    property bool _oggLoaded
+    property bool _opusLoaded
+
     allowedOrientations: Orientation.All
 
     Component.onCompleted: {
+
+        _ytdl.getMusicUrls();
+        loading.running = true;
 
         if (url720p != "none" && url720p != undefined && url720p != "") {
             //console.debug("Added 720p with" + url720p)
@@ -29,7 +36,6 @@ Page {
             //console.debug("Added 240p with" + url240p)
             qualList.append({"name": "FLV 240p", "url":url240p})
         }
-
 
     }
 
@@ -61,11 +67,15 @@ Page {
             onClicked: {
                 if (ytDownload) {
                     var suf
-                    if (name == "MP4 720p") suf = ".mp4"
-                    else if (name == "FLV 480p") suf = ".flv"
-                    else if (name == "MP4 360p") suf = ".mp4"
-                    else if (name == "FLV 240p") suf = ".flv"
-                    pageStack.replace(Qt.resolvedUrl("DownloadManager.qml"), {"downloadUrl": url, "downloadName": streamTitle + suf});
+                    if (url != "") {
+                        if (name == "MP4 720p") suf = ".mp4"
+                        else if (name == "WEBM 480p") suf = ".webm"
+                        else if (name == "MP4 360p") suf = ".mp4"
+                        else if (name == "FLV 240p") suf = ".flv"
+                        else if (name == "vorbis@128k Audio (WEBM)") suf = ".webm"
+                        else if (name == "opus@160k Audio (WEBM)") suf = ".webm"
+                        pageStack.replace(Qt.resolvedUrl("DownloadManager.qml"), {"downloadUrl": url, "downloadName": streamTitle + suf});
+                    }
                 }
                 else {
                     firstPage.streamUrl = url
@@ -75,6 +85,34 @@ Page {
                     else if (name == "FLV 240p") firstPage.ytQual = "240p"
                     pageStack.pop();
                 }
+            }
+        }
+    }
+
+    BusyIndicator {
+        id: loading
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: Theme.paddingMedium
+        anchors.horizontalCenter: parent.horizontalCenter
+        size: BusyIndicatorSize.Medium
+        running: false
+        visible: running
+    }
+
+    Connections {
+        target: _ytdl
+        onOggAudioChanged: {
+            if (_ytdl.getOggAudioUrl() != "") {  // Don't load empty stuff
+                qualList.append({"name": "vorbis@128k Audio (WEBM)", "url": _ytdl.getOggAudioUrl()})
+                _oggLoaded = true
+                if (_opusLoaded) loading.running = false
+            }
+        }
+        onOpusAudioChanged: {
+            if (_ytdl.getOpusAudioUrl() != "") {  // Don't load empty stuff
+                qualList.append({"name": "opus@160k Audio (WEBM)", "url": _ytdl.getOpusAudioUrl()})
+                _opusLoaded = true
+                if (_oggLoaded) loading.running = false
             }
         }
     }
