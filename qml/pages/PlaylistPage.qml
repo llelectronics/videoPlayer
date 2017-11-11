@@ -169,7 +169,7 @@ Page
                 MenuItem {
                     text: qsTr("Clear Playlist")
                     visible: mainWindow.modelPlaylist.count > 0
-                    onClicked: repeater1.removeAll();
+                    onClicked: { repeater1.removeAll(); mainWindow.playlist.clearError() }
                 }
 
                 MenuItem {
