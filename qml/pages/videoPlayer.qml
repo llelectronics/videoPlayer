@@ -66,9 +66,11 @@ Page {
             // TODO: Workaround somehow toggleControls() has a racing condition with something else
             pulley.visible = false;
             showNavigationIndicator = false;
+            mprisPlayer.title = streamTitle;
         }
         mprisPlayer.canGoNext = mainWindow.modelPlaylist.isNext() && isPlaylist
         mprisPlayer.canGoPrevious = mainWindow.modelPlaylist.isPrev() && isPlaylist
+        mprisPlayer.title = dataContainer.streamUrl
     }
 
     Component.onDestruction: {
@@ -745,7 +747,6 @@ Page {
                         if (dPage) dPage.title = metaData.title
                         mprisPlayer.title = metaData.title
                     }
-                    mprisPlayer.title = streamTitle
                 }
                 onPlaybackStateChanged: {
                     if (playbackState == MediaPlayer.PlayingState) {
