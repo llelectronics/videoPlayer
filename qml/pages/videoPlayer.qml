@@ -66,6 +66,7 @@ Page {
             // TODO: Workaround somehow toggleControls() has a racing condition with something else
             pulley.visible = false;
             showNavigationIndicator = false;
+            mprisPlayer.title = streamTitle;
         }
         mprisPlayer.canGoNext = mainWindow.modelPlaylist.isNext() && isPlaylist
         mprisPlayer.canGoPrevious = mainWindow.modelPlaylist.isPrev() && isPlaylist
@@ -303,6 +304,10 @@ Page {
             height: width
             playing: false
             state: onlyMusicState
+            visible: {
+                if (opacity == 0.0) false
+                else true
+            }
 
             states: [
                     State {
@@ -499,7 +504,7 @@ Page {
                     if (enableSubtitles) {
                         subTitleLoader.item.getSubtitles(subtitleUrl);
                     }
-                    onlyMusic.playing = true
+                    if (mediaPlayer.hasAudio === true && mediaPlayer.hasVideo === false) onlyMusic.playing = true
                 }
 
                 onNextClicked: {
@@ -573,8 +578,8 @@ Page {
                 }
 
                 onClicked: {
-                    if (drawer.open) drawer.open = false
-                    else {
+                    //if (drawer.open) drawer.open = false
+                    //else {
                         if (mediaPlayer.playbackState == MediaPlayer.PlayingState) {
                             //console.debug("Mouse values:" + mouse.x + " x " + mouse.y)
                             var middleX = width / 2
@@ -591,7 +596,7 @@ Page {
                             //console.debug("clicked something else")
                             toggleControls();
                         }
-                    }
+                    //}
                 }
                 onPressAndHold: {
                     if (onlyMusic.opacity == 1.0) {
@@ -612,63 +617,63 @@ Page {
             }
         }
     }
-    Drawer {
-        id: drawer
-        width: parent.width
-        height: parent.height
-        anchors.bottom: parent.bottom
-        dock: Dock.Bottom
-        foreground: flick
-        backgroundSize: {
-            if (videoPlayerPage.orientation === Orientation.Portrait) return parent.height / 8
-            else return parent.height / 6
-        }
-        background: Rectangle {
-            anchors.fill: parent
-            anchors.bottom: parent.bottom
-            color: Theme.secondaryHighlightColor
-            Button {
-                id: ytDownloadBtn
-                anchors.verticalCenter: parent.verticalCenter
-                anchors.left: parent.left
-                anchors.leftMargin: Theme.paddingMedium
-                text: "Download video"
-                visible: {
-                    if ((/^http:\/\/ytapi.com/).test(streamUrl)) return true
-                    else if (isYtUrl) return true
-                    else return false
-                }
-                // Alternatively use direct youtube url instead of ytapi for downloads (ytapi links not always download with download manager)
-                onClicked: {
-                    // Filter out all chars that might stop the download manager from downloading the file
-                    // Illegal chars: `~!@#$%^&*()-=+\|/?.>,<;:'"[{]}
-                    streamTitle = YT.getDownloadableTitleString(streamTitle)
-                    _ytdl.setUrl(originalUrl);
-                    pageStack.push(Qt.resolvedUrl("ytQualityChooser.qml"), {"streamTitle": streamTitle, "url720p": url720p, "url480p": url480p, "url360p": url360p, "url240p": url240p, "ytDownload": true});
-                    drawer.open = !drawer.open
-                }
-            }
-            Button {
-                id: add2BookmarksBtn
-                anchors.verticalCenter: parent.verticalCenter
-                anchors.right: parent.right
-                anchors.rightMargin: Theme.paddingMedium
-                text : "Add to bookmarks"
-                visible: {
-                    if (streamTitle != "" || streamUrl != "") return true
-                    else return false
-                }
-                onClicked: {
-                    if (streamTitle != "" && !youtubeDirect) mainWindow.modelBookmarks.addBookmark(streamUrl,streamTitle)
-                    else if (streamTitle != "" && youtubeDirect) mainWindow.modelBookmarks.addBookmark(originalUrl,streamTitle)
-                    else if (!youtubeDirect) mainWindow.modelBookmarks.addBookmark(streamUrl,mainWindow.findBaseName(streamUrl))
-                    else mainWindow.modelBookmarks.addBookmark(originalUrl,mainWindow.findBaseName(originalUrl))
-                    drawer.open = !drawer.open
-                }
-            }
-        }
+//    Drawer {
+//        id: drawer
+//        width: parent.width
+//        height: parent.height
+//        anchors.bottom: parent.bottom
+//        dock: Dock.Bottom
+//        foreground: flick
+//        backgroundSize: {
+//            if (videoPlayerPage.orientation === Orientation.Portrait) return parent.height / 8
+//            else return parent.height / 6
+//        }
+//        background: Rectangle {
+//            anchors.fill: parent
+//            anchors.bottom: parent.bottom
+//            color: Theme.secondaryHighlightColor
+//            Button {
+//                id: ytDownloadBtn
+//                anchors.verticalCenter: parent.verticalCenter
+//                anchors.left: parent.left
+//                anchors.leftMargin: Theme.paddingMedium
+//                text: "Download video"
+//                visible: {
+//                    if ((/^http:\/\/ytapi.com/).test(streamUrl)) return true
+//                    else if (isYtUrl) return true
+//                    else return false
+//                }
+//                // Alternatively use direct youtube url instead of ytapi for downloads (ytapi links not always download with download manager)
+//                onClicked: {
+//                    // Filter out all chars that might stop the download manager from downloading the file
+//                    // Illegal chars: `~!@#$%^&*()-=+\|/?.>,<;:'"[{]}
+//                    streamTitle = YT.getDownloadableTitleString(streamTitle)
+//                    _ytdl.setUrl(originalUrl);
+//                    pageStack.push(Qt.resolvedUrl("ytQualityChooser.qml"), {"streamTitle": streamTitle, "url720p": url720p, "url480p": url480p, "url360p": url360p, "url240p": url240p, "ytDownload": true});
+//                    drawer.open = !drawer.open
+//                }
+//            }
+//            Button {
+//                id: add2BookmarksBtn
+//                anchors.verticalCenter: parent.verticalCenter
+//                anchors.right: parent.right
+//                anchors.rightMargin: Theme.paddingMedium
+//                text : "Add to bookmarks"
+//                visible: {
+//                    if (streamTitle != "" || streamUrl != "") return true
+//                    else return false
+//                }
+//                onClicked: {
+//                    if (streamTitle != "" && !youtubeDirect) mainWindow.modelBookmarks.addBookmark(streamUrl,streamTitle)
+//                    else if (streamTitle != "" && youtubeDirect) mainWindow.modelBookmarks.addBookmark(originalUrl,streamTitle)
+//                    else if (!youtubeDirect) mainWindow.modelBookmarks.addBookmark(streamUrl,mainWindow.findBaseName(streamUrl))
+//                    else mainWindow.modelBookmarks.addBookmark(originalUrl,mainWindow.findBaseName(originalUrl))
+//                    drawer.open = !drawer.open
+//                }
+//            }
+//        }
 
-    }
+//    }
 
     children: [
 
@@ -738,13 +743,13 @@ Page {
                         else loadPlaylistPage();
                     }
                     if (metaData.title) {
-                        dPage.title = metaData.title
+                        //console.debug("MetaData.title = " + metaData.title)
+                        if (dPage) dPage.title = metaData.title
                         mprisPlayer.title = metaData.title
                     }
                 }
                 onPlaybackStateChanged: {
                     if (playbackState == MediaPlayer.PlayingState) {
-                        mprisPlayer.title = streamTitle
                         if (onlyMusic.opacity == 1.0) onlyMusic.playing = true
                     }
                     else  {
