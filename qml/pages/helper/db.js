@@ -28,6 +28,12 @@ END;')
 BEGIN \
     DELETE FROM positionStore WHERE positionStore.uid IN (SELECT positionStore.uid FROM positionStore ORDER BY positionStore.uid limit (select count(*) -10 from positionStore)); \
 END;')
+            tx.executeSql('CREATE TABLE IF NOT EXISTS searchHistory(uid INTEGER UNIQUE, searchTerm TEXT)');
+            // Limit history entries to 20
+            tx.executeSql('CREATE TRIGGER IF NOT EXISTS delete_till_20 INSERT ON searchHistory WHEN (select count(*) from history)>19 \
+BEGIN \
+    DELETE FROM searchHistory WHERE searchHistory.uid IN (SELECT searchHistory.uid FROM searchHistory ORDER BY searchHistory.uid limit (select count(*) -20 from searchHistory)); \
+END;')
         });
     }
     else if (db.version == '0.1') {
@@ -44,6 +50,17 @@ END;')
             tx.executeSql('CREATE TRIGGER IF NOT EXISTS delete_pos_till_10 INSERT ON positionStore WHEN (select count(*) from positionStore)>9 \
 BEGIN \
     DELETE FROM positionStore WHERE positionStore.uid IN (SELECT positionStore.uid FROM positionStore ORDER BY positionStore.uid limit (select count(*) -10 from positionStore)); \
+END;')
+        });
+    }
+    else if (db.version == '0.3') {
+        db.changeVersion('0.3', '0.4', function(tx) {
+            // Add Youtube Search History
+            tx.executeSql('CREATE TABLE IF NOT EXISTS searchHistory(uid INTEGER UNIQUE, searchTerm TEXT)');
+            // Limit history entries to 20
+            tx.executeSql('CREATE TRIGGER IF NOT EXISTS delete_till_20 INSERT ON searchHistory WHEN (select count(*) from history)>19 \
+BEGIN \
+DELETE FROM searchHistory WHERE searchHistory.uid IN (SELECT searchHistory.uid FROM searchHistory ORDER BY searchHistory.uid limit (select count(*) -20 from searchHistory)); \
 END;')
         });
     }
@@ -99,6 +116,49 @@ function getHistory() {
                 //console.debug("[db.js] History text != '' :" + rs.rows.item(i).title);
                 firstPage.addHistory(rs.rows.item(i).url,rs.rows.item(i).title)
             } else firstPage.addHistory(rs.rows.item(i).url,rs.rows.item(i).url)
+        }
+    })
+}
+
+// This function is used to write searchHistory into the database
+function addSearchHistory(searchTerm) {
+    var date = new Date();
+    var db = getDatabase();
+    var res = "";
+    db.transaction(function(tx) {
+        // Remove and readd if url already in history
+        var rs0 = tx.executeSql('delete from searchHistory where searchTerm=(?);',[searchTerm]);
+        if (rs0.rowsAffected > 0) {
+            //console.debug("Url already found and removed to readd it");
+        } else {
+            //console.debug("Url not found so add it newly");
+        }
+
+        var rs = tx.executeSql('INSERT OR REPLACE INTO searchHistory VALUES (?,?);', [date.getTime(),searchTerm]);
+        if (rs.rowsAffected > 0) {
+            res = "OK";
+            //console.log ("Saved to database");
+        } else {
+            res = "Error";
+            //console.log ("Error saving to database");
+        }
+    }
+    );
+    // The function returns “OK” if it was successful, or “Error” if it wasn't
+    return res;
+}
+
+// This function is used to retrieve searchHistory from database
+function getSearchHistory() {
+    var db = getDatabase();
+    var respath="";
+    db.transaction(function(tx) {
+        var rs = tx.executeSql('SELECT * FROM searchHistory ORDER BY searchHistory.uid;');
+        for (var i = 0; i < rs.rows.length; i++) {
+            if (rs.rows.item(i).searchTerm != null) {
+                //console.debug("[db.js] SearchHistory term != '' :" + rs.rows.item(i).searchTerm);
+                firstPage.addSearchHistory(rs.rows.item(i).searchTerm)
+            }
         }
     })
 }

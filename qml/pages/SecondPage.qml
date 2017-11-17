@@ -34,6 +34,7 @@ import QtWebKit 3.0
 import QtWebKit.experimental 1.0
 import QtMultimedia 5.0
 import "helper/yt.js" as YT
+import "helper/db.js" as DB
 import "helper"
 
 
@@ -54,128 +55,181 @@ Page {
         else ytView.experimental.page.visible = false
     }
 
-    SilicaWebView {
-        id: ytView
-        anchors.centerIn: parent
-        // Width and height for scale=2.0
-        //                width: searchResultsDialog.orientation === Orientation.Portrait ? Screen.width / 2 : (Screen.height - 100) / 2
-        //                height: Screen.height / 2
+    Drawer {
+        id: searchHistoryDrawer
+
         anchors.fill: parent
-        overridePageStackNavigation: true
-        focus: true
 
-        property variant itemSelectorIndex: -1
+        dock: searchResultsDialog.isPortrait ? Dock.Top : Dock.Left
 
-        experimental.itemSelector: PopOver {}
-        experimental.overview: true
-        property variant devicePixelRatio: {//1.5
-            if (Screen.width <= 540) return 1.5;
-            else if (Screen.width > 540 && Screen.width <= 768) return 2.0;
-            else if (Screen.width > 768) return 3.0;
-        }
-        experimental.customLayoutWidth: searchResultsDialog.width / devicePixelRatio
+        background: SilicaListView {
+            id: searchView
+            anchors.fill: parent
+            model: mainWindow.firstPage.searchHistoryModel
 
-        PullDownMenu {
-            MenuItem {
-                text: "Go Back"
-                onClicked: pageStack.pop();
+            VerticalScrollDecorator {}
+
+            delegate: ListItem {
+                id: listItem
+
+                Label {
+                    x: Theme.paddingLarge
+                    text: searchTerm
+                    anchors.verticalCenter: parent.verticalCenter
+                    color: listItem.highlighted ? Theme.highlightColor : Theme.primaryColor
+                }
+                onClicked: {
+                    ytView.searchField.text = searchTerm
+                    ytView.url = searchUrl + encodeURI(searchTerm)
+                    searchHistoryDrawer.open = false
+                }
+            }
+            ViewPlaceholder {
+                anchors.top: parent.top
+                anchors.topMargin: Theme.paddingLarge
+                text: qsTr("No Search History")
+                enabled: searchView.count == 0
             }
         }
 
-        Rectangle {
-            id: loadingRec
-            height: Theme.iconSizeExtraSmall / 2
-            color: Theme.highlightColor
-            anchors.top: parent.top
-            property int minimumValue: 0
-            property int maximumValue: 100
-            property int value: ytView.loadProgress
-            width: (value / (maximumValue - minimumValue)) * parent.width
-            visible: value == 100 ? false : true
-        }
+        SilicaWebView {
+            id: ytView
+            anchors.centerIn: parent
+            // Width and height for scale=2.0
+            //                width: searchResultsDialog.orientation === Orientation.Portrait ? Screen.width / 2 : (Screen.height - 100) / 2
+            //                height: Screen.height / 2
+            anchors.fill: parent
+            overridePageStackNavigation: true
+            focus: true
 
-        header: Row {
-            width: parent.width
-            spacing: 1
-            anchors.top: parent.top
-            anchors.left: parent.left
-            anchors.right: parent.right
+            property variant itemSelectorIndex: -1
+            property QtObject searchField
 
-            SearchField {
-                id: searchField
-                property string acceptedInput: ""
+            experimental.itemSelector: PopOver {}
+            experimental.overview: true
+            property variant devicePixelRatio: {//1.5
+                if (Screen.width <= 540) return 1.5;
+                else if (Screen.width > 540 && Screen.width <= 768) return 2.0;
+                else if (Screen.width > 768) return 3.0;
+            }
+            experimental.customLayoutWidth: searchResultsDialog.width / devicePixelRatio
+
+            PullDownMenu {
+                MenuItem {
+                    text: "History"
+                    onClicked: searchHistoryDrawer.open = !searchHistoryDrawer.open
+                    visible: ytDetect
+                }
+                MenuItem {
+                    text: "Go Back"
+                    onClicked: pageStack.pop();
+                }
+            }
+
+            Rectangle {
+                id: loadingRec
+                height: Theme.iconSizeExtraSmall / 2
+                color: Theme.highlightColor
+                anchors.top: parent.top
+                property int minimumValue: 0
+                property int maximumValue: 100
+                property int value: ytView.loadProgress
+                width: (value / (maximumValue - minimumValue)) * parent.width
+                visible: value == 100 ? false : true
+            }
+
+            header: Row {
                 width: parent.width
+                spacing: 1
+                anchors.top: parent.top
+                anchors.left: parent.left
+                anchors.right: parent.right
 
-                placeholderText: "Search.."
-                //                        anchors.top: parent.top
-                //                        anchors.left: parent.left
-                //                        anchors.right: parent.right
+                SearchField {
+                    id: searchField
+                    property string acceptedInput: ""
+                    width: parent.width
 
-                EnterKey.enabled: text.trim().length > 0
-                EnterKey.text: "Go!"
+                    placeholderText: "Search.."
+                    //                        anchors.top: parent.top
+                    //                        anchors.left: parent.left
+                    //                        anchors.right: parent.right
 
-                Component.onCompleted: {
-                    acceptedInput = ""
-                    _editor.accepted.connect(searchEntered)
-                }
+                    EnterKey.enabled: text.trim().length > 0
+                    EnterKey.text: "Go!"
 
-                // is called when user presses the Return key
-                function searchEntered() {
-                    searchField.acceptedInput = text
-                    ytView.url = searchUrl + encodeURI(acceptedInput)
-                    searchField.focus = false
-                }
-            }
-        }
-        experimental.userAgent: uA
-        experimental.preferences.minimumFontSize: 11
-        experimental.userScripts: [Qt.resolvedUrl("helper/userscript.js")]
-        experimental.preferences.navigatorQtObjectEnabled: true
-
-        experimental.onMessageReceived: {
-            //console.log('onMessageReceived: ' + message.data );
-            var data = null
-            try {
-                data = JSON.parse(message.data)
-            } catch (error) {
-                console.log('onMessageReceived: ' + message.data );
-                return
-            }
-            if (data.href != "" && data.href != "CANT FIND LINK") {
-                contextMenu.clickedUrl = data.href
-                contextMenu.show()
-            }
-        }
-
-
-
-        onNavigationRequested: {
-            //console.debug("[SecondPage.qml] Request navigation to " + request.url)
-            if (YT.checkYoutube(request.url.toString()) === true && ytDetect === true) {
-                if (YT.getYtID(request.url.toString()) != "") {
-                    //console.debug("[SecondPage.qml] Youtube Link detected")
-                    request.action = WebView.IgnoreRequest;
-                    dataContainer.isYtUrl = true;
-                    //var yturl = YT.getYoutubeVid(request.url.toString());
-                    //YT.getYoutubeTitle(url.toString());
-                    if (dataContainer != null) {
-                        dataContainer.streamUrl = request.url;
-                        dataContainer.originalUrl = request.url
-                        dataContainer.loadPlayer();
+                    Component.onCompleted: {
+                        acceptedInput = ""
+                        _editor.accepted.connect(searchEntered)
+                        ytView.searchField = searchField
                     }
-                    ytView.reload(); // WTF why is this working with IgnoreRequest
 
-                } else { request.action = WebView.AcceptRequest; }
+                    // is called when user presses the Return key
+                    function searchEntered() {
+                        searchField.acceptedInput = text
+                        ytView.url = searchUrl + encodeURI(acceptedInput)
+                        searchField.focus = false
+                        DB.addSearchHistory(text)
+                        mainWindow.firstPage.addSearchHistory(text)
+                    }
+                }
             }
-            else {
-                request.action = WebView.AcceptRequest;
+            experimental.userAgent: uA
+            experimental.preferences.minimumFontSize: 11
+            experimental.userScripts: [Qt.resolvedUrl("helper/userscript.js")]
+            experimental.preferences.navigatorQtObjectEnabled: true
+
+            experimental.onMessageReceived: {
+                //console.log('onMessageReceived: ' + message.data );
+                var data = null
+                try {
+                    data = JSON.parse(message.data)
+                } catch (error) {
+                    console.log('onMessageReceived: ' + message.data );
+                    return
+                }
+                if (data.href != "" && data.href != "CANT FIND LINK") {
+                    contextMenu.clickedUrl = data.href
+                    contextMenu.show()
+                }
             }
-        }
 
-        VerticalScrollDecorator {}
 
-        Component.onCompleted: url = websiteUrl
-    }
+
+            onNavigationRequested: {
+                //console.debug("[SecondPage.qml] Request navigation to " + request.url)
+                if (YT.checkYoutube(request.url.toString()) === true && ytDetect === true) {
+                    if (YT.getYtID(request.url.toString()) != "") {
+                        //console.debug("[SecondPage.qml] Youtube Link detected")
+                        request.action = WebView.IgnoreRequest;
+                        dataContainer.isYtUrl = true;
+                        //var yturl = YT.getYoutubeVid(request.url.toString());
+                        //YT.getYoutubeTitle(url.toString());
+                        if (dataContainer != null) {
+                            dataContainer.streamUrl = request.url;
+                            dataContainer.originalUrl = request.url
+                            dataContainer.loadPlayer();
+                        }
+                        ytView.reload(); // WTF why is this working with IgnoreRequest
+
+                    } else { request.action = WebView.AcceptRequest; }
+                }
+                else {
+                    request.action = WebView.AcceptRequest;
+                }
+            }
+
+            VerticalScrollDecorator {}
+
+            Component.onCompleted: url = websiteUrl
+
+            MouseArea {
+                enabled: searchHistoryDrawer.open
+                anchors.fill: parent
+                onClicked: searchHistoryDrawer.open = false
+            }
+        } // Webview
+    } // Drawer
 
     DockedPanel {
         id: navbar

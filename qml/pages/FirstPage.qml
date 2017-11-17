@@ -82,6 +82,7 @@ Page {
     property alias videoPickerComponent: videoPickerComponent
     property alias openFileComponent: openFileComponent
     property alias historyModel: historyModel
+    property alias searchHistoryModel: searchHistoryModel
 
     property variant busy: mainWindow.busy
     property variant errTxt: mainWindow.errTxt
@@ -90,6 +91,7 @@ Page {
         // Initialize the database
         DB.initialize();
         DB.getHistory();
+        DB.getSearchHistory();
     }
 
     onStreamTitleChanged: {
@@ -125,6 +127,13 @@ Page {
             historyModel.removeUrl(url);
         }
         historyModel.append({"hurl": url, "htitle": title});
+    }
+
+    function addSearchHistory(searchTerm) {
+        //console.debug("Called addSearchHistory with searchTerm : " + searchTerm)
+        if (searchHistoryModel.containsTerm(searchTerm)) {
+            return;
+        } else searchHistoryModel.append({"searchTerm": searchTerm});
     }
 
     function bbusy() {
@@ -167,6 +176,19 @@ Page {
                 }
             }
             return;
+        }
+    }
+
+    ListModel {
+        id: searchHistoryModel
+
+        function containsTerm(term) {
+            for (var i=0; i<count; i++) {
+                if (get(i).searchTerm == term)  {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 
