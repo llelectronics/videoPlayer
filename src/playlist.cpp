@@ -1,4 +1,5 @@
 #include "playlist.h"
+#include <QDebug>
 
 Playlist::Playlist(QObject *parent) :
     QObject(parent){
@@ -15,11 +16,13 @@ bool Playlist::setPllist(const QString &pllist){
         in.setCodec("UTF-8");
         while ( !in.atEnd() ){
           QString line = in.readLine();
-          if(line.at(0) == 'F'){
-              while(line.at(0) != '=')
+          if (!line.isEmpty()) {
+              if(line.at(0) == 'F'){
+                  while(line.at(0) != '=')
+                      line.remove(0,1);
                   line.remove(0,1);
-              line.remove(0,1);
-              playlist->addMedia(QUrl(line));
+                  playlist->addMedia(QUrl(line));
+              }
           }
         }
         inputList.close();
