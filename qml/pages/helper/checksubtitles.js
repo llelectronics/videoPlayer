@@ -1,16 +1,19 @@
 WorkerScript.onMessage = function(message) {
-    var found = false;
-    var i = 0;
-    var sub;
-    var text = "";
-    while ((!found) && (i < message.subtitles.length)) {
-        sub = message.subtitles[i];
-        if ((message.position*1000 >= sub.start) && (message.position*1000 <= sub.end)) {
-            text = sub.text;
-            console.debug("[checksubtitles] text: " + text);
-            found = true;
-        }
-        i++;
+  var sub, text = [];
+  var a = message.subtitles, pos = message.position*1000;
+  var ii, i0 = 0, i1 = a.length;
+  while(i1 - i0 > 1) {
+    ii = (i0 + i1) >> 1;
+    if(pos < a[ii].start) i1 = ii; else i0 = ii;
+  }
+  while(i0 >= 0 && pos <= a[i0].end) i0--;
+  for(ii = i0 + 1; ii < i1; ii++) {
+    sub = a[ii];
+    if(sub.start <= pos) {
+      text.push(sub.text);
+      //console.debug("[checksubtitles] sub.text: " + sub.text);
     }
-    WorkerScript.sendMessage(text);
+  }
+  WorkerScript.sendMessage(text.join('\n'));
 }
+
