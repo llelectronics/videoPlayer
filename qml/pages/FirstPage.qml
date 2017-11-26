@@ -314,6 +314,7 @@ Page {
         dock: page.isPortrait ? Dock.Top : Dock.Left
 
         background: SilicaListView {
+            id: historyView
             anchors.fill: parent
             model: historyModel
 
@@ -332,6 +333,12 @@ Page {
                     streamUrl = hurl
                     loadPlayer();
                 }
+            }
+            ViewPlaceholder {
+                anchors.top: parent.top
+                anchors.topMargin: Theme.paddingLarge
+                text: qsTr("No History")
+                enabled: historyView.count == 0
             }
         }
 

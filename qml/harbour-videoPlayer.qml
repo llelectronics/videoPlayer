@@ -30,6 +30,7 @@
 
 import QtQuick 2.0
 import Sailfish.Silica 1.0
+import QtQuick.Window 2.1
 import "pages"
 import "pages/helper/yt.js" as YT
 import "pages/helper/db.js" as DB
@@ -48,6 +49,7 @@ ApplicationWindow
     property alias infoBanner: infoBanner
     property alias downloadModel: downloadModel
     property alias errTxt: errTxt
+    property bool clearWebViewOnExit: false
 
     property string version: "1.9"
     property string appname: "LLs Video Player"
@@ -127,6 +129,13 @@ ApplicationWindow
         } else {
             return bytes + ' B';
         }
+    }
+
+    function _clearHistory() {
+        DB.clearTable("history");
+        DB.clearTable("searchHistory");
+        mainWindow.firstPage.historyModel.clear();
+        mainWindow.firstPage.searchHistoryModel.clear();
     }
 
     initialPage: Component {
@@ -331,6 +340,18 @@ ApplicationWindow
         text: qsTr("Dismiss")
         onClicked: {
             if (errTxt.visible) errTxt.visible = false;
+        }
+    }
+
+    // What a hack to create a on Closing behavior
+    Window {
+        visible: false
+        onClosing: {
+            //console.debug(_fm.data_dir())
+            if (clearWebViewOnExit) {
+                _fm.removeDir(_fm.data_dir + "/.QtWebkit")
+                _clearHistory();
+            }
         }
     }
 }

@@ -35,10 +35,11 @@ Dialog {
         liveViewSwitch.checked = true;
         solidSubtitlesSwitch.checked = false;
         ytDefaultQualCombo.currentIndex = 0;
+        clearWebViewOnExitSwitch.checked = false;
     }
 
     function clearHistory() {
-        remorse.execute(qsTr("Clear History"), function() { DB.clearTable("history"); mainWindow.firstPage.historyModel.clear() } )
+        remorse.execute(qsTr("Clear History"), mainWindow._clearHistory() )
     }
 
     function saveSettings() {
@@ -53,6 +54,7 @@ Dialog {
         DB.addSetting("subtitleSolid", solidSubtitlesSwitch.checked.toString());
         DB.addSetting("ytDefaultQual", ytDefaultQualCombo.qual.toString());
         DB.addSetting("onlyMusicState", onlyMusicCombo.onlyMusicState.toString());
+        DB.addSetting("clearWebViewOnExit", clearWebViewOnExitSwitch.checked.toString());
         DB.getSettings();
     }
 
@@ -446,6 +448,13 @@ Dialog {
                     else if (currentIndex == 1) onlyMusicState = "mc"
                     else if (currentIndex == 2) onlyMusicState = "eq"
                 }
+            }
+
+            TextSwitch {
+                id: clearWebViewOnExitSwitch
+                anchors.horizontalCenter: parent.horizontalCenter
+                text: qsTr("Clear webview data on exit")
+                checked: mainWindow.clearWebViewOnExit
             }
 
             BackgroundItem {

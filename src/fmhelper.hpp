@@ -10,6 +10,7 @@
 #include <QMimeDatabase>
 #include <QMimeType>
 #include <QUrl>
+#include <QStandardPaths>
 
 class FM : public QObject
 {   Q_OBJECT
@@ -22,6 +23,7 @@ class FM : public QObject
     private:
         QString m_sourceUrl;
         bool m_moveMode;
+        QString m_dataDir = QStandardPaths::writableLocation(QStandardPaths::DataLocation);
     private slots:
         void setSourceUrl(const QString &url) { m_sourceUrl = url; emit sourceUrlChanged();}
         void setMoveMode(bool &mode) { m_moveMode = mode;}
@@ -44,6 +46,10 @@ class FM : public QObject
         QString getRoot()
         {    //qDebug() << "Called the C++ slot and request removal of:" << url;
              return QDir::rootPath();
+        }
+        QString data_dir()
+        {
+            return m_dataDir;
         }
         bool existsPath(const QString &url)
         {
