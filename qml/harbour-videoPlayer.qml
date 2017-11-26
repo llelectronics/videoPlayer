@@ -349,7 +349,8 @@ ApplicationWindow
         onClosing: {
             //console.debug(_fm.data_dir())
             if (clearWebViewOnExit) {
-                _fm.removeDir(_fm.data_dir + "/.QtWebkit")
+                //console.debug("ClearWebViewOnExit is set to true so remove " + _fm.data_dir() + "/.QtWebKit");
+                _fm.removeDir(_fm.data_dir() + "/.QtWebKit");
                 _clearHistory();
             }
         }
