@@ -247,14 +247,22 @@ Page {
 
         Row {
             anchors.centerIn: parent
+            spacing: Theme.paddingLarge * 4
             IconButton {
                 id: backBtn
                 icon.source: "image://theme/icon-m-back"
                 enabled: ytView.canGoBack
                 visible: ytView.canGoBack
-                anchors.centerIn: parent
                 onClicked: {
                     ytView.goBack();
+                }
+            }
+            IconButton {
+                id: searchBtn
+                icon.source: "image://theme/icon-m-search"
+                onClicked: {
+                    ytView.scrollToTop();
+                    ytView.searchField.forceActiveFocus();
                 }
             }
         }
