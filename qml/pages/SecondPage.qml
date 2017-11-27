@@ -264,6 +264,10 @@ Page {
                     ytView.scrollToTop();
                     ytView.searchField.forceActiveFocus();
                 }
+                onPressAndHold: {
+                    ytView.scrollToTop();
+                    searchHistoryDrawer.open = !searchHistoryDrawer.open
+                }
             }
         }
     }
