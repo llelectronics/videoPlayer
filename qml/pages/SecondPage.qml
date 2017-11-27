@@ -258,6 +258,14 @@ Page {
                 }
             }
             IconButton {
+                id: reloadBtn
+                icon.source: ytView.loading ? "image://theme/icon-m-reset" : "image://theme/icon-m-refresh"
+                onClicked: {
+                    if (ytView.loading) ytView.stop();
+                    else ytView.reload();
+                }
+            }
+            IconButton {
                 id: searchBtn
                 icon.source: "image://theme/icon-m-search"
                 onClicked: {
