@@ -112,11 +112,13 @@ Page {
             YT.getYoutubeTitle(streamUrl);
             var ytID = YT.getYtID(streamUrl);
             YT.getYoutubeStream(ytID);
+            dataContainer.isYtUrl = true;
         }
         else if (YT.checkYoutube(originalUrl) === true) {
             //console.debug("[videoPlayer.qml] Loading Youtube Title from original URL")
             YT.getYoutubeTitle(originalUrl);
         }
+        else dataContainer.isYtUrl = false;
         if (dataContainer.streamTitle == "") dataContainer.streamTitle = mainWindow.findBaseName(streamUrl)
         dataContainer.ytdlStream = false
 

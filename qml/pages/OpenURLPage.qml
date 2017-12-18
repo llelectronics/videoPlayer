@@ -27,6 +27,7 @@ Dialog {
             if (dataContainer != null) {
                 mainWindow.firstPage.streamUrl = urlField.text.toString();
                 mainWindow.firstPage.originalUrl = urlField.text.toString();
+                mainWindow.firstPage.isYtUrl = true
                 mainWindow.firstPage.loadPlayer();
             }
         }
@@ -36,6 +37,7 @@ Dialog {
                 _ytdl.setUrl(urlField.text.toString());
                 _ytdl.getStreamUrl();
                 _ytdl.getStreamTitle();
+                mainWindow.firstPage.isYtUrl = false;
                 mainWindow.firstPage.busy.visible = true;
                 mainWindow.firstPage.busy.running = true;
 //                if (dataContainer != null) {

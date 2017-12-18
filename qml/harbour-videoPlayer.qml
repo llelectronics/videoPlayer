@@ -80,6 +80,7 @@ ApplicationWindow
             firstPage.originalUrl = url
             firstPage.streamUrl = url
             firstPage.loadPlayer();
+            firstPage.isYtUrl = true;
             //url = YT.getYoutubeVid(url);
         }
         else if (isUrl(url)) {
@@ -87,6 +88,7 @@ ApplicationWindow
             _ytdl.setUrl(url);
             _ytdl.getStreamUrl();
             _ytdl.getStreamTitle();
+            firstPage.isYtUrl = false;
             busy.visible = true;
             busy.running = true;
         }
@@ -94,6 +96,7 @@ ApplicationWindow
             firstPage.originalUrl = url
             firstPage.streamUrl = url
             firstPage.streamTitle = ""
+            firstPage.isYtUrl = false;
             firstPage.loadPlayer();
         }
     }
