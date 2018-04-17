@@ -69,6 +69,11 @@ ApplicationWindow
         }
     }
 
+    function contains(txt,search) {
+        if (txt.indexOf(search) !== -1) return true
+        else return false
+    }
+
     function loadUrl(url) {
         if (autoPlay == true) {
             console.debug("autoPlay = true") ;
