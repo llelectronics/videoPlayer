@@ -79,6 +79,7 @@ class FM : public QObject
                 }
             }
             else return QFile(source).copy(target);
+            return false;
         }
         bool moveFile(const QString &source, const QString &target)
         {
