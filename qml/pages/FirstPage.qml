@@ -220,7 +220,7 @@ Page {
         id: openFileComponent
         OpenDialog {
             path: "/home/nemo/Videos"
-            filter: ["*.*"]
+            filter: ["*"]
             onFileOpen: {
                 mainWindow.firstPage.originalUrl = path;
                 mainWindow.firstPage.streamUrl = path;
