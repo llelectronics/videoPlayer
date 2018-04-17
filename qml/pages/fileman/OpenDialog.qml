@@ -89,8 +89,8 @@ Page {
         anchors.fill: parent
 
         header: PageHeader {
-            title: if (page.title != "") return page.title 
-            else return findBaseName((fileModel.folder).toString())
+            title: if (page.title != "") return page.title
+                   else return findBaseName((fileModel.folder).toString())
             description: findFullPath(fileModel.folder.toString())
         }
 
@@ -125,23 +125,15 @@ Page {
                 }
                 text: qsTr("Paste") + "(" + findBaseName(_fm.sourceUrl) + ")"
                 onClicked: {
-                    var err = false;
+                    busyInd.running = true
                     if (_fm.moveMode) {
-                        console.debug("Moving " + _fm.sourceUrl + " to " + findFullPath(fileModel.folder)+ "/" + findBaseName(_fm.sourceUrl));
-                        if (!_fm.moveFile(_fm.sourceUrl,findFullPath(fileModel.folder) + "/" + findBaseName(_fm.sourceUrl))) err = true;
+                        //console.debug("Moving " + _fm.sourceUrl + " to " + findFullPath(fileModel.folder)+ "/" + findBaseName(_fm.sourceUrl));
+                        _fm.moveFile(_fm.sourceUrl,findFullPath(fileModel.folder) + "/" + findBaseName(_fm.sourceUrl))
                     }
                     else {
                         //console.debug("Copy " + _fm.sourceUrl + " to " + findFullPath(fileModel.folder)+ "/" + findBaseName(_fm.sourceUrl));
-                        if (!_fm.copyFile(_fm.sourceUrl,findFullPath(fileModel.folder) + "/" + findBaseName(_fm.sourceUrl))) err = true;
+                        _fm.copyFile(_fm.sourceUrl,findFullPath(fileModel.folder) + "/" + findBaseName(_fm.sourceUrl))
                     }
-                    if (err) {
-                        var message = qsTr("Error pasting file ") + _fm.sourceUrl
-                        console.debug(message);
-                        mainWindow.infoBanner.parent = page
-                        mainWindow.infoBanner.anchors.top = page.top
-                        infoBanner.showText(message)
-                    }
-                    else _fm.sourceUrl = "";
                 }
             }
         }
@@ -330,6 +322,32 @@ Page {
             }
             else pasteMenuEntry.visible = false;
         }
+        onCpResultChanged: {
+            if (!_fm.cpResult) {
+                var message = qsTr("Error pasting file ") + _fm.sourceUrl
+                console.debug(message);
+                mainWindow.infoBanner.parent = page
+                mainWindow.infoBanner.anchors.top = page.top
+                infoBanner.showText(message)
+            }
+            else {
+                _fm.sourceUrl = "";
+                var message = qsTr("File operation succeeded")
+                console.debug(message);
+                mainWindow.infoBanner.parent = page
+                mainWindow.infoBanner.anchors.top = page.top
+                infoBanner.showText(message)
+            }
+            busyInd.running = false;
+        }
+    }
+
+    BusyIndicator {
+        id: busyInd
+        anchors.top: view.top
+        anchors.topMargin: Theme.paddingLarge
+        anchors.left: view.left
+        anchors.leftMargin: Theme.paddingLarge
     }
 
 }

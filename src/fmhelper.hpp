@@ -11,25 +11,33 @@
 #include <QMimeType>
 #include <QUrl>
 #include <QStandardPaths>
+#include <QFuture>
+#include <QtConcurrent/QtConcurrent>
+#include <QFutureWatcher>
 
 class FM : public QObject
 {   Q_OBJECT
 
     Q_PROPERTY (QString sourceUrl READ sourceUrl WRITE setSourceUrl NOTIFY sourceUrlChanged)
     Q_PROPERTY (bool moveMode READ isMoveMode WRITE setMoveMode)
+    Q_PROPERTY (bool cpResult READ cpResult NOTIFY cpResultChanged)
 
     signals:
         void sourceUrlChanged();
+        void cpResultChanged();
     private:
         QString m_sourceUrl;
         bool m_moveMode;
         QString m_dataDir = QStandardPaths::writableLocation(QStandardPaths::DataLocation);
+        QFutureWatcher<bool> watcher;
+        bool m_cpResult;
     private slots:
         void setSourceUrl(const QString &url) { m_sourceUrl = url; emit sourceUrlChanged();}
         void setMoveMode(bool &mode) { m_moveMode = mode;}
     public:
         QString sourceUrl() {return m_sourceUrl;}
         bool isMoveMode() {return m_moveMode;}
+        bool cpResult() {return m_cpResult;}
     public slots:
         void remove(const QString &url)
         {    //qDebug() << "Called the C++ slot and request removal of:" << url;
@@ -59,7 +67,7 @@ class FM : public QObject
         {
             return QFileInfo(url).isFile();
         }
-        bool copyFile(const QString &source, const QString &target)
+        bool cpFile(const QString &source, const QString &target)
         {
             QFileInfo srcFileInfo(source);
             if (srcFileInfo.isDir()) {
@@ -79,7 +87,11 @@ class FM : public QObject
                 }
             }
             else return QFile(source).copy(target);
-            return false;
+        }
+        bool copyFile(const QString &source, const QString &target) {
+            connect(&watcher, SIGNAL(finished()), this, SLOT(cpFinished()));
+            QFuture<bool> future = QtConcurrent::run(this, &FM::cpFile, source, target);
+            watcher.setFuture(future);
         }
         bool moveFile(const QString &source, const QString &target)
         {
@@ -111,6 +123,12 @@ class FM : public QObject
             else
                 mime = db.mimeTypeForFile(filename.mid(idx, regex.matchedLength()));
             return mime.name();
+        }
+        void cpFinished()
+        {
+           m_cpResult = watcher.future().result();
+           qDebug() << "m_cpResult = " << m_cpResult;
+           emit cpResultChanged();
         }
 };
 
