@@ -29,6 +29,7 @@ class FM : public QObject
         QString m_sourceUrl;
         bool m_moveMode;
         QString m_dataDir = QStandardPaths::writableLocation(QStandardPaths::DataLocation);
+        QString m_docDir = QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation);
         QFutureWatcher<bool> watcher;
         bool m_cpResult;
     private slots:
@@ -58,6 +59,10 @@ class FM : public QObject
         QString data_dir()
         {
             return m_dataDir;
+        }
+        QString documents_dir()
+        {
+            return m_docDir;
         }
         bool existsPath(const QString &url)
         {
