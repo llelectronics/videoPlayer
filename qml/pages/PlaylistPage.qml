@@ -219,8 +219,14 @@ Page
             selectMode: true
             onFileOpen: {
                 //console.debug("Try loading playlist " + path);
-                mainWindow.modelPlaylist.isNew = false;
-                mainWindow.playlist.pllist = path;
+                if (mainWindow.endsWith(path, ".m3u")) {
+                    // Handle M3U files here by loading them into the playlist
+                    mainWindow.readM3uFile(path);
+                }
+                else {
+                    mainWindow.modelPlaylist.isNew = false;
+                    mainWindow.playlist.pllist = path;
+                }
             }
         }
     }
@@ -233,7 +239,7 @@ Page
             dataContainer: playlistPage
             selectMode: true
             onFileOpen: {
-                mainWindow.modelPlaylist.addTrack(path);
+                mainWindow.modelPlaylist.addTrack(path, "");
             }
         }
     }

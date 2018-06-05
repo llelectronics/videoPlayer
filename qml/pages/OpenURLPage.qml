@@ -32,7 +32,12 @@ Dialog {
             }
         }
         else {
-            if ((!mainWindow.contains(urlField.text.toString(),"rtsp")) && mainWindow.isUrl(urlField.text.toString())) {
+            if (mainWindow.endsWith(urlField.text.toString(), ".m3u")) {
+                // Handle M3U files here by loading them into the playlist
+                mainWindow.readM3uFile(urlField.text.toString());
+                firstPage.openPlaylist();
+            }
+            else if ((!mainWindow.contains(urlField.text.toString(),"rtsp")) && mainWindow.isUrl(urlField.text.toString())) {
                 // Call C++ side here to grab url
                 _ytdl.setUrl(urlField.text.toString());
                 _ytdl.getStreamUrl();

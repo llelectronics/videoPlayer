@@ -90,7 +90,7 @@ Page {
         var i;
         for (i = 0; i < fileModel.count; ++i)
             if (!fileModel.isFolder(i))
-                mainWindow.modelPlaylist.addTrack(fileModel.get(i, "filePath"))
+                mainWindow.modelPlaylist.addTrack(fileModel.get(i, "filePath"), "")
     }
 
     SilicaListView {
@@ -210,7 +210,7 @@ Page {
                 mainWindow.infoBanner.parent = page
                 mainWindow.infoBanner.anchors.top = page.top
                 mainWindow.infoBanner.showText(mainWindow.findBaseName(filePath) + " " + qsTr("added to playlist"));
-                mainWindow.modelPlaylist.addTrack(filePath);
+                mainWindow.modelPlaylist.addTrack(filePath,"");
             }
 
             ListItem {

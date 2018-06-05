@@ -34,6 +34,7 @@ import QtQuick.Window 2.1
 import "pages"
 import "pages/helper/yt.js" as YT
 import "pages/helper/db.js" as DB
+import "pages/helper/m3u.js" as M3U
 import harbour.videoplayer.Videoplayer 1.0
 
 ApplicationWindow
@@ -72,6 +73,38 @@ ApplicationWindow
     function contains(txt,search) {
         if (txt.indexOf(search) !== -1) return true
         else return false
+    }
+
+    function endsWith(str, suffix) {
+        return str.indexOf(suffix, str.length - suffix.length) !== -1;
+    }
+
+    function readM3uFile(file)
+    {
+        var allText
+        var rawFile = new XMLHttpRequest();
+        rawFile.open("GET", file, false);
+        rawFile.onreadystatechange = function ()
+        {
+            if(rawFile.readyState === 4)
+            {
+                if(rawFile.status === 200 || rawFile.status == 0)
+                {
+                    allText = rawFile.responseText;
+                    var m3uPlaylist = M3U.parse(allText);
+                    // Make sure Playlist is clear
+                    modelPlaylist.clear();
+                    for (var i=0; i< m3uPlaylist.tracks.length; i++) {
+                        //console.debug(m3uPlaylist.tracks[i].title + " " + m3uPlaylist.tracks[i].file);
+                        if (m3uPlaylist.tracks[i].title && m3uPlaylist.tracks[i].title != "")
+                            modelPlaylist.addTrack(m3uPlaylist.tracks[i].file,m3uPlaylist.tracks[i].title);
+                        else
+                            modelPlaylist.addTrack(m3uPlaylist.tracks[i].file,"");
+                    }
+                }
+            }
+        }
+        rawFile.send(null);
     }
 
     function loadUrl(url) {
@@ -273,8 +306,11 @@ ApplicationWindow
             }
         }
 
-        function addTrack(url) {
-            append({"title" : findBaseName(url), "url" : url});
+        function addTrack(url, title) {
+            if (title != "")
+                append({"title" : title, "url" : url});
+            else
+                append({"title" : findBaseName(url), "url" : url});
             playlist.add(url);
         }
 
