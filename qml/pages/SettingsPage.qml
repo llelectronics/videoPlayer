@@ -374,18 +374,17 @@ Dialog {
                 currentIndex: {
                     // Current Option
                     if (mainWindow.firstPage.openDialogType === "adv") return 0;
-                    else if (mainWindow.firstPage.openDialogType === "simple") return 1;
+                    else if (mainWindow.firstPage.openDialogType === "simple") return 0;
                     else if (mainWindow.firstPage.openDialogType === "gallery") return 2;
                 }
 
                 menu: ContextMenu {
-                    MenuItem { text: qsTr("Advanced Filemanager") }
-                    MenuItem { text: qsTr("Simple Filemanager") }
+                    MenuItem { text: qsTr("Filemanager") }
                     MenuItem { text: qsTr("Videogallery") }
                 }
                 onCurrentIndexChanged: {
                     if (currentIndex == 0) dType = "adv"
-                    else if (currentIndex == 1) dType = "simple"
+                    else if (currentIndex == 0) dType = "simple"
                     else if (currentIndex == 2) dType = "gallery"
                 }
             }

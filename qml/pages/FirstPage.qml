@@ -219,7 +219,7 @@ Page {
     Component {
         id: openFileComponent
         OpenDialog {
-            path: "/home/nemo/Videos"
+            path: _fm.getHome() + "/Videos"
             filter: ["*"]
             onFileOpen: {
                 mainWindow.firstPage.originalUrl = path;
@@ -290,9 +290,9 @@ Page {
                 else if (btnId == "youtubeBtn")
                     pageStack.push(Qt.resolvedUrl("SecondPage.qml"), {dataContainer: page});
                 else if (btnId == "openFileBtn") {
-                    if (mainWindow.firstPage.openDialogType === "adv") pageStack.push(Qt.resolvedUrl("fileman/Main.qml"), {dataContainer: mainWindow.firstPage});
+                    if (mainWindow.firstPage.openDialogType === "adv" || mainWindow.firstPage.openDialogType === "simple")
+                        pageStack.push(mainWindow.firstPage.openFileComponent);
                     else if (mainWindow.firstPage.openDialogType === "gallery") pageStack.push(mainWindow.firstPage.videoPickerComponent);
-                    else if (mainWindow.firstPage.openDialogType === "simple") pageStack.push(mainWindow.firstPage.openFileComponent);
                 }
                 else if (btnId == "openUrlBtn") {
                    pageStack.push(Qt.resolvedUrl("OpenURLPage.qml"), {dataContainer: page});

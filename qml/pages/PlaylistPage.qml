@@ -192,7 +192,7 @@ Page
                         if (mainWindow.playlist.pllist != "")
                             saveReturn = mainWindow.playlist.save(mainWindow.playlist.pllist);
                         else
-                            saveReturn = mainWindow.playlist.save("/home/nemo/Music/playlists/" + mainWindow.modelPlaylist.name + ".pls")
+                            saveReturn = mainWindow.playlist.save(_fm.getHome() + "/Music/playlists/" + mainWindow.modelPlaylist.name + ".pls")
                         if (saveReturn) {
                             console.debug("Saved successfully!")
                             mainWindow.infoBanner.parent = playlistPage
@@ -213,7 +213,7 @@ Page
     Component {
         id: openPlaylistComponent
         OpenDialog {
-            path: "/home/nemo/Music/playlists"
+            path: _fm.getHome() + "/Music/playlists"
             filter: ["*.pls", "*.m3u"]
             dataContainer: playlistPage
             selectMode: true
@@ -228,7 +228,7 @@ Page
     Component {
         id: add2PlaylistComponent
         OpenDialog {
-            path: "/home/nemo/Videos"
+            path: _fm.getHome() + "/Videos"
             filter: ["*.mp4", "*.mp3", "*.mkv", "*.ogg", "*.ogv", "*.flac", "*.wav", "*.m4a", "*.flv", "*.webm", "*.oga", "*.avi", "*.mov", "*.3gp", "*.mpg", "*.mpeg", "*.wmv", "*.wma", "*.dv", "*.m2v", "*.asf", "*.nsv"]
             dataContainer: playlistPage
             selectMode: true
@@ -265,7 +265,7 @@ Page
             EnterKey.onClicked: {
                 mainWindow.modelPlaylist.isNew = true
                 mainWindow.modelPlaylist.name = text // Might be useful in the future
-                mainWindow.playlist.pllist = "/home/nemo/Music/playlists/" + text + ".pls"
+                mainWindow.playlist.pllist = _fm.getHome() + "/Music/playlists/" + text + ".pls"
                 playlistPanel.open = false
                 Qt.inputMethod.hide();
                 playlistPage.forceActiveFocus();
@@ -280,7 +280,7 @@ Page
             anchors.margins: { left: Theme.paddingMedium; right: Theme.paddingMedium }
             color: Theme.secondaryColor
             wrapMode: TextEdit.WordWrap
-            text: qsTr("Playlists are saved to /home/nemo/Music/playlists")
+            text: qsTr("Playlists are saved to " + _fm.getHome() + "/Music/playlists")
         }
 
 

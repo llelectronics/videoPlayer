@@ -26,12 +26,6 @@ OTHER_FILES += qml/harbour-videoPlayer.qml \
     rpm/harbour-videoPlayer.yaml \
     harbour-videoPlayer.desktop \
     qml/pages/OpenURLPage.qml \
-    qml/pages/fileman/Main.qml \
-    qml/pages/fileman/DirView.qml \
-    qml/pages/fileman/DirStack.qml \
-    qml/pages/fileman/DirList.qml \
-    qml/pages/fileman/DirEntryMenu.qml \
-    qml/pages/fileman/DirEntry.qml \
     qml/pages/helper/yt.js \
     qml/pages/helper/VideoPoster.qml \
     qml/pages/FileDetails.qml \
@@ -65,5 +59,13 @@ DISTFILES += \
     qml/pages/helper/SubtitlesItem.qml \
     qml/pages/PlaylistPage.qml \
     qml/pages/InfoBanner.qml \
-    qml/pages/helper/PopOver.qml
+    qml/pages/helper/PopOver.qml \
+    qml/pages/fileman/qmldir \
+    qml/pages/fileman/helper/fmComponents/CreateDirDialog.qml \
+    qml/pages/fileman/helper/fmComponents/DirEntryDelegate.qml \
+    qml/pages/fileman/helper/fmComponents/FileProperties.qml \
+    qml/pages/fileman/helper/fmComponents/LetterSwitch.qml \
+    qml/pages/fileman/helper/fmComponents/PermissionDialog.qml \
+    qml/pages/fileman/helper/fmComponents/PlacesPage.qml \
+    qml/pages/fileman/helper/fmComponents/RenameDialog.qml
 
