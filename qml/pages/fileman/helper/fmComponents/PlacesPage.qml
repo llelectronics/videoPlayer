@@ -17,7 +17,7 @@ Page {
 
     property var devicesModel: [
          {
-            name: qsTr("Phone memory"),
+            name: qsTr("Device memory"),
             path: rootDir,
             icon: "image://theme/icon-m-phone"
         },
