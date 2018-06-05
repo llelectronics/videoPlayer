@@ -13,12 +13,22 @@ Page {
     property variant filter: [ "*" ]
     property string title
 
+    property bool _loaded: false
+
     property QtObject dataContainer
 
     signal fileOpen(string path);
 
     onPathChanged: {
         openFile(path);
+    }
+
+    onStatusChanged: {
+        if (status == PageStatus.Active && !_loaded) {
+            pageStack.pushAttached(Qt.resolvedUrl("helper/fmComponents/PlacesPage.qml"),
+                                   { "father": page })
+            _loaded = true
+        }
     }
 
     function openFile(path) {
@@ -96,28 +106,43 @@ Page {
 
         PullDownMenu {
             MenuItem {
+                text: qsTr("Create Folder")
+                onClicked: {
+                    var dialog = pageStack.push(Qt.resolvedUrl("helper/fmComponents/CreateDirDialog.qml"),
+                                                { "path": path })
+                    dialog.accepted.connect(function() {
+                        if (dialog.errorMessage !== "") {
+                            console.debug(dialog.errorMessage)
+                            infoBanner.parent = propertiesPage
+                            infoBanner.anchors.top = propertiesPage.top
+                            infoBanner.showText(dialog.errorMessage)
+                        }
+                    })
+                }
+            }
+            MenuItem {
                 text: "Add files to playlist"
                 onClicked: {
                     forEachAddToPlaylist();
                     mainWindow.firstPage.openPlaylist();
                 }
             }
-            MenuItem {
-                text: "Show Filesystem Root"
-                onClicked: fileModel.folder = _fm.getRoot();
-            }
-            MenuItem {
-                text: "Show Home"
-                onClicked: fileModel.folder = _fm.getHome();
-            }
-            MenuItem {
-                text: "Show Android SDCard"
-                onClicked: fileModel.folder = _fm.getRoot() + "sdcard";
-            }
-            MenuItem {
-                text: "Show SDCard"
-                onClicked: fileModel.folder = _fm.getRoot() + "media/sdcard";
-            }
+//            MenuItem {
+//                text: "Show Filesystem Root"
+//                onClicked: fileModel.folder = _fm.getRoot();
+//            }
+//            MenuItem {
+//                text: "Show Home"
+//                onClicked: fileModel.folder = _fm.getHome();
+//            }
+//            MenuItem {
+//                text: "Show Android SDCard"
+//                onClicked: fileModel.folder = _fm.getRoot() + "sdcard";
+//            }
+//            MenuItem {
+//                text: "Show SDCard"
+//                onClicked: fileModel.folder = _fm.getRoot() + "media/sdcard";
+//            }
             MenuItem {
                 id: pasteMenuEntry
                 visible: { if (_fm.sourceUrl != "" && _fm.sourceUrl != undefined) return true;
@@ -134,6 +159,15 @@ Page {
                         //console.debug("Copy " + _fm.sourceUrl + " to " + findFullPath(fileModel.folder)+ "/" + findBaseName(_fm.sourceUrl));
                         _fm.copyFile(_fm.sourceUrl,findFullPath(fileModel.folder) + "/" + findBaseName(_fm.sourceUrl))
                     }
+                }
+            }
+            MenuItem {
+                text: qsTr("Properties")
+                onClicked: {
+                    pageStack.push(Qt.resolvedUrl("helper/fmComponents/FileProperties.qml"),
+                                          {"path": findFullPath(fileModel.folder), dataContainer: dataContainer, "fileIcon": "image://theme/icon-m-folder", "fileSize": "4k",
+                                           "fileModified": fileModel.fileModified, "fileIsDir": true, "father": page})
+                    //console.debug("Path: " + findFullPath(fileModel.folder))
                 }
             }
         }
@@ -306,6 +340,12 @@ Page {
                         text: qsTr("Delete")
                         onClicked: {
                             bgdelegate.remove();
+                        }
+                    }
+                    MenuItem {
+                        text: qsTr("Properties")
+                        onClicked: {
+                            pageStack.push(Qt.resolvedUrl("helper/fmComponents/FileProperties.qml"), {"path": filePath, dataContainer: dataContainer, "fileIcon": fileIcon.source, "fileSize": humanSize(fileSize), "fileModified": fileModified, "fileIsDir": fileIsDir, "father": page})
                         }
                     }
                 }
