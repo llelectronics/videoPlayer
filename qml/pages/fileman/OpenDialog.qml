@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 import harbour.videoplayer.Videoplayer 1.0
+import Nemo.Configuration 1.0
 
 Page {
     id: page
@@ -19,6 +20,24 @@ Page {
 
     signal fileOpen(string path);
 
+    property var customPlaces: [
+ //       {
+ //           name: qsTr("Android Storage"),
+ //           path: _fm.getHome() + "/android_storage",
+ //           icon: "image://theme/icon-m-folder"
+ //       }
+    ]
+
+
+    ConfigurationGroup {
+        id: customPlacesSettings
+        path: "/apps/harbour-llsfileman"
+    }
+
+    onCustomPlacesChanged: {
+        saveCustomPlaces();
+    }
+
     onPathChanged: {
         openFile(path);
     }
@@ -36,6 +55,12 @@ Page {
 
             fileOpen(path)
         }
+    }
+
+    function saveCustomPlaces() {
+        var customPlacesJson = JSON.stringify(customPlaces);
+        //console.debug(customPlacesJson);
+        customPlacesSettings.setValue("places",customPlacesJson);
     }
 
     FolderListModel {
@@ -143,6 +168,20 @@ Page {
 //                text: "Show SDCard"
 //                onClicked: fileModel.folder = _fm.getRoot() + "media/sdcard";
 //            }
+            MenuItem {
+                text: qsTr("Add to places")
+                onClicked: {
+                    customPlaces.push(
+                                {
+                                    name: findBaseName(path),
+                                    path: path,
+                                    icon: "image://theme/icon-m-folder"
+                                }
+                                )
+                    customPlacesChanged()
+                }
+            }
+
             MenuItem {
                 id: pasteMenuEntry
                 visible: { if (_fm.sourceUrl != "" && _fm.sourceUrl != undefined) return true;

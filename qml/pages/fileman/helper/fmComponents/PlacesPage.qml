@@ -1,7 +1,10 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
+import Nemo.Configuration 1.0
 
 Page {
+    id: root
+    allowedOrientations: Orientation.All
 
     property QtObject father
 
@@ -15,8 +18,17 @@ Page {
     property string picDir: _fm.getHome() + "/Pictures"
     property string vidDir: _fm.getHome() + "/Videos"
 
+    property var customPlaces: father.customPlaces
+    //        [
+    //        {
+    //        name: qsTr("Device memory"),
+    //        path: rootDir,
+    //        icon: "image://theme/icon-m-phone"
+    //        }
+    //        ]
+
     property var devicesModel: [
-         {
+        {
             name: qsTr("Device memory"),
             path: rootDir,
             icon: "image://theme/icon-m-phone"
@@ -60,8 +72,33 @@ Page {
             icon: "image://theme/icon-m-media"
         }
     ]
+
+    ConfigurationGroup {
+        id: customPlacesSettings
+        path: "/apps/harbour-llsfileman"
+    }
+
+    Component.onCompleted: {
+        var customPlacesJSON = customPlacesSettings.value("places","")
+        var customPlacesObj = JSON.parse(customPlacesJSON)
+        for (var i=0; i<customPlacesObj.length; i++) {
+            var Name = customPlacesObj[i].name;
+            var Path = customPlacesObj[i].path;
+            var Icon = customPlacesObj[i].icon;
+            customPlaces.push(
+                        {
+                            name: Name,
+                            path: Path,
+                            icon: Icon
+                        }
+                        )
+        }
+        customPlacesChanged()
+    }
+
     SilicaFlickable {
         anchors.fill: parent
+        contentHeight: head.height + secDevices.height + secPlaces.height + cusPlaces.height + Theme.paddingLarge
 
         PageHeader {
             id: head
@@ -72,7 +109,7 @@ Page {
         Item {
             id: secDevices
             width: parent.width
-            height: devicesList.height
+            height: devicesList.height + devicesHeader.height
             anchors.top: head.bottom
             anchors.topMargin: Theme.paddingSmall
             clip: true
@@ -85,7 +122,7 @@ Page {
                 id: devicesList
                 anchors.top: devicesHeader.bottom
                 width: parent.width
-                height: count * (Theme.itemSizeSmall + Theme.paddingLarge * 2)
+                height: count * (Theme.itemSizeSmall)
 
                 interactive: false
                 model: devicesModel
@@ -111,7 +148,7 @@ Page {
             id: secPlaces
             clip: true
             width: parent.width
-            height: placesList.height
+            height: placesList.height + placesHeader.height
             anchors.top: secDevices.bottom
             anchors.topMargin: Theme.paddingSmall
 
@@ -122,7 +159,7 @@ Page {
             SilicaListView {
                 id: placesList
                 anchors.top: placesHeader.bottom
-                height: count * (Theme.itemSizeSmall + Theme.paddingLarge * 2)
+                height: count * (Theme.itemSizeSmall)
                 width: parent.width
                 model: placesModel
                 delegate: DirEntryDelegate {
@@ -139,6 +176,72 @@ Page {
             }
         }
         // End Section Places
+
+        // Section Custom Places
+        Item {
+            id: cusPlaces
+            clip: true
+            width: parent.width
+            height: cusPlacesList.height + cusPlacesHeader.height
+            anchors.top: secPlaces.bottom
+            anchors.topMargin: Theme.paddingSmall
+            visible: cusPlacesList.count > 0
+
+            Behavior on height { NumberAnimation { duration: 150 } }
+
+            SectionHeader { id: cusPlacesHeader; text: qsTr("Custom") }
+
+            SilicaListView {
+                id: cusPlacesList
+                anchors.top: cusPlacesHeader.bottom
+                height: count * (Theme.itemSizeSmall)
+                width: parent.width
+                model: customPlaces
+                delegate: DirEntryDelegate {
+                    id: delegate
+                    objectName: "delegate"
+                    delButtonVisible: true
+                    property var item: model.modelData ? model.modelData : model
+                    icon: item.icon
+                    text: item.name
+
+                    function remove() {
+                        var removal = removalComponent.createObject(root, {"root": root})
+                        removal.execute(delegate,qsTr("Deleting ") + item.name,
+                                        function() {
+                                            for (var i=0; i<root.customPlaces.length; i++) {
+                                                var index = root.customPlaces[i].path.indexOf(item.path)
+                                                if (index > -1) {
+                                                    root.customPlaces.splice(i,1)
+                                                }
+                                            }
+                                            root.father.customPlacesChanged();
+                                        })
+                    }
+
+
+                    onClicked: {
+                        if (father.path!==item.path) {
+                            father.path = item.path
+                        }
+                        pageStack.navigateBack()
+                    }
+                    onDelButtonPressed: {
+                        remove()
+                    }
+                    Component {
+                        id: removalComponent
+                        RemorseItem {
+                            id: remorse
+                            onCanceled: destroy()
+                            property QtObject root
+                        }
+                    }
+                } // End DirEntryDelegate
+            }
+
+        }
+        // End Section Custom Places
 
     }
 }
