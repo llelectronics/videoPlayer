@@ -31,7 +31,7 @@ Page {
 
     ConfigurationGroup {
         id: customPlacesSettings
-        path: "/apps/harbour-llsfileman"
+        path: "/apps/harbour-llsfileman" // DO NOT CHANGE to share custom places between apps
     }
 
     onCustomPlacesChanged: {
