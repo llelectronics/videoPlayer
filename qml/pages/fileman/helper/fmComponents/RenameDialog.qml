@@ -6,21 +6,19 @@ Dialog {
     property string newPath
     property string oldName
     property string errorMessage
+    property string newName
 
     id: dialog
     allowedOrientations: Orientation.All
-    canAccept: newName.text !== ""
+    canAccept: _newName.text !== ""
 
     onAccepted: {
-        newPath = path.replace(oldName,newName.text)
-        var isRenamed = _fm.renameFile(path, newPath);
-        if (!isRenamed) {
-            errorMessage = qsTr("Error renaming")
-        }
+        newPath = path.replace(oldName,_newName.text)
+        newName = _newName.text
     }
 
     Component.onCompleted: {
-        newName.text = oldName
+        _newName.text = oldName
     }
 
     SilicaFlickable {
@@ -54,14 +52,14 @@ Dialog {
             }
 
             TextField {
-                id: newName
+                id: _newName
                 width: parent.width
                 placeholderText: qsTr("New name")
                 label: qsTr("New name")
                 focus: true
 
                 // return key on virtual keyboard accepts the dialog
-                EnterKey.enabled: newName.text.length > 0
+                EnterKey.enabled: _newName.text.length > 0
                 EnterKey.iconSource: "image://theme/icon-m-enter-accept"
                 EnterKey.onClicked: dialog.accept()
             }

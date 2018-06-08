@@ -200,6 +200,9 @@ Page {
                 delegate: DirEntryDelegate {
                     id: delegate
                     objectName: "delegate"
+                    property bool menuOpen: contextMenu != null && contextMenu.parent === delegate
+                    height: menuOpen ? contextMenu.height + cusPlacesList.height : cusPlacesList.height
+                    property Item contextMenu
                     delButtonVisible: true
                     property var item: model.modelData ? model.modelData : model
                     icon: item.icon
@@ -219,6 +222,11 @@ Page {
                                         })
                     }
 
+                    function showContextMenu() {
+                        if (!contextMenu)
+                            contextMenu = myMenu.createObject(root, {"root": root, "path" : item.path, "oldName": item.name})
+                        contextMenu.show(delegate)
+                    }
 
                     onClicked: {
                         if (father.path!==item.path) {
@@ -229,6 +237,8 @@ Page {
                     onDelButtonPressed: {
                         remove()
                     }
+                    onPressAndHold: showContextMenu()
+
                     Component {
                         id: removalComponent
                         RemorseItem {
@@ -237,6 +247,31 @@ Page {
                             property QtObject root
                         }
                     }
+
+                    Component {
+                        id: myMenu
+                        ContextMenu {
+                            property var oldName
+                            property var path
+                            property QtObject root
+                            MenuItem {
+                                text: qsTr("Rename")
+                                onClicked: {
+                                    var dialog = pageStack.push(Qt.resolvedUrl("RenameDialog.qml"),
+                                                                { "path": path, "oldName": oldName })
+                                    dialog.accepted.connect(function() {
+                                        for (var i=0; i<root.customPlaces.length; i++) {
+                                            var index = root.customPlaces[i].path.indexOf(path)
+                                            if (index > -1) {
+                                                root.customPlaces[i].name = dialog.newName
+                                            }
+                                        }
+                                        root.father.customPlacesChanged();
+                                    })
+                                } // End onClicked
+                            }
+                        } // End ContextMenu
+                    } // End Component
                 } // End DirEntryDelegate
             }
 

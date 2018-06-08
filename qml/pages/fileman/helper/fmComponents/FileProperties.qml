@@ -68,6 +68,10 @@ Page {
                         var dialog = pageStack.push(Qt.resolvedUrl("RenameDialog.qml"),
                                                     { "path": path, "oldName": fileData.name })
                         dialog.accepted.connect(function() {
+                            var isRenamed = _fm.renameFile(path, dialog.newPath);
+                            if (!isRenamed) {
+                                dialog.errorMessage = qsTr("Error renaming")
+                            }
                             if (dialog.errorMessage !== "") {
                                 console.debug(dialog.errorMessage)
                                 infoBanner.parent = propertiesPage
