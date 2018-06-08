@@ -70,6 +70,7 @@ int main(int argc, char *argv[])
     qmlRegisterType<Playlist, 1>("harbour.videoplayer.Videoplayer", 1, 0,"Playlist");
 
     QQuickView *view = SailfishApp::createView(); // I get a white background with this.
+    view->engine()->rootContext()->setContextProperty("_ytdl", nullptr);
     view->setSource(SailfishApp::pathTo("qml/harbour-videoPlayer.qml"));  // So I do this ;)
 
     // Needs to be added here before trying to load the file as _ytdl might be needed for that
