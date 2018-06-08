@@ -201,7 +201,7 @@ Page {
                     id: delegate
                     objectName: "delegate"
                     property bool menuOpen: contextMenu != null && contextMenu.parent === delegate
-                    height: menuOpen ? contextMenu.height + cusPlacesList.height : cusPlacesList.height
+                    height: menuOpen ? contextMenu.height + Theme.itemSizeSmall : Theme.itemSizeSmall
                     property Item contextMenu
                     delButtonVisible: true
                     property var item: model.modelData ? model.modelData : model
