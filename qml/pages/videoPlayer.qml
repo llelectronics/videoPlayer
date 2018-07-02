@@ -52,6 +52,7 @@ Page {
     property bool isPlaylist: dataContainer.isPlaylist
     property bool isNewSource: false
     property string onlyMusicState: dataContainer.onlyMusicState
+    property bool isLiveStream: dataContainer.isLiveStream
 
     property alias showTimeAndTitle: showTimeAndTitle
     property alias pulley: pulley
@@ -272,11 +273,11 @@ Page {
                 }
                 onClicked: {
                     if (isYtUrl) {
-                        if (mainWindow.firstPage.streamTitle != "") mainWindow.modelBookmarks.addBookmark(mainWindow.firstPage.originalUrl,mainWindow.firstPage.streamTitle)
-                        else mainWindow.modelBookmarks.addBookmark(mainWindow.firstPage.originalUrl,mainWindow.findBaseName(mainWindow.firstPage.originalUrl))
+                        if (mainWindow.firstPage.streamTitle != "") mainWindow.modelBookmarks.addBookmark(mainWindow.firstPage.originalUrl,mainWindow.firstPage.streamTitle,mainWindow.firstPage.isLiveStream)
+                        else mainWindow.modelBookmarks.addBookmark(mainWindow.firstPage.originalUrl,mainWindow.findBaseName(mainWindow.firstPage.originalUrl), mainWindow.firstPage.isLiveStream)
                     } else {
-                        if (mainWindow.firstPage.streamTitle != "") mainWindow.modelBookmarks.addBookmark(mainWindow.firstPage.streamUrl,mainWindow.firstPage.streamTitle)
-                        else mainWindow.modelBookmarks.addBookmark(mainWindow.firstPage.streamUrl,mainWindow.findBaseName(mainWindow.firstPage.streamUrl))
+                        if (mainWindow.firstPage.streamTitle != "") mainWindow.modelBookmarks.addBookmark(mainWindow.firstPage.streamUrl,mainWindow.firstPage.streamTitle,mainWindow.firstPage.isLiveStream)
+                        else mainWindow.modelBookmarks.addBookmark(mainWindow.firstPage.streamUrl,mainWindow.findBaseName(mainWindow.firstPage.streamUrl),mainWindow.firstPage.isLiveStream)
                     }
                 }
             }
@@ -786,10 +787,12 @@ Page {
                     stop();
                 }
                 onBufferProgressChanged: {
-                    if (bufferProgress == 1.0 && isNewSource) {
-                        isNewSource = false
-                        play()
-                    } else if(isNewSource) pause()
+                    if (!isLiveStream) {
+                        if (bufferProgress == 1.0 && isNewSource) {
+                            isNewSource = false
+                            play()
+                        } else if(isNewSource) pause()
+                    }
                 }
             }
 

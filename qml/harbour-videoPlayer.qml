@@ -244,11 +244,11 @@ ApplicationWindow
             return false;
         }
 
-        function editBookmark(oldTitle, bookmarkTitle, bookmarkUrl) {
+        function editBookmark(oldTitle, bookmarkTitle, bookmarkUrl, liveStream) {
             for (var i=0; i<count; i++) {
-                if (get(i).title === oldTitle) set(i,{"title":bookmarkTitle, "url":bookmarkUrl});
+                if (get(i).title === oldTitle) set(i,{"title":bookmarkTitle, "url":bookmarkUrl, "liveStream": liveStream});
             }
-            DB.editBookmark(oldTitle,bookmarkTitle,bookmarkUrl);
+            DB.editBookmark(oldTitle,bookmarkTitle,bookmarkUrl, liveStream ? 1 : 0);
         }
 
         function removeBookmark(bookmarkUrl) {
@@ -258,9 +258,9 @@ ApplicationWindow
             DB.removeBookmark(bookmarkUrl);
         }
 
-        function addBookmark(bookmarkUrl, bookmarkTitle) {
-            append({"title":bookmarkTitle, "url":bookmarkUrl});
-            DB.addBookmark(bookmarkTitle,bookmarkUrl);
+        function addBookmark(bookmarkUrl, bookmarkTitle, liveStream) {
+            append({"title":bookmarkTitle, "url":bookmarkUrl, "liveStream": liveStream});
+            DB.addBookmark(bookmarkTitle,bookmarkUrl,liveStream ? 1 : 0);
         }
     }
 

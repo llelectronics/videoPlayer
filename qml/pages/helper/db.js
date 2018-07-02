@@ -9,7 +9,7 @@ function getDatabase() {
 function initialize() {
     var db = getDatabase();
     if(db.version == '') {
-        db.changeVersion('', '0.3', function(tx) {
+        db.changeVersion('', '0.5', function(tx) {
             // Create the history table if it doesn't already exist
             // If the table exists, this is skipped
             tx.executeSql('CREATE TABLE IF NOT EXISTS history(uid INTEGER UNIQUE, url TEXT, title TEXT)');
@@ -19,7 +19,7 @@ BEGIN \
     DELETE FROM history WHERE history.uid IN (SELECT history.uid FROM history ORDER BY history.uid limit (select count(*) -10 from history)); \
 END;')
 
-            tx.executeSql('CREATE TABLE IF NOT EXISTS bookmarks(title TEXT, url TEXT)');
+            tx.executeSql('CREATE TABLE IF NOT EXISTS bookmarks(title TEXT, url TEXT, liveStream INTEGER)');
             tx.executeSql('CREATE TABLE IF NOT EXISTS settings(setting TEXT, value TEXT)');
             tx.executeSql('CREATE UNIQUE INDEX IF NOT EXISTS idx_settings ON settings(setting)');
             tx.executeSql('CREATE TABLE IF NOT EXISTS positionStore(uid INTEGER UNIQUE, url TEXT, position INTEGER)');
@@ -62,6 +62,13 @@ END;')
 BEGIN \
 DELETE FROM searchHistory WHERE searchHistory.uid IN (SELECT searchHistory.uid FROM searchHistory ORDER BY searchHistory.uid limit (select count(*) -20 from searchHistory)); \
 END;')
+        });
+    }
+    else if (db.version == '0.4') {
+        // Need to upgrade Bookmarks here
+        db.changeVersion('0.4', '0.5', function(tx) {
+            console.debug("Upgrading db and adding liveStream to db")
+            tx.executeSql('alter table bookmarks add liveStream INTEGER');
         });
     }
 }
@@ -164,7 +171,7 @@ function getSearchHistory() {
 }
 
 // This function is used to write bookmarks into the database
-function addBookmark(title,url) {
+function addBookmark(title,url,liveStream) {
     var db = getDatabase();
     var res = "";
     db.transaction(function(tx) {
@@ -172,7 +179,7 @@ function addBookmark(title,url) {
         removeBookmark(url);
         //console.debug("Adding to bookmarks db:" + title + " " + url);
 
-        var rs = tx.executeSql('INSERT OR REPLACE INTO bookmarks VALUES (?,?);', [title,url]);
+        var rs = tx.executeSql('INSERT OR REPLACE INTO bookmarks VALUES (?,?,?);', [title,url,liveStream]);
         if (rs.rowsAffected > 0) {
             res = "OK";
             console.log ("Saved to database");
@@ -187,12 +194,12 @@ function addBookmark(title,url) {
 }
 
 // This function is used to edit bookmarks in the database
-function editBookmark(oldtitle,title,url) {
+function editBookmark(oldtitle,title,url,liveStream) {
     var db = getDatabase();
     var res = "";
     db.transaction(function(tx) {
         console.debug("UPDATE bookmarks SET title=" + title + ", url=" + url + " WHERE title=" + oldtitle + ";")
-        var rs = tx.executeSql('UPDATE bookmarks SET title=(?), url=(?) WHERE title=(?);', [title,url,oldtitle]);
+        var rs = tx.executeSql('UPDATE bookmarks SET title=(?), url=(?), liveStream=(?) WHERE title=(?);', [title,url,liveStream,oldtitle]);
         if (rs.rowsAffected > 0) {
             res = "OK";
             console.log ("Saved to database");
@@ -227,7 +234,8 @@ function getBookmarks() {
     db.transaction(function(tx) {
         var rs = tx.executeSql('SELECT * FROM bookmarks ORDER BY bookmarks.title;');
         for (var i = 0; i < rs.rows.length; i++) {
-            mainWindow.modelBookmarks.append({"title" : rs.rows.item(i).title, "url" : rs.rows.item(i).url});
+            //console.debug("liveStream: " + rs.rows.item(i).liveStream)
+            mainWindow.modelBookmarks.append({"title" : rs.rows.item(i).title, "url" : rs.rows.item(i).url, "liveStream" : rs.rows.item(i).liveStream});
         }
     })
 }

@@ -208,6 +208,8 @@ Page {
                         if (dataContainer != null) {
                             dataContainer.streamUrl = request.url;
                             dataContainer.originalUrl = request.url
+                            dataContainer.isPlaylist = false;
+                            dataContainer.isLiveStream = false;
                             dataContainer.loadPlayer();
                         }
                         ytView.reload(); // WTF why is this working with IgnoreRequest
@@ -338,6 +340,8 @@ Page {
                     if (dataContainer != null) {
                         dataContainer.streamUrl = contextMenu.clickedUrl
                         dataContainer.originalUrl = contextMenu.clickedUrl
+                        dataContainer.isPlaylist = false
+                        dataContainer.isLiveStream = false
                         dataContainer.loadPlayer();
                     }
                 }

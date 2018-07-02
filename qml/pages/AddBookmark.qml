@@ -14,6 +14,7 @@ Dialog {
     property string oldTitle;
     property alias bookmarkTitle: bookmarkTitle.text
     property alias bookmarkUrl: bookmarkUrl.text
+    property alias liveStream: liveStream.checked
 
     property ListModel bookmarks
 
@@ -26,8 +27,8 @@ Dialog {
     }
 
     function addBookmark() {
-        if (editBookmark && oldTitle != "") bookmarks.editBookmark(oldTitle,bookmarkTitle.text,bookmarkUrl.text.toString());
-        else bookmarks.addBookmark(bookmarkUrl.text.toString(), bookmarkTitle.text);
+        if (editBookmark && oldTitle != "") bookmarks.editBookmark(oldTitle,bookmarkTitle.text,bookmarkUrl.text.toString(), liveStream);
+        else bookmarks.addBookmark(bookmarkUrl.text.toString(), bookmarkTitle.text, liveStream);
     }
 
     Flickable {
@@ -71,6 +72,11 @@ Dialog {
             }
             Keys.onEnterPressed: enterPress();
             Keys.onReturnPressed: enterPress();
+            TextSwitch {
+                id: liveStream
+                anchors.horizontalCenter: parent.horizontalCenter
+                text: qsTr("Live Stream")
+            }
         }
     }
 

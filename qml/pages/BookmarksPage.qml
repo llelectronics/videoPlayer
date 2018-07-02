@@ -10,6 +10,7 @@ Page
 
     property string bookmarkUrl
     property string bookmarkTitle
+    property bool liveStream
     property QtObject dataContainer
     property ListModel modelBookmarks
 
@@ -46,7 +47,7 @@ Page
                 removal.execute(contentItem, "Deleting " + title, function() { modelBookmarks.removeBookmark(url); } )
             }
             function editBookmark() {
-                pageStack.push(Qt.resolvedUrl("AddBookmark.qml"), { bookmarks: modelBookmarks, editBookmark: true, bookmarkUrl: url, bookmarkTitle: title, oldTitle: title });
+                pageStack.push(Qt.resolvedUrl("AddBookmark.qml"), { bookmarks: modelBookmarks, editBookmark: true, bookmarkUrl: url, bookmarkTitle: title, oldTitle: title, liveStream: liveStream });
             }
 
             BackgroundItem {
@@ -60,6 +61,7 @@ Page
                 }
                 onClicked: {
                     dataContainer.streamUrl = url;
+                    dataContainer.isLiveStream = liveStream
                     dataContainer.loadPlayer();
                 }
                 onPressAndHold: {

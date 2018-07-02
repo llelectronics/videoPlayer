@@ -122,6 +122,7 @@ Page
                             mainWindow.modelPlaylist.current = index;
                             dataContainer.isPlaylist = true;
                             dataContainer.autoplay = true;
+                            dataContainer.isLiveStream = false;
                             dataContainer.loadPlayer();
                         }
                     }

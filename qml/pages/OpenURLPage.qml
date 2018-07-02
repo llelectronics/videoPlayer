@@ -27,7 +27,9 @@ Dialog {
             if (dataContainer != null) {
                 mainWindow.firstPage.streamUrl = urlField.text.toString();
                 mainWindow.firstPage.originalUrl = urlField.text.toString();
-                mainWindow.firstPage.isYtUrl = true
+                mainWindow.firstPage.isYtUrl = true;
+                mainWindow.firstPage.isPlaylist = false;
+                mainWindow.firstPage.isLiveStream = false;
                 mainWindow.firstPage.loadPlayer();
             }
         }
@@ -56,6 +58,8 @@ Dialog {
                 mainWindow.firstPage.streamUrl = urlField.text;
                 mainWindow.firstPage.originalUrl = "";
                 mainWindow.firstPage.streamTitle = "";
+                mainWindow.firstPage.isPlaylist = false;
+                mainWindow.firstPage.isLiveStream = false;
                 mainWindow.firstPage.loadPlayer();
             }
         }

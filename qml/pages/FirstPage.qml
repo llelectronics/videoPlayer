@@ -54,6 +54,7 @@ Page {
     property bool subtitleSolid: false
     property bool isPlaylist: false
     property string onlyMusicState: "default"
+    property bool isLiveStream: false
     /////////////////////////////////////////////////////
 
     // Videoplayer properties //////////////////////////
@@ -211,6 +212,7 @@ Page {
                 mainWindow.firstPage.streamUrl = selectedContent;
                 mainWindow.firstPage.autoplay = true;
                 mainWindow.firstPage.isPlaylist = false;
+                mainWindow.firstPage.isLiveStream = false;
                 mainWindow.firstPage.loadPlayer();
             }
         }
@@ -226,6 +228,7 @@ Page {
                 mainWindow.firstPage.streamUrl = path;
                 mainWindow.firstPage.autoplay = true;
                 mainWindow.firstPage.isPlaylist = false;
+                mainWindow.firstPage.isLiveStream = false;
                 mainWindow.firstPage.loadPlayer();
             }
         }
