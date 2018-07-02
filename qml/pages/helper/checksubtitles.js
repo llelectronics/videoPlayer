@@ -6,13 +6,15 @@ WorkerScript.onMessage = function(message) {
     ii = (i0 + i1) >> 1;
     if(pos < a[ii].start) i1 = ii; else i0 = ii;
   }
-  while(i0 >= 0 && pos <= a[i0].end) i0--;
-  for(ii = i0 + 1; ii < i1; ii++) {
-    sub = a[ii];
-    if(sub.start <= pos) {
-      text.push(sub.text);
-      //console.debug("[checksubtitles] sub.text: " + sub.text);
-    }
+  if (typeof a[i0] !== 'undefined') {
+      while(i0 >= 0 && pos <= a[i0].end) i0--;
+      for(ii = i0 + 1; ii < i1; ii++) {
+          sub = a[ii];
+          if(sub.start <= pos) {
+              text.push(sub.text);
+              //console.debug("[checksubtitles] sub.text: " + sub.text);
+          }
+      }
   }
   WorkerScript.sendMessage(text.join('\n'));
 }
