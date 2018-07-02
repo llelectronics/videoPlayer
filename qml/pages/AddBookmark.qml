@@ -27,8 +27,8 @@ Dialog {
     }
 
     function addBookmark() {
-        if (editBookmark && oldTitle != "") bookmarks.editBookmark(oldTitle,bookmarkTitle.text,bookmarkUrl.text.toString(), liveStream);
-        else bookmarks.addBookmark(bookmarkUrl.text.toString(), bookmarkTitle.text, liveStream);
+        if (editBookmark && oldTitle != "") bookmarks.editBookmark(oldTitle,bookmarkTitle.text,bookmarkUrl.text.toString(), liveStream.checked);
+        else bookmarks.addBookmark(bookmarkUrl.text.toString(), bookmarkTitle.text, liveStream.checked);
     }
 
     Flickable {

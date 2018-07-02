@@ -245,10 +245,11 @@ ApplicationWindow
         }
 
         function editBookmark(oldTitle, bookmarkTitle, bookmarkUrl, liveStream) {
+            console.debug("liveStream = " + liveStream)
             for (var i=0; i<count; i++) {
                 if (get(i).title === oldTitle) set(i,{"title":bookmarkTitle, "url":bookmarkUrl, "liveStream": liveStream});
             }
-            DB.editBookmark(oldTitle,bookmarkTitle,bookmarkUrl, liveStream ? 1 : 0);
+            DB.editBookmark(oldTitle,bookmarkTitle,bookmarkUrl, liveStream);
         }
 
         function removeBookmark(bookmarkUrl) {
@@ -260,7 +261,7 @@ ApplicationWindow
 
         function addBookmark(bookmarkUrl, bookmarkTitle, liveStream) {
             append({"title":bookmarkTitle, "url":bookmarkUrl, "liveStream": liveStream});
-            DB.addBookmark(bookmarkTitle,bookmarkUrl,liveStream ? 1 : 0);
+            DB.addBookmark(bookmarkTitle,bookmarkUrl,liveStream);
         }
     }
 

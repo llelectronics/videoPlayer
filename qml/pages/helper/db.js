@@ -174,6 +174,7 @@ function getSearchHistory() {
 function addBookmark(title,url,liveStream) {
     var db = getDatabase();
     var res = "";
+    liveStream = liveStream ? 1 : 0
     db.transaction(function(tx) {
         // Remove and readd if url already in history
         removeBookmark(url);
@@ -197,8 +198,9 @@ function addBookmark(title,url,liveStream) {
 function editBookmark(oldtitle,title,url,liveStream) {
     var db = getDatabase();
     var res = "";
+    liveStream = liveStream ? 1 : 0
     db.transaction(function(tx) {
-        console.debug("UPDATE bookmarks SET title=" + title + ", url=" + url + " WHERE title=" + oldtitle + ";")
+        console.debug("UPDATE bookmarks SET title=" + title + ", url=" + url + " liveStream=" + liveStream + " WHERE title=" + oldtitle + ";")
         var rs = tx.executeSql('UPDATE bookmarks SET title=(?), url=(?), liveStream=(?) WHERE title=(?);', [title,url,liveStream,oldtitle]);
         if (rs.rowsAffected > 0) {
             res = "OK";
@@ -235,7 +237,8 @@ function getBookmarks() {
         var rs = tx.executeSql('SELECT * FROM bookmarks ORDER BY bookmarks.title;');
         for (var i = 0; i < rs.rows.length; i++) {
             //console.debug("liveStream: " + rs.rows.item(i).liveStream)
-            mainWindow.modelBookmarks.append({"title" : rs.rows.item(i).title, "url" : rs.rows.item(i).url, "liveStream" : rs.rows.item(i).liveStream});
+            var liveStream = rs.rows.item(i).liveStream == 1 ? true : false
+            mainWindow.modelBookmarks.append({"title" : rs.rows.item(i).title, "url" : rs.rows.item(i).url, "liveStream" : liveStream});
         }
     })
 }
