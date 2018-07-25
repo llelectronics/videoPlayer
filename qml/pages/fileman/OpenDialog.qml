@@ -190,14 +190,7 @@ Page {
                 text: qsTr("Paste") + "(" + findBaseName(_fm.sourceUrl) + ")"
                 onClicked: {
                     busyInd.running = true
-                    if (_fm.moveMode) {
-                        //console.debug("Moving " + _fm.sourceUrl + " to " + findFullPath(fileModel.folder)+ "/" + findBaseName(_fm.sourceUrl));
-                        _fm.moveFile(_fm.sourceUrl,findFullPath(fileModel.folder) + "/" + findBaseName(_fm.sourceUrl))
-                    }
-                    else {
-                        //console.debug("Copy " + _fm.sourceUrl + " to " + findFullPath(fileModel.folder)+ "/" + findBaseName(_fm.sourceUrl));
-                        _fm.copyFile(_fm.sourceUrl,findFullPath(fileModel.folder) + "/" + findBaseName(_fm.sourceUrl))
-                    }
+                    _fm.copyFile(_fm.sourceUrl,findFullPath(fileModel.folder) + "/" + findBaseName(_fm.sourceUrl))
                 }
             }
             MenuItem {
@@ -236,13 +229,14 @@ Page {
             }
 
             function copy() {
-                _fm.sourceUrl = filePath
+                _fm.moveMode = false;
+                _fm.sourceUrl = filePath;
                 //console.debug(_fm.sourceUrl)
             }
 
             function move() {
                 _fm.moveMode = true;
-                copy();
+                _fm.sourceUrl = filePath;
             }
 
             function add2playlist() {

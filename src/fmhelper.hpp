@@ -124,9 +124,6 @@ class FM : public QObject
         {
             if (copyFile(source,target))
             {
-                QFileInfo srcFileInfo(source);
-                if (srcFileInfo.isDir()) { removeDir(source); }
-                else remove(source);
                 return true;
             }
             else return false;
@@ -242,6 +239,12 @@ class FM : public QObject
         {
            m_cpResult = watcher.future().result();
            qDebug() << "m_cpResult = " << m_cpResult;
+           // Check for target copied successfully
+           if (m_cpResult && m_moveMode) {
+               QFileInfo srcFileInfo(m_sourceUrl);
+               if (srcFileInfo.isDir()) { removeDir(m_sourceUrl); }
+               else remove(m_sourceUrl);
+           }
            emit cpResultChanged();
         }
         void dirSizeFinished()
