@@ -209,6 +209,9 @@ ApplicationWindow
                 if (pageStack.currentPage.videoPoster.opacity == 0) pageStack.currentPage.videoPoster.toggleControls();
             }
         }
+        else if (typeof pageStack.currentPage.workaroundRefresh === 'function') {
+            pageStack.currentPage.workaroundRefresh();
+        }
     }
 
     ListModel {
