@@ -680,7 +680,7 @@ Page {
 
     children: [
 
-        // Always use a black background
+        // Use a black background if not isLightTheme
         Rectangle {
             anchors.fill: parent
             color: isLightTheme ? "white" : "black"
