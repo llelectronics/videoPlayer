@@ -51,6 +51,10 @@ ApplicationWindow
     property alias downloadModel: downloadModel
     property alias errTxt: errTxt
     property bool clearWebViewOnExit: false
+    property bool isLightTheme: {
+        if (Theme.colorScheme == Theme.LightOnDark) return false
+        else return true
+    }
 
     property string version: "1.9"
     property string appname: "LLs Video Player"

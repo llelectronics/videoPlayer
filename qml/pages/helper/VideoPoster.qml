@@ -93,10 +93,10 @@ MouseArea {
             anchors.centerIn: parent
             width: playPauseImg.width + Theme.iconSizeMedium
             height: playPauseImg.height + Theme.iconSizeMedium
-            color: "black"
+            color: isLightTheme ? "white" : "black"
             opacity: 0.4
             radius: width / 2
-            border.color: "white"
+            border.color: isLightTheme ? "black" : "white"
             border.width: 2
         }
 
@@ -105,10 +105,10 @@ MouseArea {
             anchors.centerIn: ffwdImg
             width: playPauseImg.width + Theme.iconSizeSmall
             height: playPauseImg.height + Theme.iconSizeSmall
-            color: "black"
+            color: isLightTheme ? "white" : "black"
             opacity: 0.4
             radius: width / 2
-            border.color: "white"
+            border.color: isLightTheme ? "black" : "white"
             border.width: 2
         }
 
@@ -117,10 +117,10 @@ MouseArea {
             anchors.centerIn: rewImg
             width: playPauseImg.width + Theme.iconSizeSmall
             height: playPauseImg.height + Theme.iconSizeSmall
-            color: "black"
+            color: isLightTheme ? "white" : "black"
             opacity: 0.4
             radius: width / 2
-            border.color: "white"
+            border.color: isLightTheme ? "black" : "white"
             border.width: 2
         }
 
@@ -209,7 +209,7 @@ MouseArea {
             //opacity: 0.5
             gradient: Gradient {
                 GradientStop { position: 0.0; color: "transparent" }
-                GradientStop { position: 1.0; color: "black" } //Theme.highlightColor} // Black seems to look and work better
+                GradientStop { position: 1.0; color: isLightTheme ? "white" : "black" } //Theme.highlightColor} // Black seems to look and work better
             }
 
             BackgroundItem {
@@ -230,10 +230,10 @@ MouseArea {
                 }
                 Label {
                     text: firstPage.ytQual
-                    color: parent.highlighted ? Theme.highlightColor : "#FFFFFF"
+                    color: parent.highlighted ? Theme.highlightColor : isLightTheme ? "black" : "white"
                     anchors.centerIn: parent
                     style: Text.Outline
-                    styleColor: "#000000"
+                    styleColor: isLightTheme? "black" : "white"
                 }
             }
             Label {

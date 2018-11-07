@@ -150,7 +150,7 @@ Page {
             else return false
         }
         gradient: Gradient {
-            GradientStop { position: 0.0; color: "black" }
+            GradientStop { position: 0.0; color: isLightTheme ? "white" : "black" }
             GradientStop { position: 1.0; color: "transparent" } //Theme.highlightColor} // Black seems to look and work better
         }
     }
@@ -158,7 +158,7 @@ Page {
     PageHeader {
         id: urlHeader
         title: mainWindow.findBaseName(streamUrl)
-        _titleItem.color: "white"
+        _titleItem.color: isLightTheme? "black" : "white"
         visible: {
             if (titleHeader.visible == false && pulley.visible && mainWindow.applicationActive) return true
             else return false
@@ -176,7 +176,7 @@ Page {
     }
     PageHeader {
         id: titleHeader
-        _titleItem.color: "white"
+        _titleItem.color: isLightTheme? "black" : "white"
         title: streamTitle
         visible: {
             if (streamTitle != "" && pulley.visible && mainWindow.applicationActive) return true
@@ -399,7 +399,7 @@ Page {
         }
 
         Rectangle {
-            color: "black"
+            color: isLightTheme ? "white" : "black"
             opacity: 0.60
             anchors.fill: parent
             visible: {
@@ -683,7 +683,7 @@ Page {
         // Always use a black background
         Rectangle {
             anchors.fill: parent
-            color: "black"
+            color: isLightTheme ? "white" : "black"
             //visible: video.visible
         },
 
@@ -840,7 +840,7 @@ Page {
         width: parent.width
         height: Theme.fontSizeHuge
         y: coverTime.y + 10
-        color: "black"
+        color: isLightColor? "white" : "black"
         opacity: 0.4
         visible: coverTime.visible
     }

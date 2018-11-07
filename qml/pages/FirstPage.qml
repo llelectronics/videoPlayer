@@ -32,6 +32,7 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 import QtMultimedia 5.0
 import Sailfish.Pickers 1.0
+import QtGraphicalEffects 1.0
 import "helper"
 import "fileman"
 
@@ -306,6 +307,12 @@ Page {
             }
             color: colour
             icon: Qt.resolvedUrl(bicon)
+            ColorOverlay {
+                anchors.fill: parent
+                source: parent
+                color: "black"
+                visible: isLightTheme
+            }
         }
     }
 
