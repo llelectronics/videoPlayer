@@ -81,13 +81,13 @@ Page {
             //console.debug("[videoPlayer.qml] Destruction going on so write : " + mediaPlayer.source + " with timecode: " + mediaPlayer.position + " to db")
             DB.addPosition(sourcePath,mediaPlayer.position);
         }
-        mediaPlayer.stop();
-        mediaPlayer.source = "";
-        mediaPlayer.play();
-        mediaPlayer.stop();
-        gc();
-        video.destroy();
-        pageStack.popAttached();
+//        mediaPlayer.stop();
+//        mediaPlayer.source = "";
+//        mediaPlayer.play();
+//        mediaPlayer.stop();
+//        gc();
+//        video.destroy();
+//        pageStack.popAttached();
     }
 
 //    onStatusChanged: {
