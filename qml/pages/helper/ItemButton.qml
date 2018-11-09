@@ -1,5 +1,6 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
+import QtGraphicalEffects 1.0
 
 BackgroundItem {
     id: itemButton
@@ -65,6 +66,12 @@ BackgroundItem {
             anchors.rightMargin: Theme.paddingMedium
             width: parent.width / 3
             height: width
+            ColorOverlay {
+                anchors.fill: parent
+                source: parent
+                color: "black"
+                visible: isLightTheme
+            }
         }
     }
 }
