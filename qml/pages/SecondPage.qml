@@ -248,7 +248,8 @@ Page {
 
         Rectangle {
             anchors.fill: parent
-            color: Theme.rgba(Theme.highlightBackgroundColor, Theme.highlightBackgroundOpacity)
+            color: Theme.overlayBackgroundColor
+            opacity: 0.8
         }
 
         Row {
@@ -309,7 +310,8 @@ Page {
 
         Rectangle {
             anchors.fill: parent
-            color: Theme.rgba(Theme.highlightBackgroundColor, Theme.highlightBackgroundOpacity)
+            color: Theme.overlayBackgroundColor
+            opacity: 0.8
         }
 
         property string clickedUrl
