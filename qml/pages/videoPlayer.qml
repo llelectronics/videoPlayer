@@ -144,7 +144,7 @@ Page {
     Rectangle {
         id: headerBg
         width:urlHeader.width
-        height: urlHeader.height
+        height: urlHeader.height + Theme.paddingMedium
         visible: {
             if (urlHeader.visible || titleHeader.visible) return true
             else return false
