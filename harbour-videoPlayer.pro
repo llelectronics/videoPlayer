@@ -74,4 +74,4 @@ DISTFILES += \
 # following CONFIG line
 CONFIG += sailfishapp_i18n
 
-TRANSLATIONS += translations/harbour-webcat-de.ts
+TRANSLATIONS += translations/harbour-videoPlayer-de.ts
