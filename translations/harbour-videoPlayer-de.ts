@@ -660,7 +660,7 @@
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="430"/>
         <source>Music Only Indicator</source>
-        <translation>'Nur Musik' Indikator</translation>
+        <translation>&apos;Nur Musik&apos; Indikator</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="455"/>
