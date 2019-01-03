@@ -63,7 +63,7 @@ Page {
             Label {
                 id: fileNameLbl
                 font.bold: true
-                text: "Filename: "
+                text: qsTr("Filename: ")
                 anchors.left: parent.left
                 anchors.leftMargin: 25
                 anchors.top: parent.top
@@ -81,7 +81,7 @@ Page {
             Label {
                 id: fileTitleLbl
                 font.bold: true
-                text: "Title: "
+                text: qsTr("Title: ")
                 anchors.left: parent.left
                 anchors.leftMargin: 25
                 anchors.top: fileName.bottom
@@ -99,7 +99,7 @@ Page {
             Label {
                 id: fileArtistLbl
                 font.bold: true
-                text: "Artist: "
+                text: qsTr("Artist: ")
                 anchors.left: parent.left
                 anchors.leftMargin: 25
                 anchors.top: fileTitleLbl.bottom
@@ -117,7 +117,7 @@ Page {
             Label {
                 id: fileVcodecLbl
                 font.bold: true
-                text: "Videocodec: "
+                text: qsTr("Videocodec: ")
                 anchors.left: parent.left
                 anchors.leftMargin: 25
                 anchors.top: fileArtistLbl.bottom
@@ -136,7 +136,7 @@ Page {
             Label {
                 id: fileResolutionLbl
                 font.bold: true
-                text: "Resolution: "
+                text: qsTr("Resolution: ")
                 anchors.left: parent.left
                 anchors.leftMargin: 25
                 anchors.top: fileVcodecLbl.bottom
@@ -151,7 +151,7 @@ Page {
             Label {
                 id: fileVbitrateLbl
                 font.bold: true
-                text: "Videobitrate (bits/sec): "
+                text: qsTr("Videobitrate (bits/sec): ")
                 anchors.left: parent.left
                 anchors.leftMargin: 25
                 anchors.top: fileResolutionLbl.bottom
@@ -166,7 +166,7 @@ Page {
             Label {
                 id: fileFramerateLbl
                 font.bold: true
-                text: "Framerate: "
+                text: qsTr("Framerate: ")
                 anchors.left: parent.left
                 anchors.leftMargin: 25
                 anchors.top: fileVbitrateLbl.bottom
@@ -181,7 +181,7 @@ Page {
             Label {
                 id: fileAudiocodecLbl
                 font.bold: true
-                text: "Audiocodec: "
+                text: qsTr("Audiocodec: ")
                 anchors.left: parent.left
                 anchors.leftMargin: 25
                 anchors.top: fileFramerateLbl.bottom
@@ -199,7 +199,7 @@ Page {
             Label {
                 id: fileAbitrateLbl
                 font.bold: true
-                text: "Audiobitrate (bits/sec): "
+                text: qsTr("Audiobitrate (bits/sec): ")
                 anchors.left: parent.left
                 anchors.leftMargin: 25
                 anchors.top: fileAudiocodecLbl.bottom
@@ -214,7 +214,7 @@ Page {
             Label {
                 id: fileAsamplerateLbl
                 font.bold: true
-                text: "Samplerate: "
+                text: qsTr("Samplerate: ")
                 anchors.left: parent.left
                 anchors.leftMargin: 25
                 anchors.top: fileAbitrateLbl.bottom
@@ -229,7 +229,7 @@ Page {
             Label {
                 id: fileCopyrightLbl
                 font.bold: true
-                text: "Copyright: "
+                text: qsTr("Copyright: ")
                 anchors.left: parent.left
                 anchors.leftMargin: 25
                 anchors.top: fileAsamplerateLbl.bottom
@@ -247,7 +247,7 @@ Page {
             Label {
                 id: fileDateLbl
                 font.bold: true
-                text: "Date: "
+                text: qsTr("Date: ")
                 anchors.left: parent.left
                 anchors.leftMargin: 25
                 anchors.top: fileCopyrightLbl.bottom
@@ -262,7 +262,7 @@ Page {
             Label {
                 id: fileSizeLbl
                 font.bold: true
-                text: "File size: "
+                text: qsTr("File size: ")
                 anchors.left: parent.left
                 anchors.leftMargin: 25
                 anchors.top: fileDateLbl.bottom

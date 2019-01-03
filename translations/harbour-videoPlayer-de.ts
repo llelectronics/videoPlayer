@@ -195,6 +195,71 @@
         <source>Show Youtube Comments</source>
         <translation>Youtube Kommentare anzeigen</translation>
     </message>
+    <message>
+        <location filename="../qml/pages/FileDetails.qml" line="66"/>
+        <source>Filename: </source>
+        <translation>Dateiname: </translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FileDetails.qml" line="84"/>
+        <source>Title: </source>
+        <translation>Titel: </translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FileDetails.qml" line="102"/>
+        <source>Artist: </source>
+        <translation>Interpret: </translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FileDetails.qml" line="120"/>
+        <source>Videocodec: </source>
+        <translation>Videocodec: </translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FileDetails.qml" line="139"/>
+        <source>Resolution: </source>
+        <translation>Auflösung: </translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FileDetails.qml" line="154"/>
+        <source>Videobitrate (bits/sec): </source>
+        <translation>Videobitrate (bits/sek):</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FileDetails.qml" line="169"/>
+        <source>Framerate: </source>
+        <translation>Framerate: </translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FileDetails.qml" line="184"/>
+        <source>Audiocodec: </source>
+        <translation>Audiocodec: </translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FileDetails.qml" line="202"/>
+        <source>Audiobitrate (bits/sec): </source>
+        <translation>Audiobitrate (bits/sek):</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FileDetails.qml" line="217"/>
+        <source>Samplerate: </source>
+        <translation>Samplerate: </translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FileDetails.qml" line="232"/>
+        <source>Copyright: </source>
+        <translation>Copyright: </translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FileDetails.qml" line="250"/>
+        <source>Date: </source>
+        <translation>Datum: </translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FileDetails.qml" line="265"/>
+        <source>File size: </source>
+        <translation>Dateigröße: </translation>
+    </message>
 </context>
 <context>
     <name>FileProperties</name>

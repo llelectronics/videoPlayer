@@ -195,6 +195,71 @@
         <source>Show Youtube Comments</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <location filename="../qml/pages/FileDetails.qml" line="66"/>
+        <source>Filename: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FileDetails.qml" line="84"/>
+        <source>Title: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FileDetails.qml" line="102"/>
+        <source>Artist: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FileDetails.qml" line="120"/>
+        <source>Videocodec: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FileDetails.qml" line="139"/>
+        <source>Resolution: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FileDetails.qml" line="154"/>
+        <source>Videobitrate (bits/sec): </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FileDetails.qml" line="169"/>
+        <source>Framerate: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FileDetails.qml" line="184"/>
+        <source>Audiocodec: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FileDetails.qml" line="202"/>
+        <source>Audiobitrate (bits/sec): </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FileDetails.qml" line="217"/>
+        <source>Samplerate: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FileDetails.qml" line="232"/>
+        <source>Copyright: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FileDetails.qml" line="250"/>
+        <source>Date: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FileDetails.qml" line="265"/>
+        <source>File size: </source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>FileProperties</name>
