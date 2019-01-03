@@ -273,8 +273,44 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../qml/pages/FirstPage.qml" line="244"/>
         <location filename="../qml/pages/FirstPage.qml" line="378"/>
         <source>History</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FirstPage.qml" line="250"/>
+        <source>Bookmarks</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FirstPage.qml" line="256"/>
+        <source>Search on Youtube</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FirstPage.qml" line="262"/>
+        <source>Browse Files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FirstPage.qml" line="268"/>
+        <source>Enter URL</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FirstPage.qml" line="274"/>
+        <source>Playlists</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FirstPage.qml" line="356"/>
+        <source>About </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FirstPage.qml" line="360"/>
+        <source>Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -623,6 +659,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../qml/pages/SettingsPage.qml" line="284"/>
+        <source>Load Subtitles</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../qml/pages/SettingsPage.qml" line="291"/>
         <source>Bold Subtitle Font</source>
         <translation type="unfinished"></translation>
@@ -630,6 +671,31 @@
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="299"/>
         <source>Subtitle Font Size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SettingsPage.qml" line="310"/>
+        <source>Small</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SettingsPage.qml" line="311"/>
+        <source>Medium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SettingsPage.qml" line="312"/>
+        <source>Large</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SettingsPage.qml" line="313"/>
+        <source>Extra Large</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SettingsPage.qml" line="338"/>
+        <source>Subtitle Color</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -658,8 +724,28 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../qml/pages/SettingsPage.qml" line="423"/>
+        <source>Use live preview when minimized</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../qml/pages/SettingsPage.qml" line="430"/>
         <source>Music Only Indicator</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SettingsPage.qml" line="441"/>
+        <source>Default (Sound Icon)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SettingsPage.qml" line="442"/>
+        <source>MC (animated Music Cassette)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SettingsPage.qml" line="443"/>
+        <source>EQ (animated Equalizer)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

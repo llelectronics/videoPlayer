@@ -241,37 +241,37 @@ Page {
 
         ListElement {
             btnId: "historyBtn"
-            name: "History"
+            name: qsTr("History")
             colour: "gray"
             bicon: "images/icon-l-backup.png"
         }
         ListElement {
             btnId: "bookmarksBtn"
-            name: "Bookmarks"
+            name: qsTr("Bookmarks")
             colour: "brown"
             bicon: "images/icon-l-star.png"
         }
         ListElement {
             btnId: "youtubeBtn"
-            name: "Search on Youtube"
+            name: qsTr("Search on Youtube")
             colour: "red"
             bicon: "images/icon-l-service-youtube.png"
         }
         ListElement {
             btnId: "openFileBtn"
-            name: "Browse Files"
+            name: qsTr("Browse Files")
             colour: "blue"
             bicon: "images/icon-l-media-files.png"
         }
         ListElement {
             btnId: "openUrlBtn"
-            name: "Enter URL"
+            name: qsTr("Enter URL")
             colour: "green"
             bicon: "images/icon-l-redirect.png"
         }
         ListElement {
             btnId: "playlistBtn"
-            name: "Playlists"
+            name: qsTr("Playlists")
             colour: "yellow"
             bicon: "images/icon-l-clipboard.png"
         }
@@ -353,11 +353,11 @@ Page {
             PullDownMenu {
                 id: pulley
                 MenuItem {
-                    text: "About "+ appname
+                    text: qsTr("About ")+ appname
                     onClicked: pageStack.push(Qt.resolvedUrl("AboutPage.qml"));
                 }
                 MenuItem {
-                    text: "Settings"
+                    text: qsTr("Settings")
                     onClicked: pageStack.push(Qt.resolvedUrl("SettingsPage.qml"));
                 }
             }

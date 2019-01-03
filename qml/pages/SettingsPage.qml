@@ -281,7 +281,7 @@ Dialog {
             TextSwitch {
                 id: loadSubtitlesSwitch
                 anchors.horizontalCenter: parent.horizontalCenter
-                text: "Load Subtitles"
+                text: qsTr("Load Subtitles")
                 checked: mainWindow.firstPage.enableSubtitles
             }
 
@@ -307,10 +307,10 @@ Dialog {
                     else if (mainWindow.firstPage.subtitlesSize === Theme.fontSizeExtraLarge) return 3;
                 }
                 menu: ContextMenu {
-                    MenuItem { text: "Small" }
-                    MenuItem { text: "Medium" }
-                    MenuItem { text: "Large" }
-                    MenuItem { text: "Extra Large" }
+                    MenuItem { text: qsTr("Small") }
+                    MenuItem { text: qsTr("Medium") }
+                    MenuItem { text: qsTr("Large") }
+                    MenuItem { text: qsTr("Extra Large") }
                 }
                 onCurrentIndexChanged: {
                     if (currentIndex == 0) subtitleSize = "small"
@@ -335,7 +335,7 @@ Dialog {
                         color: mainWindow.firstPage.subtitlesColor
                     }
                     Label {
-                        text: "Subtitle Color"
+                        text: qsTr("Subtitle Color")
                         color: colorPickerButton.down ? Theme.highlightColor : Theme.primaryColor
                         anchors.verticalCenter: parent.verticalCenter
                     }
@@ -420,7 +420,7 @@ Dialog {
             TextSwitch {
                 id: liveViewSwitch
                 anchors.horizontalCenter: parent.horizontalCenter
-                text: "Use live preview when minimized"
+                text: qsTr("Use live preview when minimized")
                 checked: mainWindow.firstPage.liveView
             }
 
@@ -438,9 +438,9 @@ Dialog {
                 }
 
                 menu: ContextMenu {
-                    MenuItem { text: "Default (Sound Icon)" }
-                    MenuItem { text: "MC (animated Music Cassette)" }
-                    MenuItem { text: "EQ (animated Equalizer)" }
+                    MenuItem { text: qsTr("Default (Sound Icon)") }
+                    MenuItem { text: qsTr("MC (animated Music Cassette)") }
+                    MenuItem { text: qsTr("EQ (animated Equalizer)") }
                 }
                 onCurrentIndexChanged: {
                     if (currentIndex == 0) onlyMusicState = "default"

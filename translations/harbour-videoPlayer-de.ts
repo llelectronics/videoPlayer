@@ -115,7 +115,7 @@
     <message>
         <location filename="../qml/pages/DownloadManager.qml" line="139"/>
         <source>Download Manager</source>
-        <translation type="unfinished"></translation>
+        <translation>Downloadmanager</translation>
     </message>
     <message>
         <location filename="../qml/pages/DownloadManager.qml" line="163"/>
@@ -155,7 +155,7 @@
     <message>
         <location filename="../qml/pages/DownloadManager.qml" line="264"/>
         <source>Status</source>
-        <translation type="unfinished"></translation>
+        <translation>Status</translation>
     </message>
     <message>
         <location filename="../qml/pages/DownloadManager.qml" line="272"/>
@@ -273,9 +273,45 @@
         <translation>Kein Verlauf</translation>
     </message>
     <message>
+        <location filename="../qml/pages/FirstPage.qml" line="244"/>
         <location filename="../qml/pages/FirstPage.qml" line="378"/>
         <source>History</source>
         <translation>Verlauf</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FirstPage.qml" line="250"/>
+        <source>Bookmarks</source>
+        <translation>Lesezeichen</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FirstPage.qml" line="256"/>
+        <source>Search on Youtube</source>
+        <translation>Auf Youtube suchen</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FirstPage.qml" line="262"/>
+        <source>Browse Files</source>
+        <translation>Dateimanager</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FirstPage.qml" line="268"/>
+        <source>Enter URL</source>
+        <translation>URL eingeben</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FirstPage.qml" line="274"/>
+        <source>Playlists</source>
+        <translation>Playlisten</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FirstPage.qml" line="356"/>
+        <source>About </source>
+        <translation>Über </translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FirstPage.qml" line="360"/>
+        <source>Settings</source>
+        <translation>Einstellungen</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="379"/>
@@ -623,6 +659,11 @@
         <translation>Allgemein</translation>
     </message>
     <message>
+        <location filename="../qml/pages/SettingsPage.qml" line="284"/>
+        <source>Load Subtitles</source>
+        <translation>Untertitel laden</translation>
+    </message>
+    <message>
         <location filename="../qml/pages/SettingsPage.qml" line="291"/>
         <source>Bold Subtitle Font</source>
         <translation>Fette Untertitelschrift</translation>
@@ -631,6 +672,31 @@
         <location filename="../qml/pages/SettingsPage.qml" line="299"/>
         <source>Subtitle Font Size</source>
         <translation>Untertitelschriftart</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SettingsPage.qml" line="310"/>
+        <source>Small</source>
+        <translation>Klein</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SettingsPage.qml" line="311"/>
+        <source>Medium</source>
+        <translation>Mittel</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SettingsPage.qml" line="312"/>
+        <source>Large</source>
+        <translation>Groß</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SettingsPage.qml" line="313"/>
+        <source>Extra Large</source>
+        <translation>Extra Groß</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SettingsPage.qml" line="338"/>
+        <source>Subtitle Color</source>
+        <translation>Untertitelfarbe</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="355"/>
@@ -658,9 +724,29 @@
         <translation>Standard Youtube Qualität</translation>
     </message>
     <message>
+        <location filename="../qml/pages/SettingsPage.qml" line="423"/>
+        <source>Use live preview when minimized</source>
+        <translation>Live Preview anzeigen wenn minimiert</translation>
+    </message>
+    <message>
         <location filename="../qml/pages/SettingsPage.qml" line="430"/>
         <source>Music Only Indicator</source>
         <translation>&apos;Nur Musik&apos; Indikator</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SettingsPage.qml" line="441"/>
+        <source>Default (Sound Icon)</source>
+        <translation>Standard (Sound Icon)</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SettingsPage.qml" line="442"/>
+        <source>MC (animated Music Cassette)</source>
+        <translation>MC (animierte Musikkasette)</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SettingsPage.qml" line="443"/>
+        <source>EQ (animated Equalizer)</source>
+        <translation>EQ (animierter Equalizer)</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="455"/>
