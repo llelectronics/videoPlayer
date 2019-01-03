@@ -144,7 +144,7 @@ public slots:
             oggAudioChanged();
         }
         else {
-            printError();
+            printError(&oggProcess);
         }
     }
     void getOpusUrlOutput(int exitCode)
@@ -157,7 +157,7 @@ public slots:
             opusAudioChanged();
         }
         else {
-            printError();
+            printError(&opusProcess);
         }
     }
     void getStreamUrlOutput(int exitCode)
@@ -170,12 +170,12 @@ public slots:
             streamUrlChanged(streamUrl);
         }
         else {
-            printError();
+            printError(&streamProcess);
         }
     }
-    void printError()
+    void printError(QProcess *pProcess)
     {
-        QByteArray errorOut = streamProcess.readAllStandardError();
+        QByteArray errorOut = pProcess->readAllStandardError();
         qDebug() << "Called the C++ slot and got following error:" << errorOut.simplified();
         errorMsg = errorOut.simplified();
         error(errorMsg);
@@ -194,6 +194,9 @@ public slots:
     {
         if (exitCode == 0) {
             updateComplete();
+        }
+        else {
+            printError(&updateBinary);
         }
     }
 };
