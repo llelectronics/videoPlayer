@@ -120,12 +120,12 @@ Page {
 
             PullDownMenu {
                 MenuItem {
-                    text: "History"
+                    text: qsTr("History")
                     onClicked: searchHistoryDrawer.open = !searchHistoryDrawer.open
                     visible: ytDetect
                 }
                 MenuItem {
-                    text: "Go Back"
+                    text: qsTr("Go Back")
                     onClicked: pageStack.pop();
                 }
             }
@@ -154,7 +154,7 @@ Page {
                     property string acceptedInput: ""
                     width: parent.width
 
-                    placeholderText: "Search.."
+                    placeholderText: qsTr("Search..")
                     //                        anchors.top: parent.top
                     //                        anchors.left: parent.left
                     //                        anchors.right: parent.right

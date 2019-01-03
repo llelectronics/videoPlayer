@@ -695,6 +695,21 @@
         <translation>Kein Suchverlauf</translation>
     </message>
     <message>
+        <location filename="../qml/pages/SecondPage.qml" line="123"/>
+        <source>History</source>
+        <translation>Verlauf</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SecondPage.qml" line="128"/>
+        <source>Go Back</source>
+        <translation>Zurück gehen</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SecondPage.qml" line="157"/>
+        <source>Search..</source>
+        <translation>Suche..</translation>
+    </message>
+    <message>
         <location filename="../qml/pages/SecondPage.qml" line="325"/>
         <source>Load with ytdl</source>
         <translation>Mit Ytdl laden</translation>
