@@ -67,5 +67,9 @@ DISTFILES += \
     qml/pages/fileman/helper/fmComponents/LetterSwitch.qml \
     qml/pages/fileman/helper/fmComponents/PermissionDialog.qml \
     qml/pages/fileman/helper/fmComponents/PlacesPage.qml \
-    qml/pages/fileman/helper/fmComponents/RenameDialog.qml
+    qml/pages/fileman/helper/fmComponents/RenameDialog.qml \
+    translations/harbour-videoPlayer-de.ts
 
+# to disable building translations every time, comment out the
+# following CONFIG line
+CONFIG += sailfishapp_i18n
