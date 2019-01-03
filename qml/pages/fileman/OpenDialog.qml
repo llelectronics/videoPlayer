@@ -10,6 +10,7 @@ Page {
     property bool multiSelect: onlyFolders ? true : false
     property bool selectMode: false
     property bool onlyFolders: false
+    property bool hiddenShow: false
     property string path
     property variant filter: [ "*" ]
     property string title
@@ -73,6 +74,16 @@ Page {
         nameFilters: filter
     }
 
+    // WORKAROUND showHidden buggy not refreshing
+    FolderListModel {
+        id: fileModelHidden
+        folder: path ? path: _fm.getHome()
+        showDirsFirst: true
+        showDotAndDotDot: false
+        showOnlyReadable: true
+        nameFilters: filter
+    }
+
     function humanSize(bytes) {
         var precision = 2;
         var kilobyte = 1024;
@@ -128,6 +139,22 @@ Page {
             title: if (page.title != "") return page.title
                    else return findBaseName((fileModel.folder).toString())
             description: findFullPath(fileModel.folder.toString())
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    if (!hiddenShow) {
+                        view.model = fileModelHidden
+                        view.model.showHidden = true
+                        parent.description = findFullPath(fileModel.folder.toString()) + " [.*]"
+                    }
+                    else {
+                        view.model = fileModel
+                        view.model.showHidden = false
+                        parent.description = findFullPath(fileModel.folder.toString())
+                    }
+                    hiddenShow = !hiddenShow
+                }
+            }
         }
 
         PullDownMenu {
