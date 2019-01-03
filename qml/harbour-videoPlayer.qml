@@ -352,7 +352,7 @@ ApplicationWindow
     }
 
     Rectangle {
-        color: "black"
+        color: Theme.overlayBackgroundColor
         opacity: 0.60
         anchors.fill: parent
         visible: {
