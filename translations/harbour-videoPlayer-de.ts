@@ -343,6 +343,11 @@
         <translation>Ordner erstellen</translation>
     </message>
     <message>
+        <location filename="../qml/pages/fileman/OpenDialog.qml" line="177"/>
+        <source>Add all files to playlist</source>
+        <translation>Alle Dateien zur Playliste hinzufügen</translation>
+    </message>
+    <message>
         <location filename="../qml/pages/fileman/OpenDialog.qml" line="200"/>
         <source>Add to places</source>
         <translation>Zu Orte hinzufügen</translation>

@@ -343,6 +343,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../qml/pages/fileman/OpenDialog.qml" line="177"/>
+        <source>Add all files to playlist</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../qml/pages/fileman/OpenDialog.qml" line="200"/>
         <source>Add to places</source>
         <translation type="unfinished"></translation>

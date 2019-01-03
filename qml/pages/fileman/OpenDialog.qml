@@ -174,7 +174,7 @@ Page {
                 }
             }
             MenuItem {
-                text: "Add files to playlist"
+                text: qsTr("Add all files to playlist")
                 onClicked: {
                     forEachAddToPlaylist();
                     mainWindow.firstPage.openPlaylist();
