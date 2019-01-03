@@ -56,7 +56,7 @@ ApplicationWindow
         else return true
     }
 
-    property string version: "1.9"
+    property string version: "2.0"
     property string appname: "LLs Video Player"
     property string appicon: "images/icon.png"
 
