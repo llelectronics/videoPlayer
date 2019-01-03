@@ -46,6 +46,7 @@ ApplicationWindow
     property alias modelBookmarks: modelBookmarks
     property alias modelPlaylist: modelPlaylist
     property alias playlist: playlist
+    property int curPlaylistIndex: -1
     property alias busy: busy
     property alias infoBanner: infoBanner
     property alias downloadModel: downloadModel

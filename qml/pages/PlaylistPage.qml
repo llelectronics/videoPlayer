@@ -14,17 +14,19 @@ Page
     property ListModel modelPlaylist
     property bool isPlayer: false
 
-    property int _curPlayingIndex : -1;
+    property int _curPlayingIndex : mainWindow.curPlaylistIndex;
+    on_CurPlayingIndexChanged: {
+        repeater1.currentIndex = _curPlayingIndex
+    }
 
     RemorsePopup {
         id: globalRemorse
     }
 
     Component.onCompleted: {
-        if (isPlayer && dataContainer && modelPlaylist) {
-            _curPlayingIndex = modelPlaylist.getPosition(dataContainer.streamUrl)
+        if (isPlayer && dataContainer && mainWindow.modelPlaylist) {
+            mainWindow.curPlaylistIndex = mainWindow.modelPlaylist.getPosition(dataContainer.streamUrl)
         }
-        repeater1.currentIndex = _curPlayingIndex
     }
 
     Column

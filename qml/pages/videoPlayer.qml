@@ -129,6 +129,7 @@ Page {
             if (savePositionMsec !== "Not Found") savedPosition = true;
             else savedPosition = false;
         }
+        if (isPlaylist) mainWindow.curPlaylistIndex = mainWindow.modelPlaylist.getPosition(streamUrl)
         isNewSource = true
     }
 
