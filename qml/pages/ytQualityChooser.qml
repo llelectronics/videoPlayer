@@ -52,7 +52,7 @@ Page {
         model: qualList
         anchors.fill: parent
         header: PageHeader {
-            title: "Choose Quality"
+            title: qsTr("Choose Quality")
         }
         delegate: BackgroundItem {
             anchors.left: parent.left

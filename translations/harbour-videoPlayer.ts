@@ -921,4 +921,12 @@ The video cannot be played because the media service could not be instantiated.<
         <translation type="unfinished"></translation>
     </message>
 </context>
+<context>
+    <name>ytQualityChooser</name>
+    <message>
+        <location filename="../qml/pages/ytQualityChooser.qml" line="55"/>
+        <source>Choose Quality</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
 </TS>
