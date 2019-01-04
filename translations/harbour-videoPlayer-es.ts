@@ -140,7 +140,7 @@
     <message>
         <location filename="../qml/pages/DownloadManager.qml" line="246"/>
         <source>Abort</source>
-        <translation>Abortar</translation>
+        <translation>Cancelar</translation>
     </message>
     <message>
         <location filename="../qml/pages/DownloadManager.qml" line="253"/>
