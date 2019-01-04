@@ -487,6 +487,11 @@
         <source>URL to media file/stream</source>
         <translation>URL zur Mediendatei/-stream</translation>
     </message>
+    <message>
+        <location filename="../qml/pages/OpenURLPage.qml" line="109"/>
+        <source>Add to bookmarks</source>
+        <translation>Zu Lesezeichen hinzufügen</translation>
+    </message>
 </context>
 <context>
     <name>PermissionDialog</name>
@@ -857,68 +862,70 @@
     <message>
         <location filename="../qml/pages/videoPlayer.qml" line="215"/>
         <source>Load with ytdl</source>
-        <translation type="unfinished">Mit Ytdl laden</translation>
+        <translation>Mit Ytdl laden</translation>
     </message>
     <message>
         <location filename="../qml/pages/videoPlayer.qml" line="236"/>
         <source>Download Youtube Video</source>
-        <translation type="unfinished"></translation>
+        <translation>Youtube Video herunterladen</translation>
     </message>
     <message>
         <location filename="../qml/pages/videoPlayer.qml" line="254"/>
         <source>Download</source>
-        <translation type="unfinished">Herunterladen</translation>
+        <translation>Herunterladen</translation>
     </message>
     <message>
         <location filename="../qml/pages/videoPlayer.qml" line="270"/>
         <source>Add to bookmarks</source>
-        <translation type="unfinished"></translation>
+        <translation>Zu Lesezeichen hinzufügen</translation>
     </message>
     <message>
         <location filename="../qml/pages/videoPlayer.qml" line="286"/>
         <source>Load Subtitle</source>
-        <translation type="unfinished"></translation>
+        <translation>Untertitel laden</translation>
     </message>
     <message>
         <location filename="../qml/pages/videoPlayer.qml" line="290"/>
         <source>Play from last known position</source>
-        <translation type="unfinished"></translation>
+        <translation>Abspielen von zuletzt bekannter Position</translation>
     </message>
     <message>
         <location filename="../qml/pages/videoPlayer.qml" line="457"/>
         <source>Dismiss</source>
-        <translation type="unfinished">Ausblenden</translation>
+        <translation>Ausblenden</translation>
     </message>
     <message>
         <location filename="../qml/pages/videoPlayer.qml" line="780"/>
         <source>
 The video cannot be played due to a problem allocating resources.
             On Youtube Videos please make sure to be logged in. Some videos might be geoblocked or require you to be logged into youtube.</source>
-        <translation type="unfinished"></translation>
+        <translation>
+Dieses Video konnte wegen fehlender Zuordnung von Ressourcen nicht abgespielt werden.
+        Bei Youtube Videos stellen Sie sicher, dass sie angemeldet sind. Einige der Videos könnten regional gesperrt sein.</translation>
     </message>
     <message>
         <location filename="../qml/pages/videoPlayer.qml" line="782"/>
         <source>
 The audio and or video format is not supported.</source>
-        <translation type="unfinished"></translation>
+        <translation>Das Audio oder Videoformat wird nicht unterstützt.</translation>
     </message>
     <message>
         <location filename="../qml/pages/videoPlayer.qml" line="783"/>
         <source>
 The video cannot be played due to network issues.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dieses Video kann wegen Netzwerkproblemen nicht abgespielt werden.</translation>
     </message>
     <message>
         <location filename="../qml/pages/videoPlayer.qml" line="784"/>
         <source>
 The video cannot be played due to insufficient permissions.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dieses Video kann wegen unzureichenden Berechtigungen nicht abgespielt werden.</translation>
     </message>
     <message>
         <location filename="../qml/pages/videoPlayer.qml" line="785"/>
         <source>
 The video cannot be played because the media service could not be instantiated.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dieses Video konnte wegen eines nicht instanzierten Mediendienstes nicht abgespielt werden.</translation>
     </message>
 </context>
 <context>

@@ -106,7 +106,7 @@ Dialog {
             anchors.topMargin: 15
             //anchors.right: historyBtn.right
             anchors.horizontalCenter: parent.horizontalCenter
-            text: "Add to bookmarks"
+            text: qsTr("Add to bookmarks")
             visible: {
                 if (urlField.text !== "") return true
                 else return false

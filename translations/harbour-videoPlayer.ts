@@ -487,6 +487,11 @@
         <source>URL to media file/stream</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <location filename="../qml/pages/OpenURLPage.qml" line="109"/>
+        <source>Add to bookmarks</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PermissionDialog</name>
