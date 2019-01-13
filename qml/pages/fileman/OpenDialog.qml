@@ -11,7 +11,7 @@ Page {
     property bool selectMode: false
     property bool onlyFolders: false
     property bool hiddenShow: false
-    property string path
+    property string path: _fm.getHome()
     property variant filter: [ "*" ]
     property string title
 
@@ -66,7 +66,7 @@ Page {
 
     FolderListModel {
         id: fileModel
-        folder: path ? path: _fm.getHome()
+        folder: path
         showDirsFirst: true
         showDotAndDotDot: false
         showOnlyReadable: true
@@ -76,7 +76,7 @@ Page {
     // WORKAROUND showHidden buggy not refreshing
     FolderListModel {
         id: fileModelHidden
-        folder: path ? path: _fm.getHome()
+        folder: path
         showDirsFirst: true
         showDotAndDotDot: false
         showOnlyReadable: true
