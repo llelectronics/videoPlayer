@@ -49,7 +49,6 @@ Page {
                                    { "father": page })
             _loaded = true
         }
-        else if (status == PageStatus.Inactive) _loaded = false
     }
 
     function openFile(path) {

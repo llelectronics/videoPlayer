@@ -589,32 +589,32 @@
         <translation>Videos</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/helper/fmComponents/PlacesPage.qml" line="105"/>
+        <location filename="../qml/pages/fileman/helper/fmComponents/PlacesPage.qml" line="104"/>
         <source>Places</source>
         <translation>Orte</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/helper/fmComponents/PlacesPage.qml" line="119"/>
+        <location filename="../qml/pages/fileman/helper/fmComponents/PlacesPage.qml" line="118"/>
         <source>Devices</source>
         <translation>Geräte</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/helper/fmComponents/PlacesPage.qml" line="157"/>
+        <location filename="../qml/pages/fileman/helper/fmComponents/PlacesPage.qml" line="156"/>
         <source>Common</source>
         <translation>Allgemein</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/helper/fmComponents/PlacesPage.qml" line="192"/>
+        <location filename="../qml/pages/fileman/helper/fmComponents/PlacesPage.qml" line="191"/>
         <source>Custom</source>
         <translation>Benutzerdefiniert</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/helper/fmComponents/PlacesPage.qml" line="213"/>
+        <location filename="../qml/pages/fileman/helper/fmComponents/PlacesPage.qml" line="212"/>
         <source>Deleting </source>
         <translation>Lösche </translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/helper/fmComponents/PlacesPage.qml" line="258"/>
+        <location filename="../qml/pages/fileman/helper/fmComponents/PlacesPage.qml" line="257"/>
         <source>Rename</source>
         <translation>Umbenennen</translation>
     </message>

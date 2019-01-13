@@ -85,13 +85,12 @@ Page {
             var Name = customPlacesObj[i].name;
             var Path = customPlacesObj[i].path;
             var Icon = customPlacesObj[i].icon;
-            customPlaces.push(
-                        {
-                            name: Name,
-                            path: Path,
-                            icon: Icon
-                        }
-                        )
+            var placesItem = {
+                name: Name,
+                path: Path,
+                icon: Icon
+            }
+            if (customPlaces.indexOf(placesItem) === -1) customPlaces.push(placesItem)
         }
         customPlacesChanged()
     }
