@@ -251,8 +251,9 @@ Page {
 
             function remove() {
                 var removal = removalComponent.createObject(bgdelegate)
-                if (fileIsDir) removal.execute(delegate,qsTr("Deleting ") + fileName, function() { _fm.removeDir(filePath); })
-                else removal.execute(delegate,qsTr("Deleting ") + fileName, function() { _fm.remove(filePath); })
+                var toDelPath = filePath
+                if (fileIsDir) removal.execute(delegate,qsTr("Deleting ") + fileName, function() { _fm.removeDir(toDelPath); })
+                else removal.execute(delegate,qsTr("Deleting ") + fileName, function() { _fm.remove(toDelPath); })
             }
 
             function copy() {
