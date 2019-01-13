@@ -393,79 +393,79 @@
 <context>
     <name>OpenDialog</name>
     <message>
-        <location filename="../qml/pages/fileman/OpenDialog.qml" line="161"/>
+        <location filename="../qml/pages/fileman/OpenDialog.qml" line="159"/>
         <source>Create Folder</source>
         <translation>Ordner erstellen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/OpenDialog.qml" line="176"/>
+        <location filename="../qml/pages/fileman/OpenDialog.qml" line="174"/>
         <source>Add all files to playlist</source>
         <translation>Alle Dateien zur Playliste hinzufügen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/OpenDialog.qml" line="199"/>
+        <location filename="../qml/pages/fileman/OpenDialog.qml" line="197"/>
         <source>Add to places</source>
         <translation>Zu Orte hinzufügen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/OpenDialog.qml" line="217"/>
+        <location filename="../qml/pages/fileman/OpenDialog.qml" line="215"/>
         <source>Paste</source>
         <translation>Einfügen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/OpenDialog.qml" line="224"/>
-        <location filename="../qml/pages/fileman/OpenDialog.qml" line="407"/>
+        <location filename="../qml/pages/fileman/OpenDialog.qml" line="222"/>
+        <location filename="../qml/pages/fileman/OpenDialog.qml" line="405"/>
         <source>Properties</source>
         <translation>Eigenschaften</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/OpenDialog.qml" line="236"/>
+        <location filename="../qml/pages/fileman/OpenDialog.qml" line="234"/>
         <source>Scroll to top</source>
         <translation>Nach oben springen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/OpenDialog.qml" line="240"/>
+        <location filename="../qml/pages/fileman/OpenDialog.qml" line="238"/>
         <source>Show Playlist</source>
         <translation>Playliste anzeigen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/OpenDialog.qml" line="255"/>
-        <location filename="../qml/pages/fileman/OpenDialog.qml" line="256"/>
+        <location filename="../qml/pages/fileman/OpenDialog.qml" line="253"/>
+        <location filename="../qml/pages/fileman/OpenDialog.qml" line="254"/>
         <source>Deleting </source>
         <translation>Lösche </translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/OpenDialog.qml" line="273"/>
+        <location filename="../qml/pages/fileman/OpenDialog.qml" line="271"/>
         <source>added to playlist</source>
         <translation>zur Playliste hinzugefügt</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/OpenDialog.qml" line="382"/>
+        <location filename="../qml/pages/fileman/OpenDialog.qml" line="380"/>
         <source>Add to playlist</source>
         <translation>Zur Playliste hinzufügen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/OpenDialog.qml" line="389"/>
+        <location filename="../qml/pages/fileman/OpenDialog.qml" line="387"/>
         <source>Cut</source>
         <translation>Ausschneiden</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/OpenDialog.qml" line="395"/>
+        <location filename="../qml/pages/fileman/OpenDialog.qml" line="393"/>
         <source>Copy</source>
         <translation>Kopieren</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/OpenDialog.qml" line="401"/>
+        <location filename="../qml/pages/fileman/OpenDialog.qml" line="399"/>
         <source>Delete</source>
         <translation>Löschen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/OpenDialog.qml" line="428"/>
+        <location filename="../qml/pages/fileman/OpenDialog.qml" line="426"/>
         <source>Error pasting file </source>
         <translation>Fehler beim Einfügen </translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/OpenDialog.qml" line="436"/>
+        <location filename="../qml/pages/fileman/OpenDialog.qml" line="434"/>
         <source>File operation succeeded</source>
         <translation>Dateioperation erfolgreich</translation>
     </message>

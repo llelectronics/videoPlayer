@@ -136,20 +136,18 @@ Page {
 
         header: PageHeader {
             title: if (page.title != "") return page.title
-                   else return findBaseName((fileModel.folder).toString())
-            description: findFullPath(fileModel.folder.toString())
+                   else return findBaseName((path).toString())
+            description: hiddenShow ? path + " [.*]" : path
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
                     if (!hiddenShow) {
                         view.model = fileModelHidden
                         view.model.showHidden = true
-                        parent.description = findFullPath(fileModel.folder.toString()) + " [.*]"
                     }
                     else {
                         view.model = fileModel
                         view.model.showHidden = false
-                        parent.description = findFullPath(fileModel.folder.toString())
                     }
                     hiddenShow = !hiddenShow
                 }
