@@ -414,7 +414,7 @@
     </message>
     <message>
         <location filename="../qml/pages/fileman/OpenDialog.qml" line="224"/>
-        <location filename="../qml/pages/fileman/OpenDialog.qml" line="406"/>
+        <location filename="../qml/pages/fileman/OpenDialog.qml" line="407"/>
         <source>Properties</source>
         <translation type="unfinished"></translation>
     </message>
@@ -429,43 +429,43 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/OpenDialog.qml" line="254"/>
         <location filename="../qml/pages/fileman/OpenDialog.qml" line="255"/>
+        <location filename="../qml/pages/fileman/OpenDialog.qml" line="256"/>
         <source>Deleting </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/OpenDialog.qml" line="272"/>
+        <location filename="../qml/pages/fileman/OpenDialog.qml" line="273"/>
         <source>added to playlist</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/OpenDialog.qml" line="381"/>
+        <location filename="../qml/pages/fileman/OpenDialog.qml" line="382"/>
         <source>Add to playlist</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/OpenDialog.qml" line="388"/>
+        <location filename="../qml/pages/fileman/OpenDialog.qml" line="389"/>
         <source>Cut</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/OpenDialog.qml" line="394"/>
+        <location filename="../qml/pages/fileman/OpenDialog.qml" line="395"/>
         <source>Copy</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/OpenDialog.qml" line="400"/>
+        <location filename="../qml/pages/fileman/OpenDialog.qml" line="401"/>
         <source>Delete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/OpenDialog.qml" line="427"/>
+        <location filename="../qml/pages/fileman/OpenDialog.qml" line="428"/>
         <source>Error pasting file </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/OpenDialog.qml" line="435"/>
+        <location filename="../qml/pages/fileman/OpenDialog.qml" line="436"/>
         <source>File operation succeeded</source>
         <translation type="unfinished"></translation>
     </message>
