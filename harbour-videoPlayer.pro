@@ -68,10 +68,12 @@ DISTFILES += \
     qml/pages/fileman/helper/fmComponents/PermissionDialog.qml \
     qml/pages/fileman/helper/fmComponents/PlacesPage.qml \
     qml/pages/fileman/helper/fmComponents/RenameDialog.qml \
-    translations/harbour-videoPlayer-de.ts
+    translations/harbour-videoPlayer-de.ts \
+    translations/harbour-videoPlayer-es.ts
 
 # to disable building translations every time, comment out the
 # following CONFIG line
 CONFIG += sailfishapp_i18n
 
-TRANSLATIONS += translations/harbour-videoPlayer-de.ts
+TRANSLATIONS += translations/harbour-videoPlayer-de.ts \
+                translations/harbour-videoPlayer-es.ts

@@ -233,11 +233,11 @@ Page {
 
         PushUpMenu {
             MenuItem {
-                text: "Scroll to top"
+                text: qsTr("Scroll to top")
                 onClicked: entriesList.scrollToTop();
             }
             MenuItem {
-                text : "Show Playlist"
+                text : qsTr("Show Playlist")
                 onClicked: pageStack.push(Qt.resolvedUrl("../PlaylistPage.qml"), {dataContainer: mainWindow.firstPage, modelPlaylist: mainWindow.modelPlaylist});
             }
         }

@@ -419,6 +419,16 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../qml/pages/fileman/OpenDialog.qml" line="236"/>
+        <source>Scroll to top</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/fileman/OpenDialog.qml" line="240"/>
+        <source>Show Playlist</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../qml/pages/fileman/OpenDialog.qml" line="254"/>
         <location filename="../qml/pages/fileman/OpenDialog.qml" line="255"/>
         <source>Deleting </source>

@@ -419,6 +419,16 @@
         <translation>Eigenschaften</translation>
     </message>
     <message>
+        <location filename="../qml/pages/fileman/OpenDialog.qml" line="236"/>
+        <source>Scroll to top</source>
+        <translation>Nach oben springen</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/fileman/OpenDialog.qml" line="240"/>
+        <source>Show Playlist</source>
+        <translation>Playliste anzeigen</translation>
+    </message>
+    <message>
         <location filename="../qml/pages/fileman/OpenDialog.qml" line="254"/>
         <location filename="../qml/pages/fileman/OpenDialog.qml" line="255"/>
         <source>Deleting </source>
