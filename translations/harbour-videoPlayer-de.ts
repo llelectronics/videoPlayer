@@ -133,42 +133,32 @@
         <translation>Downloadliste</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DownloadManager.qml" line="213"/>
-        <source>Current operation</source>
-        <translation>Aktuelle Operation</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/DownloadManager.qml" line="246"/>
+        <location filename="../qml/pages/DownloadManager.qml" line="378"/>
         <source>Abort</source>
         <translation>Abbrechen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DownloadManager.qml" line="253"/>
-        <source>Active Downloads: </source>
-        <translation>Aktive Downloads: </translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/DownloadManager.qml" line="259"/>
+        <location filename="../qml/pages/DownloadManager.qml" line="217"/>
         <source>Details</source>
         <translation>Details</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DownloadManager.qml" line="264"/>
+        <location filename="../qml/pages/DownloadManager.qml" line="222"/>
         <source>Status</source>
         <translation>Status</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DownloadManager.qml" line="272"/>
+        <location filename="../qml/pages/DownloadManager.qml" line="230"/>
         <source>Errors</source>
         <translation>Fehler</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DownloadManager.qml" line="283"/>
+        <location filename="../qml/pages/DownloadManager.qml" line="241"/>
         <source>Download Status</source>
         <translation>Downloadstatus</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DownloadManager.qml" line="304"/>
+        <location filename="../qml/pages/DownloadManager.qml" line="262"/>
         <source>Download Errors</source>
         <translation>Downloadfehler</translation>
     </message>
@@ -403,69 +393,69 @@
 <context>
     <name>OpenDialog</name>
     <message>
-        <location filename="../qml/pages/fileman/OpenDialog.qml" line="162"/>
+        <location filename="../qml/pages/fileman/OpenDialog.qml" line="161"/>
         <source>Create Folder</source>
         <translation>Ordner erstellen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/OpenDialog.qml" line="177"/>
+        <location filename="../qml/pages/fileman/OpenDialog.qml" line="176"/>
         <source>Add all files to playlist</source>
         <translation>Alle Dateien zur Playliste hinzufügen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/OpenDialog.qml" line="200"/>
+        <location filename="../qml/pages/fileman/OpenDialog.qml" line="199"/>
         <source>Add to places</source>
         <translation>Zu Orte hinzufügen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/OpenDialog.qml" line="218"/>
+        <location filename="../qml/pages/fileman/OpenDialog.qml" line="217"/>
         <source>Paste</source>
         <translation>Einfügen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/OpenDialog.qml" line="225"/>
-        <location filename="../qml/pages/fileman/OpenDialog.qml" line="407"/>
+        <location filename="../qml/pages/fileman/OpenDialog.qml" line="224"/>
+        <location filename="../qml/pages/fileman/OpenDialog.qml" line="406"/>
         <source>Properties</source>
         <translation>Eigenschaften</translation>
     </message>
     <message>
+        <location filename="../qml/pages/fileman/OpenDialog.qml" line="254"/>
         <location filename="../qml/pages/fileman/OpenDialog.qml" line="255"/>
-        <location filename="../qml/pages/fileman/OpenDialog.qml" line="256"/>
         <source>Deleting </source>
         <translation>Lösche </translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/OpenDialog.qml" line="273"/>
+        <location filename="../qml/pages/fileman/OpenDialog.qml" line="272"/>
         <source>added to playlist</source>
         <translation>zur Playliste hinzugefügt</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/OpenDialog.qml" line="382"/>
+        <location filename="../qml/pages/fileman/OpenDialog.qml" line="381"/>
         <source>Add to playlist</source>
         <translation>Zur Playliste hinzufügen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/OpenDialog.qml" line="389"/>
+        <location filename="../qml/pages/fileman/OpenDialog.qml" line="388"/>
         <source>Cut</source>
         <translation>Ausschneiden</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/OpenDialog.qml" line="395"/>
+        <location filename="../qml/pages/fileman/OpenDialog.qml" line="394"/>
         <source>Copy</source>
         <translation>Kopieren</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/OpenDialog.qml" line="401"/>
+        <location filename="../qml/pages/fileman/OpenDialog.qml" line="400"/>
         <source>Delete</source>
         <translation>Löschen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/OpenDialog.qml" line="428"/>
+        <location filename="../qml/pages/fileman/OpenDialog.qml" line="427"/>
         <source>Error pasting file </source>
         <translation>Fehler beim Einfügen </translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/OpenDialog.qml" line="436"/>
+        <location filename="../qml/pages/fileman/OpenDialog.qml" line="435"/>
         <source>File operation succeeded</source>
         <translation>Dateioperation erfolgreich</translation>
     </message>

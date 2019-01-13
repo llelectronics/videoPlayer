@@ -209,51 +209,9 @@ Page {
                 clip: true
             }
 
-            SectionHeader {
-                text: qsTr("Current operation")
-            }
-
-            Label {
-                id: curDownloadLabel
-                text: _manager.curName
-                color: Theme.primaryColor
-                anchors.horizontalCenter: parent.horizontalCenter
-                font.pixelSize: Theme.fontSizeSmall
-                truncationMode: TruncationMode.Fade
-                visible: {
-                    if (_manager.activeDownloads != 0) return true
-                    else false
-                }
-            }
-
-            ProgressBar {
-                width: parent.width
-                maximumValue: _manager.progressTotal
-                value: _manager.progressValue
-                label: _manager.progressMessage
-                visible: {
-                    if (_manager.activeDownloads != 0) return true
-                    else false
-                }
-            }
-
-            Button {
-                id: abortButton
-                visible: {
-                    if (_manager.activeDownloads != 0) return true
-                    else false
-                }
-                text: qsTr("Abort")
-                onClicked: { _manager.downloadAbort(); }
-                anchors.horizontalCenter: parent.horizontalCenter
-            }
-
-            Label {
-                id: activeDownloadLabel
-                text: qsTr("Active Downloads: ") + (_manager.activeDownloads == 0 ? "none" : "1/" + _manager.totalDownloads)
-                color: Theme.primaryColor
-                font.pixelSize: _manager.activeDownloads == 0 ? Theme.fontSizeMedium : Theme.fontSizeSmall
-            }
+//            SectionHeader {
+//                text: qsTr("Current operation")
+//            }
 
             SectionHeader {
                 text: qsTr("Details")
@@ -360,6 +318,67 @@ Page {
             //                    }
             //                }
             //            }
+        }
+    }
+
+    DockedPanel {
+        id: activeDownloadPanel
+
+        width: parent.width
+        height: activeDownloadColumn.height + Theme.paddingMedium
+
+        dock: Dock.Bottom
+        open: _manager.activeDownloads != 0
+
+        Rectangle {
+            anchors.fill: parent
+            color: Theme.overlayBackgroundColor
+            opacity: 0.8
+        }
+
+        Column {
+            id: activeDownloadColumn
+
+            width: parent.width
+            spacing: Theme.paddingMedium
+
+
+            Label {
+                id: curDownloadLabel
+                text: _manager.curName
+                color: Theme.primaryColor
+                anchors.horizontalCenter: parent.horizontalCenter
+                font.pixelSize: Theme.fontSizeSmall
+                truncationMode: TruncationMode.Fade
+                horizontalAlignment: Text.AlignHCenter
+                width: parent.width
+                visible: {
+                    if (_manager.activeDownloads != 0) return true
+                    else false
+                }
+            }
+
+            ProgressBar {
+                width: parent.width
+                maximumValue: _manager.progressTotal
+                value: _manager.progressValue
+                label: _manager.progressMessage
+                visible: {
+                    if (_manager.activeDownloads != 0) return true
+                    else false
+                }
+            }
+
+            Button {
+                id: abortButton
+                visible: {
+                    if (_manager.activeDownloads != 0) return true
+                    else false
+                }
+                text: qsTr("Abort")
+                onClicked: { _manager.downloadAbort(); }
+                anchors.horizontalCenter: parent.horizontalCenter
+            }
         }
     }
 }
