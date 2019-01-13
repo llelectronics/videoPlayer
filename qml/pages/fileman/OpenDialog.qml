@@ -232,7 +232,7 @@ Page {
         PushUpMenu {
             MenuItem {
                 text: qsTr("Scroll to top")
-                onClicked: entriesList.scrollToTop();
+                onClicked: view.scrollToTop();
             }
             MenuItem {
                 text : qsTr("Show Playlist")
