@@ -421,12 +421,12 @@
     <message>
         <location filename="../qml/pages/fileman/OpenDialog.qml" line="234"/>
         <source>Scroll to top</source>
-        <translation type="unfinished"></translation>
+        <translation>Desplazar hacia arriba</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/OpenDialog.qml" line="238"/>
         <source>Show Playlist</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar lista de reproducción</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/OpenDialog.qml" line="253"/>
