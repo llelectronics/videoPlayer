@@ -11,7 +11,7 @@ Page {
     property bool selectMode: false
     property bool onlyFolders: false
     property bool hiddenShow: false
-    property string path
+    property string path: _fm.getHome()
     property variant filter: [ "*" ]
     property string title
 
@@ -49,7 +49,6 @@ Page {
                                    { "father": page })
             _loaded = true
         }
-        else if (status == PageStatus.Inactive) _loaded = false
     }
 
     function openFile(path) {
@@ -67,7 +66,7 @@ Page {
 
     FolderListModel {
         id: fileModel
-        folder: path ? path: _fm.getHome()
+        folder: path
         showDirsFirst: true
         showDotAndDotDot: false
         showOnlyReadable: true
@@ -77,7 +76,7 @@ Page {
     // WORKAROUND showHidden buggy not refreshing
     FolderListModel {
         id: fileModelHidden
-        folder: path ? path: _fm.getHome()
+        folder: path
         showDirsFirst: true
         showDotAndDotDot: false
         showOnlyReadable: true
@@ -137,20 +136,18 @@ Page {
 
         header: PageHeader {
             title: if (page.title != "") return page.title
-                   else return findBaseName((fileModel.folder).toString())
-            description: findFullPath(fileModel.folder.toString())
+                   else return findBaseName((path).toString())
+            description: hiddenShow ? path + " [.*]" : path
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
                     if (!hiddenShow) {
                         view.model = fileModelHidden
                         view.model.showHidden = true
-                        parent.description = findFullPath(fileModel.folder.toString()) + " [.*]"
                     }
                     else {
                         view.model = fileModel
                         view.model.showHidden = false
-                        parent.description = findFullPath(fileModel.folder.toString())
                     }
                     hiddenShow = !hiddenShow
                 }
@@ -234,11 +231,11 @@ Page {
 
         PushUpMenu {
             MenuItem {
-                text: "Scroll to top"
-                onClicked: entriesList.scrollToTop();
+                text: qsTr("Scroll to top")
+                onClicked: view.scrollToTop();
             }
             MenuItem {
-                text : "Show Playlist"
+                text : qsTr("Show Playlist")
                 onClicked: pageStack.push(Qt.resolvedUrl("../PlaylistPage.qml"), {dataContainer: mainWindow.firstPage, modelPlaylist: mainWindow.modelPlaylist});
             }
         }
@@ -252,8 +249,9 @@ Page {
 
             function remove() {
                 var removal = removalComponent.createObject(bgdelegate)
-                if (fileIsDir) removal.execute(delegate,qsTr("Deleting ") + fileName, function() { _fm.removeDir(filePath); })
-                else removal.execute(delegate,qsTr("Deleting ") + fileName, function() { _fm.remove(filePath); })
+                var toDelPath = filePath
+                if (fileIsDir) removal.execute(delegate,qsTr("Deleting ") + fileName, function() { _fm.removeDir(toDelPath); })
+                else removal.execute(delegate,qsTr("Deleting ") + fileName, function() { _fm.remove(toDelPath); })
             }
 
             function copy() {
