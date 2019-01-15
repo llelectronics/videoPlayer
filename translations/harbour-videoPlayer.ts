@@ -22,8 +22,18 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../qml/pages/AddBookmark.qml" line="60"/>
+        <source>Title of the bookmark</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../qml/pages/AddBookmark.qml" line="62"/>
         <source>Title</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/AddBookmark.qml" line="68"/>
+        <source>URL of bookmark</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

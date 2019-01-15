@@ -22,9 +22,19 @@
         <translation>Lesezeichen hinzufügen</translation>
     </message>
     <message>
+        <location filename="../qml/pages/AddBookmark.qml" line="60"/>
+        <source>Title of the bookmark</source>
+        <translation>Titel des Lesezeichens</translation>
+    </message>
+    <message>
         <location filename="../qml/pages/AddBookmark.qml" line="62"/>
         <source>Title</source>
         <translation>Titel</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/AddBookmark.qml" line="68"/>
+        <source>URL of bookmark</source>
+        <translation>URL des Lesezeichens</translation>
     </message>
     <message>
         <location filename="../qml/pages/AddBookmark.qml" line="71"/>
