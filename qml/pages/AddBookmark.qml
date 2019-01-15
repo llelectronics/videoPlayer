@@ -59,7 +59,7 @@ Dialog {
                 width: parent.width - 20
                 placeholderText: "Title of the bookmark"
                 focus: true
-                label: qsTr("Title")
+                label: qsTr("Title of the bookmark")
             }
             TextField {
                 id: bookmarkUrl
@@ -68,7 +68,7 @@ Dialog {
                 placeholderText: "URL of bookmark"
                 inputMethodHints: Qt.ImhUrlCharactersOnly
                 visible: /*editBookmark ? false :*/ true
-                label: qsTr("URL")
+                label: qsTr("URL of bookmark")
             }
             Keys.onEnterPressed: enterPress();
             Keys.onReturnPressed: enterPress();
