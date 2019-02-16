@@ -81,3 +81,4 @@ TRANSLATIONS += translations/harbour-videoPlayer-de.ts \
                 translations/harbour-videoPlayer-es.ts \
                 translations/harbour-videoPlayer-sv.ts \
                 translations/harbour-videoPlayer-zh_cn.ts
+

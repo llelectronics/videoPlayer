@@ -683,7 +683,7 @@
     <message>
         <location filename="../qml/pages/fileman/helper/fmComponents/RenameDialog.qml" line="44"/>
         <source>Give a new name for</source>
-        <translation>重新命名/translation>
+        <translation>重新命名</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/helper/fmComponents/RenameDialog.qml" line="57"/>
