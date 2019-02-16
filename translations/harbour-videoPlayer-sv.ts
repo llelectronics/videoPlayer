@@ -725,12 +725,12 @@
         <translation>Sök...</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SecondPage.qml" line="325"/>
+        <location filename="../qml/pages/SecondPage.qml" line="339"/>
         <source>Load with ytdl</source>
         <translation>Läs in med ytdl</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SecondPage.qml" line="339"/>
+        <location filename="../qml/pages/SecondPage.qml" line="353"/>
         <source>Load</source>
         <translation>Läs in</translation>
     </message>
