@@ -106,7 +106,7 @@ Page {
             overridePageStackNavigation: true
             focus: true
 
-            property variant itemSelectorIndex: -1
+            property int itemSelectorIndex: -1
             property QtObject searchField
 
             experimental.itemSelector: PopOver {}
@@ -192,7 +192,7 @@ Page {
                     console.log('onMessageReceived: ' + message.data );
                     return
                 }
-                if (data.href != "" && data.href != "CANT FIND LINK") {
+                if (data.href !== "" && data.href !== "CANT FIND LINK") {
                     contextMenu.clickedUrl = data.href
                     contextMenu.show()
                 }
@@ -217,7 +217,7 @@ Page {
             onNavigationRequested: {
                 //console.debug("[SecondPage.qml] Request navigation to " + request.url)
                 if (YT.checkYoutube(request.url.toString()) === true && ytDetect === true) {
-                    if (YT.getYtID(request.url.toString()) != "") {
+                    if (YT.getYtID(request.url.toString()) !== "") {
                         //console.debug("[SecondPage.qml] Youtube Link detected")
                         request.action = WebView.IgnoreRequest;
                         dataContainer.isYtUrl = true;

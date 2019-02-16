@@ -120,7 +120,7 @@ Page {
             YT.getYoutubeTitle(originalUrl);
         }
         else dataContainer.isYtUrl = false;
-        if (dataContainer.streamTitle == "") dataContainer.streamTitle = mainWindow.findBaseName(streamUrl)
+        if (dataContainer.streamTitle === "") dataContainer.streamTitle = mainWindow.findBaseName(streamUrl)
         dataContainer.ytdlStream = false
 
         if (streamUrl.toString().match("^file://") || streamUrl.toString().match("^/")) {
@@ -269,7 +269,7 @@ Page {
             MenuItem {
                 text: qsTr("Add to bookmarks")
                 visible: {
-                    if (mainWindow.firstPage.streamTitle != "" || mainWindow.firstPage.streamUrl != "") return true
+                    if (mainWindow.firstPage.streamTitle !== "" || mainWindow.firstPage.streamUrl !== "") return true
                     else return false
                 }
                 onClicked: {
@@ -894,11 +894,11 @@ Page {
     }
 
     Keys.onPressed: {
-        if (event.key == Qt.Key_Space) videoPauseTrigger();
-        if (event.key == Qt.Key_Left && mediaPlayer.seekable) {
+        if (event.key === Qt.Key_Space) videoPauseTrigger();
+        if (event.key === Qt.Key_Left && mediaPlayer.seekable) {
             mediaPlayer.seek(mediaPlayer.position - 5000)
         }
-        if (event.key == Qt.Key_Right && mediaPlayer.seekable) {
+        if (event.key === Qt.Key_Right && mediaPlayer.seekable) {
             mediaPlayer.seek(mediaPlayer.position + 10000)
         }
     }

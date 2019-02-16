@@ -53,7 +53,7 @@ ApplicationWindow
     property alias errTxt: errTxt
     property bool clearWebViewOnExit: false
     property bool isLightTheme: {
-        if (Theme.colorScheme == Theme.LightOnDark) return false
+        if (Theme.colorScheme === Theme.LightOnDark) return false
         else return true
     }
 
@@ -101,7 +101,7 @@ ApplicationWindow
                     modelPlaylist.clear();
                     for (var i=0; i< m3uPlaylist.tracks.length; i++) {
                         //console.debug(m3uPlaylist.tracks[i].title + " " + m3uPlaylist.tracks[i].file);
-                        if (m3uPlaylist.tracks[i].title && m3uPlaylist.tracks[i].title != "")
+                        if (m3uPlaylist.tracks[i].title && m3uPlaylist.tracks[i].title !== "")
                             modelPlaylist.addTrack(m3uPlaylist.tracks[i].file,m3uPlaylist.tracks[i].title);
                         else
                             modelPlaylist.addTrack(m3uPlaylist.tracks[i].file,"");
@@ -147,7 +147,7 @@ ApplicationWindow
     function findBaseName(url) {
         var fileName = url.substring(url.lastIndexOf('/') + 1);
         var dot = fileName.lastIndexOf('.');
-        return dot == -1 ? fileName : fileName.substring(0, dot);
+        return dot === -1 ? fileName : fileName.substring(0, dot);
     }
 
     function humanSize(bytes) {
@@ -211,7 +211,7 @@ ApplicationWindow
             }
             else if (mainWindow.applicationActive === true) {
                 pageStack.currentPage.showTimeAndTitle.count = 5
-                if (pageStack.currentPage.videoPoster.opacity == 0) pageStack.currentPage.videoPoster.toggleControls();
+                if (pageStack.currentPage.videoPoster.opacity === 0) pageStack.currentPage.videoPoster.toggleControls();
             }
         }
         else if (typeof pageStack.currentPage.workaroundRefresh === 'function') {
@@ -241,12 +241,12 @@ ApplicationWindow
             var suffix = "/";
             var str = bookmarkUrl.toString();
             for (var i=0; i<count; i++) {
-                if (get(i).url == str)  {
+                if (get(i).url === str)  {
                     return true;
                 }
                 // check if url endswith '/' and return true if url-'/' = models url
                 else if (str.indexOf(suffix, str.length - suffix.length) !== -1) {
-                    if (get(i).url == str.substring(0, str.length-1)) return true;
+                    if (get(i).url === str.substring(0, str.length-1)) return true;
                 }
             }
             return false;
@@ -315,7 +315,7 @@ ApplicationWindow
         }
 
         function addTrack(url, title) {
-            if (title != "")
+            if (title !== "")
                 append({"title" : title, "url" : url});
             else
                 append({"title" : findBaseName(url), "url" : url});
@@ -324,7 +324,7 @@ ApplicationWindow
 
         function getPosition(str) {
             for (var i=0; i<count; i++) {
-                if (get(i).url == str)  {
+                if (get(i).url === str)  {
                     return i;
                 }
             }

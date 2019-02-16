@@ -192,7 +192,7 @@ Page
                     text: qsTr("Save Playlist")
                     onClicked: {
                         var saveReturn
-                        if (mainWindow.playlist.pllist != "")
+                        if (mainWindow.playlist.pllist !== "")
                             saveReturn = mainWindow.playlist.save(mainWindow.playlist.pllist);
                         else
                             saveReturn = mainWindow.playlist.save(_fm.getHome() + "/Music/playlists/" + mainWindow.modelPlaylist.name + ".pls")
@@ -207,7 +207,7 @@ Page
                             mainWindow.playlist.clearError() // So that we can load new playlists
                         }
                     }
-                    visible: mainWindow.modelPlaylist.count != 0
+                    visible: mainWindow.modelPlaylist.count !== 0
                 }
             }
         }

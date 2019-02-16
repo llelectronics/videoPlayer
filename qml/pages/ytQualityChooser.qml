@@ -104,14 +104,14 @@ Page {
     Connections {
         target: _ytdl
         onOggAudioChanged: {
-            if (_ytdl.getOggAudioUrl() != "") {  // Don't load empty stuff
+            if (_ytdl.getOggAudioUrl() !== "") {  // Don't load empty stuff
                 qualList.append({"name": "vorbis@128k Audio (WEBM)", "url": _ytdl.getOggAudioUrl()})
                 _oggLoaded = true
                 if (_opusLoaded) loading.running = false
             }
         }
         onOpusAudioChanged: {
-            if (_ytdl.getOpusAudioUrl() != "") {  // Don't load empty stuff
+            if (_ytdl.getOpusAudioUrl() !== "") {  // Don't load empty stuff
                 qualList.append({"name": "opus@160k Audio (WEBM)", "url": _ytdl.getOpusAudioUrl()})
                 _opusLoaded = true
                 if (_oggLoaded) loading.running = false
