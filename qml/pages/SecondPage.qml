@@ -48,7 +48,7 @@ Page {
     property bool ytDetect: true
     property string websiteUrl: "https://m.youtube.com/"
     property string searchUrl: "https://m.youtube.com/results?q="
-    property string uA: "Mozilla/5.0 (Linux; U; Android 2.2; en-us; Nexus One Build/FRF91) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1"
+    property string uA: "Mozilla/5.0 (Linux; Maemo; Android 2.3.5; U; Sailfish) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1"
 
     function workaroundRefresh() {
         ytView.update();
