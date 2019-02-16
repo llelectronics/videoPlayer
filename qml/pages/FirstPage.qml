@@ -55,6 +55,7 @@ Page {
     property bool isPlaylist: false
     property string onlyMusicState: "default"
     property bool isLiveStream: false
+    property bool alwaysYtdl: false
     /////////////////////////////////////////////////////
 
     // Videoplayer properties //////////////////////////

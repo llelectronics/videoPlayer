@@ -201,13 +201,24 @@ Page {
             onUrlChanged: {
                 if (YT.checkYoutube(url.toString()) === true && ytDetect === true) {
                     if (YT.getYtID(url.toString()) !== "") {
-                        dataContainer.isYtUrl = true;
                         if (dataContainer != null) {
-                            dataContainer.streamUrl = url;
-                            dataContainer.originalUrl = url
-                            dataContainer.isPlaylist = false;
-                            dataContainer.isLiveStream = false;
-                            dataContainer.loadPlayer();
+                            if (dataContainer.alwaysYtdl) {
+                                _ytdl.setUrl(url)
+                                _ytdl.setParameter("-f " + dataContainer.ytdlQual)
+                                _ytdl.getStreamUrl()
+                                _ytdl.getStreamTitle()
+                                dataContainer.isYtUrl = false
+                                dataContainer.busy.visible = true;
+                                dataContainer.busy.running = true;
+                            }
+                            else {
+                                dataContainer.isYtUrl = true;
+                                dataContainer.streamUrl = url;
+                                dataContainer.originalUrl = url
+                                dataContainer.isPlaylist = false;
+                                dataContainer.isLiveStream = false;
+                                dataContainer.loadPlayer();
+                            }
                         }
                         ytView.goBack();
                     }

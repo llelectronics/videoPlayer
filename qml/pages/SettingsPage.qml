@@ -36,6 +36,7 @@ Dialog {
         solidSubtitlesSwitch.checked = false;
         ytDefaultQualCombo.currentIndex = 0;
         clearWebViewOnExitSwitch.checked = false;
+        alwaysYtdlSwitch.checked = false;
     }
 
     function clearHistory() {
@@ -55,6 +56,7 @@ Dialog {
         DB.addSetting("ytDefaultQual", ytDefaultQualCombo.qual.toString());
         DB.addSetting("onlyMusicState", onlyMusicCombo.onlyMusicState.toString());
         DB.addSetting("clearWebViewOnExit", clearWebViewOnExitSwitch.checked.toString());
+        DB.addSetting("alwaysYtdl", alwaysYtdlSwitch.checked.toString());
         DB.getSettings();
     }
 
@@ -467,6 +469,13 @@ Dialog {
                 }
                 anchors.horizontalCenter: parent.horizontalCenter
                 onClicked: clearHistory();
+            }
+
+            TextSwitch {
+                id: alwaysYtdlSwitch
+                anchors.horizontalCenter: parent.horizontalCenter
+                text: qsTr("Try to load all youtube videos with ytdl")
+                checked: mainWindow.firstPage.alwaysYtdl
             }
 
             BackgroundItem {

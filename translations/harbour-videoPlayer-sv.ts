@@ -327,75 +327,75 @@
 <context>
     <name>FirstPage</name>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="208"/>
+        <location filename="../qml/pages/FirstPage.qml" line="209"/>
         <source>Open Video</source>
         <extracomment>For choosing video to open from the device</extracomment>
         <translation>Öppna video</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="343"/>
+        <location filename="../qml/pages/FirstPage.qml" line="344"/>
         <source>No History</source>
         <translation>Ingen historik</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="244"/>
-        <location filename="../qml/pages/FirstPage.qml" line="378"/>
+        <location filename="../qml/pages/FirstPage.qml" line="245"/>
+        <location filename="../qml/pages/FirstPage.qml" line="379"/>
         <source>History</source>
         <translation>Historik</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="250"/>
+        <location filename="../qml/pages/FirstPage.qml" line="251"/>
         <source>Bookmarks</source>
         <translation>Bokmärken</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="256"/>
+        <location filename="../qml/pages/FirstPage.qml" line="257"/>
         <source>Search on Youtube</source>
         <translation>Sök på Youtube</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="262"/>
+        <location filename="../qml/pages/FirstPage.qml" line="263"/>
         <source>Browse Files</source>
         <translation>Bläddra efter filer</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="268"/>
+        <location filename="../qml/pages/FirstPage.qml" line="269"/>
         <source>Enter URL</source>
         <translation>Ange URL</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="274"/>
+        <location filename="../qml/pages/FirstPage.qml" line="275"/>
         <source>Playlists</source>
         <translation>Spelningslistor</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="356"/>
+        <location filename="../qml/pages/FirstPage.qml" line="357"/>
         <source>About </source>
         <translation>Om </translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="360"/>
+        <location filename="../qml/pages/FirstPage.qml" line="361"/>
         <source>Settings</source>
         <translation>Inställningar</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="379"/>
-        <location filename="../qml/pages/FirstPage.qml" line="392"/>
+        <location filename="../qml/pages/FirstPage.qml" line="380"/>
+        <location filename="../qml/pages/FirstPage.qml" line="393"/>
         <source>Open</source>
         <translation>Öppna</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="384"/>
+        <location filename="../qml/pages/FirstPage.qml" line="385"/>
         <source>Type in URL here</source>
         <translation>Skriv in URL här</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="385"/>
+        <location filename="../qml/pages/FirstPage.qml" line="386"/>
         <source>URL to media</source>
         <translation>URL till media</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="461"/>
+        <location filename="../qml/pages/FirstPage.qml" line="462"/>
         <source>Youtube-Dl updated.</source>
         <translation>Youtube-Dl uppdaterad.</translation>
     </message>
@@ -725,12 +725,12 @@
         <translation>Sök...</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SecondPage.qml" line="339"/>
+        <location filename="../qml/pages/SecondPage.qml" line="350"/>
         <source>Load with ytdl</source>
         <translation>Läs in med ytdl</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SecondPage.qml" line="353"/>
+        <location filename="../qml/pages/SecondPage.qml" line="364"/>
         <source>Load</source>
         <translation>Läs in</translation>
     </message>
@@ -738,123 +738,128 @@
 <context>
     <name>SettingsPage</name>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="42"/>
-        <location filename="../qml/pages/SettingsPage.qml" line="462"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="43"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="464"/>
         <source>Clear History</source>
         <translation>Rensa historiken</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="94"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="96"/>
         <source>Save Settings</source>
         <translation>Spara inställningar</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="115"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="117"/>
         <source>Load Defaults</source>
         <translation>Läs in standard</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="240"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="242"/>
         <source>General</source>
         <translation>Allmänt</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="284"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="286"/>
         <source>Load Subtitles</source>
         <translation>Läs in undertexter</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="291"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="293"/>
         <source>Bold Subtitle Font</source>
         <translation>Fet undertextstil</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="299"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="301"/>
         <source>Subtitle Font Size</source>
         <translation>Undertextstorlek</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="310"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="312"/>
         <source>Small</source>
         <translation>Liten</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="311"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="313"/>
         <source>Medium</source>
         <translation>Medium</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="312"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="314"/>
         <source>Large</source>
         <translation>Stor</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="313"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="315"/>
         <source>Extra Large</source>
         <translation>Extra stor</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="338"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="340"/>
         <source>Subtitle Color</source>
         <translation>Undertextfärg</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="355"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="357"/>
         <source>Use solid subtitletext background</source>
         <translation>Använd solid undertextbakgrund</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="371"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="373"/>
         <source>Browse File Dialog</source>
         <translation>Bläddra efter filer</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="382"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="384"/>
         <source>Filemanager</source>
         <translation>Filhanterare</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="383"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="385"/>
         <source>Videogallery</source>
         <translation>Videogalleri</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="395"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="397"/>
         <source>Default Youtube Quality</source>
         <translation>Standard Youtube-kvalitet</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="423"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="425"/>
         <source>Use live preview when minimized</source>
         <translation>Använd direkt förhandsgranskning vid minimerad</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="430"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="432"/>
         <source>Music Only Indicator</source>
         <translation>Indikator för endast musik</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="441"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="443"/>
         <source>Default (Sound Icon)</source>
         <translation>Standard (Ljudikon)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="442"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="444"/>
         <source>MC (animated Music Cassette)</source>
         <translation>MC (Animerad musikkassett)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="443"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="445"/>
         <source>EQ (animated Equalizer)</source>
         <translation>EQ (Animerad equalizer)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="455"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="457"/>
         <source>Clear webview data on exit</source>
         <translation>Rensa ut webbvydata vid avslut</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="475"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="477"/>
+        <source>Try to load all youtube videos with ytdl</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SettingsPage.qml" line="484"/>
         <source>Update Youtube-Dl</source>
         <translation>Uppdatera Youtube Dl</translation>
     </message>
