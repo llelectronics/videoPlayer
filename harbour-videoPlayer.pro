@@ -72,6 +72,7 @@ DISTFILES += \
     translations/harbour-videoPlayer-es.ts \
     translations/harbour-videoPlayer-sv.ts \
     translations/harbour-videoPlayer-zh_cn.ts \
+    translations/harbour-videoPlayer-nl.ts \
     qml/pages/helper/Mplayer.qml
 
 # to disable building translations every time, comment out the
@@ -81,5 +82,6 @@ CONFIG += sailfishapp_i18n
 TRANSLATIONS += translations/harbour-videoPlayer-de.ts \
                 translations/harbour-videoPlayer-es.ts \
                 translations/harbour-videoPlayer-sv.ts \
-                translations/harbour-videoPlayer-zh_cn.ts
+                translations/harbour-videoPlayer-zh_cn.ts \
+                translations/harbour-videoPlayer-nl.ts
 

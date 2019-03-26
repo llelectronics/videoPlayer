@@ -333,71 +333,105 @@
         <translation>Video openen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="344"/>
+        <location filename="../qml/pages/FirstPage.qml" line="347"/>
         <source>No History</source>
         <translation>Geen vorige</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="245"/>
-        <location filename="../qml/pages/FirstPage.qml" line="379"/>
+        <location filename="../qml/pages/FirstPage.qml" line="248"/>
+        <location filename="../qml/pages/FirstPage.qml" line="382"/>
         <source>History</source>
         <translation>Vorige</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="251"/>
+        <location filename="../qml/pages/FirstPage.qml" line="254"/>
         <source>Bookmarks</source>
         <translation>Bladwijzers</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="257"/>
+        <location filename="../qml/pages/FirstPage.qml" line="260"/>
         <source>Search on Youtube</source>
         <translation>Zoeken op Youtube</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="263"/>
+        <location filename="../qml/pages/FirstPage.qml" line="266"/>
         <source>Browse Files</source>
         <translation>Bestanden bladeren</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="269"/>
+        <location filename="../qml/pages/FirstPage.qml" line="272"/>
         <source>Enter URL</source>
         <translation>URL ingeven</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="275"/>
+        <location filename="../qml/pages/FirstPage.qml" line="278"/>
         <source>Playlists</source>
         <translation>Afafspeellijsten</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="357"/>
+        <location filename="../qml/pages/FirstPage.qml" line="360"/>
         <source>About </source>
         <translation>Over </translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="361"/>
+        <location filename="../qml/pages/FirstPage.qml" line="364"/>
         <source>Settings</source>
         <translation>Instellingen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="380"/>
-        <location filename="../qml/pages/FirstPage.qml" line="393"/>
+        <location filename="../qml/pages/FirstPage.qml" line="383"/>
+        <location filename="../qml/pages/FirstPage.qml" line="396"/>
         <source>Open</source>
         <translation>Openen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="385"/>
+        <location filename="../qml/pages/FirstPage.qml" line="388"/>
         <source>Type in URL here</source>
         <translation>Geef hier URL in</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="386"/>
+        <location filename="../qml/pages/FirstPage.qml" line="389"/>
         <source>URL to media</source>
         <translation>URL naar media</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="462"/>
+        <location filename="../qml/pages/FirstPage.qml" line="465"/>
         <source>Youtube-Dl updated.</source>
         <translation>Youtube-Dl geüpdatet</translation>
+    </message>
+</context>
+<context>
+    <name>Mplayer</name>
+    <message>
+        <location filename="../qml/pages/helper/Mplayer.qml" line="114"/>
+        <source>
+The video cannot be played due to a problem allocating resources.
+            On Youtube Videos please make sure to be logged in. Some videos might be geoblocked or require you to be logged into youtube.</source>
+        <translation>Deze video can niet afgespeeld worden omdat geen goede toekenning kan plaatsvinden.  Let op je ingelogd bent voor Youtube video.  Sommige videos kunnen ook een geoblock hebben.</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/helper/Mplayer.qml" line="116"/>
+        <source>
+The audio and or video format is not supported.</source>
+        <translation>Het audio of video type wordt niet ondersteund.</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/helper/Mplayer.qml" line="117"/>
+        <source>
+The video cannot be played due to network issues.</source>
+        <translation>De video kan niet afgespeeld worden vanwege een probleem met de verbinding.</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/helper/Mplayer.qml" line="118"/>
+        <source>
+The video cannot be played due to insufficient permissions.</source>
+        <translation>De video kan niet afgespeeld worden vanwege ontoereikende toestemmingen.</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/helper/Mplayer.qml" line="119"/>
+        <source>
+The video cannot be played because the media service could not be instantiated.</source>
+        <translation>The kan niet afgespeeld worden omdat de media diensten niet gestart kunnen worden.</translation>
     </message>
 </context>
 <context>
@@ -867,7 +901,7 @@
 <context>
     <name>harbour-videoPlayer</name>
     <message>
-        <location filename="../qml/harbour-videoPlayer.qml" line="392"/>
+        <location filename="../qml/harbour-videoPlayer.qml" line="478"/>
         <source>Dismiss</source>
         <translation>Negeer</translation>
     </message>
@@ -875,70 +909,39 @@
 <context>
     <name>videoPlayer</name>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="215"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="222"/>
         <source>Load with ytdl</source>
         <translation>Met ytdl laden</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="236"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="243"/>
         <source>Download Youtube Video</source>
         <translation>Youtube video downloaden</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="254"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="261"/>
         <source>Download</source>
         <translation>Download</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="270"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="277"/>
         <source>Add to bookmarks</source>
         <translation>Aan bladwijzer toevoegen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="286"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="293"/>
         <source>Load Subtitle</source>
         <translation>Laad ondertitels</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="290"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="297"/>
         <source>Play from last known position</source>
         <translation>Afspelen vanaf laatst bekende positie</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="457"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="464"/>
         <source>Dismiss</source>
         <translation>Negeer</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="780"/>
-        <source>
-The video cannot be played due to a problem allocating resources.
-            On Youtube Videos please make sure to be logged in. Some videos might be geoblocked or require you to be logged into youtube.</source>
-        <translation>Deze video can niet afgespeeld worden omdat geen goede toekenning kan plaatsvinden.  Let op je ingelogd bent voor Youtube video.  Sommige videos kunnen ook een geoblock hebben.</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="782"/>
-        <source>
-The audio and or video format is not supported.</source>
-        <translation>Het audio of video type wordt niet ondersteund.</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="783"/>
-        <source>
-The video cannot be played due to network issues.</source>
-        <translation>De video kan niet afgespeeld worden vanwege een probleem met de verbinding.</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="784"/>
-        <source>
-The video cannot be played due to insufficient permissions.</source>
-        <translation>De video kan niet afgespeeld worden vanwege ontoereikende toestemmingen.</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="785"/>
-        <source>
-The video cannot be played because the media service could not be instantiated.</source>
-        <translation>The kan niet afgespeeld worden omdat de media diensten niet gestart kunnen worden.</translation>
     </message>
 </context>
 <context>
