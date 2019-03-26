@@ -333,71 +333,111 @@
         <translation>Abrir vídeo</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="344"/>
+        <location filename="../qml/pages/FirstPage.qml" line="347"/>
         <source>No History</source>
         <translation>No hay historial</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="245"/>
-        <location filename="../qml/pages/FirstPage.qml" line="379"/>
+        <location filename="../qml/pages/FirstPage.qml" line="248"/>
+        <location filename="../qml/pages/FirstPage.qml" line="382"/>
         <source>History</source>
         <translation>Historial</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="251"/>
+        <location filename="../qml/pages/FirstPage.qml" line="254"/>
         <source>Bookmarks</source>
         <translation>Marcadores</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="257"/>
+        <location filename="../qml/pages/FirstPage.qml" line="260"/>
         <source>Search on Youtube</source>
         <translation>Buscar en Youtube</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="263"/>
+        <location filename="../qml/pages/FirstPage.qml" line="266"/>
         <source>Browse Files</source>
         <translation>Explorar archivos</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="269"/>
+        <location filename="../qml/pages/FirstPage.qml" line="272"/>
         <source>Enter URL</source>
         <translation>Introducir URL</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="275"/>
+        <location filename="../qml/pages/FirstPage.qml" line="278"/>
         <source>Playlists</source>
         <translation>Listas de reprod.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="357"/>
+        <location filename="../qml/pages/FirstPage.qml" line="360"/>
         <source>About </source>
         <translation>Acerca de </translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="361"/>
+        <location filename="../qml/pages/FirstPage.qml" line="364"/>
         <source>Settings</source>
         <translation>Ajustes</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="380"/>
-        <location filename="../qml/pages/FirstPage.qml" line="393"/>
+        <location filename="../qml/pages/FirstPage.qml" line="383"/>
+        <location filename="../qml/pages/FirstPage.qml" line="396"/>
         <source>Open</source>
         <translation>Abrir</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="385"/>
+        <location filename="../qml/pages/FirstPage.qml" line="388"/>
         <source>Type in URL here</source>
         <translation>Escribe aquí la URL</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="386"/>
+        <location filename="../qml/pages/FirstPage.qml" line="389"/>
         <source>URL to media</source>
         <translation>URL a multimedia</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="462"/>
+        <location filename="../qml/pages/FirstPage.qml" line="465"/>
         <source>Youtube-Dl updated.</source>
         <translation>Youtube-Dl actualizada.</translation>
+    </message>
+</context>
+<context>
+    <name>Mplayer</name>
+    <message>
+        <location filename="../qml/pages/helper/Mplayer.qml" line="114"/>
+        <source>
+The video cannot be played due to a problem allocating resources.
+            On Youtube Videos please make sure to be logged in. Some videos might be geoblocked or require you to be logged into youtube.</source>
+        <translation>
+No se puede reproducir el vídeo por un problema de asignación de recursos.
+        Comprueba que has iniciado sesión en Youtube. Algunos vídeos pueden estar bloqueados geográficamente o es necesario iniciar sesión.</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/helper/Mplayer.qml" line="116"/>
+        <source>
+The audio and or video format is not supported.</source>
+        <translation>
+Formato de audio y vídeo no soportado.</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/helper/Mplayer.qml" line="117"/>
+        <source>
+The video cannot be played due to network issues.</source>
+        <translation>
+No se puede reproducir vídeo por problemas de conexión.</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/helper/Mplayer.qml" line="118"/>
+        <source>
+The video cannot be played due to insufficient permissions.</source>
+        <translation>
+No se puede reproducir vídeo debido a permisos insuficientes.</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/helper/Mplayer.qml" line="119"/>
+        <source>
+The video cannot be played because the media service could not be instantiated.</source>
+        <translation>
+No se puede reproducir vídeo porque no se pudo instanciar el servicio multimedia.</translation>
     </message>
 </context>
 <context>
@@ -867,7 +907,7 @@
 <context>
     <name>harbour-videoPlayer</name>
     <message>
-        <location filename="../qml/harbour-videoPlayer.qml" line="392"/>
+        <location filename="../qml/harbour-videoPlayer.qml" line="478"/>
         <source>Dismiss</source>
         <translation>Descartar</translation>
     </message>
@@ -875,76 +915,39 @@
 <context>
     <name>videoPlayer</name>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="215"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="222"/>
         <source>Load with ytdl</source>
         <translation>Cargar con ytdl</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="236"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="243"/>
         <source>Download Youtube Video</source>
         <translation>Descargar vídeo de Youtube</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="254"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="261"/>
         <source>Download</source>
         <translation>Descargar</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="270"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="277"/>
         <source>Add to bookmarks</source>
         <translation>Añadir a marcadores</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="286"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="293"/>
         <source>Load Subtitle</source>
         <translation>Cargar subtítulos</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="290"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="297"/>
         <source>Play from last known position</source>
         <translation>Reproducir desde la última posición</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="457"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="464"/>
         <source>Dismiss</source>
         <translation>Descartar</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="780"/>
-        <source>
-The video cannot be played due to a problem allocating resources.
-            On Youtube Videos please make sure to be logged in. Some videos might be geoblocked or require you to be logged into youtube.</source>
-        <translation>
-No se puede reproducir el vídeo por un problema de asignación de recursos.
-        Comprueba que has iniciado sesión en Youtube. Algunos vídeos pueden estar bloqueados geográficamente o es necesario iniciar sesión.</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="782"/>
-        <source>
-The audio and or video format is not supported.</source>
-        <translation>
-Formato de audio y vídeo no soportado.</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="783"/>
-        <source>
-The video cannot be played due to network issues.</source>
-        <translation>
-No se puede reproducir vídeo por problemas de conexión.</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="784"/>
-        <source>
-The video cannot be played due to insufficient permissions.</source>
-        <translation>
-No se puede reproducir vídeo debido a permisos insuficientes.</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="785"/>
-        <source>
-The video cannot be played because the media service could not be instantiated.</source>
-        <translation>
-No se puede reproducir vídeo porque no se pudo instanciar el servicio multimedia.</translation>
     </message>
 </context>
 <context>

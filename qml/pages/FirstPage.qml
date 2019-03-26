@@ -225,6 +225,9 @@ Page {
             path: _fm.getHome() + "/Videos"
             filter: ["*"]
             onFileOpen: {
+                // Clear Playlist and add to playlist maybe
+                //mainWindow.modelPlaylist.clear();
+                //mainWindow.modelPlaylist.addTrack(path,"");
                 mainWindow.firstPage.originalUrl = path;
                 mainWindow.firstPage.streamUrl = path;
                 mainWindow.firstPage.autoplay = true;
