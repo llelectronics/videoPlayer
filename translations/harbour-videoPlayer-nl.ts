@@ -339,7 +339,7 @@
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="249"/>
-        <location filename="../qml/pages/FirstPage.qml" line="383"/>
+        <location filename="../qml/pages/FirstPage.qml" line="387"/>
         <source>History</source>
         <translation>Vorige</translation>
     </message>
@@ -379,23 +379,28 @@
         <translation>Instellingen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="384"/>
-        <location filename="../qml/pages/FirstPage.qml" line="397"/>
+        <location filename="../qml/pages/FirstPage.qml" line="369"/>
+        <source>Show Player</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FirstPage.qml" line="388"/>
+        <location filename="../qml/pages/FirstPage.qml" line="401"/>
         <source>Open</source>
         <translation>Openen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="389"/>
+        <location filename="../qml/pages/FirstPage.qml" line="393"/>
         <source>Type in URL here</source>
         <translation>Geef hier URL in</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="390"/>
+        <location filename="../qml/pages/FirstPage.qml" line="394"/>
         <source>URL to media</source>
         <translation>URL naar media</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="466"/>
+        <location filename="../qml/pages/FirstPage.qml" line="470"/>
         <source>Youtube-Dl updated.</source>
         <translation>Youtube-Dl geüpdatet</translation>
     </message>
@@ -901,7 +906,7 @@ The video cannot be played because the media service could not be instantiated.<
 <context>
     <name>harbour-videoPlayer</name>
     <message>
-        <location filename="../qml/harbour-videoPlayer.qml" line="479"/>
+        <location filename="../qml/harbour-videoPlayer.qml" line="483"/>
         <source>Dismiss</source>
         <translation>Negeer</translation>
     </message>

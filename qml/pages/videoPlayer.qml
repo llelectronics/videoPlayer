@@ -86,8 +86,8 @@ Page {
         minPlayer.seek(mediaPlayer.position)
         minPlayer.streamTitle = streamTitle
         minPlayer.isPlaylist = isPlaylist
+        if (mediaPlayer.playbackState === MediaPlayer.PlayingState) minPlayer.play();
         mediaPlayer.pause();
-        minPlayer.play();
         minPlayerPanel.show()
 //        mediaPlayer.stop();
 //        mediaPlayer.source = "";

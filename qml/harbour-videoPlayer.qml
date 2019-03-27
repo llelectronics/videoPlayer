@@ -381,6 +381,10 @@ ApplicationWindow
             anchors.fill: parent
             color: Theme.overlayBackgroundColor
             opacity: 0.8
+            SwipeArea {
+                anchors.fill: parent
+                onSwipeDown: minPlayerPanel.hide()
+            }
         }
 
         Label {

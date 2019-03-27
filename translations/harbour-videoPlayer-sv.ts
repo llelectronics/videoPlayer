@@ -339,7 +339,7 @@
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="249"/>
-        <location filename="../qml/pages/FirstPage.qml" line="383"/>
+        <location filename="../qml/pages/FirstPage.qml" line="387"/>
         <source>History</source>
         <translation>Historik</translation>
     </message>
@@ -379,23 +379,28 @@
         <translation>Inställningar</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="384"/>
-        <location filename="../qml/pages/FirstPage.qml" line="397"/>
+        <location filename="../qml/pages/FirstPage.qml" line="369"/>
+        <source>Show Player</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FirstPage.qml" line="388"/>
+        <location filename="../qml/pages/FirstPage.qml" line="401"/>
         <source>Open</source>
         <translation>Öppna</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="389"/>
+        <location filename="../qml/pages/FirstPage.qml" line="393"/>
         <source>Type in URL here</source>
         <translation>Skriv in URL här</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="390"/>
+        <location filename="../qml/pages/FirstPage.qml" line="394"/>
         <source>URL to media</source>
         <translation>URL till media</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="466"/>
+        <location filename="../qml/pages/FirstPage.qml" line="470"/>
         <source>Youtube-Dl updated.</source>
         <translation>Youtube-Dl uppdaterad.</translation>
     </message>
@@ -907,7 +912,7 @@ Videon kan inte spelas upp, eftersom medietjänsten inte kunde startas.</transla
 <context>
     <name>harbour-videoPlayer</name>
     <message>
-        <location filename="../qml/harbour-videoPlayer.qml" line="479"/>
+        <location filename="../qml/harbour-videoPlayer.qml" line="483"/>
         <source>Dismiss</source>
         <translation>Avfärda</translation>
     </message>

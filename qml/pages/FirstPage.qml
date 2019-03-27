@@ -365,6 +365,10 @@ Page {
                     text: qsTr("Settings")
                     onClicked: pageStack.push(Qt.resolvedUrl("SettingsPage.qml"));
                 }
+                MenuItem {
+                    text: qsTr("Show Player")
+                    onClicked: minPlayerPanel.show()
+                }
             }
 
             MouseArea {
