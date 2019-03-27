@@ -327,75 +327,75 @@
 <context>
     <name>FirstPage</name>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="209"/>
+        <location filename="../qml/pages/FirstPage.qml" line="210"/>
         <source>Open Video</source>
         <extracomment>For choosing video to open from the device</extracomment>
         <translation>Abrir vídeo</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="347"/>
+        <location filename="../qml/pages/FirstPage.qml" line="348"/>
         <source>No History</source>
         <translation>No hay historial</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="248"/>
-        <location filename="../qml/pages/FirstPage.qml" line="382"/>
+        <location filename="../qml/pages/FirstPage.qml" line="249"/>
+        <location filename="../qml/pages/FirstPage.qml" line="383"/>
         <source>History</source>
         <translation>Historial</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="254"/>
+        <location filename="../qml/pages/FirstPage.qml" line="255"/>
         <source>Bookmarks</source>
         <translation>Marcadores</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="260"/>
+        <location filename="../qml/pages/FirstPage.qml" line="261"/>
         <source>Search on Youtube</source>
         <translation>Buscar en Youtube</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="266"/>
+        <location filename="../qml/pages/FirstPage.qml" line="267"/>
         <source>Browse Files</source>
         <translation>Explorar archivos</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="272"/>
+        <location filename="../qml/pages/FirstPage.qml" line="273"/>
         <source>Enter URL</source>
         <translation>Introducir URL</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="278"/>
+        <location filename="../qml/pages/FirstPage.qml" line="279"/>
         <source>Playlists</source>
         <translation>Listas de reprod.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="360"/>
+        <location filename="../qml/pages/FirstPage.qml" line="361"/>
         <source>About </source>
         <translation>Acerca de </translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="364"/>
+        <location filename="../qml/pages/FirstPage.qml" line="365"/>
         <source>Settings</source>
         <translation>Ajustes</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="383"/>
-        <location filename="../qml/pages/FirstPage.qml" line="396"/>
+        <location filename="../qml/pages/FirstPage.qml" line="384"/>
+        <location filename="../qml/pages/FirstPage.qml" line="397"/>
         <source>Open</source>
         <translation>Abrir</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="388"/>
+        <location filename="../qml/pages/FirstPage.qml" line="389"/>
         <source>Type in URL here</source>
         <translation>Escribe aquí la URL</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="389"/>
+        <location filename="../qml/pages/FirstPage.qml" line="390"/>
         <source>URL to media</source>
         <translation>URL a multimedia</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="465"/>
+        <location filename="../qml/pages/FirstPage.qml" line="466"/>
         <source>Youtube-Dl updated.</source>
         <translation>Youtube-Dl actualizada.</translation>
     </message>
@@ -403,7 +403,7 @@
 <context>
     <name>Mplayer</name>
     <message>
-        <location filename="../qml/pages/helper/Mplayer.qml" line="114"/>
+        <location filename="../qml/pages/helper/Mplayer.qml" line="108"/>
         <source>
 The video cannot be played due to a problem allocating resources.
             On Youtube Videos please make sure to be logged in. Some videos might be geoblocked or require you to be logged into youtube.</source>
@@ -412,28 +412,28 @@ No se puede reproducir el vídeo por un problema de asignación de recursos.
         Comprueba que has iniciado sesión en Youtube. Algunos vídeos pueden estar bloqueados geográficamente o es necesario iniciar sesión.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/helper/Mplayer.qml" line="116"/>
+        <location filename="../qml/pages/helper/Mplayer.qml" line="110"/>
         <source>
 The audio and or video format is not supported.</source>
         <translation>
 Formato de audio y vídeo no soportado.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/helper/Mplayer.qml" line="117"/>
+        <location filename="../qml/pages/helper/Mplayer.qml" line="111"/>
         <source>
 The video cannot be played due to network issues.</source>
         <translation>
 No se puede reproducir vídeo por problemas de conexión.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/helper/Mplayer.qml" line="118"/>
+        <location filename="../qml/pages/helper/Mplayer.qml" line="112"/>
         <source>
 The video cannot be played due to insufficient permissions.</source>
         <translation>
 No se puede reproducir vídeo debido a permisos insuficientes.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/helper/Mplayer.qml" line="119"/>
+        <location filename="../qml/pages/helper/Mplayer.qml" line="113"/>
         <source>
 The video cannot be played because the media service could not be instantiated.</source>
         <translation>
@@ -907,7 +907,7 @@ No se puede reproducir vídeo porque no se pudo instanciar el servicio multimedi
 <context>
     <name>harbour-videoPlayer</name>
     <message>
-        <location filename="../qml/harbour-videoPlayer.qml" line="478"/>
+        <location filename="../qml/harbour-videoPlayer.qml" line="479"/>
         <source>Dismiss</source>
         <translation>Descartar</translation>
     </message>
@@ -915,37 +915,37 @@ No se puede reproducir vídeo porque no se pudo instanciar el servicio multimedi
 <context>
     <name>videoPlayer</name>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="222"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="223"/>
         <source>Load with ytdl</source>
         <translation>Cargar con ytdl</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="243"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="244"/>
         <source>Download Youtube Video</source>
-        <translation>Descargar vídeo de Youtube</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="261"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="262"/>
         <source>Download</source>
         <translation>Descargar</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="277"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="278"/>
         <source>Add to bookmarks</source>
         <translation>Añadir a marcadores</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="293"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="294"/>
         <source>Load Subtitle</source>
-        <translation>Cargar subtítulos</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="297"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="298"/>
         <source>Play from last known position</source>
-        <translation>Reproducir desde la última posición</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="464"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="465"/>
         <source>Dismiss</source>
         <translation>Descartar</translation>
     </message>
@@ -953,7 +953,7 @@ No se puede reproducir vídeo porque no se pudo instanciar el servicio multimedi
 <context>
     <name>ytQualityChooser</name>
     <message>
-        <location filename="../qml/pages/ytQualityChooser.qml" line="55"/>
+        <location filename="../qml/pages/ytQualityChooser.qml" line="57"/>
         <source>Choose Quality</source>
         <translation>Elige calidad</translation>
     </message>

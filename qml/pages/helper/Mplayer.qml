@@ -1,6 +1,6 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-import QtMultimedia 5.0
+import QtMultimedia 5.6
 
 MediaPlayer {
     id: mediaPlayer
@@ -8,15 +8,9 @@ MediaPlayer {
     property QtObject dataContainer
     property string streamTitle
     property string streamUrl
-    property QtObject videoPoster
-    property QtObject onlyMusic
-    property QtObject progressCircle
     property bool isPlaylist
-    property bool isNewSource
-    property bool isLiveStream
-    property QtObject mprisPlayer
-    property QtObject errorDetail
-    property QtObject errorBox
+    property bool isNewSource: true
+    property bool isLiveStream: false
     property bool isPlaying: playbackState === MediaPlayer.PlayingState ? true : false
     property bool isMinMode
 
@@ -123,19 +117,17 @@ MediaPlayer {
         }
     }
     onBufferProgressChanged: {
-        if (!isMinMode) {
-            if (!isLiveStream) {
-                if (bufferProgress == 1.0 && isNewSource) {
-                    isNewSource = false
-                    play()
-                } else if(isNewSource) pause()
-            }
-            else {
-                if (bufferProgress == 0.7 && isNewSource) { // 7% filling for live streams
-                    isNewSource = false
-                    play()
-                } else if(isNewSource) pause()
-            }
+        if (!isLiveStream) {
+            if (bufferProgress == 1.0 && isNewSource) {
+                isNewSource = false
+                play()
+            } else if(isNewSource) pause()
+        }
+        else {
+            if (bufferProgress == 0.7 && isNewSource) { // 7% filling for live streams
+                isNewSource = false
+                play()
+            } else if(isNewSource) pause()
         }
     }
 }

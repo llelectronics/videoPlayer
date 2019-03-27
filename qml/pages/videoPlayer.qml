@@ -51,6 +51,7 @@ Page {
     property bool subtitleSolid: dataContainer.subtitleSolid
     property bool isPlaylist: dataContainer.isPlaylist
     property bool isNewSource: false
+    property bool isDash: dataContainer.isDash
     property string onlyMusicState: dataContainer.onlyMusicState
     property bool isLiveStream: dataContainer.isLiveStream
 
@@ -511,6 +512,7 @@ Page {
                     player.source = source;
                     console.debug("Starting playback")
                     player.play();
+                    if (isDash) minPlayer.play();
                     hideControls();
                     if (enableSubtitles) {
                         subTitleLoader.item.getSubtitles(subtitleUrl);
@@ -560,6 +562,7 @@ Page {
                     progressCircle.visible = false;
                     if (! mediaPlayer.seekable) mediaPlayer.stop();
                     onlyMusic.playing = false
+                    if (isDash) minPlayer.pause();
                 }
 
                 function next() {
@@ -704,8 +707,8 @@ Page {
                 dataContainer: videoPlayerPage
                 streamTitle: streamTitle
                 streamUrl: streamUrl
-                onSourceChanged: minPlayer.source = source
-                onPositionChanged: minPlayer.seek(position)
+                onSourceChanged: if (!isDash)  minPlayer.source = source
+                onPositionChanged: if (!isDash) minPlayer.seek(position)
             }
 
             visible: mediaPlayer.status >= MediaPlayer.Loaded && mediaPlayer.status <= MediaPlayer.EndOfMedia

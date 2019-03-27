@@ -352,6 +352,7 @@ ApplicationWindow
     Mplayer {
         id: minPlayer
         isMinMode: true
+        audioRole: MediaPlayer.MusicRole
         onStatusChanged: {
             if (minPlayer.status === MediaPlayer.EndOfMedia) {
                 if (isPlaylist && modelPlaylist.isNext()) {

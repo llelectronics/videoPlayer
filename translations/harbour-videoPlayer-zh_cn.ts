@@ -327,75 +327,75 @@
 <context>
     <name>FirstPage</name>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="209"/>
+        <location filename="../qml/pages/FirstPage.qml" line="210"/>
         <source>Open Video</source>
         <extracomment>For choosing video to open from the device</extracomment>
         <translation>打开视频</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="347"/>
+        <location filename="../qml/pages/FirstPage.qml" line="348"/>
         <source>No History</source>
         <translation>无历史</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="248"/>
-        <location filename="../qml/pages/FirstPage.qml" line="382"/>
+        <location filename="../qml/pages/FirstPage.qml" line="249"/>
+        <location filename="../qml/pages/FirstPage.qml" line="383"/>
         <source>History</source>
         <translation>历史</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="254"/>
+        <location filename="../qml/pages/FirstPage.qml" line="255"/>
         <source>Bookmarks</source>
         <translation>收藏</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="260"/>
+        <location filename="../qml/pages/FirstPage.qml" line="261"/>
         <source>Search on Youtube</source>
         <translation>在Youtube搜索</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="266"/>
+        <location filename="../qml/pages/FirstPage.qml" line="267"/>
         <source>Browse Files</source>
         <translation>浏览文件</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="272"/>
+        <location filename="../qml/pages/FirstPage.qml" line="273"/>
         <source>Enter URL</source>
         <translation>Introducir URL</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="278"/>
+        <location filename="../qml/pages/FirstPage.qml" line="279"/>
         <source>Playlists</source>
         <translation>播放列表</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="360"/>
+        <location filename="../qml/pages/FirstPage.qml" line="361"/>
         <source>About </source>
         <translation>关于</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="364"/>
+        <location filename="../qml/pages/FirstPage.qml" line="365"/>
         <source>Settings</source>
         <translation>设置</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="383"/>
-        <location filename="../qml/pages/FirstPage.qml" line="396"/>
+        <location filename="../qml/pages/FirstPage.qml" line="384"/>
+        <location filename="../qml/pages/FirstPage.qml" line="397"/>
         <source>Open</source>
         <translation>打开</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="388"/>
+        <location filename="../qml/pages/FirstPage.qml" line="389"/>
         <source>Type in URL here</source>
         <translation>在此输入链接</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="389"/>
+        <location filename="../qml/pages/FirstPage.qml" line="390"/>
         <source>URL to media</source>
         <translation>到媒体的链接</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="465"/>
+        <location filename="../qml/pages/FirstPage.qml" line="466"/>
         <source>Youtube-Dl updated.</source>
         <translation>Youtube-Dl 已更新</translation>
     </message>
@@ -403,7 +403,7 @@
 <context>
     <name>Mplayer</name>
     <message>
-        <location filename="../qml/pages/helper/Mplayer.qml" line="114"/>
+        <location filename="../qml/pages/helper/Mplayer.qml" line="108"/>
         <source>
 The video cannot be played due to a problem allocating resources.
             On Youtube Videos please make sure to be logged in. Some videos might be geoblocked or require you to be logged into youtube.</source>
@@ -412,28 +412,28 @@ The video cannot be played due to a problem allocating resources.
            对 YouTube视频, 请确保已登录。有些视频可能会锁定地理位置或要求您登录到 youtube。</translation>
     </message>
     <message>
-        <location filename="../qml/pages/helper/Mplayer.qml" line="116"/>
+        <location filename="../qml/pages/helper/Mplayer.qml" line="110"/>
         <source>
 The audio and or video format is not supported.</source>
         <translation>
 不支持音频或视频格式</translation>
     </message>
     <message>
-        <location filename="../qml/pages/helper/Mplayer.qml" line="117"/>
+        <location filename="../qml/pages/helper/Mplayer.qml" line="111"/>
         <source>
 The video cannot be played due to network issues.</source>
         <translation>
 因网络问题无法播放此视频</translation>
     </message>
     <message>
-        <location filename="../qml/pages/helper/Mplayer.qml" line="118"/>
+        <location filename="../qml/pages/helper/Mplayer.qml" line="112"/>
         <source>
 The video cannot be played due to insufficient permissions.</source>
         <translation>
 因权限不足, 无法播放视频</translation>
     </message>
     <message>
-        <location filename="../qml/pages/helper/Mplayer.qml" line="119"/>
+        <location filename="../qml/pages/helper/Mplayer.qml" line="113"/>
         <source>
 The video cannot be played because the media service could not be instantiated.</source>
         <translation>
@@ -907,7 +907,7 @@ The video cannot be played because the media service could not be instantiated.<
 <context>
     <name>harbour-videoPlayer</name>
     <message>
-        <location filename="../qml/harbour-videoPlayer.qml" line="478"/>
+        <location filename="../qml/harbour-videoPlayer.qml" line="479"/>
         <source>Dismiss</source>
         <translation>摒弃</translation>
     </message>
@@ -915,37 +915,37 @@ The video cannot be played because the media service could not be instantiated.<
 <context>
     <name>videoPlayer</name>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="222"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="223"/>
         <source>Load with ytdl</source>
         <translation>用ytdl加载</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="243"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="244"/>
         <source>Download Youtube Video</source>
-        <translation>下载Youtube视频</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="261"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="262"/>
         <source>Download</source>
         <translation>下载</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="277"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="278"/>
         <source>Add to bookmarks</source>
         <translation>添加到收藏</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="293"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="294"/>
         <source>Load Subtitle</source>
-        <translation>载入字幕</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="297"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="298"/>
         <source>Play from last known position</source>
-        <translation>从上次已知位置播放</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="464"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="465"/>
         <source>Dismiss</source>
         <translation>摒弃</translation>
     </message>
@@ -953,7 +953,7 @@ The video cannot be played because the media service could not be instantiated.<
 <context>
     <name>ytQualityChooser</name>
     <message>
-        <location filename="../qml/pages/ytQualityChooser.qml" line="55"/>
+        <location filename="../qml/pages/ytQualityChooser.qml" line="57"/>
         <source>Choose Quality</source>
         <translation>选择质量</translation>
     </message>
