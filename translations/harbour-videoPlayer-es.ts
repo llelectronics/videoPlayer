@@ -920,37 +920,37 @@ No se puede reproducir vídeo porque no se pudo instanciar el servicio multimedi
 <context>
     <name>videoPlayer</name>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="223"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="224"/>
         <source>Load with ytdl</source>
         <translation>Cargar con ytdl</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="244"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="245"/>
         <source>Download Youtube Video</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="262"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="263"/>
         <source>Download</source>
         <translation>Descargar</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="278"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="279"/>
         <source>Add to bookmarks</source>
         <translation>Añadir a marcadores</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="294"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="295"/>
         <source>Load Subtitle</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="298"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="299"/>
         <source>Play from last known position</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="465"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="466"/>
         <source>Dismiss</source>
         <translation>Descartar</translation>
     </message>

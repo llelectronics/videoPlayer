@@ -110,17 +110,19 @@ MediaPlayer {
         }
     }
     onBufferProgressChanged: {
-        if (!isLiveStream) {
-            if (bufferProgress == 1.0 && isNewSource) {
-                isNewSource = false
-                play()
-            } else if(isNewSource) pause()
-        }
-        else {
-            if (bufferProgress == 0.7 && isNewSource) { // 7% filling for live streams
-                isNewSource = false
-                play()
-            } else if(isNewSource) pause()
+        if (!isMinMode) {
+            if (!isLiveStream) {
+                if (bufferProgress == 1.0 && isNewSource) {
+                    isNewSource = false
+                    play()
+                } else if(isNewSource) pause()
+            }
+            else {
+                if (bufferProgress == 0.7 && isNewSource) { // 7% filling for live streams
+                    isNewSource = false
+                    play()
+                } else if(isNewSource) pause()
+            }
         }
     }
 }

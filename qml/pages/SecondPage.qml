@@ -225,30 +225,30 @@ Page {
                 }
             }
 
-            onNavigationRequested: {
-                //console.debug("[SecondPage.qml] Request navigation to " + request.url)
-                if (YT.checkYoutube(request.url.toString()) === true && ytDetect === true) {
-                    if (YT.getYtID(request.url.toString()) !== "") {
-                        //console.debug("[SecondPage.qml] Youtube Link detected")
-                        request.action = WebView.IgnoreRequest;
-                        dataContainer.isYtUrl = true;
-                        //var yturl = YT.getYoutubeVid(request.url.toString());
-                        //YT.getYoutubeTitle(url.toString());
-                        if (dataContainer != null) {
-                            dataContainer.streamUrl = request.url;
-                            dataContainer.originalUrl = request.url
-                            dataContainer.isPlaylist = false;
-                            dataContainer.isLiveStream = false;
-                            dataContainer.loadPlayer();
-                        }
-                        ytView.reload(); // WTF why is this working with IgnoreRequest
+//            onNavigationRequested: {
+//                //console.debug("[SecondPage.qml] Request navigation to " + request.url)
+//                if (YT.checkYoutube(request.url.toString()) === true && ytDetect === true) {
+//                    if (YT.getYtID(request.url.toString()) !== "") {
+//                        //console.debug("[SecondPage.qml] Youtube Link detected")
+//                        request.action = WebView.IgnoreRequest;
+//                        dataContainer.isYtUrl = true;
+//                        //var yturl = YT.getYoutubeVid(request.url.toString());
+//                        //YT.getYoutubeTitle(url.toString());
+//                        if (dataContainer != null) {
+//                            dataContainer.streamUrl = request.url;
+//                            dataContainer.originalUrl = request.url
+//                            dataContainer.isPlaylist = false;
+//                            dataContainer.isLiveStream = false;
+//                            dataContainer.loadPlayer();
+//                        }
+//                        ytView.reload(); // WTF why is this working with IgnoreRequest
 
-                    } else { request.action = WebView.AcceptRequest; }
-                }
-                else {
-                    request.action = WebView.AcceptRequest;
-                }
-            }
+//                    } else { request.action = WebView.AcceptRequest; }
+//                }
+//                else {
+//                    request.action = WebView.AcceptRequest;
+//                }
+//            }
 
             VerticalScrollDecorator {}
 

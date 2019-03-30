@@ -83,6 +83,7 @@ Page {
             //console.debug("[videoPlayer.qml] Destruction going on so write : " + mediaPlayer.source + " with timecode: " + mediaPlayer.position + " to db")
             DB.addPosition(sourcePath,mediaPlayer.position);
         }
+        minPlayer.source = mediaPlayer.source
         minPlayer.seek(mediaPlayer.position)
         minPlayer.streamTitle = streamTitle
         minPlayer.isPlaylist = isPlaylist
@@ -707,8 +708,6 @@ Page {
                 dataContainer: videoPlayerPage
                 streamTitle: streamTitle
                 streamUrl: streamUrl
-                onSourceChanged: if (!isDash)  minPlayer.source = source
-                onPositionChanged: if (!isDash) minPlayer.seek(position)
                 onPlaybackStateChanged: {
                     if (playbackState == MediaPlayer.PlayingState) {
                         if (onlyMusic.opacity == 1.0) onlyMusic.playing = true
