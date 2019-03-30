@@ -709,6 +709,14 @@ Page {
                 streamUrl: streamUrl
                 onSourceChanged: if (!isDash)  minPlayer.source = source
                 onPositionChanged: if (!isDash) minPlayer.seek(position)
+                onPlaybackStateChanged: {
+                    if (playbackState == MediaPlayer.PlayingState) {
+                        if (onlyMusic.opacity == 1.0) onlyMusic.playing = true
+                    }
+                    else  {
+                        if (onlyMusic.opacity == 1.0) onlyMusic.playing = false
+                    }
+                }
             }
 
             visible: mediaPlayer.status >= MediaPlayer.Loaded && mediaPlayer.status <= MediaPlayer.EndOfMedia

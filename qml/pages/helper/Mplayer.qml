@@ -78,14 +78,7 @@ MediaPlayer {
         }
     }
     onPlaybackStateChanged: {
-        if (onlyMusic != undefined) {
-            if (playbackState == MediaPlayer.PlayingState) {
-                if (onlyMusic.opacity == 1.0) onlyMusic.playing = true
-            }
-            else  {
-                if (onlyMusic.opacity == 1.0) onlyMusic.playing = false
-            }
-        }
+        console.debug("Playback changed to: " + playbackState)
     }
 
     onError: {
