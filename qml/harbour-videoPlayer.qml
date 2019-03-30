@@ -361,7 +361,6 @@ ApplicationWindow
                     minPlayer.play()
                 }
             }
-            streamTitle = findBaseName(source.toString())
         }
         onSourceChanged: {
             if (isPlaylist) curPlaylistIndex = modelPlaylist.getPosition(source)

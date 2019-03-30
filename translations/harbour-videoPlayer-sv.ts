@@ -912,7 +912,7 @@ Videon kan inte spelas upp, eftersom medietjänsten inte kunde startas.</transla
 <context>
     <name>harbour-videoPlayer</name>
     <message>
-        <location filename="../qml/harbour-videoPlayer.qml" line="483"/>
+        <location filename="../qml/harbour-videoPlayer.qml" line="482"/>
         <source>Dismiss</source>
         <translation>Avfärda</translation>
     </message>
