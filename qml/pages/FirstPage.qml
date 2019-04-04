@@ -368,6 +368,7 @@ Page {
                 MenuItem {
                     text: qsTr("Show Player")
                     onClicked: minPlayerPanel.show()
+                    visible: minPlayer.source != ""
                 }
             }
 

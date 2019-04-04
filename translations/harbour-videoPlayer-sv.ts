@@ -408,7 +408,7 @@
 <context>
     <name>Mplayer</name>
     <message>
-        <location filename="../qml/pages/helper/Mplayer.qml" line="101"/>
+        <location filename="../qml/pages/helper/Mplayer.qml" line="98"/>
         <source>
 The video cannot be played due to a problem allocating resources.
             On Youtube Videos please make sure to be logged in. Some videos might be geoblocked or require you to be logged into youtube.</source>
@@ -417,28 +417,28 @@ Det går inte att spela upp videon på grund av problem med att allokera resurse
             Se till att vara inloggad på Youtube-videor. Vissa videoklipp kan vara geoblockerade eller kräva att du är inloggad på YouTube.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/helper/Mplayer.qml" line="103"/>
+        <location filename="../qml/pages/helper/Mplayer.qml" line="100"/>
         <source>
 The audio and or video format is not supported.</source>
         <translation>
 Ljud- eller videoformatet stöds inte.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/helper/Mplayer.qml" line="104"/>
+        <location filename="../qml/pages/helper/Mplayer.qml" line="101"/>
         <source>
 The video cannot be played due to network issues.</source>
         <translation>
 Videon kan inte spelas upp, på grund av nätverksproblem.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/helper/Mplayer.qml" line="105"/>
+        <location filename="../qml/pages/helper/Mplayer.qml" line="102"/>
         <source>
 The video cannot be played due to insufficient permissions.</source>
         <translation>
 Videon kan inte spelas upp, på grund av otillräckliga rättigheter.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/helper/Mplayer.qml" line="106"/>
+        <location filename="../qml/pages/helper/Mplayer.qml" line="103"/>
         <source>
 The video cannot be played because the media service could not be instantiated.</source>
         <translation>

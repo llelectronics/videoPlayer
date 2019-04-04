@@ -408,32 +408,32 @@
 <context>
     <name>Mplayer</name>
     <message>
-        <location filename="../qml/pages/helper/Mplayer.qml" line="101"/>
+        <location filename="../qml/pages/helper/Mplayer.qml" line="98"/>
         <source>
 The video cannot be played due to a problem allocating resources.
             On Youtube Videos please make sure to be logged in. Some videos might be geoblocked or require you to be logged into youtube.</source>
         <translation>Deze video can niet afgespeeld worden omdat geen goede toekenning kan plaatsvinden.  Let op je ingelogd bent voor Youtube video.  Sommige videos kunnen ook een geoblock hebben.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/helper/Mplayer.qml" line="103"/>
+        <location filename="../qml/pages/helper/Mplayer.qml" line="100"/>
         <source>
 The audio and or video format is not supported.</source>
         <translation>Het audio of video type wordt niet ondersteund.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/helper/Mplayer.qml" line="104"/>
+        <location filename="../qml/pages/helper/Mplayer.qml" line="101"/>
         <source>
 The video cannot be played due to network issues.</source>
         <translation>De video kan niet afgespeeld worden vanwege een probleem met de verbinding.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/helper/Mplayer.qml" line="105"/>
+        <location filename="../qml/pages/helper/Mplayer.qml" line="102"/>
         <source>
 The video cannot be played due to insufficient permissions.</source>
         <translation>De video kan niet afgespeeld worden vanwege ontoereikende toestemmingen.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/helper/Mplayer.qml" line="106"/>
+        <location filename="../qml/pages/helper/Mplayer.qml" line="103"/>
         <source>
 The video cannot be played because the media service could not be instantiated.</source>
         <translation>The kan niet afgespeeld worden omdat de media diensten niet gestart kunnen worden.</translation>
