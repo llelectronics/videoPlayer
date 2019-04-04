@@ -1,5 +1,7 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
+import QtMultimedia 5.6
+import org.nemomobile.mpris 1.0
 
 DockedPanel {
     id: minPlayerPanel
@@ -9,6 +11,18 @@ DockedPanel {
     height: Theme.itemSizeExtraLarge + Theme.paddingLarge
 
     dock: Dock.Bottom
+
+    function prev() {
+        minPlayer.stop();
+        minPlayer.source = modelPlaylist.prev();
+        minPlayer.play();
+    }
+
+    function next() {
+        minPlayer.stop();
+        minPlayer.source = modelPlaylist.next();
+        minPlayer.play();
+    }
 
     Rectangle {
         anchors.fill: parent
@@ -39,9 +53,7 @@ DockedPanel {
             icon.source: "image://theme/icon-m-previous"
             visible: minPlayer.isPlaylist && modelPlaylist.isPrev();
             onClicked: {
-                minPlayer.stop();
-                minPlayer.source = modelPlaylist.prev();
-                minPlayer.play();
+                prev();
             }
         }
         IconButton {
@@ -63,9 +75,7 @@ DockedPanel {
             icon.source: "image://theme/icon-m-next"
             visible: minPlayer.isPlaylist && modelPlaylist.isNext();
             onClicked: {
-                minPlayer.stop();
-                minPlayer.source = modelPlaylist.next();
-                minPlayer.play();
+                next();
             }
         }
     }

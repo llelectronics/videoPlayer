@@ -71,9 +71,6 @@ Page {
             showNavigationIndicator = false;
             mprisPlayer.title = streamTitle;
         }
-        mprisPlayer.canGoNext = mainWindow.modelPlaylist.isNext() && isPlaylist
-        mprisPlayer.canGoPrevious = mainWindow.modelPlaylist.isPrev() && isPlaylist
-        mprisPlayer.title = dataContainer.streamUrl
     }
 
     Component.onDestruction: {
@@ -148,6 +145,7 @@ Page {
             DB.addHistory(streamUrl,streamTitle);
             // Don't forgt to write it to the List aswell
             mainWindow.firstPage.add2History(streamUrl,streamTitle);
+            mprisPlayer.title = streamTitle
         }
     }
 
@@ -577,6 +575,7 @@ Page {
                     videoPauseTrigger();
                     mediaPlayer.play();
                     hideControls();
+                    mprisPlayer.title = streamTitle
                 }
 
                 function prev() {
@@ -590,6 +589,7 @@ Page {
                     videoPauseTrigger();
                     mediaPlayer.play();
                     hideControls();
+                    mprisPlayer.title = streamTitle
                 }
 
                 onClicked: {
@@ -711,9 +711,11 @@ Page {
                 onPlaybackStateChanged: {
                     if (playbackState == MediaPlayer.PlayingState) {
                         if (onlyMusic.opacity == 1.0) onlyMusic.playing = true
+                        mprisPlayer.playbackStatus = Mpris.Playing
                     }
                     else  {
                         if (onlyMusic.opacity == 1.0) onlyMusic.playing = false
+                        mprisPlayer.playbackStatus = Mpris.Paused
                     }
                 }
             }
@@ -869,49 +871,8 @@ Page {
         }
     }
 
-    MprisPlayer {
-        id: mprisPlayer
-
-        serviceName: "llsVplayer"
-
-        property string title: streamTitle
-
-        onTitleChanged: {
-            if (title != "") {
-                console.debug("Title changed to: " + title)
-                var metadata = mprisPlayer.metadata
-                metadata[Mpris.metadataToString(Mpris.Title)] = title
-                mprisPlayer.metadata = metadata
-            }
-        }
-
-        // Mpris2 Root Interface
-        identity: "LLs Video Player"
-
-        // Mpris2 Player Interface
-        canControl: true
-
-        canGoNext: true
-        canGoPrevious: true
-        canPause: true
-        canPlay: true
-        canSeek: true
-
-        playbackStatus: {
-            if (mediaPlayer.playbackState == MediaPlayer.PlayingState) return Mpris.Playing
-            else if (mediaPlayer.playbackState == MediaPlayer.PausedState) return Mpris.Paused
-            else return Mpris.Stopped
-        }
-        onPlaybackStatusChanged: {
-            mprisPlayer.canGoNext = mainWindow.modelPlaylist.isNext() && isPlaylist
-            mprisPlayer.canGoPrevious = mainWindow.modelPlaylist.isPrev() && isPlaylist
-            title = streamTitle
-        }
-
-        loopStatus: Mpris.None
-        shuffle: false
-        volume: 1
-
+    Connections {
+        target: mprisPlayer
         onPauseRequested: {
             videoPoster.pause();
         }

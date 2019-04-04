@@ -58,6 +58,7 @@ ApplicationWindow
         if (Theme.colorScheme === Theme.LightOnDark) return false
         else return true
     }
+    property alias mprisPlayer: mprisPlayer
 
     property string version: "2.0"
     property string appname: "LLs Video Player"
@@ -282,7 +283,7 @@ ApplicationWindow
         property string name
 
         function isNext() {
-            if (current != count-1 || count > 0) return true
+            if (current != count-1) return true
             else return false
         }
 
@@ -371,6 +372,9 @@ ApplicationWindow
         id: minPlayerPanel
     }
 
+    MprisConnector {
+        id: mprisPlayer
+    }
 
     InfoBanner {
         id: infoBanner
