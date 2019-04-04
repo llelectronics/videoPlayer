@@ -77,9 +77,6 @@ MediaPlayer {
             }
         }
     }
-    onPlaybackStateChanged: {
-        console.debug("Playback changed to: " + playbackState)
-    }
 
     onError: {
         if (!isMinMode) {

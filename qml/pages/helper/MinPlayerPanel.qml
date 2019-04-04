@@ -59,7 +59,7 @@ DockedPanel {
         IconButton {
             icon.source: minPlayer.isPlaying ? "image://theme/icon-m-pause" : "image://theme/icon-m-play"
             onClicked: {
-                console.debug("isPlayling: " + minPlayer.isPlaying)
+                //console.debug("isPlayling: " + minPlayer.isPlaying)
                 if (minPlayer.isPlaying)
                 {
                     //console.debug("Pause")
