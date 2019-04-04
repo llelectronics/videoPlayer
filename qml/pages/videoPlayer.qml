@@ -62,7 +62,10 @@ Page {
 
 
     Component.onCompleted: {
-        if (minPlayerLoader.status == Loader.Ready) minPlayerLoader.item.hide()
+        if (minPlayerLoader.status == Loader.Ready) {
+            minPlayerLoader.item.hide();
+            minPlayer.pause();
+        }
         if (autoplay) {
             //console.debug("[videoPlayer.qml] Autoplay activated for url: " + videoPoster.source);
             videoPoster.play();
