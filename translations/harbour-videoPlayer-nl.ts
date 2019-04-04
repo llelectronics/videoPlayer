@@ -906,7 +906,7 @@ The video cannot be played because the media service could not be instantiated.<
 <context>
     <name>harbour-videoPlayer</name>
     <message>
-        <location filename="../qml/harbour-videoPlayer.qml" line="427"/>
+        <location filename="../qml/harbour-videoPlayer.qml" line="432"/>
         <source>Dismiss</source>
         <translation>Negeer</translation>
     </message>
@@ -914,37 +914,37 @@ The video cannot be played because the media service could not be instantiated.<
 <context>
     <name>videoPlayer</name>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="223"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="229"/>
         <source>Load with ytdl</source>
         <translation>Laad met ytdl</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="244"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="250"/>
         <source>Download Youtube Video</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="262"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="268"/>
         <source>Download</source>
         <translation>Download</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="278"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="284"/>
         <source>Add to bookmarks</source>
         <translation>Aan bladwijzer toevoegen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="294"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="300"/>
         <source>Load Subtitle</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="298"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="304"/>
         <source>Play from last known position</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="465"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="471"/>
         <source>Dismiss</source>
         <translation>Negeer</translation>
     </message>

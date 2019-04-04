@@ -73,6 +73,7 @@ Page {
             pulley.visible = false;
             showNavigationIndicator = false;
             mprisPlayer.title = streamTitle;
+            minPlayerLoader.active = false;
         }
     }
 
@@ -89,6 +90,8 @@ Page {
         minPlayer.isPlaylist = isPlaylist
         if (mediaPlayer.playbackState === MediaPlayer.PlayingState) minPlayer.play();
         mediaPlayer.pause();
+        mprisPlayer.hide();
+        minPlayerLoader.active = true;
         minPlayerLoader.sourceComponent = minPlayerComponent
         minPlayerLoader.item.show()
 //        mediaPlayer.stop();

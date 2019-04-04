@@ -8,6 +8,15 @@ MprisPlayer {
 
     property string title
 
+    function hide() {
+        canControl = false;
+        title = "";
+    }
+
+    function show() {
+        canControl = true;
+    }
+
     onTitleChanged: {
         if (title != "") {
             console.debug("Title changed to: " + title)

@@ -38,6 +38,7 @@ import "pages/helper/m3u.js" as M3U
 import harbour.videoplayer.Videoplayer 1.0
 import "pages/helper"
 import QtMultimedia 5.0
+import org.nemomobile.mpris 1.0
 
 ApplicationWindow
 {
@@ -365,6 +366,10 @@ ApplicationWindow
         }
         onSourceChanged: {
             if (isPlaylist) curPlaylistIndex = modelPlaylist.getPosition(source)
+        }
+        onPlaybackStateChanged: {
+            if (playbackState == MediaPlayer.PlayingState) mprisPlayer.playbackStatus = Mpris.Playing
+            else mprisPlayer.playbackStatus = Mpris.Paused
         }
     }
 
