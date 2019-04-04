@@ -367,7 +367,11 @@ Page {
                 }
                 MenuItem {
                     text: qsTr("Show Player")
-                    onClicked: minPlayerPanel.show()
+                    onClicked: {
+                        minPlayerLoader.active = true;
+                        minPlayerLoader.sourceComponent = minPlayerComponent
+                        minPlayerLoader.item.show()
+                    }
                     visible: minPlayer.source != ""
                 }
             }
