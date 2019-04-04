@@ -406,46 +406,6 @@
     </message>
 </context>
 <context>
-    <name>Mplayer</name>
-    <message>
-        <location filename="../qml/pages/helper/Mplayer.qml" line="98"/>
-        <source>
-The video cannot be played due to a problem allocating resources.
-            On Youtube Videos please make sure to be logged in. Some videos might be geoblocked or require you to be logged into youtube.</source>
-        <translation>
-由于分配资源时出现问题, 无法播放视频。
-           对 YouTube视频, 请确保已登录。有些视频可能会锁定地理位置或要求您登录到 youtube。</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/helper/Mplayer.qml" line="100"/>
-        <source>
-The audio and or video format is not supported.</source>
-        <translation>
-不支持音频或视频格式</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/helper/Mplayer.qml" line="101"/>
-        <source>
-The video cannot be played due to network issues.</source>
-        <translation>
-因网络问题无法播放此视频</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/helper/Mplayer.qml" line="102"/>
-        <source>
-The video cannot be played due to insufficient permissions.</source>
-        <translation>
-因权限不足, 无法播放视频</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/helper/Mplayer.qml" line="103"/>
-        <source>
-The video cannot be played because the media service could not be instantiated.</source>
-        <translation>
-因无法实例化媒体服务，无法播放此视频</translation>
-    </message>
-</context>
-<context>
     <name>OpenDialog</name>
     <message>
         <location filename="../qml/pages/fileman/OpenDialog.qml" line="159"/>
@@ -953,6 +913,41 @@ The video cannot be played because the media service could not be instantiated.<
         <location filename="../qml/pages/videoPlayer.qml" line="471"/>
         <source>Dismiss</source>
         <translation>摒弃</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/videoPlayer.qml" line="774"/>
+        <source>
+The video cannot be played due to a problem allocating resources.
+                        On Youtube Videos please make sure to be logged in. Some videos might be geoblocked or require you to be logged into youtube.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/videoPlayer.qml" line="776"/>
+        <source>
+The audio and or video format is not supported.</source>
+        <translation type="unfinished">
+不支持音频或视频格式</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/videoPlayer.qml" line="777"/>
+        <source>
+The video cannot be played due to network issues.</source>
+        <translation type="unfinished">
+因网络问题无法播放此视频</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/videoPlayer.qml" line="778"/>
+        <source>
+The video cannot be played due to insufficient permissions.</source>
+        <translation type="unfinished">
+因权限不足, 无法播放视频</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/videoPlayer.qml" line="779"/>
+        <source>
+The video cannot be played because the media service could not be instantiated.</source>
+        <translation type="unfinished">
+因无法实例化媒体服务，无法播放此视频</translation>
     </message>
 </context>
 <context>

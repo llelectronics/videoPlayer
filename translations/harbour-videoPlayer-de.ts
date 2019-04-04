@@ -406,42 +406,6 @@
     </message>
 </context>
 <context>
-    <name>Mplayer</name>
-    <message>
-        <location filename="../qml/pages/helper/Mplayer.qml" line="98"/>
-        <source>
-The video cannot be played due to a problem allocating resources.
-            On Youtube Videos please make sure to be logged in. Some videos might be geoblocked or require you to be logged into youtube.</source>
-        <translation>
-Dieses Video konnte wegen fehlender Zuordnung von Ressourcen nicht abgespielt werden.
-        Bei Youtube Videos stellen Sie sicher, dass sie angemeldet sind. Einige der Videos könnten regional gesperrt sein.</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/helper/Mplayer.qml" line="100"/>
-        <source>
-The audio and or video format is not supported.</source>
-        <translation>Das Audio oder Videoformat wird nicht unterstützt.</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/helper/Mplayer.qml" line="101"/>
-        <source>
-The video cannot be played due to network issues.</source>
-        <translation>Dieses Video kann wegen Netzwerkproblemen nicht abgespielt werden.</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/helper/Mplayer.qml" line="102"/>
-        <source>
-The video cannot be played due to insufficient permissions.</source>
-        <translation>Dieses Video kann wegen unzureichenden Berechtigungen nicht abgespielt werden.</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/helper/Mplayer.qml" line="103"/>
-        <source>
-The video cannot be played because the media service could not be instantiated.</source>
-        <translation>Dieses Video konnte wegen eines nicht instanzierten Mediendienstes nicht abgespielt werden.</translation>
-    </message>
-</context>
-<context>
     <name>OpenDialog</name>
     <message>
         <location filename="../qml/pages/fileman/OpenDialog.qml" line="159"/>
@@ -949,6 +913,37 @@ The video cannot be played because the media service could not be instantiated.<
         <location filename="../qml/pages/videoPlayer.qml" line="471"/>
         <source>Dismiss</source>
         <translation>Ausblenden</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/videoPlayer.qml" line="774"/>
+        <source>
+The video cannot be played due to a problem allocating resources.
+                        On Youtube Videos please make sure to be logged in. Some videos might be geoblocked or require you to be logged into youtube.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/videoPlayer.qml" line="776"/>
+        <source>
+The audio and or video format is not supported.</source>
+        <translation type="unfinished">Das Audio oder Videoformat wird nicht unterstützt.</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/videoPlayer.qml" line="777"/>
+        <source>
+The video cannot be played due to network issues.</source>
+        <translation type="unfinished">Dieses Video kann wegen Netzwerkproblemen nicht abgespielt werden.</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/videoPlayer.qml" line="778"/>
+        <source>
+The video cannot be played due to insufficient permissions.</source>
+        <translation type="unfinished">Dieses Video kann wegen unzureichenden Berechtigungen nicht abgespielt werden.</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/videoPlayer.qml" line="779"/>
+        <source>
+The video cannot be played because the media service could not be instantiated.</source>
+        <translation type="unfinished">Dieses Video konnte wegen eines nicht instanzierten Mediendienstes nicht abgespielt werden.</translation>
     </message>
 </context>
 <context>
