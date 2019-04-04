@@ -339,7 +339,7 @@
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="249"/>
-        <location filename="../qml/pages/FirstPage.qml" line="387"/>
+        <location filename="../qml/pages/FirstPage.qml" line="388"/>
         <source>History</source>
         <translation>Historial</translation>
     </message>
@@ -384,23 +384,23 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="388"/>
-        <location filename="../qml/pages/FirstPage.qml" line="401"/>
+        <location filename="../qml/pages/FirstPage.qml" line="389"/>
+        <location filename="../qml/pages/FirstPage.qml" line="402"/>
         <source>Open</source>
         <translation>Abrir</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="393"/>
+        <location filename="../qml/pages/FirstPage.qml" line="394"/>
         <source>Type in URL here</source>
         <translation>Escribe aquí la URL</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="394"/>
+        <location filename="../qml/pages/FirstPage.qml" line="395"/>
         <source>URL to media</source>
         <translation>URL a multimedia</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="470"/>
+        <location filename="../qml/pages/FirstPage.qml" line="471"/>
         <source>Youtube-Dl updated.</source>
         <translation>Youtube-Dl actualizada.</translation>
     </message>

@@ -37,7 +37,7 @@ DockedPanel {
     Label {
         id: mediaTitle
         anchors.top: parent.top
-        anchors.topMargin: Theme.paddingMedium
+        anchors.topMargin: Theme.paddingSmall
         anchors.horizontalCenter: parent.horizontalCenter
         truncationMode: TruncationMode.Fade
         text: minPlayer.streamTitle
@@ -45,10 +45,28 @@ DockedPanel {
         horizontalAlignment: (contentWidth > width) ? Text.AlignLeft : Text.AlignHCenter
     }
 
+    Label {
+        id: playTime
+        anchors.top: mediaTitle.bottom
+        anchors.topMargin: Theme.paddingSmall / 6
+        property string pos: {
+            if ((minPlayer.position / 1000) > 3599) Format.formatDuration(minPlayer.position / 1000, Formatter.DurationLong)
+            else return Format.formatDuration(minPlayer.position / 1000, Formatter.DurationShort)
+        }
+        property string dur: {
+            if ((minPlayer.duration / 1000) > 3599) Format.formatDuration(minPlayer.duration / 1000, Formatter.DurationLong)
+            else return Format.formatDuration(minPlayer.duration / 1000, Formatter.DurationShort)
+        }
+        text: pos + " / " + dur;
+        width: parent.width
+        horizontalAlignment: Text.AlignHCenter
+        font.pixelSize: Theme.fontSizeExtraSmall
+    }
+
     Row {
         anchors.horizontalCenter: parent.horizontalCenter
-        anchors.top: mediaTitle.bottom
-        anchors.topMargin: Theme.paddingMedium
+        anchors.top: playTime.bottom
+        anchors.topMargin: Theme.paddingSmall / 4
         IconButton {
             icon.source: "image://theme/icon-m-previous"
             visible: minPlayer.isPlaylist && modelPlaylist.isPrev();
