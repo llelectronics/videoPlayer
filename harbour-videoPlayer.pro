@@ -74,7 +74,8 @@ DISTFILES += \
     translations/harbour-videoPlayer-zh_cn.ts \
     translations/harbour-videoPlayer-nl.ts \
     qml/pages/helper/Mplayer.qml \
-    qml/pages/helper/SwipeArea.qml
+    qml/pages/helper/SwipeArea.qml \
+    qml/pages/helper/MinPlayerPanel.qml
 
 # to disable building translations every time, comment out the
 # following CONFIG line

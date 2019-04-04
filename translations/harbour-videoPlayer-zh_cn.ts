@@ -912,7 +912,7 @@ The video cannot be played because the media service could not be instantiated.<
 <context>
     <name>harbour-videoPlayer</name>
     <message>
-        <location filename="../qml/harbour-videoPlayer.qml" line="482"/>
+        <location filename="../qml/harbour-videoPlayer.qml" line="417"/>
         <source>Dismiss</source>
         <translation>摒弃</translation>
     </message>

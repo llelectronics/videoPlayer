@@ -912,7 +912,7 @@ No se puede reproducir vídeo porque no se pudo instanciar el servicio multimedi
 <context>
     <name>harbour-videoPlayer</name>
     <message>
-        <location filename="../qml/harbour-videoPlayer.qml" line="482"/>
+        <location filename="../qml/harbour-videoPlayer.qml" line="417"/>
         <source>Dismiss</source>
         <translation>Descartar</translation>
     </message>

@@ -282,7 +282,7 @@ ApplicationWindow
         property string name
 
         function isNext() {
-            if (current != count-1) return true
+            if (current != count-1 || count > 0) return true
             else return false
         }
 
@@ -367,75 +367,10 @@ ApplicationWindow
         }
     }
 
-    DockedPanel {
+    MinPlayerPanel {
         id: minPlayerPanel
-        parent: pageStack.currentPage
-
-        width: parent.width
-        height: Theme.itemSizeExtraLarge + Theme.paddingLarge
-
-        dock: Dock.Bottom
-
-        Rectangle {
-            anchors.fill: parent
-            color: Theme.overlayBackgroundColor
-            opacity: 0.8
-            SwipeArea {
-                anchors.fill: parent
-                onSwipeDown: minPlayerPanel.hide()
-            }
-        }
-
-        Label {
-            id: mediaTitle
-            anchors.top: parent.top
-            anchors.topMargin: Theme.paddingMedium
-            anchors.horizontalCenter: parent.horizontalCenter
-            truncationMode: TruncationMode.Fade
-            text: minPlayer.streamTitle
-            width: parent.width - 2 * Theme.paddingLarge
-            horizontalAlignment: (contentWidth > width) ? Text.AlignLeft : Text.AlignHCenter
-        }
-
-        Row {
-            anchors.horizontalCenter: parent.horizontalCenter
-            anchors.top: mediaTitle.bottom
-            anchors.topMargin: Theme.paddingMedium
-            IconButton {
-                icon.source: "image://theme/icon-m-previous"
-                visible: modelPlaylist.isPrev();
-                onClicked: {
-                    minPlayer.stop();
-                    minPlayer.source = modelPlaylist.prev();
-                    minPlayer.play();
-                }
-            }
-            IconButton {
-                icon.source: minPlayer.isPlaying ? "image://theme/icon-m-pause" : "image://theme/icon-m-play"
-                onClicked: {
-                    console.debug("isPlayling: " + minPlayer.isPlaying)
-                    if (minPlayer.isPlaying)
-                    {
-                        //console.debug("Pause")
-                        minPlayer.pause()
-                    }
-                    else {
-                        //console.debug("Play")
-                        minPlayer.play()
-                    }
-                }
-            }
-            IconButton {
-                icon.source: "image://theme/icon-m-next"
-                visible: modelPlaylist.isNext();
-                onClicked: {
-                    minPlayer.stop();
-                    minPlayer.source = modelPlaylist.next();
-                    minPlayer.play();
-                }
-            }
-        }
     }
+
 
     InfoBanner {
         id: infoBanner
