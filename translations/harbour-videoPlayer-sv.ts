@@ -912,7 +912,7 @@ Videon kan inte spelas upp, eftersom medietjänsten inte kunde startas.</transla
 <context>
     <name>harbour-videoPlayer</name>
     <message>
-        <location filename="../qml/harbour-videoPlayer.qml" line="421"/>
+        <location filename="../qml/harbour-videoPlayer.qml" line="427"/>
         <source>Dismiss</source>
         <translation>Avfärda</translation>
     </message>
@@ -920,37 +920,37 @@ Videon kan inte spelas upp, eftersom medietjänsten inte kunde startas.</transla
 <context>
     <name>videoPlayer</name>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="222"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="223"/>
         <source>Load with ytdl</source>
         <translation>Läs in med ytdl</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="243"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="244"/>
         <source>Download Youtube Video</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="261"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="262"/>
         <source>Download</source>
         <translation>Ladda ner</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="277"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="278"/>
         <source>Add to bookmarks</source>
         <translation>Lägg till i bokmärken</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="293"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="294"/>
         <source>Load Subtitle</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="297"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="298"/>
         <source>Play from last known position</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="464"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="465"/>
         <source>Dismiss</source>
         <translation>Avfärda</translation>
     </message>

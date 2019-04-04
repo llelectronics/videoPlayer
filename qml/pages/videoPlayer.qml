@@ -62,7 +62,7 @@ Page {
 
 
     Component.onCompleted: {
-        minPlayerPanel.hide()
+        if (minPlayerLoader.status == Loader.Ready) minPlayerLoader.item.hide()
         if (autoplay) {
             //console.debug("[videoPlayer.qml] Autoplay activated for url: " + videoPoster.source);
             videoPoster.play();
@@ -86,7 +86,8 @@ Page {
         minPlayer.isPlaylist = isPlaylist
         if (mediaPlayer.playbackState === MediaPlayer.PlayingState) minPlayer.play();
         mediaPlayer.pause();
-        minPlayerPanel.show()
+        minPlayerLoader.sourceComponent = minPlayerComponent
+        minPlayerLoader.item.show()
 //        mediaPlayer.stop();
 //        mediaPlayer.source = "";
 //        mediaPlayer.play();

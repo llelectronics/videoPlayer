@@ -368,8 +368,14 @@ ApplicationWindow
         }
     }
 
-    MinPlayerPanel {
-        id: minPlayerPanel
+    Component {
+        id: minPlayerComponent
+        MinPlayerPanel {
+            id: minPlayerPanel
+        }
+    }
+    Loader {
+        id: minPlayerLoader
     }
 
     MprisConnector {
