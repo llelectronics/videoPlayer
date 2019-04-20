@@ -51,6 +51,7 @@ Page {
     property bool subtitleSolid: dataContainer.subtitleSolid
     property bool isPlaylist: dataContainer.isPlaylist
     property bool isNewSource: false
+    property bool isDash: dataContainer.isDash
     property string onlyMusicState: dataContainer.onlyMusicState
     property bool isLiveStream: dataContainer.isLiveStream
 
@@ -61,6 +62,10 @@ Page {
 
 
     Component.onCompleted: {
+        if (minPlayerLoader.status == Loader.Ready) {
+            minPlayerLoader.item.hide();
+            minPlayer.pause();
+        }
         if (autoplay) {
             //console.debug("[videoPlayer.qml] Autoplay activated for url: " + videoPoster.source);
             videoPoster.play();
@@ -68,10 +73,8 @@ Page {
             pulley.visible = false;
             showNavigationIndicator = false;
             mprisPlayer.title = streamTitle;
+            minPlayerLoader.active = false;
         }
-        mprisPlayer.canGoNext = mainWindow.modelPlaylist.isNext() && isPlaylist
-        mprisPlayer.canGoPrevious = mainWindow.modelPlaylist.isPrev() && isPlaylist
-        mprisPlayer.title = dataContainer.streamUrl
     }
 
     Component.onDestruction: {
@@ -81,6 +84,16 @@ Page {
             //console.debug("[videoPlayer.qml] Destruction going on so write : " + mediaPlayer.source + " with timecode: " + mediaPlayer.position + " to db")
             DB.addPosition(sourcePath,mediaPlayer.position);
         }
+        minPlayer.source = mediaPlayer.source
+        minPlayer.seek(mediaPlayer.position)
+        minPlayer.streamTitle = streamTitle
+        minPlayer.isPlaylist = isPlaylist
+        if (mediaPlayer.playbackState === MediaPlayer.PlayingState) minPlayer.play();
+        mediaPlayer.pause();
+        mprisPlayer.hide();
+        minPlayerLoader.active = true;
+        minPlayerLoader.sourceComponent = minPlayerComponent
+        minPlayerLoader.item.show()
 //        mediaPlayer.stop();
 //        mediaPlayer.source = "";
 //        mediaPlayer.play();
@@ -120,7 +133,7 @@ Page {
             YT.getYoutubeTitle(originalUrl);
         }
         else dataContainer.isYtUrl = false;
-        if (dataContainer.streamTitle == "") dataContainer.streamTitle = mainWindow.findBaseName(streamUrl)
+        if (dataContainer.streamTitle === "") dataContainer.streamTitle = mainWindow.findBaseName(streamUrl)
         dataContainer.ytdlStream = false
 
         if (streamUrl.toString().match("^file://") || streamUrl.toString().match("^/")) {
@@ -139,6 +152,7 @@ Page {
             DB.addHistory(streamUrl,streamTitle);
             // Don't forgt to write it to the List aswell
             mainWindow.firstPage.add2History(streamUrl,streamTitle);
+            mprisPlayer.title = streamTitle
         }
     }
 
@@ -269,7 +283,7 @@ Page {
             MenuItem {
                 text: qsTr("Add to bookmarks")
                 visible: {
-                    if (mainWindow.firstPage.streamTitle != "" || mainWindow.firstPage.streamUrl != "") return true
+                    if (mainWindow.firstPage.streamTitle !== "" || mainWindow.firstPage.streamUrl !== "") return true
                     else return false
                 }
                 onClicked: {
@@ -504,6 +518,7 @@ Page {
                     player.source = source;
                     console.debug("Starting playback")
                     player.play();
+                    if (isDash) minPlayer.play();
                     hideControls();
                     if (enableSubtitles) {
                         subTitleLoader.item.getSubtitles(subtitleUrl);
@@ -553,6 +568,7 @@ Page {
                     progressCircle.visible = false;
                     if (! mediaPlayer.seekable) mediaPlayer.stop();
                     onlyMusic.playing = false
+                    if (isDash) minPlayer.pause();
                 }
 
                 function next() {
@@ -566,6 +582,7 @@ Page {
                     videoPauseTrigger();
                     mediaPlayer.play();
                     hideControls();
+                    mprisPlayer.title = streamTitle
                 }
 
                 function prev() {
@@ -579,6 +596,7 @@ Page {
                     videoPauseTrigger();
                     mediaPlayer.play();
                     hideControls();
+                    mprisPlayer.title = streamTitle
                 }
 
                 onClicked: {
@@ -692,38 +710,23 @@ Page {
             id: video
             anchors.fill: parent
 
-            source: MediaPlayer {
+            source: Mplayer {
                 id: mediaPlayer
-
-                function loadPlaylistPage() {
-                    var playlistPage = pageStack.pushAttached(Qt.resolvedUrl("PlaylistPage.qml"), { "dataContainer" : videoPlayerPage, "modelPlaylist" : mainWindow.modelPlaylist, "isPlayer" : true});
-
+                dataContainer: videoPlayerPage
+                streamTitle: videoPlayerPage.streamTitle
+                streamUrl: videoPlayerPage.streamUrl
+                isPlaylist: videoPlayerPage.isPlaylist
+                isLiveStream: videoPlayerPage.isLiveStream
+                onPlaybackStateChanged: {
+                    if (playbackState == MediaPlayer.PlayingState) {
+                        if (onlyMusic.opacity == 1.0) onlyMusic.playing = true
+                        mprisPlayer.playbackStatus = Mpris.Playing
+                    }
+                    else  {
+                        if (onlyMusic.opacity == 1.0) onlyMusic.playing = false
+                        mprisPlayer.playbackStatus = Mpris.Paused
+                    }
                 }
-
-                function loadMetaDataPage() {
-                    //console.debug("Loading metadata page")
-                    var mDataTitle;
-                    //console.debug(metaData.title)
-                    if (streamTitle != "") mDataTitle = streamTitle
-                    else mDataTitle = mainWindow.findBaseName(streamUrl)
-                    //console.debug("[mDataTitle]: " + mDataTitle)
-                    dPage = pageStack.pushAttached(Qt.resolvedUrl("FileDetails.qml"), {
-                                                       filename: streamUrl,
-                                                       title: mDataTitle,
-                                                       artist: metaData.albumArtist,
-                                                       videocodec: metaData.videoCodec,
-                                                       resolution: metaData.resolution,
-                                                       videobitrate: metaData.videoBitRate,
-                                                       framerate: metaData.videoFrameRate,
-                                                       audiocodec: metaData.audioCodec,
-                                                       audiobitrate: metaData.audioBitRate,
-                                                       samplerate: metaData.sampleRate,
-                                                       copyright: metaData.copyright,
-                                                       date: metaData.date,
-                                                       size: mainWindow.humanSize(_fm.getSize(streamUrl)) //metaData.size
-                                                   });
-                }
-
                 onDurationChanged: {
                     //console.debug("Duration(msec): " + duration);
                     videoPoster.duration = (duration/1000);
@@ -733,7 +736,7 @@ Page {
                 onStatusChanged: {
                     //errorTxt.visible = false     // DEBUG: Always show errors for now
                     //errorDetail.visible = false
-                    //console.debug("[videoPlayer.qml]: mediaPlayer.status: " + mediaPlayer.status)
+                    //console.debug("[videoPlayer.qml]: mediaPlayer.status: " + mediaPlayer.status + " isPlaylist:" + isPlaylist)
                     if (mediaPlayer.status === MediaPlayer.Loading || mediaPlayer.status === MediaPlayer.Buffering || mediaPlayer.status === MediaPlayer.Stalled) progressCircle.visible = true;
                     else if (mediaPlayer.status === MediaPlayer.EndOfMedia) {
                         videoPoster.showControls();
@@ -752,15 +755,6 @@ Page {
                         mprisPlayer.title = metaData.title
                     }
                 }
-                onPlaybackStateChanged: {
-                    if (playbackState == MediaPlayer.PlayingState) {
-                        if (onlyMusic.opacity == 1.0) onlyMusic.playing = true
-                    }
-                    else  {
-                        if (onlyMusic.opacity == 1.0) onlyMusic.playing = false
-                    }
-                }
-
                 onError: {
                     // Just a little help
                     //            MediaPlayer.NoError - there is no current error.
@@ -778,7 +772,7 @@ Page {
                     // Prepare user friendly advise on error
                     errorDetail.text = errorString;
                     if (error == MediaPlayer.ResourceError) errorDetail.text += qsTr("\nThe video cannot be played due to a problem allocating resources.\n\
-            On Youtube Videos please make sure to be logged in. Some videos might be geoblocked or require you to be logged into youtube.")
+                        On Youtube Videos please make sure to be logged in. Some videos might be geoblocked or require you to be logged into youtube.")
                     else if (error == MediaPlayer.FormatError) errorDetail.text += qsTr("\nThe audio and or video format is not supported.")
                     else if (error == MediaPlayer.NetworkError) errorDetail.text += qsTr("\nThe video cannot be played due to network issues.")
                     else if (error == MediaPlayer.AccessDenied) errorDetail.text += qsTr("\nThe video cannot be played due to insufficient permissions.")
@@ -786,20 +780,6 @@ Page {
                     errorBox.visible = true;
                     /* Avoid MediaPlayer undefined behavior */
                     stop();
-                }
-                onBufferProgressChanged: {
-                    if (!isLiveStream) {
-                        if (bufferProgress == 1.0 && isNewSource) {
-                            isNewSource = false
-                            play()
-                        } else if(isNewSource) pause()
-                    }
-                    else {
-                        if (bufferProgress == 0.7 && isNewSource) { // 7% filling for live streams
-                            isNewSource = false
-                            play()
-                        } else if(isNewSource) pause()
-                    }
                 }
             }
 
@@ -894,11 +874,11 @@ Page {
     }
 
     Keys.onPressed: {
-        if (event.key == Qt.Key_Space) videoPauseTrigger();
-        if (event.key == Qt.Key_Left && mediaPlayer.seekable) {
+        if (event.key === Qt.Key_Space) videoPauseTrigger();
+        if (event.key === Qt.Key_Left && mediaPlayer.seekable) {
             mediaPlayer.seek(mediaPlayer.position - 5000)
         }
-        if (event.key == Qt.Key_Right && mediaPlayer.seekable) {
+        if (event.key === Qt.Key_Right && mediaPlayer.seekable) {
             mediaPlayer.seek(mediaPlayer.position + 10000)
         }
     }
@@ -954,49 +934,8 @@ Page {
         }
     }
 
-    MprisPlayer {
-        id: mprisPlayer
-
-        serviceName: "llsVplayer"
-
-        property string title: streamTitle
-
-        onTitleChanged: {
-            if (title != "") {
-                console.debug("Title changed to: " + title)
-                var metadata = mprisPlayer.metadata
-                metadata[Mpris.metadataToString(Mpris.Title)] = title
-                mprisPlayer.metadata = metadata
-            }
-        }
-
-        // Mpris2 Root Interface
-        identity: "LLs Video Player"
-
-        // Mpris2 Player Interface
-        canControl: true
-
-        canGoNext: true
-        canGoPrevious: true
-        canPause: true
-        canPlay: true
-        canSeek: true
-
-        playbackStatus: {
-            if (mediaPlayer.playbackState == MediaPlayer.PlayingState) return Mpris.Playing
-            else if (mediaPlayer.playbackState == MediaPlayer.PausedState) return Mpris.Paused
-            else return Mpris.Stopped
-        }
-        onPlaybackStatusChanged: {
-            mprisPlayer.canGoNext = mainWindow.modelPlaylist.isNext() && isPlaylist
-            mprisPlayer.canGoPrevious = mainWindow.modelPlaylist.isPrev() && isPlaylist
-            title = streamTitle
-        }
-
-        loopStatus: Mpris.None
-        shuffle: false
-        volume: 1
-
+    Connections {
+        target: mprisPlayer
         onPauseRequested: {
             videoPoster.pause();
         }

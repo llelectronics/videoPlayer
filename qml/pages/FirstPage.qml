@@ -55,6 +55,8 @@ Page {
     property bool isPlaylist: false
     property string onlyMusicState: "default"
     property bool isLiveStream: false
+    property bool alwaysYtdl: false
+    property bool isDash: false
     /////////////////////////////////////////////////////
 
     // Videoplayer properties //////////////////////////
@@ -224,6 +226,9 @@ Page {
             path: _fm.getHome() + "/Videos"
             filter: ["*"]
             onFileOpen: {
+                // Clear Playlist and add to playlist maybe
+                //mainWindow.modelPlaylist.clear();
+                //mainWindow.modelPlaylist.addTrack(path,"");
                 mainWindow.firstPage.originalUrl = path;
                 mainWindow.firstPage.streamUrl = path;
                 mainWindow.firstPage.autoplay = true;
@@ -359,6 +364,15 @@ Page {
                 MenuItem {
                     text: qsTr("Settings")
                     onClicked: pageStack.push(Qt.resolvedUrl("SettingsPage.qml"));
+                }
+                MenuItem {
+                    text: qsTr("Show Player")
+                    onClicked: {
+                        minPlayerLoader.active = true;
+                        minPlayerLoader.sourceComponent = minPlayerComponent
+                        minPlayerLoader.item.show()
+                    }
+                    visible: minPlayer.source != ""
                 }
             }
 

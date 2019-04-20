@@ -57,7 +57,7 @@ Dialog {
                 id: bookmarkTitle
                 anchors.horizontalCenter: parent.horizontalCenter
                 width: parent.width - 20
-                placeholderText: "Title of the bookmark"
+                placeholderText: qsTr("Title of the bookmark")
                 focus: true
                 label: qsTr("Title")
             }
@@ -65,7 +65,7 @@ Dialog {
                 id: bookmarkUrl
                 width: parent.width - 20
                 anchors.horizontalCenter: parent.horizontalCenter
-                placeholderText: "URL of bookmark"
+                placeholderText: qsTr("URL of bookmark")
                 inputMethodHints: Qt.ImhUrlCharactersOnly
                 visible: /*editBookmark ? false :*/ true
                 label: qsTr("URL")

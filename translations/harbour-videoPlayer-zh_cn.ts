@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="es_ES">
+<TS version="2.1" language="zh_cn">
 <context>
     <name>AboutPage</name>
     <message>
         <location filename="../qml/pages/AboutPage.qml" line="90"/>
         <source>A simple video player based on GStreamer.</source>
-        <translation>Un reproductor de vídeo sencillo basado en GStreamer.</translation>
+        <translation>一个基于GStreamer的简易视频播放器。</translation>
     </message>
 </context>
 <context>
@@ -14,12 +14,12 @@
     <message>
         <location filename="../qml/pages/AddBookmark.qml" line="41"/>
         <source>Edit Bookmark</source>
-        <translation>Editar marcador</translation>
+        <translation>编辑收藏</translation>
     </message>
     <message>
         <location filename="../qml/pages/AddBookmark.qml" line="41"/>
         <source>Add Bookmark</source>
-        <translation>Añadir marcador</translation>
+        <translation>添加收藏</translation>
     </message>
     <message>
         <location filename="../qml/pages/AddBookmark.qml" line="60"/>
@@ -29,7 +29,7 @@
     <message>
         <location filename="../qml/pages/AddBookmark.qml" line="62"/>
         <source>Title</source>
-        <translation>Título</translation>
+        <translation>标题</translation>
     </message>
     <message>
         <location filename="../qml/pages/AddBookmark.qml" line="68"/>
@@ -39,12 +39,12 @@
     <message>
         <location filename="../qml/pages/AddBookmark.qml" line="71"/>
         <source>URL</source>
-        <translation>URL</translation>
+        <translation>链接</translation>
     </message>
     <message>
         <location filename="../qml/pages/AddBookmark.qml" line="78"/>
         <source>Live Stream</source>
-        <translation>Retransmisión en directo</translation>
+        <translation>直播流</translation>
     </message>
 </context>
 <context>
@@ -52,22 +52,22 @@
     <message>
         <location filename="../qml/pages/BookmarksPage.qml" line="25"/>
         <source>Bookmarks</source>
-        <translation>Marcadores</translation>
+        <translation>收藏</translation>
     </message>
     <message>
         <location filename="../qml/pages/BookmarksPage.qml" line="93"/>
         <source>Edit</source>
-        <translation>Editar</translation>
+        <translation>编辑</translation>
     </message>
     <message>
         <location filename="../qml/pages/BookmarksPage.qml" line="99"/>
         <source>Delete</source>
-        <translation>Borrar</translation>
+        <translation>删除</translation>
     </message>
     <message>
         <location filename="../qml/pages/BookmarksPage.qml" line="109"/>
         <source>Add Bookmark</source>
-        <translation>Añadir marcador</translation>
+        <translation>添加收藏</translation>
     </message>
 </context>
 <context>
@@ -75,28 +75,28 @@
     <message>
         <location filename="../qml/pages/fileman/helper/fmComponents/CreateDirDialog.qml" line="16"/>
         <source>Error creating new directory</source>
-        <translation>Error al crear nuevo directorio</translation>
+        <translation>创建新目录出错</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/helper/fmComponents/CreateDirDialog.qml" line="32"/>
         <source>Create Folder</source>
-        <translation>Crear carpeta</translation>
+        <translation>创建文件夹</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/helper/fmComponents/CreateDirDialog.qml" line="33"/>
         <source>Create</source>
-        <translation>Crear</translation>
+        <translation>创建</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/helper/fmComponents/CreateDirDialog.qml" line="39"/>
         <source>Create a new folder under</source>
-        <translation>Crear nueva carpeta dentro de</translation>
+        <translation>在下面创建新文件夹</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/helper/fmComponents/CreateDirDialog.qml" line="52"/>
         <location filename="../qml/pages/fileman/helper/fmComponents/CreateDirDialog.qml" line="53"/>
         <source>Folder name</source>
-        <translation>Nombre de carpeta</translation>
+        <translation>文件夹名称</translation>
     </message>
 </context>
 <context>
@@ -104,73 +104,73 @@
     <message>
         <location filename="../qml/pages/DownloadManager.qml" line="44"/>
         <source>Deleting </source>
-        <translation>Borrando </translation>
+        <translation>删除</translation>
     </message>
     <message>
         <location filename="../qml/pages/DownloadManager.qml" line="96"/>
         <source>Delete</source>
-        <translation>Borrar</translation>
+        <translation>删除</translation>
     </message>
     <message>
         <location filename="../qml/pages/DownloadManager.qml" line="116"/>
         <location filename="../qml/pages/DownloadManager.qml" line="153"/>
         <source>Add Download</source>
-        <translation>Añadir descarga</translation>
+        <translation>添加下载</translation>
     </message>
     <message>
         <location filename="../qml/pages/DownloadManager.qml" line="127"/>
         <source>Clear Downloads</source>
-        <translation>Limpiar descargas</translation>
+        <translation>清除下载</translation>
     </message>
     <message>
         <location filename="../qml/pages/DownloadManager.qml" line="139"/>
         <source>Download Manager</source>
-        <translation>Gestor de descargas</translation>
+        <translation>下载管理</translation>
     </message>
     <message>
         <location filename="../qml/pages/DownloadManager.qml" line="163"/>
         <source>Enter URL to download</source>
-        <translation>Introduce URL para descargar</translation>
+        <translation>输入链接以下载</translation>
     </message>
     <message>
         <location filename="../qml/pages/DownloadManager.qml" line="180"/>
         <source>Download</source>
-        <translation>Descargar</translation>
+        <translation>下载</translation>
     </message>
     <message>
         <location filename="../qml/pages/DownloadManager.qml" line="201"/>
         <source>Download list</source>
-        <translation>Lista de descarga</translation>
+        <translation>下载列表</translation>
     </message>
     <message>
         <location filename="../qml/pages/DownloadManager.qml" line="378"/>
         <source>Abort</source>
-        <translation>Cancelar</translation>
+        <translation>关于</translation>
     </message>
     <message>
         <location filename="../qml/pages/DownloadManager.qml" line="217"/>
         <source>Details</source>
-        <translation>Detalles</translation>
+        <translation>详情</translation>
     </message>
     <message>
         <location filename="../qml/pages/DownloadManager.qml" line="222"/>
         <source>Status</source>
-        <translation>Estado</translation>
+        <translation>状态</translation>
     </message>
     <message>
         <location filename="../qml/pages/DownloadManager.qml" line="230"/>
         <source>Errors</source>
-        <translation>Errores</translation>
+        <translation>错误</translation>
     </message>
     <message>
         <location filename="../qml/pages/DownloadManager.qml" line="241"/>
         <source>Download Status</source>
-        <translation>Estado de descarga</translation>
+        <translation>下载状态</translation>
     </message>
     <message>
         <location filename="../qml/pages/DownloadManager.qml" line="262"/>
         <source>Download Errors</source>
-        <translation>Errores de descarga</translation>
+        <translation>下载出错</translation>
     </message>
 </context>
 <context>
@@ -178,87 +178,87 @@
     <message>
         <location filename="../qml/pages/FileDetails.qml" line="35"/>
         <source>Search Artist on Youtube</source>
-        <translation>Buscar artista en Youtube</translation>
+        <translation>在Youtube搜索艺术家</translation>
     </message>
     <message>
         <location filename="../qml/pages/FileDetails.qml" line="39"/>
         <source>Search Artist on Wikipedia</source>
-        <translation>Buscar artista en Wikipedia</translation>
+        <translation>在维基百科搜索艺术家</translation>
     </message>
     <message>
         <location filename="../qml/pages/FileDetails.qml" line="43"/>
         <source>Search Artist on Google Image</source>
-        <translation>Buscar artista en Google Image</translation>
+        <translation>在Google图片搜索艺术家</translation>
     </message>
     <message>
         <location filename="../qml/pages/FileDetails.qml" line="47"/>
         <source>Show Youtube Comments</source>
-        <translation>Mostrar comentarios de Youtube</translation>
+        <translation>显示Youtube评论</translation>
     </message>
     <message>
         <location filename="../qml/pages/FileDetails.qml" line="66"/>
         <source>Filename: </source>
-        <translation>Nombre de archivo: </translation>
+        <translation>文件名称: </translation>
     </message>
     <message>
         <location filename="../qml/pages/FileDetails.qml" line="84"/>
         <source>Title: </source>
-        <translation>Título: </translation>
+        <translation>标题: </translation>
     </message>
     <message>
         <location filename="../qml/pages/FileDetails.qml" line="102"/>
         <source>Artist: </source>
-        <translation>Artista: </translation>
+        <translation>艺术家: </translation>
     </message>
     <message>
         <location filename="../qml/pages/FileDetails.qml" line="120"/>
         <source>Videocodec: </source>
-        <translation>Códec de vídeo: </translation>
+        <translation>视频解码器: </translation>
     </message>
     <message>
         <location filename="../qml/pages/FileDetails.qml" line="139"/>
         <source>Resolution: </source>
-        <translation>Resolución: </translation>
+        <translation>分辨率: </translation>
     </message>
     <message>
         <location filename="../qml/pages/FileDetails.qml" line="154"/>
         <source>Videobitrate (bits/sec): </source>
-        <translation>Tasa de bits de vídeo (bits/seg): </translation>
+        <translation>视频比特率 (bits/seg): </translation>
     </message>
     <message>
         <location filename="../qml/pages/FileDetails.qml" line="169"/>
         <source>Framerate: </source>
-        <translation>Fotogramas por seg.: </translation>
+        <translation>帧数/秒: </translation>
     </message>
     <message>
         <location filename="../qml/pages/FileDetails.qml" line="184"/>
         <source>Audiocodec: </source>
-        <translation>Códec de audio: </translation>
+        <translation>音频解码器: </translation>
     </message>
     <message>
         <location filename="../qml/pages/FileDetails.qml" line="202"/>
         <source>Audiobitrate (bits/sec): </source>
-        <translation>Tasa de bits de audio (bits/seg): </translation>
+        <translation>音频比特率 (bits/seg): </translation>
     </message>
     <message>
         <location filename="../qml/pages/FileDetails.qml" line="217"/>
         <source>Samplerate: </source>
-        <translation>Frecuencia de muestreo: </translation>
+        <translation>采样频率: </translation>
     </message>
     <message>
         <location filename="../qml/pages/FileDetails.qml" line="232"/>
         <source>Copyright: </source>
-        <translation>Derechos de autor: </translation>
+        <translation>版权: </translation>
     </message>
     <message>
         <location filename="../qml/pages/FileDetails.qml" line="250"/>
         <source>Date: </source>
-        <translation>Fecha: </translation>
+        <translation>日期: </translation>
     </message>
     <message>
         <location filename="../qml/pages/FileDetails.qml" line="265"/>
         <source>File size: </source>
-        <translation>Tamaño de archivo: </translation>
+        <translation>文件大小: </translation>
     </message>
 </context>
 <context>
@@ -266,62 +266,62 @@
     <message>
         <location filename="../qml/pages/fileman/helper/fmComponents/FileProperties.qml" line="45"/>
         <source>Change Permissions</source>
-        <translation>Cambiar permisos</translation>
+        <translation>更改许可</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/helper/fmComponents/FileProperties.qml" line="66"/>
         <source>Rename</source>
-        <translation>Renombrar</translation>
+        <translation>重命名</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/helper/fmComponents/FileProperties.qml" line="73"/>
         <source>Error renaming</source>
-        <translation>Error al renombrar</translation>
+        <translation>重命名出错</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/helper/fmComponents/FileProperties.qml" line="106"/>
         <source>Properties</source>
-        <translation>Propiedades</translation>
+        <translation>属性</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/helper/fmComponents/FileProperties.qml" line="183"/>
         <source>Location</source>
-        <translation>Ubicación</translation>
+        <translation>位置</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/helper/fmComponents/FileProperties.qml" line="187"/>
         <source>Type</source>
-        <translation>Tipo</translation>
+        <translation>类型</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/helper/fmComponents/FileProperties.qml" line="189"/>
         <source>Link to %1</source>
-        <translation>Enlace a %1</translation>
+        <translation>链接到 %1</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/helper/fmComponents/FileProperties.qml" line="193"/>
         <source>Size</source>
-        <translation>Tamaño</translation>
+        <translation>大小</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/helper/fmComponents/FileProperties.qml" line="212"/>
         <source>Permissions</source>
-        <translation>Permisos</translation>
+        <translation>许可</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/helper/fmComponents/FileProperties.qml" line="216"/>
         <source>Owner</source>
-        <translation>Propietario</translation>
+        <translation>所有者</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/helper/fmComponents/FileProperties.qml" line="220"/>
         <source>Group</source>
-        <translation>Grupo</translation>
+        <translation>群组</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/helper/fmComponents/FileProperties.qml" line="224"/>
         <source>Last modified</source>
-        <translation>Última actualización</translation>
+        <translation>最近修改</translation>
     </message>
 </context>
 <context>
@@ -330,33 +330,33 @@
         <location filename="../qml/pages/FirstPage.qml" line="210"/>
         <source>Open Video</source>
         <extracomment>For choosing video to open from the device</extracomment>
-        <translation>Abrir vídeo</translation>
+        <translation>打开视频</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="348"/>
         <source>No History</source>
-        <translation>No hay historial</translation>
+        <translation>无历史</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="249"/>
         <location filename="../qml/pages/FirstPage.qml" line="392"/>
         <source>History</source>
-        <translation>Historial</translation>
+        <translation>历史</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="255"/>
         <source>Bookmarks</source>
-        <translation>Marcadores</translation>
+        <translation>收藏</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="261"/>
         <source>Search on Youtube</source>
-        <translation>Buscar en Youtube</translation>
+        <translation>在Youtube搜索</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="267"/>
         <source>Browse Files</source>
-        <translation>Explorar archivos</translation>
+        <translation>浏览文件</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="273"/>
@@ -366,17 +366,17 @@
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="279"/>
         <source>Playlists</source>
-        <translation>Listas de reprod.</translation>
+        <translation>播放列表</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="361"/>
         <source>About </source>
-        <translation>Acerca de </translation>
+        <translation>关于</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="365"/>
         <source>Settings</source>
-        <translation>Ajustes</translation>
+        <translation>设置</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="369"/>
@@ -387,22 +387,22 @@
         <location filename="../qml/pages/FirstPage.qml" line="393"/>
         <location filename="../qml/pages/FirstPage.qml" line="406"/>
         <source>Open</source>
-        <translation>Abrir</translation>
+        <translation>打开</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="398"/>
         <source>Type in URL here</source>
-        <translation>Escribe aquí la URL</translation>
+        <translation>在此输入链接</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="399"/>
         <source>URL to media</source>
-        <translation>URL a multimedia</translation>
+        <translation>到媒体的链接</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="475"/>
         <source>Youtube-Dl updated.</source>
-        <translation>Youtube-Dl actualizada.</translation>
+        <translation>Youtube-Dl 已更新</translation>
     </message>
 </context>
 <context>
@@ -410,79 +410,79 @@
     <message>
         <location filename="../qml/pages/fileman/OpenDialog.qml" line="159"/>
         <source>Create Folder</source>
-        <translation>Crear carpeta</translation>
+        <translation>创建文件夹</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/OpenDialog.qml" line="174"/>
         <source>Add all files to playlist</source>
-        <translation>Añadir todos los archivos a la lista</translation>
+        <translation>添加所有文件到播放列表</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/OpenDialog.qml" line="197"/>
         <source>Add to places</source>
-        <translation>Añadir a lugares</translation>
+        <translation>添加到位置</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/OpenDialog.qml" line="215"/>
         <source>Paste</source>
-        <translation>Pegar</translation>
+        <translation>粘贴</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/OpenDialog.qml" line="222"/>
         <location filename="../qml/pages/fileman/OpenDialog.qml" line="405"/>
         <source>Properties</source>
-        <translation>Propiedades</translation>
+        <translation>属性</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/OpenDialog.qml" line="234"/>
         <source>Scroll to top</source>
-        <translation>Desplazar hacia arriba</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/OpenDialog.qml" line="238"/>
         <source>Show Playlist</source>
-        <translation>Mostrar lista de reproducción</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/OpenDialog.qml" line="253"/>
         <location filename="../qml/pages/fileman/OpenDialog.qml" line="254"/>
         <source>Deleting </source>
-        <translation>Borrando </translation>
+        <translation>删除</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/OpenDialog.qml" line="271"/>
         <source>added to playlist</source>
-        <translation>añadido a la lista</translation>
+        <translation>已添加到播放列表</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/OpenDialog.qml" line="380"/>
         <source>Add to playlist</source>
-        <translation>Añadir a lista de reproducción</translation>
+        <translation>添加到播放列表</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/OpenDialog.qml" line="387"/>
         <source>Cut</source>
-        <translation>Cortar</translation>
+        <translation>剪切</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/OpenDialog.qml" line="393"/>
         <source>Copy</source>
-        <translation>Copiar</translation>
+        <translation>复制</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/OpenDialog.qml" line="399"/>
         <source>Delete</source>
-        <translation>Borrar</translation>
+        <translation>删除</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/OpenDialog.qml" line="426"/>
         <source>Error pasting file </source>
-        <translation>Error al pegar archivo </translation>
+        <translation>粘贴文件出错 </translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/OpenDialog.qml" line="434"/>
         <source>File operation succeeded</source>
-        <translation>Operación de archivo correcta</translation>
+        <translation>文件操作成功</translation>
     </message>
 </context>
 <context>
@@ -490,22 +490,22 @@
     <message>
         <location filename="../qml/pages/OpenURLPage.qml" line="13"/>
         <source>Load URL</source>
-        <translation>Cargar URL</translation>
+        <translation>加载链接</translation>
     </message>
     <message>
         <location filename="../qml/pages/OpenURLPage.qml" line="89"/>
         <source>Type in URL here</source>
-        <translation>Escribe aquí la URL</translation>
+        <translation>在此输入链接</translation>
     </message>
     <message>
         <location filename="../qml/pages/OpenURLPage.qml" line="90"/>
         <source>URL to media file/stream</source>
-        <translation>URL a archivo/transmisión multimedia</translation>
+        <translation>到媒体或流的链接</translation>
     </message>
     <message>
         <location filename="../qml/pages/OpenURLPage.qml" line="109"/>
         <source>Add to bookmarks</source>
-        <translation>Añadir a marcadores</translation>
+        <translation>添加到收藏</translation>
     </message>
 </context>
 <context>
@@ -513,52 +513,52 @@
     <message>
         <location filename="../qml/pages/fileman/helper/fmComponents/PermissionDialog.qml" line="21"/>
         <source>Could not change permission</source>
-        <translation>No es posible cambiar permiso</translation>
+        <translation>无法更改许可</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/helper/fmComponents/PermissionDialog.qml" line="53"/>
         <source>Change Permissions</source>
-        <translation>Cambiar permisos</translation>
+        <translation>更改许可</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/helper/fmComponents/PermissionDialog.qml" line="54"/>
         <source>Change</source>
-        <translation>Cambiar</translation>
+        <translation>更改</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/helper/fmComponents/PermissionDialog.qml" line="60"/>
         <source>Change permissions for</source>
-        <translation>Cambiar permisos de</translation>
+        <translation>更改许可给</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/helper/fmComponents/PermissionDialog.qml" line="81"/>
         <source>Read</source>
-        <translation>Lectura</translation>
+        <translation>读取</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/helper/fmComponents/PermissionDialog.qml" line="89"/>
         <source>Write</source>
-        <translation>Escritura</translation>
+        <translation>写入</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/helper/fmComponents/PermissionDialog.qml" line="96"/>
         <source>Execute</source>
-        <translation>Ejecución</translation>
+        <translation>执行</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/helper/fmComponents/PermissionDialog.qml" line="117"/>
         <source>Owner</source>
-        <translation>Propietario</translation>
+        <translation>所有者</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/helper/fmComponents/PermissionDialog.qml" line="155"/>
         <source>Group</source>
-        <translation>Grupo</translation>
+        <translation>群组</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/helper/fmComponents/PermissionDialog.qml" line="188"/>
         <source>Others</source>
-        <translation>Otros</translation>
+        <translation>别的</translation>
     </message>
 </context>
 <context>
@@ -566,72 +566,72 @@
     <message>
         <location filename="../qml/pages/fileman/helper/fmComponents/PlacesPage.qml" line="32"/>
         <source>Device memory</source>
-        <translation>Memoria de dispositivo</translation>
+        <translation>设备储存</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/helper/fmComponents/PlacesPage.qml" line="37"/>
         <source>SD Card</source>
-        <translation>Tarjeta SD</translation>
+        <translation>SD卡</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/helper/fmComponents/PlacesPage.qml" line="45"/>
         <source>Home</source>
-        <translation>Home</translation>
+        <translation>主页</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/helper/fmComponents/PlacesPage.qml" line="50"/>
         <source>Documents</source>
-        <translation>Documentos</translation>
+        <translation>文档</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/helper/fmComponents/PlacesPage.qml" line="55"/>
         <source>Downloads</source>
-        <translation>Descargas</translation>
+        <translation>下载</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/helper/fmComponents/PlacesPage.qml" line="60"/>
         <source>Music</source>
-        <translation>Música</translation>
+        <translation>音乐</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/helper/fmComponents/PlacesPage.qml" line="65"/>
         <source>Pictures</source>
-        <translation>Fotos</translation>
+        <translation>图片</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/helper/fmComponents/PlacesPage.qml" line="70"/>
         <source>Videos</source>
-        <translation>Vídeos</translation>
+        <translation>视频</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/helper/fmComponents/PlacesPage.qml" line="104"/>
         <source>Places</source>
-        <translation>Lugares</translation>
+        <translation>位置</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/helper/fmComponents/PlacesPage.qml" line="118"/>
         <source>Devices</source>
-        <translation>Dispositivos</translation>
+        <translation>设备</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/helper/fmComponents/PlacesPage.qml" line="156"/>
         <source>Common</source>
-        <translation>Común</translation>
+        <translation>通用</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/helper/fmComponents/PlacesPage.qml" line="191"/>
         <source>Custom</source>
-        <translation>Personalizado</translation>
+        <translation>定制</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/helper/fmComponents/PlacesPage.qml" line="212"/>
         <source>Deleting </source>
-        <translation>Borrando </translation>
+        <translation>删除</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/helper/fmComponents/PlacesPage.qml" line="257"/>
         <source>Rename</source>
-        <translation>Renombrar</translation>
+        <translation>重命名</translation>
     </message>
 </context>
 <context>
@@ -639,52 +639,52 @@
     <message>
         <location filename="../qml/pages/PlaylistPage.qml" line="46"/>
         <source>Playlists</source>
-        <translation>Listas de reproducción</translation>
+        <translation>播放列表</translation>
     </message>
     <message>
         <location filename="../qml/pages/PlaylistPage.qml" line="60"/>
         <source>Please add tracks to playlist</source>
-        <translation>Añade pistas a la lista</translation>
+        <translation>请添加音乐到播放列表</translation>
     </message>
     <message>
         <location filename="../qml/pages/PlaylistPage.qml" line="61"/>
         <source>Please load or create playlist</source>
-        <translation>Carga o crea una lista</translation>
+        <translation>请载入或创建播放列表</translation>
     </message>
     <message>
         <location filename="../qml/pages/PlaylistPage.qml" line="163"/>
         <source>Delete</source>
-        <translation>Borrar</translation>
+        <translation>删除</translation>
     </message>
     <message>
         <location filename="../qml/pages/PlaylistPage.qml" line="173"/>
         <source>Clear Playlist</source>
-        <translation>Limpiar lista</translation>
+        <translation>清除播放列表</translation>
     </message>
     <message>
         <location filename="../qml/pages/PlaylistPage.qml" line="179"/>
         <source>Create Playlist</source>
-        <translation>Crear lista</translation>
+        <translation>创建播放列表</translation>
     </message>
     <message>
         <location filename="../qml/pages/PlaylistPage.qml" line="183"/>
         <source>Add to Playlist</source>
-        <translation>Añadir a la lista</translation>
+        <translation>添加到播放列表</translation>
     </message>
     <message>
         <location filename="../qml/pages/PlaylistPage.qml" line="188"/>
         <source>Load Playlist</source>
-        <translation>Cargar lista</translation>
+        <translation>载入播放列表</translation>
     </message>
     <message>
         <location filename="../qml/pages/PlaylistPage.qml" line="192"/>
         <source>Save Playlist</source>
-        <translation>Guardar lista</translation>
+        <translation>保存播放列表</translation>
     </message>
     <message>
         <location filename="../qml/pages/PlaylistPage.qml" line="203"/>
         <source>Playlist saved.</source>
-        <translation>Lista guardada.</translation>
+        <translation>播放列表已保存</translation>
     </message>
 </context>
 <context>
@@ -693,18 +693,18 @@
         <location filename="../qml/pages/fileman/helper/fmComponents/RenameDialog.qml" line="37"/>
         <location filename="../qml/pages/fileman/helper/fmComponents/RenameDialog.qml" line="38"/>
         <source>Rename</source>
-        <translation>Renombrar</translation>
+        <translation>重命名</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/helper/fmComponents/RenameDialog.qml" line="44"/>
         <source>Give a new name for</source>
-        <translation>Indica el nuevo nombre de</translation>
+        <translation>重新命名</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/helper/fmComponents/RenameDialog.qml" line="57"/>
         <location filename="../qml/pages/fileman/helper/fmComponents/RenameDialog.qml" line="58"/>
         <source>New name</source>
-        <translation>Nuevo nombre</translation>
+        <translation>新名字</translation>
     </message>
 </context>
 <context>
@@ -712,32 +712,32 @@
     <message>
         <location filename="../qml/pages/SecondPage.qml" line="94"/>
         <source>No Search History</source>
-        <translation>No hay historial de búsqueda</translation>
+        <translation>无搜索历史</translation>
     </message>
     <message>
         <location filename="../qml/pages/SecondPage.qml" line="123"/>
         <source>History</source>
-        <translation>Historial</translation>
+        <translation>历史</translation>
     </message>
     <message>
         <location filename="../qml/pages/SecondPage.qml" line="128"/>
         <source>Go Back</source>
-        <translation>Volver</translation>
+        <translation>返回</translation>
     </message>
     <message>
         <location filename="../qml/pages/SecondPage.qml" line="157"/>
         <source>Search..</source>
-        <translation>Buscar..</translation>
+        <translation>搜索..</translation>
     </message>
     <message>
         <location filename="../qml/pages/SecondPage.qml" line="350"/>
         <source>Load with ytdl</source>
-        <translation>Cargar con ytdl</translation>
+        <translation>用ytdl加载</translation>
     </message>
     <message>
         <location filename="../qml/pages/SecondPage.qml" line="364"/>
         <source>Load</source>
-        <translation>Cargar</translation>
+        <translation>加载</translation>
     </message>
 </context>
 <context>
@@ -746,27 +746,27 @@
         <location filename="../qml/pages/SettingsPage.qml" line="43"/>
         <location filename="../qml/pages/SettingsPage.qml" line="464"/>
         <source>Clear History</source>
-        <translation>Limpiar historial</translation>
+        <translation>清除历史</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="96"/>
         <source>Save Settings</source>
-        <translation>Guardar ajustes</translation>
+        <translation>保存设置</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="117"/>
         <source>Load Defaults</source>
-        <translation>Cargar ajustes por defecto</translation>
+        <translation>载入默认</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="242"/>
         <source>General</source>
-        <translation>General</translation>
+        <translation>常规</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="286"/>
         <source>Load Subtitles</source>
-        <translation>Cargar subtítulos</translation>
+        <translation>载入字幕</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="293"/>
@@ -776,87 +776,87 @@
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="301"/>
         <source>Subtitle Font Size</source>
-        <translation>Tamaño de fuente en subtítulos</translation>
+        <translation>字幕字体大小</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="312"/>
         <source>Small</source>
-        <translation>Pequeño</translation>
+        <translation>Peque?o</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="313"/>
         <source>Medium</source>
-        <translation>Medio</translation>
+        <translation>中号</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="314"/>
         <source>Large</source>
-        <translation>Grande</translation>
+        <translation>大号</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="315"/>
         <source>Extra Large</source>
-        <translation>Extra grande</translation>
+        <translation>特大号</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="340"/>
         <source>Subtitle Color</source>
-        <translation>Color de subtítulos</translation>
+        <translation>字幕色彩</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="357"/>
         <source>Use solid subtitletext background</source>
-        <translation>Usar fondo en texto de subtítulo</translation>
+        <translation>使用实心字幕背景</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="373"/>
         <source>Browse File Dialog</source>
-        <translation>Diálogo en explorador</translation>
+        <translation>浏览文件对话</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="384"/>
         <source>Filemanager</source>
-        <translation>Gestor de archivos</translation>
+        <translation>文件管理器</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="385"/>
         <source>Videogallery</source>
-        <translation>Galería de vídeos</translation>
+        <translation>视频图库</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="397"/>
         <source>Default Youtube Quality</source>
-        <translation>Calidad por defecto en Youtube</translation>
+        <translation>默认Youtube视频质量</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="425"/>
         <source>Use live preview when minimized</source>
-        <translation>Usar vista previa al minimizar</translation>
+        <translation>最小化时使用实时预览</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="432"/>
         <source>Music Only Indicator</source>
-        <translation>Indicador de música</translation>
+        <translation>音乐指示灯</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="443"/>
         <source>Default (Sound Icon)</source>
-        <translation>Por defecto (Icono de sonido)</translation>
+        <translation>默认 (声音图标)</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="444"/>
         <source>MC (animated Music Cassette)</source>
-        <translation>MC (Casete animada)</translation>
+        <translation>MC (动画音乐盒式磁带·)</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="445"/>
         <source>EQ (animated Equalizer)</source>
-        <translation>EQ (ecualizador animado)</translation>
+        <translation>EQ (动画均衡器)</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="457"/>
         <source>Clear webview data on exit</source>
-        <translation>Limpiar datos de webview al salir</translation>
+        <translation>退出时清除网络预览数据</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="477"/>
@@ -866,7 +866,7 @@
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="484"/>
         <source>Update Youtube-Dl</source>
-        <translation>Actualizar Youtube-Dl</translation>
+        <translation>更新 Youtube-Dl</translation>
     </message>
 </context>
 <context>
@@ -874,7 +874,7 @@
     <message>
         <location filename="../qml/harbour-videoPlayer.qml" line="432"/>
         <source>Dismiss</source>
-        <translation>Descartar</translation>
+        <translation>摒弃</translation>
     </message>
 </context>
 <context>
@@ -882,7 +882,7 @@
     <message>
         <location filename="../qml/pages/videoPlayer.qml" line="229"/>
         <source>Load with ytdl</source>
-        <translation>Cargar con ytdl</translation>
+        <translation>用ytdl加载</translation>
     </message>
     <message>
         <location filename="../qml/pages/videoPlayer.qml" line="250"/>
@@ -892,12 +892,12 @@
     <message>
         <location filename="../qml/pages/videoPlayer.qml" line="268"/>
         <source>Download</source>
-        <translation>Descargar</translation>
+        <translation>下载</translation>
     </message>
     <message>
         <location filename="../qml/pages/videoPlayer.qml" line="284"/>
         <source>Add to bookmarks</source>
-        <translation>Añadir a marcadores</translation>
+        <translation>添加到收藏</translation>
     </message>
     <message>
         <location filename="../qml/pages/videoPlayer.qml" line="300"/>
@@ -912,7 +912,7 @@
     <message>
         <location filename="../qml/pages/videoPlayer.qml" line="471"/>
         <source>Dismiss</source>
-        <translation>Descartar</translation>
+        <translation>摒弃</translation>
     </message>
     <message>
         <location filename="../qml/pages/videoPlayer.qml" line="774"/>
@@ -926,28 +926,28 @@ The video cannot be played due to a problem allocating resources.
         <source>
 The audio and or video format is not supported.</source>
         <translation type="unfinished">
-Formato de audio y vídeo no soportado.</translation>
+不支持音频或视频格式</translation>
     </message>
     <message>
         <location filename="../qml/pages/videoPlayer.qml" line="777"/>
         <source>
 The video cannot be played due to network issues.</source>
         <translation type="unfinished">
-No se puede reproducir vídeo por problemas de conexión.</translation>
+因网络问题无法播放此视频</translation>
     </message>
     <message>
         <location filename="../qml/pages/videoPlayer.qml" line="778"/>
         <source>
 The video cannot be played due to insufficient permissions.</source>
         <translation type="unfinished">
-No se puede reproducir vídeo debido a permisos insuficientes.</translation>
+因权限不足, 无法播放视频</translation>
     </message>
     <message>
         <location filename="../qml/pages/videoPlayer.qml" line="779"/>
         <source>
 The video cannot be played because the media service could not be instantiated.</source>
         <translation type="unfinished">
-No se puede reproducir vídeo porque no se pudo instanciar el servicio multimedia.</translation>
+因无法实例化媒体服务，无法播放此视频</translation>
     </message>
 </context>
 <context>
@@ -955,7 +955,7 @@ No se puede reproducir vídeo porque no se pudo instanciar el servicio multimedi
     <message>
         <location filename="../qml/pages/ytQualityChooser.qml" line="57"/>
         <source>Choose Quality</source>
-        <translation>Elige calidad</translation>
+        <translation>选择质量</translation>
     </message>
 </context>
 </TS>

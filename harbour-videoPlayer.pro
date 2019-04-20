@@ -69,11 +69,22 @@ DISTFILES += \
     qml/pages/fileman/helper/fmComponents/PlacesPage.qml \
     qml/pages/fileman/helper/fmComponents/RenameDialog.qml \
     translations/harbour-videoPlayer-de.ts \
-    translations/harbour-videoPlayer-es.ts
+    translations/harbour-videoPlayer-es.ts \
+    translations/harbour-videoPlayer-sv.ts \
+    translations/harbour-videoPlayer-zh_cn.ts \
+    translations/harbour-videoPlayer-nl.ts \
+    qml/pages/helper/Mplayer.qml \
+    qml/pages/helper/SwipeArea.qml \
+    qml/pages/helper/MinPlayerPanel.qml \
+    qml/pages/helper/MprisConnector.qml
 
 # to disable building translations every time, comment out the
 # following CONFIG line
 CONFIG += sailfishapp_i18n
 
 TRANSLATIONS += translations/harbour-videoPlayer-de.ts \
-                translations/harbour-videoPlayer-es.ts
+                translations/harbour-videoPlayer-es.ts \
+                translations/harbour-videoPlayer-sv.ts \
+                translations/harbour-videoPlayer-zh_cn.ts \
+                translations/harbour-videoPlayer-nl.ts
+

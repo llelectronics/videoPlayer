@@ -48,7 +48,7 @@ Page {
     property bool ytDetect: true
     property string websiteUrl: "https://m.youtube.com/"
     property string searchUrl: "https://m.youtube.com/results?q="
-    property string uA: "Mozilla/5.0 (Linux; U; Android 2.2; en-us; Nexus One Build/FRF91) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1"
+    property string uA: "Mozilla/5.0 (Linux; Maemo; Android 2.3.5; U; Sailfish) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1"
 
     function workaroundRefresh() {
         ytView.update();
@@ -106,7 +106,7 @@ Page {
             overridePageStackNavigation: true
             focus: true
 
-            property variant itemSelectorIndex: -1
+            property int itemSelectorIndex: -1
             property QtObject searchField
 
             experimental.itemSelector: PopOver {}
@@ -192,38 +192,63 @@ Page {
                     console.log('onMessageReceived: ' + message.data );
                     return
                 }
-                if (data.href != "" && data.href != "CANT FIND LINK") {
+                if (data.href !== "" && data.href !== "CANT FIND LINK") {
                     contextMenu.clickedUrl = data.href
                     contextMenu.show()
                 }
             }
 
-
-
-            onNavigationRequested: {
-                //console.debug("[SecondPage.qml] Request navigation to " + request.url)
-                if (YT.checkYoutube(request.url.toString()) === true && ytDetect === true) {
-                    if (YT.getYtID(request.url.toString()) != "") {
-                        //console.debug("[SecondPage.qml] Youtube Link detected")
-                        request.action = WebView.IgnoreRequest;
-                        dataContainer.isYtUrl = true;
-                        //var yturl = YT.getYoutubeVid(request.url.toString());
-                        //YT.getYoutubeTitle(url.toString());
+            onUrlChanged: {
+                if (YT.checkYoutube(url.toString()) === true && ytDetect === true) {
+                    if (YT.getYtID(url.toString()) !== "") {
                         if (dataContainer != null) {
-                            dataContainer.streamUrl = request.url;
-                            dataContainer.originalUrl = request.url
-                            dataContainer.isPlaylist = false;
-                            dataContainer.isLiveStream = false;
-                            dataContainer.loadPlayer();
+                            if (dataContainer.alwaysYtdl) {
+                                _ytdl.setUrl(url)
+                                _ytdl.setParameter("-f " + dataContainer.ytdlQual)
+                                _ytdl.getStreamUrl()
+                                _ytdl.getStreamTitle()
+                                dataContainer.isYtUrl = false
+                                dataContainer.busy.visible = true;
+                                dataContainer.busy.running = true;
+                            }
+                            else {
+                                dataContainer.isYtUrl = true;
+                                dataContainer.streamUrl = url;
+                                dataContainer.originalUrl = url
+                                dataContainer.isPlaylist = false;
+                                dataContainer.isLiveStream = false;
+                                dataContainer.loadPlayer();
+                            }
                         }
-                        ytView.reload(); // WTF why is this working with IgnoreRequest
-
-                    } else { request.action = WebView.AcceptRequest; }
-                }
-                else {
-                    request.action = WebView.AcceptRequest;
+                        ytView.goBack();
+                    }
                 }
             }
+
+//            onNavigationRequested: {
+//                //console.debug("[SecondPage.qml] Request navigation to " + request.url)
+//                if (YT.checkYoutube(request.url.toString()) === true && ytDetect === true) {
+//                    if (YT.getYtID(request.url.toString()) !== "") {
+//                        //console.debug("[SecondPage.qml] Youtube Link detected")
+//                        request.action = WebView.IgnoreRequest;
+//                        dataContainer.isYtUrl = true;
+//                        //var yturl = YT.getYoutubeVid(request.url.toString());
+//                        //YT.getYoutubeTitle(url.toString());
+//                        if (dataContainer != null) {
+//                            dataContainer.streamUrl = request.url;
+//                            dataContainer.originalUrl = request.url
+//                            dataContainer.isPlaylist = false;
+//                            dataContainer.isLiveStream = false;
+//                            dataContainer.loadPlayer();
+//                        }
+//                        ytView.reload(); // WTF why is this working with IgnoreRequest
+
+//                    } else { request.action = WebView.AcceptRequest; }
+//                }
+//                else {
+//                    request.action = WebView.AcceptRequest;
+//                }
+//            }
 
             VerticalScrollDecorator {}
 

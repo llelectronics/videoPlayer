@@ -28,9 +28,12 @@ public:
 private:
     QString _oggAudio;
     QString _opusAudio;
+    QString _fullHdVideo;
+    QString _fullHdAudio;
     QString _format;
     QProcess oggProcess;
     QProcess opusProcess;
+    QProcess fullHdProcess;
 signals:
     void streamUrlChanged(QString changedUrl);
     void sTitleChanged(QString sTitle);
@@ -39,6 +42,7 @@ signals:
     void error(QString message);
     void oggAudioChanged();
     void opusAudioChanged();
+    void fullHdChanged();
 public slots:
     void setUrl(QString url)
     {
@@ -63,6 +67,14 @@ public slots:
     QString getOpusAudioUrl()
     {
         return _opusAudio;
+    }
+    QString getFullHdVideoUrl()
+    {
+        return _fullHdVideo;
+    }
+    QString getFullHdAudioUrl()
+    {
+        return _fullHdAudio;
     }
     void checkAndInstall()
     {
@@ -118,6 +130,20 @@ public slots:
         getOpusUrl();
     }
 
+    void getDashUrls()
+    {
+        getFullHdUrls();
+    }
+
+    void getFullHdUrls()
+    {
+        checkAndInstall();
+        parameter = " ";
+        parameter += "-f 137,140";
+        //parameter += "-f 248,251";
+        fullHdProcess.start(data_dir + "/youtube-dl " + parameter + " -g " + reqUrl);
+        connect(&fullHdProcess, SIGNAL(finished(int)), this, SLOT(getFullHdUrlOutput(int)));
+    }
     void getVorbisUrl()
     {
         checkAndInstall();
@@ -133,6 +159,20 @@ public slots:
         parameter += "-f 251";
         opusProcess.start(data_dir + "/youtube-dl " + parameter + " -g " + reqUrl);
         connect(&opusProcess, SIGNAL(finished(int)), this, SLOT(getOpusUrlOutput(int)));
+    }
+    void getFullHdUrlOutput(int exitCode)
+    {
+        if (exitCode == 0) {
+            QByteArray out = fullHdProcess.readAllStandardOutput();
+            QList<QByteArray> outputList = out.split('\n');
+            qDebug() << "Called the C++ slot and got following url:" << outputList[0];
+            _fullHdVideo = outputList[0];
+            _fullHdAudio = outputList[1];
+            fullHdChanged();
+        }
+        else {
+            printError(&oggProcess);
+        }
     }
     void getOggUrlOutput(int exitCode)
     {
