@@ -24,7 +24,7 @@
     <message>
         <location filename="../qml/pages/AddBookmark.qml" line="60"/>
         <source>Title of the bookmark</source>
-        <translation type="unfinished"></translation>
+        <translation>Título del marcador</translation>
     </message>
     <message>
         <location filename="../qml/pages/AddBookmark.qml" line="62"/>
@@ -34,7 +34,7 @@
     <message>
         <location filename="../qml/pages/AddBookmark.qml" line="68"/>
         <source>URL of bookmark</source>
-        <translation type="unfinished"></translation>
+        <translation>URL del marcardor</translation>
     </message>
     <message>
         <location filename="../qml/pages/AddBookmark.qml" line="71"/>
@@ -381,7 +381,7 @@
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="369"/>
         <source>Show Player</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar reproductor</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="393"/>
@@ -861,7 +861,7 @@
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="477"/>
         <source>Try to load all youtube videos with ytdl</source>
-        <translation type="unfinished"></translation>
+        <translation>Cargar vídeos de youtube con ytdl</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="484"/>
@@ -887,7 +887,7 @@
     <message>
         <location filename="../qml/pages/videoPlayer.qml" line="250"/>
         <source>Download Youtube Video</source>
-        <translation type="unfinished"></translation>
+        <translation>Descargar vídeo de Youtube</translation>
     </message>
     <message>
         <location filename="../qml/pages/videoPlayer.qml" line="268"/>
@@ -902,12 +902,12 @@
     <message>
         <location filename="../qml/pages/videoPlayer.qml" line="300"/>
         <source>Load Subtitle</source>
-        <translation type="unfinished"></translation>
+        <translation>Cargar subtítulo</translation>
     </message>
     <message>
         <location filename="../qml/pages/videoPlayer.qml" line="304"/>
         <source>Play from last known position</source>
-        <translation type="unfinished"></translation>
+        <translation>Reproducir desde la última posición</translation>
     </message>
     <message>
         <location filename="../qml/pages/videoPlayer.qml" line="471"/>
@@ -919,34 +919,36 @@
         <source>
 The video cannot be played due to a problem allocating resources.
                         On Youtube Videos please make sure to be logged in. Some videos might be geoblocked or require you to be logged into youtube.</source>
-        <translation type="unfinished"></translation>
+        <translation>
+No se puede reproducir vídeo por un problema de asignación de recursos.
+Asegúrate haber iniciado sesión en los vídeos de Youtube. Algunos vídeos pueden estar bloqueados geográficamente o requieren inicio de sesión.</translation>
     </message>
     <message>
         <location filename="../qml/pages/videoPlayer.qml" line="776"/>
         <source>
 The audio and or video format is not supported.</source>
-        <translation type="unfinished">
+        <translation>
 Formato de audio y vídeo no soportado.</translation>
     </message>
     <message>
         <location filename="../qml/pages/videoPlayer.qml" line="777"/>
         <source>
 The video cannot be played due to network issues.</source>
-        <translation type="unfinished">
+        <translation>
 No se puede reproducir vídeo por problemas de conexión.</translation>
     </message>
     <message>
         <location filename="../qml/pages/videoPlayer.qml" line="778"/>
         <source>
 The video cannot be played due to insufficient permissions.</source>
-        <translation type="unfinished">
+        <translation>
 No se puede reproducir vídeo debido a permisos insuficientes.</translation>
     </message>
     <message>
         <location filename="../qml/pages/videoPlayer.qml" line="779"/>
         <source>
 The video cannot be played because the media service could not be instantiated.</source>
-        <translation type="unfinished">
+        <translation>
 No se puede reproducir vídeo porque no se pudo instanciar el servicio multimedia.</translation>
     </message>
 </context>
