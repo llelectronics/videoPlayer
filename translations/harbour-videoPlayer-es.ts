@@ -921,7 +921,7 @@ The video cannot be played due to a problem allocating resources.
                         On Youtube Videos please make sure to be logged in. Some videos might be geoblocked or require you to be logged into youtube.</source>
         <translation>
 No se puede reproducir vídeo por un problema de asignación de recursos.
-Asegúrate haber iniciado sesión en los vídeos de Youtube. Algunos vídeos pueden estar bloqueados geográficamente o requieren inicio de sesión.</translation>
+Asegúrate de haber iniciado sesión para los vídeos de Youtube. Algunos vídeos pueden estar bloqueados geográficamente o requieren inicio de sesión.</translation>
     </message>
     <message>
         <location filename="../qml/pages/videoPlayer.qml" line="776"/>
