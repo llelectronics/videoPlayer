@@ -57,6 +57,7 @@ Page {
     property bool isLiveStream: false
     property bool alwaysYtdl: false
     property bool isDash: false
+    property bool showMinPlayer: false
     /////////////////////////////////////////////////////
 
     // Videoplayer properties //////////////////////////

@@ -327,80 +327,80 @@
 <context>
     <name>FirstPage</name>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="210"/>
+        <location filename="../qml/pages/FirstPage.qml" line="211"/>
         <source>Open Video</source>
         <extracomment>For choosing video to open from the device</extracomment>
         <translation>Video öffnen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="348"/>
+        <location filename="../qml/pages/FirstPage.qml" line="349"/>
         <source>No History</source>
         <translation>Kein Verlauf</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="249"/>
-        <location filename="../qml/pages/FirstPage.qml" line="392"/>
+        <location filename="../qml/pages/FirstPage.qml" line="250"/>
+        <location filename="../qml/pages/FirstPage.qml" line="393"/>
         <source>History</source>
         <translation>Verlauf</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="255"/>
+        <location filename="../qml/pages/FirstPage.qml" line="256"/>
         <source>Bookmarks</source>
         <translation>Lesezeichen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="261"/>
+        <location filename="../qml/pages/FirstPage.qml" line="262"/>
         <source>Search on Youtube</source>
         <translation>Auf Youtube suchen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="267"/>
+        <location filename="../qml/pages/FirstPage.qml" line="268"/>
         <source>Browse Files</source>
         <translation>Dateimanager</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="273"/>
+        <location filename="../qml/pages/FirstPage.qml" line="274"/>
         <source>Enter URL</source>
         <translation>URL eingeben</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="279"/>
+        <location filename="../qml/pages/FirstPage.qml" line="280"/>
         <source>Playlists</source>
         <translation>Playlisten</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="361"/>
+        <location filename="../qml/pages/FirstPage.qml" line="362"/>
         <source>About </source>
         <translation>Über </translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="365"/>
+        <location filename="../qml/pages/FirstPage.qml" line="366"/>
         <source>Settings</source>
         <translation>Einstellungen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="369"/>
+        <location filename="../qml/pages/FirstPage.qml" line="370"/>
         <source>Show Player</source>
         <translation>Player anzeigen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="393"/>
-        <location filename="../qml/pages/FirstPage.qml" line="406"/>
+        <location filename="../qml/pages/FirstPage.qml" line="394"/>
+        <location filename="../qml/pages/FirstPage.qml" line="407"/>
         <source>Open</source>
         <translation>Öffnen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="398"/>
+        <location filename="../qml/pages/FirstPage.qml" line="399"/>
         <source>Type in URL here</source>
         <translation>URL hier eingeben</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="399"/>
+        <location filename="../qml/pages/FirstPage.qml" line="400"/>
         <source>URL to media</source>
         <translation>URL zur Mediendatei</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="475"/>
+        <location filename="../qml/pages/FirstPage.qml" line="476"/>
         <source>Youtube-Dl updated.</source>
         <translation>Youtube-Dl aktualisiert.</translation>
     </message>
@@ -743,128 +743,133 @@
 <context>
     <name>SettingsPage</name>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="43"/>
-        <location filename="../qml/pages/SettingsPage.qml" line="464"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="44"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="473"/>
         <source>Clear History</source>
         <translation>Verlauf leeren</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="96"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="98"/>
         <source>Save Settings</source>
         <translation>Einstellungen speichern</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="117"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="119"/>
         <source>Load Defaults</source>
         <translation>Standardwerte laden</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="242"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="244"/>
         <source>General</source>
         <translation>Allgemein</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="286"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="288"/>
         <source>Load Subtitles</source>
         <translation>Untertitel laden</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="293"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="295"/>
         <source>Bold Subtitle Font</source>
         <translation>Fette Untertitelschrift</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="301"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="303"/>
         <source>Subtitle Font Size</source>
         <translation>Untertitelschriftart</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="312"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="314"/>
         <source>Small</source>
         <translation>Klein</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="313"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="315"/>
         <source>Medium</source>
         <translation>Mittel</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="314"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="316"/>
         <source>Large</source>
         <translation>Groß</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="315"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="317"/>
         <source>Extra Large</source>
         <translation>Extra Groß</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="340"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="342"/>
         <source>Subtitle Color</source>
         <translation>Untertitelfarbe</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="357"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="359"/>
         <source>Use solid subtitletext background</source>
         <translation>Undurchsichtigen Untertitelhintergrund</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="373"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="367"/>
+        <source>Show mini player when swiping back from main player</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SettingsPage.qml" line="382"/>
         <source>Browse File Dialog</source>
         <translation>Dateidurchsuchen Dialog</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="384"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="393"/>
         <source>Filemanager</source>
         <translation>Dateimanager</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="385"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="394"/>
         <source>Videogallery</source>
         <translation>Videogallerie</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="397"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="406"/>
         <source>Default Youtube Quality</source>
         <translation>Standard Youtube Qualität</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="425"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="434"/>
         <source>Use live preview when minimized</source>
         <translation>Live Preview anzeigen wenn minimiert</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="432"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="441"/>
         <source>Music Only Indicator</source>
         <translation>&apos;Nur Musik&apos; Indikator</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="443"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="452"/>
         <source>Default (Sound Icon)</source>
         <translation>Standard (Sound Icon)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="444"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="453"/>
         <source>MC (animated Music Cassette)</source>
         <translation>MC (animierte Musikkasette)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="445"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="454"/>
         <source>EQ (animated Equalizer)</source>
         <translation>EQ (animierter Equalizer)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="457"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="466"/>
         <source>Clear webview data on exit</source>
         <translation>Webviewdaten beim Beenden löschen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="477"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="486"/>
         <source>Try to load all youtube videos with ytdl</source>
         <translation>Versuche alle Youtube Videos mit ytdl zu laden</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="484"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="493"/>
         <source>Update Youtube-Dl</source>
         <translation>Youtube-Dl updaten</translation>
     </message>
@@ -880,67 +885,67 @@
 <context>
     <name>videoPlayer</name>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="229"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="231"/>
         <source>Load with ytdl</source>
         <translation>Mit Ytdl laden</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="250"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="252"/>
         <source>Download Youtube Video</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="268"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="270"/>
         <source>Download</source>
         <translation>Herunterladen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="284"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="286"/>
         <source>Add to bookmarks</source>
         <translation>Zu Lesezeichen hinzufügen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="300"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="302"/>
         <source>Load Subtitle</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="304"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="306"/>
         <source>Play from last known position</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="471"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="473"/>
         <source>Dismiss</source>
         <translation>Ausblenden</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="774"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="776"/>
         <source>
 The video cannot be played due to a problem allocating resources.
                         On Youtube Videos please make sure to be logged in. Some videos might be geoblocked or require you to be logged into youtube.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="776"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="778"/>
         <source>
 The audio and or video format is not supported.</source>
         <translation type="unfinished">Das Audio oder Videoformat wird nicht unterstützt.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="777"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="779"/>
         <source>
 The video cannot be played due to network issues.</source>
         <translation type="unfinished">Dieses Video kann wegen Netzwerkproblemen nicht abgespielt werden.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="778"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="780"/>
         <source>
 The video cannot be played due to insufficient permissions.</source>
         <translation type="unfinished">Dieses Video kann wegen unzureichenden Berechtigungen nicht abgespielt werden.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="779"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="781"/>
         <source>
 The video cannot be played because the media service could not be instantiated.</source>
         <translation type="unfinished">Dieses Video konnte wegen eines nicht instanzierten Mediendienstes nicht abgespielt werden.</translation>

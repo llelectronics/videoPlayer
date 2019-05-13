@@ -84,16 +84,18 @@ Page {
             //console.debug("[videoPlayer.qml] Destruction going on so write : " + mediaPlayer.source + " with timecode: " + mediaPlayer.position + " to db")
             DB.addPosition(sourcePath,mediaPlayer.position);
         }
-        minPlayer.source = mediaPlayer.source
-        minPlayer.seek(mediaPlayer.position)
-        minPlayer.streamTitle = streamTitle
-        minPlayer.isPlaylist = isPlaylist
-        if (mediaPlayer.playbackState === MediaPlayer.PlayingState) minPlayer.play();
-        mediaPlayer.pause();
-        mprisPlayer.hide();
-        minPlayerLoader.active = true;
-        minPlayerLoader.sourceComponent = minPlayerComponent
-        minPlayerLoader.item.show()
+        if (mainWindow.firstPage.showMinPlayer) {
+            minPlayer.source = mediaPlayer.source
+            minPlayer.seek(mediaPlayer.position)
+            minPlayer.streamTitle = streamTitle
+            minPlayer.isPlaylist = isPlaylist
+            if (mediaPlayer.playbackState === MediaPlayer.PlayingState) minPlayer.play();
+            mediaPlayer.pause();
+            mprisPlayer.hide();
+            minPlayerLoader.active = true;
+            minPlayerLoader.sourceComponent = minPlayerComponent
+            minPlayerLoader.item.show()
+        }
 //        mediaPlayer.stop();
 //        mediaPlayer.source = "";
 //        mediaPlayer.play();

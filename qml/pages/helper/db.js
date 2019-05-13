@@ -358,6 +358,7 @@ function getSettings() {
             else if (rs.rows.item(i).setting == "onlyMusicState") mainWindow.firstPage.onlyMusicState = rs.rows.item(i).value
             else if (rs.rows.item(i).setting == "clearWebViewOnExit") mainWindow.clearWebViewOnExit = stringToBoolean(rs.rows.item(i).value)
             else if (rs.rows.item(i).setting == "alwaysYtdl") mainWindow.firstPage.alwaysYtdl = stringToBoolean(rs.rows.item(i).value)
+            else if (rs.rows.item(i).setting == "showMinPlayer") mainWindow.firstPage.showMinPlayer = stringToBoolean(rs.rows.item(i).value)
         }
     })
 }

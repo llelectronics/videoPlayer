@@ -327,80 +327,80 @@
 <context>
     <name>FirstPage</name>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="210"/>
+        <location filename="../qml/pages/FirstPage.qml" line="211"/>
         <source>Open Video</source>
         <extracomment>For choosing video to open from the device</extracomment>
         <translation>打开视频</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="348"/>
+        <location filename="../qml/pages/FirstPage.qml" line="349"/>
         <source>No History</source>
         <translation>无历史</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="249"/>
-        <location filename="../qml/pages/FirstPage.qml" line="392"/>
+        <location filename="../qml/pages/FirstPage.qml" line="250"/>
+        <location filename="../qml/pages/FirstPage.qml" line="393"/>
         <source>History</source>
         <translation>历史</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="255"/>
+        <location filename="../qml/pages/FirstPage.qml" line="256"/>
         <source>Bookmarks</source>
         <translation>收藏</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="261"/>
+        <location filename="../qml/pages/FirstPage.qml" line="262"/>
         <source>Search on Youtube</source>
         <translation>在Youtube搜索</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="267"/>
+        <location filename="../qml/pages/FirstPage.qml" line="268"/>
         <source>Browse Files</source>
         <translation>浏览文件</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="273"/>
+        <location filename="../qml/pages/FirstPage.qml" line="274"/>
         <source>Enter URL</source>
         <translation>输入链接</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="279"/>
+        <location filename="../qml/pages/FirstPage.qml" line="280"/>
         <source>Playlists</source>
         <translation>播放列表</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="361"/>
+        <location filename="../qml/pages/FirstPage.qml" line="362"/>
         <source>About </source>
         <translation>关于</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="365"/>
+        <location filename="../qml/pages/FirstPage.qml" line="366"/>
         <source>Settings</source>
         <translation>设置</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="369"/>
+        <location filename="../qml/pages/FirstPage.qml" line="370"/>
         <source>Show Player</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="393"/>
-        <location filename="../qml/pages/FirstPage.qml" line="406"/>
+        <location filename="../qml/pages/FirstPage.qml" line="394"/>
+        <location filename="../qml/pages/FirstPage.qml" line="407"/>
         <source>Open</source>
         <translation>打开</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="398"/>
+        <location filename="../qml/pages/FirstPage.qml" line="399"/>
         <source>Type in URL here</source>
         <translation>在此输入链接</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="399"/>
+        <location filename="../qml/pages/FirstPage.qml" line="400"/>
         <source>URL to media</source>
         <translation>到媒体的链接</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="475"/>
+        <location filename="../qml/pages/FirstPage.qml" line="476"/>
         <source>Youtube-Dl updated.</source>
         <translation>Youtube-Dl 已更新</translation>
     </message>
@@ -743,128 +743,133 @@
 <context>
     <name>SettingsPage</name>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="43"/>
-        <location filename="../qml/pages/SettingsPage.qml" line="464"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="44"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="473"/>
         <source>Clear History</source>
         <translation>清除历史</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="96"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="98"/>
         <source>Save Settings</source>
         <translation>保存设置</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="117"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="119"/>
         <source>Load Defaults</source>
         <translation>载入默认</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="242"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="244"/>
         <source>General</source>
         <translation>常规</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="286"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="288"/>
         <source>Load Subtitles</source>
         <translation>载入字幕</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="293"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="295"/>
         <source>Bold Subtitle Font</source>
         <translation>粗体字幕字体</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="301"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="303"/>
         <source>Subtitle Font Size</source>
         <translation>字幕字体大小</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="312"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="314"/>
         <source>Small</source>
         <translation>小号</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="313"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="315"/>
         <source>Medium</source>
         <translation>中号</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="314"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="316"/>
         <source>Large</source>
         <translation>大号</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="315"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="317"/>
         <source>Extra Large</source>
         <translation>特大号</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="340"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="342"/>
         <source>Subtitle Color</source>
         <translation>字幕色彩</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="357"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="359"/>
         <source>Use solid subtitletext background</source>
         <translation>使用实心字幕背景</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="373"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="367"/>
+        <source>Show mini player when swiping back from main player</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SettingsPage.qml" line="382"/>
         <source>Browse File Dialog</source>
         <translation>浏览文件对话</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="384"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="393"/>
         <source>Filemanager</source>
         <translation>文件管理器</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="385"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="394"/>
         <source>Videogallery</source>
         <translation>视频图库</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="397"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="406"/>
         <source>Default Youtube Quality</source>
         <translation>默认Youtube视频质量</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="425"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="434"/>
         <source>Use live preview when minimized</source>
         <translation>最小化时使用实时预览</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="432"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="441"/>
         <source>Music Only Indicator</source>
         <translation>音乐指示灯</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="443"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="452"/>
         <source>Default (Sound Icon)</source>
         <translation>默认 (声音图标)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="444"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="453"/>
         <source>MC (animated Music Cassette)</source>
         <translation>MC (动画音乐盒式磁带·)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="445"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="454"/>
         <source>EQ (animated Equalizer)</source>
         <translation>EQ (动画均衡器)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="457"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="466"/>
         <source>Clear webview data on exit</source>
         <translation>退出时清除网络预览数据</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="477"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="486"/>
         <source>Try to load all youtube videos with ytdl</source>
         <translation>尝试以ytdl加载所有youtube视频</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="484"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="493"/>
         <source>Update Youtube-Dl</source>
         <translation>更新 Youtube-Dl</translation>
     </message>
@@ -880,70 +885,70 @@
 <context>
     <name>videoPlayer</name>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="229"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="231"/>
         <source>Load with ytdl</source>
         <translation>用ytdl加载</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="250"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="252"/>
         <source>Download Youtube Video</source>
         <translation>下载youtube视频</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="268"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="270"/>
         <source>Download</source>
         <translation>下载</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="284"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="286"/>
         <source>Add to bookmarks</source>
         <translation>添加到收藏</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="300"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="302"/>
         <source>Load Subtitle</source>
         <translation>加载字幕</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="304"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="306"/>
         <source>Play from last known position</source>
         <translation>从上次播放位置播放</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="471"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="473"/>
         <source>Dismiss</source>
         <translation>摒弃</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="774"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="776"/>
         <source>
 The video cannot be played due to a problem allocating resources.
                         On Youtube Videos please make sure to be logged in. Some videos might be geoblocked or require you to be logged into youtube.</source>
         <translation>由于分配源的缘故，无法播放该视频。请登陆到Youtube,因为某些视频被地理锁定了。</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="776"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="778"/>
         <source>
 The audio and or video format is not supported.</source>
         <translation>
 不支持音频或视频格式</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="777"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="779"/>
         <source>
 The video cannot be played due to network issues.</source>
         <translation>
 因网络问题无法播放此视频</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="778"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="780"/>
         <source>
 The video cannot be played due to insufficient permissions.</source>
         <translation>
 因权限不足, 无法播放视频</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="779"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="781"/>
         <source>
 The video cannot be played because the media service could not be instantiated.</source>
         <translation>

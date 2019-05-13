@@ -37,6 +37,7 @@ Dialog {
         ytDefaultQualCombo.currentIndex = 0;
         clearWebViewOnExitSwitch.checked = false;
         alwaysYtdlSwitch.checked = false;
+        showMinPlayerSwitch.checked = false;
     }
 
     function clearHistory() {
@@ -57,6 +58,7 @@ Dialog {
         DB.addSetting("onlyMusicState", onlyMusicCombo.onlyMusicState.toString());
         DB.addSetting("clearWebViewOnExit", clearWebViewOnExitSwitch.checked.toString());
         DB.addSetting("alwaysYtdl", alwaysYtdlSwitch.checked.toString());
+        DB.addSetting("showMinPlayer", showMinPlayerSwitch.checked.toString());
         DB.getSettings();
     }
 
@@ -357,6 +359,13 @@ Dialog {
                 text: qsTr("Use solid subtitletext background")
                 checked: mainWindow.firstPage.subtitleSolid
                 visible: loadSubtitlesSwitch.checked
+            }
+
+            TextSwitch {
+                id: showMinPlayerSwitch
+                anchors.horizontalCenter: parent.horizontalCenter
+                text: qsTr("Show mini player when swiping back from main player")
+                checked: mainWindow.firstPage.showMinPlayer
             }
 
             TextSwitch {
