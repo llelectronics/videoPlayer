@@ -82,7 +82,16 @@ public slots:
         ytdlBin.setFileName(data_dir + "/youtube-dl");
         if (!ytdlBin.exists()) {
             ytdlBin.setFileName("/usr/share/harbour-videoPlayer/qml/pages/helper/youtube-dl");
-            ytdlBin.copy(data_dir + "/youtube-dl");
+            if (ytdlBin.exists()) {
+                ytdlBin.setFileName("/usr/share/harbour-videoPlayer/qml/pages/helper/youtube-dl");
+                ytdlBin.copy(data_dir + "/youtube-dl");
+            }
+            else {
+                QProcess *ytdlBinDownload;
+                ytdlBinDownload->start("curl -L https://yt-dl.org/downloads/latest/youtube-dl -o " + data_dir + "/youtube-dl");
+                ytdlBinDownload->waitForFinished();
+            }
+            ytdlBin.setFileName(data_dir + "/youtube-dl");
         }
         ytdlBin.setPermissions(QFileDevice::ExeUser|QFileDevice::ExeGroup|QFileDevice::ExeOther|QFileDevice::ReadUser|QFileDevice::ReadGroup|QFileDevice::ReadOther|QFileDevice::WriteUser|QFileDevice::WriteGroup|QFileDevice::WriteOther);
 
