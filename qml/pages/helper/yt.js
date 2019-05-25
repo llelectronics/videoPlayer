@@ -219,22 +219,22 @@ function getYoutubeStream(youtube_id) {
 
 
     if (ytfailCount == 0) {
-        doc.open("GET", "http://www.youtube.com/get_video_info?video_id=" + youtube_id);
+        doc.open("GET", "https://www.youtube.com/get_video_info?video_id=" + youtube_id);
         doc.send();
     }
     else if (ytfailCount == 1) {
         doc.abort()
-        doc.open("GET", "http://www.youtube.com/get_video_info?video_id=" + youtube_id + "&el=embedded");
+        doc.open("GET", "https://www.youtube.com/get_video_info?video_id=" + youtube_id + "&el=embedded");
         doc.send();
     }
     else if (ytfailCount == 2) {
         doc.abort()
-        doc.open("GET", "http://www.youtube.com/get_video_info?video_id=" + youtube_id + "&el=detailpage");
+        doc.open("GET", "https://www.youtube.com/get_video_info?video_id=" + youtube_id + "&el=detailpage");
         doc.send();
     }
     else if (ytfailCount == 3) {
         doc.abort()
-        doc.open("GET", "http://www.youtube.com/get_video_info?video_id=" + youtube_id + "&el=vevo");
+        doc.open("GET", "https://www.youtube.com/get_video_info?video_id=" + youtube_id + "&el=vevo");
         doc.send();
     }
     else {

@@ -811,7 +811,7 @@
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="367"/>
         <source>Show mini player when swiping back from main player</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeige Mini Player nach zurückwischen vom Hauptplayer</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="382"/>
