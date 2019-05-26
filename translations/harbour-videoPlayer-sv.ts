@@ -381,7 +381,7 @@
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="370"/>
         <source>Show Player</source>
-        <translation type="unfinished"></translation>
+        <translation>Visa spelare</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="394"/>
@@ -811,7 +811,7 @@
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="367"/>
         <source>Show mini player when swiping back from main player</source>
-        <translation type="unfinished"></translation>
+        <translation>Visa minispelare vid tillbakasvep från huvudspelare</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="382"/>
@@ -866,7 +866,7 @@
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="486"/>
         <source>Try to load all youtube videos with ytdl</source>
-        <translation type="unfinished"></translation>
+        <translation>Försöka läsa in alla videor med ytdl</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="493"/>
@@ -892,7 +892,7 @@
     <message>
         <location filename="../qml/pages/videoPlayer.qml" line="252"/>
         <source>Download Youtube Video</source>
-        <translation type="unfinished"></translation>
+        <translation>Ladda ner Youtube-video</translation>
     </message>
     <message>
         <location filename="../qml/pages/videoPlayer.qml" line="270"/>
@@ -907,12 +907,12 @@
     <message>
         <location filename="../qml/pages/videoPlayer.qml" line="302"/>
         <source>Load Subtitle</source>
-        <translation type="unfinished"></translation>
+        <translation>Läs in undertext</translation>
     </message>
     <message>
         <location filename="../qml/pages/videoPlayer.qml" line="306"/>
         <source>Play from last known position</source>
-        <translation type="unfinished"></translation>
+        <translation>Spela upp från senaste kända position</translation>
     </message>
     <message>
         <location filename="../qml/pages/videoPlayer.qml" line="473"/>
@@ -924,34 +924,36 @@
         <source>
 The video cannot be played due to a problem allocating resources.
                         On Youtube Videos please make sure to be logged in. Some videos might be geoblocked or require you to be logged into youtube.</source>
-        <translation type="unfinished"></translation>
+        <translation>
+Det går inte att spela upp videon på grund av problem med att resursallokering.
+                        Se till att vara inloggad på Youtube-videor. Vissa videor kan vara geoblockerade eller kräva att du är inloggad på YouTube.</translation>
     </message>
     <message>
         <location filename="../qml/pages/videoPlayer.qml" line="778"/>
         <source>
 The audio and or video format is not supported.</source>
-        <translation type="unfinished">
-Ljud- eller videoformatet stöds inte.</translation>
+        <translation>
+Ljud- och/eller videoformatet stöds inte.</translation>
     </message>
     <message>
         <location filename="../qml/pages/videoPlayer.qml" line="779"/>
         <source>
 The video cannot be played due to network issues.</source>
-        <translation type="unfinished">
+        <translation>
 Videon kan inte spelas upp, på grund av nätverksproblem.</translation>
     </message>
     <message>
         <location filename="../qml/pages/videoPlayer.qml" line="780"/>
         <source>
 The video cannot be played due to insufficient permissions.</source>
-        <translation type="unfinished">
+        <translation>
 Videon kan inte spelas upp, på grund av otillräckliga rättigheter.</translation>
     </message>
     <message>
         <location filename="../qml/pages/videoPlayer.qml" line="781"/>
         <source>
 The video cannot be played because the media service could not be instantiated.</source>
-        <translation type="unfinished">
+        <translation>
 Videon kan inte spelas upp, eftersom medietjänsten inte kunde startas.</translation>
     </message>
 </context>
