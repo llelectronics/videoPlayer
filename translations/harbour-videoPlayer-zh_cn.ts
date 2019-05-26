@@ -381,7 +381,7 @@
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="370"/>
         <source>Show Player</source>
-        <translation type="unfinished"></translation>
+        <translation>显示播放器</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="394"/>
@@ -811,7 +811,7 @@
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="367"/>
         <source>Show mini player when swiping back from main player</source>
-        <translation type="unfinished"></translation>
+        <translation>从主播放器返回时显示微型播放器</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="382"/>
@@ -841,7 +841,7 @@
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="441"/>
         <source>Music Only Indicator</source>
-        <translation>音乐指示灯</translation>
+        <translation>音乐指示器</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="452"/>
