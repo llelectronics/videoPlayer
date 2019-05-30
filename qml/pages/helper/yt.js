@@ -49,6 +49,7 @@ function getYoutubeTitle(url) {
                 //                    firstPage.streamTitle = jsonObject.data.title;
                 //                }
             } else {
+                firstPage.streamTitle = url
                 console.log("responseText", xhr.responseText);
             }
         }

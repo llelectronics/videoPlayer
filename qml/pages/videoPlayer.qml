@@ -135,7 +135,7 @@ Page {
             YT.getYoutubeTitle(originalUrl);
         }
         else dataContainer.isYtUrl = false;
-        if (dataContainer.streamTitle === "") dataContainer.streamTitle = mainWindow.findBaseName(streamUrl)
+        //if (dataContainer.streamTitle === "") dataContainer.streamTitle = mainWindow.findBaseName(streamUrl)
         dataContainer.ytdlStream = false
 
         if (streamUrl.toString().match("^file://") || streamUrl.toString().match("^/")) {
@@ -143,13 +143,14 @@ Page {
             console.debug("[videoPlayer.qml] streamUrl= " + streamUrl + " savePositionMsec= " + savePositionMsec + " streamUrl.length = " + streamUrl.length);
             if (savePositionMsec !== "Not Found") savedPosition = true;
             else savedPosition = false;
+            dataContainer.streamTitle = mainWindow.findBaseName(streamUrl)
         }
         if (isPlaylist) mainWindow.curPlaylistIndex = mainWindow.modelPlaylist.getPosition(streamUrl)
         isNewSource = true
     }
 
     onStreamTitleChanged: {
-        if (streamTitle != "") {
+        if (streamTitle != "" && streamTitle != streamUrl && !mainWindow.firstPage.historyModel.containsTitle(streamTitle) && !mainWindow.firstPage.historyModel.containsUrl(streamUrl)) {
             //Write into history database
             DB.addHistory(streamUrl,streamTitle);
             // Don't forgt to write it to the List aswell
