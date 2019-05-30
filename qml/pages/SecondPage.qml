@@ -65,11 +65,13 @@ Page {
         anchors.fill: parent
 
         dock: searchResultsDialog.isPortrait ? Dock.Top : Dock.Left
+        property QtObject historyListView
 
         background: SilicaListView {
             id: searchView
             anchors.fill: parent
             model: mainWindow.firstPage.searchHistoryModel
+            verticalLayoutDirection: ListView.BottomToTop
 
             VerticalScrollDecorator {}
 
@@ -94,6 +96,10 @@ Page {
                 text: qsTr("No Search History")
                 enabled: searchView.count == 0
             }
+            Component.onCompleted: searchHistoryDrawer.historyListView = searchView
+        }
+        onOpenedChanged: {
+            historyListView.scrollToTop();
         }
 
         SilicaWebView {
