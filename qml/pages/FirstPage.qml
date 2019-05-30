@@ -321,11 +321,13 @@ Page {
         anchors.fill: parent
 
         dock: page.isPortrait ? Dock.Top : Dock.Left
+        property QtObject historyListView
 
         background: SilicaListView {
             id: historyView
             anchors.fill: parent
             model: historyModel
+            verticalLayoutDirection: ListView.BottomToTop
 
             VerticalScrollDecorator {}
 
@@ -349,6 +351,10 @@ Page {
                 text: qsTr("No History")
                 enabled: historyView.count == 0
             }
+            Component.onCompleted: drawer.historyListView = historyView
+        }
+        onOpenChanged: {
+            historyListView.scrollToTop();
         }
 
         SilicaGridView {
