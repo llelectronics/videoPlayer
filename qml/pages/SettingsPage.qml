@@ -386,7 +386,7 @@ Dialog {
                     // Current Option
                     if (mainWindow.firstPage.openDialogType === "adv") return 0;
                     else if (mainWindow.firstPage.openDialogType === "simple") return 0;
-                    else if (mainWindow.firstPage.openDialogType === "gallery") return 2;
+                    else if (mainWindow.firstPage.openDialogType === "gallery") return 1;
                 }
 
                 menu: ContextMenu {
@@ -396,7 +396,7 @@ Dialog {
                 onCurrentIndexChanged: {
                     if (currentIndex == 0) dType = "adv"
                     else if (currentIndex == 0) dType = "simple"
-                    else if (currentIndex == 2) dType = "gallery"
+                    else if (currentIndex == 1) dType = "gallery"
                 }
             }
 
