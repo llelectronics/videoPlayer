@@ -275,7 +275,7 @@ Page {
         height: Theme.itemSizeSmall + Theme.paddingSmall
 
         dock: Dock.Bottom
-        open: ytView.canGoBack && (!ytView.atYEnd)
+        open: ytView.canGoBack && (!ytView.atYEnd) && (!searchHistoryDrawer.open)
 
         Rectangle {
             anchors.fill: parent

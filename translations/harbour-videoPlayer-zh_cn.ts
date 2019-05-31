@@ -885,70 +885,70 @@
 <context>
     <name>videoPlayer</name>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="233"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="232"/>
         <source>Load with ytdl</source>
         <translation>用ytdl加载</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="254"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="253"/>
         <source>Download Youtube Video</source>
         <translation>下载youtube视频</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="272"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="271"/>
         <source>Download</source>
         <translation>下载</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="288"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="287"/>
         <source>Add to bookmarks</source>
         <translation>添加到收藏</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="304"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="303"/>
         <source>Load Subtitle</source>
         <translation>加载字幕</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="308"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="307"/>
         <source>Play from last known position</source>
         <translation>从上次播放位置播放</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="475"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="474"/>
         <source>Dismiss</source>
         <translation>摒弃</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="778"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="777"/>
         <source>
 The video cannot be played due to a problem allocating resources.
                         On Youtube Videos please make sure to be logged in. Some videos might be geoblocked or require you to be logged into youtube.</source>
         <translation>由于分配源的缘故，无法播放该视频。请登陆到Youtube,因为某些视频被地理锁定了。</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="780"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="779"/>
         <source>
 The audio and or video format is not supported.</source>
         <translation>
 不支持音频或视频格式</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="781"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="780"/>
         <source>
 The video cannot be played due to network issues.</source>
         <translation>
 因网络问题无法播放此视频</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="782"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="781"/>
         <source>
 The video cannot be played due to insufficient permissions.</source>
         <translation>
 因权限不足, 无法播放视频</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="783"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="782"/>
         <source>
 The video cannot be played because the media service could not be instantiated.</source>
         <translation>
