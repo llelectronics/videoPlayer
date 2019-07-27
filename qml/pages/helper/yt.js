@@ -103,23 +103,25 @@ function getYoutubeStream(youtube_id) {
                 var found = false;
                 for (var i = 0; i < streamsSplit.length; i++) {
                     secondSplit = streamsSplit[i].split("&");
-//                    console.debug(" --- STREAMSPLIT 2 streamsSplit.length : " + streamsSplit.length)
-//                    console.debug(" --- STREAMSPLIT 2 : " + i);
-//                    console.debug(" --- STREAMSPLIT 2 --- : " + secondSplit[0] + " , " + secondSplit[1]+ " , " + secondSplit[2]+ " , " + secondSplit[3]);
+                    //console.debug(" --- STREAMSPLIT 2 streamsSplit.length : " + streamsSplit.length)
+                    //console.debug(" --- STREAMSPLIT 2 : " + i);
+                    //console.debug(" --- STREAMSPLIT 2 --- : " + secondSplit[0] + " , " + secondSplit[1]+ " , " + secondSplit[2]+ " , " + secondSplit[3]);
 //                    }
 
-                    var url="", sig="", itag="";
+                    var url="", sig="", itag="", sp="";
                     var resolutionFormat;
                     for (var j = 0; j < secondSplit.length; j++) {
                         paramPair = secondSplit[j].split("=");
-                        //                    console.debug(" --- STREAMS PARAM PAIR : " + i);
-                        //                    console.debug(" --- STREAMS PARAM PAIR --- : " + paramPair[0] + " = " + paramPair[1]);
+                        // console.debug(" --- STREAMS PARAM PAIR : " + i);
+                        // console.debug(" --- STREAMS PARAM PAIR --- : " + paramPair[0] + " = " + paramPair[1]);
                         if (paramPair[0] === "url") {
                             url = decodeURIComponent(paramPair[1]);
                         } else if (paramPair[0] === "sig") {
                             sig = paramPair[1]; // do not decode, as we would have to encode it later (although decoding/encoding has currently no effect for the signature)
                         } else if (paramPair[0] === "itag") {
                             itag = paramPair[1];
+                        } else if (paramPair[0] === "sp") {
+                            sp = paramPair[1]; // do not decode, as we would have to encode it later (although decoding/encoding has currently no effect for the signature)
                         }
                         //***********************************************//
                         //     List of video formats as of 2012.12.10    //
@@ -141,8 +143,13 @@ function getYoutubeStream(youtube_id) {
                         // Try to get 720p HD video stream first
                         if (itag === "22" && typeof url !== 'undefined' && url != "") { // 5 parameters per video; itag 22 is "MP4 720p", see http://userscripts.org/scripts/review/25105
                             resolutionFormat = "MP4 720p"
-                            firstPage.url720p = url += "&signature=" + sig;
-                            url += "&signature=" + sig;
+                            if (!!sig) {
+                                url += "&signature=" + sig;
+                            }
+                            else if (!!sp) {
+                                url += "&sp=" + sp;
+                            }
+                            firstPage.url720p = url
                             found = true;
                             break;
                         }
@@ -150,24 +157,39 @@ function getYoutubeStream(youtube_id) {
                         // TODO: This is not working. Need to check it in the future
                         else if (itag === "35" && typeof url !== 'undefined' && url != "") { // 12 parameters per video; itag 135 is "MP4 480p", see http://userscripts.org/scripts/review/25105
                             resolutionFormat = "MP4 480p"
-                            firstPage.url480p = url += "&signature=" + sig;
-                            if (found == false) url += "&signature=" + sig;
+                            if (!!sig) {
+                                url += "&signature=" + sig;
+                            }
+                            else if (!!sp) {
+                                url += "&sp=" + sp;
+                            }
+                            firstPage.url480p = url
                             found = true;
                             break;
                         }
                         // If above fails try to get 360p video stream
                         else if (itag === "18" && typeof url !== 'undefined' && url != "") { // 5 parameters per video; itag 18 is "MP4 360p", see http://userscripts.org/scripts/review/25105
                             resolutionFormat = "MP4 360p"
-                            firstPage.url360p = url += "&signature=" + sig;
-                            if (found == false) url += "&signature=" + sig;
+                            if (!!sig) {
+                                url += "&signature=" + sig;
+                            }
+                            else if (!!sp) {
+                                url += "&sp=" + sp;
+                            }
+                            firstPage.url360p = url
                             found = true;
                             break;
                         }
                         // If above fails try to get 240p video stream
                         else if (itag === "36" && typeof url !== 'undefined' && url != "") { // 5 parameters per video; itag 36 is "3GPP 240p", see http://userscripts.org/scripts/review/25105
                             resolutionFormat = "FLV 240p"
-                            firstPage.url240p = url += "&signature=" + sig;
-                            if (found == false) url += "&signature=" + sig;
+                            if (!!sig) {
+                                url += "&signature=" + sig;
+                            }
+                            else if (!!sp) {
+                                url += "&sp=" + sp;
+                            }
+                            firstPage.url240p = url
                             found = true;
                             break;
                         }
