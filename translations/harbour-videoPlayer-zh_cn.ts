@@ -402,7 +402,7 @@
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="482"/>
         <source>Youtube-Dl updated.</source>
-        <translation>Youtube-Dl 已更新</translation>
+        <translation>Youtube-Dl已更新</translation>
     </message>
 </context>
 <context>
@@ -717,7 +717,7 @@
     <message>
         <location filename="../qml/pages/SecondPage.qml" line="129"/>
         <source>Reload</source>
-        <translation type="unfinished"></translation>
+        <translation>重新加载</translation>
     </message>
     <message>
         <location filename="../qml/pages/SecondPage.qml" line="133"/>
@@ -761,7 +761,7 @@
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="119"/>
         <source>Load Defaults</source>
-        <translation>载入默认</translation>
+        <translation>加载默认</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="244"/>
@@ -771,7 +771,7 @@
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="288"/>
         <source>Load Subtitles</source>
-        <translation>载入字幕</translation>
+        <translation>加载字幕</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="295"/>
@@ -856,7 +856,7 @@
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="453"/>
         <source>MC (animated Music Cassette)</source>
-        <translation>MC (动画音乐盒式磁带·)</translation>
+        <translation>MC (动画音乐盒式磁带)</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="454"/>
@@ -876,7 +876,7 @@
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="493"/>
         <source>Update Youtube-Dl</source>
-        <translation>更新 Youtube-Dl</translation>
+        <translation>更新Youtube-Dl</translation>
     </message>
 </context>
 <context>
@@ -884,7 +884,7 @@
     <message>
         <location filename="../qml/harbour-videoPlayer.qml" line="432"/>
         <source>Dismiss</source>
-        <translation>摒弃</translation>
+        <translation>退出</translation>
     </message>
 </context>
 <context>
