@@ -181,6 +181,7 @@ MouseArea {
                         }
                         else {
                             pressTime += 1
+                            forwardIndicator.visible = true
                             ffwd(10*pressTime)
                         }
                     }
@@ -216,6 +217,7 @@ MouseArea {
                         }
                         else {
                             pressTime += 1
+                            backwardIndicator.visible = true
                             rew(5*pressTime)
                         }
                     }
@@ -310,6 +312,82 @@ MouseArea {
                     }
                 }
             }
+        }
+        Row {
+            id: backwardIndicator
+            anchors.horizontalCenter: parent.horizontalCenter
+            y: parent.width / 2 - (playPauseImg.height + Theme.paddingLarge)
+            visible: false
+            spacing: -Theme.paddingLarge*2
+
+            Image {
+                id: prev1
+                width: Theme.itemSizeLarge
+                height: Theme.itemSizeLarge
+                anchors.verticalCenter: parent.verticalCenter
+                fillMode: Image.PreserveAspectFit
+                source: "image://theme/icon-cover-play"
+
+                transform: Rotation{
+                    angle: 180
+                    origin.x: prev1.width/2
+                    origin.y: prev1.height/2
+                }
+            }
+            Image {
+                id: prev2
+                width: Theme.itemSizeLarge
+                height: Theme.itemSizeLarge
+                anchors.verticalCenter: parent.verticalCenter
+                fillMode: Image.PreserveAspectFit
+                source: "image://theme/icon-cover-play"
+
+                transform: Rotation{
+                    angle: 180
+                    origin.x: prev2.width/2
+                    origin.y: prev2.height/2
+                }
+            }
+
+            Timer {
+                id: hideBackward
+                interval: 300
+                onTriggered: backwardIndicator.visible = false
+            }
+
+            onVisibleChanged: if (backwardIndicator.visible) hideBackward.start()
+        }
+
+        Row {
+            id: forwardIndicator
+            anchors.horizontalCenter: parent.horizontalCenter
+            y: parent.width / 2 - (playPauseImg.height + Theme.paddingLarge)
+            visible: false
+            spacing: -Theme.paddingLarge*2
+
+            Image {
+                width: Theme.itemSizeLarge
+                height: Theme.itemSizeLarge
+                anchors.verticalCenter: parent.verticalCenter
+                fillMode: Image.PreserveAspectFit
+                source: "image://theme/icon-cover-play"
+
+            }
+            Image {
+                width: Theme.itemSizeLarge
+                height: Theme.itemSizeLarge
+                anchors.verticalCenter: parent.verticalCenter
+                fillMode: Image.PreserveAspectFit
+                source: "image://theme/icon-cover-play"
+            }
+
+            Timer {
+                id: hideForward
+                interval: 300
+                onTriggered: forwardIndicator.visible = false
+            }
+
+            onVisibleChanged: if (forwardIndicator.visible) hideForward.start()
         }
     }
 }
