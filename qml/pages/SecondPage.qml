@@ -289,7 +289,10 @@ Page {
 
         Row {
             anchors.centerIn: parent
-            spacing: Theme.paddingLarge
+            spacing: {
+                if (backBtn.visible) (parent.width - 5*backBtn.width) / 6
+                else (parent.width - 4*backBtn.width) / 5
+            }
             IconButton {
                 id: backBtn
                 icon.source: "image://theme/icon-m-back"

@@ -735,12 +735,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SecondPage.qml" line="381"/>
+        <location filename="../qml/pages/SecondPage.qml" line="384"/>
         <source>Load with ytdl</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SecondPage.qml" line="395"/>
+        <location filename="../qml/pages/SecondPage.qml" line="398"/>
         <source>Load</source>
         <translation type="unfinished"></translation>
     </message>
