@@ -126,6 +126,10 @@ Page {
 
             PullDownMenu {
                 MenuItem {
+                    text : qsTr("Reload")
+                    onClicked: ytView.reload();
+                }
+                MenuItem {
                     text: qsTr("History")
                     onClicked: searchHistoryDrawer.open = !searchHistoryDrawer.open
                     visible: ytDetect
@@ -275,7 +279,7 @@ Page {
         height: Theme.itemSizeSmall + Theme.paddingSmall
 
         dock: Dock.Bottom
-        open: ytView.canGoBack && (!ytView.atYEnd) && (!searchHistoryDrawer.open)
+        open: (!ytView.atYEnd) && (!searchHistoryDrawer.open)
 
         Rectangle {
             anchors.fill: parent
@@ -285,7 +289,7 @@ Page {
 
         Row {
             anchors.centerIn: parent
-            spacing: Theme.paddingLarge * 4
+            spacing: Theme.paddingLarge
             IconButton {
                 id: backBtn
                 icon.source: "image://theme/icon-m-back"
@@ -296,13 +300,34 @@ Page {
                 }
             }
             IconButton {
-                id: reloadBtn
-                icon.source: ytView.loading ? "image://theme/icon-m-reset" : "image://theme/icon-m-refresh"
+                id: homeBtn
+                icon.source: "image://theme/icon-m-home";
                 onClicked: {
-                    if (ytView.loading) ytView.stop();
-                    else ytView.reload();
+                    ytView.url = "https://youtube.com"
                 }
             }
+            IconButton {
+                id: libBtn
+                icon.source: "image://theme/icon-m-levels"
+                onClicked: {
+                    ytView.url = "https://youtube.com/feed/subscriptions"
+                }
+            }
+            IconButton {
+                id: subBtn
+                icon.source: "image://theme/icon-m-file-folder"
+                onClicked: {
+                    ytView.url = "https://youtube.com/feed/library"
+                }
+            }
+//            IconButton {
+//                id: reloadBtn
+//                icon.source: ytView.loading ? "image://theme/icon-m-reset" : "image://theme/icon-m-refresh"
+//                onClicked: {
+//                    if (ytView.loading) ytView.stop();
+//                    else ytView.reload();
+//                }
+//            }
             IconButton {
                 id: searchBtn
                 icon.source: "image://theme/icon-m-search"
