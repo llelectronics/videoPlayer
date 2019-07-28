@@ -716,26 +716,31 @@
     </message>
     <message>
         <location filename="../qml/pages/SecondPage.qml" line="129"/>
+        <source>Reload</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SecondPage.qml" line="133"/>
         <source>History</source>
         <translation>Historik</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SecondPage.qml" line="134"/>
+        <location filename="../qml/pages/SecondPage.qml" line="138"/>
         <source>Go Back</source>
         <translation>Gå tillbaka</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SecondPage.qml" line="163"/>
+        <location filename="../qml/pages/SecondPage.qml" line="167"/>
         <source>Search..</source>
         <translation>Sök...</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SecondPage.qml" line="356"/>
+        <location filename="../qml/pages/SecondPage.qml" line="381"/>
         <source>Load with ytdl</source>
         <translation>Läs in med ytdl</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SecondPage.qml" line="370"/>
+        <location filename="../qml/pages/SecondPage.qml" line="395"/>
         <source>Load</source>
         <translation>Läs in</translation>
     </message>

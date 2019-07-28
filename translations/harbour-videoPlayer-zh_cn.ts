@@ -716,26 +716,31 @@
     </message>
     <message>
         <location filename="../qml/pages/SecondPage.qml" line="129"/>
+        <source>Reload</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SecondPage.qml" line="133"/>
         <source>History</source>
         <translation>历史</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SecondPage.qml" line="134"/>
+        <location filename="../qml/pages/SecondPage.qml" line="138"/>
         <source>Go Back</source>
         <translation>返回</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SecondPage.qml" line="163"/>
+        <location filename="../qml/pages/SecondPage.qml" line="167"/>
         <source>Search..</source>
         <translation>搜索..</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SecondPage.qml" line="356"/>
+        <location filename="../qml/pages/SecondPage.qml" line="381"/>
         <source>Load with ytdl</source>
         <translation>用ytdl加载</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SecondPage.qml" line="370"/>
+        <location filename="../qml/pages/SecondPage.qml" line="395"/>
         <source>Load</source>
         <translation>加载</translation>
     </message>
