@@ -64,7 +64,7 @@ class FM : public QObject
         QString getSDCard()
         {
             foreach (const QStorageInfo &storage, QStorageInfo::mountedVolumes()) {
-                    if (storage.isValid() && storage.isReady() && storage.device().indexOf("mmcblk1p1") != -1) {
+                    if (storage.isValid() && storage.isReady() && storage.device().indexOf("mmcblk1") != -1) {
 //                        qDebug() << "DEBUG STORAGE rootPath: " + storage.rootPath();
 //                        qDebug() << "DEBUG STORAGE device: " + storage.device();
                         return storage.rootPath();
