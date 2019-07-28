@@ -311,6 +311,11 @@ MouseArea {
                         //videoItem.player.pause()
                     }
                 }
+                onDownChanged: {
+                    if (down) {
+                        videoPlayerPage.showTimeAndTitle.start()
+                    }
+                }
             }
         }
         Row {
