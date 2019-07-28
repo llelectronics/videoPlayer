@@ -12,6 +12,7 @@ MouseArea {
     property url source
     property string mimeType
     property int duration
+    property int pressTime: 1
     onDurationChanged: positionSlider.maximumValue = duration
     property alias controls: controls
     property alias position: positionSlider.value
@@ -148,6 +149,14 @@ MouseArea {
             }
         }
 
+        Timer {
+            id: pressTimer
+            running: false;
+            interval: 1500
+            onTriggered: { stop() }
+            triggeredOnStart: false
+        }
+
         Image {
             id: ffwdImg
             anchors.verticalCenter: playPauseImg.verticalCenter
@@ -165,7 +174,15 @@ MouseArea {
                     //console.debug("VideoItem.source length = " + videoItem.source.toString().length)
                     if (videoItem.source.toString().length !== 0) {
                         //console.debug("Yeah we have a video source")
-                        ffwd(10)
+                        if (!pressTimer.running) {
+                            pressTime = 1;
+                            pressTimer.start();
+                            ffwd(10)
+                        }
+                        else {
+                            pressTime += 1
+                            ffwd(10*pressTime)
+                        }
                     }
                 }
                 onPressAndHold: {
@@ -192,7 +209,15 @@ MouseArea {
                     //console.debug("VideoItem.source length = " + videoItem.source.toString().length)
                     if (videoItem.source.toString().length !== 0) {
                         //console.debug("Yeah we have a video source")
-                        rew(5)
+                        if (!pressTimer.running) {
+                            pressTime = 1;
+                            pressTimer.start();
+                            rew(5)
+                        }
+                        else {
+                            pressTime += 1
+                            rew(5*pressTime)
+                        }
                     }
                 }
                 onPressAndHold: {
