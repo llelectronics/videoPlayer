@@ -11,6 +11,10 @@ Page {
     objectName: "videoPlayerPage"
     allowedOrientations: Orientation.All
 
+    onOrientationChanged: video.checkScaleStatus()
+    onHeightChanged: video.checkScaleStatus()
+    onWidthChanged: video.checkScaleStatus()
+
     focus: true
 
     property QtObject dataContainer
@@ -723,7 +727,8 @@ Page {
             transformOrigin: Item.Center
 
             function checkScaleStatus() {
-                if ((width/height) > sourceRect.width/sourceRect.height) allowScaling = true;
+                if ((videoPlayerPage.width/videoPlayerPage.height) > sourceRect.width/sourceRect.height) allowScaling = true;
+                console.log(videoPlayerPage.width/videoPlayerPage.height + " - " + sourceRect.width/sourceRect.height);
             }
 
             onFillModeChanged: {
