@@ -54,6 +54,7 @@ Page {
     property bool isDash: dataContainer.isDash
     property string onlyMusicState: dataContainer.onlyMusicState
     property bool isLiveStream: dataContainer.isLiveStream
+    property bool allowScaling: false
 
     property alias showTimeAndTitle: showTimeAndTitle
     property alias pulley: pulley
@@ -218,6 +219,13 @@ Page {
         else if (videoPoster.source.toString().length !== 0) videoPoster.play();
         if (videoPoster.controls.opacity === 0.0) videoPoster.toggleControls();
 
+    }
+
+    function toggleAspectRatio() {
+        // This switches between different aspect ratio fill modes
+        //console.debug("video.fillMode= " + video.fillMode)
+        if (video.fillMode == VideoOutput.PreserveAspectFit) video.fillMode = VideoOutput.PreserveAspectCrop
+        else video.fillMode = VideoOutput.PreserveAspectFit
     }
 
     SilicaFlickable {
@@ -712,6 +720,16 @@ Page {
         VideoOutput {
             id: video
             anchors.fill: parent
+            transformOrigin: Item.Center
+
+            function checkScaleStatus() {
+                if ((width/height) > sourceRect.width/sourceRect.height) allowScaling = true;
+            }
+
+            onFillModeChanged: {
+                if (fillMode === VideoOutput.PreserveAspectCrop) scale=sourceRect.width/sourceRect.height
+                else scale=1
+            }
 
             source: Mplayer {
                 id: mediaPlayer
@@ -724,6 +742,7 @@ Page {
                     if (playbackState == MediaPlayer.PlayingState) {
                         if (onlyMusic.opacity == 1.0) onlyMusic.playing = true
                         mprisPlayer.playbackStatus = Mpris.Playing
+                        video.checkScaleStatus()
                     }
                     else  {
                         if (onlyMusic.opacity == 1.0) onlyMusic.playing = false

@@ -263,10 +263,27 @@ MouseArea {
                     styleColor: isLightTheme? "black" : "white"
                 }
             }
+            BackgroundItem {
+                id: aspectBtn
+                anchors.right: qualBtn.visible ? qualBtn.left : parent.right
+                anchors.rightMargin: Theme.paddingMedium
+                anchors.bottom: parent.bottom
+                anchors.bottomMargin: Theme.paddingMedium
+                width: height
+                height: Theme.iconSizeMedium
+                visible: allowScaling
+                onClicked: {
+                    toggleAspectRatio();
+                }
+                Image {
+                    source: "image://theme/icon-m-scale"
+                    anchors.fill: parent
+                }
+            }
             Label {
                 id: maxTime
-                anchors.right: qualBtn.visible ? qualBtn.left : parent.right
-                anchors.rightMargin: qualBtn.visible ? Theme.paddingMedium : (2 * Theme.paddingLarge)
+                anchors.right: (aspectBtn.visible) ? aspectBtn.left : parent.right
+                anchors.rightMargin: qualBtn.visible || aspectBtn.visible ? Theme.paddingMedium : (2 * Theme.paddingLarge)
                 anchors.bottom: parent.bottom
                 anchors.bottomMargin: Theme.paddingLarge
                 text: {
@@ -292,10 +309,11 @@ MouseArea {
                 enabled: { if (controls.opacity == 1.0) return true; else return false; }
                 height: Theme.itemSizeSmall
                 width: {
-                    if (qualBtn.visible && maxTime.visible) parent.width - (maxTime.width + qualBtn.width)
-                    else if (maxTime.visible) parent.width - (maxTime.width)
-                    else if (qualBtn.visible) parent.width - (qualBtn.width)
-                    else parent.width
+                    var slidWidth = parent.width
+                    if (qualBtn.visible) slidWidth =- qualBtn.width
+                    if (maxTime.visible) slidWidth =- maxTime.width
+                    if (aspectBtn.visible) slidWidth =- aspectBtn.width
+                    return slidWidth
                 }
                 handleVisible: down ? true : false
                 minimumValue: 0
