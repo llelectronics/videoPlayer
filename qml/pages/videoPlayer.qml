@@ -732,7 +732,7 @@ Page {
             }
 
             onFillModeChanged: {
-                if (fillMode === VideoOutput.PreserveAspectCrop) scale=sourceRect.width/sourceRect.height
+                if (fillMode === VideoOutput.PreserveAspectCrop) scale = 1 + (((videoPlayerPage.width/videoPlayerPage.height) - (sourceRect.width/sourceRect.height)) / (sourceRect.width/sourceRect.height))
                 else scale=1
             }
 
