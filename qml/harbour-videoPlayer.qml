@@ -433,6 +433,7 @@ ApplicationWindow
         onClicked: {
             if (errTxt.visible) errTxt.visible = false;
         }
+        parent: errTxt.parent
     }
 
     // What a hack to create a on Closing behavior

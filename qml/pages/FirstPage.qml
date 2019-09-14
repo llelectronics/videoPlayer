@@ -473,6 +473,7 @@ Page {
             if (message != "") {
                 errTxt.visible = true
                 errTxt.text = message
+                errTxt.parent = pageStack.currentPage
             }
         }
         onUpdateComplete: {
@@ -480,6 +481,7 @@ Page {
             busy.visible = false
             errTxt.visible = true
             errTxt.text = qsTr("Youtube-Dl updated.")
+            errTxt.parent = pageStack.currentPage
         }
     }
 

@@ -400,7 +400,7 @@
         <translation>URL zur Mediendatei</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="482"/>
+        <location filename="../qml/pages/FirstPage.qml" line="483"/>
         <source>Youtube-Dl updated.</source>
         <translation>Youtube-Dl aktualisiert.</translation>
     </message>
