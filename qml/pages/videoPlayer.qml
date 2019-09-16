@@ -59,6 +59,7 @@ Page {
     property string onlyMusicState: dataContainer.onlyMusicState
     property bool isLiveStream: dataContainer.isLiveStream
     property bool allowScaling: false
+    property bool isRepeat: false
 
     property alias showTimeAndTitle: showTimeAndTitle
     property alias pulley: pulley
@@ -808,6 +809,11 @@ Page {
                     errorBox.visible = true;
                     /* Avoid MediaPlayer undefined behavior */
                     stop();
+                }
+                onStopped: {
+                    if (isRepeat) {
+                        play();
+                    }
                 }
             }
 

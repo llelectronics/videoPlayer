@@ -293,11 +293,28 @@ MouseArea {
                 visible: videoItem._loaded
             }
 
+            BackgroundItem {
+                id: repeatBtn
+                anchors.left: parent.left
+                anchors.leftMargin: Theme.paddingMedium
+                anchors.bottom: parent.bottom
+                anchors.bottomMargin: Theme.paddingMedium
+                width: height
+                height: Theme.iconSizeMedium
+                onClicked: {
+                    isRepeat = !isRepeat
+                }
+                Image {
+                    source: isRepeat ? "image://theme/icon-m-repeat" : "image://theme/icon-m-forward"
+                    anchors.fill: parent
+                }
+            }
+
             Slider {
                 id: positionSlider
 
                 anchors {
-                    left: parent.left;
+                    left: repeatBtn.right;
                     right: {
                         if (maxTime.visible) maxTime.left
                         else if (qualBtn.visible) qualBtn.left
