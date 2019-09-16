@@ -66,6 +66,7 @@ bool Playlist::save(QString filename) {
     //qDebug() << "Save called with filename:" + file;
     //playlist->save(QUrl::fromLocalFile("/home/nemo/Music/playlists/test.m3u"), "m3u");
     QFile file(filename);
+    createPlaylistFolderIfNotExists();
     if (file.open(QIODevice::WriteOnly))
     {
         QTextStream ts(&file);
@@ -102,4 +103,10 @@ QString Playlist::plsEncode() {
     }
     out << "NumberOfEntries=" + QString::number(playlist->mediaCount());
     return out.join("\n");
+}
+
+void Playlist::createPlaylistFolderIfNotExists()
+{
+    QDir playlistDir(QDir::homePath()+"/Music/playlists");
+    if (!playlistDir.exists()) playlistDir.mkpath(".");
 }
