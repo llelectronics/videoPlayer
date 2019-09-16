@@ -488,6 +488,7 @@ Page {
                 errorTxt.text = ""
                 errorDetail.text = ""
                 errorBox.visible = false
+                videoPoster.showControls();
             }
             visible: errorBox.visible
             anchors.horizontalCenter: parent.horizontalCenter
