@@ -348,8 +348,10 @@ MouseArea {
                 }
                 onDownChanged: {
                     if (down) {
-                        videoPlayerPage.showTimeAndTitle.start()
+                        coverTime.visible = true
                     }
+                    else
+                        coverTime.fadeOut.start()
                 }
             }
         }
