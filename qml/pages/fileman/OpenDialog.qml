@@ -275,6 +275,7 @@ Page {
             ListItem {
                 id: delegate
 
+                contentHeight: fileLabel.height + fileInfo.height + Theme.paddingSmall
                 showMenuOnPressAndHold: false
                 menu: myMenu
                 visible : {

@@ -429,7 +429,7 @@
     </message>
     <message>
         <location filename="../qml/pages/fileman/OpenDialog.qml" line="222"/>
-        <location filename="../qml/pages/fileman/OpenDialog.qml" line="405"/>
+        <location filename="../qml/pages/fileman/OpenDialog.qml" line="406"/>
         <source>Properties</source>
         <translation>Egenskaper</translation>
     </message>
@@ -455,32 +455,32 @@
         <translation>tillagt i spelningslistan</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/OpenDialog.qml" line="380"/>
+        <location filename="../qml/pages/fileman/OpenDialog.qml" line="381"/>
         <source>Add to playlist</source>
         <translation>Lägg till i spelningslista</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/OpenDialog.qml" line="387"/>
+        <location filename="../qml/pages/fileman/OpenDialog.qml" line="388"/>
         <source>Cut</source>
         <translation>Klipp ur</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/OpenDialog.qml" line="393"/>
+        <location filename="../qml/pages/fileman/OpenDialog.qml" line="394"/>
         <source>Copy</source>
         <translation>Kopiera</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/OpenDialog.qml" line="399"/>
+        <location filename="../qml/pages/fileman/OpenDialog.qml" line="400"/>
         <source>Delete</source>
         <translation>Ta bort</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/OpenDialog.qml" line="426"/>
+        <location filename="../qml/pages/fileman/OpenDialog.qml" line="427"/>
         <source>Error pasting file </source>
         <translation>Kunde inte klistra in filen </translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/OpenDialog.qml" line="434"/>
+        <location filename="../qml/pages/fileman/OpenDialog.qml" line="435"/>
         <source>File operation succeeded</source>
         <translation>Filåtgärd slutförd</translation>
     </message>
