@@ -231,6 +231,7 @@ Page {
         //console.debug("video.fillMode= " + video.fillMode)
         if (video.fillMode == VideoOutput.PreserveAspectFit) video.fillMode = VideoOutput.PreserveAspectCrop
         else video.fillMode = VideoOutput.PreserveAspectFit
+        showScaleIndicator.start();
     }
 
     SilicaFlickable {
@@ -827,6 +828,51 @@ Page {
             }
         }
     ]
+
+    Item {
+        id: scaleIndicator
+
+        anchors.horizontalCenter: videoPlayerPage.horizontalCenter
+        anchors.top: parent.top
+        anchors.topMargin: 4 * Theme.paddingLarge
+        opacity: 0
+
+        NumberAnimation on opacity { duration: 500 }
+
+        Rectangle {
+            width: scaleLblIndicator.width + 2 * Theme.paddingMedium
+            height: scaleLblIndicator.height + 2 * Theme.paddingMedium
+            color: "black"
+            opacity: 0.4
+            anchors.centerIn: parent
+
+        }
+        Label {
+            id: scaleLblIndicator
+            font.pixelSize: Theme.fontSizeSmall
+            anchors.centerIn: parent
+            text: (video.fillMode === VideoOutput.PreserveAspectCrop) ? qsTr("Zoomed to fit screen") : qsTr("Original")
+            color: "#ececec" // a bit darker white
+        }
+    }
+
+    Timer {
+        id: showScaleIndicator
+        interval: 1000
+        property int count: 0
+        triggeredOnStart: true
+        onTriggered: {
+            ++count
+            if (count >= 2) {
+                scaleIndicator.opacity = 0
+                count = 0;
+                stop();
+            }
+            else {
+                scaleIndicator.opacity = 1.0
+            }
+        }
+    }
 
     // Need some more time to figure that out completely
     Timer {
