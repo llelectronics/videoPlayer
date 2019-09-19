@@ -287,7 +287,7 @@ MouseArea {
                 anchors.bottom: parent.bottom
                 anchors.bottomMargin: Theme.paddingLarge
                 text: {
-                    if (positionSlider.maximumValue > 3599) return Format.formatDuration(maximumValue, Formatter.DurationLong)
+                    if (positionSlider.maximumValue > 3599) return Format.formatDuration(positionSlider.maximumValue, Formatter.DurationLong)
                     else return Format.formatDuration(positionSlider.maximumValue, Formatter.DurationShort)
                 }
                 visible: videoItem._loaded
