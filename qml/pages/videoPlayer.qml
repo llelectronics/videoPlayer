@@ -842,7 +842,7 @@ Page {
         Rectangle {
             width: scaleLblIndicator.width + 2 * Theme.paddingMedium
             height: scaleLblIndicator.height + 2 * Theme.paddingMedium
-            color: "black"
+            color: isLightTheme? "white" : "black"
             opacity: 0.4
             anchors.centerIn: parent
 
@@ -852,7 +852,7 @@ Page {
             font.pixelSize: Theme.fontSizeSmall
             anchors.centerIn: parent
             text: (video.fillMode === VideoOutput.PreserveAspectCrop) ? qsTr("Zoomed to fit screen") : qsTr("Original")
-            color: "#ececec" // a bit darker white
+            color: Theme.primaryColor
         }
     }
 
@@ -901,7 +901,7 @@ Page {
         width: parent.width
         height: Theme.fontSizeHuge
         y: coverTime.y + 10
-        color: isLightColor? "white" : "black"
+        color: isLightTheme? "white" : "black"
         opacity: 0.4
         visible: coverTime.visible
     }
@@ -940,14 +940,14 @@ Page {
             id: dur
             text: videoDuration
             anchors.left: curPos.right
-            color: Theme.highlightColor
+            color: Theme.primaryColor
             font.pixelSize: Theme.fontSizeHuge
             font.bold: true
         }
         Label {
             id: curPos
             text: videoPosition + " / "
-            color: Theme.highlightColor
+            color: Theme.primaryColor
             font.pixelSize: Theme.fontSizeHuge
             font.bold: true
         }
