@@ -73,28 +73,28 @@
 <context>
     <name>CreateDirDialog</name>
     <message>
-        <location filename="../qml/pages/fileman/helper/fmComponents/CreateDirDialog.qml" line="16"/>
+        <location filename="../qml/pages/fileman/fmComponents/CreateDirDialog.qml" line="16"/>
         <source>Error creating new directory</source>
         <translation>Fehler beim Erstellen eines neuen Ordners</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/helper/fmComponents/CreateDirDialog.qml" line="32"/>
+        <location filename="../qml/pages/fileman/fmComponents/CreateDirDialog.qml" line="32"/>
         <source>Create Folder</source>
         <translation>Ordner erstellen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/helper/fmComponents/CreateDirDialog.qml" line="33"/>
+        <location filename="../qml/pages/fileman/fmComponents/CreateDirDialog.qml" line="33"/>
         <source>Create</source>
         <translation>Erstelle</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/helper/fmComponents/CreateDirDialog.qml" line="39"/>
+        <location filename="../qml/pages/fileman/fmComponents/CreateDirDialog.qml" line="39"/>
         <source>Create a new folder under</source>
         <translation>Erstelle neuen Ordner unter</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/helper/fmComponents/CreateDirDialog.qml" line="52"/>
-        <location filename="../qml/pages/fileman/helper/fmComponents/CreateDirDialog.qml" line="53"/>
+        <location filename="../qml/pages/fileman/fmComponents/CreateDirDialog.qml" line="52"/>
+        <location filename="../qml/pages/fileman/fmComponents/CreateDirDialog.qml" line="53"/>
         <source>Folder name</source>
         <translation>Ordnername</translation>
     </message>
@@ -262,64 +262,93 @@
     </message>
 </context>
 <context>
+    <name>FileItemDelegate</name>
+    <message>
+        <location filename="../qml/pages/fileman/fmComponents/FileItemDelegate.qml" line="16"/>
+        <location filename="../qml/pages/fileman/fmComponents/FileItemDelegate.qml" line="18"/>
+        <source>Deleting </source>
+        <translation type="unfinished">Lösche </translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/fileman/fmComponents/FileItemDelegate.qml" line="136"/>
+        <source>Cut</source>
+        <translation type="unfinished">Ausschneiden</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/fileman/fmComponents/FileItemDelegate.qml" line="142"/>
+        <source>Copy</source>
+        <translation type="unfinished">Kopieren</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/fileman/fmComponents/FileItemDelegate.qml" line="148"/>
+        <source>Delete</source>
+        <translation type="unfinished">Löschen</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/fileman/fmComponents/FileItemDelegate.qml" line="154"/>
+        <source>Properties</source>
+        <translation type="unfinished">Eigenschaften</translation>
+    </message>
+</context>
+<context>
     <name>FileProperties</name>
     <message>
-        <location filename="../qml/pages/fileman/helper/fmComponents/FileProperties.qml" line="45"/>
+        <location filename="../qml/pages/fileman/fmComponents/FileProperties.qml" line="45"/>
         <source>Change Permissions</source>
         <translation>Berechtigungen ändern</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/helper/fmComponents/FileProperties.qml" line="66"/>
+        <location filename="../qml/pages/fileman/fmComponents/FileProperties.qml" line="66"/>
         <source>Rename</source>
         <translation>Umbenennen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/helper/fmComponents/FileProperties.qml" line="73"/>
+        <location filename="../qml/pages/fileman/fmComponents/FileProperties.qml" line="73"/>
         <source>Error renaming</source>
         <translation>Umbenennen fehlgeschlagen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/helper/fmComponents/FileProperties.qml" line="106"/>
+        <location filename="../qml/pages/fileman/fmComponents/FileProperties.qml" line="106"/>
         <source>Properties</source>
         <translation>Eigenschaften</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/helper/fmComponents/FileProperties.qml" line="183"/>
+        <location filename="../qml/pages/fileman/fmComponents/FileProperties.qml" line="183"/>
         <source>Location</source>
         <translation>Pfad</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/helper/fmComponents/FileProperties.qml" line="187"/>
+        <location filename="../qml/pages/fileman/fmComponents/FileProperties.qml" line="187"/>
         <source>Type</source>
         <translation>Typ</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/helper/fmComponents/FileProperties.qml" line="189"/>
+        <location filename="../qml/pages/fileman/fmComponents/FileProperties.qml" line="189"/>
         <source>Link to %1</source>
         <translation>Link zu %1</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/helper/fmComponents/FileProperties.qml" line="193"/>
+        <location filename="../qml/pages/fileman/fmComponents/FileProperties.qml" line="193"/>
         <source>Size</source>
         <translation>Größe</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/helper/fmComponents/FileProperties.qml" line="212"/>
+        <location filename="../qml/pages/fileman/fmComponents/FileProperties.qml" line="212"/>
         <source>Permissions</source>
         <translation>Berechtigungen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/helper/fmComponents/FileProperties.qml" line="216"/>
+        <location filename="../qml/pages/fileman/fmComponents/FileProperties.qml" line="216"/>
         <source>Owner</source>
         <translation>Eigentümer</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/helper/fmComponents/FileProperties.qml" line="220"/>
+        <location filename="../qml/pages/fileman/fmComponents/FileProperties.qml" line="220"/>
         <source>Group</source>
         <translation>Gruppe</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/helper/fmComponents/FileProperties.qml" line="224"/>
+        <location filename="../qml/pages/fileman/fmComponents/FileProperties.qml" line="224"/>
         <source>Last modified</source>
         <translation>Zuletzt bearbeitet</translation>
     </message>
@@ -408,79 +437,94 @@
 <context>
     <name>OpenDialog</name>
     <message>
-        <location filename="../qml/pages/fileman/OpenDialog.qml" line="159"/>
+        <location filename="../qml/pages/fileman/OpenDialog.qml" line="20"/>
+        <location filename="../qml/pages/fileman/OpenDialog.qml" line="134"/>
+        <source>Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/fileman/OpenDialog.qml" line="135"/>
+        <source>Time</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/fileman/OpenDialog.qml" line="136"/>
+        <source>Size</source>
+        <translation type="unfinished">Größe</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/fileman/OpenDialog.qml" line="137"/>
+        <source>Type</source>
+        <translation type="unfinished">Typ</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/fileman/OpenDialog.qml" line="174"/>
         <source>Create Folder</source>
         <translation>Ordner erstellen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/OpenDialog.qml" line="174"/>
+        <location filename="../qml/pages/fileman/OpenDialog.qml" line="189"/>
         <source>Add all files to playlist</source>
         <translation>Alle Dateien zur Playliste hinzufügen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/OpenDialog.qml" line="197"/>
+        <location filename="../qml/pages/fileman/OpenDialog.qml" line="224"/>
         <source>Add to places</source>
         <translation>Zu Orte hinzufügen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/OpenDialog.qml" line="215"/>
+        <location filename="../qml/pages/fileman/OpenDialog.qml" line="242"/>
         <source>Paste</source>
         <translation>Einfügen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/OpenDialog.qml" line="222"/>
-        <location filename="../qml/pages/fileman/OpenDialog.qml" line="406"/>
+        <location filename="../qml/pages/fileman/OpenDialog.qml" line="249"/>
+        <location filename="../qml/pages/fileman/OpenDialog.qml" line="483"/>
         <source>Properties</source>
         <translation>Eigenschaften</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/OpenDialog.qml" line="234"/>
+        <location filename="../qml/pages/fileman/OpenDialog.qml" line="261"/>
         <source>Scroll to top</source>
         <translation>Nach oben springen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/OpenDialog.qml" line="238"/>
+        <location filename="../qml/pages/fileman/OpenDialog.qml" line="265"/>
         <source>Show Playlist</source>
         <translation>Playliste anzeigen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/OpenDialog.qml" line="253"/>
-        <location filename="../qml/pages/fileman/OpenDialog.qml" line="254"/>
-        <source>Deleting </source>
-        <translation>Lösche </translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/fileman/OpenDialog.qml" line="271"/>
+        <location filename="../qml/pages/fileman/OpenDialog.qml" line="450"/>
         <source>added to playlist</source>
         <translation>zur Playliste hinzugefügt</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/OpenDialog.qml" line="381"/>
+        <location filename="../qml/pages/fileman/OpenDialog.qml" line="458"/>
         <source>Add to playlist</source>
         <translation>Zur Playliste hinzufügen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/OpenDialog.qml" line="388"/>
+        <location filename="../qml/pages/fileman/OpenDialog.qml" line="465"/>
         <source>Cut</source>
         <translation>Ausschneiden</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/OpenDialog.qml" line="394"/>
+        <location filename="../qml/pages/fileman/OpenDialog.qml" line="471"/>
         <source>Copy</source>
         <translation>Kopieren</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/OpenDialog.qml" line="400"/>
+        <location filename="../qml/pages/fileman/OpenDialog.qml" line="477"/>
         <source>Delete</source>
         <translation>Löschen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/OpenDialog.qml" line="427"/>
+        <location filename="../qml/pages/fileman/OpenDialog.qml" line="503"/>
         <source>Error pasting file </source>
         <translation>Fehler beim Einfügen </translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/OpenDialog.qml" line="435"/>
+        <location filename="../qml/pages/fileman/OpenDialog.qml" line="511"/>
         <source>File operation succeeded</source>
         <translation>Dateioperation erfolgreich</translation>
     </message>
@@ -511,52 +555,52 @@
 <context>
     <name>PermissionDialog</name>
     <message>
-        <location filename="../qml/pages/fileman/helper/fmComponents/PermissionDialog.qml" line="21"/>
+        <location filename="../qml/pages/fileman/fmComponents/PermissionDialog.qml" line="21"/>
         <source>Could not change permission</source>
         <translation>Berechtigungen konnten nicht geändert werden</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/helper/fmComponents/PermissionDialog.qml" line="53"/>
+        <location filename="../qml/pages/fileman/fmComponents/PermissionDialog.qml" line="53"/>
         <source>Change Permissions</source>
         <translation>Berechtigungen ändern</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/helper/fmComponents/PermissionDialog.qml" line="54"/>
+        <location filename="../qml/pages/fileman/fmComponents/PermissionDialog.qml" line="54"/>
         <source>Change</source>
         <translation>Ändern</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/helper/fmComponents/PermissionDialog.qml" line="60"/>
+        <location filename="../qml/pages/fileman/fmComponents/PermissionDialog.qml" line="60"/>
         <source>Change permissions for</source>
         <translation>Berechtigungen ändern für</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/helper/fmComponents/PermissionDialog.qml" line="81"/>
+        <location filename="../qml/pages/fileman/fmComponents/PermissionDialog.qml" line="81"/>
         <source>Read</source>
         <translation>Lesen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/helper/fmComponents/PermissionDialog.qml" line="89"/>
+        <location filename="../qml/pages/fileman/fmComponents/PermissionDialog.qml" line="89"/>
         <source>Write</source>
         <translation>Schreiben</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/helper/fmComponents/PermissionDialog.qml" line="96"/>
+        <location filename="../qml/pages/fileman/fmComponents/PermissionDialog.qml" line="96"/>
         <source>Execute</source>
         <translation>Ausführen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/helper/fmComponents/PermissionDialog.qml" line="117"/>
+        <location filename="../qml/pages/fileman/fmComponents/PermissionDialog.qml" line="117"/>
         <source>Owner</source>
         <translation>Eigentümer</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/helper/fmComponents/PermissionDialog.qml" line="155"/>
+        <location filename="../qml/pages/fileman/fmComponents/PermissionDialog.qml" line="155"/>
         <source>Group</source>
         <translation>Gruppe</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/helper/fmComponents/PermissionDialog.qml" line="188"/>
+        <location filename="../qml/pages/fileman/fmComponents/PermissionDialog.qml" line="188"/>
         <source>Others</source>
         <translation>Andere</translation>
     </message>
@@ -564,72 +608,77 @@
 <context>
     <name>PlacesPage</name>
     <message>
-        <location filename="../qml/pages/fileman/helper/fmComponents/PlacesPage.qml" line="32"/>
+        <location filename="../qml/pages/fileman/fmComponents/PlacesPage.qml" line="32"/>
         <source>Device memory</source>
         <translation>Gerätespeicher</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/helper/fmComponents/PlacesPage.qml" line="37"/>
+        <location filename="../qml/pages/fileman/fmComponents/PlacesPage.qml" line="37"/>
         <source>SD Card</source>
         <translation>SD-Speicherkarte</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/helper/fmComponents/PlacesPage.qml" line="45"/>
+        <location filename="../qml/pages/fileman/fmComponents/PlacesPage.qml" line="45"/>
         <source>Home</source>
         <translation>Benutzerverzeichnis</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/helper/fmComponents/PlacesPage.qml" line="50"/>
+        <location filename="../qml/pages/fileman/fmComponents/PlacesPage.qml" line="50"/>
         <source>Documents</source>
         <translation>Dokumente</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/helper/fmComponents/PlacesPage.qml" line="55"/>
+        <location filename="../qml/pages/fileman/fmComponents/PlacesPage.qml" line="55"/>
         <source>Downloads</source>
         <translation>Downloads</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/helper/fmComponents/PlacesPage.qml" line="60"/>
+        <location filename="../qml/pages/fileman/fmComponents/PlacesPage.qml" line="60"/>
         <source>Music</source>
         <translation>Musik</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/helper/fmComponents/PlacesPage.qml" line="65"/>
+        <location filename="../qml/pages/fileman/fmComponents/PlacesPage.qml" line="65"/>
         <source>Pictures</source>
         <translation>Bilder</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/helper/fmComponents/PlacesPage.qml" line="70"/>
+        <location filename="../qml/pages/fileman/fmComponents/PlacesPage.qml" line="70"/>
         <source>Videos</source>
         <translation>Videos</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/helper/fmComponents/PlacesPage.qml" line="104"/>
+        <location filename="../qml/pages/fileman/fmComponents/PlacesPage.qml" line="75"/>
+        <source>Android Storage</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/fileman/fmComponents/PlacesPage.qml" line="109"/>
         <source>Places</source>
         <translation>Orte</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/helper/fmComponents/PlacesPage.qml" line="118"/>
+        <location filename="../qml/pages/fileman/fmComponents/PlacesPage.qml" line="123"/>
         <source>Devices</source>
         <translation>Geräte</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/helper/fmComponents/PlacesPage.qml" line="156"/>
+        <location filename="../qml/pages/fileman/fmComponents/PlacesPage.qml" line="161"/>
         <source>Common</source>
         <translation>Allgemein</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/helper/fmComponents/PlacesPage.qml" line="191"/>
+        <location filename="../qml/pages/fileman/fmComponents/PlacesPage.qml" line="207"/>
         <source>Custom</source>
         <translation>Benutzerdefiniert</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/helper/fmComponents/PlacesPage.qml" line="212"/>
+        <location filename="../qml/pages/fileman/fmComponents/PlacesPage.qml" line="228"/>
         <source>Deleting </source>
         <translation>Lösche </translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/helper/fmComponents/PlacesPage.qml" line="257"/>
+        <location filename="../qml/pages/fileman/fmComponents/PlacesPage.qml" line="273"/>
         <source>Rename</source>
         <translation>Umbenennen</translation>
     </message>
@@ -690,19 +739,19 @@
 <context>
     <name>RenameDialog</name>
     <message>
-        <location filename="../qml/pages/fileman/helper/fmComponents/RenameDialog.qml" line="37"/>
-        <location filename="../qml/pages/fileman/helper/fmComponents/RenameDialog.qml" line="38"/>
+        <location filename="../qml/pages/fileman/fmComponents/RenameDialog.qml" line="37"/>
+        <location filename="../qml/pages/fileman/fmComponents/RenameDialog.qml" line="38"/>
         <source>Rename</source>
         <translation>Umbenennen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/helper/fmComponents/RenameDialog.qml" line="44"/>
+        <location filename="../qml/pages/fileman/fmComponents/RenameDialog.qml" line="44"/>
         <source>Give a new name for</source>
         <translation>Geben Sie einen neuen Namen ein für</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/helper/fmComponents/RenameDialog.qml" line="57"/>
-        <location filename="../qml/pages/fileman/helper/fmComponents/RenameDialog.qml" line="58"/>
+        <location filename="../qml/pages/fileman/fmComponents/RenameDialog.qml" line="57"/>
+        <location filename="../qml/pages/fileman/fmComponents/RenameDialog.qml" line="58"/>
         <source>New name</source>
         <translation>Neuer Name</translation>
     </message>
