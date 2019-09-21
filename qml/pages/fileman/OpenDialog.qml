@@ -328,10 +328,11 @@ Page {
                     anchors.left: fileIcon.right
                     anchors.leftMargin: Theme.paddingLarge
                     anchors.top: fileLabel.bottom
-                    text: fileIsDir ? "directory" : humanSize(fileSize) + ", " + fileModified
+                    text: fileIsDir ? fileModified.toLocaleString() : humanSize(fileSize) + ", " + fileModified.toLocaleString()
                     color: Theme.secondaryColor
                     width: parent.width - fileIcon.width - (Theme.paddingLarge + Theme.paddingSmall + Theme.paddingLarge)
                     truncationMode: TruncationMode.Fade
+                    font.pixelSize: Theme.fontSizeTiny
                 }
                 Switch {
                     id: mSelect
