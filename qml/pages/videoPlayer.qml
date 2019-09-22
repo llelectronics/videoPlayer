@@ -836,8 +836,14 @@ Page {
         anchors.top: parent.top
         anchors.topMargin: 4 * Theme.paddingLarge
         opacity: 0
+        property alias fadeOut: fadeOut
 
-        NumberAnimation on opacity { duration: 500 }
+        NumberAnimation on opacity {
+            id: fadeOut
+            to: 0
+            duration: 400;
+            easing.type: Easing.InOutCubic
+        }
 
         Rectangle {
             width: scaleLblIndicator.width + 2 * Theme.paddingMedium
@@ -845,7 +851,7 @@ Page {
             color: isLightTheme? "white" : "black"
             opacity: 0.4
             anchors.centerIn: parent
-
+            radius: 2
         }
         Label {
             id: scaleLblIndicator
@@ -861,10 +867,11 @@ Page {
         interval: 1000
         property int count: 0
         triggeredOnStart: true
+        repeat: true
         onTriggered: {
             ++count
-            if (count >= 2) {
-                scaleIndicator.opacity = 0
+            if (count == 2) {
+                scaleIndicator.fadeOut.start();
                 count = 0;
                 stop();
             }

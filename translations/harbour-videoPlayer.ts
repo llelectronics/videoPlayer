@@ -1005,12 +1005,12 @@ The video cannot be played because the media service could not be instantiated.<
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="854"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="860"/>
         <source>Zoomed to fit screen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="854"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="860"/>
         <source>Original</source>
         <translation type="unfinished"></translation>
     </message>
