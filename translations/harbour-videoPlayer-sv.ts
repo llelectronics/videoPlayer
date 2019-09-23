@@ -974,7 +974,7 @@
         <translation>Avfärda</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="804"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="833"/>
         <source>
 The video cannot be played due to a problem allocating resources.
                         On Youtube Videos please make sure to be logged in. Some videos might be geoblocked or require you to be logged into youtube.</source>
@@ -983,40 +983,40 @@ Det går inte att spela upp videon på grund av problem med att resursallokering
                         Se till att vara inloggad på Youtube-videor. Vissa videor kan vara geoblockerade eller kräva att du är inloggad på YouTube.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="806"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="835"/>
         <source>
 The audio and or video format is not supported.</source>
         <translation>
 Ljud- och/eller videoformatet stöds inte.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="807"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="836"/>
         <source>
 The video cannot be played due to network issues.</source>
         <translation>
 Videon kan inte spelas upp, på grund av nätverksproblem.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="808"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="837"/>
         <source>
 The video cannot be played due to insufficient permissions.</source>
         <translation>
 Videon kan inte spelas upp, på grund av otillräckliga rättigheter.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="809"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="838"/>
         <source>
 The video cannot be played because the media service could not be instantiated.</source>
         <translation>
 Videon kan inte spelas upp, eftersom medietjänsten inte kunde startas.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="860"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="889"/>
         <source>Zoomed to fit screen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="860"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="889"/>
         <source>Original</source>
         <translation type="unfinished"></translation>
     </message>

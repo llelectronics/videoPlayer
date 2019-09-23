@@ -506,6 +506,7 @@ Page {
             id: mediaItem
             property bool active : true
             visible: active && mainWindow.applicationActive
+            parent: pincher
             anchors.fill: parent
 
             VideoPoster {
@@ -714,6 +715,34 @@ Page {
 //        }
 
 //    }
+
+    PinchArea {
+        id: pincher
+        enabled: allowScaling
+        anchors.fill: parent
+        pinch.target: video
+        pinch.minimumScale: 1
+        pinch.maximumScale: 1 + (((videoPlayerPage.width/videoPlayerPage.height) - (video.sourceRect.width/video.sourceRect.height)) / (video.sourceRect.width/video.sourceRect.height))
+        pinch.dragAxis: Pinch.XAndYAxis
+        property bool pinchIn: false
+        onPinchUpdated: {
+            if (pinch.previousScale < pinch.scale) {
+                pinchIn = true
+            }
+            else if (pinch.previousScale > pinch.scale) {
+                pinchIn = false
+            }
+        }
+        onPinchFinished: {
+            if (pinchIn) {
+                video.fillMode = VideoOutput.PreserveAspectCrop
+            }
+            else {
+                video.fillMode = VideoOutput.PreserveAspectFit
+            }
+            showScaleIndicator.start();
+        }
+    }
 
     children: [
 

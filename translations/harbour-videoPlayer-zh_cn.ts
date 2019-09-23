@@ -974,47 +974,47 @@
         <translation>摒弃</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="804"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="833"/>
         <source>
 The video cannot be played due to a problem allocating resources.
                         On Youtube Videos please make sure to be logged in. Some videos might be geoblocked or require you to be logged into youtube.</source>
         <translation>由于分配源的缘故，无法播放该视频。请登陆到Youtube,因为某些视频被地理锁定了。</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="806"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="835"/>
         <source>
 The audio and or video format is not supported.</source>
         <translation>
 不支持音频或视频格式</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="807"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="836"/>
         <source>
 The video cannot be played due to network issues.</source>
         <translation>
 因网络问题无法播放此视频</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="808"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="837"/>
         <source>
 The video cannot be played due to insufficient permissions.</source>
         <translation>
 因权限不足, 无法播放视频</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="809"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="838"/>
         <source>
 The video cannot be played because the media service could not be instantiated.</source>
         <translation>
 因无法实例化媒体服务，无法播放此视频</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="860"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="889"/>
         <source>Zoomed to fit screen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="860"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="889"/>
         <source>Original</source>
         <translation type="unfinished"></translation>
     </message>
