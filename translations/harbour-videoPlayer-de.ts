@@ -267,27 +267,27 @@
         <location filename="../qml/pages/fileman/fmComponents/FileItemDelegate.qml" line="16"/>
         <location filename="../qml/pages/fileman/fmComponents/FileItemDelegate.qml" line="18"/>
         <source>Deleting </source>
-        <translation type="unfinished">Lösche </translation>
+        <translation>Lösche </translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/fmComponents/FileItemDelegate.qml" line="136"/>
         <source>Cut</source>
-        <translation type="unfinished">Ausschneiden</translation>
+        <translation>Ausschneiden</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/fmComponents/FileItemDelegate.qml" line="142"/>
         <source>Copy</source>
-        <translation type="unfinished">Kopieren</translation>
+        <translation>Kopieren</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/fmComponents/FileItemDelegate.qml" line="148"/>
         <source>Delete</source>
-        <translation type="unfinished">Löschen</translation>
+        <translation>Löschen</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/fmComponents/FileItemDelegate.qml" line="154"/>
         <source>Properties</source>
-        <translation type="unfinished">Eigenschaften</translation>
+        <translation>Eigenschaften</translation>
     </message>
 </context>
 <context>
@@ -445,17 +445,17 @@
     <message>
         <location filename="../qml/pages/fileman/OpenDialog.qml" line="135"/>
         <source>Time</source>
-        <translation type="unfinished"></translation>
+        <translation>Datum</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/OpenDialog.qml" line="136"/>
         <source>Size</source>
-        <translation type="unfinished">Größe</translation>
+        <translation>Größe</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/OpenDialog.qml" line="137"/>
         <source>Type</source>
-        <translation type="unfinished">Typ</translation>
+        <translation>Typ</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/OpenDialog.qml" line="174"/>
@@ -650,7 +650,7 @@
     <message>
         <location filename="../qml/pages/fileman/fmComponents/PlacesPage.qml" line="75"/>
         <source>Android Storage</source>
-        <translation type="unfinished"></translation>
+        <translation>Android Datenspeicher</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/fmComponents/PlacesPage.qml" line="109"/>
@@ -961,12 +961,12 @@
     <message>
         <location filename="../qml/pages/videoPlayer.qml" line="319"/>
         <source>Load Subtitle</source>
-        <translation type="unfinished"></translation>
+        <translation>Untertitel laden</translation>
     </message>
     <message>
         <location filename="../qml/pages/videoPlayer.qml" line="323"/>
         <source>Play from last known position</source>
-        <translation type="unfinished"></translation>
+        <translation>Spiele von letzter bekannten Position</translation>
     </message>
     <message>
         <location filename="../qml/pages/videoPlayer.qml" line="492"/>
@@ -984,35 +984,35 @@ The video cannot be played due to a problem allocating resources.
         <location filename="../qml/pages/videoPlayer.qml" line="841"/>
         <source>
 The audio and or video format is not supported.</source>
-        <translation type="unfinished">Das Audio oder Videoformat wird nicht unterstützt.</translation>
+        <translation>Das Audio oder Videoformat wird nicht unterstützt.</translation>
     </message>
     <message>
         <location filename="../qml/pages/videoPlayer.qml" line="842"/>
         <source>
 The video cannot be played due to network issues.</source>
-        <translation type="unfinished">Dieses Video kann wegen Netzwerkproblemen nicht abgespielt werden.</translation>
+        <translation>Dieses Video kann wegen Netzwerkproblemen nicht abgespielt werden.</translation>
     </message>
     <message>
         <location filename="../qml/pages/videoPlayer.qml" line="843"/>
         <source>
 The video cannot be played due to insufficient permissions.</source>
-        <translation type="unfinished">Dieses Video kann wegen unzureichenden Berechtigungen nicht abgespielt werden.</translation>
+        <translation>Dieses Video kann wegen unzureichenden Berechtigungen nicht abgespielt werden.</translation>
     </message>
     <message>
         <location filename="../qml/pages/videoPlayer.qml" line="844"/>
         <source>
 The video cannot be played because the media service could not be instantiated.</source>
-        <translation type="unfinished">Dieses Video konnte wegen eines nicht instanzierten Mediendienstes nicht abgespielt werden.</translation>
+        <translation>Dieses Video konnte wegen eines nicht instanzierten Mediendienstes nicht abgespielt werden.</translation>
     </message>
     <message>
         <location filename="../qml/pages/videoPlayer.qml" line="895"/>
         <source>Zoomed to fit screen</source>
-        <translation type="unfinished"></translation>
+        <translation>Auf Bildschirmgröße gezoomt</translation>
     </message>
     <message>
         <location filename="../qml/pages/videoPlayer.qml" line="895"/>
         <source>Original</source>
-        <translation type="unfinished"></translation>
+        <translation>Original</translation>
     </message>
 </context>
 <context>
