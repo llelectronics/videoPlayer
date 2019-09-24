@@ -422,6 +422,7 @@ ApplicationWindow
         background: null
         wrapMode: TextEdit.WordWrap
         readOnly: true
+        rotation: pageStack.currentPage.rotation
     }
     Button {
         id: dismissBtn
@@ -434,6 +435,7 @@ ApplicationWindow
             if (errTxt.visible) errTxt.visible = false;
         }
         parent: errTxt.parent
+        rotation: pageStack.currentPage.rotation
     }
 
     // What a hack to create a on Closing behavior

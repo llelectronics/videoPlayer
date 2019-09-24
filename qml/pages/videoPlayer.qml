@@ -436,6 +436,7 @@ Page {
             color: isLightTheme ? "white" : "black"
             opacity: 0.60
             anchors.fill: parent
+            parent: flick
             visible: {
                 if (errorBox.visible) return true;
                 else return false;
@@ -453,6 +454,7 @@ Page {
             spacing: 15
             width: parent.width
             height: parent.height
+            parent: videoPlayerPage
             z:99
             visible: {
                 if (errorTxt.text !== "" || errorDetail.text !== "" ) return true;
@@ -498,6 +500,7 @@ Page {
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.bottom: parent.bottom
             anchors.bottomMargin: Theme.paddingLarge
+            parent: flick
             z: {
                 if ((errorBox.z + 1) > (videoPoster.z + 1)) errorBox.z + 1
                 else videoPoster.z + 1
@@ -721,7 +724,7 @@ Page {
     PinchArea {
         id: pincher
         enabled: allowScaling && !pulley.visible && !errorBox.visible
-        visible: allowScaling && !pulley.visible && !errorBox.visible
+        visible: enabled
         anchors.fill: parent
         pinch.target: video
         pinch.minimumScale: 1

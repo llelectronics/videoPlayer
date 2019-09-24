@@ -784,12 +784,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SecondPage.qml" line="384"/>
+        <location filename="../qml/pages/SecondPage.qml" line="386"/>
         <source>Load with ytdl</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SecondPage.qml" line="398"/>
+        <location filename="../qml/pages/SecondPage.qml" line="400"/>
         <source>Load</source>
         <translation type="unfinished"></translation>
     </message>
@@ -931,7 +931,7 @@
 <context>
     <name>harbour-videoPlayer</name>
     <message>
-        <location filename="../qml/harbour-videoPlayer.qml" line="432"/>
+        <location filename="../qml/harbour-videoPlayer.qml" line="433"/>
         <source>Dismiss</source>
         <translation type="unfinished"></translation>
     </message>
@@ -939,78 +939,78 @@
 <context>
     <name>videoPlayer</name>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="246"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="248"/>
         <source>Load with ytdl</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="267"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="269"/>
         <source>Download Youtube Video</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="285"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="287"/>
         <source>Download</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="301"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="303"/>
         <source>Add to bookmarks</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="317"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="319"/>
         <source>Load Subtitle</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="321"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="323"/>
         <source>Play from last known position</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="488"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="492"/>
         <source>Dismiss</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="833"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="839"/>
         <source>
 The video cannot be played due to a problem allocating resources.
                         On Youtube Videos please make sure to be logged in. Some videos might be geoblocked or require you to be logged into youtube.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="835"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="841"/>
         <source>
 The audio and or video format is not supported.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="836"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="842"/>
         <source>
 The video cannot be played due to network issues.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="837"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="843"/>
         <source>
 The video cannot be played due to insufficient permissions.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="838"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="844"/>
         <source>
 The video cannot be played because the media service could not be instantiated.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="889"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="895"/>
         <source>Zoomed to fit screen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="889"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="895"/>
         <source>Original</source>
         <translation type="unfinished"></translation>
     </message>
