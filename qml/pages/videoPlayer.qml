@@ -238,9 +238,11 @@ Page {
         id: flick
         anchors.fill: parent
 
+
         // PullDownMenu and PushUpMenu must be declared in SilicaFlickable, SilicaListView or SilicaGridView
         PullDownMenu {
             id: pulley
+
             MenuItem {
                 id: ytdlMenuItem
                 text: qsTr("Load with ytdl")
@@ -506,7 +508,7 @@ Page {
             id: mediaItem
             property bool active : true
             visible: active && mainWindow.applicationActive
-            parent: pincher
+            parent: pincher.enabled ? pincher : flick
             anchors.fill: parent
 
             VideoPoster {
@@ -718,7 +720,8 @@ Page {
 
     PinchArea {
         id: pincher
-        enabled: allowScaling
+        enabled: allowScaling && !pulley.visible && !errorBox.visible
+        visible: allowScaling && !pulley.visible && !errorBox.visible
         anchors.fill: parent
         pinch.target: video
         pinch.minimumScale: 1
