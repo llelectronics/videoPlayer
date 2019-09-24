@@ -393,6 +393,7 @@ ApplicationWindow
     }
 
     Rectangle {
+        id: bgOverlay
         color: Theme.overlayBackgroundColor
         opacity: 0.60
         anchors.fill: parent
@@ -403,39 +404,45 @@ ApplicationWindow
         }
     }
 
-    BusyIndicator {
-        id: busy
+    Item {
+        id: bgItem
+        rotation: mainWindow._rotatingItem.rotation
         anchors.centerIn: parent
-        size: BusyIndicatorSize.Large
-        running: false
-        visible: false
-    }
+        width: pageStack.verticalOrientation ? parent.width : parent.height
+        height: pageStack.verticalOrientation ? parent.height : parent.width
 
-    TextArea {
-        id: errTxt
-        anchors.top: parent.top
-        height: parent.height - (dismissBtn.height + Theme.paddingLarge)
-        width: parent.width
-        font.pointSize: Theme.fontSizeSmall
-        color: Theme.primaryColor
-        visible: false
-        background: null
-        wrapMode: TextEdit.WordWrap
-        readOnly: true
-        rotation: pageStack.currentPage.rotation
-    }
-    Button {
-        id: dismissBtn
-        anchors.bottom: parent.bottom
-        anchors.bottomMargin: Theme.paddingLarge
-        anchors.horizontalCenter: parent.horizontalCenter
-        visible: errTxt.visible
-        text: qsTr("Dismiss")
-        onClicked: {
-            if (errTxt.visible) errTxt.visible = false;
+        BusyIndicator {
+            id: busy
+            anchors.centerIn: parent
+            size: BusyIndicatorSize.Large
+            running: false
+            visible: false
         }
-        parent: errTxt.parent
-        rotation: pageStack.currentPage.rotation
+
+        TextArea {
+            id: errTxt
+            anchors.top: parent.top
+            height: parent.height - (dismissBtn.height + Theme.paddingLarge)
+            width: parent.width
+            font.pointSize: Theme.fontSizeSmall
+            color: Theme.primaryColor
+            visible: false
+            background: null
+            wrapMode: TextEdit.WordWrap
+            readOnly: true
+            z: dismissBtn.z + 1
+        }
+        Button {
+            id: dismissBtn
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: Theme.paddingLarge
+            anchors.horizontalCenter: parent.horizontalCenter
+            visible: errTxt.visible
+            text: qsTr("Dismiss")
+            onClicked: {
+                if (errTxt.visible) errTxt.visible = false;
+            }
+        }
     }
 
     // What a hack to create a on Closing behavior

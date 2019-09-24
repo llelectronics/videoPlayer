@@ -429,7 +429,7 @@
         <translation>URL zur Mediendatei</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="483"/>
+        <location filename="../qml/pages/FirstPage.qml" line="482"/>
         <source>Youtube-Dl updated.</source>
         <translation>Youtube-Dl aktualisiert.</translation>
     </message>
@@ -931,7 +931,7 @@
 <context>
     <name>harbour-videoPlayer</name>
     <message>
-        <location filename="../qml/harbour-videoPlayer.qml" line="433"/>
+        <location filename="../qml/harbour-videoPlayer.qml" line="441"/>
         <source>Dismiss</source>
         <translation>Ausblenden</translation>
     </message>
