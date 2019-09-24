@@ -235,10 +235,10 @@ Page {
                 }
             }
 
-            onNavigationRequested: {
-                request.action = WebView.IgnoreRequest;
-                console.debug("[SecondPage.qml] Request navigation to " + request.url)
-                if (ytDetect !== true) request.action = WebView.AcceptRequest;
+//            onNavigationRequested: {
+//                console.debug("[SecondPage.qml] Request navigation to " + request.url)
+//                if (request.url == "https://m.youtube.com/" || request.url.indexOf("results?q=")) request.action = WebView.AcceptRequest
+//                else request.action = WebView.IgnoreRequest;
 //                if (YT.checkYoutube(request.url.toString()) === true && ytDetect === true) {
 //                    if (YT.getYtID(request.url.toString()) !== "") {
 //                        //console.debug("[SecondPage.qml] Youtube Link detected")
@@ -260,7 +260,7 @@ Page {
 //                else {
 //                    request.action = WebView.AcceptRequest;
 //                }
-            }
+//            }
 
             VerticalScrollDecorator {}
 
