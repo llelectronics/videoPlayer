@@ -210,10 +210,11 @@ Page {
 
             onUrlChanged: {
                 if (YT.checkYoutube(url.toString()) === true && ytDetect === true) {
-                    if (YT.getYtID(url.toString()) !== "") {
+                    var youtubeID = YT.getYtID(url.toString())
+                    if (youtubeID !== "") {
                         if (dataContainer != null) {
                             if (dataContainer.alwaysYtdl) {
-                                _ytdl.setUrl(url)
+                                _ytdl.setUrl(youtubeID)
                                 _ytdl.setParameter("-f " + dataContainer.ytdlQual)
                                 _ytdl.getStreamUrl()
                                 _ytdl.getStreamTitle()
@@ -386,13 +387,16 @@ Page {
                 text: qsTr("Load with ytdl")
                 onClicked: {
                     contextMenu.hide()
-                    _ytdl.setUrl(contextMenu.clickedUrl)
-                    _ytdl.setParameter("-f " + mainWindow.firstPage.ytdlQual)
-                    _ytdl.getStreamUrl()
-                    _ytdl.getStreamTitle()
-                    mainWindow.firstPage.isYtUrl = false
-                    mainWindow.firstPage.busy.visible = true;
-                    mainWindow.firstPage.busy.running = true;
+                    var youtubeID = YT.getYtID(contextMenu.clickedUrl.toString())
+                    if (youtubeID !== "") {
+                        _ytdl.setUrl(youtubeID)
+                        _ytdl.setParameter("-f " + mainWindow.firstPage.ytdlQual)
+                        _ytdl.getStreamUrl()
+                        _ytdl.getStreamTitle()
+                        mainWindow.firstPage.isYtUrl = false
+                        mainWindow.firstPage.busy.visible = true;
+                        mainWindow.firstPage.busy.running = true;
+                    }
                 }
                 visible: contextMenu.clickedUrl != ""
             }

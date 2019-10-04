@@ -3,6 +3,7 @@ import Sailfish.Silica 1.0
 import QtMultimedia 5.0
 import org.nemomobile.thumbnailer 1.0
 import QtGraphicalEffects 1.0
+import "yt.js" as YT
 
 MouseArea {
     id: videoItem
@@ -252,7 +253,10 @@ MouseArea {
                 }
                 onClicked: {
                     videoItem.player.pause()
-                    _ytdl.setUrl(firstPage.originalUrl);
+                    var youtubeID = YT.getYtID(firstPage.originalUrl.toString())
+                    if (youtubeID !== "") {
+                        _ytdl.setUrl(youtubeID);
+                    }
                     pageStack.push(Qt.resolvedUrl("../ytQualityChooser.qml"), {"streamTitle": firstPage.streamTitle, "url720p": firstPage.url720p, "url480p": firstPage.url480p, "url360p": firstPage.url360p, "url240p": firstPage.url240p});
                 }
                 Label {

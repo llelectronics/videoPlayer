@@ -254,14 +254,17 @@ Page {
                 //onClicked: pageStack.push(Qt.resolvedUrl("DownloadManager.qml"), {"downloadUrl": streamUrl, "downloadName": streamTitle});
                 // Alternatively use direct youtube url instead of ytapi for downloads (ytapi links not always download with download manager)
                 onClicked: {
-                    _ytdl.setUrl(originalUrl)
-                    _ytdl.setParameter("-f " + ytdlQual)
-                    _ytdl.getStreamUrl()
-                    _ytdl.getStreamTitle()
-                    mainWindow.firstPage.isYtUrl = false
-                    mainWindow.firstPage.busy.visible = true;
-                    mainWindow.firstPage.busy.running = true;
-                    pageStack.pop()
+                    var youtubeID = YT.getYtID(originalUrl.toString())
+                    if (youtubeID !== "") {
+                        _ytdl.setUrl(youtubeID)
+                        _ytdl.setParameter("-f " + ytdlQual)
+                        _ytdl.getStreamUrl()
+                        _ytdl.getStreamTitle()
+                        mainWindow.firstPage.isYtUrl = false
+                        mainWindow.firstPage.busy.visible = true;
+                        mainWindow.firstPage.busy.running = true;
+                        pageStack.pop()
+                    }
                 }
             }
             MenuItem {
@@ -279,7 +282,8 @@ Page {
                     // Illegal chars: `~!@#$%^&*()-=+\|/?.>,<;:'"[{]}
                     //console.debug("[FileDetails -> Download YT Video]: " + mainWindow.firstPage.youtubeDirectUrl)
                     mainWindow.firstPage.streamTitle = YT.getDownloadableTitleString(mainWindow.firstPage.streamTitle)
-                    _ytdl.setUrl(originalUrl);
+                    var youtubeID = YT.getYtID(originalUrl.toString())
+                    _ytdl.setUrl(youtubeID);
                     pageStack.push(Qt.resolvedUrl("ytQualityChooser.qml"), {"streamTitle": mainWindow.firstPage.streamTitle, "url720p": url720p, "url480p": url480p, "url360p": url360p, "url240p": url240p, "ytDownload": true});
                 }
             }
