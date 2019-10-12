@@ -1,7 +1,6 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 import QtMultimedia 5.0
-import Sailfish.Media 1.0
 import "helper"
 import "fileman"
 import org.nemomobile.mpris 1.0

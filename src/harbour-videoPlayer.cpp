@@ -39,6 +39,7 @@
 #include "youtubedl-helper.hpp"
 #include "folderlistmodel/qquickfolderlistmodel.h"
 #include "playlist.h"
+#include "videohelper.hpp"
 
 int main(int argc, char *argv[])
 {
@@ -71,11 +72,15 @@ int main(int argc, char *argv[])
 
     QQuickView *view = SailfishApp::createView(); // I get a white background with this.
     view->engine()->rootContext()->setContextProperty("_ytdl", nullptr);
+    view->engine()->rootContext()->setContextProperty("_videoHelper", nullptr);
     view->setSource(SailfishApp::pathTo("qml/harbour-videoPlayer.qml"));  // So I do this ;)
 
     // Needs to be added here before trying to load the file as _ytdl might be needed for that
     ythelper *youtubedl = new ythelper();
     view->engine()->rootContext()->setContextProperty("_ytdl", youtubedl);
+
+    videoHelper *vHelper = new videoHelper();
+    view->engine()->rootContext()->setContextProperty("_videoHelper", vHelper);
 
     QObject *object = view->rootObject();
 
