@@ -939,78 +939,78 @@
 <context>
     <name>videoPlayer</name>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="248"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="247"/>
         <source>Load with ytdl</source>
         <translation>Mit Ytdl laden</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="272"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="271"/>
         <source>Download Youtube Video</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="291"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="290"/>
         <source>Download</source>
         <translation>Herunterladen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="307"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="306"/>
         <source>Add to bookmarks</source>
         <translation>Zu Lesezeichen hinzufügen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="323"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="322"/>
         <source>Load Subtitle</source>
         <translation>Untertitel laden</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="327"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="326"/>
         <source>Play from last known position</source>
         <translation>Spiele von letzter bekannten Position</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="496"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="495"/>
         <source>Dismiss</source>
         <translation>Ausblenden</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="843"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="842"/>
         <source>
 The video cannot be played due to a problem allocating resources.
                         On Youtube Videos please make sure to be logged in. Some videos might be geoblocked or require you to be logged into youtube.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="845"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="844"/>
         <source>
 The audio and or video format is not supported.</source>
         <translation>Das Audio oder Videoformat wird nicht unterstützt.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="846"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="845"/>
         <source>
 The video cannot be played due to network issues.</source>
         <translation>Dieses Video kann wegen Netzwerkproblemen nicht abgespielt werden.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="847"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="846"/>
         <source>
 The video cannot be played due to insufficient permissions.</source>
         <translation>Dieses Video kann wegen unzureichenden Berechtigungen nicht abgespielt werden.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="848"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="847"/>
         <source>
 The video cannot be played because the media service could not be instantiated.</source>
         <translation>Dieses Video konnte wegen eines nicht instanzierten Mediendienstes nicht abgespielt werden.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="899"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="898"/>
         <source>Zoomed to fit screen</source>
         <translation>Auf Bildschirmgröße gezoomt</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="899"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="898"/>
         <source>Original</source>
         <translation>Original</translation>
     </message>

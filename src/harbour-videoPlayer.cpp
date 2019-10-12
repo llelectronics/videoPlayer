@@ -105,9 +105,9 @@ int main(int argc, char *argv[])
     if (argc>1) QMetaObject::invokeMethod(object, "loadUrl", Q_ARG(QVariant, file));
 
     // Create download manager object
-    DownloadManager manager;
+    DownloadManager *manager = new DownloadManager();
 
-    view->engine()->rootContext()->setContextProperty("_manager", &manager);
+    view->engine()->rootContext()->setContextProperty("_manager", manager);
 
     FM *fileAction = new FM();
     view->engine()->rootContext()->setContextProperty("_fm", fileAction);
