@@ -6,7 +6,7 @@
     <message>
         <location filename="../qml/pages/AboutPage.qml" line="90"/>
         <source>A simple video player based on GStreamer.</source>
-        <translation>一个基于GStreamer的简易视频播放器。</translation>
+        <translation>一个基于 GStreamer 的简易视频播放器。</translation>
     </message>
 </context>
 <context>
@@ -178,7 +178,7 @@
     <message>
         <location filename="../qml/pages/FileDetails.qml" line="35"/>
         <source>Search Artist on Youtube</source>
-        <translation>在Youtube搜索艺术家</translation>
+        <translation>在 Youtube 搜索艺术家</translation>
     </message>
     <message>
         <location filename="../qml/pages/FileDetails.qml" line="39"/>
@@ -188,12 +188,12 @@
     <message>
         <location filename="../qml/pages/FileDetails.qml" line="43"/>
         <source>Search Artist on Google Image</source>
-        <translation>在Google图片搜索艺术家</translation>
+        <translation>在 Google 图片搜索艺术家</translation>
     </message>
     <message>
         <location filename="../qml/pages/FileDetails.qml" line="47"/>
         <source>Show Youtube Comments</source>
-        <translation>显示Youtube评论</translation>
+        <translation>显示 Youtube 评论</translation>
     </message>
     <message>
         <location filename="../qml/pages/FileDetails.qml" line="66"/>
@@ -267,27 +267,27 @@
         <location filename="../qml/pages/fileman/fmComponents/FileItemDelegate.qml" line="16"/>
         <location filename="../qml/pages/fileman/fmComponents/FileItemDelegate.qml" line="18"/>
         <source>Deleting </source>
-        <translation type="unfinished">删除</translation>
+        <translation>删除</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/fmComponents/FileItemDelegate.qml" line="136"/>
         <source>Cut</source>
-        <translation type="unfinished">剪切</translation>
+        <translation>剪切</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/fmComponents/FileItemDelegate.qml" line="142"/>
         <source>Copy</source>
-        <translation type="unfinished">复制</translation>
+        <translation>复制</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/fmComponents/FileItemDelegate.qml" line="148"/>
         <source>Delete</source>
-        <translation type="unfinished">删除</translation>
+        <translation>删除</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/fmComponents/FileItemDelegate.qml" line="154"/>
         <source>Properties</source>
-        <translation type="unfinished">属性</translation>
+        <translation>属性</translation>
     </message>
 </context>
 <context>
@@ -431,7 +431,7 @@
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="482"/>
         <source>Youtube-Dl updated.</source>
-        <translation>Youtube-Dl已更新</translation>
+        <translation>Youtube-Dl 已更新</translation>
     </message>
 </context>
 <context>
@@ -440,22 +440,22 @@
         <location filename="../qml/pages/fileman/OpenDialog.qml" line="20"/>
         <location filename="../qml/pages/fileman/OpenDialog.qml" line="134"/>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>名称</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/OpenDialog.qml" line="135"/>
         <source>Time</source>
-        <translation type="unfinished"></translation>
+        <translation>时间</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/OpenDialog.qml" line="136"/>
         <source>Size</source>
-        <translation type="unfinished">大小</translation>
+        <translation>大小</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/OpenDialog.qml" line="137"/>
         <source>Type</source>
-        <translation type="unfinished">类型</translation>
+        <translation>类型</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/OpenDialog.qml" line="174"/>
@@ -650,7 +650,7 @@
     <message>
         <location filename="../qml/pages/fileman/fmComponents/PlacesPage.qml" line="75"/>
         <source>Android Storage</source>
-        <translation type="unfinished"></translation>
+        <translation>Android 存储</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/fmComponents/PlacesPage.qml" line="109"/>
@@ -786,7 +786,7 @@
     <message>
         <location filename="../qml/pages/SecondPage.qml" line="387"/>
         <source>Load with ytdl</source>
-        <translation>用ytdl加载</translation>
+        <translation>用 ytdl 加载</translation>
     </message>
     <message>
         <location filename="../qml/pages/SecondPage.qml" line="404"/>
@@ -920,12 +920,12 @@
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="486"/>
         <source>Try to load all youtube videos with ytdl</source>
-        <translation>尝试以ytdl加载所有youtube视频</translation>
+        <translation>尝试以 ytdl 加载所有 youtube 视频</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="493"/>
         <source>Update Youtube-Dl</source>
-        <translation>更新Youtube-Dl</translation>
+        <translation>更新 Youtube-Dl</translation>
     </message>
 </context>
 <context>
@@ -941,12 +941,12 @@
     <message>
         <location filename="../qml/pages/videoPlayer.qml" line="247"/>
         <source>Load with ytdl</source>
-        <translation>用ytdl加载</translation>
+        <translation>用 ytdl 加载</translation>
     </message>
     <message>
         <location filename="../qml/pages/videoPlayer.qml" line="271"/>
         <source>Download Youtube Video</source>
-        <translation>下载youtube视频</translation>
+        <translation>下载 youtube 视频</translation>
     </message>
     <message>
         <location filename="../qml/pages/videoPlayer.qml" line="290"/>
@@ -971,14 +971,14 @@
     <message>
         <location filename="../qml/pages/videoPlayer.qml" line="495"/>
         <source>Dismiss</source>
-        <translation>摒弃</translation>
+        <translation>取消</translation>
     </message>
     <message>
         <location filename="../qml/pages/videoPlayer.qml" line="842"/>
         <source>
 The video cannot be played due to a problem allocating resources.
                         On Youtube Videos please make sure to be logged in. Some videos might be geoblocked or require you to be logged into youtube.</source>
-        <translation>由于分配源的缘故，无法播放该视频。请登陆到Youtube,因为某些视频被地理锁定了。</translation>
+        <translation>由于分配源的缘故，无法播放该视频。请登陆到 Youtube ,因为某些视频被地理锁定了。</translation>
     </message>
     <message>
         <location filename="../qml/pages/videoPlayer.qml" line="844"/>
@@ -1011,12 +1011,12 @@ The video cannot be played because the media service could not be instantiated.<
     <message>
         <location filename="../qml/pages/videoPlayer.qml" line="898"/>
         <source>Zoomed to fit screen</source>
-        <translation type="unfinished"></translation>
+        <translation>缩放以适应屏幕</translation>
     </message>
     <message>
         <location filename="../qml/pages/videoPlayer.qml" line="898"/>
         <source>Original</source>
-        <translation type="unfinished"></translation>
+        <translation>原始比例</translation>
     </message>
 </context>
 <context>
