@@ -267,27 +267,27 @@
         <location filename="../qml/pages/fileman/fmComponents/FileItemDelegate.qml" line="16"/>
         <location filename="../qml/pages/fileman/fmComponents/FileItemDelegate.qml" line="18"/>
         <source>Deleting </source>
-        <translation type="unfinished">Tar bort </translation>
+        <translation>Tar bort </translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/fmComponents/FileItemDelegate.qml" line="136"/>
         <source>Cut</source>
-        <translation type="unfinished">Klipp ur</translation>
+        <translation>Klipp ur</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/fmComponents/FileItemDelegate.qml" line="142"/>
         <source>Copy</source>
-        <translation type="unfinished">Kopiera</translation>
+        <translation>Kopiera</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/fmComponents/FileItemDelegate.qml" line="148"/>
         <source>Delete</source>
-        <translation type="unfinished">Ta bort</translation>
+        <translation>Ta bort</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/fmComponents/FileItemDelegate.qml" line="154"/>
         <source>Properties</source>
-        <translation type="unfinished">Egenskaper</translation>
+        <translation>Egenskaper</translation>
     </message>
 </context>
 <context>
@@ -440,22 +440,22 @@
         <location filename="../qml/pages/fileman/OpenDialog.qml" line="20"/>
         <location filename="../qml/pages/fileman/OpenDialog.qml" line="134"/>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Namn</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/OpenDialog.qml" line="135"/>
         <source>Time</source>
-        <translation type="unfinished"></translation>
+        <translation>Tid</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/OpenDialog.qml" line="136"/>
         <source>Size</source>
-        <translation type="unfinished">Storlek</translation>
+        <translation>Storlek</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/OpenDialog.qml" line="137"/>
         <source>Type</source>
-        <translation type="unfinished">Typ</translation>
+        <translation>Typ</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/OpenDialog.qml" line="174"/>
@@ -650,7 +650,7 @@
     <message>
         <location filename="../qml/pages/fileman/fmComponents/PlacesPage.qml" line="75"/>
         <source>Android Storage</source>
-        <translation type="unfinished"></translation>
+        <translation>Android-lagring</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/fmComponents/PlacesPage.qml" line="109"/>
@@ -766,7 +766,7 @@
     <message>
         <location filename="../qml/pages/SecondPage.qml" line="129"/>
         <source>Reload</source>
-        <translation type="unfinished"></translation>
+        <translation>Läs in igen</translation>
     </message>
     <message>
         <location filename="../qml/pages/SecondPage.qml" line="133"/>
@@ -1013,12 +1013,12 @@ Videon kan inte spelas upp, eftersom medietjänsten inte kunde startas.</transla
     <message>
         <location filename="../qml/pages/videoPlayer.qml" line="898"/>
         <source>Zoomed to fit screen</source>
-        <translation type="unfinished"></translation>
+        <translation>Zoomad för att passa skärmen</translation>
     </message>
     <message>
         <location filename="../qml/pages/videoPlayer.qml" line="898"/>
         <source>Original</source>
-        <translation type="unfinished"></translation>
+        <translation>Original</translation>
     </message>
 </context>
 <context>
