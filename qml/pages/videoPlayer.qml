@@ -5,6 +5,7 @@ import Sailfish.Media 1.0
 import "helper"
 import "fileman"
 import org.nemomobile.mpris 1.0
+import Nemo.KeepAlive 1.2
 
 Page {
     id: videoPlayerPage
@@ -862,8 +863,8 @@ Page {
             height: parent.height
             anchors.centerIn: videoPlayerPage
 
-            ScreenBlank {
-                suspend: mediaPlayer.playbackState == MediaPlayer.PlayingState
+            DisplayBlanking {
+                preventBlanking: mediaPlayer.playbackState == MediaPlayer.PlayingState
             }
         }
     ]
