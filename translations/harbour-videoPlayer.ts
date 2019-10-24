@@ -537,17 +537,17 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/OpenURLPage.qml" line="90"/>
+        <location filename="../qml/pages/OpenURLPage.qml" line="89"/>
         <source>Type in URL here</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/OpenURLPage.qml" line="91"/>
+        <location filename="../qml/pages/OpenURLPage.qml" line="90"/>
         <source>URL to media file/stream</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/OpenURLPage.qml" line="110"/>
+        <location filename="../qml/pages/OpenURLPage.qml" line="109"/>
         <source>Add to bookmarks</source>
         <translation type="unfinished"></translation>
     </message>

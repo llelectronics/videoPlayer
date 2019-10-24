@@ -8,7 +8,7 @@
 #         - icon definition filename in desktop file must be changed
 TARGET = harbour-videoPlayer
 
-QT += multimedia dbus
+QT += multimedia
 
 CONFIG += sailfishapp
 
@@ -52,7 +52,6 @@ HEADERS += \
     src/folderlistmodel/qquickfolderlistmodel.h \
     src/folderlistmodel/fileproperty_p.h \
     src/folderlistmodel/fileinfothread_p.h \
-    src/videohelper.hpp \
     src/youtubedl-helper.hpp \
     src/playlist.h
 
