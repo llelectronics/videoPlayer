@@ -537,17 +537,17 @@
         <translation>URL openen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/OpenURLPage.qml" line="90"/>
+        <location filename="../qml/pages/OpenURLPage.qml" line="89"/>
         <source>Type in URL here</source>
         <translation>Geef hier URL in:</translation>
     </message>
     <message>
-        <location filename="../qml/pages/OpenURLPage.qml" line="91"/>
+        <location filename="../qml/pages/OpenURLPage.qml" line="90"/>
         <source>URL to media file/stream</source>
         <translation>URL naar media bestand/stream</translation>
     </message>
     <message>
-        <location filename="../qml/pages/OpenURLPage.qml" line="110"/>
+        <location filename="../qml/pages/OpenURLPage.qml" line="109"/>
         <source>Add to bookmarks</source>
         <translation>Aan bladwijzer toevoegen</translation>
     </message>
