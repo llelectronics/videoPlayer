@@ -1,6 +1,6 @@
 [Desktop Entry]
 Type=Application
-X-Nemo-Application-Type=silica-qt5
+X-Nemo-Application-Type=silica-media
 Name=LLs vPlayer
 Icon=harbour-videoPlayer
 Exec=harbour-videoPlayer %U
