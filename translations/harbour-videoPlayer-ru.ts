@@ -366,7 +366,7 @@
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="275"/>
         <source>Playlists</source>
-        <translation>Списки воспроизведения</translation>
+        <translation>Списки</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="357"/>
@@ -485,7 +485,7 @@
     <message>
         <location filename="../qml/pages/OpenURLPage.qml" line="13"/>
         <source>Load URL</source>
-        <translation>Загрузить по URL</translation>
+        <translation>Открыть URL</translation>
     </message>
     <message>
         <location filename="../qml/pages/OpenURLPage.qml" line="89"/>
