@@ -57,6 +57,8 @@ MediaPlayer {
                 play()
             } else if(isNewSource) pause()
         }
+        if (bufferProgress < 0.05) pause()
+        if (bufferProgress == 1.0 && !isNewSource) play()
     }
 }
 
