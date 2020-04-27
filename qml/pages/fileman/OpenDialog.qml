@@ -2,6 +2,7 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 import harbour.videoplayer.Videoplayer 1.0
 import Nemo.Configuration 1.0
+import Sailfish.Pickers 1.0
 import "fmComponents"
 
 Page {
@@ -35,6 +36,17 @@ Page {
  //       }
     ]
 
+    function openSearch() {
+        pageStack.push(contentPickerPage)
+    }
+
+    function openPicker(picker) {
+        if (picker === "docDir") pageStack.push(documentPickerPage)
+        else if (picker === "dowDir") pageStack.push(downloadPickerPage)
+        else if (picker === "picDir") pageStack.push(imagePickerPage)
+        else if (picker === "musDir") pageStack.push(musicPickerPage)
+        else if (picker === "vidDir") pageStack.push(videoPickerPage)
+    }
 
     ConfigurationGroup {
         id: customPlacesSettings
@@ -515,6 +527,61 @@ Page {
                 infoBanner.showText(message)
             }
             busyInd.running = false;
+        }
+    }
+
+    Component {
+        id: contentPickerPage
+        ContentPickerPage {
+            title: qsTr("Search file")
+            onSelectedContentPropertiesChanged: {
+                openFile(selectedContentProperties.filePath)
+            }
+        }
+    }
+    Component {
+        id: documentPickerPage
+        DocumentPickerPage {
+            title: qsTr("Documents")
+            onSelectedContentPropertiesChanged: {
+                openFile(selectedContentProperties.filePath)
+            }
+        }
+    }
+    Component {
+        id: downloadPickerPage
+        DownloadPickerPage {
+            title: qsTr("Downloads")
+            onSelectedContentPropertiesChanged: {
+                openFile(selectedContentProperties.filePath)
+            }
+        }
+    }
+    Component {
+        id: musicPickerPage
+        MusicPickerPage {
+            title: qsTr("Music")
+            onSelectedContentPropertiesChanged: {
+                openFile(selectedContentProperties.filePath)
+            }
+        }
+    }
+    Component {
+        id: imagePickerPage
+        ImagePickerPage {
+            title: qsTr("Pictures")
+            onSelectedContentPropertiesChanged: {
+                openFile(selectedContentProperties.filePath)
+            }
+        }
+    }
+    Component {
+        id: videoPickerPage
+        VideoPickerPage {
+            title: qsTr("Videos")
+            onSelectedContentPropertiesChanged: {
+                openFile(selectedContentProperties.filePath)
+            }
         }
     }
 
