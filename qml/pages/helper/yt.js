@@ -32,29 +32,29 @@ function getYoutubeVid(url) {
 }
 
 function getYoutubeTitle(url) {
-    var youtube_id;
-    youtube_id = getYtID(url);
-    var xhr = new XMLHttpRequest();
-    xhr.open("GET","https://www.googleapis.com/youtube/v3/videos?id=" + youtube_id + "&key="+ ytApiKey + "&fields=items(snippet(title))&part=snippet",true);
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState === 4) {
-            if (xhr.status === 200) {
-                var jsonObject = eval('(' + xhr.responseText + ')');
-                //console.log("JSON Response: " + jsonObject.data.items[0].snippet);
-                console.log("Youtube Title: " + jsonObject.items[0].snippet.title);
-                firstPage.streamTitle = jsonObject.items[0].snippet.title;
-                //                for ( var index in jsonObject.data )
-                //                {
-                //                    console.log("Youtube Title: " + jsonObject.data.title);
-                //                    firstPage.streamTitle = jsonObject.data.title;
-                //                }
-            } else {
-                firstPage.streamTitle = url
-                console.log("responseText", xhr.responseText);
-            }
-        }
-    }
-    xhr.send();
+//    var youtube_id;
+//    youtube_id = getYtID(url);
+//    var xhr = new XMLHttpRequest();
+//    xhr.open("GET","https://www.googleapis.com/youtube/v3/videos?id=" + youtube_id + "&key="+ ytApiKey + "&fields=items(snippet(title))&part=snippet",true);
+//    xhr.onreadystatechange = function() {
+//        if (xhr.readyState === 4) {
+//            if (xhr.status === 200) {
+//                var jsonObject = eval('(' + xhr.responseText + ')');
+//                //console.log("JSON Response: " + jsonObject.data.items[0].snippet);
+//                console.log("Youtube Title: " + jsonObject.items[0].snippet.title);
+//                firstPage.streamTitle = jsonObject.items[0].snippet.title;
+//                //                for ( var index in jsonObject.data )
+//                //                {
+//                //                    console.log("Youtube Title: " + jsonObject.data.title);
+//                //                    firstPage.streamTitle = jsonObject.data.title;
+//                //                }
+//            } else {
+//                firstPage.streamTitle = url
+//                console.log("responseText", xhr.responseText);
+//            }
+//        }
+//    }
+//    xhr.send();
 }
 
 
@@ -73,6 +73,8 @@ function getYoutubeStream(youtube_id) {
             var response;
             var streamData;
             var paramPair;
+            var videoDetailsData;
+            var videoTitle;
 
             for (var i = 0; i < videoInfo.length; i++) {
                 try {
@@ -92,10 +94,11 @@ function getYoutubeStream(youtube_id) {
                     //console.log("Formats: " + JSON.stringify(streams));
 
                     //streams = response.stream //decodeURIComponent(paramPair[1]);
+                    videoDetailsData = response["videoDetails"];
+                    videoTitle = videoDetailsData["title"];
                     break;
                 }
             }
-
 
             if (!streams) {
                 var msg = "YouTube videoInfo parsing: url_encoded_fmt_stream_map not found";
@@ -211,6 +214,10 @@ function getYoutubeStream(youtube_id) {
                     }
 
                     //if (firstPage.youtubeDirect) firstPage.streamUrl = url
+                    if (videoTitle) {
+                        var vT = videoTitle.replace(/\+/g, " ");
+                        firstPage.streamTitle = vT;
+                    }
                     return url;
 
                 } else {
