@@ -103,30 +103,30 @@ DockedPanel {
         else mprisPlayer.playbackStatus = Mpris.Paused
     }
 
-    Connections {
-        target: mprisPlayer
-        onPauseRequested: {
-            minPlayer.pause();
-        }
-        onPlayRequested: {
-            minPlayer.play();
-        }
-        onPlayPauseRequested: {
-           if (minPlayer.playbackState == MediaPlayer.PlayingState) mprisPlayer.pause();
-           else mprisPlayer.play();
-        }
-        onStopRequested: {
-            minPlayer.stop();
-        }
-        onNextRequested: {
-            next();
-        }
-        onPreviousRequested: {
-            prev();
-        }
-        onSeekRequested: {
-            minPlayer.seek(offset);
-        }
-    }
+//    Connections {
+//        target: mprisPlayer
+//        onPauseRequested: {
+//            minPlayer.pause();
+//        }
+//        onPlayRequested: {
+//            minPlayer.play();
+//        }
+//        onPlayPauseRequested: {
+//           if (minPlayer.playbackState == MediaPlayer.PlayingState) mprisPlayer.pause();
+//           else mprisPlayer.play();
+//        }
+//        onStopRequested: {
+//            minPlayer.stop();
+//        }
+//        onNextRequested: {
+//            next();
+//        }
+//        onPreviousRequested: {
+//            prev();
+//        }
+//        onSeekRequested: {
+//            minPlayer.seek(offset);
+//        }
+//    }
 }
 
