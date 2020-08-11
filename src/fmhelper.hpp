@@ -15,6 +15,8 @@
 #include <QtConcurrent/QtConcurrent>
 #include <QFutureWatcher>
 #include <QStorageInfo>
+#include <QJsonDocument>
+#include "QProcess"
 
 class FM : public QObject
 {   Q_OBJECT
@@ -83,12 +85,29 @@ class FM : public QObject
         }
         QString getSDCard()
         {
-            foreach (const QStorageInfo &storage, QStorageInfo::mountedVolumes()) {
-                    if (storage.isValid() && storage.isReady() && storage.device().indexOf("mmcblk1p1") != -1) {
-//                        qDebug() << "DEBUG STORAGE rootPath: " + storage.rootPath();
-//                        qDebug() << "DEBUG STORAGE device: " + storage.device();
-                        return storage.rootPath();
+            QProcess lsblkProc;
+            QList<QString> list = {"-J", "/dev/mmcblk1"};
+            lsblkProc.start(QString("/bin/lsblk"), list);
+            if (lsblkProc.waitForFinished()) {
+                QByteArray lsblkOut = lsblkProc.readAll();
+                //qWarning() << lsblkOut;
+                QJsonDocument d = QJsonDocument::fromJson(lsblkOut);
+                QJsonObject devObj = d.object();
+                QJsonArray blockDevArray = devObj.value(QString("blockdevices")).toArray();
+                QJsonObject blockArrayObject = blockDevArray.first().toObject();
+                QJsonArray blockPartArray = blockArrayObject.value(QString("children")).toArray();
+                QJsonObject blockPartObject = blockPartArray.first().toObject();
+                if (!QJsonValue(blockPartObject.value("mountpoint")).isNull()) {
+                    return blockPartObject.value("mountpoint").toString();
+                }
+                else if (QJsonValue(blockPartObject.value("children")).isArray()) {
+                    // Try to go through children
+                    QJsonArray blockPartChildrenArray =blockPartObject.value(QString("children")).toArray();
+                    QJsonObject blockPartChildrenObject = blockPartChildrenArray.first().toObject();
+                    if (!QJsonValue(blockPartChildrenObject.value("mountpoint")).isNull()) {
+                        return blockPartChildrenObject.value("mountpoint").toString();
                     }
+                }
             }
             return "";
         }
