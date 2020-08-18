@@ -310,6 +310,10 @@ Page {
                    openPlaylist();
                 }
             }
+            onPressAndHold: {
+                pageStack.push(Qt.resolvedUrl("YTSearchResultsPage.qml"), {dataContainer: page});
+            }
+
             color: colour
             icon: Qt.resolvedUrl(bicon)
         }

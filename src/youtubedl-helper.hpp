@@ -34,6 +34,7 @@ private:
     QProcess oggProcess;
     QProcess opusProcess;
     QProcess fullHdProcess;
+    QProcess searchProcess;
 signals:
     void streamUrlChanged(QString changedUrl);
     void sTitleChanged(QString sTitle);
@@ -43,6 +44,7 @@ signals:
     void oggAudioChanged();
     void opusAudioChanged();
     void fullHdChanged();
+    void ytSearchResultsChanged(QString ytSearchResultsJson);
 public slots:
     void setUrl(QString url)
     {
@@ -169,6 +171,13 @@ public slots:
         opusProcess.start(data_dir + "/youtube-dl " + parameter + " -g " + reqUrl);
         connect(&opusProcess, SIGNAL(finished(int)), this, SLOT(getOpusUrlOutput(int)));
     }
+    void getYtSearchResults(QString searchTerm) {
+        checkAndInstall();
+        parameter = " ";
+        parameter += "-J \"ytsearch5:" + searchTerm.toUtf8() + "\"";
+        searchProcess.start(data_dir + "/youtube-dl " + parameter);
+        connect(&searchProcess, SIGNAL(finished(int)), this, SLOT(getYtSearchResultsOutput(int)));
+    }
     void getFullHdUrlOutput(int exitCode)
     {
         if (exitCode == 0) {
@@ -246,6 +255,16 @@ public slots:
         }
         else {
             printError(&updateBinary);
+        }
+    }
+    void getYtSearchResultsOutput(int exitCode)
+    {
+        if (exitCode == 0) {
+            QByteArray out = searchProcess.readAllStandardOutput();
+            emit ytSearchResultsChanged(QString(out));
+        }
+        else {
+            printError(&searchProcess);
         }
     }
 };
