@@ -75,13 +75,12 @@ Page {
                 width: parent.width-64
             }
 
-            Button {
+            Label {
                 id: homepage
                 anchors.horizontalCenter: parent.horizontalCenter
                 text: "<a href=\"https://github.com/llelectronics/videoPlayer\">Sourcecode on Github</a>"
-                onClicked: {
-                    Qt.openUrlExternally("https://github.com/llelectronics/videoPlayer")
-                }
+                onLinkActivated: Qt.openUrlExternally(link)
+                linkColor: Theme.highlightColor
             }
 
             Label {
