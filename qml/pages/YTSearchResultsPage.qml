@@ -15,7 +15,8 @@ Page {
         ListElement {
             titleYT: "NEPTUNE OS 6 : A Look at a nice Debian 10 based Linux Distribution"
             thumbnailYT: "https://i.ytimg.com/vi_webp/P8R0YVyfN6E/maxresdefault.webp?v=5d8b4ec2"
-            channelNameYT: "UCdI8plWGpNHwN1oswHi3iWA"
+            channelNameYT: "Joe Loves Linux"
+            channelIdYT: "UCdI8plWGpNHwN1oswHi3iWA"
             channelUrlYT: "http://www.youtube.com/channel/UCdI8plWGpNHwN1oswHi3iWA"
             videoIdYT: "P8R0YVyfN6E"
             videoUrlYT: "https://r2---sn-gx5oo1-ia1e.googlevideo.com/videoplayback?expire=1597675379&ei=E0M6X7bNJZKRmgeHkJm4Ag&ip=202.36.244.181&id=o-AIeyqJgsNzbXBeoLIlYP_w4lxoVtigxFfzIzjm_9roDG&itag=22&source=youtube&requiressl=yes&mh=17&mm=31%2C29&mn=sn-gx5oo1-ia1e%2Csn-ntq7yned&ms=au%2Crdu&mv=m&mvi=2&pl=24&initcwndbps=1626250&vprv=1&mime=video%2Fmp4&ratebypass=yes&dur=1166.965&lmt=1569410865192162&mt=1597653634&fvip=5&fexp=23883098&c=WEB&txp=2216222&sparams=expire%2Cei%2Cip%2Cid%2Citag%2Csource%2Crequiressl%2Cvprv%2Cmime%2Cratebypass%2Cdur%2Clmt&sig=AOq0QJ8wRQIhAKvtNxXpZUEodH9mZD4GPx1EFvuRqQhlV1Y02vj4ySCWAiAgyHVpk-m3kGf2Oggpl6KzAeSXZGfcAe1O5w1hMhfJDQ%3D%3D&lsparams=mh%2Cmm%2Cmn%2Cms%2Cmv%2Cmvi%2Cpl%2Cinitcwndbps&lsig=AG3C_xAwRAIgHxVMtqO4SvR7KCfOWA0trt3uU63Wm-KztzcS6mClfPcCIBNj0Nnc8iWxvT7VoExvcg9fjwA5Jsfwz42jk_4CVTdJ"
@@ -25,12 +26,19 @@ Page {
         ListElement {
             titleYT: "Neptune OS: Debian Allesk\u00f6nner mit KDE | #Linux #Neptune #Plasma"
             thumbnailYT: "https://i.ytimg.com/vi/mt0xmoP_0T0/maxresdefault.jpg"
-            channelNameYT: "UCdHDE389WqZX-TP6wPN1Llg"
+            channelNameYT: "linux made simple"
+            channelIdYT: "UCdHDE389WqZX-TP6wPN1Llg"
             channelUrlYT: "http://www.youtube.com/channel/UCdHDE389WqZX-TP6wPN1Llg"
             videoIdYT: "mt0xmoP_0T0"
             videoUrlYT: "https://r1---sn-gx5oo1-ia1e.googlevideo.com/videoplayback?expire=1597675381&ei=FUM6X6HZM8XH1AbR_avwBA&ip=202.36.244.181&id=o-AGBkCvUKQZJnuWaZlh7uzx5STKVdJMlo_Css5P5G0YfA&itag=22&source=youtube&requiressl=yes&mh=kC&mm=31%2C29&mn=sn-gx5oo1-ia1e%2Csn-ntqe6n7k&ms=au%2Crdu&mv=m&mvi=1&pl=24&initcwndbps=1626250&vprv=1&mime=video%2Fmp4&ratebypass=yes&dur=1234.001&lmt=1584313723647993&mt=1597653634&fvip=5&fexp=23883098&c=WEB&txp=5432432&sparams=expire%2Cei%2Cip%2Cid%2Citag%2Csource%2Crequiressl%2Cvprv%2Cmime%2Cratebypass%2Cdur%2Clmt&sig=AOq0QJ8wRQIhANnTVzt5icf86RKXud59huYDhbwE4u6tWAcSvLbAWBzxAiAkDR54fY27iq_D8qFaQNt524iajIOU0XHPocWFist64A%3D%3D&lsparams=mh%2Cmm%2Cmn%2Cms%2Cmv%2Cmvi%2Cpl%2Cinitcwndbps&lsig=AG3C_xAwRQIgcQSjpJvFtDBl7A5mMNaN1VSpKM1iTIi8iXVlwJXFI9cCIQClZZee50AH5ioKpHH8QCAACi4OJayiKNlW6fTVn2km0g%3D%3D"
             durationYT: "1234"
             uploadDateYT: "20200712"
+        }
+        onCountChanged: {
+            if ((count != 0) && (mainWindow.firstPage.busy.visible)) {
+                mainWindow.firstPage.busy.visible = false;
+                mainWindow.firstPage.busy.running = false;
+            }
         }
 
     }
@@ -66,8 +74,8 @@ Page {
 
                 // is called when user presses the Return key
                 function searchEntered() {
-                    busy.running = true
-                    busy.visible = true
+                    mainWindow.firstPage.busy.visible = true;
+                    mainWindow.firstPage.busy.running = true;
                     exampleModel.clear()
                     searchField.acceptedInput = text
                     _ytdl.getYtSearchResults(acceptedInput)
@@ -82,6 +90,7 @@ Page {
             title: titleYT
             thumbnail: thumbnailYT
             channelName: channelNameYT
+            channelId: channelIdYT
             channelUrl: channelUrlYT
             videoId: videoIdYT
             videoUrl: videoUrlYT
@@ -93,36 +102,48 @@ Page {
     Connections {
         target: _ytdl
         onYtSearchResultsChanged: {
+            mainWindow.firstPage.busy.visible = false;
+            mainWindow.firstPage.busy.running = false;
             if (ytSearchResultsJson != "") {  // Don't load empty stuff
                 var JsonObject = JSON.parse(ytSearchResultsJson)
                 for (var i = 0; i < JsonObject.entries.length; i++){
                     console.debug(JsonObject.entries[i]);
+                    var yt360p
                     var yt720p
                     for (var j = 0; j < JsonObject.entries[i].formats.length; j++) {
-                        console.debug("===DEBUG==== JsonObject.entries[i].formats[j].format_note:" + JsonObject.entries[i].formats[j].format_note)
-                        if (JsonObject.entries[i].formats[j].format_note == "720p") {
-                            yt720p = JsonObject.entries[i].formats[j].url
+                        //console.debug("===DEBUG==== JsonObject.entries[i].formats[j].format_note:" + JsonObject.entries[i].formats[j].format_note)
+                        if (JsonObject.entries[i].formats[j].format_note == "360p" &&
+                                JsonObject.entries[i].formats[j].ext == "mp4" &&
+                                JsonObject.entries[i].formats[j].format_id == "18") {
+                            yt360p = JsonObject.entries[i].formats[j].url
+                        }
+                        if (JsonObject.entries[i].formats[j].format_note == "720p" &&
+                                JsonObject.entries[i].formats[j].ext == "mp4" &&
+                                JsonObject.entries[i].formats[j].format_id == "22") {
+                            yt360p = JsonObject.entries[i].formats[j].url
                         }
                     }
                     exampleModel.append(
                                 {
                                     "titleYT": JsonObject.entries[i].title,
                                     "thumbnailYT": JsonObject.entries[i].thumbnail,
-                                    "channelNameYT": JsonObject.entries[i].channel_id,
+                                    "channelNameYT": JsonObject.entries[i].uploader,
+                                    "channelIdYT": JsonObject.entries[i].channel_id,
                                     "channelUrlYT": JsonObject.entries[i].uploader_url,
                                     "videoIdYT": JsonObject.entries[i].id,
-                                    "videoUrlYT": yt720p,
+                                    "videoUrlYT": yt360p,
                                     "durationYT": JsonObject.entries[i].duration.toString(),
-                                    "uploadDateYT": JsonObject.entries[i].upload_date.toString()
+                                    "uploadDateYT": JsonObject.entries[i].upload_date.toString(),
+                                    "url720p": yt720p,
+                                    "url360p": yt360p
                                 }
                                 )
                 }
-
             }
             else {
                 // Fail silently
-                busy.running = false
-                busy.visible = false
+                mainWindow.firstPage.busy.visible = true;
+                mainWindow.firstPage.busy.running = true;
             }
         }
     }

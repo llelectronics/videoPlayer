@@ -16,6 +16,7 @@ Rectangle {
    property string thumbnail
    property alias title: fullTitle.text
    property alias channelName: channelName.text
+   property string channelId
    property string uploadDate
    property string channelUrl
    property string videoUrl
@@ -48,9 +49,13 @@ Rectangle {
        height: dataContainer.height * 0.28 // 28 %
        source: thumbnail
        MouseArea {
+           property bool down: pressed && containsMouse
+           property color highlightedColor: Theme.rgba(palette.highlightBackgroundColor, Theme.highlightBackgroundOpacity)
+
            anchors.fill: parent
-           onPressed: parent.highlighted = true
-           onReleased: parent.highlighted = false
+           onDownChanged: down ? ytSearchResultItem.color = highlightedColor : "transparent"
+           onReleased: ytSearchResultItem.color = "transparent"
+           onCanceled: ytSearchResultItem.color = "transparent"
            onClicked: {
                dataContainer.isYtUrl = false;
                dataContainer.streamUrl = videoUrl;
@@ -76,6 +81,18 @@ Rectangle {
        anchors.centerIn: durRec
        color: "white"
    }
+   // There seems to be no way to retrieve the Channel Logo without using the API which requires a key
+//   Icon {
+//       source: "http://i4.ytimg.com/i/UHW94eEFW7hkUMVaZz4eDg/1.jpg"
+//       width: Theme.iconSizeMedium
+//       height: width
+//       anchors.left: Theme.paddingMedium
+//       anchors.top: fullTitle.verticalCenter
+//       MouseArea {
+//           anchors.fill: parent
+//           onClicked: Qt.openUrlExternally(channelUrl)
+//       }
+//   }
    TextArea {
        id: fullTitle
        anchors.top: thumb.bottom
@@ -96,6 +113,10 @@ Rectangle {
        anchors.topMargin: Theme.paddingSmall / 2
        anchors.left: fullTitle.left
        font.pixelSize: Theme.fontSizeExtraSmall
+       MouseArea {
+           anchors.fill: parent
+           onClicked: Qt.openUrlExternally(channelUrl)
+       }
    }
    Label {
        id: vDate
