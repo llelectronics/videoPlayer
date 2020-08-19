@@ -275,7 +275,7 @@ Page {
             anchors.fill: parent
             minimumTouchPoints: 1
             maximumTouchPoints: 2
-            onTouchUpdated: (touchPoints.length === 2) ? pullDownMenu.enabled = false : pullDownMenu.enabled = true
+            onTouchUpdated: (touchPoints.length === 2) ? pulley.enabled = false : pulley.enabled = true
 
             PinchArea {
                 id: pinchArea
@@ -376,6 +376,7 @@ Page {
                 title: model.title
                 source: resizeAnimation.running ? "" : model.url
                 size: gridView.cellWidth
+                opacity: 1
                 duration: model.duration > 3600 ? formatter.formatDuration(model.duration, Formatter.DurationLong) : formatter.formatDuration(model.duration, Formatter.DurationShort)
                 onClicked: {
                     var fileUrl = videosModel.get(index).url
