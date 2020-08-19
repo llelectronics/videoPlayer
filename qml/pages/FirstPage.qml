@@ -445,7 +445,8 @@ Page {
                     }
                 }
                 onPressAndHold: {
-                    pageStack.push(Qt.resolvedUrl("YTSearchResultsPage.qml"), {dataContainer: page});
+                    if (btnId == "youtubeBtn")
+                        pageStack.push(Qt.resolvedUrl("YTSearchResultsPage.qml"), {dataContainer: page});
                 }
 
                 color: colour
