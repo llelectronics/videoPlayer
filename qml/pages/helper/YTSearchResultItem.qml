@@ -57,8 +57,15 @@ Rectangle {
            onReleased: ytSearchResultItem.color = "transparent"
            onCanceled: ytSearchResultItem.color = "transparent"
            onClicked: {
-               dataContainer.isYtUrl = false;
-               dataContainer.streamUrl = videoUrl;
+               dataContainer.isYtUrl = true;
+               if (dataContainer.url720p != "none" && dataContainer.url720p != "" && dataContainer.ytQualWanted == "720p") {
+                   dataContainer.streamUrl = url720p
+                   dataContainer.ytQual = "720p"
+               }
+               if (dataContainer.url360p != "none" && dataContainer.url360p != "" && dataContainer.ytQualWanted == "360p") {
+                   dataContainer.streamUrl = url360p
+                   dataContainer.ytQual = "360p"
+               }
                dataContainer.streamTitle = title
                dataContainer.originalUrl = "https://youtube.com/watch?v=" + videoId
                dataContainer.isPlaylist = false;
