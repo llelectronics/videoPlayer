@@ -90,6 +90,9 @@ Page {
             videoUrl: videoUrlYT
             duration: durationYT
             uploadDate: uploadDateYT
+            url360p: url360pYT
+            url720p: url720pYT
+            url240p: url240pYT
         }
     }
 
@@ -102,11 +105,14 @@ Page {
             if (ytSearchResultsJson != "") {  // Don't load empty stuff
                 var JsonObject = JSON.parse(ytSearchResultsJson)
                 for (var i = 0; i < JsonObject.entries.length; i++){
-                    console.debug(JsonObject.entries[i]);
-                    var yt360p
-                    var yt720p
+                    //console.debug(JsonObject.entries[i]);
+                    var yt360p = ""
+                    var yt720p = ""
+                    var yt240p = ""
                     for (var j = 0; j < JsonObject.entries[i].formats.length; j++) {
-                        //console.debug("===DEBUG==== JsonObject.entries[i].formats[j].format_note:" + JsonObject.entries[i].formats[j].format_note)
+//                        console.debug("===DEBUG==== JsonObject.entries[i].formats[j].format_note:" + JsonObject.entries[i].formats[j].format_note)
+//                        console.debug("===DEBUG==== JsonObject.entries[i].formats[j].ext:" + JsonObject.entries[i].formats[j].ext)
+//                        console.debug("===DEBUG==== JsonObject.entries[i].formats[j].format_id:" + JsonObject.entries[i].formats[j].format_id)
                         if (JsonObject.entries[i].formats[j].format_note == "360p" &&
                                 JsonObject.entries[i].formats[j].ext == "mp4" &&
                                 JsonObject.entries[i].formats[j].format_id == "18") {
@@ -115,7 +121,12 @@ Page {
                         if (JsonObject.entries[i].formats[j].format_note == "720p" &&
                                 JsonObject.entries[i].formats[j].ext == "mp4" &&
                                 JsonObject.entries[i].formats[j].format_id == "22") {
-                            yt360p = JsonObject.entries[i].formats[j].url
+                            yt720p = JsonObject.entries[i].formats[j].url
+                        }
+                        if (JsonObject.entries[i].formats[j].format_note == "240p" &&
+                                JsonObject.entries[i].formats[j].ext == "flv" &&
+                                JsonObject.entries[i].formats[j].format_id == "36") {
+                            yt240p = JsonObject.entries[i].formats[j].url
                         }
                     }
                     exampleModel.append(
@@ -129,8 +140,9 @@ Page {
                                     "videoUrlYT": yt360p,
                                     "durationYT": JsonObject.entries[i].duration.toString(),
                                     "uploadDateYT": JsonObject.entries[i].upload_date.toString(),
-                                    "url720p": yt720p,
-                                    "url360p": yt360p
+                                    "url720pYT": yt720p,
+                                    "url360pYT": yt360p,
+                                    "url240pYT": yt240p
                                 }
                                 )
                 }

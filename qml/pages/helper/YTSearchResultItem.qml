@@ -57,19 +57,29 @@ Rectangle {
            onReleased: ytSearchResultItem.color = "transparent"
            onCanceled: ytSearchResultItem.color = "transparent"
            onClicked: {
-               dataContainer.isYtUrl = true;
-               if (dataContainer.url720p != "none" && dataContainer.url720p != "" && dataContainer.ytQualWanted == "720p") {
+               console.debug("url720p = " + url720p)
+               console.debug("url360p = " + url360p)
+               console.debug("url240p = " + url240p)
+               dataContainer.url720p = url720p
+               dataContainer.url360p = url360p
+               dataContainer.url240p = url240p
+               if (url720p != "none" && url720p != "" && dataContainer.ytQualWanted == "720p") {
                    dataContainer.streamUrl = url720p
                    dataContainer.ytQual = "720p"
                }
-               if (dataContainer.url360p != "none" && dataContainer.url360p != "" && dataContainer.ytQualWanted == "360p") {
+               if (url360p != "none" && url360p != "" && dataContainer.ytQualWanted == "360p") {
                    dataContainer.streamUrl = url360p
                    dataContainer.ytQual = "360p"
+               }
+               if (url240p != "none" && url240p != "" && dataContainer.ytQualWanted == "240p") {
+                   dataContainer.streamUrl = url240p
+                   dataContainer.ytQual = "240p"
                }
                dataContainer.streamTitle = title
                dataContainer.originalUrl = "https://youtube.com/watch?v=" + videoId
                dataContainer.isPlaylist = false;
                dataContainer.isLiveStream = false;
+               dataContainer.isYtUrl = true;
                dataContainer.loadPlayer();
            }
        }
