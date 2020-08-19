@@ -325,6 +325,10 @@ Page {
                 onClicked: pageStack.push(openSubsComponent)
             }
             MenuItem {
+                text: qsTr("Playlist")
+                onClicked: openPlaylist();
+            }
+            MenuItem {
                 text: qsTr("Play from last known position")
                 visible: {
                     savedPosition

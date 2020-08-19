@@ -10,24 +10,24 @@ BackgroundItem {
     property alias icon: logo.source
 
     // Taken from Jolla Notes
-    Item {
-        anchors.fill: parent
-        clip: true
+//    Item {
+//        anchors.fill: parent
+//        clip: true
 
-        Rectangle {
-            rotation: 45 // diagonal gradient
-            // Use square root of 2, rounded up a little bit, to make the
-            // rotated square cover all of the parent square
-            width: parent.width * 1.412136
-            height: parent.height * 1.412136
-            x: parent.width - width
+//        Rectangle {
+//            rotation: 45 // diagonal gradient
+//            // Use square root of 2, rounded up a little bit, to make the
+//            // rotated square cover all of the parent square
+//            width: parent.width * 1.412136
+//            height: parent.height * 1.412136
+//            x: parent.width - width
 
-            gradient: Gradient {
-                GradientStop { position: 0.0; color: Theme.rgba(Theme.primaryColor, 0) }
-                GradientStop { position: 1.0; color: Theme.rgba(Theme.primaryColor, 0.1) }
-            }
-        }
-    }
+//            gradient: Gradient {
+//                GradientStop { position: 0.0; color: Theme.rgba(Theme.primaryColor, 0) }
+//                GradientStop { position: 1.0; color: Theme.rgba(Theme.primaryColor, 0.1) }
+//            }
+//        }
+//    }
 
     Item {
         anchors.fill: parent;
@@ -36,8 +36,7 @@ BackgroundItem {
         Text {
             id: buttonText
             anchors {
-                top: parent.top
-                topMargin: - (font.pixelSize / 4)
+                verticalCenter: parent.verticalCenter
                 left: parent.left
                 right: parent.right
             }
@@ -48,24 +47,22 @@ BackgroundItem {
             wrapMode: Text.Wrap
         }
 
-        Rectangle {
-            id: colortag
+//        Rectangle {
+//            id: colortag
 
-            anchors.bottom: parent.bottom
-            anchors.left: parent.left
-            width: Theme.itemSizeExtraSmall
-            height: width/8
-            radius: Math.round(Theme.paddingSmall/3)
-            color: itemButton.color
-        }
+//            anchors.bottom: parent.bottom
+//            anchors.left: parent.left
+//            width: Theme.itemSizeExtraSmall
+//            height: width/8
+//            radius: Math.round(Theme.paddingSmall/3)
+//            color: itemButton.color
+//        }
         Image {
             id: logo
-            anchors.bottom: parent.bottom
-            anchors.bottomMargin: Theme.paddingMedium
             anchors.right: parent.right
             anchors.rightMargin: Theme.paddingMedium
-            width: parent.width / 3
-            height: width
+            width: height
+            height: parent.height
             ColorOverlay {
                 anchors.fill: parent
                 source: parent

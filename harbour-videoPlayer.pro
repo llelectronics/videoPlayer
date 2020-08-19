@@ -56,6 +56,7 @@ HEADERS += \
     src/playlist.h
 
 DISTFILES += \
+    qml/pages/HistoryPage.qml \
     qml/pages/YTSearchResultsPage.qml \
     qml/pages/helper/SubtitlesItem.qml \
     qml/pages/PlaylistPage.qml \

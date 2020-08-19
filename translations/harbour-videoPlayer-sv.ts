@@ -362,13 +362,13 @@
         <translation>Öppna video</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="351"/>
+        <location filename="../qml/pages/FirstPage.qml" line="355"/>
         <source>No History</source>
         <translation>Ingen historik</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="250"/>
-        <location filename="../qml/pages/FirstPage.qml" line="399"/>
+        <location filename="../qml/pages/FirstPage.qml" line="403"/>
         <source>History</source>
         <translation>Historik</translation>
     </message>
@@ -398,38 +398,38 @@
         <translation>Spelningslistor</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="368"/>
+        <location filename="../qml/pages/FirstPage.qml" line="372"/>
         <source>About </source>
         <translation>Om </translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="372"/>
+        <location filename="../qml/pages/FirstPage.qml" line="376"/>
         <source>Settings</source>
         <translation>Inställningar</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="376"/>
+        <location filename="../qml/pages/FirstPage.qml" line="380"/>
         <source>Show Player</source>
         <translation>Visa spelare</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="400"/>
-        <location filename="../qml/pages/FirstPage.qml" line="413"/>
+        <location filename="../qml/pages/FirstPage.qml" line="404"/>
+        <location filename="../qml/pages/FirstPage.qml" line="417"/>
         <source>Open</source>
         <translation>Öppna</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="405"/>
+        <location filename="../qml/pages/FirstPage.qml" line="409"/>
         <source>Type in URL here</source>
         <translation>Skriv in URL här</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="406"/>
+        <location filename="../qml/pages/FirstPage.qml" line="410"/>
         <source>URL to media</source>
         <translation>URL till media</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="482"/>
+        <location filename="../qml/pages/FirstPage.qml" line="486"/>
         <source>Youtube-Dl updated.</source>
         <translation>Youtube-Dl uppdaterad.</translation>
     </message>

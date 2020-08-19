@@ -32,6 +32,9 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 import QtMultimedia 5.0
 import Sailfish.Pickers 1.0
+import QtDocGallery 5.0
+import Sailfish.Gallery 1.0
+import Nemo.Configuration 1.0
 import "helper"
 import "fileman"
 
@@ -42,6 +45,8 @@ Page {
 
     signal updateCover
     signal removeFile(string url)
+
+    property bool _isLandscape: (page.orientation === Orientation.Landscape || page.orientation === Orientation.LandscapeInverted)
 
     // Settings /////////////////////////////////////////
     property string openDialogType: "adv"
@@ -240,23 +245,163 @@ Page {
         }
     }
 
+    ConfigurationGroup {
+        id: settings
+        path: "/apps/llsvplayer"
+
+        property real scale: 2
+    }
+
+    DocumentGalleryModel {
+        id: videosModel
+
+        rootType: DocumentGallery.Video
+        autoUpdate: true
+        properties: ["url", "title", "lastModified", "duration"]
+        sortProperties: ["-lastModified"]
+        filter: GalleryStartsWithFilter { property: "title"; value: searchField.text.toLowerCase().trim() }
+    }
+
+    Formatter {
+        id: formatter
+    }
+
+    SilicaFlickable {
+        id: videoFlick
+        anchors.fill: parent
+
+        MultiPointTouchArea {
+            id: multiPointTouchArea
+            anchors.fill: parent
+            minimumTouchPoints: 1
+            maximumTouchPoints: 2
+            onTouchUpdated: (touchPoints.length === 2) ? pullDownMenu.enabled = false : pullDownMenu.enabled = true
+
+            PinchArea {
+                id: pinchArea
+                MouseArea{ anchors.fill: parent; propagateComposedEvents: true }
+                enabled: true
+                pinch.target: scale
+                pinch.maximumScale: 2
+                pinch.minimumScale: 0
+                anchors.fill: parent
+            }
+        }
+
+
+        Item {
+            id: scale
+            scale: settings.scale
+            onScaleChanged: {
+                if  (Math.round(scale.scale) !== settings.scale)
+                    settings.scale = scale.scale
+            }
+        }
+
+        PageHeader {
+            id: pageHeader
+            title: "LLs Video Player"
+        }
+
+        SearchField {
+            id: searchField
+            anchors.top: pageHeader.bottom
+            width: parent.width
+        }
+
+        PullDownMenu {
+            id: pulley
+            MenuItem {
+                text: qsTr("About ")+ appname
+                onClicked: pageStack.push(Qt.resolvedUrl("AboutPage.qml"));
+            }
+            MenuItem {
+                text: qsTr("Settings")
+                onClicked: pageStack.push(Qt.resolvedUrl("SettingsPage.qml"));
+            }
+            MenuItem {
+                text: qsTr("History")
+                onClicked: pageStack.push(Qt.resolvedUrl("BookmarksPage.qml"), {dataContainer: page});
+            }
+            MenuItem {
+                text: qsTr("Bookmarks")
+                onClicked: pageStack.push(Qt.resolvedUrl("BookmarksPage.qml"), {dataContainer: page, modelBookmarks: mainWindow.modelBookmarks});
+            }
+            MenuItem {
+                text: qsTr("Enter URL")
+                onClicked: pageStack.push(Qt.resolvedUrl("OpenURLPage.qml"), {dataContainer: page});
+            }
+
+            MenuItem {
+                text: qsTr("Show Player")
+                onClicked: {
+                    minPlayerLoader.active = true;
+                    minPlayerLoader.sourceComponent = minPlayerComponent
+                    minPlayerLoader.item.show()
+                }
+                visible: minPlayer.source != ""
+            }
+        }
+
+
+        SilicaGridView {
+            id: gridView
+            model: videosModel
+            enabled: !pinchArea.pinch.active
+
+            anchors.top: searchField.bottom
+            width: parent.width
+            height: parent.height - pageHeader.height - searchField.height
+
+            cellWidth: _isLandscape ? Screen.height / Math.round(Screen.height / (Screen.width/(4-Math.floor(scale.scale)))) :  Screen.width/(4-Math.floor(scale.scale))
+            cellHeight: cellWidth
+            clip: true
+
+            Behavior on cellWidth {
+                PropertyAnimation {
+                    id: resizeAnimation
+                    easing.type: Easing.InOutQuad;
+                    easing.amplitude: 2.0;
+                    easing.period: 1.5
+                }
+            }
+
+            ViewPlaceholder {
+                text: qsTrId("No videos")
+                enabled: videosModel.count === 0
+            }
+
+            delegate: ThumbnailVideo {
+                id: thumbnail
+                title: model.title
+                source: resizeAnimation.running ? "" : model.url
+                size: gridView.cellWidth
+                duration: model.duration > 3600 ? formatter.formatDuration(model.duration, Formatter.DurationLong) : formatter.formatDuration(model.duration, Formatter.DurationShort)
+                onClicked: {
+                    var fileUrl = videosModel.get(index).url
+                    originalUrl = fileUrl;
+                    streamUrl = fileUrl;
+                    autoplay = true;
+                    isPlaylist = false;
+                    isLiveStream = false;
+                    loadPlayer();
+                }
+
+
+                Rectangle {
+                    anchors.fill: parent
+
+                    color: parent.down ? Theme.rgba(Theme.highlightBackgroundColor, Theme.highlightBackgroundOpacity) : "transparent"
+                }
+            }
+        }
+    }
+
 
 
     ListModel {
         id: menuButtons
 
-        ListElement {
-            btnId: "historyBtn"
-            name: qsTr("History")
-            colour: "gray"
-            bicon: "images/icon-l-backup.png"
-        }
-        ListElement {
-            btnId: "bookmarksBtn"
-            name: qsTr("Bookmarks")
-            colour: "brown"
-            bicon: "images/icon-l-star.png"
-        }
         ListElement {
             btnId: "youtubeBtn"
             name: qsTr("Search on Youtube")
@@ -269,26 +414,14 @@ Page {
             colour: "blue"
             bicon: "images/icon-l-media-files.png"
         }
-        ListElement {
-            btnId: "openUrlBtn"
-            name: qsTr("Enter URL")
-            colour: "green"
-            bicon: "images/icon-l-redirect.png"
-        }
-        ListElement {
-            btnId: "playlistBtn"
-            name: qsTr("Playlists")
-            colour: "yellow"
-            bicon: "images/icon-l-clipboard.png"
-        }
     }
 
     Component {
         id: menuButtonsDelegate
         ItemButton {
             id: historyBtn
-            width: grid.cellWidth
-            height: grid.cellHeight
+            width: actionList.width
+            height: Theme.itemSizeMedium
             text: qsTr(name)
             onClicked: {
                 errTxt.visible = false;
@@ -319,136 +452,40 @@ Page {
         }
     }
 
-    Drawer {
-        id: drawer
+    DockedPanel {
+        width: parent.width
+        height: Theme.itemSizeMedium * 2
 
-        anchors.fill: parent
+        dock: Dock.Bottom
+        open: true
 
-        dock: page.isPortrait ? Dock.Top : Dock.Left
-        property QtObject historyListView
-
-        background: SilicaListView {
-            id: historyView
+        Rectangle {
             anchors.fill: parent
-            model: historyModel
-            verticalLayoutDirection: ListView.BottomToTop
-
-            VerticalScrollDecorator {}
-
-            delegate: ListItem {
-                id: listItem
-
-                Label {
-                    x: Theme.paddingLarge
-                    text: htitle
-                    anchors.verticalCenter: parent.verticalCenter
-                    color: listItem.highlighted ? Theme.highlightColor : Theme.primaryColor
-                }
-                onClicked: {
-                    streamUrl = hurl
-                    loadPlayer();
-                }
-            }
-            ViewPlaceholder {
-                anchors.top: parent.top
-                anchors.topMargin: Theme.paddingLarge
-                text: qsTr("No History")
-                enabled: historyView.count == 0
-            }
-            Component.onCompleted: drawer.historyListView = historyView
-        }
-        onOpenChanged: {
-            historyListView.scrollToTop();
+            color: Theme.overlayBackgroundColor
+            opacity: 0.8
         }
 
-        SilicaGridView {
-            id: grid
+        SilicaListView {
+            id: actionList
             width: parent.width
-            height: page.height
+            height: childrenRect.height
 
-            PullDownMenu {
-                id: pulley
-                MenuItem {
-                    text: qsTr("About ")+ appname
-                    onClicked: pageStack.push(Qt.resolvedUrl("AboutPage.qml"));
-                }
-                MenuItem {
-                    text: qsTr("Settings")
-                    onClicked: pageStack.push(Qt.resolvedUrl("SettingsPage.qml"));
-                }
-                MenuItem {
-                    text: qsTr("Show Player")
-                    onClicked: {
-                        minPlayerLoader.active = true;
-                        minPlayerLoader.sourceComponent = minPlayerComponent
-                        minPlayerLoader.item.show()
-                    }
-                    visible: minPlayer.source != ""
-                }
-            }
-
-            MouseArea {
-                enabled: drawer.open
-                anchors.fill: grid
-                onClicked: drawer.open = false
-            }
+            clip: true
 
             property TextField urlField
             property PageHeader pageHeader
 
-            header: PageHeader {
-                id: pageHeader
-                title: {
-                    if (urlField.visible) ""
-                    else if (drawer.opened) qsTr("History")
-                    else qsTr("Open")
-                }
-                TextField {
-                    id: urlField
-                    visible: false
-                    placeholderText: qsTr("Type in URL here")
-                    label: qsTr("URL to media")
-                    anchors.top: parent.top
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    anchors.margins: Theme.paddingLarge
-                    width: Screen.width - Theme.paddingLarge
-                    inputMethodHints: Qt.ImhUrlCharactersOnly | Qt.ImhNoPredictiveText
-                    EnterKey.enabled: text.length > 0
-                    EnterKey.text: qsTr("Open")
-                    Component.onCompleted: {
-                        grid.urlField = urlField
-                        // console.debug("StreamUrl :" + streamUrl) // DEBUG
-                        if (streamUrl !== "") {
-                            text = streamUrl;
-                            selectAll();
-                        }
-                    }
-                }
-                Component.onCompleted: grid.pageHeader = pageHeader
-            }
-            cellWidth: {
-                if (page.orientation == Orientation.PortraitInverted || page.orientation == Orientation.Portrait)
-                    page.width / 2
-                else
-                    page.width / 4
-            }
-            cellHeight: {
-                if (page.orientation == Orientation.PortraitInverted || page.orientation == Orientation.Portrait)
-                    (page.height / 3) - pageHeader.height / 2
-                else
-                    (page.height / 2) - pageHeader.height / 2
-            }
             //model: menuButtons
             delegate: menuButtonsDelegate
-            snapMode: GridView.SnapToRow
+            snapMode: ListView.SnapToItem
             populate: Transition {
                 NumberAnimation { properties: "x,y"; duration: 400 }
             }
             Component.onCompleted: {
-                grid.model = menuButtons
+                actionList.model = menuButtons
             }
-        } // SilicaGridView
-    } // Drawer
+        } // SilicaactionListView
+    }
 
     Connections {
         target: _ytdl
