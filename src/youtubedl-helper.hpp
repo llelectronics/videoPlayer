@@ -174,7 +174,7 @@ public slots:
     void getYtSearchResults(QString searchTerm) {
         checkAndInstall();
         parameter = " ";
-        parameter += "-J \"ytsearch5:" + searchTerm.toUtf8() + "\"";
+        parameter += "-J \"ytsearch11:" + searchTerm.toUtf8() + "\"";
         searchProcess.start(data_dir + "/youtube-dl " + parameter);
         connect(&searchProcess, SIGNAL(finished(int)), this, SLOT(getYtSearchResultsOutput(int)));
     }
