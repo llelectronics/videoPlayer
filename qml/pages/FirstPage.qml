@@ -351,7 +351,7 @@ Page {
 
             anchors.top: searchField.bottom
             width: parent.width
-            height: parent.height - pageHeader.height - searchField.height
+            height: parent.height - pageHeader.height - searchField.height - actionList.height
 
             cellWidth: _isLandscape ? Screen.height / Math.round(Screen.height / (Screen.width/(4-Math.floor(scale.scale)))) :  Screen.width/(4-Math.floor(scale.scale))
             cellHeight: cellWidth
@@ -395,80 +395,71 @@ Page {
                 }
             }
         }
-    }
 
 
 
-    ListModel {
-        id: menuButtons
 
-        ListElement {
-            btnId: "youtubeBtn"
-            name: qsTr("Search on Youtube")
-            colour: "red"
-            bicon: "images/icon-l-service-youtube.png"
-        }
-        ListElement {
-            btnId: "openFileBtn"
-            name: qsTr("Browse Files")
-            colour: "blue"
-            bicon: "images/icon-l-media-files.png"
-        }
-    }
+        ListModel {
+            id: menuButtons
 
-    Component {
-        id: menuButtonsDelegate
-        ItemButton {
-            id: historyBtn
-            width: actionList.width
-            height: Theme.itemSizeMedium
-            text: qsTr(name)
-            onClicked: {
-                errTxt.visible = false;
-                autoplay = false;
-                if (btnId == "historyBtn") drawer.open = !drawer.open
-                else if (btnId == "bookmarksBtn")
-                    pageStack.push(Qt.resolvedUrl("BookmarksPage.qml"), {dataContainer: page, modelBookmarks: mainWindow.modelBookmarks});
-                else if (btnId == "youtubeBtn")
-                    pageStack.push(Qt.resolvedUrl("SecondPage.qml"), {dataContainer: page});
-                else if (btnId == "openFileBtn") {
-                    if (mainWindow.firstPage.openDialogType === "adv" || mainWindow.firstPage.openDialogType === "simple")
-                        pageStack.push(mainWindow.firstPage.openFileComponent);
-                    else if (mainWindow.firstPage.openDialogType === "gallery") pageStack.push(mainWindow.firstPage.videoPickerComponent);
-                }
-                else if (btnId == "openUrlBtn") {
-                   pageStack.push(Qt.resolvedUrl("OpenURLPage.qml"), {dataContainer: page});
-                }
-                else if (btnId == "playlistBtn") {
-                   openPlaylist();
-                }
+            ListElement {
+                btnId: "youtubeBtn"
+                name: qsTr("Search on Youtube")
+                colour: "red"
+                bicon: "images/icon-l-service-youtube.png"
             }
-            onPressAndHold: {
-                pageStack.push(Qt.resolvedUrl("YTSearchResultsPage.qml"), {dataContainer: page});
+            ListElement {
+                btnId: "openFileBtn"
+                name: qsTr("Browse Files")
+                colour: "blue"
+                bicon: "images/icon-l-media-files.png"
             }
-
-            color: colour
-            icon: Qt.resolvedUrl(bicon)
         }
-    }
 
-    DockedPanel {
-        width: parent.width
-        height: Theme.itemSizeMedium * 2
+        Component {
+            id: menuButtonsDelegate
+            ItemButton {
+                id: historyBtn
+                width: actionList.width
+                height: Theme.itemSizeMedium
+                text: qsTr(name)
+                onClicked: {
+                    errTxt.visible = false;
+                    autoplay = false;
+                    if (btnId == "historyBtn") drawer.open = !drawer.open
+                    else if (btnId == "bookmarksBtn")
+                        pageStack.push(Qt.resolvedUrl("BookmarksPage.qml"), {dataContainer: page, modelBookmarks: mainWindow.modelBookmarks});
+                    else if (btnId == "youtubeBtn")
+                        pageStack.push(Qt.resolvedUrl("SecondPage.qml"), {dataContainer: page});
+                    else if (btnId == "openFileBtn") {
+                        if (mainWindow.firstPage.openDialogType === "adv" || mainWindow.firstPage.openDialogType === "simple")
+                            pageStack.push(mainWindow.firstPage.openFileComponent);
+                        else if (mainWindow.firstPage.openDialogType === "gallery") pageStack.push(mainWindow.firstPage.videoPickerComponent);
+                    }
+                    else if (btnId == "openUrlBtn") {
+                        pageStack.push(Qt.resolvedUrl("OpenURLPage.qml"), {dataContainer: page});
+                    }
+                    else if (btnId == "playlistBtn") {
+                        openPlaylist();
+                    }
+                }
+                onPressAndHold: {
+                    pageStack.push(Qt.resolvedUrl("YTSearchResultsPage.qml"), {dataContainer: page});
+                }
 
-        dock: Dock.Bottom
-        open: true
-
-        Rectangle {
-            anchors.fill: parent
-            color: Theme.overlayBackgroundColor
-            opacity: 0.8
+                color: colour
+                icon: Qt.resolvedUrl(bicon)
+            }
         }
+
+
 
         SilicaListView {
             id: actionList
             width: parent.width
             height: childrenRect.height
+
+            anchors.top: gridView.bottom
 
             clip: true
 

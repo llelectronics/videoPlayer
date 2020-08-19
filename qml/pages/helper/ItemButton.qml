@@ -45,6 +45,7 @@ BackgroundItem {
             color: Theme.primaryColor
             textFormat: Text.PlainText
             wrapMode: Text.Wrap
+            verticalAlignment: Text.AlignVCenter
         }
 
 //        Rectangle {
@@ -61,6 +62,7 @@ BackgroundItem {
             id: logo
             anchors.right: parent.right
             anchors.rightMargin: Theme.paddingMedium
+            anchors.verticalCenter: parent.verticalCenter
             width: height
             height: parent.height
             ColorOverlay {

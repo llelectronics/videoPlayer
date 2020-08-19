@@ -34,12 +34,6 @@ Page {
             durationYT: "1234"
             uploadDateYT: "20200712"
         }
-        onCountChanged: {
-            if ((count != 0) && (mainWindow.firstPage.busy.visible)) {
-                mainWindow.firstPage.busy.visible = false;
-                mainWindow.firstPage.busy.running = false;
-            }
-        }
 
     }
 
@@ -102,6 +96,7 @@ Page {
     Connections {
         target: _ytdl
         onYtSearchResultsChanged: {
+            console.debug("Got search results. Set busy false")
             mainWindow.firstPage.busy.visible = false;
             mainWindow.firstPage.busy.running = false;
             if (ytSearchResultsJson != "") {  // Don't load empty stuff
@@ -142,8 +137,8 @@ Page {
             }
             else {
                 // Fail silently
-                mainWindow.firstPage.busy.visible = true;
-                mainWindow.firstPage.busy.running = true;
+                mainWindow.firstPage.busy.visible = false;
+                mainWindow.firstPage.busy.running = false;
             }
         }
     }
