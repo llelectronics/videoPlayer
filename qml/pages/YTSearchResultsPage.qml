@@ -42,43 +42,35 @@ Page {
         id: ytSearchResultsList
         anchors.fill: parent
         model: exampleModel
-        header: Row {
+        header: SearchField {
+            id: searchField
+            property string acceptedInput: ""
             width: parent.width
-            spacing: 1
-            anchors.top: parent.top
-            anchors.left: parent.left
-            anchors.right: parent.right
 
-            SearchField {
-                id: searchField
-                property string acceptedInput: ""
-                width: parent.width
+            placeholderText: qsTr("Search..")
+            //                        anchors.top: parent.top
+            //                        anchors.left: parent.left
+            //                        anchors.right: parent.right
 
-                placeholderText: qsTr("Search..")
-                //                        anchors.top: parent.top
-                //                        anchors.left: parent.left
-                //                        anchors.right: parent.right
+            EnterKey.enabled: text.trim().length > 0
+            EnterKey.text: "Search"
 
-                EnterKey.enabled: text.trim().length > 0
-                EnterKey.text: "Search"
+            Component.onCompleted: {
+                acceptedInput = ""
+                _editor.accepted.connect(searchEntered)
+            }
 
-                Component.onCompleted: {
-                    acceptedInput = ""
-                    _editor.accepted.connect(searchEntered)
-                }
-
-                // is called when user presses the Return key
-                function searchEntered() {
-                    mainWindow.firstPage.busy.visible = true;
-                    mainWindow.firstPage.busy.running = true;
-                    exampleModel.clear()
-                    searchField.acceptedInput = text
-                    _ytdl.getYtSearchResults(acceptedInput)
-                    searchField.focus = false
-                    // Search History adding
-                    //DB.addSearchHistory(text)
-                    //mainWindow.firstPage.addSearchHistory(text)
-                }
+            // is called when user presses the Return key
+            function searchEntered() {
+                mainWindow.firstPage.busy.visible = true;
+                mainWindow.firstPage.busy.running = true;
+                exampleModel.clear()
+                searchField.acceptedInput = text
+                _ytdl.getYtSearchResults(acceptedInput)
+                searchField.focus = false
+                // Search History adding
+                //DB.addSearchHistory(text)
+                //mainWindow.firstPage.addSearchHistory(text)
             }
         }
         delegate: YTSearchResultItem {
