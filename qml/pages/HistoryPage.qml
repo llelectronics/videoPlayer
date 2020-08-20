@@ -5,6 +5,7 @@ Page {
 
     property QtObject dataContainer
     property ListModel modelHistory
+    allowedOrientations: Orientation.All
 
     PageHeader {
         id: historyHead
