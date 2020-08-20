@@ -74,7 +74,7 @@ desktop-file-install --delete-original       \
 %{_bindir}
 %{_datadir}/%{name}/qml
 %{_datadir}/applications/%{name}.desktop
-%{_datadir}/icons/hicolor/86x86/apps/%{name}.png
+%{_datadir}/icons/hicolor/*/apps/%{name}.png
 /usr/bin
 /usr/share/harbour-videoPlayer
 /usr/share/applications

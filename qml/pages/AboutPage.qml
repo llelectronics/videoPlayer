@@ -12,12 +12,12 @@ Page {
             id: column1
             anchors.fill: parent
             anchors.topMargin: Theme.paddingLarge * 3
-            spacing: 15
+            spacing: Theme.paddingLarge
 
             Image{
                 source: appicon
-                height: 128
-                width: 128
+                height: Theme.iconSizeExtraLarge
+                width: height
                 fillMode: Image.PreserveAspectFit
                 anchors {
                     horizontalCenter: parent.horizontalCenter
