@@ -8,6 +8,7 @@ Page {
     allowedOrientations: Orientation.All
 
     property QtObject dataContainer
+    property bool _isLandscape: (ytSearchResultsPage.orientation === Orientation.Landscape || ytSearchResultsPage.orientation === Orientation.LandscapeInverted)
 
 
     ListModel {

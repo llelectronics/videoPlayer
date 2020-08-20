@@ -45,8 +45,8 @@ Rectangle {
 
    HighlightImage {
        id: thumb
-       width: parent.width
-       height: dataContainer.height * 0.28 // 28 %
+       width: _isLandscape ? height * 1.337 : parent.width
+       height: ytSearchResultsPage.height * 0.28 // 28 %
        source: thumbnail
        MouseArea {
            property bool down: pressed && containsMouse
@@ -112,10 +112,10 @@ Rectangle {
 //   }
    TextArea {
        id: fullTitle
-       anchors.top: thumb.bottom
-       anchors.left: thumb.left
+       anchors.top: _isLandscape ?  parent.top : thumb.bottom
+       anchors.left: _isLandscape ? thumb.right : thumb.left
        anchors.leftMargin: Theme.paddingLarge
-       anchors.right: thumb.right
+       anchors.right: _isLandscape ? parent.right : thumb.right
        anchors.rightMargin: Theme.paddingLarge
        font.bold: true
        width: parent.width
