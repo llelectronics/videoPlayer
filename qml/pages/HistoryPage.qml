@@ -4,6 +4,7 @@ import Sailfish.Silica 1.0
 Page {
 
     property QtObject dataContainer
+    property ListModel modelHistory
 
     PageHeader {
         id: historyHead
@@ -13,7 +14,7 @@ Page {
     SilicaListView {
         id: historyView
         anchors.fill: parent
-        model: historyModel
+        model: modelHistory
         verticalLayoutDirection: ListView.BottomToTop
 
         VerticalScrollDecorator {}
@@ -29,7 +30,7 @@ Page {
             }
             onClicked: {
                 dataContainer.streamUrl = hurl
-                loadPlayer();
+                dataContainer.loadPlayer();
             }
         }
         ViewPlaceholder {

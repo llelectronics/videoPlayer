@@ -321,7 +321,7 @@ Page {
             }
             MenuItem {
                 text: qsTr("History")
-                onClicked: pageStack.push(Qt.resolvedUrl("BookmarksPage.qml"), {dataContainer: page});
+                onClicked: pageStack.push(Qt.resolvedUrl("HistoryPage.qml"), {dataContainer: page, modelHistory: historyModel});
             }
             MenuItem {
                 text: qsTr("Bookmarks")
