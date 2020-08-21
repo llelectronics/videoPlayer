@@ -7,18 +7,18 @@ Page {
     property ListModel modelHistory
     allowedOrientations: Orientation.All
 
-    PageHeader {
-        id: historyHead
-        title: qsTr("History")
-    }
 
     SilicaListView {
         id: historyView
         anchors.fill: parent
         model: modelHistory
-        verticalLayoutDirection: ListView.BottomToTop
 
         VerticalScrollDecorator {}
+
+        header: PageHeader {
+            id: historyHead
+            title: qsTr("History")
+        }
 
         delegate: ListItem {
             id: listItem
@@ -41,5 +41,6 @@ Page {
             enabled: historyView.count == 0
         }
     }
+    Component.onCompleted: historyView.scrollToBottom()
 
 }
