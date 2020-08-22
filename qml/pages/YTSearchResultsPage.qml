@@ -10,6 +10,7 @@ Page {
     property QtObject dataContainer
     property bool _isLandscape: (ytSearchResultsPage.orientation === Orientation.Landscape || ytSearchResultsPage.orientation === Orientation.LandscapeInverted)
 
+    property QtObject _searchField
 
     ListModel {
         id: exampleModel
@@ -38,41 +39,69 @@ Page {
 
     }
 
-    SilicaListView {
-        id: ytSearchResultsList
+    SilicaFlickable {
+        id: ytSearchResultsFlick
         anchors.fill: parent
-        model: exampleModel
-        header: SearchField {
-            id: searchField
-            property string acceptedInput: ""
-            width: parent.width
 
-            placeholderText: qsTr("Search..")
-            //                        anchors.top: parent.top
-            //                        anchors.left: parent.left
-            //                        anchors.right: parent.right
-
-            EnterKey.enabled: text.trim().length > 0
-            EnterKey.text: "Search"
-
-            Component.onCompleted: {
-                acceptedInput = ""
-                _editor.accepted.connect(searchEntered)
-            }
-
-            // is called when user presses the Return key
-            function searchEntered() {
-                mainWindow.firstPage.busy.visible = true;
-                mainWindow.firstPage.busy.running = true;
-                exampleModel.clear()
-                searchField.acceptedInput = text
-                _ytdl.getYtSearchResults(acceptedInput)
-                searchField.focus = false
-                // Search History adding
-                //DB.addSearchHistory(text)
-                //mainWindow.firstPage.addSearchHistory(text)
+        PullDownMenu {
+            MenuItem {
+                text: qsTr("Show Website")
+                onClicked: pageStack.push(Qt.resolvedUrl("SecondPage.qml"), {"dataContainer": dataContainer});
             }
         }
+
+        PageHeader {
+            id: pHead
+            SearchField {
+                id: searchField
+                property string acceptedInput: ""
+                width: parent.width
+
+                placeholderText: qsTr("Search..")
+                //                        anchors.top: parent.top
+                //                        anchors.left: parent.left
+                //                        anchors.right: parent.right
+
+                EnterKey.enabled: text.trim().length > 0
+                EnterKey.text: "Search"
+
+                Component.onCompleted: {
+                    acceptedInput = ""
+                    _editor.accepted.connect(searchEntered)
+                    ytSearchResultsPage._searchField = searchField
+                }
+
+                // is called when user presses the Return key
+                function searchEntered() {
+                    mainWindow.firstPage.busy.visible = true;
+                    mainWindow.firstPage.busy.running = true;
+                    exampleModel.clear()
+                    searchField.acceptedInput = text
+                    _ytdl.getYtSearchResults(acceptedInput)
+                    searchField.focus = false
+                    // Search History adding
+                    //DB.addSearchHistory(text)
+                    //mainWindow.firstPage.addSearchHistory(text)
+                }
+            }
+        }
+
+        SectionHeader {
+            id: recentSearchHeader
+            anchors.top: pHead.bottom
+            text: qsTr("Recent Searches")
+            visible: searchView.visible
+        }
+
+
+    SilicaListView {
+        id: ytSearchResultsList
+        anchors.top: pHead.bottom
+        width: parent.width
+        height: parent.height - pHead.height
+        model: exampleModel
+        visible: exampleModel.count > 0
+        clip: true
         delegate: YTSearchResultItem {
             title: titleYT
             thumbnail: thumbnailYT
@@ -88,6 +117,51 @@ Page {
             url240p: url240pYT
         }
     }
+
+
+
+        // Search History List
+        SilicaListView {
+            id: searchView
+            width: parent.width
+            height: parent.height - recentSearchHeader.height - pHead.height
+            anchors.top: recentSearchHeader.bottom
+            model: mainWindow.firstPage.searchHistoryModel
+            visible: !ytSearchResultsList.visible
+
+            clip: true
+
+            VerticalScrollDecorator {}
+
+            verticalLayoutDirection: ListView.BottomToTop
+
+            delegate: ListItem {
+                id: listItem
+
+                Label {
+                    x: Theme.paddingLarge
+                    text: searchTerm
+                    anchors.verticalCenter: parent.verticalCenter
+                    color: listItem.highlighted ? Theme.highlightColor : Theme.primaryColor
+                }
+                onClicked: {
+                    ytSearchResultsPage._searchField.text = searchTerm
+                    ytSearchResultsPage._searchField.searchEntered()
+                }
+            }
+            ViewPlaceholder {
+                anchors.top: parent.top
+                anchors.topMargin: Theme.paddingLarge
+                text: qsTr("No Search History")
+                enabled: searchView.count == 0
+            }
+        }
+        // End of Search History List
+
+        Component.onCompleted: searchView.scrollToTop()
+
+    }
+
 
     Connections {
         target: _ytdl
