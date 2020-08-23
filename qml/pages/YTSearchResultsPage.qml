@@ -13,7 +13,7 @@ Page {
     property QtObject _searchField
 
     ListModel {
-        id: exampleModel
+        id: ytSearchResultsModel
 //        ListElement {
 //            titleYT: "NEPTUNE OS 6 : A Look at a nice Debian 10 based Linux Distribution"
 //            thumbnailYT: "https://i.ytimg.com/vi_webp/P8R0YVyfN6E/maxresdefault.webp?v=5d8b4ec2"
@@ -36,6 +36,15 @@ Page {
 //            durationYT: "1234"
 //            uploadDateYT: "20200712"
 //        }
+        function contains(id) {
+            var str = id.toString();
+            for (var i=0; i<count; i++) {
+                if (get(i).videoIdYT === str)  {
+                    return true;
+                }
+            }
+            return false;
+        }
 
     }
 
@@ -75,7 +84,7 @@ Page {
                 function searchEntered() {
                     mainWindow.firstPage.busy.visible = true;
                     mainWindow.firstPage.busy.running = true;
-                    exampleModel.clear()
+                    ytSearchResultsModel.clear()
                     searchField.acceptedInput = text
                     _ytdl.getYtSearchResults(acceptedInput)
                     searchField.focus = false
@@ -90,7 +99,7 @@ Page {
             id: recentSearchHeader
             anchors.top: pHead.bottom
             text: qsTr("Recent Searches")
-            visible: searchView.visible
+            visible: searchHistoryList.visible
         }
 
 
@@ -99,9 +108,21 @@ Page {
         anchors.top: pHead.bottom
         width: parent.width
         height: parent.height - pHead.height
-        model: exampleModel
-        visible: exampleModel.count > 0
+        model: ytSearchResultsModel
+        visible: ytSearchResultsModel.count > 0
         clip: true
+        PushUpMenu {
+            id: pushUpYtSearchResultList
+            MenuItem {
+                text: qsTr("Load more")
+                onClicked: {
+                    mainWindow.firstPage.busy.visible = true;
+                    mainWindow.firstPage.busy.running = true;
+                    _ytdl.getYtSearchResults(_searchField.acceptedInput)
+                }
+            }
+        }
+
         delegate: YTSearchResultItem {
             title: titleYT
             thumbnail: thumbnailYT
@@ -122,7 +143,7 @@ Page {
 
         // Search History List
         SilicaListView {
-            id: searchView
+            id: searchHistoryList
             width: parent.width
             height: parent.height - recentSearchHeader.height - pHead.height
             anchors.top: recentSearchHeader.bottom
@@ -153,12 +174,12 @@ Page {
                 anchors.top: parent.top
                 anchors.topMargin: Theme.paddingLarge
                 text: qsTr("No Search History")
-                enabled: searchView.count == 0
+                enabled: searchHistoryList.count == 0
             }
         }
         // End of Search History List
 
-        Component.onCompleted: searchView.scrollToTop()
+        Component.onCompleted: searchHistoryList.scrollToTop()
 
     }
 
@@ -196,22 +217,25 @@ Page {
                             yt240p = JsonObject.entries[i].formats[j].url
                         }
                     }
-                    exampleModel.append(
-                                {
-                                    "titleYT": JsonObject.entries[i].title,
-                                    "thumbnailYT": JsonObject.entries[i].thumbnail,
-                                    "channelNameYT": JsonObject.entries[i].uploader,
-                                    "channelIdYT": JsonObject.entries[i].channel_id,
-                                    "channelUrlYT": JsonObject.entries[i].uploader_url,
-                                    "videoIdYT": JsonObject.entries[i].id,
-                                    "videoUrlYT": yt360p,
-                                    "durationYT": JsonObject.entries[i].duration.toString(),
-                                    "uploadDateYT": JsonObject.entries[i].upload_date.toString(),
-                                    "url720pYT": yt720p,
-                                    "url360pYT": yt360p,
-                                    "url240pYT": yt240p
-                                }
-                                )
+                    // Only append video ids that are not already in the list
+                    if (!ytSearchResultsModel.contains(JsonObject.entries[i].id)) {
+                        ytSearchResultsModel.append(
+                                    {
+                                        "titleYT": JsonObject.entries[i].title,
+                                        "thumbnailYT": JsonObject.entries[i].thumbnail,
+                                        "channelNameYT": JsonObject.entries[i].uploader,
+                                        "channelIdYT": JsonObject.entries[i].channel_id,
+                                        "channelUrlYT": JsonObject.entries[i].uploader_url,
+                                        "videoIdYT": JsonObject.entries[i].id,
+                                        "videoUrlYT": yt360p,
+                                        "durationYT": JsonObject.entries[i].duration.toString(),
+                                        "uploadDateYT": JsonObject.entries[i].upload_date.toString(),
+                                        "url720pYT": yt720p,
+                                        "url360pYT": yt360p,
+                                        "url240pYT": yt240p
+                                    }
+                                    ) // append End
+                    }
                 }
             }
             else {
