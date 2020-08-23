@@ -351,7 +351,7 @@ Page {
 
             anchors.top: searchField.bottom
             width: parent.width
-            height: parent.height - pageHeader.height - searchField.height - actionList.height
+            height: parent.height - pageHeader.height - searchField.height
 
             cellWidth: _isLandscape ? Screen.height / Math.round(Screen.height / (Screen.width/(4-Math.floor(scale.scale)))) :  Screen.width/(4-Math.floor(scale.scale))
             cellHeight: cellWidth
@@ -421,7 +421,7 @@ Page {
             id: menuButtonsDelegate
             ItemButton {
                 id: historyBtn
-                width: actionList.width
+                width: actionBar.width
                 height: Theme.itemSizeMedium
                 text: qsTr(name)
                 onClicked: {
@@ -454,30 +454,43 @@ Page {
             }
         }
 
-
-
-        SilicaListView {
-            id: actionList
+        DockedPanel {
+            id: actionBar
             width: parent.width
-            height: childrenRect.height
+            height: Theme.itemSizeMedium * 2
 
-            anchors.top: gridView.bottom
+            dock: Dock.Bottom
+            open: true
 
-            clip: true
-
-            property TextField urlField
-            property PageHeader pageHeader
-
-            //model: menuButtons
-            delegate: menuButtonsDelegate
-            snapMode: ListView.SnapToItem
-            populate: Transition {
-                NumberAnimation { properties: "x,y"; duration: 400 }
+            Rectangle {
+                anchors.fill: parent
+                color: Theme.overlayBackgroundColor
+                opacity: 0.8
             }
-            Component.onCompleted: {
-                actionList.model = menuButtons
-            }
-        } // SilicaactionListView
+
+            SilicaListView {
+                id: actionList
+                width: parent.width
+                height: childrenRect.height
+
+                anchors.top: gridView.bottom
+
+                clip: true
+
+                property TextField urlField
+                property PageHeader pageHeader
+
+                //model: menuButtons
+                delegate: menuButtonsDelegate
+                snapMode: ListView.SnapToItem
+                populate: Transition {
+                    NumberAnimation { properties: "x,y"; duration: 400 }
+                }
+                Component.onCompleted: {
+                    actionList.model = menuButtons
+                }
+            } // SilicaactionListView
+        }
     }
 
     Connections {
