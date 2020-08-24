@@ -12,6 +12,8 @@ Rectangle {
     height: childrenRect.height + Theme.paddingLarge
     color: "transparent"
 
+    signal longPressed
+
     property string duration
     property string thumbnail
     property alias title: fullTitle.text
@@ -25,6 +27,8 @@ Rectangle {
     property string url480p
     property string url360p
     property string url240p
+
+    property int _defaultHeight: _isLandscape? thumb.height + Theme.paddingLarge : thumb.height + fullTitle.height + channelName.height + Theme.paddingLarge
 
     onUploadDateChanged: {
         var locale = Qt.locale()
@@ -125,6 +129,7 @@ Rectangle {
             dataContainer.isYtUrl = true;
             dataContainer.loadPlayer();
         }
+        onPressAndHold: longPressed()
     }
 
     Label {

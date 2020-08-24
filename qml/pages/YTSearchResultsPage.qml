@@ -125,6 +125,7 @@ Page {
         }
 
         delegate: YTSearchResultItem {
+            id: yTSearchResultItem
             title: titleYT
             thumbnail: thumbnailYT
             channelName: channelNameYT
@@ -137,6 +138,35 @@ Page {
             url360p: url360pYT
             url720p: url720pYT
             url240p: url240pYT
+
+            height: menuOpen ? contextMenu.height + _defaultHeight : _defaultHeight
+
+            function downloadVideo() {
+                pageStack.push(Qt.resolvedUrl("ytQualityChooser.qml"), {"streamTitle": titleYT, "url720p": url720pYT, "url480p": "", "url360p": url360pYT, "url240p": url240pYT, "ytDownload": true});
+            }
+
+            property bool menuOpen: contextMenu != null && contextMenu.parent === yTSearchResultItem
+            property Item contextMenu
+
+            onLongPressed: {
+                if (!contextMenu)
+                    contextMenu = contextMenuComponent.createObject(ytSearchResultsList)
+                contextMenu.show(yTSearchResultItem)
+            }
+
+            Component {
+                id: contextMenuComponent
+                ContextMenu {
+                    id: menu
+                    MenuItem {
+                        text: qsTr("Download")
+                        onClicked: {
+                            console.debug("Download this video now")
+                            menu.parent.downloadVideo()
+                        }
+                    }
+                }
+            }
         }
     }
 
