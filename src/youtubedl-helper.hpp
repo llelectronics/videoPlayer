@@ -13,6 +13,7 @@
 
 class ythelper : public QObject
 {   Q_OBJECT
+    Q_PROPERTY(int searchResultNumber READ searchResultNumber WRITE setSearchResultNumber)
 public:
     QString reqUrl;
     QString streamUrl;
@@ -24,6 +25,8 @@ public:
     QProcess updateBinary;
     QString data_dir = QStandardPaths::writableLocation(QStandardPaths::DataLocation);
     QString music_dir = QStandardPaths::writableLocation(QStandardPaths::MusicLocation);
+    int searchResultNumber() { return m_searchResultNumber; }
+    void setSearchResultNumber(int nr) { m_searchResultNumber = nr; }
 //    bool ffmpegAvailable = false;
 private:
     QString _oggAudio;
@@ -35,6 +38,7 @@ private:
     QProcess opusProcess;
     QProcess fullHdProcess;
     QProcess searchProcess;
+    int m_searchResultNumber = 11;
 signals:
     void streamUrlChanged(QString changedUrl);
     void sTitleChanged(QString sTitle);
@@ -174,7 +178,7 @@ public slots:
     void getYtSearchResults(QString searchTerm) {
         checkAndInstall();
         parameter = " ";
-        parameter += "-J \"ytsearch11:" + searchTerm.toUtf8() + "\"";
+        parameter += "-J \"ytsearch" + QString::number(m_searchResultNumber) + ":" + searchTerm.toUtf8() + "\"";
         searchProcess.start(data_dir + "/youtube-dl " + parameter);
         connect(&searchProcess, SIGNAL(finished(int)), this, SLOT(getYtSearchResultsOutput(int)));
     }

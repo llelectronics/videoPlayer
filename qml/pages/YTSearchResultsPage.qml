@@ -118,6 +118,7 @@ Page {
                 onClicked: {
                     mainWindow.firstPage.busy.visible = true;
                     mainWindow.firstPage.busy.running = true;
+                    _ytdl.searchResultNumber = _ytdl.searchResultNumber * 2
                     _ytdl.getYtSearchResults(_searchField.acceptedInput)
                 }
             }
