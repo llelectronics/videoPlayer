@@ -296,16 +296,18 @@ ApplicationWindow
         function next() {
             if (isNext()) {
                 var nextUrl = get(current+1).url
+                var nextTitle = get(current+1).title
                 current = current + 1
-                return nextUrl
+                return [ nextUrl, nextTitle ]
             }
         }
 
         function prev() {
             if (isPrev()) {
                 var prevUrl = get(current-1).url
+                var prevTitle = get(current-1).title
                 current = current - 1
-                return prevUrl
+                return [ prevUrl, prevTitle ]
             }
         }
 

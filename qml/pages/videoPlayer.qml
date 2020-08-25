@@ -610,7 +610,9 @@ Page {
                     dataContainer.streamTitle = ""
                     videoPoster.player.stop();
                     // before load new
-                    dataContainer.streamUrl = mainWindow.modelPlaylist.next() ;
+                    var nextMedia = mainWindow.modelPlaylist.next()
+                    dataContainer.streamUrl = nextMedia[0]
+                    dataContainer.streamTitle = nextMedia[1]
                     mediaPlayer.source = streamUrl
                     videoPauseTrigger();
                     mediaPlayer.play();
@@ -624,7 +626,9 @@ Page {
                     dataContainer.streamTitle = ""
                     videoPoster.player.stop();
                     // before load new
-                    dataContainer.streamUrl = mainWindow.modelPlaylist.prev() ;
+                    var prevMedia = mainWindow.modelPlaylist.prev()
+                    dataContainer.streamUrl = prevMedia[0]
+                    dataContainer.streamTitle = prevMedia[1]
                     mediaPlayer.source = streamUrl
                     videoPauseTrigger();
                     mediaPlayer.play();

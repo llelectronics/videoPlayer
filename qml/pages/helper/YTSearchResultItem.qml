@@ -127,6 +127,7 @@ Rectangle {
             dataContainer.isPlaylist = true;
             dataContainer.isLiveStream = false;
             dataContainer.isYtUrl = true;
+            dataContainer.ytdlStream = true;
             mainWindow.modelPlaylist.addTrackToTop(url360p,title);
             dataContainer.loadPlayer();
         }
