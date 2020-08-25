@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 import "helper"
+import "helper/db.js" as DB
 
 Page {
     id: ytSearchResultsPage
@@ -103,8 +104,8 @@ Page {
                     _ytdl.getYtSearchResults(acceptedInput)
                     searchField.focus = false
                     // Search History adding
-                    //DB.addSearchHistory(text)
-                    //mainWindow.firstPage.addSearchHistory(text)
+                    DB.addSearchHistory(text)
+                    mainWindow.firstPage.addSearchHistory(text)
                 }
             }
         }
