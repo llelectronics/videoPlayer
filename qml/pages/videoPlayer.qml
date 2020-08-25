@@ -326,7 +326,7 @@ Page {
             }
             MenuItem {
                 text: qsTr("Playlist")
-                onClicked: openPlaylist();
+                onClicked: mainWindow.firstPage.openPlaylist();
             }
             MenuItem {
                 text: qsTr("Play from last known position")
