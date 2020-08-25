@@ -59,6 +59,20 @@ Page {
             }
         }
 
+        PushUpMenu {
+            id: pushUpYtSearchResultList
+            MenuItem {
+                text: qsTr("Load more")
+                visible: ytSearchResultsList.visible
+                onClicked: {
+                    mainWindow.firstPage.busy.visible = true;
+                    mainWindow.firstPage.busy.running = true;
+                    _ytdl.searchResultNumber = _ytdl.searchResultNumber * 2
+                    _ytdl.getYtSearchResults(_searchField.acceptedInput)
+                }
+            }
+        }
+
         PageHeader {
             id: pHead
             SearchField {
@@ -111,18 +125,6 @@ Page {
         model: ytSearchResultsModel
         visible: ytSearchResultsModel.count > 0
         clip: true
-        PushUpMenu {
-            id: pushUpYtSearchResultList
-            MenuItem {
-                text: qsTr("Load more")
-                onClicked: {
-                    mainWindow.firstPage.busy.visible = true;
-                    mainWindow.firstPage.busy.running = true;
-                    _ytdl.searchResultNumber = _ytdl.searchResultNumber * 2
-                    _ytdl.getYtSearchResults(_searchField.acceptedInput)
-                }
-            }
-        }
 
         delegate: YTSearchResultItem {
             id: yTSearchResultItem
