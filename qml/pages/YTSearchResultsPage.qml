@@ -263,6 +263,11 @@ Page {
                             yt240p = JsonObject.entries[i].formats[j].url
                         }
                     }
+                    var defaultVideoUrl;
+                    if (mainWindow.firstPage.ytQualWanted == "720p") defaultVideoUrl = yt720p;
+                    else if (mainWindow.firstPage.ytQualWanted == "360p") defaultVideoUrl = yt360p;
+                    else if (mainWindow.firstPage.ytQualWanted == "240p") defaultVideoUrl = yt240p;
+                    else defaultVideoUrl = yt360p;
                     // Only append video ids that are not already in the list
                     if (!ytSearchResultsModel.contains(JsonObject.entries[i].id)) {
                         ytSearchResultsModel.append(
@@ -273,7 +278,7 @@ Page {
                                         "channelIdYT": JsonObject.entries[i].channel_id,
                                         "channelUrlYT": JsonObject.entries[i].uploader_url,
                                         "videoIdYT": JsonObject.entries[i].id,
-                                        "videoUrlYT": yt360p,
+                                        "videoUrlYT": defaultVideoUrl,
                                         "durationYT": JsonObject.entries[i].duration.toString(),
                                         "uploadDateYT": JsonObject.entries[i].upload_date.toString(),
                                         "url720pYT": yt720p,
