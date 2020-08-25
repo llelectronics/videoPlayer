@@ -342,6 +342,7 @@ ApplicationWindow
                     return i;
                 }
             }
+            return 0; // Fallback
         }
     }
 
