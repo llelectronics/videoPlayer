@@ -318,6 +318,14 @@ ApplicationWindow
             }
         }
 
+        function addTrackToTop(url, title) {
+            if (title !== "")
+                insert(0, {"title" : title, "url" : url});
+            else
+                insert(0, {"title" : findBaseName(url), "url" : url});
+            playlist.insert(0,url);
+        }
+
         function addTrack(url, title) {
             if (title !== "")
                 append({"title" : title, "url" : url});
