@@ -473,8 +473,6 @@ Page {
                 width: parent.width
                 height: childrenRect.height
 
-                anchors.top: gridView.bottom
-
                 clip: true
 
                 property TextField urlField
