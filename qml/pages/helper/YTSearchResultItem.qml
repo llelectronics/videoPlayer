@@ -124,9 +124,10 @@ Rectangle {
             }
             dataContainer.streamTitle = title
             dataContainer.originalUrl = "https://youtube.com/watch?v=" + videoId
-            dataContainer.isPlaylist = false;
+            dataContainer.isPlaylist = true;
             dataContainer.isLiveStream = false;
             dataContainer.isYtUrl = true;
+            mainWindow.modelPlaylist.addTrack(url360p,title);
             dataContainer.loadPlayer();
         }
         onPressAndHold: longPressed()

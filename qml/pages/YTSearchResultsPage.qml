@@ -145,6 +145,13 @@ Page {
                 pageStack.push(Qt.resolvedUrl("ytQualityChooser.qml"), {"streamTitle": titleYT, "url720p": url720pYT, "url480p": "", "url360p": url360pYT, "url240p": url240pYT, "ytDownload": true});
             }
 
+            function add2playlist() {
+                mainWindow.infoBanner.parent = ytSearchResultsPage
+                mainWindow.infoBanner.anchors.top = ytSearchResultsPage.top
+                mainWindow.infoBanner.showText(titleYT + " " + qsTr("added to playlist"));
+                mainWindow.modelPlaylist.addTrack(videoUrlYT,titleYT);
+            }
+
             property bool menuOpen: contextMenu != null && contextMenu.parent === yTSearchResultItem
             property Item contextMenu
 
@@ -159,9 +166,14 @@ Page {
                 ContextMenu {
                     id: menu
                     MenuItem {
+                        text: qsTr("Add to playlist")
+                        onClicked: {
+                            menu.parent.add2playlist();
+                        }
+                    }
+                    MenuItem {
                         text: qsTr("Download")
                         onClicked: {
-                            console.debug("Download this video now")
                             menu.parent.downloadVideo()
                         }
                     }
