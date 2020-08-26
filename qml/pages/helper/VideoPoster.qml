@@ -28,6 +28,7 @@ MouseArea {
                                     && videoItem.player
                                     && videoItem.player.status >= MediaPlayer.Loaded
                                     && videoItem.player.status < MediaPlayer.EndOfMedia
+    property alias _pressTimer: pressTimer
 
     implicitWidth: poster.implicitWidth
     implicitHeight: poster.implicitHeight

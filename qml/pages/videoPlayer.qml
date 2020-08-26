@@ -530,6 +530,9 @@ Page {
 
                 player: mediaPlayer
 
+                property int mouseX
+                property int mouseY
+
                 //duration: videoDuration
                 active: mediaItem.active
                 source: streamUrl
@@ -636,26 +639,73 @@ Page {
                     mprisPlayer.title = streamTitle
                 }
 
-                onClicked: {
-                    //if (drawer.open) drawer.open = false
-                    //else {
-                        if (mediaPlayer.playbackState == MediaPlayer.PlayingState) {
-                            //console.debug("Mouse values:" + mouse.x + " x " + mouse.y)
-                            var middleX = width / 2
-                            var middleY = height / 2
-                            //console.debug("MiddleX:" + middleX + " MiddleY:"+middleY + " mouse.x:"+mouse.x + " mouse.y:"+mouse.y)
-                            if ((mouse.x >= middleX - Theme.iconSizeMedium && mouse.x <= middleX + Theme.iconSizeMedium) && (mouse.y >= middleY - Theme.iconSizeMedium && mouse.y <= middleY + Theme.iconSizeMedium)) {
-                                pause();
-                            }
-                            else {
-                                toggleControls();
-                            }
-                        } else {
-                            //mediaPlayer.play()
-                            //console.debug("clicked something else")
+                function singleClick(mouse) {
+                    if (mediaPlayer.playbackState == MediaPlayer.PlayingState) {
+                        //console.debug("Mouse values:" + mouse.x + " x " + mouse.y)
+                        var middleX = width / 2
+                        var middleY = height / 2
+                        //console.debug("MiddleX:" + middleX + " MiddleY:"+middleY + " mouse.x:"+mouse.x + " mouse.y:"+mouse.y)
+                        if ((mouseX >= middleX - Theme.iconSizeMedium && mouseX <= middleX + Theme.iconSizeMedium) && (mouseY >= middleY - Theme.iconSizeMedium && mouseY <= middleY + Theme.iconSizeMedium)) {
+                            pause();
+                        }
+                        else {
                             toggleControls();
                         }
-                    //}
+                    } else {
+                        //mediaPlayer.play()
+                        //console.debug("clicked something else")
+                        toggleControls();
+                    }
+                }
+
+                function dblClick() {
+                    var middleX = width / 2
+                    if (mouseX > middleX + Theme.iconSizeMedium + Theme.paddingMedium) {
+                        if (source.toString().length !== 0) {
+                            //console.debug("Yeah we have a video source")
+                            if (!_pressTimer.running) {
+                                pressTime = 1;
+                                _pressTimer.start();
+                                ffwd(10)
+                            }
+                            else {
+                                pressTime += 1
+                                ffwd(10*pressTime)
+                            }
+                        }
+                    }
+                    else if (mouseX < middleX - Theme.iconSizeMedium - Theme.paddingMedium) {
+                        if (source.toString().length !== 0) {
+                            //console.debug("Yeah we have a video source")
+                            if (!_pressTimer.running) {
+                                pressTime = 1;
+                                _pressTimer.start();
+                                rew(5)
+                            }
+                            else {
+                                pressTime += 1
+                                rew(5*pressTime)
+                            }
+                        }
+                    }
+                }
+
+                Timer{
+                    id:dblClicktimer
+                    interval: 200
+                    onTriggered: videoPoster.singleClick()
+                }
+
+                onClicked: {
+                    mouseX = mouse.x
+                    mouseY = mouse.y
+                    if(dblClicktimer.running)
+                    {
+                        videoPoster.dblClick()
+                        dblClicktimer.stop()
+                    }
+                    else
+                        dblClicktimer.restart()
                 }
                 onPressAndHold: {
                     if (onlyMusic.opacity == 1.0) {
