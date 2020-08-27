@@ -34,11 +34,46 @@ MouseArea {
     implicitHeight: poster.implicitHeight
 
     function ffwd(seconds) {
+        ffwdRewRectAnim.secs = seconds
+        ffwdRewRectAnim.isRew = false
+        ffwdRewAnim.start()
         videoItem.player.seek((positionSlider.value*1000) + (seconds * 1000))
     }
 
     function rew(seconds) {
+        ffwdRewRectAnim.secs = seconds
+        ffwdRewRectAnim.isRew = true
+        ffwdRewAnim.start()
         videoItem.player.seek((positionSlider.value*1000) - (seconds * 1000))
+    }
+
+    SequentialAnimation {
+        id: ffwdRewAnim
+        PropertyAction { target: ffwdRewRectAnim; property: "visible"; value: true }
+        NumberAnimation { target: ffwdRewRectAnim; property: "opacity"; to: 1; duration: 200 }
+        NumberAnimation { target: ffwdRewRectAnim; property: "opacity"; to: 0; duration: 200 }
+        PropertyAction { target: ffwdRewRectAnim; property: "visible"; value: false }
+    }
+
+    Rectangle {
+        id: ffwdRewRectAnim
+
+        property int secs: 10
+        property bool isRew: false
+
+        anchors.verticalCenter: parent.verticalCenter
+        width: parent.width / 2
+        anchors.right: isRew? undefined : parent.right
+        anchors.left: isRew ? parent.left : undefined
+        color: Theme.backgroundGlowColor
+        visible: false
+        opacity: 0
+
+        Label {
+            anchors.centerIn: parent
+            text: parent.isRew ? parent.secs + " <<" : ">> " + parent.secs
+            font.pixelSize: Theme.fontSizeExtraLarge
+        }
     }
 
     Connections {
