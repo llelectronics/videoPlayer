@@ -58,6 +58,7 @@ HEADERS += \
 DISTFILES += \
     qml/pages/HistoryPage.qml \
     qml/pages/YTSearchResultsPage.qml \
+    qml/pages/helper/Jupii.qml \
     qml/pages/helper/SubtitlesItem.qml \
     qml/pages/PlaylistPage.qml \
     qml/pages/InfoBanner.qml \

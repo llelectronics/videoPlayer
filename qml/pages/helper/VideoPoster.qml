@@ -268,13 +268,14 @@ MouseArea {
         Rectangle {
             anchors { left: parent.left; right: parent.right; bottom: parent.bottom }
             enabled: { if (controls.opacity == 1.0) return true; else return false; }
-            height: positionSlider.height + (2 * Theme.paddingLarge)
+            height: Theme.itemSizeMedium + (2 * Theme.paddingLarge)
             //color: "black"
             //opacity: 0.5
             gradient: Gradient {
                 GradientStop { position: 0.0; color: "transparent" }
                 GradientStop { position: 1.0; color: isLightTheme ? "white" : "black" } //Theme.highlightColor} // Black seems to look and work better
             }
+
 
             BackgroundItem {
                 id: qualBtn
@@ -350,11 +351,35 @@ MouseArea {
                 }
             }
 
+            BackgroundItem {
+                id: castBtn
+                anchors.left: repeatBtn.right
+                anchors.leftMargin: Theme.paddingMedium
+                anchors.bottom: parent.bottom
+                anchors.bottomMargin: Theme.paddingMedium
+                width: height
+                visible: jupii.found
+                height: Theme.iconSizeMedium
+                onClicked: {
+                    jupii.addUrlOnceAndPlay(streamUrl.toString(), streamTitle, "", (onlyMusic.visible ? 1 : 2), "llsvplayer", "/usr/share/icons/hicolor/172x172/apps/harbour-videoPlayer.png")
+                }
+                Image {
+                    source: "../images/icon-m-cast.png"
+                    anchors.fill: parent
+                    ColorOverlay {
+                        anchors.fill: parent
+                        source: parent
+                        color: "black"
+                        visible: isLightTheme
+                    }
+                }
+            }
+
             Slider {
                 id: positionSlider
 
                 anchors {
-                    left: repeatBtn.right;
+                    left: castBtn.visible ? castBtn.right : repeatBtn.right
                     right: {
                         if (maxTime.visible) maxTime.left
                         else if (qualBtn.visible) qualBtn.left
@@ -364,7 +389,7 @@ MouseArea {
                 }
                 anchors.bottomMargin: Theme.paddingLarge + Theme.paddingMedium
                 enabled: { if (controls.opacity == 1.0) return true; else return false; }
-                height: Theme.itemSizeSmall
+                height: Theme.itemSizeMedium
                 width: {
                     var slidWidth = parent.width
                     if (qualBtn.visible) slidWidth =- qualBtn.width
@@ -394,7 +419,7 @@ MouseArea {
                         coverTime.fadeOut.start()
                 }
             }
-        }
+        } // Bottom rect End
         Row {
             id: backwardIndicator
             anchors.horizontalCenter: parent.horizontalCenter

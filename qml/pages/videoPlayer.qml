@@ -692,7 +692,7 @@ Page {
 
                 Timer{
                     id:dblClicktimer
-                    interval: 200
+                    interval: 250
                     onTriggered: videoPoster.singleClick()
                 }
 
@@ -811,6 +811,10 @@ Page {
             }
             showScaleIndicator.start();
         }
+    }
+
+    Jupii {
+        id: jupii
     }
 
     children: [
