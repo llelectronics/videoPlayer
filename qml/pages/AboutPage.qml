@@ -30,7 +30,7 @@ Page {
 
             }
             Label {
-                text: "License: BSD (3-clause)"
+                text: qsTr("License: BSD (3-clause)")
                 anchors.horizontalCenter: parent.horizontalCenter
             }
 
@@ -49,7 +49,7 @@ Page {
             Label {
                 width: 360
                 font.pixelSize: Theme.fontSizeMedium
-                text: "Created by llelectronics"
+                text: qsTr("Created by: llelectronics")
                 anchors.horizontalCenter: parent.horizontalCenter
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment: Text.AlignHCenter
@@ -78,7 +78,7 @@ Page {
             Label {
                 id: homepage
                 anchors.horizontalCenter: parent.horizontalCenter
-                text: "<a href=\"https://github.com/llelectronics/videoPlayer\">Sourcecode on Github</a>"
+                text: "<a href=\"https://github.com/llelectronics/videoPlayer\">Sourcecode</a>"
                 onLinkActivated: Qt.openUrlExternally(link)
                 linkColor: Theme.highlightColor
             }
