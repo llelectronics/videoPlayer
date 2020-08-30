@@ -42,6 +42,7 @@ Dialog {
             else if ((!mainWindow.contains(urlField.text.toString(),"rtsp")) && mainWindow.isUrl(urlField.text.toString())) {
                 // Call C++ side here to grab url
                 _ytdl.setUrl(urlField.text.toString());
+                _ytdl.setParameter("-f " + firstPage.ytdlQual)
                 _ytdl.getStreamUrl();
                 _ytdl.getStreamTitle();
                 mainWindow.firstPage.isYtUrl = false;

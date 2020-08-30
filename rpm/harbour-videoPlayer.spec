@@ -13,7 +13,7 @@ Name:       harbour-videoPlayer
 %{!?qtc_make:%define qtc_make make}
 %{?qtc_builddir:%define _builddir %qtc_builddir}
 Summary:    Simple video player using gstreamer
-Version:    2.0.1
+Version:    2.0.8
 Release:    1
 Group:      Qt/Qt
 License:    LICENSE
@@ -74,7 +74,7 @@ desktop-file-install --delete-original       \
 %{_bindir}
 %{_datadir}/%{name}/qml
 %{_datadir}/applications/%{name}.desktop
-%{_datadir}/icons/hicolor/86x86/apps/%{name}.png
+%{_datadir}/icons/hicolor/*/apps/%{name}.png
 /usr/bin
 /usr/share/harbour-videoPlayer
 /usr/share/applications

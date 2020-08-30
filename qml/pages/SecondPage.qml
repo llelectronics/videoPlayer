@@ -65,11 +65,13 @@ Page {
         anchors.fill: parent
 
         dock: searchResultsDialog.isPortrait ? Dock.Top : Dock.Left
+        property QtObject historyListView
 
         background: SilicaListView {
             id: searchView
             anchors.fill: parent
             model: mainWindow.firstPage.searchHistoryModel
+            verticalLayoutDirection: ListView.BottomToTop
 
             VerticalScrollDecorator {}
 
@@ -94,6 +96,10 @@ Page {
                 text: qsTr("No Search History")
                 enabled: searchView.count == 0
             }
+            Component.onCompleted: searchHistoryDrawer.historyListView = searchView
+        }
+        onOpenedChanged: {
+            historyListView.scrollToTop();
         }
 
         SilicaWebView {
@@ -119,6 +125,10 @@ Page {
             experimental.customLayoutWidth: searchResultsDialog.width / devicePixelRatio
 
             PullDownMenu {
+                MenuItem {
+                    text : qsTr("Reload")
+                    onClicked: ytView.reload();
+                }
                 MenuItem {
                     text: qsTr("History")
                     onClicked: searchHistoryDrawer.open = !searchHistoryDrawer.open
@@ -200,10 +210,11 @@ Page {
 
             onUrlChanged: {
                 if (YT.checkYoutube(url.toString()) === true && ytDetect === true) {
-                    if (YT.getYtID(url.toString()) !== "") {
+                    var youtubeID = YT.getYtID(url.toString())
+                    if (youtubeID !== "") {
                         if (dataContainer != null) {
                             if (dataContainer.alwaysYtdl) {
-                                _ytdl.setUrl(url)
+                                _ytdl.setUrl(youtubeID)
                                 _ytdl.setParameter("-f " + dataContainer.ytdlQual)
                                 _ytdl.getStreamUrl()
                                 _ytdl.getStreamTitle()
@@ -226,7 +237,9 @@ Page {
             }
 
 //            onNavigationRequested: {
-//                //console.debug("[SecondPage.qml] Request navigation to " + request.url)
+//                console.debug("[SecondPage.qml] Request navigation to " + request.url)
+//                if (request.url == "https://m.youtube.com/" || request.url.indexOf("results?q=")) request.action = WebView.AcceptRequest
+//                else request.action = WebView.IgnoreRequest;
 //                if (YT.checkYoutube(request.url.toString()) === true && ytDetect === true) {
 //                    if (YT.getYtID(request.url.toString()) !== "") {
 //                        //console.debug("[SecondPage.qml] Youtube Link detected")
@@ -269,7 +282,7 @@ Page {
         height: Theme.itemSizeSmall + Theme.paddingSmall
 
         dock: Dock.Bottom
-        open: ytView.canGoBack && (!ytView.atYEnd)
+        open: (!ytView.atYEnd) && (!searchHistoryDrawer.open)
 
         Rectangle {
             anchors.fill: parent
@@ -279,7 +292,10 @@ Page {
 
         Row {
             anchors.centerIn: parent
-            spacing: Theme.paddingLarge * 4
+            spacing: {
+                if (backBtn.visible) (parent.width - 5*backBtn.width) / 6
+                else (parent.width - 4*backBtn.width) / 5
+            }
             IconButton {
                 id: backBtn
                 icon.source: "image://theme/icon-m-back"
@@ -290,13 +306,34 @@ Page {
                 }
             }
             IconButton {
-                id: reloadBtn
-                icon.source: ytView.loading ? "image://theme/icon-m-reset" : "image://theme/icon-m-refresh"
+                id: homeBtn
+                icon.source: "image://theme/icon-m-home";
                 onClicked: {
-                    if (ytView.loading) ytView.stop();
-                    else ytView.reload();
+                    ytView.url = "https://youtube.com"
                 }
             }
+            IconButton {
+                id: libBtn
+                icon.source: "image://theme/icon-m-levels"
+                onClicked: {
+                    ytView.url = "https://youtube.com/feed/subscriptions"
+                }
+            }
+            IconButton {
+                id: subBtn
+                icon.source: "image://theme/icon-m-file-folder"
+                onClicked: {
+                    ytView.url = "https://youtube.com/feed/library"
+                }
+            }
+//            IconButton {
+//                id: reloadBtn
+//                icon.source: ytView.loading ? "image://theme/icon-m-reset" : "image://theme/icon-m-refresh"
+//                onClicked: {
+//                    if (ytView.loading) ytView.stop();
+//                    else ytView.reload();
+//                }
+//            }
             IconButton {
                 id: searchBtn
                 icon.source: "image://theme/icon-m-search"
@@ -350,13 +387,16 @@ Page {
                 text: qsTr("Load with ytdl")
                 onClicked: {
                     contextMenu.hide()
-                    _ytdl.setUrl(contextMenu.clickedUrl)
-                    _ytdl.setParameter("-f " + mainWindow.firstPage.ytdlQual)
-                    _ytdl.getStreamUrl()
-                    _ytdl.getStreamTitle()
-                    mainWindow.firstPage.isYtUrl = false
-                    mainWindow.firstPage.busy.visible = true;
-                    mainWindow.firstPage.busy.running = true;
+                    var youtubeID = YT.getYtID(contextMenu.clickedUrl.toString())
+                    if (youtubeID !== "") {
+                        _ytdl.setUrl(youtubeID)
+                        _ytdl.setParameter("-f " + mainWindow.firstPage.ytdlQual)
+                        _ytdl.getStreamUrl()
+                        _ytdl.getStreamTitle()
+                        mainWindow.firstPage.isYtUrl = false
+                        mainWindow.firstPage.busy.visible = true;
+                        mainWindow.firstPage.busy.running = true;
+                    }
                 }
                 visible: contextMenu.clickedUrl != ""
             }

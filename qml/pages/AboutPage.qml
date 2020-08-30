@@ -12,12 +12,12 @@ Page {
             id: column1
             anchors.fill: parent
             anchors.topMargin: Theme.paddingLarge * 3
-            spacing: 15
+            spacing: Theme.paddingLarge
 
             Image{
                 source: appicon
-                height: 128
-                width: 128
+                height: Theme.iconSizeExtraLarge
+                width: height
                 fillMode: Image.PreserveAspectFit
                 anchors {
                     horizontalCenter: parent.horizontalCenter
@@ -75,13 +75,12 @@ Page {
                 width: parent.width-64
             }
 
-            Button {
+            Label {
                 id: homepage
                 anchors.horizontalCenter: parent.horizontalCenter
                 text: "<a href=\"https://github.com/llelectronics/videoPlayer\">Sourcecode on Github</a>"
-                onClicked: {
-                    Qt.openUrlExternally("https://github.com/llelectronics/videoPlayer")
-                }
+                onLinkActivated: Qt.openUrlExternally(link)
+                linkColor: Theme.highlightColor
             }
 
             Label {

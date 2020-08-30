@@ -296,16 +296,18 @@ ApplicationWindow
         function next() {
             if (isNext()) {
                 var nextUrl = get(current+1).url
+                var nextTitle = get(current+1).title
                 current = current + 1
-                return nextUrl
+                return [ nextUrl, nextTitle ]
             }
         }
 
         function prev() {
             if (isPrev()) {
                 var prevUrl = get(current-1).url
+                var prevTitle = get(current-1).title
                 current = current - 1
-                return prevUrl
+                return [ prevUrl, prevTitle ]
             }
         }
 
@@ -316,6 +318,14 @@ ApplicationWindow
                     playlist.remove(i);
                 }
             }
+        }
+
+        function addTrackToTop(url, title) {
+            if (title !== "")
+                insert(0, {"title" : title, "url" : url});
+            else
+                insert(0, {"title" : findBaseName(url), "url" : url});
+            playlist.insert(0,url);
         }
 
         function addTrack(url, title) {
@@ -332,6 +342,7 @@ ApplicationWindow
                     return i;
                 }
             }
+            return 0; // Fallback
         }
     }
 
@@ -393,6 +404,7 @@ ApplicationWindow
     }
 
     Rectangle {
+        id: bgOverlay
         color: Theme.overlayBackgroundColor
         opacity: 0.60
         anchors.fill: parent
@@ -403,35 +415,44 @@ ApplicationWindow
         }
     }
 
-    BusyIndicator {
-        id: busy
+    Item {
+        id: bgItem
+        rotation: mainWindow._rotatingItem.rotation
         anchors.centerIn: parent
-        size: BusyIndicatorSize.Large
-        running: false
-        visible: false
-    }
+        width: pageStack.verticalOrientation ? parent.width : parent.height
+        height: pageStack.verticalOrientation ? parent.height : parent.width
 
-    TextArea {
-        id: errTxt
-        anchors.top: parent.top
-        height: parent.height - (dismissBtn.height + Theme.paddingLarge)
-        width: parent.width
-        font.pointSize: Theme.fontSizeSmall
-        color: Theme.primaryColor
-        visible: false
-        background: null
-        wrapMode: TextEdit.WordWrap
-        readOnly: true
-    }
-    Button {
-        id: dismissBtn
-        anchors.bottom: parent.bottom
-        anchors.bottomMargin: Theme.paddingLarge
-        anchors.horizontalCenter: parent.horizontalCenter
-        visible: errTxt.visible
-        text: qsTr("Dismiss")
-        onClicked: {
-            if (errTxt.visible) errTxt.visible = false;
+        BusyIndicator {
+            id: busy
+            anchors.centerIn: parent
+            size: BusyIndicatorSize.Large
+            running: false
+            visible: false
+        }
+
+        TextArea {
+            id: errTxt
+            anchors.top: parent.top
+            height: parent.height - (dismissBtn.height + Theme.paddingLarge)
+            width: parent.width
+            font.pointSize: Theme.fontSizeSmall
+            color: Theme.primaryColor
+            visible: false
+            background: null
+            wrapMode: TextEdit.WordWrap
+            readOnly: true
+            z: dismissBtn.z + 1
+        }
+        Button {
+            id: dismissBtn
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: Theme.paddingLarge
+            anchors.horizontalCenter: parent.horizontalCenter
+            visible: errTxt.visible
+            text: qsTr("Dismiss")
+            onClicked: {
+                if (errTxt.visible) errTxt.visible = false;
+            }
         }
     }
 

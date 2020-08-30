@@ -37,6 +37,7 @@ Dialog {
         ytDefaultQualCombo.currentIndex = 0;
         clearWebViewOnExitSwitch.checked = false;
         alwaysYtdlSwitch.checked = false;
+        showMinPlayerSwitch.checked = false;
     }
 
     function clearHistory() {
@@ -57,6 +58,7 @@ Dialog {
         DB.addSetting("onlyMusicState", onlyMusicCombo.onlyMusicState.toString());
         DB.addSetting("clearWebViewOnExit", clearWebViewOnExitSwitch.checked.toString());
         DB.addSetting("alwaysYtdl", alwaysYtdlSwitch.checked.toString());
+        DB.addSetting("showMinPlayer", showMinPlayerSwitch.checked.toString());
         DB.getSettings();
     }
 
@@ -360,6 +362,13 @@ Dialog {
             }
 
             TextSwitch {
+                id: showMinPlayerSwitch
+                anchors.horizontalCenter: parent.horizontalCenter
+                text: qsTr("Show mini player when swiping back from main player")
+                checked: mainWindow.firstPage.showMinPlayer
+            }
+
+            TextSwitch {
                 id: directYoutubeSwitch
                 anchors.horizontalCenter: parent.horizontalCenter
                 text: "Use direct youtube url"
@@ -377,7 +386,7 @@ Dialog {
                     // Current Option
                     if (mainWindow.firstPage.openDialogType === "adv") return 0;
                     else if (mainWindow.firstPage.openDialogType === "simple") return 0;
-                    else if (mainWindow.firstPage.openDialogType === "gallery") return 2;
+                    else if (mainWindow.firstPage.openDialogType === "gallery") return 1;
                 }
 
                 menu: ContextMenu {
@@ -387,7 +396,7 @@ Dialog {
                 onCurrentIndexChanged: {
                     if (currentIndex == 0) dType = "adv"
                     else if (currentIndex == 0) dType = "simple"
-                    else if (currentIndex == 2) dType = "gallery"
+                    else if (currentIndex == 1) dType = "gallery"
                 }
             }
 

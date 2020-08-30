@@ -5,11 +5,16 @@ import Sailfish.Media 1.0
 import "helper"
 import "fileman"
 import org.nemomobile.mpris 1.0
+import Nemo.KeepAlive 1.2
 
 Page {
     id: videoPlayerPage
     objectName: "videoPlayerPage"
     allowedOrientations: Orientation.All
+
+    onOrientationChanged: video.checkScaleStatus()
+    onHeightChanged: video.checkScaleStatus()
+    onWidthChanged: video.checkScaleStatus()
 
     focus: true
 
@@ -54,6 +59,8 @@ Page {
     property bool isDash: dataContainer.isDash
     property string onlyMusicState: dataContainer.onlyMusicState
     property bool isLiveStream: dataContainer.isLiveStream
+    property bool allowScaling: false
+    property bool isRepeat: false
 
     property alias showTimeAndTitle: showTimeAndTitle
     property alias pulley: pulley
@@ -84,16 +91,18 @@ Page {
             //console.debug("[videoPlayer.qml] Destruction going on so write : " + mediaPlayer.source + " with timecode: " + mediaPlayer.position + " to db")
             DB.addPosition(sourcePath,mediaPlayer.position);
         }
-        minPlayer.source = mediaPlayer.source
-        minPlayer.seek(mediaPlayer.position)
-        minPlayer.streamTitle = streamTitle
-        minPlayer.isPlaylist = isPlaylist
-        if (mediaPlayer.playbackState === MediaPlayer.PlayingState) minPlayer.play();
-        mediaPlayer.pause();
-        mprisPlayer.hide();
-        minPlayerLoader.active = true;
-        minPlayerLoader.sourceComponent = minPlayerComponent
-        minPlayerLoader.item.show()
+        if (mainWindow.firstPage.showMinPlayer) {
+            minPlayer.source = mediaPlayer.source
+            minPlayer.seek(mediaPlayer.position)
+            minPlayer.streamTitle = streamTitle
+            minPlayer.isPlaylist = isPlaylist
+            if (mediaPlayer.playbackState === MediaPlayer.PlayingState) minPlayer.play();
+            mediaPlayer.pause();
+            mprisPlayer.hide();
+            minPlayerLoader.active = true;
+            minPlayerLoader.sourceComponent = minPlayerComponent
+            minPlayerLoader.item.show()
+        }
 //        mediaPlayer.stop();
 //        mediaPlayer.source = "";
 //        mediaPlayer.play();
@@ -133,7 +142,7 @@ Page {
             YT.getYoutubeTitle(originalUrl);
         }
         else dataContainer.isYtUrl = false;
-        if (dataContainer.streamTitle === "") dataContainer.streamTitle = mainWindow.findBaseName(streamUrl)
+        //if (dataContainer.streamTitle === "") dataContainer.streamTitle = mainWindow.findBaseName(streamUrl)
         dataContainer.ytdlStream = false
 
         if (streamUrl.toString().match("^file://") || streamUrl.toString().match("^/")) {
@@ -141,13 +150,14 @@ Page {
             console.debug("[videoPlayer.qml] streamUrl= " + streamUrl + " savePositionMsec= " + savePositionMsec + " streamUrl.length = " + streamUrl.length);
             if (savePositionMsec !== "Not Found") savedPosition = true;
             else savedPosition = false;
+            dataContainer.streamTitle = mainWindow.findBaseName(streamUrl)
         }
         if (isPlaylist) mainWindow.curPlaylistIndex = mainWindow.modelPlaylist.getPosition(streamUrl)
         isNewSource = true
     }
 
     onStreamTitleChanged: {
-        if (streamTitle != "") {
+        if (streamTitle != "" && streamTitle != streamUrl && !mainWindow.firstPage.historyModel.containsTitle(streamTitle) && !mainWindow.firstPage.historyModel.containsUrl(streamUrl)) {
             //Write into history database
             DB.addHistory(streamUrl,streamTitle);
             // Don't forgt to write it to the List aswell
@@ -217,13 +227,23 @@ Page {
 
     }
 
+    function toggleAspectRatio() {
+        // This switches between different aspect ratio fill modes
+        //console.debug("video.fillMode= " + video.fillMode)
+        if (video.fillMode == VideoOutput.PreserveAspectFit) video.fillMode = VideoOutput.PreserveAspectCrop
+        else video.fillMode = VideoOutput.PreserveAspectFit
+        showScaleIndicator.start();
+    }
+
     SilicaFlickable {
         id: flick
         anchors.fill: parent
 
+
         // PullDownMenu and PushUpMenu must be declared in SilicaFlickable, SilicaListView or SilicaGridView
         PullDownMenu {
             id: pulley
+
             MenuItem {
                 id: ytdlMenuItem
                 text: qsTr("Load with ytdl")
@@ -235,14 +255,17 @@ Page {
                 //onClicked: pageStack.push(Qt.resolvedUrl("DownloadManager.qml"), {"downloadUrl": streamUrl, "downloadName": streamTitle});
                 // Alternatively use direct youtube url instead of ytapi for downloads (ytapi links not always download with download manager)
                 onClicked: {
-                    _ytdl.setUrl(originalUrl)
-                    _ytdl.setParameter("-f " + ytdlQual)
-                    _ytdl.getStreamUrl()
-                    _ytdl.getStreamTitle()
-                    mainWindow.firstPage.isYtUrl = false
-                    mainWindow.firstPage.busy.visible = true;
-                    mainWindow.firstPage.busy.running = true;
-                    pageStack.pop()
+                    var youtubeID = YT.getYtID(originalUrl.toString())
+                    if (youtubeID !== "") {
+                        _ytdl.setUrl(youtubeID)
+                        _ytdl.setParameter("-f " + ytdlQual)
+                        _ytdl.getStreamUrl()
+                        _ytdl.getStreamTitle()
+                        mainWindow.firstPage.isYtUrl = false
+                        mainWindow.firstPage.busy.visible = true;
+                        mainWindow.firstPage.busy.running = true;
+                        pageStack.pop()
+                    }
                 }
             }
             MenuItem {
@@ -260,7 +283,8 @@ Page {
                     // Illegal chars: `~!@#$%^&*()-=+\|/?.>,<;:'"[{]}
                     //console.debug("[FileDetails -> Download YT Video]: " + mainWindow.firstPage.youtubeDirectUrl)
                     mainWindow.firstPage.streamTitle = YT.getDownloadableTitleString(mainWindow.firstPage.streamTitle)
-                    _ytdl.setUrl(originalUrl);
+                    var youtubeID = YT.getYtID(originalUrl.toString())
+                    _ytdl.setUrl(youtubeID);
                     pageStack.push(Qt.resolvedUrl("ytQualityChooser.qml"), {"streamTitle": mainWindow.firstPage.streamTitle, "url720p": url720p, "url480p": url480p, "url360p": url360p, "url240p": url240p, "ytDownload": true});
                 }
             }
@@ -299,6 +323,10 @@ Page {
             MenuItem {
                 text: qsTr("Load Subtitle")
                 onClicked: pageStack.push(openSubsComponent)
+            }
+            MenuItem {
+                text: qsTr("Playlist")
+                onClicked: mainWindow.firstPage.openPlaylist();
             }
             MenuItem {
                 text: qsTr("Play from last known position")
@@ -417,6 +445,7 @@ Page {
             color: isLightTheme ? "white" : "black"
             opacity: 0.60
             anchors.fill: parent
+            parent: flick
             visible: {
                 if (errorBox.visible) return true;
                 else return false;
@@ -434,6 +463,7 @@ Page {
             spacing: 15
             width: parent.width
             height: parent.height
+            parent: videoPlayerPage
             z:99
             visible: {
                 if (errorTxt.text !== "" || errorDetail.text !== "" ) return true;
@@ -473,11 +503,13 @@ Page {
                 errorTxt.text = ""
                 errorDetail.text = ""
                 errorBox.visible = false
+                videoPoster.showControls();
             }
             visible: errorBox.visible
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.bottom: parent.bottom
             anchors.bottomMargin: Theme.paddingLarge
+            parent: flick
             z: {
                 if ((errorBox.z + 1) > (videoPoster.z + 1)) errorBox.z + 1
                 else videoPoster.z + 1
@@ -488,6 +520,7 @@ Page {
             id: mediaItem
             property bool active : true
             visible: active && mainWindow.applicationActive
+            parent: pincher.enabled ? pincher : flick
             anchors.fill: parent
 
             VideoPoster {
@@ -496,6 +529,9 @@ Page {
                 height: videoPlayerPage.height
 
                 player: mediaPlayer
+
+                property int mouseX
+                property int mouseY
 
                 //duration: videoDuration
                 active: mediaItem.active
@@ -577,7 +613,9 @@ Page {
                     dataContainer.streamTitle = ""
                     videoPoster.player.stop();
                     // before load new
-                    dataContainer.streamUrl = mainWindow.modelPlaylist.next() ;
+                    var nextMedia = mainWindow.modelPlaylist.next()
+                    dataContainer.streamUrl = nextMedia[0]
+                    dataContainer.streamTitle = nextMedia[1]
                     mediaPlayer.source = streamUrl
                     videoPauseTrigger();
                     mediaPlayer.play();
@@ -591,7 +629,9 @@ Page {
                     dataContainer.streamTitle = ""
                     videoPoster.player.stop();
                     // before load new
-                    dataContainer.streamUrl = mainWindow.modelPlaylist.prev() ;
+                    var prevMedia = mainWindow.modelPlaylist.prev()
+                    dataContainer.streamUrl = prevMedia[0]
+                    dataContainer.streamTitle = prevMedia[1]
                     mediaPlayer.source = streamUrl
                     videoPauseTrigger();
                     mediaPlayer.play();
@@ -599,26 +639,73 @@ Page {
                     mprisPlayer.title = streamTitle
                 }
 
-                onClicked: {
-                    //if (drawer.open) drawer.open = false
-                    //else {
-                        if (mediaPlayer.playbackState == MediaPlayer.PlayingState) {
-                            //console.debug("Mouse values:" + mouse.x + " x " + mouse.y)
-                            var middleX = width / 2
-                            var middleY = height / 2
-                            //console.debug("MiddleX:" + middleX + " MiddleY:"+middleY + " mouse.x:"+mouse.x + " mouse.y:"+mouse.y)
-                            if ((mouse.x >= middleX - Theme.iconSizeMedium && mouse.x <= middleX + Theme.iconSizeMedium) && (mouse.y >= middleY - Theme.iconSizeMedium && mouse.y <= middleY + Theme.iconSizeMedium)) {
-                                pause();
-                            }
-                            else {
-                                toggleControls();
-                            }
-                        } else {
-                            //mediaPlayer.play()
-                            //console.debug("clicked something else")
+                function singleClick(mouse) {
+                    if (mediaPlayer.playbackState == MediaPlayer.PlayingState) {
+                        //console.debug("Mouse values:" + mouse.x + " x " + mouse.y)
+                        var middleX = width / 2
+                        var middleY = height / 2
+                        //console.debug("MiddleX:" + middleX + " MiddleY:"+middleY + " mouse.x:"+mouse.x + " mouse.y:"+mouse.y)
+                        if ((mouseX >= middleX - Theme.iconSizeMedium && mouseX <= middleX + Theme.iconSizeMedium) && (mouseY >= middleY - Theme.iconSizeMedium && mouseY <= middleY + Theme.iconSizeMedium)) {
+                            pause();
+                        }
+                        else {
                             toggleControls();
                         }
-                    //}
+                    } else {
+                        //mediaPlayer.play()
+                        //console.debug("clicked something else")
+                        toggleControls();
+                    }
+                }
+
+                function dblClick() {
+                    var middleX = width / 2
+                    if (mouseX > middleX + Theme.iconSizeMedium + Theme.paddingMedium) {
+                        if (source.toString().length !== 0) {
+                            //console.debug("Yeah we have a video source")
+                            if (!_pressTimer.running) {
+                                pressTime = 1;
+                                _pressTimer.start();
+                                ffwd(10)
+                            }
+                            else {
+                                pressTime += 1
+                                ffwd(10*pressTime)
+                            }
+                        }
+                    }
+                    else if (mouseX < middleX - Theme.iconSizeMedium - Theme.paddingMedium) {
+                        if (source.toString().length !== 0) {
+                            //console.debug("Yeah we have a video source")
+                            if (!_pressTimer.running) {
+                                pressTime = 1;
+                                _pressTimer.start();
+                                rew(5)
+                            }
+                            else {
+                                pressTime += 1
+                                rew(5*pressTime)
+                            }
+                        }
+                    }
+                }
+
+                Timer{
+                    id:dblClicktimer
+                    interval: 250
+                    onTriggered: videoPoster.singleClick()
+                }
+
+                onClicked: {
+                    mouseX = mouse.x
+                    mouseY = mouse.y
+                    if(dblClicktimer.running)
+                    {
+                        videoPoster.dblClick()
+                        dblClicktimer.stop()
+                    }
+                    else
+                        dblClicktimer.restart()
                 }
                 onPressAndHold: {
                     if (onlyMusic.opacity == 1.0) {
@@ -697,6 +784,39 @@ Page {
 
 //    }
 
+    PinchArea {
+        id: pincher
+        enabled: allowScaling && !pulley.visible && !errorBox.visible
+        visible: enabled
+        anchors.fill: parent
+        pinch.target: video
+        pinch.minimumScale: 1
+        pinch.maximumScale: 1 + (((videoPlayerPage.width/videoPlayerPage.height) - (video.sourceRect.width/video.sourceRect.height)) / (video.sourceRect.width/video.sourceRect.height))
+        pinch.dragAxis: Pinch.XAndYAxis
+        property bool pinchIn: false
+        onPinchUpdated: {
+            if (pinch.previousScale < pinch.scale) {
+                pinchIn = true
+            }
+            else if (pinch.previousScale > pinch.scale) {
+                pinchIn = false
+            }
+        }
+        onPinchFinished: {
+            if (pinchIn) {
+                video.fillMode = VideoOutput.PreserveAspectCrop
+            }
+            else {
+                video.fillMode = VideoOutput.PreserveAspectFit
+            }
+            showScaleIndicator.start();
+        }
+    }
+
+    Jupii {
+        id: jupii
+    }
+
     children: [
 
         // Use a black background if not isLightTheme
@@ -709,6 +829,17 @@ Page {
         VideoOutput {
             id: video
             anchors.fill: parent
+            transformOrigin: Item.Center
+
+            function checkScaleStatus() {
+                if ((videoPlayerPage.width/videoPlayerPage.height) > sourceRect.width/sourceRect.height) allowScaling = true;
+                console.log(videoPlayerPage.width/videoPlayerPage.height + " - " + sourceRect.width/sourceRect.height);
+            }
+
+            onFillModeChanged: {
+                if (fillMode === VideoOutput.PreserveAspectCrop) scale = 1 + (((videoPlayerPage.width/videoPlayerPage.height) - (sourceRect.width/sourceRect.height)) / (sourceRect.width/sourceRect.height))
+                else scale=1
+            }
 
             source: Mplayer {
                 id: mediaPlayer
@@ -721,6 +852,7 @@ Page {
                     if (playbackState == MediaPlayer.PlayingState) {
                         if (onlyMusic.opacity == 1.0) onlyMusic.playing = true
                         mprisPlayer.playbackStatus = Mpris.Playing
+                        video.checkScaleStatus()
                     }
                     else  {
                         if (onlyMusic.opacity == 1.0) onlyMusic.playing = false
@@ -781,6 +913,11 @@ Page {
                     /* Avoid MediaPlayer undefined behavior */
                     stop();
                 }
+                onStopped: {
+                    if (isRepeat) {
+                        play();
+                    }
+                }
             }
 
             visible: mediaPlayer.status >= MediaPlayer.Loaded && mediaPlayer.status <= MediaPlayer.EndOfMedia
@@ -788,11 +925,63 @@ Page {
             height: parent.height
             anchors.centerIn: videoPlayerPage
 
-            ScreenBlank {
-                suspend: mediaPlayer.playbackState == MediaPlayer.PlayingState
+            DisplayBlanking {
+                preventBlanking: mediaPlayer.playbackState == MediaPlayer.PlayingState
             }
         }
     ]
+
+    Item {
+        id: scaleIndicator
+
+        anchors.horizontalCenter: videoPlayerPage.horizontalCenter
+        anchors.top: parent.top
+        anchors.topMargin: 4 * Theme.paddingLarge
+        opacity: 0
+        property alias fadeOut: fadeOut
+
+        NumberAnimation on opacity {
+            id: fadeOut
+            to: 0
+            duration: 400;
+            easing.type: Easing.InOutCubic
+        }
+
+        Rectangle {
+            width: scaleLblIndicator.width + 2 * Theme.paddingMedium
+            height: scaleLblIndicator.height + 2 * Theme.paddingMedium
+            color: isLightTheme? "white" : "black"
+            opacity: 0.4
+            anchors.centerIn: parent
+            radius: 2
+        }
+        Label {
+            id: scaleLblIndicator
+            font.pixelSize: Theme.fontSizeSmall
+            anchors.centerIn: parent
+            text: (video.fillMode === VideoOutput.PreserveAspectCrop) ? qsTr("Zoomed to fit screen") : qsTr("Original")
+            color: Theme.primaryColor
+        }
+    }
+
+    Timer {
+        id: showScaleIndicator
+        interval: 1000
+        property int count: 0
+        triggeredOnStart: true
+        repeat: true
+        onTriggered: {
+            ++count
+            if (count == 2) {
+                scaleIndicator.fadeOut.start();
+                count = 0;
+                stop();
+            }
+            else {
+                scaleIndicator.opacity = 1.0
+            }
+        }
+    }
 
     // Need some more time to figure that out completely
     Timer {
@@ -821,7 +1010,7 @@ Page {
         width: parent.width
         height: Theme.fontSizeHuge
         y: coverTime.y + 10
-        color: isLightColor? "white" : "black"
+        color: isLightTheme? "white" : "black"
         opacity: 0.4
         visible: coverTime.visible
     }
@@ -860,14 +1049,14 @@ Page {
             id: dur
             text: videoDuration
             anchors.left: curPos.right
-            color: Theme.highlightColor
+            color: Theme.primaryColor
             font.pixelSize: Theme.fontSizeHuge
             font.bold: true
         }
         Label {
             id: curPos
             text: videoPosition + " / "
-            color: Theme.highlightColor
+            color: Theme.primaryColor
             font.pixelSize: Theme.fontSizeHuge
             font.bold: true
         }

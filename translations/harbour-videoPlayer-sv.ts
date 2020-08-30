@@ -73,28 +73,28 @@
 <context>
     <name>CreateDirDialog</name>
     <message>
-        <location filename="../qml/pages/fileman/helper/fmComponents/CreateDirDialog.qml" line="16"/>
+        <location filename="../qml/pages/fileman/fmComponents/CreateDirDialog.qml" line="16"/>
         <source>Error creating new directory</source>
         <translation>Kunde inte skapa ny mapp</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/helper/fmComponents/CreateDirDialog.qml" line="32"/>
+        <location filename="../qml/pages/fileman/fmComponents/CreateDirDialog.qml" line="32"/>
         <source>Create Folder</source>
         <translation>Skapa mapp</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/helper/fmComponents/CreateDirDialog.qml" line="33"/>
+        <location filename="../qml/pages/fileman/fmComponents/CreateDirDialog.qml" line="33"/>
         <source>Create</source>
         <translation>Skapa</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/helper/fmComponents/CreateDirDialog.qml" line="39"/>
+        <location filename="../qml/pages/fileman/fmComponents/CreateDirDialog.qml" line="39"/>
         <source>Create a new folder under</source>
         <translation>Skapa en ny mapp under</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/helper/fmComponents/CreateDirDialog.qml" line="52"/>
-        <location filename="../qml/pages/fileman/helper/fmComponents/CreateDirDialog.qml" line="53"/>
+        <location filename="../qml/pages/fileman/fmComponents/CreateDirDialog.qml" line="52"/>
+        <location filename="../qml/pages/fileman/fmComponents/CreateDirDialog.qml" line="53"/>
         <source>Folder name</source>
         <translation>Mappnamn</translation>
     </message>
@@ -262,64 +262,93 @@
     </message>
 </context>
 <context>
+    <name>FileItemDelegate</name>
+    <message>
+        <location filename="../qml/pages/fileman/fmComponents/FileItemDelegate.qml" line="16"/>
+        <location filename="../qml/pages/fileman/fmComponents/FileItemDelegate.qml" line="18"/>
+        <source>Deleting </source>
+        <translation>Tar bort </translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/fileman/fmComponents/FileItemDelegate.qml" line="136"/>
+        <source>Cut</source>
+        <translation>Klipp ur</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/fileman/fmComponents/FileItemDelegate.qml" line="142"/>
+        <source>Copy</source>
+        <translation>Kopiera</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/fileman/fmComponents/FileItemDelegate.qml" line="148"/>
+        <source>Delete</source>
+        <translation>Ta bort</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/fileman/fmComponents/FileItemDelegate.qml" line="154"/>
+        <source>Properties</source>
+        <translation>Egenskaper</translation>
+    </message>
+</context>
+<context>
     <name>FileProperties</name>
     <message>
-        <location filename="../qml/pages/fileman/helper/fmComponents/FileProperties.qml" line="45"/>
+        <location filename="../qml/pages/fileman/fmComponents/FileProperties.qml" line="45"/>
         <source>Change Permissions</source>
         <translation>Ändra rättigheter</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/helper/fmComponents/FileProperties.qml" line="66"/>
+        <location filename="../qml/pages/fileman/fmComponents/FileProperties.qml" line="66"/>
         <source>Rename</source>
         <translation>Byt namn</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/helper/fmComponents/FileProperties.qml" line="73"/>
+        <location filename="../qml/pages/fileman/fmComponents/FileProperties.qml" line="73"/>
         <source>Error renaming</source>
         <translation>Kunde inte byta namn</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/helper/fmComponents/FileProperties.qml" line="106"/>
+        <location filename="../qml/pages/fileman/fmComponents/FileProperties.qml" line="106"/>
         <source>Properties</source>
         <translation>Egenskaper</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/helper/fmComponents/FileProperties.qml" line="183"/>
+        <location filename="../qml/pages/fileman/fmComponents/FileProperties.qml" line="183"/>
         <source>Location</source>
         <translation>Plats</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/helper/fmComponents/FileProperties.qml" line="187"/>
+        <location filename="../qml/pages/fileman/fmComponents/FileProperties.qml" line="187"/>
         <source>Type</source>
         <translation>Typ</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/helper/fmComponents/FileProperties.qml" line="189"/>
+        <location filename="../qml/pages/fileman/fmComponents/FileProperties.qml" line="189"/>
         <source>Link to %1</source>
         <translation>Länk till %1</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/helper/fmComponents/FileProperties.qml" line="193"/>
+        <location filename="../qml/pages/fileman/fmComponents/FileProperties.qml" line="193"/>
         <source>Size</source>
         <translation>Storlek</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/helper/fmComponents/FileProperties.qml" line="212"/>
+        <location filename="../qml/pages/fileman/fmComponents/FileProperties.qml" line="212"/>
         <source>Permissions</source>
         <translation>Rättigheter</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/helper/fmComponents/FileProperties.qml" line="216"/>
+        <location filename="../qml/pages/fileman/fmComponents/FileProperties.qml" line="216"/>
         <source>Owner</source>
         <translation>Ägare</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/helper/fmComponents/FileProperties.qml" line="220"/>
+        <location filename="../qml/pages/fileman/fmComponents/FileProperties.qml" line="220"/>
         <source>Group</source>
         <translation>Grupp</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/helper/fmComponents/FileProperties.qml" line="224"/>
+        <location filename="../qml/pages/fileman/fmComponents/FileProperties.qml" line="224"/>
         <source>Last modified</source>
         <translation>Senast ändrad</translation>
     </message>
@@ -327,80 +356,80 @@
 <context>
     <name>FirstPage</name>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="210"/>
+        <location filename="../qml/pages/FirstPage.qml" line="211"/>
         <source>Open Video</source>
         <extracomment>For choosing video to open from the device</extracomment>
         <translation>Öppna video</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="348"/>
+        <location filename="../qml/pages/FirstPage.qml" line="355"/>
         <source>No History</source>
         <translation>Ingen historik</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="249"/>
-        <location filename="../qml/pages/FirstPage.qml" line="392"/>
+        <location filename="../qml/pages/FirstPage.qml" line="250"/>
+        <location filename="../qml/pages/FirstPage.qml" line="403"/>
         <source>History</source>
         <translation>Historik</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="255"/>
+        <location filename="../qml/pages/FirstPage.qml" line="256"/>
         <source>Bookmarks</source>
         <translation>Bokmärken</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="261"/>
+        <location filename="../qml/pages/FirstPage.qml" line="262"/>
         <source>Search on Youtube</source>
         <translation>Sök på Youtube</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="267"/>
+        <location filename="../qml/pages/FirstPage.qml" line="268"/>
         <source>Browse Files</source>
         <translation>Bläddra efter filer</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="273"/>
+        <location filename="../qml/pages/FirstPage.qml" line="274"/>
         <source>Enter URL</source>
         <translation>Ange URL</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="279"/>
+        <location filename="../qml/pages/FirstPage.qml" line="280"/>
         <source>Playlists</source>
         <translation>Spelningslistor</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="361"/>
+        <location filename="../qml/pages/FirstPage.qml" line="372"/>
         <source>About </source>
         <translation>Om </translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="365"/>
+        <location filename="../qml/pages/FirstPage.qml" line="376"/>
         <source>Settings</source>
         <translation>Inställningar</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="369"/>
+        <location filename="../qml/pages/FirstPage.qml" line="380"/>
         <source>Show Player</source>
-        <translation type="unfinished"></translation>
+        <translation>Visa spelare</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="393"/>
-        <location filename="../qml/pages/FirstPage.qml" line="406"/>
+        <location filename="../qml/pages/FirstPage.qml" line="404"/>
+        <location filename="../qml/pages/FirstPage.qml" line="417"/>
         <source>Open</source>
         <translation>Öppna</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="398"/>
+        <location filename="../qml/pages/FirstPage.qml" line="409"/>
         <source>Type in URL here</source>
         <translation>Skriv in URL här</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="399"/>
+        <location filename="../qml/pages/FirstPage.qml" line="410"/>
         <source>URL to media</source>
         <translation>URL till media</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="475"/>
+        <location filename="../qml/pages/FirstPage.qml" line="486"/>
         <source>Youtube-Dl updated.</source>
         <translation>Youtube-Dl uppdaterad.</translation>
     </message>
@@ -408,81 +437,126 @@
 <context>
     <name>OpenDialog</name>
     <message>
-        <location filename="../qml/pages/fileman/OpenDialog.qml" line="159"/>
+        <location filename="../qml/pages/fileman/OpenDialog.qml" line="21"/>
+        <location filename="../qml/pages/fileman/OpenDialog.qml" line="146"/>
+        <source>Name</source>
+        <translation>Namn</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/fileman/OpenDialog.qml" line="147"/>
+        <source>Time</source>
+        <translation>Tid</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/fileman/OpenDialog.qml" line="148"/>
+        <source>Size</source>
+        <translation>Storlek</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/fileman/OpenDialog.qml" line="149"/>
+        <source>Type</source>
+        <translation>Typ</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/fileman/OpenDialog.qml" line="186"/>
         <source>Create Folder</source>
         <translation>Skapa mapp</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/OpenDialog.qml" line="174"/>
+        <location filename="../qml/pages/fileman/OpenDialog.qml" line="201"/>
         <source>Add all files to playlist</source>
         <translation>Lägg till filer i spelningslista</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/OpenDialog.qml" line="197"/>
+        <location filename="../qml/pages/fileman/OpenDialog.qml" line="236"/>
         <source>Add to places</source>
         <translation>Lägg till i platser</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/OpenDialog.qml" line="215"/>
+        <location filename="../qml/pages/fileman/OpenDialog.qml" line="254"/>
         <source>Paste</source>
         <translation>Klistra in</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/OpenDialog.qml" line="222"/>
-        <location filename="../qml/pages/fileman/OpenDialog.qml" line="405"/>
+        <location filename="../qml/pages/fileman/OpenDialog.qml" line="261"/>
+        <location filename="../qml/pages/fileman/OpenDialog.qml" line="495"/>
         <source>Properties</source>
         <translation>Egenskaper</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/OpenDialog.qml" line="234"/>
+        <location filename="../qml/pages/fileman/OpenDialog.qml" line="273"/>
         <source>Scroll to top</source>
         <translation>Skrolla till början</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/OpenDialog.qml" line="238"/>
+        <location filename="../qml/pages/fileman/OpenDialog.qml" line="277"/>
         <source>Show Playlist</source>
         <translation>Visa spelningslista</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/OpenDialog.qml" line="253"/>
-        <location filename="../qml/pages/fileman/OpenDialog.qml" line="254"/>
-        <source>Deleting </source>
-        <translation>Tar bort </translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/fileman/OpenDialog.qml" line="271"/>
+        <location filename="../qml/pages/fileman/OpenDialog.qml" line="462"/>
         <source>added to playlist</source>
         <translation>tillagt i spelningslistan</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/OpenDialog.qml" line="380"/>
+        <location filename="../qml/pages/fileman/OpenDialog.qml" line="470"/>
         <source>Add to playlist</source>
         <translation>Lägg till i spelningslista</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/OpenDialog.qml" line="387"/>
+        <location filename="../qml/pages/fileman/OpenDialog.qml" line="477"/>
         <source>Cut</source>
         <translation>Klipp ur</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/OpenDialog.qml" line="393"/>
+        <location filename="../qml/pages/fileman/OpenDialog.qml" line="483"/>
         <source>Copy</source>
         <translation>Kopiera</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/OpenDialog.qml" line="399"/>
+        <location filename="../qml/pages/fileman/OpenDialog.qml" line="489"/>
         <source>Delete</source>
         <translation>Ta bort</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/OpenDialog.qml" line="426"/>
+        <location filename="../qml/pages/fileman/OpenDialog.qml" line="515"/>
         <source>Error pasting file </source>
         <translation>Kunde inte klistra in filen </translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/OpenDialog.qml" line="434"/>
+        <location filename="../qml/pages/fileman/OpenDialog.qml" line="523"/>
         <source>File operation succeeded</source>
         <translation>Filåtgärd slutförd</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/fileman/OpenDialog.qml" line="536"/>
+        <source>Search file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/fileman/OpenDialog.qml" line="545"/>
+        <source>Documents</source>
+        <translation type="unfinished">Dokument</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/fileman/OpenDialog.qml" line="554"/>
+        <source>Downloads</source>
+        <translation type="unfinished">Nerladdningar</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/fileman/OpenDialog.qml" line="563"/>
+        <source>Music</source>
+        <translation type="unfinished">Musik</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/fileman/OpenDialog.qml" line="572"/>
+        <source>Pictures</source>
+        <translation type="unfinished">Bilder</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/fileman/OpenDialog.qml" line="581"/>
+        <source>Videos</source>
+        <translation type="unfinished">Videor</translation>
     </message>
 </context>
 <context>
@@ -493,17 +567,17 @@
         <translation>Läs in URL</translation>
     </message>
     <message>
-        <location filename="../qml/pages/OpenURLPage.qml" line="89"/>
+        <location filename="../qml/pages/OpenURLPage.qml" line="90"/>
         <source>Type in URL here</source>
         <translation>Skriv in URL här</translation>
     </message>
     <message>
-        <location filename="../qml/pages/OpenURLPage.qml" line="90"/>
+        <location filename="../qml/pages/OpenURLPage.qml" line="91"/>
         <source>URL to media file/stream</source>
         <translation>URL till mediafil/ström</translation>
     </message>
     <message>
-        <location filename="../qml/pages/OpenURLPage.qml" line="109"/>
+        <location filename="../qml/pages/OpenURLPage.qml" line="110"/>
         <source>Add to bookmarks</source>
         <translation>Lägg till i bokmärken</translation>
     </message>
@@ -511,52 +585,52 @@
 <context>
     <name>PermissionDialog</name>
     <message>
-        <location filename="../qml/pages/fileman/helper/fmComponents/PermissionDialog.qml" line="21"/>
+        <location filename="../qml/pages/fileman/fmComponents/PermissionDialog.qml" line="21"/>
         <source>Could not change permission</source>
         <translation>Kunde inte ändra rättighet</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/helper/fmComponents/PermissionDialog.qml" line="53"/>
+        <location filename="../qml/pages/fileman/fmComponents/PermissionDialog.qml" line="53"/>
         <source>Change Permissions</source>
         <translation>Ändra rättighet</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/helper/fmComponents/PermissionDialog.qml" line="54"/>
+        <location filename="../qml/pages/fileman/fmComponents/PermissionDialog.qml" line="54"/>
         <source>Change</source>
         <translation>Ändra</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/helper/fmComponents/PermissionDialog.qml" line="60"/>
+        <location filename="../qml/pages/fileman/fmComponents/PermissionDialog.qml" line="60"/>
         <source>Change permissions for</source>
         <translation>Ändra rättighet för</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/helper/fmComponents/PermissionDialog.qml" line="81"/>
+        <location filename="../qml/pages/fileman/fmComponents/PermissionDialog.qml" line="81"/>
         <source>Read</source>
         <translation>Läs</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/helper/fmComponents/PermissionDialog.qml" line="89"/>
+        <location filename="../qml/pages/fileman/fmComponents/PermissionDialog.qml" line="89"/>
         <source>Write</source>
         <translation>Skriv</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/helper/fmComponents/PermissionDialog.qml" line="96"/>
+        <location filename="../qml/pages/fileman/fmComponents/PermissionDialog.qml" line="96"/>
         <source>Execute</source>
         <translation>Kör</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/helper/fmComponents/PermissionDialog.qml" line="117"/>
+        <location filename="../qml/pages/fileman/fmComponents/PermissionDialog.qml" line="117"/>
         <source>Owner</source>
         <translation>Ägare</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/helper/fmComponents/PermissionDialog.qml" line="155"/>
+        <location filename="../qml/pages/fileman/fmComponents/PermissionDialog.qml" line="155"/>
         <source>Group</source>
         <translation>Grupp</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/helper/fmComponents/PermissionDialog.qml" line="188"/>
+        <location filename="../qml/pages/fileman/fmComponents/PermissionDialog.qml" line="188"/>
         <source>Others</source>
         <translation>Annat</translation>
     </message>
@@ -564,72 +638,92 @@
 <context>
     <name>PlacesPage</name>
     <message>
-        <location filename="../qml/pages/fileman/helper/fmComponents/PlacesPage.qml" line="32"/>
+        <location filename="../qml/pages/fileman/fmComponents/PlacesPage.qml" line="62"/>
         <source>Device memory</source>
         <translation>Enhetsminne</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/helper/fmComponents/PlacesPage.qml" line="37"/>
+        <location filename="../qml/pages/fileman/fmComponents/PlacesPage.qml" line="67"/>
         <source>SD Card</source>
         <translation>SD-kort</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/helper/fmComponents/PlacesPage.qml" line="45"/>
+        <location filename="../qml/pages/fileman/fmComponents/PlacesPage.qml" line="75"/>
         <source>Home</source>
         <translation>Hem</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/helper/fmComponents/PlacesPage.qml" line="50"/>
+        <location filename="../qml/pages/fileman/fmComponents/PlacesPage.qml" line="34"/>
+        <location filename="../qml/pages/fileman/fmComponents/PlacesPage.qml" line="80"/>
         <source>Documents</source>
         <translation>Dokument</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/helper/fmComponents/PlacesPage.qml" line="55"/>
+        <location filename="../qml/pages/fileman/fmComponents/PlacesPage.qml" line="39"/>
+        <location filename="../qml/pages/fileman/fmComponents/PlacesPage.qml" line="85"/>
         <source>Downloads</source>
         <translation>Nerladdningar</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/helper/fmComponents/PlacesPage.qml" line="60"/>
+        <location filename="../qml/pages/fileman/fmComponents/PlacesPage.qml" line="44"/>
+        <location filename="../qml/pages/fileman/fmComponents/PlacesPage.qml" line="90"/>
         <source>Music</source>
         <translation>Musik</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/helper/fmComponents/PlacesPage.qml" line="65"/>
+        <location filename="../qml/pages/fileman/fmComponents/PlacesPage.qml" line="49"/>
+        <location filename="../qml/pages/fileman/fmComponents/PlacesPage.qml" line="95"/>
         <source>Pictures</source>
         <translation>Bilder</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/helper/fmComponents/PlacesPage.qml" line="70"/>
+        <location filename="../qml/pages/fileman/fmComponents/PlacesPage.qml" line="54"/>
+        <location filename="../qml/pages/fileman/fmComponents/PlacesPage.qml" line="100"/>
         <source>Videos</source>
         <translation>Videor</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/helper/fmComponents/PlacesPage.qml" line="104"/>
+        <location filename="../qml/pages/fileman/fmComponents/PlacesPage.qml" line="105"/>
+        <source>Android Storage</source>
+        <translation>Android-lagring</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/fileman/fmComponents/PlacesPage.qml" line="140"/>
         <source>Places</source>
         <translation>Platser</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/helper/fmComponents/PlacesPage.qml" line="118"/>
+        <location filename="../qml/pages/fileman/fmComponents/PlacesPage.qml" line="145"/>
+        <source>Search</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/fileman/fmComponents/PlacesPage.qml" line="162"/>
+        <source>Data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/fileman/fmComponents/PlacesPage.qml" line="228"/>
         <source>Devices</source>
         <translation>Enheter</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/helper/fmComponents/PlacesPage.qml" line="156"/>
+        <location filename="../qml/pages/fileman/fmComponents/PlacesPage.qml" line="266"/>
         <source>Common</source>
         <translation>Gemensamt</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/helper/fmComponents/PlacesPage.qml" line="191"/>
+        <location filename="../qml/pages/fileman/fmComponents/PlacesPage.qml" line="313"/>
         <source>Custom</source>
         <translation>Anpassat</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/helper/fmComponents/PlacesPage.qml" line="212"/>
+        <location filename="../qml/pages/fileman/fmComponents/PlacesPage.qml" line="334"/>
         <source>Deleting </source>
         <translation>Tar bort </translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/helper/fmComponents/PlacesPage.qml" line="257"/>
+        <location filename="../qml/pages/fileman/fmComponents/PlacesPage.qml" line="379"/>
         <source>Rename</source>
         <translation>Byt namn</translation>
     </message>
@@ -690,19 +784,19 @@
 <context>
     <name>RenameDialog</name>
     <message>
-        <location filename="../qml/pages/fileman/helper/fmComponents/RenameDialog.qml" line="37"/>
-        <location filename="../qml/pages/fileman/helper/fmComponents/RenameDialog.qml" line="38"/>
+        <location filename="../qml/pages/fileman/fmComponents/RenameDialog.qml" line="37"/>
+        <location filename="../qml/pages/fileman/fmComponents/RenameDialog.qml" line="38"/>
         <source>Rename</source>
         <translation>Byt namn</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/helper/fmComponents/RenameDialog.qml" line="44"/>
+        <location filename="../qml/pages/fileman/fmComponents/RenameDialog.qml" line="44"/>
         <source>Give a new name for</source>
         <translation>Ange ett nytt namn för</translation>
     </message>
     <message>
-        <location filename="../qml/pages/fileman/helper/fmComponents/RenameDialog.qml" line="57"/>
-        <location filename="../qml/pages/fileman/helper/fmComponents/RenameDialog.qml" line="58"/>
+        <location filename="../qml/pages/fileman/fmComponents/RenameDialog.qml" line="57"/>
+        <location filename="../qml/pages/fileman/fmComponents/RenameDialog.qml" line="58"/>
         <source>New name</source>
         <translation>Nytt namn</translation>
     </message>
@@ -710,32 +804,37 @@
 <context>
     <name>SecondPage</name>
     <message>
-        <location filename="../qml/pages/SecondPage.qml" line="94"/>
+        <location filename="../qml/pages/SecondPage.qml" line="96"/>
         <source>No Search History</source>
         <translation>Ingen sökhistorik</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SecondPage.qml" line="123"/>
+        <location filename="../qml/pages/SecondPage.qml" line="129"/>
+        <source>Reload</source>
+        <translation>Läs in igen</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SecondPage.qml" line="133"/>
         <source>History</source>
         <translation>Historik</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SecondPage.qml" line="128"/>
+        <location filename="../qml/pages/SecondPage.qml" line="138"/>
         <source>Go Back</source>
         <translation>Gå tillbaka</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SecondPage.qml" line="157"/>
+        <location filename="../qml/pages/SecondPage.qml" line="167"/>
         <source>Search..</source>
         <translation>Sök...</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SecondPage.qml" line="350"/>
+        <location filename="../qml/pages/SecondPage.qml" line="387"/>
         <source>Load with ytdl</source>
         <translation>Läs in med ytdl</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SecondPage.qml" line="364"/>
+        <location filename="../qml/pages/SecondPage.qml" line="404"/>
         <source>Load</source>
         <translation>Läs in</translation>
     </message>
@@ -743,128 +842,133 @@
 <context>
     <name>SettingsPage</name>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="43"/>
-        <location filename="../qml/pages/SettingsPage.qml" line="464"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="44"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="473"/>
         <source>Clear History</source>
         <translation>Rensa historiken</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="96"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="98"/>
         <source>Save Settings</source>
         <translation>Spara inställningar</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="117"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="119"/>
         <source>Load Defaults</source>
         <translation>Läs in standard</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="242"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="244"/>
         <source>General</source>
         <translation>Allmänt</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="286"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="288"/>
         <source>Load Subtitles</source>
         <translation>Läs in undertexter</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="293"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="295"/>
         <source>Bold Subtitle Font</source>
         <translation>Fet undertextstil</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="301"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="303"/>
         <source>Subtitle Font Size</source>
         <translation>Undertextstorlek</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="312"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="314"/>
         <source>Small</source>
         <translation>Liten</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="313"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="315"/>
         <source>Medium</source>
         <translation>Medium</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="314"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="316"/>
         <source>Large</source>
         <translation>Stor</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="315"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="317"/>
         <source>Extra Large</source>
         <translation>Extra stor</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="340"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="342"/>
         <source>Subtitle Color</source>
         <translation>Undertextfärg</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="357"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="359"/>
         <source>Use solid subtitletext background</source>
         <translation>Använd solid undertextbakgrund</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="373"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="367"/>
+        <source>Show mini player when swiping back from main player</source>
+        <translation>Visa minispelare vid tillbakasvep från huvudspelare</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SettingsPage.qml" line="382"/>
         <source>Browse File Dialog</source>
         <translation>Bläddra efter filer</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="384"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="393"/>
         <source>Filemanager</source>
         <translation>Filhanterare</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="385"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="394"/>
         <source>Videogallery</source>
         <translation>Videogalleri</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="397"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="406"/>
         <source>Default Youtube Quality</source>
         <translation>Standard Youtube-kvalitet</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="425"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="434"/>
         <source>Use live preview when minimized</source>
         <translation>Använd direkt förhandsgranskning vid minimerad</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="432"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="441"/>
         <source>Music Only Indicator</source>
         <translation>Indikator för endast musik</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="443"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="452"/>
         <source>Default (Sound Icon)</source>
         <translation>Standard (Ljudikon)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="444"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="453"/>
         <source>MC (animated Music Cassette)</source>
         <translation>MC (Animerad musikkassett)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="445"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="454"/>
         <source>EQ (animated Equalizer)</source>
         <translation>EQ (Animerad equalizer)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="457"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="466"/>
         <source>Clear webview data on exit</source>
         <translation>Rensa ut webbvydata vid avslut</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="477"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="486"/>
         <source>Try to load all youtube videos with ytdl</source>
-        <translation type="unfinished"></translation>
+        <translation>Försöka läsa in alla videor med ytdl</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="484"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="493"/>
         <source>Update Youtube-Dl</source>
         <translation>Uppdatera Youtube Dl</translation>
     </message>
@@ -872,7 +976,7 @@
 <context>
     <name>harbour-videoPlayer</name>
     <message>
-        <location filename="../qml/harbour-videoPlayer.qml" line="432"/>
+        <location filename="../qml/harbour-videoPlayer.qml" line="441"/>
         <source>Dismiss</source>
         <translation>Avfärda</translation>
     </message>
@@ -880,74 +984,86 @@
 <context>
     <name>videoPlayer</name>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="229"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="249"/>
         <source>Load with ytdl</source>
         <translation>Läs in med ytdl</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="250"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="273"/>
         <source>Download Youtube Video</source>
-        <translation type="unfinished"></translation>
+        <translation>Ladda ner Youtube-video</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="268"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="292"/>
         <source>Download</source>
         <translation>Ladda ner</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="284"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="308"/>
         <source>Add to bookmarks</source>
         <translation>Lägg till i bokmärken</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="300"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="324"/>
         <source>Load Subtitle</source>
-        <translation type="unfinished"></translation>
+        <translation>Läs in undertext</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="304"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="328"/>
         <source>Play from last known position</source>
-        <translation type="unfinished"></translation>
+        <translation>Spela upp från senaste kända position</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="471"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="497"/>
         <source>Dismiss</source>
         <translation>Avfärda</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="774"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="844"/>
         <source>
 The video cannot be played due to a problem allocating resources.
                         On Youtube Videos please make sure to be logged in. Some videos might be geoblocked or require you to be logged into youtube.</source>
-        <translation type="unfinished"></translation>
+        <translation>
+Det går inte att spela upp videon på grund av problem med att resursallokering.
+                        Se till att vara inloggad på Youtube-videor. Vissa videor kan vara geoblockerade eller kräva att du är inloggad på YouTube.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="776"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="846"/>
         <source>
 The audio and or video format is not supported.</source>
-        <translation type="unfinished">
-Ljud- eller videoformatet stöds inte.</translation>
+        <translation>
+Ljud- och/eller videoformatet stöds inte.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="777"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="847"/>
         <source>
 The video cannot be played due to network issues.</source>
-        <translation type="unfinished">
+        <translation>
 Videon kan inte spelas upp, på grund av nätverksproblem.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="778"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="848"/>
         <source>
 The video cannot be played due to insufficient permissions.</source>
-        <translation type="unfinished">
+        <translation>
 Videon kan inte spelas upp, på grund av otillräckliga rättigheter.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="779"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="849"/>
         <source>
 The video cannot be played because the media service could not be instantiated.</source>
-        <translation type="unfinished">
+        <translation>
 Videon kan inte spelas upp, eftersom medietjänsten inte kunde startas.</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/videoPlayer.qml" line="900"/>
+        <source>Zoomed to fit screen</source>
+        <translation>Zoomad för att passa skärmen</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/videoPlayer.qml" line="900"/>
+        <source>Original</source>
+        <translation>Original</translation>
     </message>
 </context>
 <context>

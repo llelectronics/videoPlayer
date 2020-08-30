@@ -32,28 +32,29 @@ function getYoutubeVid(url) {
 }
 
 function getYoutubeTitle(url) {
-    var youtube_id;
-    youtube_id = getYtID(url);
-    var xhr = new XMLHttpRequest();
-    xhr.open("GET","https://www.googleapis.com/youtube/v3/videos?id=" + youtube_id + "&key="+ ytApiKey + "&fields=items(snippet(title))&part=snippet",true);
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState === 4) {
-            if (xhr.status === 200) {
-                var jsonObject = eval('(' + xhr.responseText + ')');
-                //console.log("JSON Response: " + jsonObject.data.items[0].snippet);
-                console.log("Youtube Title: " + jsonObject.items[0].snippet.title);
-                firstPage.streamTitle = jsonObject.items[0].snippet.title;
-                //                for ( var index in jsonObject.data )
-                //                {
-                //                    console.log("Youtube Title: " + jsonObject.data.title);
-                //                    firstPage.streamTitle = jsonObject.data.title;
-                //                }
-            } else {
-                console.log("responseText", xhr.responseText);
-            }
-        }
-    }
-    xhr.send();
+//    var youtube_id;
+//    youtube_id = getYtID(url);
+//    var xhr = new XMLHttpRequest();
+//    xhr.open("GET","https://www.googleapis.com/youtube/v3/videos?id=" + youtube_id + "&key="+ ytApiKey + "&fields=items(snippet(title))&part=snippet",true);
+//    xhr.onreadystatechange = function() {
+//        if (xhr.readyState === 4) {
+//            if (xhr.status === 200) {
+//                var jsonObject = eval('(' + xhr.responseText + ')');
+//                //console.log("JSON Response: " + jsonObject.data.items[0].snippet);
+//                console.log("Youtube Title: " + jsonObject.items[0].snippet.title);
+//                firstPage.streamTitle = jsonObject.items[0].snippet.title;
+//                //                for ( var index in jsonObject.data )
+//                //                {
+//                //                    console.log("Youtube Title: " + jsonObject.data.title);
+//                //                    firstPage.streamTitle = jsonObject.data.title;
+//                //                }
+//            } else {
+//                firstPage.streamTitle = url
+//                console.log("responseText", xhr.responseText);
+//            }
+//        }
+//    }
+//    xhr.send();
 }
 
 
@@ -69,21 +70,35 @@ function getYoutubeStream(youtube_id) {
 
             var videoInfoSplit = videoInfo.split("&");
             var streams;
+            var response;
+            var streamData;
             var paramPair;
+            var videoDetailsData;
+            var videoTitle;
 
             for (var i = 0; i < videoInfo.length; i++) {
                 try {
                     paramPair = videoInfoSplit[i].split("=");
+                    //console.log(paramPair)
                 } catch(e) {
                     msg = "[yt.js]: " + e
                     //console.debug(msg)
                 }
-                if (paramPair[0] === "url_encoded_fmt_stream_map") {
-                    streams = decodeURIComponent(paramPair[1]);
+                if (paramPair[0] === "player_response") {
+                    //console.log("player response found: " + paramPair[1]);
+                    response = JSON.parse(decodeURIComponent(paramPair[1]));
+                    //console.log("Response:" + response);
+                    streamData = response["streamingData"];
+                    //console.log("StreamData:" + JSON.stringify(streamData));
+                    streams = streamData["formats"];
+                    //console.log("Formats: " + JSON.stringify(streams));
+
+                    //streams = response.stream //decodeURIComponent(paramPair[1]);
+                    videoDetailsData = response["videoDetails"];
+                    videoTitle = videoDetailsData["title"];
                     break;
                 }
             }
-
 
             if (!streams) {
                 var msg = "YouTube videoInfo parsing: url_encoded_fmt_stream_map not found";
@@ -91,35 +106,14 @@ function getYoutubeStream(youtube_id) {
                 //return;
             }
             try {
-                var streamsSplit = streams.split(",");
-                //console.debug(" --- STREAMSPLIT : " + streamsSplit[1] + " , " + streamsSplit[2] + " , " + streamsSplit[3] + " , " + streamsSplit[4]);
-            } catch(e) {
-                msg = "[yt.js]: " + e
-                //                console.debug(msg)
-            }
-            try {
-                var secondSplit;
                 var found = false;
-                for (var i = 0; i < streamsSplit.length; i++) {
-                    secondSplit = streamsSplit[i].split("&");
-//                    console.debug(" --- STREAMSPLIT 2 streamsSplit.length : " + streamsSplit.length)
-//                    console.debug(" --- STREAMSPLIT 2 : " + i);
-//                    console.debug(" --- STREAMSPLIT 2 --- : " + secondSplit[0] + " , " + secondSplit[1]+ " , " + secondSplit[2]+ " , " + secondSplit[3]);
-//                    }
-
-                    var url="", sig="", itag="";
+                for (var i = 0; i < streams.length; i++) {
+                    var streamObject = streams[i];
+                    //console.log("Get streamObject " + i + " : " + JSON.stringify(streamObject))
+                    var url=decodeURIComponent(streamObject["url"]), sig="", itag=streamObject["itag"], sp="";
+                    if ("cipher" in streamObject) sig=streamObject.cipher
                     var resolutionFormat;
-                    for (var j = 0; j < secondSplit.length; j++) {
-                        paramPair = secondSplit[j].split("=");
-                        //                    console.debug(" --- STREAMS PARAM PAIR : " + i);
-                        //                    console.debug(" --- STREAMS PARAM PAIR --- : " + paramPair[0] + " = " + paramPair[1]);
-                        if (paramPair[0] === "url") {
-                            url = decodeURIComponent(paramPair[1]);
-                        } else if (paramPair[0] === "sig") {
-                            sig = paramPair[1]; // do not decode, as we would have to encode it later (although decoding/encoding has currently no effect for the signature)
-                        } else if (paramPair[0] === "itag") {
-                            itag = paramPair[1];
-                        }
+
                         //***********************************************//
                         //     List of video formats as of 2012.12.10    //
                         // fmt=17   144p        vq=?           ?    vorbis   //
@@ -138,39 +132,59 @@ function getYoutubeStream(youtube_id) {
                         //***********************************************//
 
                         // Try to get 720p HD video stream first
-                        if (itag === "22" && typeof url !== 'undefined' && url != "") { // 5 parameters per video; itag 22 is "MP4 720p", see http://userscripts.org/scripts/review/25105
+                        if (itag === 22) { // 5 parameters per video; itag 22 is "MP4 720p", see http://userscripts.org/scripts/review/25105
                             resolutionFormat = "MP4 720p"
-                            firstPage.url720p = url += "&signature=" + sig;
-                            url += "&signature=" + sig;
+                            if (!!sig) {
+                                url += "&signature=" + sig;
+                            }
+                            else if (!!sp) {
+                                url += "&sp=" + sp;
+                            }
+                            firstPage.url720p = url
                             found = true;
-                            break;
+                            continue;
                         }
                         // If above fails try to get 480p video stream
                         // TODO: This is not working. Need to check it in the future
-                        else if (itag === "35" && typeof url !== 'undefined' && url != "") { // 12 parameters per video; itag 135 is "MP4 480p", see http://userscripts.org/scripts/review/25105
+                        else if (itag === 35) { // 12 parameters per video; itag 135 is "MP4 480p", see http://userscripts.org/scripts/review/25105
                             resolutionFormat = "MP4 480p"
-                            firstPage.url480p = url += "&signature=" + sig;
-                            if (found == false) url += "&signature=" + sig;
+                            if (!!sig) {
+                                url += "&signature=" + sig;
+                            }
+                            else if (!!sp) {
+                                url += "&sp=" + sp;
+                            }
+                            firstPage.url480p = url
                             found = true;
-                            break;
+                            continue;
                         }
                         // If above fails try to get 360p video stream
-                        else if (itag === "18" && typeof url !== 'undefined' && url != "") { // 5 parameters per video; itag 18 is "MP4 360p", see http://userscripts.org/scripts/review/25105
+                        else if (itag === 18) { // 5 parameters per video; itag 18 is "MP4 360p", see http://userscripts.org/scripts/review/25105
                             resolutionFormat = "MP4 360p"
-                            firstPage.url360p = url += "&signature=" + sig;
-                            if (found == false) url += "&signature=" + sig;
+                            if (!!sig) {
+                                url += "&signature=" + sig;
+                            }
+                            else if (!!sp) {
+                                url += "&sp=" + sp;
+                            }
+                            firstPage.url360p = url
                             found = true;
-                            break;
+                            continue;
                         }
                         // If above fails try to get 240p video stream
-                        else if (itag === "36" && typeof url !== 'undefined' && url != "") { // 5 parameters per video; itag 36 is "3GPP 240p", see http://userscripts.org/scripts/review/25105
+                        else if (itag === 36) { // 5 parameters per video; itag 36 is "3GPP 240p", see http://userscripts.org/scripts/review/25105
                             resolutionFormat = "FLV 240p"
-                            firstPage.url240p = url += "&signature=" + sig;
-                            if (found == false) url += "&signature=" + sig;
+                            if (!!sig) {
+                                url += "&signature=" + sig;
+                            }
+                            else if (!!sp) {
+                                url += "&sp=" + sp;
+                            }
+                            firstPage.url240p = url
                             found = true;
-                            break;
+                            continue;
                         }
-                    }
+
                 }
 
                 if (found) {
@@ -200,6 +214,10 @@ function getYoutubeStream(youtube_id) {
                     }
 
                     //if (firstPage.youtubeDirect) firstPage.streamUrl = url
+                    if (videoTitle) {
+                        var vT = videoTitle.replace(/\+/g, " ");
+                        firstPage.streamTitle = vT;
+                    }
                     return url;
 
                 } else {
@@ -219,22 +237,22 @@ function getYoutubeStream(youtube_id) {
 
 
     if (ytfailCount == 0) {
-        doc.open("GET", "http://www.youtube.com/get_video_info?video_id=" + youtube_id);
+        doc.open("GET", "https://www.youtube.com/get_video_info?video_id=" + youtube_id);
         doc.send();
     }
     else if (ytfailCount == 1) {
         doc.abort()
-        doc.open("GET", "http://www.youtube.com/get_video_info?video_id=" + youtube_id + "&el=embedded");
+        doc.open("GET", "https://www.youtube.com/get_video_info?video_id=" + youtube_id + "&el=embedded");
         doc.send();
     }
     else if (ytfailCount == 2) {
         doc.abort()
-        doc.open("GET", "http://www.youtube.com/get_video_info?video_id=" + youtube_id + "&el=detailpage");
+        doc.open("GET", "https://www.youtube.com/get_video_info?video_id=" + youtube_id + "&el=detailpage");
         doc.send();
     }
     else if (ytfailCount == 3) {
         doc.abort()
-        doc.open("GET", "http://www.youtube.com/get_video_info?video_id=" + youtube_id + "&el=vevo");
+        doc.open("GET", "https://www.youtube.com/get_video_info?video_id=" + youtube_id + "&el=vevo");
         doc.send();
     }
     else {

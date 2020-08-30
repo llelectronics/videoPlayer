@@ -8,6 +8,7 @@
 #include <QDebug>
 #include <QtMultimedia/QMediaObject>
 #include <QtMultimedia/QMediaContent>
+#include <QDir>
 
 class Playlist : public QObject
 {
@@ -34,6 +35,7 @@ private:
     QMediaPlaylist *playlist;
     QString mCurrent;
     QString plsEncode();
+    void createPlaylistFolderIfNotExists();
 
 Q_SIGNALS:
     void pllistChanged();

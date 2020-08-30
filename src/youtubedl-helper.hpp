@@ -13,6 +13,7 @@
 
 class ythelper : public QObject
 {   Q_OBJECT
+    Q_PROPERTY(int searchResultNumber READ searchResultNumber WRITE setSearchResultNumber)
 public:
     QString reqUrl;
     QString streamUrl;
@@ -24,6 +25,8 @@ public:
     QProcess updateBinary;
     QString data_dir = QStandardPaths::writableLocation(QStandardPaths::DataLocation);
     QString music_dir = QStandardPaths::writableLocation(QStandardPaths::MusicLocation);
+    int searchResultNumber() { return m_searchResultNumber; }
+    void setSearchResultNumber(int nr) { m_searchResultNumber = nr; }
 //    bool ffmpegAvailable = false;
 private:
     QString _oggAudio;
@@ -34,6 +37,8 @@ private:
     QProcess oggProcess;
     QProcess opusProcess;
     QProcess fullHdProcess;
+    QProcess searchProcess;
+    int m_searchResultNumber = 11;
 signals:
     void streamUrlChanged(QString changedUrl);
     void sTitleChanged(QString sTitle);
@@ -43,6 +48,7 @@ signals:
     void oggAudioChanged();
     void opusAudioChanged();
     void fullHdChanged();
+    void ytSearchResultsChanged(QString ytSearchResultsJson);
 public slots:
     void setUrl(QString url)
     {
@@ -82,7 +88,16 @@ public slots:
         ytdlBin.setFileName(data_dir + "/youtube-dl");
         if (!ytdlBin.exists()) {
             ytdlBin.setFileName("/usr/share/harbour-videoPlayer/qml/pages/helper/youtube-dl");
-            ytdlBin.copy(data_dir + "/youtube-dl");
+            if (ytdlBin.exists()) {
+                ytdlBin.setFileName("/usr/share/harbour-videoPlayer/qml/pages/helper/youtube-dl");
+                ytdlBin.copy(data_dir + "/youtube-dl");
+            }
+            else {
+                QProcess *ytdlBinDownload;
+                ytdlBinDownload->start("curl -L https://yt-dl.org/downloads/latest/youtube-dl -o " + data_dir + "/youtube-dl");
+                ytdlBinDownload->waitForFinished();
+            }
+            ytdlBin.setFileName(data_dir + "/youtube-dl");
         }
         ytdlBin.setPermissions(QFileDevice::ExeUser|QFileDevice::ExeGroup|QFileDevice::ExeOther|QFileDevice::ReadUser|QFileDevice::ReadGroup|QFileDevice::ReadOther|QFileDevice::WriteUser|QFileDevice::WriteGroup|QFileDevice::WriteOther);
 
@@ -159,6 +174,13 @@ public slots:
         parameter += "-f 251";
         opusProcess.start(data_dir + "/youtube-dl " + parameter + " -g " + reqUrl);
         connect(&opusProcess, SIGNAL(finished(int)), this, SLOT(getOpusUrlOutput(int)));
+    }
+    void getYtSearchResults(QString searchTerm) {
+        checkAndInstall();
+        parameter = " ";
+        parameter += "-J \"ytsearch" + QString::number(m_searchResultNumber) + ":" + searchTerm.toUtf8() + "\"";
+        searchProcess.start(data_dir + "/youtube-dl " + parameter);
+        connect(&searchProcess, SIGNAL(finished(int)), this, SLOT(getYtSearchResultsOutput(int)));
     }
     void getFullHdUrlOutput(int exitCode)
     {
@@ -237,6 +259,16 @@ public slots:
         }
         else {
             printError(&updateBinary);
+        }
+    }
+    void getYtSearchResultsOutput(int exitCode)
+    {
+        if (exitCode == 0) {
+            QByteArray out = searchProcess.readAllStandardOutput();
+            emit ytSearchResultsChanged(QString(out));
+        }
+        else {
+            printError(&searchProcess);
         }
     }
 };

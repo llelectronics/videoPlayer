@@ -56,6 +56,9 @@ HEADERS += \
     src/playlist.h
 
 DISTFILES += \
+    qml/pages/HistoryPage.qml \
+    qml/pages/YTSearchResultsPage.qml \
+    qml/pages/helper/Jupii.qml \
     qml/pages/helper/SubtitlesItem.qml \
     qml/pages/PlaylistPage.qml \
     qml/pages/InfoBanner.qml \
@@ -68,19 +71,25 @@ DISTFILES += \
     qml/pages/fileman/helper/fmComponents/PermissionDialog.qml \
     qml/pages/fileman/helper/fmComponents/PlacesPage.qml \
     qml/pages/fileman/helper/fmComponents/RenameDialog.qml \
+    qml/pages/helper/YTSearchResultItem.qml \
     translations/harbour-videoPlayer-de.ts \
     translations/harbour-videoPlayer-es.ts \
+    translations/harbour-videoPlayer-pl.ts \
+    translations/harbour-videoPlayer-ru.ts \
     translations/harbour-videoPlayer-sv.ts \
     translations/harbour-videoPlayer-zh_cn.ts \
     translations/harbour-videoPlayer-nl.ts \
     qml/pages/helper/Mplayer.qml \
     qml/pages/helper/SwipeArea.qml \
     qml/pages/helper/MinPlayerPanel.qml \
-    qml/pages/helper/MprisConnector.qml
+    qml/pages/helper/MprisConnector.qml \
+    translations/harbour-videoPlayer.ts
 
 # to disable building translations every time, comment out the
 # following CONFIG line
-CONFIG += sailfishapp_i18n
+#CONFIG += sailfishapp_i18n
+
+SAILFISHAPP_ICONS = 86x86 108x108 128x128 172x172
 
 TRANSLATIONS += translations/harbour-videoPlayer-de.ts \
                 translations/harbour-videoPlayer-es.ts \
