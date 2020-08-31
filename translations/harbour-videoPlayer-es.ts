@@ -267,27 +267,27 @@
         <location filename="../qml/pages/fileman/fmComponents/FileItemDelegate.qml" line="16"/>
         <location filename="../qml/pages/fileman/fmComponents/FileItemDelegate.qml" line="18"/>
         <source>Deleting </source>
-        <translation type="unfinished">Borrando </translation>
+        <translation>Borrando </translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/fmComponents/FileItemDelegate.qml" line="136"/>
         <source>Cut</source>
-        <translation type="unfinished">Cortar</translation>
+        <translation>Cortar</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/fmComponents/FileItemDelegate.qml" line="142"/>
         <source>Copy</source>
-        <translation type="unfinished">Copiar</translation>
+        <translation>Copiar</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/fmComponents/FileItemDelegate.qml" line="148"/>
         <source>Delete</source>
-        <translation type="unfinished">Borrar</translation>
+        <translation>Borrar</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/fmComponents/FileItemDelegate.qml" line="154"/>
         <source>Properties</source>
-        <translation type="unfinished">Propiedades</translation>
+        <translation>Propiedades</translation>
     </message>
 </context>
 <context>
@@ -431,7 +431,7 @@
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="486"/>
         <source>Youtube-Dl updated.</source>
-        <translation>Youtube-Dl actualizada.</translation>
+        <translation>Youtube-Dl actualizado.</translation>
     </message>
 </context>
 <context>
@@ -440,22 +440,22 @@
         <location filename="../qml/pages/fileman/OpenDialog.qml" line="21"/>
         <location filename="../qml/pages/fileman/OpenDialog.qml" line="146"/>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nombre</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/OpenDialog.qml" line="147"/>
         <source>Time</source>
-        <translation type="unfinished"></translation>
+        <translation>Hora</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/OpenDialog.qml" line="148"/>
         <source>Size</source>
-        <translation type="unfinished">Tamaño</translation>
+        <translation>Tamaño</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/OpenDialog.qml" line="149"/>
         <source>Type</source>
-        <translation type="unfinished">Tipo</translation>
+        <translation>Tipo</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/OpenDialog.qml" line="186"/>
@@ -531,32 +531,32 @@
     <message>
         <location filename="../qml/pages/fileman/OpenDialog.qml" line="536"/>
         <source>Search file</source>
-        <translation type="unfinished"></translation>
+        <translation>Buscar archivo</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/OpenDialog.qml" line="545"/>
         <source>Documents</source>
-        <translation type="unfinished">Documentos</translation>
+        <translation>Documentos</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/OpenDialog.qml" line="554"/>
         <source>Downloads</source>
-        <translation type="unfinished">Descargas</translation>
+        <translation>Descargas</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/OpenDialog.qml" line="563"/>
         <source>Music</source>
-        <translation type="unfinished">Música</translation>
+        <translation>Música</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/OpenDialog.qml" line="572"/>
         <source>Pictures</source>
-        <translation type="unfinished">Fotos</translation>
+        <translation>Imágenes</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/OpenDialog.qml" line="581"/>
         <source>Videos</source>
-        <translation type="unfinished">Vídeos</translation>
+        <translation>Vídeos</translation>
     </message>
 </context>
 <context>
@@ -650,7 +650,7 @@
     <message>
         <location filename="../qml/pages/fileman/fmComponents/PlacesPage.qml" line="75"/>
         <source>Home</source>
-        <translation>Home</translation>
+        <translation>Carpeta de usuario</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/fmComponents/PlacesPage.qml" line="34"/>
@@ -674,7 +674,7 @@
         <location filename="../qml/pages/fileman/fmComponents/PlacesPage.qml" line="49"/>
         <location filename="../qml/pages/fileman/fmComponents/PlacesPage.qml" line="95"/>
         <source>Pictures</source>
-        <translation>Fotos</translation>
+        <translation>Imágenes</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/fmComponents/PlacesPage.qml" line="54"/>
@@ -685,7 +685,7 @@
     <message>
         <location filename="../qml/pages/fileman/fmComponents/PlacesPage.qml" line="105"/>
         <source>Android Storage</source>
-        <translation type="unfinished"></translation>
+        <translation>Almacenamiento de Android</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/fmComponents/PlacesPage.qml" line="140"/>
@@ -695,12 +695,12 @@
     <message>
         <location filename="../qml/pages/fileman/fmComponents/PlacesPage.qml" line="145"/>
         <source>Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Buscar</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/fmComponents/PlacesPage.qml" line="162"/>
         <source>Data</source>
-        <translation type="unfinished"></translation>
+        <translation>Datos</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/fmComponents/PlacesPage.qml" line="228"/>
@@ -811,7 +811,7 @@
     <message>
         <location filename="../qml/pages/SecondPage.qml" line="129"/>
         <source>Reload</source>
-        <translation type="unfinished"></translation>
+        <translation>Volver a cargar</translation>
     </message>
     <message>
         <location filename="../qml/pages/SecondPage.qml" line="133"/>
@@ -885,7 +885,7 @@
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="315"/>
         <source>Medium</source>
-        <translation>Medio</translation>
+        <translation>Mediano</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="316"/>
@@ -910,7 +910,7 @@
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="367"/>
         <source>Show mini player when swiping back from main player</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar mini reproductor al volver  atrás desde el reproductor principal</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="382"/>
@@ -1058,12 +1058,12 @@ No se puede reproducir vídeo porque no se pudo instanciar el servicio multimedi
     <message>
         <location filename="../qml/pages/videoPlayer.qml" line="900"/>
         <source>Zoomed to fit screen</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajustado a la pantalla</translation>
     </message>
     <message>
         <location filename="../qml/pages/videoPlayer.qml" line="900"/>
         <source>Original</source>
-        <translation type="unfinished"></translation>
+        <translation>Original</translation>
     </message>
 </context>
 <context>
