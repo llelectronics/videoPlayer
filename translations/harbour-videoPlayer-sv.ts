@@ -531,32 +531,32 @@
     <message>
         <location filename="../qml/pages/fileman/OpenDialog.qml" line="536"/>
         <source>Search file</source>
-        <translation type="unfinished"></translation>
+        <translation>Sök fil</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/OpenDialog.qml" line="545"/>
         <source>Documents</source>
-        <translation type="unfinished">Dokument</translation>
+        <translation>Dokument</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/OpenDialog.qml" line="554"/>
         <source>Downloads</source>
-        <translation type="unfinished">Nerladdningar</translation>
+        <translation>Nerladdningar</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/OpenDialog.qml" line="563"/>
         <source>Music</source>
-        <translation type="unfinished">Musik</translation>
+        <translation>Musik</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/OpenDialog.qml" line="572"/>
         <source>Pictures</source>
-        <translation type="unfinished">Bilder</translation>
+        <translation>Bilder</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/OpenDialog.qml" line="581"/>
         <source>Videos</source>
-        <translation type="unfinished">Videor</translation>
+        <translation>Videor</translation>
     </message>
 </context>
 <context>
@@ -695,12 +695,12 @@
     <message>
         <location filename="../qml/pages/fileman/fmComponents/PlacesPage.qml" line="145"/>
         <source>Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Sök</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/fmComponents/PlacesPage.qml" line="162"/>
         <source>Data</source>
-        <translation type="unfinished"></translation>
+        <translation>Data</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/fmComponents/PlacesPage.qml" line="228"/>
