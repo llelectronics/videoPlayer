@@ -6,12 +6,12 @@
     <message>
         <location filename="../qml/pages/AboutPage.qml" line="33"/>
         <source>License: BSD (3-clause)</source>
-        <translation type="unfinished"></translation>
+        <translation>Licencia: BSD (3 cláusulas)</translation>
     </message>
     <message>
         <location filename="../qml/pages/AboutPage.qml" line="52"/>
         <source>Created by: llelectronics</source>
-        <translation type="unfinished"></translation>
+        <translation>Creado por: llelectronics</translation>
     </message>
     <message>
         <location filename="../qml/pages/AboutPage.qml" line="89"/>
@@ -388,7 +388,7 @@
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="370"/>
         <source>No videos</source>
-        <translation type="unfinished"></translation>
+        <translation>No hay vídeos</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="408"/>
@@ -447,12 +447,12 @@
     <message>
         <location filename="../qml/pages/HistoryPage.qml" line="20"/>
         <source>History</source>
-        <translation type="unfinished">Historial</translation>
+        <translation>Historial</translation>
     </message>
     <message>
         <location filename="../qml/pages/HistoryPage.qml" line="40"/>
         <source>No History</source>
-        <translation type="unfinished">No hay historial</translation>
+        <translation>No hay historial</translation>
     </message>
 </context>
 <context>
@@ -999,42 +999,42 @@
     <message>
         <location filename="../qml/pages/YTSearchResultsPage.qml" line="58"/>
         <source>Show Website</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar web</translation>
     </message>
     <message>
         <location filename="../qml/pages/YTSearchResultsPage.qml" line="66"/>
         <source>Load more</source>
-        <translation type="unfinished"></translation>
+        <translation>Cargar más</translation>
     </message>
     <message>
         <location filename="../qml/pages/YTSearchResultsPage.qml" line="84"/>
         <source>Search..</source>
-        <translation type="unfinished">Buscar..</translation>
+        <translation>Buscar..</translation>
     </message>
     <message>
         <location filename="../qml/pages/YTSearchResultsPage.qml" line="116"/>
         <source>Recent Searches</source>
-        <translation type="unfinished"></translation>
+        <translation>Búsquedas recientes</translation>
     </message>
     <message>
         <location filename="../qml/pages/YTSearchResultsPage.qml" line="154"/>
         <source>added to playlist</source>
-        <translation type="unfinished">añadido a la lista</translation>
+        <translation>añadido a la lista</translation>
     </message>
     <message>
         <location filename="../qml/pages/YTSearchResultsPage.qml" line="172"/>
         <source>Add to playlist</source>
-        <translation type="unfinished">Añadir a lista de reproducción</translation>
+        <translation>Añadir a lista de reproducción</translation>
     </message>
     <message>
         <location filename="../qml/pages/YTSearchResultsPage.qml" line="178"/>
         <source>Download</source>
-        <translation type="unfinished">Descargar</translation>
+        <translation>Descargar</translation>
     </message>
     <message>
         <location filename="../qml/pages/YTSearchResultsPage.qml" line="222"/>
         <source>No Search History</source>
-        <translation type="unfinished">No hay historial de búsqueda</translation>
+        <translation>No hay historial de búsqueda</translation>
     </message>
 </context>
 <context>
@@ -1075,7 +1075,7 @@
     <message>
         <location filename="../qml/pages/videoPlayer.qml" line="328"/>
         <source>Playlist</source>
-        <translation type="unfinished"></translation>
+        <translation>Lista de reproducción</translation>
     </message>
     <message>
         <location filename="../qml/pages/videoPlayer.qml" line="332"/>
