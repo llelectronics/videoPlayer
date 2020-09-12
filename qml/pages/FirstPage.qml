@@ -367,7 +367,7 @@ Page {
             }
 
             ViewPlaceholder {
-                text: qsTrId("No videos")
+                text: qsTr("No videos")
                 enabled: videosModel.count === 0
             }
 
