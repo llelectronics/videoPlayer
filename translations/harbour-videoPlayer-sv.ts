@@ -4,7 +4,17 @@
 <context>
     <name>AboutPage</name>
     <message>
-        <location filename="../qml/pages/AboutPage.qml" line="90"/>
+        <location filename="../qml/pages/AboutPage.qml" line="33"/>
+        <source>License: BSD (3-clause)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/AboutPage.qml" line="52"/>
+        <source>Created by: llelectronics</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/AboutPage.qml" line="89"/>
         <source>A simple video player based on GStreamer.</source>
         <translation>En enkel videospelare, baserad på GStreamer.</translation>
     </message>
@@ -356,82 +366,93 @@
 <context>
     <name>FirstPage</name>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="211"/>
+        <location filename="../qml/pages/FirstPage.qml" line="216"/>
         <source>Open Video</source>
         <extracomment>For choosing video to open from the device</extracomment>
         <translation>Öppna video</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="355"/>
         <source>No History</source>
-        <translation>Ingen historik</translation>
+        <translation type="vanished">Ingen historik</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="250"/>
-        <location filename="../qml/pages/FirstPage.qml" line="403"/>
+        <location filename="../qml/pages/FirstPage.qml" line="323"/>
         <source>History</source>
         <translation>Historik</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="256"/>
+        <location filename="../qml/pages/FirstPage.qml" line="327"/>
         <source>Bookmarks</source>
         <translation>Bokmärken</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="262"/>
+        <location filename="../qml/pages/FirstPage.qml" line="370"/>
+        <source>No videos</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FirstPage.qml" line="408"/>
         <source>Search on Youtube</source>
         <translation>Sök på Youtube</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="268"/>
+        <location filename="../qml/pages/FirstPage.qml" line="414"/>
         <source>Browse Files</source>
         <translation>Bläddra efter filer</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="274"/>
+        <location filename="../qml/pages/FirstPage.qml" line="331"/>
         <source>Enter URL</source>
         <translation>Ange URL</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="280"/>
         <source>Playlists</source>
-        <translation>Spelningslistor</translation>
+        <translation type="vanished">Spelningslistor</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="372"/>
+        <location filename="../qml/pages/FirstPage.qml" line="315"/>
         <source>About </source>
         <translation>Om </translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="376"/>
+        <location filename="../qml/pages/FirstPage.qml" line="319"/>
         <source>Settings</source>
         <translation>Inställningar</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="380"/>
+        <location filename="../qml/pages/FirstPage.qml" line="336"/>
         <source>Show Player</source>
         <translation>Visa spelare</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="404"/>
-        <location filename="../qml/pages/FirstPage.qml" line="417"/>
         <source>Open</source>
-        <translation>Öppna</translation>
+        <translation type="vanished">Öppna</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="409"/>
         <source>Type in URL here</source>
-        <translation>Skriv in URL här</translation>
+        <translation type="vanished">Skriv in URL här</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="410"/>
         <source>URL to media</source>
-        <translation>URL till media</translation>
+        <translation type="vanished">URL till media</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="486"/>
+        <location filename="../qml/pages/FirstPage.qml" line="527"/>
         <source>Youtube-Dl updated.</source>
         <translation>Youtube-Dl uppdaterad.</translation>
+    </message>
+</context>
+<context>
+    <name>HistoryPage</name>
+    <message>
+        <location filename="../qml/pages/HistoryPage.qml" line="20"/>
+        <source>History</source>
+        <translation type="unfinished">Historik</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/HistoryPage.qml" line="40"/>
+        <source>No History</source>
+        <translation type="unfinished">Ingen historik</translation>
     </message>
 </context>
 <context>
@@ -974,9 +995,52 @@
     </message>
 </context>
 <context>
+    <name>YTSearchResultsPage</name>
+    <message>
+        <location filename="../qml/pages/YTSearchResultsPage.qml" line="58"/>
+        <source>Show Website</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/YTSearchResultsPage.qml" line="66"/>
+        <source>Load more</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/YTSearchResultsPage.qml" line="84"/>
+        <source>Search..</source>
+        <translation type="unfinished">Sök...</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/YTSearchResultsPage.qml" line="116"/>
+        <source>Recent Searches</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/YTSearchResultsPage.qml" line="154"/>
+        <source>added to playlist</source>
+        <translation type="unfinished">tillagt i spelningslistan</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/YTSearchResultsPage.qml" line="172"/>
+        <source>Add to playlist</source>
+        <translation type="unfinished">Lägg till i spelningslista</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/YTSearchResultsPage.qml" line="178"/>
+        <source>Download</source>
+        <translation type="unfinished">Ladda ner</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/YTSearchResultsPage.qml" line="222"/>
+        <source>No Search History</source>
+        <translation type="unfinished">Ingen sökhistorik</translation>
+    </message>
+</context>
+<context>
     <name>harbour-videoPlayer</name>
     <message>
-        <location filename="../qml/harbour-videoPlayer.qml" line="441"/>
+        <location filename="../qml/harbour-videoPlayer.qml" line="452"/>
         <source>Dismiss</source>
         <translation>Avfärda</translation>
     </message>
@@ -1010,16 +1074,21 @@
     </message>
     <message>
         <location filename="../qml/pages/videoPlayer.qml" line="328"/>
+        <source>Playlist</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/videoPlayer.qml" line="332"/>
         <source>Play from last known position</source>
         <translation>Spela upp från senaste kända position</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="497"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="501"/>
         <source>Dismiss</source>
         <translation>Avfärda</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="844"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="906"/>
         <source>
 The video cannot be played due to a problem allocating resources.
                         On Youtube Videos please make sure to be logged in. Some videos might be geoblocked or require you to be logged into youtube.</source>
@@ -1028,40 +1097,40 @@ Det går inte att spela upp videon på grund av problem med att resursallokering
                         Se till att vara inloggad på Youtube-videor. Vissa videor kan vara geoblockerade eller kräva att du är inloggad på YouTube.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="846"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="908"/>
         <source>
 The audio and or video format is not supported.</source>
         <translation>
 Ljud- och/eller videoformatet stöds inte.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="847"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="909"/>
         <source>
 The video cannot be played due to network issues.</source>
         <translation>
 Videon kan inte spelas upp, på grund av nätverksproblem.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="848"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="910"/>
         <source>
 The video cannot be played due to insufficient permissions.</source>
         <translation>
 Videon kan inte spelas upp, på grund av otillräckliga rättigheter.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="849"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="911"/>
         <source>
 The video cannot be played because the media service could not be instantiated.</source>
         <translation>
 Videon kan inte spelas upp, eftersom medietjänsten inte kunde startas.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="900"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="962"/>
         <source>Zoomed to fit screen</source>
         <translation>Zoomad för att passa skärmen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="900"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="962"/>
         <source>Original</source>
         <translation>Original</translation>
     </message>
