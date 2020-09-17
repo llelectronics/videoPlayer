@@ -431,7 +431,7 @@ Page {
                     else if (btnId == "bookmarksBtn")
                         pageStack.push(Qt.resolvedUrl("BookmarksPage.qml"), {dataContainer: page, modelBookmarks: mainWindow.modelBookmarks});
                     else if (btnId == "youtubeBtn")
-                        pageStack.push(Qt.resolvedUrl("SecondPage.qml"), {dataContainer: page});
+                        pageStack.push(Qt.resolvedUrl("YTSearchResultsPage.qml"), {dataContainer: page});
                     else if (btnId == "openFileBtn") {
                         if (mainWindow.firstPage.openDialogType === "adv" || mainWindow.firstPage.openDialogType === "simple")
                             pageStack.push(mainWindow.firstPage.openFileComponent);
@@ -446,7 +446,7 @@ Page {
                 }
                 onPressAndHold: {
                     if (btnId == "youtubeBtn")
-                        pageStack.push(Qt.resolvedUrl("YTSearchResultsPage.qml"), {dataContainer: page});
+                        pageStack.push(Qt.resolvedUrl("SecondPage.qml"), {dataContainer: page});
                 }
 
                 color: colour
