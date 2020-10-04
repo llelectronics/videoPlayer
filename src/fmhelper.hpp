@@ -95,6 +95,10 @@ class FM : public QObject
                 QJsonObject devObj = d.object();
                 QJsonArray blockDevArray = devObj.value(QString("blockdevices")).toArray();
                 QJsonObject blockArrayObject = blockDevArray.first().toObject();
+                if (!QJsonValue(blockArrayObject.value("mountpoint")).isNull()) {
+                    //qWarning() << "Found microSD card with mountpoint " << blockArrayObject.value("mountpoint").toString();
+                    return blockArrayObject.value("mountpoint").toString();
+                }
                 QJsonArray blockPartArray = blockArrayObject.value(QString("children")).toArray();
                 QJsonObject blockPartObject = blockPartArray.first().toObject();
                 if (!QJsonValue(blockPartObject.value("mountpoint")).isNull()) {
