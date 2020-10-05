@@ -218,7 +218,6 @@ Page {
             }
         ]
     }
-
     function videoPauseTrigger() {
         // this seems not to work somehow
         if (videoPoster.player.playbackState == MediaPlayer.PlayingState) videoPoster.pause();
@@ -243,6 +242,11 @@ Page {
         // PullDownMenu and PushUpMenu must be declared in SilicaFlickable, SilicaListView or SilicaGridView
         PullDownMenu {
             id: pulley
+
+            MenuItem {
+                text: qsTr("Properties")
+                onClicked: mediaPlayer.loadMetaDataPage("")
+            }
 
             MenuItem {
                 id: ytdlMenuItem
@@ -878,7 +882,7 @@ Page {
                     }
                     else  {
                         progressCircle.visible = false;
-                        if (!isPlaylist) loadMetaDataPage();
+                        if (!isPlaylist) loadMetaDataPage("inBackground");
                         else loadPlaylistPage();
                     }
                     if (metaData.title) {
