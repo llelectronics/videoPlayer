@@ -61,7 +61,7 @@ ApplicationWindow
     }
     property alias mprisPlayer: mprisPlayer
 
-    property string version: "2.0"
+    property string version: "3.0"
     property string appname: "LLs Video Player"
     property string appicon: "images/icon.png"
 
