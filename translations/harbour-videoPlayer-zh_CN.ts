@@ -6,12 +6,12 @@
     <message>
         <location filename="../qml/pages/AboutPage.qml" line="33"/>
         <source>License: BSD (3-clause)</source>
-        <translation type="unfinished"></translation>
+        <translation>许可协议:BSD(条款3)</translation>
     </message>
     <message>
         <location filename="../qml/pages/AboutPage.qml" line="52"/>
         <source>Created by: llelectronics</source>
-        <translation type="unfinished"></translation>
+        <translation>创建者:llelectronics</translation>
     </message>
     <message>
         <location filename="../qml/pages/AboutPage.qml" line="89"/>
@@ -388,12 +388,12 @@
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="370"/>
         <source>No videos</source>
-        <translation type="unfinished"></translation>
+        <translation>无视频</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="408"/>
         <source>Search on Youtube</source>
-        <translation>在Youtube搜索</translation>
+        <translation>在 Youtube 搜索</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="414"/>
@@ -439,7 +439,7 @@
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="527"/>
         <source>Youtube-Dl updated.</source>
-        <translation>Youtube-Dl 已更新</translation>
+        <translation>Youtube-Dl 已更新。</translation>
     </message>
 </context>
 <context>
@@ -447,12 +447,12 @@
     <message>
         <location filename="../qml/pages/HistoryPage.qml" line="20"/>
         <source>History</source>
-        <translation type="unfinished">历史</translation>
+        <translation>历史</translation>
     </message>
     <message>
         <location filename="../qml/pages/HistoryPage.qml" line="40"/>
         <source>No History</source>
-        <translation type="unfinished">无历史</translation>
+        <translation>无历史</translation>
     </message>
 </context>
 <context>
@@ -552,32 +552,32 @@
     <message>
         <location filename="../qml/pages/fileman/OpenDialog.qml" line="536"/>
         <source>Search file</source>
-        <translation type="unfinished"></translation>
+        <translation>搜索文件</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/OpenDialog.qml" line="545"/>
         <source>Documents</source>
-        <translation type="unfinished">文档</translation>
+        <translation>文档</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/OpenDialog.qml" line="554"/>
         <source>Downloads</source>
-        <translation type="unfinished">下载</translation>
+        <translation>下载</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/OpenDialog.qml" line="563"/>
         <source>Music</source>
-        <translation type="unfinished">音乐</translation>
+        <translation>音乐</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/OpenDialog.qml" line="572"/>
         <source>Pictures</source>
-        <translation type="unfinished">图片</translation>
+        <translation>图片</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/OpenDialog.qml" line="581"/>
         <source>Videos</source>
-        <translation type="unfinished">视频</translation>
+        <translation>视频</translation>
     </message>
 </context>
 <context>
@@ -716,12 +716,12 @@
     <message>
         <location filename="../qml/pages/fileman/fmComponents/PlacesPage.qml" line="145"/>
         <source>Search</source>
-        <translation type="unfinished"></translation>
+        <translation>搜索</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/fmComponents/PlacesPage.qml" line="162"/>
         <source>Data</source>
-        <translation type="unfinished"></translation>
+        <translation>数据</translation>
     </message>
     <message>
         <location filename="../qml/pages/fileman/fmComponents/PlacesPage.qml" line="228"/>
@@ -951,7 +951,7 @@
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="406"/>
         <source>Default Youtube Quality</source>
-        <translation>默认Youtube视频质量</translation>
+        <translation>默认 Youtube 视频质量</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="434"/>
@@ -999,42 +999,42 @@
     <message>
         <location filename="../qml/pages/YTSearchResultsPage.qml" line="58"/>
         <source>Show Website</source>
-        <translation type="unfinished"></translation>
+        <translation>显示网址</translation>
     </message>
     <message>
         <location filename="../qml/pages/YTSearchResultsPage.qml" line="66"/>
         <source>Load more</source>
-        <translation type="unfinished"></translation>
+        <translation>加载更多</translation>
     </message>
     <message>
         <location filename="../qml/pages/YTSearchResultsPage.qml" line="84"/>
         <source>Search..</source>
-        <translation type="unfinished">搜索..</translation>
+        <translation>搜索……</translation>
     </message>
     <message>
         <location filename="../qml/pages/YTSearchResultsPage.qml" line="116"/>
         <source>Recent Searches</source>
-        <translation type="unfinished"></translation>
+        <translation>最近搜索</translation>
     </message>
     <message>
         <location filename="../qml/pages/YTSearchResultsPage.qml" line="154"/>
         <source>added to playlist</source>
-        <translation type="unfinished">已添加到播放列表</translation>
+        <translation>已添加到播放列表</translation>
     </message>
     <message>
         <location filename="../qml/pages/YTSearchResultsPage.qml" line="172"/>
         <source>Add to playlist</source>
-        <translation type="unfinished">添加到播放列表</translation>
+        <translation>添加到播放列表</translation>
     </message>
     <message>
         <location filename="../qml/pages/YTSearchResultsPage.qml" line="178"/>
         <source>Download</source>
-        <translation type="unfinished">下载</translation>
+        <translation>下载</translation>
     </message>
     <message>
         <location filename="../qml/pages/YTSearchResultsPage.qml" line="222"/>
         <source>No Search History</source>
-        <translation type="unfinished">无搜索历史</translation>
+        <translation>无搜索历史</translation>
     </message>
 </context>
 <context>
@@ -1075,7 +1075,7 @@
     <message>
         <location filename="../qml/pages/videoPlayer.qml" line="328"/>
         <source>Playlist</source>
-        <translation type="unfinished"></translation>
+        <translation>播放列表</translation>
     </message>
     <message>
         <location filename="../qml/pages/videoPlayer.qml" line="332"/>
@@ -1092,7 +1092,7 @@
         <source>
 The video cannot be played due to a problem allocating resources.
                         On Youtube Videos please make sure to be logged in. Some videos might be geoblocked or require you to be logged into youtube.</source>
-        <translation>由于分配源的缘故，无法播放该视频。请登陆到 Youtube ,因为某些视频被地理锁定了。</translation>
+        <translation>由于分配源的缘故，无法播放该视频。请登陆到 Youtube ，因为某些视频被地理锁定。</translation>
     </message>
     <message>
         <location filename="../qml/pages/videoPlayer.qml" line="908"/>
