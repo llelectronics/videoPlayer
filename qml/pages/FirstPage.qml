@@ -37,6 +37,7 @@ import Sailfish.Gallery 1.0
 import Nemo.Configuration 1.0
 import "helper"
 import "fileman"
+import "helper/otherComponents"
 
 Page {
     id: page
@@ -252,14 +253,18 @@ Page {
         property real scale: 2
     }
 
-    DocumentGalleryModel {
-        id: videosModel
+//    DocumentGalleryModel {
+//        id: videosModel
 
-        rootType: DocumentGallery.Video
-        autoUpdate: true
-        properties: ["url", "title", "lastModified", "duration"]
-        sortProperties: ["-lastModified"]
-        filter: GalleryStartsWithFilter { property: "title"; value: searchField.text.toLowerCase().trim() }
+//        rootType: DocumentGallery.Video
+//        autoUpdate: true
+//        properties: ["url", "title", "lastModified", "duration"]
+//        sortProperties: ["-lastModified"]
+//        filter: GalleryStartsWithFilter { property: "title"; value: searchField.text.toLowerCase().trim() }
+//    }
+
+    VideoModel {
+        id: videosModel
     }
 
     Formatter {
@@ -346,7 +351,7 @@ Page {
 
         SilicaGridView {
             id: gridView
-            model: videosModel
+            model: videosModel.model
             enabled: !pinchArea.pinch.active
 
             anchors.top: searchField.bottom

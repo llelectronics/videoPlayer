@@ -28,6 +28,13 @@ Page {
                 text: htitle
                 anchors.verticalCenter: parent.verticalCenter
                 color: listItem.highlighted ? Theme.highlightColor : Theme.primaryColor
+                anchors {
+                    left: historyView.left
+                    right: historyView.right
+                    leftMargin: Theme.paddingSmall
+                    rightMargin: Theme.paddingSmall
+                }
+                truncationMode: TruncationMode.Fade
             }
             onClicked: {
                 dataContainer.streamUrl = hurl
