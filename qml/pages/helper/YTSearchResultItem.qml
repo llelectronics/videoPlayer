@@ -139,6 +139,7 @@ Rectangle {
         anchors.top: fullTitle.bottom
         anchors.topMargin: Theme.paddingSmall / 2
         anchors.left: fullTitle.left
+        anchors.leftMargin: Theme.paddingLarge
         font.pixelSize: Theme.fontSizeExtraSmall
         MouseArea {
             anchors.fill: parent
@@ -148,7 +149,7 @@ Rectangle {
     Label {
         id: vDate
         anchors.right: parent.right
-        anchors.rightMargin: Theme.paddingMedium
+        anchors.rightMargin: Theme.paddingLarge
         anchors.top: fullTitle.bottom
         anchors.topMargin: Theme.paddingSmall / 2
         font.pixelSize: Theme.fontSizeExtraSmall
