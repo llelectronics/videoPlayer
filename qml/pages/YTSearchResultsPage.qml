@@ -62,9 +62,10 @@ Page {
 
         PushUpMenu {
             id: pushUpYtSearchResultList
+            enabled: ytSearchResultsList.visible
+            visible: enabled
             MenuItem {
                 text: qsTr("Load more")
-                enabled: ytSearchResultsList.visible
                 onClicked: {
                     mainWindow.firstPage.busy.visible = true;
                     mainWindow.firstPage.busy.running = true;
