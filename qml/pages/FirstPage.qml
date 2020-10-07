@@ -382,7 +382,9 @@ Page {
                 source: resizeAnimation.running ? "" : model.url
                 size: gridView.cellWidth
                 opacity: 1
-                duration: model.duration > 3600 ? formatter.formatDuration(model.duration, Formatter.DurationLong) : formatter.formatDuration(model.duration, Formatter.DurationShort)
+                mimeType: model.mimeType
+                duration: model.duration > 3600 ? formatter.formatDuration(model.duration, Formatter.DurationLong) :
+                                                  formatter.formatDuration(model.duration, Formatter.DurationShort)
                 onClicked: {
                     var fileUrl = videosModel.get(index).url
                     originalUrl = fileUrl;
