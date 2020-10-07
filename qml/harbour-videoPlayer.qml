@@ -429,6 +429,10 @@ ApplicationWindow
             running: false
             visible: false
         }
+        MouseArea {
+            anchors.fill: parent
+            enabled: busy.visible
+        }
 
         TextArea {
             id: errTxt
