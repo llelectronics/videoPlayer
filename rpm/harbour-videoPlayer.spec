@@ -20,7 +20,7 @@ License:    LICENSE
 URL:        http://example.org/
 Source0:    %{name}-%{version}.tar.bz2
 Source100:  harbour-videoPlayer.yaml
-Requires:   sailfishsilica-qt5 >= 0.10.9, pyotherside-qml-plugin-python3-qt5 >= 1.3.0, mpris-qt5
+Requires:   sailfishsilica-qt5 >= 0.10.9, pyotherside-qml-plugin-python3-qt5 >= 1.3.0, mpris-qt5, python
 BuildRequires:  pkgconfig(Qt5Quick)
 BuildRequires:  pkgconfig(Qt5Qml)
 BuildRequires:  pkgconfig(Qt5Core)
