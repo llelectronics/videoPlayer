@@ -39,6 +39,7 @@ Page
             property bool menuOpen: contextMenu != null && contextMenu.parent === myListItem
             property Item contextMenu
 
+            width: parent.width
             height: menuOpen ? contextMenu.height + contentItem.height : contentItem.height
 
             function remove() {
@@ -52,12 +53,15 @@ Page
 
             BackgroundItem {
                 id: contentItem
+                width: parent.width
                 Label {
                     text: title
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.left: parent.left
                     anchors.leftMargin: Theme.paddingMedium
                     color: contentItem.down || menuOpen ? Theme.highlightColor : Theme.primaryColor
+                    width: parent.width - Theme.paddingMedium * 2
+                    truncationMode: TruncationMode.Fade
                 }
                 onClicked: {
                     dataContainer.streamUrl = url;

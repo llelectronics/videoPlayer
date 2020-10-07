@@ -2,6 +2,7 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 
 Page {
+    id: historyPage
 
     property QtObject dataContainer
     property ListModel modelHistory
@@ -23,17 +24,14 @@ Page {
         delegate: ListItem {
             id: listItem
 
+            width: parent.width
+
             Label {
                 x: Theme.paddingLarge
                 text: htitle
-                anchors.verticalCenter: parent.verticalCenter
                 color: listItem.highlighted ? Theme.highlightColor : Theme.primaryColor
-                anchors {
-                    left: historyView.left
-                    right: historyView.right
-                    leftMargin: Theme.paddingSmall
-                    rightMargin: Theme.paddingSmall
-                }
+                anchors.verticalCenter: parent.verticalCenter
+                width: parent.width - Theme.paddingMedium * 2
                 truncationMode: TruncationMode.Fade
             }
             onClicked: {
