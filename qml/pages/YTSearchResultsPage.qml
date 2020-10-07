@@ -69,6 +69,7 @@ Page {
                 onClicked: {
                     mainWindow.firstPage.busy.visible = true;
                     mainWindow.firstPage.busy.running = true;
+                    mainWindow.isYtSearchRunning = true;
                     _ytdl.searchResultNumber = _ytdl.searchResultNumber * 2
                     _ytdl.getYtSearchResults(_searchField.acceptedInput)
                 }
@@ -100,6 +101,7 @@ Page {
                 function searchEntered() {
                     mainWindow.firstPage.busy.visible = true;
                     mainWindow.firstPage.busy.running = true;
+                    mainWindow.isYtSearchRunning = true;
                     ytSearchResultsModel.clear()
                     searchField.acceptedInput = text
                     _ytdl.getYtSearchResults(acceptedInput)
@@ -237,6 +239,7 @@ Page {
             console.debug("Got search results. Set busy false")
             mainWindow.firstPage.busy.visible = false;
             mainWindow.firstPage.busy.running = false;
+            mainWindow.isYtSearchRunning = false;
             if (ytSearchResultsJson != "") {  // Don't load empty stuff
                 var JsonObject = JSON.parse(ytSearchResultsJson)
                 for (var i = 0; i < JsonObject.entries.length; i++){
@@ -294,6 +297,7 @@ Page {
                 // Fail silently
                 mainWindow.firstPage.busy.visible = false;
                 mainWindow.firstPage.busy.running = false;
+                mainWindow.isYtSearchRunning = false;
             }
         }
     }

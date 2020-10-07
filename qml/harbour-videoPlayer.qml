@@ -60,6 +60,8 @@ ApplicationWindow
         else return true
     }
     property alias mprisPlayer: mprisPlayer
+    property bool isYtSearchRunning: false
+    property bool isYtSearchAborted: false
 
     property string version: "3.0"
     property string appname: "LLs Video Player"
@@ -429,11 +431,32 @@ ApplicationWindow
             running: false
             visible: false
         }
+        Label {
+            anchors.top: busy.bottom
+            anchors.topMargin: Theme.paddingLarge * 2
+            anchors.horizontalCenter: parent.horizontalCenter
+            text: qsTr("Loading Youtube results...")
+            visible: isYtSearchRunning && busy.visible
+        }
         MouseArea {
             anchors.fill: parent
             enabled: busy.visible
         }
-
+        Button {
+            id: abortBtn
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: Theme.paddingLarge
+            anchors.horizontalCenter: parent.horizontalCenter
+            visible: isYtSearchRunning && busy.visible
+            text: qsTr("Abort")
+            onClicked: {
+                busy.visible = false;
+                busy.running = false;
+                isYtSearchRunning = false;
+                isYtSearchAborted = true;
+                _ytdl.killYtSearch();
+            }
+        }
         TextArea {
             id: errTxt
             anchors.top: parent.top

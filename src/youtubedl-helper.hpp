@@ -271,6 +271,9 @@ public slots:
             printError(&searchProcess);
         }
     }
+    void killYtSearch() {
+        searchProcess.close();
+    }
 };
 
 #endif // YOUTUBEDLHELPER_HPP

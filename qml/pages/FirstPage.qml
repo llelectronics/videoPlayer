@@ -520,9 +520,15 @@ Page {
         }
         onError: {
             busy.running = false
-            if (message != "") {
-                errTxt.visible = true
-                errTxt.text = message
+            isYtSearchRunning = false
+            if (!isYtSearchAborted) {
+                if (message != "") {
+                    errTxt.visible = true
+                    errTxt.text = message
+                }
+            }
+            else {
+                isYtSearchAborted = false
             }
         }
         onUpdateComplete: {
