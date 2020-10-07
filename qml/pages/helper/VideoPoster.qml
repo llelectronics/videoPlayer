@@ -323,7 +323,11 @@ MouseArea {
             }
             Label {
                 id: maxTime
-                anchors.right: (aspectBtn.visible) ? aspectBtn.left : parent.right
+                anchors.right: {
+                    if (aspectBtn.visible) return aspectBtn.left
+                    else if (qualBtn.visible) return qualBtn.left
+                    else return parent.right
+                }
                 anchors.rightMargin: qualBtn.visible || aspectBtn.visible ? Theme.paddingMedium : (2 * Theme.paddingLarge)
                 anchors.bottom: parent.bottom
                 anchors.bottomMargin: Theme.paddingLarge
