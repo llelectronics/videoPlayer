@@ -65,17 +65,17 @@
         <translation>Marcadores</translation>
     </message>
     <message>
-        <location filename="../qml/pages/BookmarksPage.qml" line="93"/>
+        <location filename="../qml/pages/BookmarksPage.qml" line="97"/>
         <source>Edit</source>
         <translation>Editar</translation>
     </message>
     <message>
-        <location filename="../qml/pages/BookmarksPage.qml" line="99"/>
+        <location filename="../qml/pages/BookmarksPage.qml" line="103"/>
         <source>Delete</source>
         <translation>Borrar</translation>
     </message>
     <message>
-        <location filename="../qml/pages/BookmarksPage.qml" line="109"/>
+        <location filename="../qml/pages/BookmarksPage.qml" line="113"/>
         <source>Add Bookmark</source>
         <translation>Añadir marcador</translation>
     </message>
@@ -366,78 +366,58 @@
 <context>
     <name>FirstPage</name>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="216"/>
+        <location filename="../qml/pages/FirstPage.qml" line="217"/>
         <source>Open Video</source>
         <extracomment>For choosing video to open from the device</extracomment>
         <translation>Abrir vídeo</translation>
     </message>
     <message>
-        <source>No History</source>
-        <translation type="vanished">No hay historial</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/FirstPage.qml" line="323"/>
+        <location filename="../qml/pages/FirstPage.qml" line="328"/>
         <source>History</source>
         <translation>Historial</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="327"/>
+        <location filename="../qml/pages/FirstPage.qml" line="332"/>
         <source>Bookmarks</source>
         <translation>Marcadores</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="370"/>
+        <location filename="../qml/pages/FirstPage.qml" line="375"/>
         <source>No videos</source>
         <translation>No hay vídeos</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="408"/>
+        <location filename="../qml/pages/FirstPage.qml" line="415"/>
         <source>Search on Youtube</source>
         <translation>Buscar en Youtube</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="414"/>
+        <location filename="../qml/pages/FirstPage.qml" line="421"/>
         <source>Browse Files</source>
         <translation>Explorar archivos</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="331"/>
+        <location filename="../qml/pages/FirstPage.qml" line="336"/>
         <source>Enter URL</source>
         <translation>Introducir URL</translation>
     </message>
     <message>
-        <source>Playlists</source>
-        <translation type="vanished">Listas de reprod.</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/FirstPage.qml" line="315"/>
+        <location filename="../qml/pages/FirstPage.qml" line="320"/>
         <source>About </source>
         <translation>Acerca de </translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="319"/>
+        <location filename="../qml/pages/FirstPage.qml" line="324"/>
         <source>Settings</source>
         <translation>Ajustes</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="336"/>
+        <location filename="../qml/pages/FirstPage.qml" line="341"/>
         <source>Show Player</source>
         <translation>Mostrar reproductor</translation>
     </message>
     <message>
-        <source>Open</source>
-        <translation type="vanished">Abrir</translation>
-    </message>
-    <message>
-        <source>Type in URL here</source>
-        <translation type="vanished">Escribe aquí la URL</translation>
-    </message>
-    <message>
-        <source>URL to media</source>
-        <translation type="vanished">URL a multimedia</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/FirstPage.qml" line="527"/>
+        <location filename="../qml/pages/FirstPage.qml" line="540"/>
         <source>Youtube-Dl updated.</source>
         <translation>Youtube-Dl actualizado.</translation>
     </message>
@@ -445,12 +425,12 @@
 <context>
     <name>HistoryPage</name>
     <message>
-        <location filename="../qml/pages/HistoryPage.qml" line="20"/>
+        <location filename="../qml/pages/HistoryPage.qml" line="21"/>
         <source>History</source>
         <translation>Historial</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HistoryPage.qml" line="40"/>
+        <location filename="../qml/pages/HistoryPage.qml" line="45"/>
         <source>No History</source>
         <translation>No hay historial</translation>
     </message>
@@ -1002,37 +982,37 @@
         <translation>Mostrar web</translation>
     </message>
     <message>
-        <location filename="../qml/pages/YTSearchResultsPage.qml" line="66"/>
+        <location filename="../qml/pages/YTSearchResultsPage.qml" line="68"/>
         <source>Load more</source>
         <translation>Cargar más</translation>
     </message>
     <message>
-        <location filename="../qml/pages/YTSearchResultsPage.qml" line="84"/>
+        <location filename="../qml/pages/YTSearchResultsPage.qml" line="86"/>
         <source>Search..</source>
         <translation>Buscar..</translation>
     </message>
     <message>
-        <location filename="../qml/pages/YTSearchResultsPage.qml" line="116"/>
+        <location filename="../qml/pages/YTSearchResultsPage.qml" line="119"/>
         <source>Recent Searches</source>
         <translation>Búsquedas recientes</translation>
     </message>
     <message>
-        <location filename="../qml/pages/YTSearchResultsPage.qml" line="154"/>
+        <location filename="../qml/pages/YTSearchResultsPage.qml" line="157"/>
         <source>added to playlist</source>
         <translation>añadido a la lista</translation>
     </message>
     <message>
-        <location filename="../qml/pages/YTSearchResultsPage.qml" line="172"/>
+        <location filename="../qml/pages/YTSearchResultsPage.qml" line="175"/>
         <source>Add to playlist</source>
         <translation>Añadir a lista de reproducción</translation>
     </message>
     <message>
-        <location filename="../qml/pages/YTSearchResultsPage.qml" line="178"/>
+        <location filename="../qml/pages/YTSearchResultsPage.qml" line="181"/>
         <source>Download</source>
         <translation>Descargar</translation>
     </message>
     <message>
-        <location filename="../qml/pages/YTSearchResultsPage.qml" line="222"/>
+        <location filename="../qml/pages/YTSearchResultsPage.qml" line="225"/>
         <source>No Search History</source>
         <translation>No hay historial de búsqueda</translation>
     </message>
@@ -1040,7 +1020,17 @@
 <context>
     <name>harbour-videoPlayer</name>
     <message>
-        <location filename="../qml/harbour-videoPlayer.qml" line="452"/>
+        <location filename="../qml/harbour-videoPlayer.qml" line="438"/>
+        <source>Loading Youtube results...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/harbour-videoPlayer.qml" line="451"/>
+        <source>Abort</source>
+        <translation type="unfinished">Cancelar</translation>
+    </message>
+    <message>
+        <location filename="../qml/harbour-videoPlayer.qml" line="479"/>
         <source>Dismiss</source>
         <translation>Descartar</translation>
     </message>
@@ -1048,47 +1038,52 @@
 <context>
     <name>videoPlayer</name>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="249"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="247"/>
+        <source>Properties</source>
+        <translation type="unfinished">Propiedades</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/videoPlayer.qml" line="253"/>
         <source>Load with ytdl</source>
         <translation>Cargar con ytdl</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="273"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="277"/>
         <source>Download Youtube Video</source>
         <translation>Descargar vídeo de Youtube</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="292"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="296"/>
         <source>Download</source>
         <translation>Descargar</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="308"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="312"/>
         <source>Add to bookmarks</source>
         <translation>Añadir a marcadores</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="324"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="328"/>
         <source>Load Subtitle</source>
         <translation>Cargar subtítulo</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="328"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="332"/>
         <source>Playlist</source>
         <translation>Lista de reproducción</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="332"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="336"/>
         <source>Play from last known position</source>
         <translation>Reproducir desde la última posición</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="501"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="505"/>
         <source>Dismiss</source>
         <translation>Descartar</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="906"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="853"/>
         <source>
 The video cannot be played due to a problem allocating resources.
                         On Youtube Videos please make sure to be logged in. Some videos might be geoblocked or require you to be logged into youtube.</source>
@@ -1097,40 +1092,40 @@ No se puede reproducir vídeo por un problema de asignación de recursos.
 Asegúrate de haber iniciado sesión para los vídeos de Youtube. Algunos vídeos pueden estar bloqueados geográficamente o requieren inicio de sesión.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="908"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="855"/>
         <source>
 The audio and or video format is not supported.</source>
         <translation>
 Formato de audio y vídeo no soportado.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="909"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="856"/>
         <source>
 The video cannot be played due to network issues.</source>
         <translation>
 No se puede reproducir vídeo por problemas de conexión.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="910"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="857"/>
         <source>
 The video cannot be played due to insufficient permissions.</source>
         <translation>
 No se puede reproducir vídeo debido a permisos insuficientes.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="911"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="858"/>
         <source>
 The video cannot be played because the media service could not be instantiated.</source>
         <translation>
 No se puede reproducir vídeo porque no se pudo instanciar el servicio multimedia.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="962"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="909"/>
         <source>Zoomed to fit screen</source>
         <translation>Ajustado a la pantalla</translation>
     </message>
     <message>
-        <location filename="../qml/pages/videoPlayer.qml" line="962"/>
+        <location filename="../qml/pages/videoPlayer.qml" line="909"/>
         <source>Original</source>
         <translation>Original</translation>
     </message>
