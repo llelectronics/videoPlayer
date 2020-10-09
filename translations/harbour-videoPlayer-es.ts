@@ -979,7 +979,7 @@
     <message>
         <location filename="../qml/pages/YTSearchResultsPage.qml" line="58"/>
         <source>Show Website</source>
-        <translation>Mostrar web</translation>
+        <translation>Mostrar en web</translation>
     </message>
     <message>
         <location filename="../qml/pages/YTSearchResultsPage.qml" line="68"/>
@@ -1022,12 +1022,12 @@
     <message>
         <location filename="../qml/harbour-videoPlayer.qml" line="438"/>
         <source>Loading Youtube results...</source>
-        <translation type="unfinished"></translation>
+        <translation>Cargando resultados de Youtube...</translation>
     </message>
     <message>
         <location filename="../qml/harbour-videoPlayer.qml" line="451"/>
         <source>Abort</source>
-        <translation type="unfinished">Cancelar</translation>
+        <translation>Cancelar</translation>
     </message>
     <message>
         <location filename="../qml/harbour-videoPlayer.qml" line="479"/>
@@ -1040,7 +1040,7 @@
     <message>
         <location filename="../qml/pages/videoPlayer.qml" line="247"/>
         <source>Properties</source>
-        <translation type="unfinished">Propiedades</translation>
+        <translation>Propiedades</translation>
     </message>
     <message>
         <location filename="../qml/pages/videoPlayer.qml" line="253"/>
