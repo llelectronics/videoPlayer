@@ -440,7 +440,7 @@ ApplicationWindow
         }
         MouseArea {
             anchors.fill: parent
-            enabled: busy.visible
+            enabled: bgOverlay.visible
         }
         Button {
             id: abortBtn
