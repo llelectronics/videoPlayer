@@ -10,6 +10,8 @@
 #include <QFile>
 #include <QStandardPaths>
 #include <QFileDevice>
+#include <QFileInfo>
+#include <QDateTime>
 
 class ythelper : public QObject
 {   Q_OBJECT
@@ -85,12 +87,11 @@ public slots:
     void checkAndInstall()
     {
         QFile ytdlBin;
+        QFile ytdlBinOrig("/usr/share/harbour-videoPlayer/qml/pages/helper/youtube-dl");
         ytdlBin.setFileName(data_dir + "/youtube-dl");
         if (!ytdlBin.exists()) {
-            ytdlBin.setFileName("/usr/share/harbour-videoPlayer/qml/pages/helper/youtube-dl");
-            if (ytdlBin.exists()) {
-                ytdlBin.setFileName("/usr/share/harbour-videoPlayer/qml/pages/helper/youtube-dl");
-                ytdlBin.copy(data_dir + "/youtube-dl");
+            if (ytdlBinOrig.exists()) {
+                ytdlBinOrig.copy(data_dir + "/youtube-dl");
             }
             else {
                 QProcess *ytdlBinDownload;
@@ -98,6 +99,20 @@ public slots:
                 ytdlBinDownload->waitForFinished();
             }
             ytdlBin.setFileName(data_dir + "/youtube-dl");
+        }
+        QFileInfo ytdlFileInfo; ytdlFileInfo.setFile(ytdlBin);
+        QFileInfo ytdlBinOrigInfo; ytdlBinOrigInfo.setFile(ytdlBinOrig);
+        QDateTime created = ytdlFileInfo.lastModified();
+        QDateTime origTime = ytdlBinOrigInfo.lastModified();
+        if (created < origTime) {
+            qDebug() << "Youtube-DL outdated. Updating in the background ...";
+            if (ytdlBin.exists()) {
+                ytdlBin.remove();
+            }
+            ytdlBinOrig.copy(data_dir + "/youtube-dl");
+        }
+        else {
+            qDebug() << "Youtube-DL does not need an update yet.";
         }
         ytdlBin.setPermissions(QFileDevice::ExeUser|QFileDevice::ExeGroup|QFileDevice::ExeOther|QFileDevice::ReadUser|QFileDevice::ReadGroup|QFileDevice::ReadOther|QFileDevice::WriteUser|QFileDevice::WriteGroup|QFileDevice::WriteOther);
 
