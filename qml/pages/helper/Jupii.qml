@@ -11,7 +11,8 @@ Item {
     }
 
     function addUrlOnceAndPlay(url, title, author, type, app, icon) {
-        jupiiPlayer.call('add', [url, title, author, "", type, app, icon, true, true, true])
+        jupiiPlayer.call('add', [url, "", title, author, "", type, app, icon, true, true])
+        jupiiPlayer.call('focus')
     }
 
     DBusInterface {
