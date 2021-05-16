@@ -1022,12 +1022,12 @@
     <message>
         <location filename="../qml/harbour-videoPlayer.qml" line="438"/>
         <source>Loading Youtube results...</source>
-        <translation type="unfinished"></translation>
+        <translation>正在加载 YouTtube 结果……</translation>
     </message>
     <message>
         <location filename="../qml/harbour-videoPlayer.qml" line="451"/>
         <source>Abort</source>
-        <translation type="unfinished">关于</translation>
+        <translation>关于</translation>
     </message>
     <message>
         <location filename="../qml/harbour-videoPlayer.qml" line="479"/>
@@ -1040,7 +1040,7 @@
     <message>
         <location filename="../qml/pages/videoPlayer.qml" line="247"/>
         <source>Properties</source>
-        <translation type="unfinished">属性</translation>
+        <translation>属性</translation>
     </message>
     <message>
         <location filename="../qml/pages/videoPlayer.qml" line="253"/>
